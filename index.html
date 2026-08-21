@@ -5,12 +5,9 @@
 
   <meta charset="UTF-8">
 
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>Login</title>
-
 
   <style>
 
@@ -21,15 +18,11 @@
       font-family: Arial, Helvetica, sans-serif;
     }
 
-
     body {
-
       min-height: 100vh;
-
       display: flex;
       justify-content: center;
       align-items: center;
-
       padding: 20px;
 
       background:
@@ -48,22 +41,14 @@
       color: white;
     }
 
-
-    /* =========================
-       LOGIN CARD
-    ========================= */
-
     .login-card {
-
       width: 100%;
       max-width: 420px;
-
       padding: 35px 30px;
 
       background: rgba(18, 22, 28, 0.96);
 
       border: 1px solid rgba(255,255,255,0.08);
-
       border-radius: 24px;
 
       box-shadow:
@@ -74,36 +59,21 @@
       animation: cardShow 0.7s ease;
     }
 
-
     @keyframes cardShow {
 
       from {
-
         opacity: 0;
-
-        transform:
-          translateY(25px);
-
+        transform: translateY(25px);
       }
 
       to {
-
         opacity: 1;
-
-        transform:
-          translateY(0);
-
+        transform: translateY(0);
       }
 
     }
 
-
-    /* =========================
-       LOGO
-    ========================= */
-
     .logo {
-
       width: 78px;
       height: 78px;
 
@@ -112,9 +82,7 @@
       border-radius: 50%;
 
       display: flex;
-
       align-items: center;
-
       justify-content: center;
 
       font-size: 34px;
@@ -127,77 +95,46 @@
         );
 
       box-shadow:
-        0 0 40px
-        rgba(0,208,132,0.25);
+        0 0 40px rgba(0,208,132,0.25);
     }
 
-
-    /* =========================
-       TITLE
-    ========================= */
-
     .title {
-
       text-align: center;
     }
 
-
     .title h1 {
-
       font-size: 30px;
-
       font-weight: 700;
-
       margin-bottom: 8px;
     }
 
-
     .title p {
-
       color: #8e97a4;
-
       font-size: 14px;
-
       margin-bottom: 30px;
     }
 
-
-    /* =========================
-       INPUT
-    ========================= */
-
     .input-group {
-
       margin-bottom: 18px;
     }
 
-
     .input-group label {
-
       display: block;
-
       margin-bottom: 8px;
-
       color: #aeb6c2;
-
       font-size: 13px;
     }
 
-
     .input-group input {
-
       width: 100%;
-
       height: 53px;
 
       padding: 0 16px;
 
       border-radius: 12px;
-
       border: 1px solid #252c35;
 
       background: #0c1015;
-
       color: white;
 
       outline: none;
@@ -207,37 +144,24 @@
       transition: 0.25s;
     }
 
-
     .input-group input::placeholder {
-
       color: #555e69;
     }
 
-
     .input-group input:focus {
-
       border-color: #00d084;
 
       box-shadow:
-        0 0 0 3px
-        rgba(0,208,132,0.08);
+        0 0 0 3px rgba(0,208,132,0.08);
     }
 
-
-    /* =========================
-       LOGIN BUTTON
-    ========================= */
-
     .login-btn {
-
       width: 100%;
-
       height: 54px;
 
       margin-top: 5px;
 
       border: none;
-
       border-radius: 12px;
 
       background:
@@ -250,7 +174,6 @@
       color: #04100a;
 
       font-size: 16px;
-
       font-weight: 700;
 
       cursor: pointer;
@@ -258,43 +181,25 @@
       transition: 0.25s;
     }
 
-
     .login-btn:hover {
-
-      transform:
-        translateY(-2px);
+      transform: translateY(-2px);
 
       box-shadow:
-        0 10px 30px
-        rgba(0,208,132,0.25);
+        0 10px 30px rgba(0,208,132,0.25);
     }
-
 
     .login-btn:active {
-
-      transform:
-        scale(0.98);
+      transform: scale(0.98);
     }
 
-
     .login-btn:disabled {
-
       opacity: 0.6;
-
       cursor: not-allowed;
-
       transform: none;
-
       box-shadow: none;
     }
 
-
-    /* =========================
-       MESSAGE
-    ========================= */
-
     #message {
-
       display: none;
 
       text-align: center;
@@ -308,9 +213,7 @@
       font-size: 13px;
     }
 
-
     #message.error {
-
       display: block;
 
       color: #ff667d;
@@ -319,13 +222,10 @@
         rgba(255,60,85,0.08);
 
       border:
-        1px solid
-        rgba(255,60,85,0.15);
+        1px solid rgba(255,60,85,0.15);
     }
 
-
     #message.success {
-
       display: block;
 
       color: #00d084;
@@ -334,17 +234,10 @@
         rgba(0,208,132,0.08);
 
       border:
-        1px solid
-        rgba(0,208,132,0.15);
+        1px solid rgba(0,208,132,0.15);
     }
 
-
-    /* =========================
-       PHONE
-    ========================= */
-
     .phone-box {
-
       margin-top: 25px;
 
       padding: 15px;
@@ -353,8 +246,7 @@
 
       background: #0c1015;
 
-      border:
-        1px solid #202731;
+      border: 1px solid #202731;
 
       display: flex;
 
@@ -363,9 +255,7 @@
       gap: 12px;
     }
 
-
     .phone-icon {
-
       width: 42px;
       height: 42px;
 
@@ -385,15 +275,11 @@
       flex-shrink: 0;
     }
 
-
     .phone-info {
-
       min-width: 0;
     }
 
-
     .phone-title {
-
       color: #707985;
 
       font-size: 10px;
@@ -403,9 +289,7 @@
       margin-bottom: 4px;
     }
 
-
     #phoneName {
-
       color: #e2e7ed;
 
       font-size: 13px;
@@ -419,9 +303,7 @@
       text-overflow: ellipsis;
     }
 
-
     #phoneDetails {
-
       color: #737d89;
 
       font-size: 11px;
@@ -435,13 +317,7 @@
       text-overflow: ellipsis;
     }
 
-
-    /* =========================
-       FOOTER
-    ========================= */
-
     .footer {
-
       text-align: center;
 
       margin-top: 22px;
@@ -451,23 +327,14 @@
       font-size: 11px;
     }
 
-
-    /* =========================
-       MOBILE
-    ========================= */
-
     @media(max-width:480px) {
 
       .login-card {
-
         padding: 30px 22px;
-
         border-radius: 20px;
       }
 
-
       .title h1 {
-
         font-size: 27px;
       }
 
@@ -484,20 +351,10 @@
   <div class="login-card">
 
 
-    <!-- =====================
-         LOGO
-    ====================== -->
-
     <div class="logo">
-
       👋
-
     </div>
 
-
-    <!-- =====================
-         TITLE
-    ====================== -->
 
     <div class="title">
 
@@ -511,10 +368,6 @@
 
     </div>
 
-
-    <!-- =====================
-         USERNAME
-    ====================== -->
 
     <div class="input-group">
 
@@ -532,10 +385,6 @@
     </div>
 
 
-    <!-- =====================
-         PASSWORD
-    ====================== -->
-
     <div class="input-group">
 
       <label>
@@ -552,10 +401,6 @@
     </div>
 
 
-    <!-- =====================
-         LOGIN BUTTON
-    ====================== -->
-
     <button
       class="login-btn"
       id="loginBtn"
@@ -566,65 +411,36 @@
     </button>
 
 
-    <!-- =====================
-         MESSAGE
-    ====================== -->
-
     <div id="message"></div>
 
 
-    <!-- =====================
-         PHONE INFORMATION
-    ====================== -->
-
     <div class="phone-box">
 
-
       <div class="phone-icon">
-
         📱
-
       </div>
-
 
       <div class="phone-info">
 
-
         <div class="phone-title">
-
           YOUR PHONE
-
         </div>
-
 
         <div id="phoneName">
-
           Detecting device...
-
         </div>
-
 
         <div id="phoneDetails">
-
           Please wait...
-
         </div>
 
-
       </div>
-
 
     </div>
 
 
-    <!-- =====================
-         FOOTER
-    ====================== -->
-
     <div class="footer">
-
       Secure Login System
-
     </div>
 
 
@@ -636,15 +452,11 @@
 
 
 /* =====================================================
-   GOOGLE APPS SCRIPT WEB APP URL
-=====================================================
-
-   এখানে তোমার Apps Script Web App URL বসাবে।
-
+   YOUR APPS SCRIPT WEB APP URL
 ===================================================== */
 
 const API_URL =
-  "YOUR_APPS_SCRIPT_WEB_APP_URL_HERE";
+  "https://script.google.com/macros/s/AKfycby1wEKzuThOiXdf9lVmoJVysfasR14ivssXFjGFfDnnc-d16uQRjNhel5LKNXDK4ZbxDw/exec";
 
 
 
@@ -654,145 +466,77 @@ const API_URL =
 
 function detectPhone() {
 
+  const ua = navigator.userAgent;
 
-  const ua =
-    navigator.userAgent;
-
-
-  const platform =
-    navigator.platform || "";
+  let device = "Unknown Device";
+  let os = "Unknown OS";
+  let browser = "Unknown Browser";
 
 
-  let device =
-    "Unknown Device";
-
-
-  let os =
-    "Unknown OS";
-
-
-  let browser =
-    "Unknown Browser";
-
-
-  /* =========================
-     DEVICE
-  ========================= */
+  /* DEVICE */
 
   if (/iPhone/i.test(ua)) {
-
-    device =
-      "Apple iPhone";
-
+    device = "Apple iPhone";
   }
 
   else if (/iPad/i.test(ua)) {
-
-    device =
-      "Apple iPad";
-
+    device = "Apple iPad";
   }
 
   else if (/Samsung/i.test(ua)) {
-
-    device =
-      "Samsung Galaxy";
-
+    device = "Samsung Galaxy";
   }
 
   else if (/SM-[A-Z0-9-]+/i.test(ua)) {
-
-    device =
-      "Samsung Galaxy";
-
+    device = "Samsung Galaxy";
   }
 
   else if (/Xiaomi/i.test(ua)) {
-
-    device =
-      "Xiaomi";
-
+    device = "Xiaomi";
   }
 
   else if (/Redmi/i.test(ua)) {
-
-    device =
-      "Redmi";
-
+    device = "Redmi";
   }
 
   else if (/Huawei/i.test(ua)) {
-
-    device =
-      "Huawei";
-
-  }
-
-  else if (/HUAWEI/i.test(ua)) {
-
-    device =
-      "Huawei";
-
+    device = "Huawei";
   }
 
   else if (/OPPO/i.test(ua)) {
-
-    device =
-      "OPPO";
-
+    device = "OPPO";
   }
 
   else if (/vivo/i.test(ua)) {
-
-    device =
-      "Vivo";
-
+    device = "Vivo";
   }
 
   else if (/realme/i.test(ua)) {
-
-    device =
-      "Realme";
-
+    device = "Realme";
   }
 
   else if (/OnePlus/i.test(ua)) {
-
-    device =
-      "OnePlus";
-
+    device = "OnePlus";
   }
 
   else if (/Android/i.test(ua)) {
-
-    device =
-      "Android Phone";
-
+    device = "Android Phone";
   }
 
   else if (/Windows/i.test(ua)) {
-
-    device =
-      "Windows PC";
-
+    device = "Windows PC";
   }
 
   else if (/Macintosh/i.test(ua)) {
-
-    device =
-      "Mac";
-
+    device = "Mac";
   }
 
 
-  /* =========================
-     OS
-  ========================= */
+  /* OS */
 
   if (/Windows NT 10/i.test(ua)) {
 
-    os =
-      "Windows 10/11";
+    os = "Windows 10/11";
 
   }
 
@@ -822,57 +566,35 @@ function detectPhone() {
   }
 
   else if (/Mac OS X/i.test(ua)) {
-
-    os =
-      "macOS";
-
+    os = "macOS";
   }
 
   else if (/Linux/i.test(ua)) {
-
-    os =
-      "Linux";
-
+    os = "Linux";
   }
 
 
-  /* =========================
-     BROWSER
-  ========================= */
+  /* BROWSER */
 
   if (/Edg/i.test(ua)) {
-
-    browser =
-      "Microsoft Edge";
-
+    browser = "Microsoft Edge";
   }
 
   else if (/Chrome/i.test(ua)) {
-
-    browser =
-      "Google Chrome";
-
+    browser = "Google Chrome";
   }
 
   else if (/Firefox/i.test(ua)) {
-
-    browser =
-      "Mozilla Firefox";
-
+    browser = "Mozilla Firefox";
   }
 
-  else if (/Safari/i.test(ua) &&
-           !/Chrome/i.test(ua)) {
-
-    browser =
-      "Safari";
-
+  else if (
+    /Safari/i.test(ua) &&
+    !/Chrome/i.test(ua)
+  ) {
+    browser = "Safari";
   }
 
-
-  /* =========================
-     SHOW
-  ========================= */
 
   document.getElementById(
     "phoneName"
@@ -897,7 +619,6 @@ detectPhone();
 
 async function login() {
 
-
   const username =
     document
       .getElementById("username")
@@ -913,13 +634,8 @@ async function login() {
 
 
   const button =
-    document
-      .getElementById("loginBtn");
+    document.getElementById("loginBtn");
 
-
-  /* =========================
-     EMPTY CHECK
-  ========================= */
 
   if (!username || !password) {
 
@@ -929,16 +645,10 @@ async function login() {
     );
 
     return;
-
   }
 
 
-  /* =========================
-     BUTTON LOADING
-  ========================= */
-
-  button.disabled =
-    true;
+  button.disabled = true;
 
   button.textContent =
     "Logging in...";
@@ -949,11 +659,6 @@ async function login() {
 
   try {
 
-
-    /* =========================
-       SEND REQUEST
-    ========================= */
-
     const response =
       await fetch(
         API_URL,
@@ -962,10 +667,8 @@ async function login() {
           method: "POST",
 
           headers: {
-
             "Content-Type":
               "text/plain;charset=utf-8"
-
           },
 
           body:
@@ -985,30 +688,22 @@ async function login() {
       );
 
 
-    /* =========================
-       RESPONSE
-    ========================= */
-
     const data =
       await response.json();
 
 
     console.log(
-      "Login response:",
+      "Server Response:",
       data
     );
 
 
-    /* =========================
-       SUCCESS
-    ========================= */
+    /* LOGIN SUCCESS */
 
     if (data.success === true) {
 
 
-      /* =====================
-         SAVE LOGIN SESSION
-      ===================== */
+      /* SAVE SESSION */
 
       localStorage.setItem(
         "loggedIn",
@@ -1038,15 +733,13 @@ async function login() {
 
 
       localStorage.setItem(
-        "photo",
-        data.photo ||
-        ""
+        "status",
+        data.status ||
+        "Active"
       );
 
 
-      /* =====================
-         MESSAGE
-      ===================== */
+      /* SUCCESS MESSAGE */
 
       showMessage(
         "Login successful!",
@@ -1054,27 +747,20 @@ async function login() {
       );
 
 
-      /* =====================
-         DASHBOARD
-      ===================== */
+      /* GO DASHBOARD */
 
-      setTimeout(
-        function() {
+      setTimeout(function() {
 
-          window.location.href =
-            "dashboard.html";
+        window.location.href =
+          "dashboard.html";
 
-        },
-        500
-      );
+      }, 500);
 
 
     }
 
 
-    /* =========================
-       FAILED
-    ========================= */
+    /* LOGIN FAILED */
 
     else {
 
@@ -1086,6 +772,7 @@ async function login() {
         "error"
 
       );
+
 
       button.disabled =
         false;
@@ -1099,7 +786,6 @@ async function login() {
   }
 
   catch(error) {
-
 
     console.error(
       "Login Error:",
@@ -1147,8 +833,11 @@ function showMessage(
   message.className =
     type;
 
-}
 
+  message.style.display =
+    "block";
+
+}
 
 
 function hideMessage() {
@@ -1170,16 +859,14 @@ function hideMessage() {
 
 
 /* =====================================================
-   ENTER KEY
+   ENTER KEY LOGIN
 ===================================================== */
 
 document.addEventListener(
   "keydown",
   function(event) {
 
-    if (
-      event.key === "Enter"
-    ) {
+    if (event.key === "Enter") {
 
       login();
 
