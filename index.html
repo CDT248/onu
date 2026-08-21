@@ -1,12 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Hello - Login</title>
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0">
+
+  <title>Login</title>
+
 
   <style>
+
     * {
       margin: 0;
       padding: 0;
@@ -14,369 +21,1177 @@
       font-family: Arial, Helvetica, sans-serif;
     }
 
-    body {
-      min-height: 100vh;
-      background:
-        radial-gradient(circle at top left, rgba(0, 255, 140, 0.12), transparent 35%),
-        radial-gradient(circle at bottom right, rgba(255, 0, 60, 0.10), transparent 35%),
-        #080b0f;
 
-      color: #fff;
+    body {
+
+      min-height: 100vh;
+
       display: flex;
-      align-items: center;
       justify-content: center;
+      align-items: center;
+
       padding: 20px;
+
+      background:
+        radial-gradient(
+          circle at top left,
+          rgba(0, 255, 140, 0.12),
+          transparent 35%
+        ),
+        radial-gradient(
+          circle at bottom right,
+          rgba(255, 0, 60, 0.10),
+          transparent 35%
+        ),
+        #070a0e;
+
+      color: white;
     }
 
-    .container {
+
+    /* =========================
+       LOGIN CARD
+    ========================= */
+
+    .login-card {
+
       width: 100%;
       max-width: 420px;
-      background: rgba(18, 22, 28, 0.92);
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 24px;
+
       padding: 35px 30px;
-      box-shadow: 0 25px 70px rgba(0,0,0,0.55);
+
+      background: rgba(18, 22, 28, 0.96);
+
+      border: 1px solid rgba(255,255,255,0.08);
+
+      border-radius: 24px;
+
+      box-shadow:
+        0 25px 70px rgba(0,0,0,0.60);
+
       backdrop-filter: blur(15px);
-      animation: show 0.7s ease;
+
+      animation: cardShow 0.7s ease;
     }
 
-    @keyframes show {
+
+    @keyframes cardShow {
+
       from {
+
         opacity: 0;
-        transform: translateY(25px);
+
+        transform:
+          translateY(25px);
+
       }
+
       to {
+
         opacity: 1;
-        transform: translateY(0);
+
+        transform:
+          translateY(0);
+
       }
+
     }
 
-    .hello {
-      text-align: center;
-      margin-bottom: 30px;
-    }
 
-    .hello-icon {
-      width: 75px;
-      height: 75px;
-      margin: auto;
+    /* =========================
+       LOGO
+    ========================= */
+
+    .logo {
+
+      width: 78px;
+      height: 78px;
+
+      margin: 0 auto 18px;
+
       border-radius: 50%;
+
       display: flex;
+
       align-items: center;
+
       justify-content: center;
+
       font-size: 34px;
 
-      background: linear-gradient(135deg, #00d084, #00a86b);
-      box-shadow: 0 0 35px rgba(0,208,132,0.25);
+      background:
+        linear-gradient(
+          135deg,
+          #00d084,
+          #00a86b
+        );
+
+      box-shadow:
+        0 0 40px
+        rgba(0,208,132,0.25);
     }
 
-    .hello h1 {
-      margin-top: 18px;
+
+    /* =========================
+       TITLE
+    ========================= */
+
+    .title {
+
+      text-align: center;
+    }
+
+
+    .title h1 {
+
       font-size: 30px;
+
       font-weight: 700;
-    }
 
-    .hello p {
-      color: #8f98a5;
-      margin-top: 8px;
-      font-size: 14px;
-    }
-
-    .input-box {
-      margin-bottom: 18px;
-    }
-
-    .input-box label {
-      display: block;
-      font-size: 13px;
-      color: #aeb6c2;
       margin-bottom: 8px;
     }
 
-    .input-box input {
+
+    .title p {
+
+      color: #8e97a4;
+
+      font-size: 14px;
+
+      margin-bottom: 30px;
+    }
+
+
+    /* =========================
+       INPUT
+    ========================= */
+
+    .input-group {
+
+      margin-bottom: 18px;
+    }
+
+
+    .input-group label {
+
+      display: block;
+
+      margin-bottom: 8px;
+
+      color: #aeb6c2;
+
+      font-size: 13px;
+    }
+
+
+    .input-group input {
+
       width: 100%;
-      height: 52px;
+
+      height: 53px;
+
       padding: 0 16px;
+
       border-radius: 12px;
+
       border: 1px solid #252c35;
-      background: #0d1116;
+
+      background: #0c1015;
+
       color: white;
+
       outline: none;
+
       font-size: 15px;
+
       transition: 0.25s;
     }
 
-    .input-box input:focus {
-      border-color: #00d084;
-      box-shadow: 0 0 0 3px rgba(0,208,132,0.08);
+
+    .input-group input::placeholder {
+
+      color: #555e69;
     }
 
+
+    .input-group input:focus {
+
+      border-color: #00d084;
+
+      box-shadow:
+        0 0 0 3px
+        rgba(0,208,132,0.08);
+    }
+
+
+    /* =========================
+       LOGIN BUTTON
+    ========================= */
+
     .login-btn {
+
       width: 100%;
-      height: 53px;
-      border: none;
-      border-radius: 12px;
+
+      height: 54px;
+
       margin-top: 5px;
 
-      background: linear-gradient(135deg, #00d084, #00a86b);
-      color: #06110c;
+      border: none;
+
+      border-radius: 12px;
+
+      background:
+        linear-gradient(
+          135deg,
+          #00d084,
+          #00a86b
+        );
+
+      color: #04100a;
 
       font-size: 16px;
+
       font-weight: 700;
+
       cursor: pointer;
 
       transition: 0.25s;
     }
 
+
     .login-btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 10px 30px rgba(0,208,132,0.25);
+
+      transform:
+        translateY(-2px);
+
+      box-shadow:
+        0 10px 30px
+        rgba(0,208,132,0.25);
     }
+
 
     .login-btn:active {
-      transform: scale(0.98);
+
+      transform:
+        scale(0.98);
     }
 
-    .location {
+
+    .login-btn:disabled {
+
+      opacity: 0.6;
+
+      cursor: not-allowed;
+
+      transform: none;
+
+      box-shadow: none;
+    }
+
+
+    /* =========================
+       MESSAGE
+    ========================= */
+
+    #message {
+
+      display: none;
+
+      text-align: center;
+
+      margin-top: 16px;
+
+      padding: 11px;
+
+      border-radius: 10px;
+
+      font-size: 13px;
+    }
+
+
+    #message.error {
+
+      display: block;
+
+      color: #ff667d;
+
+      background:
+        rgba(255,60,85,0.08);
+
+      border:
+        1px solid
+        rgba(255,60,85,0.15);
+    }
+
+
+    #message.success {
+
+      display: block;
+
+      color: #00d084;
+
+      background:
+        rgba(0,208,132,0.08);
+
+      border:
+        1px solid
+        rgba(0,208,132,0.15);
+    }
+
+
+    /* =========================
+       PHONE
+    ========================= */
+
+    .phone-box {
+
       margin-top: 25px;
-      padding: 13px 15px;
-      border-radius: 12px;
-      background: #0d1116;
-      border: 1px solid #202731;
+
+      padding: 15px;
+
+      border-radius: 13px;
+
+      background: #0c1015;
+
+      border:
+        1px solid #202731;
 
       display: flex;
+
       align-items: center;
-      gap: 10px;
+
+      gap: 12px;
     }
 
-    .location-icon {
-      font-size: 20px;
+
+    .phone-icon {
+
+      width: 42px;
+      height: 42px;
+
+      border-radius: 10px;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      background:
+        rgba(0,208,132,0.08);
+
+      font-size: 21px;
+
+      flex-shrink: 0;
     }
 
-    .location-text {
-      flex: 1;
+
+    .phone-info {
+
       min-width: 0;
     }
 
-    .location-title {
-      font-size: 11px;
-      color: #7e8794;
-      margin-bottom: 3px;
+
+    .phone-title {
+
+      color: #707985;
+
+      font-size: 10px;
+
+      letter-spacing: 0.5px;
+
+      margin-bottom: 4px;
     }
 
-    #location {
+
+    #phoneName {
+
+      color: #e2e7ed;
+
       font-size: 13px;
-      color: #d7dde5;
+
+      font-weight: 600;
+
       white-space: nowrap;
+
       overflow: hidden;
+
       text-overflow: ellipsis;
     }
 
+
+    #phoneDetails {
+
+      color: #737d89;
+
+      font-size: 11px;
+
+      margin-top: 3px;
+
+      white-space: nowrap;
+
+      overflow: hidden;
+
+      text-overflow: ellipsis;
+    }
+
+
+    /* =========================
+       FOOTER
+    ========================= */
+
     .footer {
+
       text-align: center;
+
       margin-top: 22px;
-      font-size: 12px;
-      color: #626b77;
+
+      color: #5e6672;
+
+      font-size: 11px;
     }
 
-    .message {
-      text-align: center;
-      margin-top: 15px;
-      font-size: 13px;
-      display: none;
-    }
 
-    .success {
-      color: #00d084;
-    }
+    /* =========================
+       MOBILE
+    ========================= */
 
-    .error {
-      color: #ff4d67;
-    }
+    @media(max-width:480px) {
 
-    @media (max-width: 480px) {
-      .container {
+      .login-card {
+
         padding: 30px 22px;
+
         border-radius: 20px;
       }
 
-      .hello h1 {
+
+      .title h1 {
+
         font-size: 27px;
       }
+
     }
+
   </style>
+
 </head>
+
 
 <body>
 
-  <div class="container">
 
-    <div class="hello">
+  <div class="login-card">
 
-      <div class="hello-icon">
-        👋
-      </div>
 
-      <h1>Hello!</h1>
+    <!-- =====================
+         LOGO
+    ====================== -->
 
-      <p>Welcome back. Please login to continue.</p>
+    <div class="logo">
+
+      👋
 
     </div>
 
 
-    <div class="input-box">
+    <!-- =====================
+         TITLE
+    ====================== -->
 
-      <label>Username</label>
+    <div class="title">
+
+      <h1>
+        Hello!
+      </h1>
+
+      <p>
+        Login to continue to your dashboard
+      </p>
+
+    </div>
+
+
+    <!-- =====================
+         USERNAME
+    ====================== -->
+
+    <div class="input-group">
+
+      <label>
+        Username
+      </label>
 
       <input
         type="text"
         id="username"
-        placeholder="Enter your username"
+        placeholder="Enter username"
         autocomplete="username"
       >
 
     </div>
 
 
-    <div class="input-box">
+    <!-- =====================
+         PASSWORD
+    ====================== -->
 
-      <label>Password</label>
+    <div class="input-group">
+
+      <label>
+        Password
+      </label>
 
       <input
         type="password"
         id="password"
-        placeholder="Enter your password"
+        placeholder="Enter password"
         autocomplete="current-password"
       >
 
     </div>
 
 
-    <button class="login-btn" onclick="login()">
+    <!-- =====================
+         LOGIN BUTTON
+    ====================== -->
+
+    <button
+      class="login-btn"
+      id="loginBtn"
+      onclick="login()">
+
       Login
+
     </button>
 
 
-    <div id="message" class="message"></div>
+    <!-- =====================
+         MESSAGE
+    ====================== -->
+
+    <div id="message"></div>
 
 
-    <div class="location">
+    <!-- =====================
+         PHONE INFORMATION
+    ====================== -->
 
-      <div class="location-icon">
-        📍
+    <div class="phone-box">
+
+
+      <div class="phone-icon">
+
+        📱
+
       </div>
 
-      <div class="location-text">
 
-        <div class="location-title">
-          YOUR LOCATION
+      <div class="phone-info">
+
+
+        <div class="phone-title">
+
+          YOUR PHONE
+
         </div>
 
-        <div id="location">
-          Detecting location...
+
+        <div id="phoneName">
+
+          Detecting device...
+
         </div>
+
+
+        <div id="phoneDetails">
+
+          Please wait...
+
+        </div>
+
 
       </div>
+
 
     </div>
 
+
+    <!-- =====================
+         FOOTER
+    ====================== -->
 
     <div class="footer">
-      Secure Login • Welcome Back
+
+      Secure Login System
+
     </div>
+
 
   </div>
 
 
-  <script>
 
-    // ================================
-    // LOCATION
-    // ================================
+<script>
 
-    const locationText = document.getElementById("location");
 
-    if (navigator.geolocation) {
+/* =====================================================
+   GOOGLE APPS SCRIPT WEB APP URL
+=====================================================
 
-      navigator.geolocation.getCurrentPosition(
+   এখানে তোমার Apps Script Web App URL বসাবে।
 
-        function(position) {
+===================================================== */
 
-          const lat = position.coords.latitude.toFixed(4);
-          const lon = position.coords.longitude.toFixed(4);
+const API_URL =
+  "YOUR_APPS_SCRIPT_WEB_APP_URL_HERE";
 
-          locationText.innerHTML =
-            `Latitude: ${lat}, Longitude: ${lon}`;
 
-        },
 
-        function() {
+/* =====================================================
+   DEVICE DETECTION
+===================================================== */
 
-          locationText.innerHTML =
-            "Location permission denied";
+function detectPhone() {
+
+
+  const ua =
+    navigator.userAgent;
+
+
+  const platform =
+    navigator.platform || "";
+
+
+  let device =
+    "Unknown Device";
+
+
+  let os =
+    "Unknown OS";
+
+
+  let browser =
+    "Unknown Browser";
+
+
+  /* =========================
+     DEVICE
+  ========================= */
+
+  if (/iPhone/i.test(ua)) {
+
+    device =
+      "Apple iPhone";
+
+  }
+
+  else if (/iPad/i.test(ua)) {
+
+    device =
+      "Apple iPad";
+
+  }
+
+  else if (/Samsung/i.test(ua)) {
+
+    device =
+      "Samsung Galaxy";
+
+  }
+
+  else if (/SM-[A-Z0-9-]+/i.test(ua)) {
+
+    device =
+      "Samsung Galaxy";
+
+  }
+
+  else if (/Xiaomi/i.test(ua)) {
+
+    device =
+      "Xiaomi";
+
+  }
+
+  else if (/Redmi/i.test(ua)) {
+
+    device =
+      "Redmi";
+
+  }
+
+  else if (/Huawei/i.test(ua)) {
+
+    device =
+      "Huawei";
+
+  }
+
+  else if (/HUAWEI/i.test(ua)) {
+
+    device =
+      "Huawei";
+
+  }
+
+  else if (/OPPO/i.test(ua)) {
+
+    device =
+      "OPPO";
+
+  }
+
+  else if (/vivo/i.test(ua)) {
+
+    device =
+      "Vivo";
+
+  }
+
+  else if (/realme/i.test(ua)) {
+
+    device =
+      "Realme";
+
+  }
+
+  else if (/OnePlus/i.test(ua)) {
+
+    device =
+      "OnePlus";
+
+  }
+
+  else if (/Android/i.test(ua)) {
+
+    device =
+      "Android Phone";
+
+  }
+
+  else if (/Windows/i.test(ua)) {
+
+    device =
+      "Windows PC";
+
+  }
+
+  else if (/Macintosh/i.test(ua)) {
+
+    device =
+      "Mac";
+
+  }
+
+
+  /* =========================
+     OS
+  ========================= */
+
+  if (/Windows NT 10/i.test(ua)) {
+
+    os =
+      "Windows 10/11";
+
+  }
+
+  else if (/Android/i.test(ua)) {
+
+    const match =
+      ua.match(/Android\s([0-9.]+)/i);
+
+    os =
+      match
+        ? "Android " + match[1]
+        : "Android";
+
+  }
+
+  else if (/iPhone|iPad/i.test(ua)) {
+
+    const match =
+      ua.match(/OS\s([0-9_]+)/i);
+
+    os =
+      match
+        ? "iOS " +
+          match[1].replace(/_/g, ".")
+        : "iOS";
+
+  }
+
+  else if (/Mac OS X/i.test(ua)) {
+
+    os =
+      "macOS";
+
+  }
+
+  else if (/Linux/i.test(ua)) {
+
+    os =
+      "Linux";
+
+  }
+
+
+  /* =========================
+     BROWSER
+  ========================= */
+
+  if (/Edg/i.test(ua)) {
+
+    browser =
+      "Microsoft Edge";
+
+  }
+
+  else if (/Chrome/i.test(ua)) {
+
+    browser =
+      "Google Chrome";
+
+  }
+
+  else if (/Firefox/i.test(ua)) {
+
+    browser =
+      "Mozilla Firefox";
+
+  }
+
+  else if (/Safari/i.test(ua) &&
+           !/Chrome/i.test(ua)) {
+
+    browser =
+      "Safari";
+
+  }
+
+
+  /* =========================
+     SHOW
+  ========================= */
+
+  document.getElementById(
+    "phoneName"
+  ).textContent = device;
+
+
+  document.getElementById(
+    "phoneDetails"
+  ).textContent =
+    os + " • " + browser;
+
+}
+
+
+detectPhone();
+
+
+
+/* =====================================================
+   LOGIN
+===================================================== */
+
+async function login() {
+
+
+  const username =
+    document
+      .getElementById("username")
+      .value
+      .trim();
+
+
+  const password =
+    document
+      .getElementById("password")
+      .value
+      .trim();
+
+
+  const button =
+    document
+      .getElementById("loginBtn");
+
+
+  /* =========================
+     EMPTY CHECK
+  ========================= */
+
+  if (!username || !password) {
+
+    showMessage(
+      "Please enter username and password.",
+      "error"
+    );
+
+    return;
+
+  }
+
+
+  /* =========================
+     BUTTON LOADING
+  ========================= */
+
+  button.disabled =
+    true;
+
+  button.textContent =
+    "Logging in...";
+
+
+  hideMessage();
+
+
+  try {
+
+
+    /* =========================
+       SEND REQUEST
+    ========================= */
+
+    const response =
+      await fetch(
+        API_URL,
+        {
+
+          method: "POST",
+
+          headers: {
+
+            "Content-Type":
+              "text/plain;charset=utf-8"
+
+          },
+
+          body:
+            JSON.stringify({
+
+              action: "login",
+
+              username:
+                username,
+
+              password:
+                password
+
+            })
 
         }
+      );
+
+
+    /* =========================
+       RESPONSE
+    ========================= */
+
+    const data =
+      await response.json();
+
+
+    console.log(
+      "Login response:",
+      data
+    );
+
+
+    /* =========================
+       SUCCESS
+    ========================= */
+
+    if (data.success === true) {
+
+
+      /* =====================
+         SAVE LOGIN SESSION
+      ===================== */
+
+      localStorage.setItem(
+        "loggedIn",
+        "true"
+      );
+
+
+      localStorage.setItem(
+        "username",
+        data.username ||
+        username
+      );
+
+
+      localStorage.setItem(
+        "name",
+        data.name ||
+        ""
+      );
+
+
+      localStorage.setItem(
+        "role",
+        data.role ||
+        ""
+      );
+
+
+      localStorage.setItem(
+        "photo",
+        data.photo ||
+        ""
+      );
+
+
+      /* =====================
+         MESSAGE
+      ===================== */
+
+      showMessage(
+        "Login successful!",
+        "success"
+      );
+
+
+      /* =====================
+         DASHBOARD
+      ===================== */
+
+      setTimeout(
+        function() {
+
+          window.location.href =
+            "dashboard.html";
+
+        },
+        500
+      );
+
+
+    }
+
+
+    /* =========================
+       FAILED
+    ========================= */
+
+    else {
+
+      showMessage(
+
+        data.message ||
+        "Invalid username or password.",
+
+        "error"
 
       );
 
-    } else {
+      button.disabled =
+        false;
 
-      locationText.innerHTML =
-        "Location not supported";
-
-    }
-
-
-    // ================================
-    // LOGIN
-    // ================================
-
-    function login() {
-
-      const username =
-        document.getElementById("username").value.trim();
-
-      const password =
-        document.getElementById("password").value.trim();
-
-      const message =
-        document.getElementById("message");
-
-
-      if (!username || !password) {
-
-        message.style.display = "block";
-        message.className = "message error";
-        message.innerHTML =
-          "Please enter username and password.";
-
-        return;
-      }
-
-
-      // Demo login
-      // পরে Google Sheet / Apps Script
-      // login system এখানে connect করা যাবে।
-
-      message.style.display = "block";
-      message.className = "message success";
-      message.innerHTML =
-        "Login button working!";
+      button.textContent =
+        "Login";
 
     }
 
 
-    // Enter key login
+  }
 
-    document.addEventListener("keydown", function(event) {
+  catch(error) {
 
-      if (event.key === "Enter") {
-        login();
-      }
 
-    });
+    console.error(
+      "Login Error:",
+      error
+    );
 
-  </script>
+
+    showMessage(
+      "Unable to connect to server.",
+      "error"
+    );
+
+
+    button.disabled =
+      false;
+
+    button.textContent =
+      "Login";
+
+  }
+
+}
+
+
+
+/* =====================================================
+   MESSAGE
+===================================================== */
+
+function showMessage(
+  text,
+  type
+) {
+
+  const message =
+    document.getElementById(
+      "message"
+    );
+
+
+  message.textContent =
+    text;
+
+
+  message.className =
+    type;
+
+}
+
+
+
+function hideMessage() {
+
+  const message =
+    document.getElementById(
+      "message"
+    );
+
+
+  message.style.display =
+    "none";
+
+
+  message.className = "";
+
+}
+
+
+
+/* =====================================================
+   ENTER KEY
+===================================================== */
+
+document.addEventListener(
+  "keydown",
+  function(event) {
+
+    if (
+      event.key === "Enter"
+    ) {
+
+      login();
+
+    }
+
+  }
+);
+
+
+</script>
+
 
 </body>
+
 </html>
