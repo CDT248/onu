@@ -29,17 +29,17 @@
       background:
         radial-gradient(
           circle at top left,
-          rgba(0, 255, 140, 0.10),
+          rgba(0,255,140,0.10),
           transparent 35%
         ),
         radial-gradient(
           circle at bottom right,
-          rgba(255, 0, 60, 0.08),
+          rgba(255,0,60,0.08),
           transparent 35%
         ),
         #070a0e;
 
-      color: white;
+      color: #fff;
     }
 
 
@@ -49,9 +49,9 @@
 
     .header {
 
-      height: 72px;
+      height: 70px;
 
-      padding: 0 35px;
+      padding: 0 30px;
 
       display: flex;
 
@@ -60,7 +60,7 @@
       justify-content: space-between;
 
       background:
-        rgba(13,17,22,0.92);
+        rgba(13,17,22,0.94);
 
       border-bottom:
         1px solid rgba(255,255,255,0.07);
@@ -81,7 +81,7 @@
 
       align-items: center;
 
-      gap: 12px;
+      gap: 11px;
     }
 
 
@@ -105,9 +105,9 @@
           #00a86b
         );
 
-      font-size: 20px;
-
       color: #04100a;
+
+      font-size: 20px;
     }
 
 
@@ -125,13 +125,13 @@
 
       align-items: center;
 
-      gap: 15px;
+      gap: 14px;
     }
 
 
     .user-name {
 
-      color: #b9c1cc;
+      color: #b7c0ca;
 
       font-size: 13px;
     }
@@ -139,24 +139,23 @@
 
     .logout-btn {
 
-      border: 1px solid
+      padding: 9px 15px;
+
+      border-radius: 9px;
+
+      border:
+        1px solid
         rgba(255,255,255,0.08);
 
       background: #151a20;
 
-      color: #ff667d;
-
-      padding: 10px 16px;
-
-      border-radius: 10px;
+      color: #ff657b;
 
       cursor: pointer;
 
-      font-size: 13px;
+      font-size: 12px;
 
       font-weight: 600;
-
-      transition: 0.25s;
     }
 
 
@@ -164,9 +163,6 @@
 
       background:
         rgba(255,60,85,0.10);
-
-      border-color:
-        rgba(255,60,85,0.25);
     }
 
 
@@ -176,58 +172,146 @@
 
     .main {
 
-      max-width: 1100px;
+      max-width: 1200px;
 
       margin: auto;
 
-      padding: 55px 25px;
+      padding: 35px 25px;
     }
 
 
-    .welcome {
+    .page-title {
 
-      margin-bottom: 40px;
+      margin-bottom: 25px;
     }
 
 
-    .welcome h1 {
+    .page-title h1 {
 
-      font-size: 32px;
+      font-size: 28px;
 
-      margin-bottom: 8px;
+      margin-bottom: 7px;
     }
 
 
-    .welcome p {
+    .page-title p {
 
-      color: #7f8996;
+      color: #7e8794;
 
-      font-size: 14px;
+      font-size: 13px;
     }
 
 
     /* =========================
-       CARDS
+       TOP BAR
     ========================= */
 
-    .cards {
+    .toolbar {
 
-      display: grid;
+      display: flex;
 
-      grid-template-columns:
-        repeat(2, 1fr);
+      gap: 12px;
 
-      gap: 25px;
+      margin-bottom: 20px;
     }
 
 
-    .card {
+    .search-box {
 
-      min-height: 260px;
+      flex: 1;
 
-      padding: 30px;
+      position: relative;
+    }
 
-      border-radius: 22px;
+
+    .search-box span {
+
+      position: absolute;
+
+      left: 15px;
+
+      top: 50%;
+
+      transform:
+        translateY(-50%);
+
+      color: #6f7884;
+
+      font-size: 16px;
+    }
+
+
+    .search-box input {
+
+      width: 100%;
+
+      height: 48px;
+
+      padding:
+        0 15px 0 43px;
+
+      background: #0d1116;
+
+      border:
+        1px solid #242b34;
+
+      border-radius: 11px;
+
+      color: white;
+
+      outline: none;
+
+      font-size: 13px;
+
+      transition: 0.25s;
+    }
+
+
+    .search-box input:focus {
+
+      border-color: #00d084;
+
+      box-shadow:
+        0 0 0 3px
+        rgba(0,208,132,0.07);
+    }
+
+
+    .refresh-btn {
+
+      height: 48px;
+
+      padding:
+        0 18px;
+
+      border-radius: 11px;
+
+      border:
+        1px solid #242b34;
+
+      background: #0d1116;
+
+      color: #b9c1cb;
+
+      cursor: pointer;
+
+      font-size: 13px;
+    }
+
+
+    .refresh-btn:hover {
+
+      border-color: #00d084;
+
+      color: #00d084;
+    }
+
+
+    /* =========================
+       LIST CONTAINER
+    ========================= */
+
+    .list-container {
 
       background:
         rgba(18,22,28,0.94);
@@ -236,115 +320,174 @@
         1px solid
         rgba(255,255,255,0.07);
 
-      box-shadow:
-        0 20px 50px
-        rgba(0,0,0,0.35);
-
-      cursor: pointer;
-
-      position: relative;
+      border-radius: 17px;
 
       overflow: hidden;
 
-      transition:
-        transform 0.3s,
-        border-color 0.3s,
-        box-shadow 0.3s;
-    }
-
-
-    .card:hover {
-
-      transform:
-        translateY(-7px);
-
-      border-color:
-        rgba(0,208,132,0.30);
-
       box-shadow:
-        0 25px 60px
-        rgba(0,0,0,0.50);
+        0 20px 50px
+        rgba(0,0,0,0.35);
     }
 
 
-    .card::before {
+    /* =========================
+       LIST HEADER
+    ========================= */
 
-      content: "";
+    .list-header {
 
-      position: absolute;
+      display: grid;
 
-      width: 180px;
-      height: 180px;
+      grid-template-columns:
+        70px
+        1.3fr
+        1fr
+        1fr
+        120px;
 
-      right: -70px;
-      bottom: -70px;
+      padding:
+        16px 20px;
 
-      border-radius: 50%;
+      background: #10151b;
+
+      border-bottom:
+        1px solid #202731;
+
+      color: #788290;
+
+      font-size: 11px;
+
+      font-weight: 600;
+
+      text-transform: uppercase;
+    }
+
+
+    /* =========================
+       LIST ITEM
+    ========================= */
+
+    .list-item {
+
+      display: grid;
+
+      grid-template-columns:
+        70px
+        1.3fr
+        1fr
+        1fr
+        120px;
+
+      align-items: center;
+
+      padding:
+        17px 20px;
+
+      border-bottom:
+        1px solid #1b2128;
+
+      transition: 0.2s;
+    }
+
+
+    .list-item:last-child {
+
+      border-bottom: none;
+    }
+
+
+    .list-item:hover {
+
+      background:
+        rgba(0,208,132,0.035);
+    }
+
+
+    .serial {
+
+      color: #65707d;
+
+      font-size: 12px;
+    }
+
+
+    .name {
+
+      font-size: 14px;
+
+      font-weight: 600;
+    }
+
+
+    .username {
+
+      color: #929ba7;
+
+      font-size: 12px;
+    }
+
+
+    .role {
+
+      color: #929ba7;
+
+      font-size: 12px;
+    }
+
+
+    .status {
+
+      display: inline-flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      width: 75px;
+
+      padding: 6px 9px;
+
+      border-radius: 20px;
+
+      font-size: 10px;
+
+      font-weight: 600;
+    }
+
+
+    .active {
+
+      color: #00d084;
 
       background:
         rgba(0,208,132,0.08);
     }
 
 
-    .card-icon {
+    .inactive {
 
-      width: 65px;
-      height: 65px;
-
-      border-radius: 17px;
-
-      display: flex;
-
-      align-items: center;
-
-      justify-content: center;
-
-      font-size: 31px;
+      color: #ff657b;
 
       background:
-        rgba(0,208,132,0.09);
-
-      border:
-        1px solid
-        rgba(0,208,132,0.12);
-
-      margin-bottom: 25px;
+        rgba(255,60,85,0.08);
     }
 
 
-    .card h2 {
+    /* =========================
+       EMPTY
+    ========================= */
 
-      font-size: 24px;
+    .empty {
 
-      margin-bottom: 10px;
-    }
+      text-align: center;
 
+      padding: 50px 20px;
 
-    .card p {
-
-      color: #7e8794;
+      color: #68727e;
 
       font-size: 13px;
 
-      line-height: 1.6;
-
-      max-width: 400px;
-    }
-
-
-    .open-text {
-
-      position: absolute;
-
-      left: 30px;
-
-      bottom: 25px;
-
-      color: #00d084;
-
-      font-size: 13px;
-
-      font-weight: 600;
+      display: none;
     }
 
 
@@ -356,7 +499,7 @@
 
       text-align: center;
 
-      margin-top: 55px;
+      margin-top: 30px;
 
       color: #4f5863;
 
@@ -372,13 +515,7 @@
 
       .header {
 
-        padding: 0 18px;
-      }
-
-
-      .brand-name {
-
-        font-size: 16px;
+        padding: 0 17px;
       }
 
 
@@ -391,26 +528,38 @@
       .main {
 
         padding:
-          35px 18px;
+          28px 15px;
       }
 
 
-      .welcome h1 {
+      .page-title h1 {
 
-        font-size: 27px;
+        font-size: 24px;
       }
 
 
-      .cards {
+      .toolbar {
 
-        grid-template-columns:
-          1fr;
+        flex-direction: column;
       }
 
 
-      .card {
+      .refresh-btn {
 
-        min-height: 230px;
+        width: 100%;
+      }
+
+
+      .list-container {
+
+        overflow-x: auto;
+      }
+
+
+      .list-header,
+      .list-item {
+
+        min-width: 720px;
       }
 
     }
@@ -476,14 +625,14 @@
   <main class="main">
 
 
-    <div class="welcome">
+    <div class="page-title">
 
       <h1>
-        Welcome 👋
+        Data List
       </h1>
 
       <p>
-        Choose an option to continue.
+        Search and manage your data
       </p>
 
     </div>
@@ -491,71 +640,85 @@
 
 
     <!-- =========================
-         CARDS
+         SEARCH
     ========================== -->
 
-    <div class="cards">
+    <div class="toolbar">
 
 
-      <!-- ANTI ONU -->
+      <div class="search-box">
 
-      <div
-        class="card"
-        onclick="openAntiONU()">
+        <span>
+          🔍
+        </span>
 
-
-        <div class="card-icon">
-          🛡️
-        </div>
-
-
-        <h2>
-          ANTI ONU
-        </h2>
-
-
-        <p>
-          Manage and access the
-          ANTI ONU system.
-        </p>
-
-
-        <div class="open-text">
-          Open →
-        </div>
-
+        <input
+          type="text"
+          id="search"
+          placeholder="Search by name, username or role..."
+          oninput="searchData()"
+        >
 
       </div>
 
 
+      <button
+        class="refresh-btn"
+        onclick="loadData()">
 
-      <!-- USER -->
+        🔄 Refresh
+
+      </button>
+
+
+    </div>
+
+
+
+    <!-- =========================
+         LIST
+    ========================== -->
+
+    <div class="list-container">
+
+
+      <div class="list-header">
+
+        <div>
+          #
+        </div>
+
+        <div>
+          Name
+        </div>
+
+        <div>
+          Username
+        </div>
+
+        <div>
+          Role
+        </div>
+
+        <div>
+          Status
+        </div>
+
+      </div>
+
+
+      <div id="dataList">
+
+        <!-- Data will load here -->
+
+      </div>
+
 
       <div
-        class="card"
-        onclick="openUser()">
+        class="empty"
+        id="empty">
 
-
-        <div class="card-icon">
-          👤
-        </div>
-
-
-        <h2>
-          USER
-        </h2>
-
-
-        <p>
-          Manage users and access
-          user related information.
-        </p>
-
-
-        <div class="open-text">
-          Open →
-        </div>
-
+        No data found.
 
       </div>
 
@@ -566,7 +729,7 @@
 
     <div class="footer">
 
-      Secure Dashboard System
+      Dashboard System
 
     </div>
 
@@ -582,81 +745,246 @@
    LOGIN PROTECTION
 ===================================================== */
 
-const loggedIn =
-  localStorage.getItem(
-    "loggedIn"
+if (
+  localStorage.getItem("loggedIn")
+  !== "true"
+) {
+
+  window.location.replace(
+    "index.html"
   );
-
-
-if (loggedIn !== "true") {
-
-  window.location.href =
-    "index.html";
 
 }
 
 
 
 /* =====================================================
-   SHOW USER NAME
+   USER NAME
 ===================================================== */
 
-const name =
-  localStorage.getItem(
-    "name"
-  );
+const loggedName =
+  localStorage.getItem("name");
 
 
-const username =
-  localStorage.getItem(
-    "username"
-  );
+const loggedUsername =
+  localStorage.getItem("username");
 
 
 document.getElementById(
   "userName"
 ).textContent =
-  name ||
-  username ||
+  loggedName ||
+  loggedUsername ||
   "User";
 
 
 
 /* =====================================================
-   ANTI ONU
+   DEMO DATA
 ===================================================== */
 
-function openAntiONU() {
+let allData = [
 
-  /*
-    এখানে তোমার ANTI ONU page-এর নাম দাও।
+  {
+    name: "Admin",
+    username: "admin",
+    role: "Admin",
+    status: "Active"
+  },
 
-    Example:
-    window.location.href = "anti-onu.html";
-  */
+  {
+    name: "Fahim",
+    username: "fahim",
+    role: "User",
+    status: "Active"
+  },
 
-  window.location.href =
-    "anti-onu.html";
+  {
+    name: "Support",
+    username: "support",
+    role: "Support",
+    status: "Inactive"
+  },
+
+  {
+    name: "Manager",
+    username: "manager",
+    role: "Manager",
+    status: "Active"
+  }
+
+];
+
+
+
+/* =====================================================
+   LOAD DATA
+===================================================== */
+
+function loadData() {
+
+  renderData(allData);
 
 }
 
 
 
 /* =====================================================
-   USER
+   RENDER DATA
 ===================================================== */
 
-function openUser() {
+function renderData(data) {
 
-  /*
-    এখানে তোমার User page-এর নাম দাও।
 
-    Example:
-    window.location.href = "user.html";
-  */
+  const list =
+    document.getElementById(
+      "dataList"
+    );
 
-  window.location.href =
-    "user.html";
+
+  const empty =
+    document.getElementById(
+      "empty"
+    );
+
+
+  list.innerHTML = "";
+
+
+  if (
+    !data ||
+    data.length === 0
+  ) {
+
+    empty.style.display =
+      "block";
+
+    return;
+
+  }
+
+
+  empty.style.display =
+    "none";
+
+
+  data.forEach(
+    function(item, index) {
+
+
+      const row =
+        document.createElement(
+          "div"
+        );
+
+
+      row.className =
+        "list-item";
+
+
+      const statusClass =
+        String(item.status)
+          .toLowerCase()
+          === "active"
+          ? "active"
+          : "inactive";
+
+
+      row.innerHTML = `
+
+        <div class="serial">
+          ${index + 1}
+        </div>
+
+        <div class="name">
+          ${item.name || "-"}
+        </div>
+
+        <div class="username">
+          ${item.username || "-"}
+        </div>
+
+        <div class="role">
+          ${item.role || "-"}
+        </div>
+
+        <div>
+          <span class="status ${statusClass}">
+            ${item.status || "-"}
+          </span>
+        </div>
+
+      `;
+
+
+      list.appendChild(row);
+
+    }
+  );
+
+}
+
+
+
+/* =====================================================
+   SEARCH
+===================================================== */
+
+function searchData() {
+
+
+  const search =
+    document
+      .getElementById("search")
+      .value
+      .toLowerCase()
+      .trim();
+
+
+  if (!search) {
+
+    renderData(allData);
+
+    return;
+
+  }
+
+
+  const filtered =
+    allData.filter(
+      function(item) {
+
+        return (
+
+          String(item.name || "")
+            .toLowerCase()
+            .includes(search)
+
+          ||
+
+          String(item.username || "")
+            .toLowerCase()
+            .includes(search)
+
+          ||
+
+          String(item.role || "")
+            .toLowerCase()
+            .includes(search)
+
+          ||
+
+          String(item.status || "")
+            .toLowerCase()
+            .includes(search)
+
+        );
+
+      }
+    );
+
+
+  renderData(filtered);
 
 }
 
@@ -669,34 +997,7 @@ function openUser() {
 function logout() {
 
 
-  localStorage.removeItem(
-    "loggedIn"
-  );
-
-
-  localStorage.removeItem(
-    "username"
-  );
-
-
-  localStorage.removeItem(
-    "name"
-  );
-
-
-  localStorage.removeItem(
-    "role"
-  );
-
-
-  localStorage.removeItem(
-    "status"
-  );
-
-
-  localStorage.removeItem(
-    "photo"
-  );
+  localStorage.clear();
 
 
   window.location.replace(
@@ -704,6 +1005,14 @@ function logout() {
   );
 
 }
+
+
+
+/* =====================================================
+   START
+===================================================== */
+
+loadData();
 
 
 </script>
