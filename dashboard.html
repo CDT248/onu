@@ -1,19 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0">
-
-  <title>Dashboard</title>
-
+  <title>Data Dashboard</title>
 
   <style>
-
     * {
       margin: 0;
       padding: 0;
@@ -21,1003 +14,2378 @@
       font-family: Arial, Helvetica, sans-serif;
     }
 
-
     body {
-
-      min-height: 100vh;
-
-      background:
-        radial-gradient(
-          circle at top left,
-          rgba(0,255,140,0.10),
-          transparent 35%
-        ),
-        radial-gradient(
-          circle at bottom right,
-          rgba(255,0,60,0.08),
-          transparent 35%
-        ),
-        #070a0e;
-
-      color: #fff;
+      background: #f4f7f6;
+      color: #1f2937;
     }
-
 
     /* =========================
        HEADER
-    ========================= */
+    ========================== */
 
     .header {
-
+      width: 100%;
       height: 70px;
-
-      padding: 0 30px;
-
+      background: #ffffff;
+      border-bottom: 1px solid #e5e7eb;
       display: flex;
-
       align-items: center;
-
       justify-content: space-between;
-
-      background:
-        rgba(13,17,22,0.94);
-
-      border-bottom:
-        1px solid rgba(255,255,255,0.07);
-
-      backdrop-filter: blur(15px);
-
+      padding: 0 25px;
       position: sticky;
-
       top: 0;
-
       z-index: 100;
     }
 
-
-    .brand {
-
-      display: flex;
-
-      align-items: center;
-
-      gap: 11px;
-    }
-
-
-    .brand-icon {
-
-      width: 40px;
-      height: 40px;
-
-      border-radius: 11px;
-
-      display: flex;
-
-      align-items: center;
-
-      justify-content: center;
-
-      background:
-        linear-gradient(
-          135deg,
-          #00d084,
-          #00a86b
-        );
-
-      color: #04100a;
-
-      font-size: 20px;
-    }
-
-
-    .brand-name {
-
-      font-size: 18px;
-
+    .logo {
+      font-size: 22px;
       font-weight: 700;
+      color: #087f5b;
     }
 
-
-    .user-area {
-
+    .header-right {
       display: flex;
-
       align-items: center;
-
-      gap: 14px;
+      gap: 10px;
     }
-
-
-    .user-name {
-
-      color: #b7c0ca;
-
-      font-size: 13px;
-    }
-
-
-    .logout-btn {
-
-      padding: 9px 15px;
-
-      border-radius: 9px;
-
-      border:
-        1px solid
-        rgba(255,255,255,0.08);
-
-      background: #151a20;
-
-      color: #ff657b;
-
-      cursor: pointer;
-
-      font-size: 12px;
-
-      font-weight: 600;
-    }
-
-
-    .logout-btn:hover {
-
-      background:
-        rgba(255,60,85,0.10);
-    }
-
 
     /* =========================
        MAIN
-    ========================= */
+    ========================== */
 
-    .main {
-
-      max-width: 1200px;
-
+    .container {
+      max-width: 1500px;
       margin: auto;
-
-      padding: 35px 25px;
+      padding: 25px;
     }
-
-
-    .page-title {
-
-      margin-bottom: 25px;
-    }
-
-
-    .page-title h1 {
-
-      font-size: 28px;
-
-      margin-bottom: 7px;
-    }
-
-
-    .page-title p {
-
-      color: #7e8794;
-
-      font-size: 13px;
-    }
-
 
     /* =========================
-       TOP BAR
-    ========================= */
+       TOP
+    ========================== */
 
-    .toolbar {
-
+    .top-section {
       display: flex;
-
-      gap: 12px;
-
+      justify-content: space-between;
+      align-items: center;
+      gap: 15px;
       margin-bottom: 20px;
     }
 
-
-    .search-box {
-
-      flex: 1;
-
-      position: relative;
+    .title h1 {
+      font-size: 26px;
+      margin-bottom: 5px;
     }
 
-
-    .search-box span {
-
-      position: absolute;
-
-      left: 15px;
-
-      top: 50%;
-
-      transform:
-        translateY(-50%);
-
-      color: #6f7884;
-
-      font-size: 16px;
+    .title p {
+      color: #6b7280;
+      font-size: 14px;
     }
 
+    /* =========================
+       BUTTONS
+    ========================== */
 
-    .search-box input {
-
-      width: 100%;
-
-      height: 48px;
-
-      padding:
-        0 15px 0 43px;
-
-      background: #0d1116;
-
-      border:
-        1px solid #242b34;
-
-      border-radius: 11px;
-
-      color: white;
-
-      outline: none;
-
-      font-size: 13px;
-
-      transition: 0.25s;
-    }
-
-
-    .search-box input:focus {
-
-      border-color: #00d084;
-
-      box-shadow:
-        0 0 0 3px
-        rgba(0,208,132,0.07);
-    }
-
-
-    .refresh-btn {
-
-      height: 48px;
-
-      padding:
-        0 18px;
-
-      border-radius: 11px;
-
-      border:
-        1px solid #242b34;
-
-      background: #0d1116;
-
-      color: #b9c1cb;
-
+    button {
+      border: none;
       cursor: pointer;
-
-      font-size: 13px;
-    }
-
-
-    .refresh-btn:hover {
-
-      border-color: #00d084;
-
-      color: #00d084;
-    }
-
-
-    /* =========================
-       LIST CONTAINER
-    ========================= */
-
-    .list-container {
-
-      background:
-        rgba(18,22,28,0.94);
-
-      border:
-        1px solid
-        rgba(255,255,255,0.07);
-
-      border-radius: 17px;
-
-      overflow: hidden;
-
-      box-shadow:
-        0 20px 50px
-        rgba(0,0,0,0.35);
-    }
-
-
-    /* =========================
-       LIST HEADER
-    ========================= */
-
-    .list-header {
-
-      display: grid;
-
-      grid-template-columns:
-        70px
-        1.3fr
-        1fr
-        1fr
-        120px;
-
-      padding:
-        16px 20px;
-
-      background: #10151b;
-
-      border-bottom:
-        1px solid #202731;
-
-      color: #788290;
-
-      font-size: 11px;
-
-      font-weight: 600;
-
-      text-transform: uppercase;
-    }
-
-
-    /* =========================
-       LIST ITEM
-    ========================= */
-
-    .list-item {
-
-      display: grid;
-
-      grid-template-columns:
-        70px
-        1.3fr
-        1fr
-        1fr
-        120px;
-
-      align-items: center;
-
-      padding:
-        17px 20px;
-
-      border-bottom:
-        1px solid #1b2128;
-
       transition: 0.2s;
     }
 
-
-    .list-item:last-child {
-
-      border-bottom: none;
-    }
-
-
-    .list-item:hover {
-
-      background:
-        rgba(0,208,132,0.035);
-    }
-
-
-    .serial {
-
-      color: #65707d;
-
-      font-size: 12px;
-    }
-
-
-    .name {
-
+    .btn {
+      padding: 11px 17px;
+      border-radius: 8px;
       font-size: 14px;
-
       font-weight: 600;
     }
 
-
-    .username {
-
-      color: #929ba7;
-
-      font-size: 12px;
+    .btn-primary {
+      background: #087f5b;
+      color: #fff;
     }
 
-
-    .role {
-
-      color: #929ba7;
-
-      font-size: 12px;
+    .btn-primary:hover {
+      background: #066b4d;
     }
 
+    .btn-refresh {
+      background: #eef2f7;
+      color: #374151;
+    }
+
+    .btn-refresh:hover {
+      background: #e2e8f0;
+    }
+
+    .btn-edit {
+      background: #e8f1ff;
+      color: #2563eb;
+      padding: 7px 10px;
+      border-radius: 6px;
+    }
+
+    .btn-delete {
+      background: #fee2e2;
+      color: #dc2626;
+      padding: 7px 10px;
+      border-radius: 6px;
+    }
+
+    /* =========================
+       FILTER BOX
+    ========================== */
+
+    .filter-box {
+      background: #ffffff;
+      border: 1px solid #e5e7eb;
+      border-radius: 12px;
+      padding: 18px;
+      margin-bottom: 20px;
+    }
+
+    .filters {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr auto auto;
+      gap: 12px;
+      align-items: end;
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .field label {
+      font-size: 12px;
+      font-weight: 600;
+      color: #6b7280;
+    }
+
+    .field input,
+    .field select {
+      width: 100%;
+      height: 42px;
+      border: 1px solid #d1d5db;
+      border-radius: 8px;
+      padding: 0 12px;
+      outline: none;
+      background: #fff;
+      font-size: 14px;
+    }
+
+    .field input:focus,
+    .field select:focus {
+      border-color: #087f5b;
+    }
+
+    /* =========================
+       TABLE
+    ========================== */
+
+    .table-box {
+      background: #ffffff;
+      border: 1px solid #e5e7eb;
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .table-header {
+      padding: 16px 18px;
+      border-bottom: 1px solid #e5e7eb;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .table-header h2 {
+      font-size: 17px;
+    }
+
+    .total-count {
+      font-size: 13px;
+      color: #6b7280;
+    }
+
+    .table-wrapper {
+      width: 100%;
+      overflow-x: auto;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 850px;
+    }
+
+    th {
+      background: #f8fafc;
+      padding: 13px;
+      text-align: left;
+      font-size: 12px;
+      color: #64748b;
+      white-space: nowrap;
+      border-bottom: 1px solid #e5e7eb;
+    }
+
+    td {
+      padding: 13px;
+      border-bottom: 1px solid #eef0f2;
+      font-size: 13px;
+      white-space: nowrap;
+    }
+
+    tr:hover td {
+      background: #fafafa;
+    }
+
+    .actions {
+      display: flex;
+      gap: 7px;
+    }
+
+    /* =========================
+       STATUS
+    ========================== */
 
     .status {
-
-      display: inline-flex;
-
-      align-items: center;
-
-      justify-content: center;
-
-      width: 75px;
-
-      padding: 6px 9px;
-
+      display: inline-block;
+      padding: 5px 9px;
       border-radius: 20px;
-
-      font-size: 10px;
-
-      font-weight: 600;
+      font-size: 11px;
+      font-weight: 700;
     }
 
-
-    .active {
-
-      color: #00d084;
-
-      background:
-        rgba(0,208,132,0.08);
+    .status-pending {
+      background: #fff7ed;
+      color: #ea580c;
     }
 
-
-    .inactive {
-
-      color: #ff657b;
-
-      background:
-        rgba(255,60,85,0.08);
+    .status-complete {
+      background: #ecfdf5;
+      color: #059669;
     }
 
+    .status-cancelled {
+      background: #fef2f2;
+      color: #dc2626;
+    }
+
+    .status-default {
+      background: #f1f5f9;
+      color: #475569;
+    }
 
     /* =========================
-       EMPTY
-    ========================= */
+       PAGINATION
+    ========================== */
+
+    .pagination-box {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 18px;
+      border-top: 1px solid #e5e7eb;
+    }
+
+    .page-info {
+      font-size: 13px;
+      color: #6b7280;
+    }
+
+    .pagination {
+      display: flex;
+      gap: 5px;
+    }
+
+    .page-btn {
+      min-width: 34px;
+      height: 34px;
+      border: 1px solid #d1d5db;
+      background: #fff;
+      border-radius: 6px;
+      font-size: 13px;
+    }
+
+    .page-btn.active {
+      background: #087f5b;
+      color: white;
+      border-color: #087f5b;
+    }
+
+    .page-btn:disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
+    }
+
+    /* =========================
+       MODAL
+    ========================== */
+
+    .modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.45);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      z-index: 999;
+    }
+
+    .modal.show {
+      display: flex;
+    }
+
+    .modal-box {
+      width: 100%;
+      max-width: 700px;
+      max-height: 90vh;
+      overflow-y: auto;
+      background: white;
+      border-radius: 14px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+    }
+
+    .modal-header {
+      padding: 18px 20px;
+      border-bottom: 1px solid #e5e7eb;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .modal-header h2 {
+      font-size: 19px;
+    }
+
+    .close-btn {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: #f1f5f9;
+      font-size: 20px;
+      color: #475569;
+    }
+
+    .form {
+      padding: 20px;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+
+    .form-group.full {
+      grid-column: 1 / -1;
+    }
+
+    .form-group label {
+      font-size: 13px;
+      font-weight: 600;
+      color: #374151;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      border: 1px solid #d1d5db;
+      border-radius: 8px;
+      padding: 10px 12px;
+      outline: none;
+      font-size: 14px;
+    }
+
+    .form-group textarea {
+      min-height: 90px;
+      resize: vertical;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: #087f5b;
+    }
+
+    .form-footer {
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+      padding-top: 20px;
+    }
+
+    .btn-cancel {
+      background: #f1f5f9;
+      color: #374151;
+    }
+
+    /* =========================
+       LOADING
+    ========================== */
+
+    .loading {
+      text-align: center;
+      padding: 40px;
+      color: #6b7280;
+    }
 
     .empty {
-
       text-align: center;
-
       padding: 50px 20px;
-
-      color: #68727e;
-
-      font-size: 13px;
-
-      display: none;
+      color: #6b7280;
     }
 
-
     /* =========================
-       FOOTER
-    ========================= */
+       TOAST
+    ========================== */
 
-    .footer {
-
-      text-align: center;
-
-      margin-top: 30px;
-
-      color: #4f5863;
-
-      font-size: 11px;
+    .toast {
+      position: fixed;
+      right: 25px;
+      bottom: 25px;
+      min-width: 250px;
+      padding: 14px 17px;
+      border-radius: 9px;
+      color: white;
+      background: #111827;
+      box-shadow: 0 10px 30px rgba(0,0,0,.2);
+      transform: translateY(100px);
+      opacity: 0;
+      transition: .3s;
+      z-index: 2000;
+      font-size: 14px;
     }
 
+    .toast.show {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    .toast.success {
+      background: #087f5b;
+    }
+
+    .toast.error {
+      background: #dc2626;
+    }
 
     /* =========================
-       MOBILE
-    ========================= */
+       RESPONSIVE
+    ========================== */
 
-    @media(max-width:700px) {
-
-      .header {
-
-        padding: 0 17px;
+    @media (max-width: 900px) {
+      .filters {
+        grid-template-columns: 1fr 1fr;
       }
 
-
-      .user-name {
-
-        display: none;
+      .filters .search-field {
+        grid-column: 1 / -1;
       }
 
-
-      .main {
-
-        padding:
-          28px 15px;
-      }
-
-
-      .page-title h1 {
-
-        font-size: 24px;
-      }
-
-
-      .toolbar {
-
+      .top-section {
+        align-items: flex-start;
         flex-direction: column;
       }
-
-
-      .refresh-btn {
-
-        width: 100%;
-      }
-
-
-      .list-container {
-
-        overflow-x: auto;
-      }
-
-
-      .list-header,
-      .list-item {
-
-        min-width: 720px;
-      }
-
     }
 
-  </style>
+    @media (max-width: 600px) {
+      .container {
+        padding: 15px;
+      }
 
+      .header {
+        padding: 0 15px;
+      }
+
+      .filters {
+        grid-template-columns: 1fr;
+      }
+
+      .filters .search-field {
+        grid-column: auto;
+      }
+
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .form-group.full {
+        grid-column: auto;
+      }
+
+      .pagination-box {
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      .pagination {
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+    }
+  </style>
 </head>
 
-
 <body>
-
 
   <!-- =========================
        HEADER
   ========================== -->
 
   <header class="header">
-
-
-    <div class="brand">
-
-      <div class="brand-icon">
-        ⚡
-      </div>
-
-      <div class="brand-name">
-        Dashboard
-      </div>
-
+    <div class="logo">
+      DATA DASHBOARD
     </div>
 
-
-    <div class="user-area">
-
-      <div
-        class="user-name"
-        id="userName">
-
-        User
-
-      </div>
-
-
-      <button
-        class="logout-btn"
-        onclick="logout()">
-
-        Logout
-
+    <div class="header-right">
+      <button class="btn btn-refresh" onclick="loadData()">
+        🔄 Refresh
       </button>
 
+      <button class="btn btn-primary" onclick="openEntryModal()">
+        ➕ New Entry
+      </button>
     </div>
-
-
   </header>
-
 
 
   <!-- =========================
        MAIN
   ========================== -->
 
-  <main class="main">
+  <main class="container">
 
+    <div class="top-section">
 
-    <div class="page-title">
-
-      <h1>
-        Data List
-      </h1>
-
-      <p>
-        Search and manage your data
-      </p>
+      <div class="title">
+        <h1>Data Dashboard</h1>
+        <p>Manage your Google Sheet data</p>
+      </div>
 
     </div>
 
 
-
     <!-- =========================
-         SEARCH
+         FILTERS
     ========================== -->
 
-    <div class="toolbar">
+    <section class="filter-box">
+
+      <div class="filters">
+
+        <div class="field search-field">
+          <label>🔍 Search</label>
+
+          <input
+            type="text"
+            id="searchInput"
+            placeholder="Search anything..."
+            oninput="applyFilters()"
+          >
+        </div>
 
 
-      <div class="search-box">
+        <div class="field">
+          <label>📅 From Date</label>
 
-        <span>
-          🔍
-        </span>
+          <input
+            type="date"
+            id="fromDate"
+            onchange="applyFilters()"
+          >
+        </div>
 
-        <input
-          type="text"
-          id="search"
-          placeholder="Search by name, username or role..."
-          oninput="searchData()"
+
+        <div class="field">
+          <label>📅 To Date</label>
+
+          <input
+            type="date"
+            id="toDate"
+            onchange="applyFilters()"
+          >
+        </div>
+
+
+        <div class="field">
+          <label>Status</label>
+
+          <select
+            id="statusFilter"
+            onchange="applyFilters()"
+          >
+            <option value="">All Status</option>
+          </select>
+        </div>
+
+
+        <button
+          class="btn btn-refresh"
+          onclick="clearFilters()"
         >
+          Clear
+        </button>
 
       </div>
 
-
-      <button
-        class="refresh-btn"
-        onclick="loadData()">
-
-        🔄 Refresh
-
-      </button>
-
-
-    </div>
-
+    </section>
 
 
     <!-- =========================
-         LIST
+         TABLE
     ========================== -->
 
-    <div class="list-container">
+    <section class="table-box">
 
+      <div class="table-header">
 
-      <div class="list-header">
+        <h2>All Entries</h2>
 
-        <div>
-          #
-        </div>
-
-        <div>
-          Name
-        </div>
-
-        <div>
-          Username
-        </div>
-
-        <div>
-          Role
-        </div>
-
-        <div>
-          Status
+        <div class="total-count">
+          Total: <strong id="totalCount">0</strong>
         </div>
 
       </div>
 
 
-      <div id="dataList">
+      <div class="table-wrapper">
 
-        <!-- Data will load here -->
+        <table>
+
+          <thead id="tableHead"></thead>
+
+          <tbody id="tableBody">
+
+            <tr>
+              <td colspan="100%">
+                <div class="loading">
+                  Loading data...
+                </div>
+              </td>
+            </tr>
+
+          </tbody>
+
+        </table>
 
       </div>
 
 
-      <div
-        class="empty"
-        id="empty">
+      <!-- =========================
+           PAGINATION
+      ========================== -->
 
-        No data found.
+      <div class="pagination-box">
+
+        <div class="page-info" id="pageInfo">
+          Page 1
+        </div>
+
+        <div class="pagination" id="pagination"></div>
 
       </div>
 
-
-    </div>
-
-
-
-    <div class="footer">
-
-      Dashboard System
-
-    </div>
-
+    </section>
 
   </main>
 
 
+  <!-- =========================
+       ENTRY / EDIT MODAL
+  ========================== -->
 
-<script>
+  <div class="modal" id="entryModal">
 
+    <div class="modal-box">
 
-/* =====================================================
-   LOGIN PROTECTION
-===================================================== */
+      <div class="modal-header">
 
-if (
-  localStorage.getItem("loggedIn")
-  !== "true"
-) {
+        <h2 id="modalTitle">
+          New Entry
+        </h2>
 
-  window.location.replace(
-    "index.html"
-  );
+        <button
+          class="close-btn"
+          onclick="closeEntryModal()"
+        >
+          ×
+        </button>
 
-}
-
-
-
-/* =====================================================
-   USER NAME
-===================================================== */
-
-const loggedName =
-  localStorage.getItem("name");
+      </div>
 
 
-const loggedUsername =
-  localStorage.getItem("username");
+      <form
+        class="form"
+        id="entryForm"
+        onsubmit="submitEntry(event)"
+      >
 
-
-document.getElementById(
-  "userName"
-).textContent =
-  loggedName ||
-  loggedUsername ||
-  "User";
-
-
-
-/* =====================================================
-   DEMO DATA
-===================================================== */
-
-let allData = [
-
-  {
-    name: "Admin",
-    username: "admin",
-    role: "Admin",
-    status: "Active"
-  },
-
-  {
-    name: "Fahim",
-    username: "fahim",
-    role: "User",
-    status: "Active"
-  },
-
-  {
-    name: "Support",
-    username: "support",
-    role: "Support",
-    status: "Inactive"
-  },
-
-  {
-    name: "Manager",
-    username: "manager",
-    role: "Manager",
-    status: "Active"
-  }
-
-];
-
-
-
-/* =====================================================
-   LOAD DATA
-===================================================== */
-
-function loadData() {
-
-  renderData(allData);
-
-}
-
-
-
-/* =====================================================
-   RENDER DATA
-===================================================== */
-
-function renderData(data) {
-
-
-  const list =
-    document.getElementById(
-      "dataList"
-    );
-
-
-  const empty =
-    document.getElementById(
-      "empty"
-    );
-
-
-  list.innerHTML = "";
-
-
-  if (
-    !data ||
-    data.length === 0
-  ) {
-
-    empty.style.display =
-      "block";
-
-    return;
-
-  }
-
-
-  empty.style.display =
-    "none";
-
-
-  data.forEach(
-    function(item, index) {
-
-
-      const row =
-        document.createElement(
-          "div"
-        );
-
-
-      row.className =
-        "list-item";
-
-
-      const statusClass =
-        String(item.status)
-          .toLowerCase()
-          === "active"
-          ? "active"
-          : "inactive";
-
-
-      row.innerHTML = `
-
-        <div class="serial">
-          ${index + 1}
+        <div
+          class="form-grid"
+          id="formFields"
+        >
+          <!-- JS will create fields -->
         </div>
 
-        <div class="name">
-          ${item.name || "-"}
+
+        <div class="form-footer">
+
+          <button
+            type="button"
+            class="btn btn-cancel"
+            onclick="closeEntryModal()"
+          >
+            Cancel
+          </button>
+
+          <button
+            type="submit"
+            class="btn btn-primary"
+            id="submitBtn"
+          >
+            Save Entry
+          </button>
+
         </div>
 
-        <div class="username">
-          ${item.username || "-"}
-        </div>
+      </form>
 
-        <div class="role">
-          ${item.role || "-"}
-        </div>
+    </div>
 
-        <div>
-          <span class="status ${statusClass}">
-            ${item.status || "-"}
-          </span>
-        </div>
-
-      `;
+  </div>
 
 
-      list.appendChild(row);
+  <!-- =========================
+       TOAST
+  ========================== -->
 
-    }
-  );
-
-}
-
-
-
-/* =====================================================
-   SEARCH
-===================================================== */
-
-function searchData() {
+  <div
+    class="toast"
+    id="toast"
+  ></div>
 
 
-  const search =
-    document
-      .getElementById("search")
-      .value
-      .toLowerCase()
-      .trim();
+  <script>
+
+    /* =====================================================
+       CONFIGURATION
+    ===================================================== */
+
+    /*
+      এখানে তোমার Google Apps Script Web App URL বসাবে।
+
+      Example:
+
+      const API_URL =
+      "https://script.google.com/macros/s/XXXXXXXX/exec";
+    */
+
+    const API_URL = "YOUR_APPS_SCRIPT_WEB_APP_URL";
 
 
-  if (!search) {
+    /* =====================================================
+       SETTINGS
+    ===================================================== */
 
-    renderData(allData);
-
-    return;
-
-  }
+    const ROWS_PER_PAGE = 10;
 
 
-  const filtered =
-    allData.filter(
-      function(item) {
+    /*
+      তোমার Sheet-এর Header এখানে দিতে হবে।
 
-        return (
+      Example:
 
-          String(item.name || "")
-            .toLowerCase()
-            .includes(search)
+      const FORM_FIELDS = [
+        "Name",
+        "Number",
+        "Address",
+        "Status"
+      ];
 
-          ||
+      Header নাম অবশ্যই Google Sheet-এর Header-এর
+      সাথে মিলতে হবে।
+    */
 
-          String(item.username || "")
-            .toLowerCase()
-            .includes(search)
+    const FORM_FIELDS = [
+      "Name",
+      "Number",
+      "Address",
+      "Status",
+      "Remarks"
+    ];
 
-          ||
 
-          String(item.role || "")
-            .toLowerCase()
-            .includes(search)
+    /*
+      Date কোন Header-এ আছে সেটা এখানে লিখবে।
 
-          ||
+      Example:
+      "Date"
 
-          String(item.status || "")
-            .toLowerCase()
-            .includes(search)
+      যদি Date না থাকে:
+      ""
+    */
 
-        );
+    const DATE_COLUMN = "Date";
+
+
+    /*
+      Status কোন Header-এ আছে সেটা এখানে লিখবে।
+    */
+
+    const STATUS_COLUMN = "Status";
+
+
+    /* =====================================================
+       GLOBAL VARIABLES
+    ===================================================== */
+
+    let allData = [];
+
+    let filteredData = [];
+
+    let headers = [];
+
+    let currentPage = 1;
+
+    let editingRow = null;
+
+
+    /* =====================================================
+       PAGE LOAD
+    ===================================================== */
+
+    document.addEventListener(
+      "DOMContentLoaded",
+      function () {
+
+        loadData();
 
       }
     );
 
 
-  renderData(filtered);
+    /* =====================================================
+       LOAD DATA
+    ===================================================== */
 
-}
+    async function loadData() {
 
+      showLoading();
 
+      try {
 
-/* =====================================================
-   LOGOUT
-===================================================== */
+        if (
+          !API_URL ||
+          API_URL === "YOUR_APPS_SCRIPT_WEB_APP_URL"
+        ) {
 
-function logout() {
+          throw new Error(
+            "Please set your Apps Script Web App URL."
+          );
 
-
-  localStorage.clear();
-
-
-  window.location.replace(
-    "index.html"
-  );
-
-}
-
+        }
 
 
-/* =====================================================
-   START
-===================================================== */
+        const response = await fetch(
+          API_URL + "?action=getData",
+          {
+            method: "GET"
+          }
+        );
 
-loadData();
+
+        if (!response.ok) {
+
+          throw new Error(
+            "Server returned error."
+          );
+
+        }
 
 
-</script>
+        const result = await response.json();
 
+
+        /*
+          Expected response:
+
+          {
+            success: true,
+            headers: [...],
+            data: [...]
+          }
+
+          অথবা
+
+          {
+            success: true,
+            data: [
+              {
+                Name: "...",
+                Number: "..."
+              }
+            ]
+          }
+        */
+
+
+        if (result.success === false) {
+
+          throw new Error(
+            result.message || "Data loading failed."
+          );
+
+        }
+
+
+        if (
+          Array.isArray(result.headers)
+        ) {
+
+          headers = result.headers;
+
+        }
+
+
+        if (
+          Array.isArray(result.data)
+        ) {
+
+          allData = result.data;
+
+        } else {
+
+          allData = [];
+
+        }
+
+
+        /*
+          যদি headers না আসে,
+          প্রথম object থেকে headers তৈরি হবে।
+        */
+
+        if (
+          headers.length === 0 &&
+          allData.length > 0 &&
+          typeof allData[0] === "object"
+        ) {
+
+          headers = Object.keys(
+            allData[0]
+          );
+
+        }
+
+
+        filteredData = [...allData];
+
+        currentPage = 1;
+
+
+        buildTableHeader();
+
+        buildStatusFilter();
+
+        renderTable();
+
+        updateTotal();
+
+
+        showToast(
+          "Data loaded successfully.",
+          "success"
+        );
+
+
+      } catch (error) {
+
+        console.error(error);
+
+        showError(
+          error.message || "Failed to load data."
+        );
+
+      }
+
+    }
+
+
+    /* =====================================================
+       TABLE HEADER
+    ===================================================== */
+
+    function buildTableHeader() {
+
+      const tableHead =
+        document.getElementById("tableHead");
+
+
+      if (!headers.length) {
+
+        tableHead.innerHTML = "";
+
+        return;
+
+      }
+
+
+      let html = "<tr>";
+
+
+      headers.forEach(
+        function (header) {
+
+          html += `
+            <th>
+              ${escapeHTML(header)}
+            </th>
+          `;
+
+        }
+      );
+
+
+      html += `
+        <th>Action</th>
+      `;
+
+
+      html += "</tr>";
+
+
+      tableHead.innerHTML = html;
+
+    }
+
+
+    /* =====================================================
+       STATUS FILTER
+    ===================================================== */
+
+    function buildStatusFilter() {
+
+      const select =
+        document.getElementById(
+          "statusFilter"
+        );
+
+
+      const statuses = new Set();
+
+
+      allData.forEach(
+        function (row) {
+
+          if (
+            row &&
+            row[STATUS_COLUMN] !== undefined &&
+            row[STATUS_COLUMN] !== null &&
+            String(row[STATUS_COLUMN]).trim() !== ""
+          ) {
+
+            statuses.add(
+              String(row[STATUS_COLUMN]).trim()
+            );
+
+          }
+
+        }
+      );
+
+
+      select.innerHTML =
+        `<option value="">All Status</option>`;
+
+
+      Array.from(statuses)
+        .sort()
+        .forEach(
+          function (status) {
+
+            select.innerHTML += `
+              <option value="${escapeAttribute(status)}">
+                ${escapeHTML(status)}
+              </option>
+            `;
+
+          }
+        );
+
+    }
+
+
+    /* =====================================================
+       APPLY FILTERS
+    ===================================================== */
+
+    function applyFilters() {
+
+      const search =
+        document.getElementById(
+          "searchInput"
+        ).value
+          .toLowerCase()
+          .trim();
+
+
+      const fromDate =
+        document.getElementById(
+          "fromDate"
+        ).value;
+
+
+      const toDate =
+        document.getElementById(
+          "toDate"
+        ).value;
+
+
+      const status =
+        document.getElementById(
+          "statusFilter"
+        ).value;
+
+
+      filteredData =
+        allData.filter(
+          function (row) {
+
+            /* =====================
+               SEARCH
+            ====================== */
+
+            if (search) {
+
+              const text =
+                headers
+                  .map(
+                    h => row[h] ?? ""
+                  )
+                  .join(" ")
+                  .toLowerCase();
+
+
+              if (
+                !text.includes(search)
+              ) {
+
+                return false;
+
+              }
+
+            }
+
+
+            /* =====================
+               STATUS
+            ====================== */
+
+            if (status) {
+
+              const rowStatus =
+                String(
+                  row[STATUS_COLUMN] ?? ""
+                ).trim();
+
+
+              if (
+                rowStatus !== status
+              ) {
+
+                return false;
+
+              }
+
+            }
+
+
+            /* =====================
+               DATE
+            ====================== */
+
+            if (
+              DATE_COLUMN &&
+              (
+                fromDate ||
+                toDate
+              )
+            ) {
+
+              const rowDate =
+                normalizeDate(
+                  row[DATE_COLUMN]
+                );
+
+
+              if (!rowDate) {
+
+                return false;
+
+              }
+
+
+              if (
+                fromDate &&
+                rowDate < fromDate
+              ) {
+
+                return false;
+
+              }
+
+
+              if (
+                toDate &&
+                rowDate > toDate
+              ) {
+
+                return false;
+
+              }
+
+            }
+
+
+            return true;
+
+          }
+        );
+
+
+      currentPage = 1;
+
+      renderTable();
+
+      updateTotal();
+
+    }
+
+
+    /* =====================================================
+       CLEAR FILTERS
+    ===================================================== */
+
+    function clearFilters() {
+
+      document.getElementById(
+        "searchInput"
+      ).value = "";
+
+
+      document.getElementById(
+        "fromDate"
+      ).value = "";
+
+
+      document.getElementById(
+        "toDate"
+      ).value = "";
+
+
+      document.getElementById(
+        "statusFilter"
+      ).value = "";
+
+
+      filteredData = [...allData];
+
+      currentPage = 1;
+
+      renderTable();
+
+      updateTotal();
+
+    }
+
+
+    /* =====================================================
+       RENDER TABLE
+    ===================================================== */
+
+    function renderTable() {
+
+      const tbody =
+        document.getElementById(
+          "tableBody"
+        );
+
+
+      if (!filteredData.length) {
+
+        tbody.innerHTML = `
+          <tr>
+            <td colspan="100%">
+              <div class="empty">
+                No data found.
+              </div>
+            </td>
+          </tr>
+        `;
+
+
+        renderPagination();
+
+        return;
+
+      }
+
+
+      const start =
+        (
+          currentPage - 1
+        ) * ROWS_PER_PAGE;
+
+
+      const end =
+        start + ROWS_PER_PAGE;
+
+
+      const pageData =
+        filteredData.slice(
+          start,
+          end
+        );
+
+
+      let html = "";
+
+
+      pageData.forEach(
+        function (row) {
+
+          html += "<tr>";
+
+
+          headers.forEach(
+            function (header) {
+
+              let value =
+                row[header] ?? "";
+
+
+              if (
+                header === STATUS_COLUMN
+              ) {
+
+                html += `
+                  <td>
+                    ${formatStatus(value)}
+                  </td>
+                `;
+
+              } else {
+
+                html += `
+                  <td>
+                    ${escapeHTML(
+                      formatValue(value)
+                    )}
+                  </td>
+                `;
+
+              }
+
+            }
+          );
+
+
+          html += `
+            <td>
+              <div class="actions">
+
+                <button
+                  class="btn-edit"
+                  onclick='editEntry(${JSON.stringify(row)})'
+                >
+                  ✏️
+                </button>
+
+                <button
+                  class="btn-delete"
+                  onclick='deleteEntry(${JSON.stringify(row)})'
+                >
+                  🗑️
+                </button>
+
+              </div>
+            </td>
+          `;
+
+
+          html += "</tr>";
+
+        }
+      );
+
+
+      tbody.innerHTML = html;
+
+
+      renderPagination();
+
+    }
+
+
+    /* =====================================================
+       PAGINATION
+    ===================================================== */
+
+    function renderPagination() {
+
+      const pagination =
+        document.getElementById(
+          "pagination"
+        );
+
+
+      const pageInfo =
+        document.getElementById(
+          "pageInfo"
+        );
+
+
+      const totalPages =
+        Math.ceil(
+          filteredData.length /
+          ROWS_PER_PAGE
+        );
+
+
+      if (totalPages <= 1) {
+
+        pagination.innerHTML = "";
+
+        pageInfo.textContent =
+          `Page 1`;
+
+        return;
+
+      }
+
+
+      let html = "";
+
+
+      html += `
+        <button
+          class="page-btn"
+          onclick="changePage(${currentPage - 1})"
+          ${currentPage === 1 ? "disabled" : ""}
+        >
+          ‹
+        </button>
+      `;
+
+
+      let startPage =
+        Math.max(
+          1,
+          currentPage - 2
+        );
+
+
+      let endPage =
+        Math.min(
+          totalPages,
+          currentPage + 2
+        );
+
+
+      for (
+        let i = startPage;
+        i <= endPage;
+        i++
+      ) {
+
+        html += `
+          <button
+            class="page-btn ${
+              i === currentPage
+                ? "active"
+                : ""
+            }"
+            onclick="changePage(${i})"
+          >
+            ${i}
+          </button>
+        `;
+
+      }
+
+
+      html += `
+        <button
+          class="page-btn"
+          onclick="changePage(${currentPage + 1})"
+          ${
+            currentPage === totalPages
+              ? "disabled"
+              : ""
+          }
+        >
+          ›
+        </button>
+      `;
+
+
+      pagination.innerHTML = html;
+
+
+      pageInfo.textContent =
+        `Page ${currentPage} of ${totalPages}`;
+
+    }
+
+
+    function changePage(page) {
+
+      const totalPages =
+        Math.ceil(
+          filteredData.length /
+          ROWS_PER_PAGE
+        );
+
+
+      if (
+        page < 1 ||
+        page > totalPages
+      ) {
+
+        return;
+
+      }
+
+
+      currentPage = page;
+
+      renderTable();
+
+    }
+
+
+    /* =====================================================
+       ENTRY MODAL
+    ===================================================== */
+
+    function openEntryModal() {
+
+      editingRow = null;
+
+
+      document.getElementById(
+        "modalTitle"
+      ).textContent =
+        "New Entry";
+
+
+      document.getElementById(
+        "submitBtn"
+      ).textContent =
+        "Save Entry";
+
+
+      buildForm();
+
+
+      document.getElementById(
+        "entryModal"
+      ).classList.add("show");
+
+    }
+
+
+    function closeEntryModal() {
+
+      document.getElementById(
+        "entryModal"
+      ).classList.remove("show");
+
+      editingRow = null;
+
+    }
+
+
+    /* =====================================================
+       BUILD FORM
+    ===================================================== */
+
+    function buildForm() {
+
+      const container =
+        document.getElementById(
+          "formFields"
+        );
+
+
+      let fields = [];
+
+
+      if (
+        FORM_FIELDS.length
+      ) {
+
+        fields = FORM_FIELDS;
+
+      } else {
+
+        fields = headers.filter(
+          h =>
+            h !== "Serial" &&
+            h !== "ID" &&
+            h !== "Timestamp"
+        );
+
+      }
+
+
+      let html = "";
+
+
+      fields.forEach(
+        function (field) {
+
+          const lower =
+            field.toLowerCase();
+
+
+          const isStatus =
+            field === STATUS_COLUMN;
+
+
+          const isLong =
+            lower.includes("address") ||
+            lower.includes("remark") ||
+            lower.includes("note") ||
+            lower.includes("description");
+
+
+          html += `
+            <div class="form-group ${
+              isLong ? "full" : ""
+            }">
+
+              <label>
+                ${escapeHTML(field)}
+              </label>
+          `;
+
+
+          if (isStatus) {
+
+            html += `
+              <select
+                name="${escapeAttribute(field)}"
+              >
+
+                <option value="">
+                  Select Status
+                </option>
+
+                <option value="Pending">
+                  Pending
+                </option>
+
+                <option value="Complete">
+                  Complete
+                </option>
+
+                <option value="Cancelled">
+                  Cancelled
+                </option>
+
+              </select>
+            `;
+
+          } else if (lower.includes("date")) {
+
+            html += `
+              <input
+                type="date"
+                name="${escapeAttribute(field)}"
+              >
+            `;
+
+          } else if (isLong) {
+
+            html += `
+              <textarea
+                name="${escapeAttribute(field)}"
+              ></textarea>
+            `;
+
+          } else {
+
+            html += `
+              <input
+                type="text"
+                name="${escapeAttribute(field)}"
+                autocomplete="off"
+              >
+            `;
+
+          }
+
+
+          html += `
+            </div>
+          `;
+
+        }
+      );
+
+
+      container.innerHTML = html;
+
+
+      if (editingRow) {
+
+        fields.forEach(
+          function (field) {
+
+            const input =
+              document.querySelector(
+                `[name="${CSS.escape(field)}"]`
+              );
+
+
+            if (
+              input &&
+              editingRow[field] !== undefined
+            ) {
+
+              input.value =
+                convertForInput(
+                  field,
+                  editingRow[field]
+                );
+
+            }
+
+          }
+        );
+
+      }
+
+    }
+
+
+    /* =====================================================
+       EDIT
+    ===================================================== */
+
+    function editEntry(row) {
+
+      editingRow = row;
+
+
+      document.getElementById(
+        "modalTitle"
+      ).textContent =
+        "Edit Entry";
+
+
+      document.getElementById(
+        "submitBtn"
+      ).textContent =
+        "Update Entry";
+
+
+      buildForm();
+
+
+      document.getElementById(
+        "entryModal"
+      ).classList.add("show");
+
+    }
+
+
+    /* =====================================================
+       SUBMIT ENTRY
+    ===================================================== */
+
+    async function submitEntry(event) {
+
+      event.preventDefault();
+
+
+      const form =
+        document.getElementById(
+          "entryForm"
+        );
+
+
+      const formData =
+        new FormData(form);
+
+
+      const data = {};
+
+
+      formData.forEach(
+        function (value, key) {
+
+          data[key] = value;
+
+        }
+      );
+
+
+      const submitBtn =
+        document.getElementById(
+          "submitBtn"
+        );
+
+
+      submitBtn.disabled = true;
+
+      submitBtn.textContent =
+        "Saving...";
+
+
+      try {
+
+        const payload = {
+
+          action:
+            editingRow
+              ? "update"
+              : "create",
+
+          data: data,
+
+          /*
+            Edit করার সময়
+            original row data-ও পাঠানো হচ্ছে।
+          */
+
+          oldData:
+            editingRow || null
+
+        };
+
+
+        const response =
+          await fetch(
+            API_URL,
+            {
+              method: "POST",
+
+              headers: {
+                "Content-Type":
+                  "text/plain;charset=utf-8"
+              },
+
+              body:
+                JSON.stringify(payload)
+
+            }
+          );
+
+
+        const result =
+          await response.json();
+
+
+        if (
+          result.success === false
+        ) {
+
+          throw new Error(
+            result.message ||
+            "Save failed."
+          );
+
+        }
+
+
+        closeEntryModal();
+
+
+        showToast(
+          editingRow
+            ? "Entry updated successfully."
+            : "Entry added successfully.",
+          "success"
+        );
+
+
+        await loadData();
+
+
+      } catch (error) {
+
+        console.error(error);
+
+        showToast(
+          error.message ||
+          "Failed to save entry.",
+          "error"
+        );
+
+      } finally {
+
+        submitBtn.disabled = false;
+
+        submitBtn.textContent =
+          editingRow
+            ? "Update Entry"
+            : "Save Entry";
+
+      }
+
+    }
+
+
+    /* =====================================================
+       DELETE
+    ===================================================== */
+
+    async function deleteEntry(row) {
+
+      const confirmDelete =
+        confirm(
+          "Are you sure you want to delete this entry?"
+        );
+
+
+      if (!confirmDelete) {
+
+        return;
+
+      }
+
+
+      try {
+
+        const payload = {
+
+          action: "delete",
+
+          data: row
+
+        };
+
+
+        const response =
+          await fetch(
+            API_URL,
+            {
+              method: "POST",
+
+              headers: {
+                "Content-Type":
+                  "text/plain;charset=utf-8"
+              },
+
+              body:
+                JSON.stringify(payload)
+
+            }
+          );
+
+
+        const result =
+          await response.json();
+
+
+        if (
+          result.success === false
+        ) {
+
+          throw new Error(
+            result.message ||
+            "Delete failed."
+          );
+
+        }
+
+
+        showToast(
+          "Entry deleted successfully.",
+          "success"
+        );
+
+
+        await loadData();
+
+
+      } catch (error) {
+
+        console.error(error);
+
+        showToast(
+          error.message ||
+          "Failed to delete entry.",
+          "error"
+        );
+
+      }
+
+    }
+
+
+    /* =====================================================
+       UPDATE TOTAL
+    ===================================================== */
+
+    function updateTotal() {
+
+      document.getElementById(
+        "totalCount"
+      ).textContent =
+        filteredData.length;
+
+    }
+
+
+    /* =====================================================
+       STATUS FORMAT
+    ===================================================== */
+
+    function formatStatus(value) {
+
+      const text =
+        String(value ?? "");
+
+
+      const lower =
+        text.toLowerCase();
+
+
+      let className =
+        "status-default";
+
+
+      if (
+        lower === "pending"
+      ) {
+
+        className =
+          "status-pending";
+
+      } else if (
+        lower === "complete" ||
+        lower === "completed"
+      ) {
+
+        className =
+          "status-complete";
+
+      } else if (
+        lower === "cancelled" ||
+        lower === "canceled"
+      ) {
+
+        className =
+          "status-cancelled";
+
+      }
+
+
+      return `
+        <span class="status ${className}">
+          ${escapeHTML(text)}
+        </span>
+      `;
+
+    }
+
+
+    /* =====================================================
+       DATE NORMALIZE
+    ===================================================== */
+
+    function normalizeDate(value) {
+
+      if (!value) {
+
+        return "";
+
+      }
+
+
+      const text =
+        String(value).trim();
+
+
+      /*
+        YYYY-MM-DD
+      */
+
+      if (
+        /^\d{4}-\d{2}-\d{2}$/.test(text)
+      ) {
+
+        return text;
+
+      }
+
+
+      /*
+        DD-MM-YYYY
+      */
+
+      let match =
+        text.match(
+          /^(\d{2})-(\d{2})-(\d{4})$/
+        );
+
+
+      if (match) {
+
+        return `${match[3]}-${match[2]}-${match[1]}`;
+
+      }
+
+
+      /*
+        DD/MM/YYYY
+      */
+
+      match =
+        text.match(
+          /^(\d{2})\/(\d{2})\/(\d{4})$/
+        );
+
+
+      if (match) {
+
+        return `${match[3]}-${match[2]}-${match[1]}`;
+
+      }
+
+
+      const date =
+        new Date(text);
+
+
+      if (
+        !isNaN(date.getTime())
+      ) {
+
+        const year =
+          date.getFullYear();
+
+
+        const month =
+          String(
+            date.getMonth() + 1
+          ).padStart(2, "0");
+
+
+        const day =
+          String(
+            date.getDate()
+          ).padStart(2, "0");
+
+
+        return `${year}-${month}-${day}`;
+
+      }
+
+
+      return "";
+
+    }
+
+
+    /* =====================================================
+       FORMAT VALUE
+    ===================================================== */
+
+    function formatValue(value) {
+
+      if (
+        value === null ||
+        value === undefined
+      ) {
+
+        return "";
+
+      }
+
+
+      return String(value);
+
+    }
+
+
+    /* =====================================================
+       CONVERT VALUE FOR INPUT
+    ===================================================== */
+
+    function convertForInput(
+      field,
+      value
+    ) {
+
+      if (
+        !value
+      ) {
+
+        return "";
+
+      }
+
+
+      if (
+        field.toLowerCase().includes("date")
+      ) {
+
+        return normalizeDate(value);
+
+      }
+
+
+      return String(value);
+
+    }
+
+
+    /* =====================================================
+       LOADING
+    ===================================================== */
+
+    function showLoading() {
+
+      document.getElementById(
+        "tableBody"
+      ).innerHTML = `
+        <tr>
+          <td colspan="100%">
+            <div class="loading">
+              Loading data...
+            </div>
+          </td>
+        </tr>
+      `;
+
+    }
+
+
+    function showError(message) {
+
+      document.getElementById(
+        "tableBody"
+      ).innerHTML = `
+        <tr>
+          <td colspan="100%">
+            <div class="empty">
+              ❌ ${escapeHTML(message)}
+            </div>
+          </td>
+        </tr>
+      `;
+
+    }
+
+
+    /* =====================================================
+       TOAST
+    ===================================================== */
+
+    function showToast(
+      message,
+      type = ""
+    ) {
+
+      const toast =
+        document.getElementById(
+          "toast"
+        );
+
+
+      toast.textContent =
+        message;
+
+
+      toast.className =
+        "toast show " + type;
+
+
+      setTimeout(
+        function () {
+
+          toast.className =
+            "toast";
+
+        },
+        3000
+      );
+
+    }
+
+
+    /* =====================================================
+       HTML SECURITY
+    ===================================================== */
+
+    function escapeHTML(value) {
+
+      return String(value ?? "")
+        .replace(
+          /&/g,
+          "&amp;"
+        )
+        .replace(
+          /</g,
+          "&lt;"
+        )
+        .replace(
+          />/g,
+          "&gt;"
+        )
+        .replace(
+          /"/g,
+          "&quot;"
+        )
+        .replace(
+          /'/g,
+          "&#039;"
+        );
+
+    }
+
+
+    function escapeAttribute(value) {
+
+      return escapeHTML(value);
+
+    }
+
+
+    /* =====================================================
+       CLOSE MODAL WHEN CLICK OUTSIDE
+    ===================================================== */
+
+    document
+      .getElementById("entryModal")
+      .addEventListener(
+        "click",
+        function (event) {
+
+          if (
+            event.target === this
+          ) {
+
+            closeEntryModal();
+
+          }
+
+        }
+      );
+
+  </script>
 
 </body>
-
 </html>
