@@ -5,7 +5,9 @@
 
   <meta charset="UTF-8">
 
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0">
 
   <title>Login</title>
 
@@ -20,9 +22,11 @@
 
     body {
       min-height: 100vh;
+
       display: flex;
       justify-content: center;
       align-items: center;
+
       padding: 20px;
 
       background:
@@ -44,11 +48,13 @@
     .login-card {
       width: 100%;
       max-width: 420px;
+
       padding: 35px 30px;
 
       background: rgba(18, 22, 28, 0.96);
 
       border: 1px solid rgba(255,255,255,0.08);
+
       border-radius: 24px;
 
       box-shadow:
@@ -105,12 +111,15 @@
     .title h1 {
       font-size: 30px;
       font-weight: 700;
+
       margin-bottom: 8px;
     }
 
     .title p {
       color: #8e97a4;
+
       font-size: 14px;
+
       margin-bottom: 30px;
     }
 
@@ -120,8 +129,11 @@
 
     .input-group label {
       display: block;
+
       margin-bottom: 8px;
+
       color: #aeb6c2;
+
       font-size: 13px;
     }
 
@@ -132,9 +144,11 @@
       padding: 0 16px;
 
       border-radius: 12px;
+
       border: 1px solid #252c35;
 
       background: #0c1015;
+
       color: white;
 
       outline: none;
@@ -162,6 +176,7 @@
       margin-top: 5px;
 
       border: none;
+
       border-radius: 12px;
 
       background:
@@ -174,6 +189,7 @@
       color: #04100a;
 
       font-size: 16px;
+
       font-weight: 700;
 
       cursor: pointer;
@@ -194,8 +210,11 @@
 
     .login-btn:disabled {
       opacity: 0.6;
+
       cursor: not-allowed;
+
       transform: none;
+
       box-shadow: none;
     }
 
@@ -331,6 +350,7 @@
 
       .login-card {
         padding: 30px 22px;
+
         border-radius: 20px;
       }
 
@@ -369,6 +389,8 @@
     </div>
 
 
+    <!-- USERNAME -->
+
     <div class="input-group">
 
       <label>
@@ -384,6 +406,8 @@
 
     </div>
 
+
+    <!-- PASSWORD -->
 
     <div class="input-group">
 
@@ -401,6 +425,8 @@
     </div>
 
 
+    <!-- LOGIN BUTTON -->
+
     <button
       class="login-btn"
       id="loginBtn"
@@ -411,8 +437,12 @@
     </button>
 
 
+    <!-- MESSAGE -->
+
     <div id="message"></div>
 
+
+    <!-- DEVICE -->
 
     <div class="phone-box">
 
@@ -423,7 +453,7 @@
       <div class="phone-info">
 
         <div class="phone-title">
-          YOUR PHONE
+          YOUR DEVICE
         </div>
 
         <div id="phoneName">
@@ -452,12 +482,26 @@
 
 
 /* =====================================================
-   YOUR APPS SCRIPT WEB APP URL
+   GOOGLE APPS SCRIPT WEB APP URL
 ===================================================== */
 
 const API_URL =
   "https://script.google.com/macros/s/AKfycby1wEKzuThOiXdf9lVmoJVysfasR14ivssXFjGFfDnnc-d16uQRjNhel5LKNXDK4ZbxDw/exec";
 
+
+/* =====================================================
+   ROLE → DASHBOARD
+===================================================== */
+
+const ROLE_PAGES = {
+
+  admin: "ad.html",
+
+  support: "2S.html",
+
+  call: "3C.html"
+
+};
 
 
 /* =====================================================
@@ -473,66 +517,98 @@ function detectPhone() {
   let browser = "Unknown Browser";
 
 
-  /* DEVICE */
+  /* =========================
+     DEVICE
+  ========================== */
 
   if (/iPhone/i.test(ua)) {
+
     device = "Apple iPhone";
+
   }
 
   else if (/iPad/i.test(ua)) {
+
     device = "Apple iPad";
+
   }
 
   else if (/Samsung/i.test(ua)) {
+
     device = "Samsung Galaxy";
+
   }
 
   else if (/SM-[A-Z0-9-]+/i.test(ua)) {
+
     device = "Samsung Galaxy";
+
   }
 
   else if (/Xiaomi/i.test(ua)) {
+
     device = "Xiaomi";
+
   }
 
   else if (/Redmi/i.test(ua)) {
+
     device = "Redmi";
+
   }
 
   else if (/Huawei/i.test(ua)) {
+
     device = "Huawei";
+
   }
 
   else if (/OPPO/i.test(ua)) {
+
     device = "OPPO";
+
   }
 
   else if (/vivo/i.test(ua)) {
+
     device = "Vivo";
+
   }
 
   else if (/realme/i.test(ua)) {
+
     device = "Realme";
+
   }
 
   else if (/OnePlus/i.test(ua)) {
+
     device = "OnePlus";
+
   }
 
   else if (/Android/i.test(ua)) {
+
     device = "Android Phone";
+
   }
 
   else if (/Windows/i.test(ua)) {
+
     device = "Windows PC";
+
   }
 
   else if (/Macintosh/i.test(ua)) {
+
     device = "Mac";
+
   }
 
 
-  /* OS */
+  /* =========================
+     OS
+  ========================== */
 
   if (/Windows NT 10/i.test(ua)) {
 
@@ -555,44 +631,58 @@ function detectPhone() {
   else if (/iPhone|iPad/i.test(ua)) {
 
     const match =
-      ua.match(/OS\s([0-9_]+)/i);
+      ua.match(/OS\s([0-9\_]+)/i);
 
     os =
       match
         ? "iOS " +
-          match[1].replace(/_/g, ".")
+          match[1].replace(/\_/g, ".")
         : "iOS";
 
   }
 
   else if (/Mac OS X/i.test(ua)) {
+
     os = "macOS";
+
   }
 
   else if (/Linux/i.test(ua)) {
+
     os = "Linux";
+
   }
 
 
-  /* BROWSER */
+  /* =========================
+     BROWSER
+  ========================== */
 
   if (/Edg/i.test(ua)) {
+
     browser = "Microsoft Edge";
+
   }
 
   else if (/Chrome/i.test(ua)) {
+
     browser = "Google Chrome";
+
   }
 
   else if (/Firefox/i.test(ua)) {
+
     browser = "Mozilla Firefox";
+
   }
 
   else if (
     /Safari/i.test(ua) &&
     !/Chrome/i.test(ua)
   ) {
+
     browser = "Safari";
+
   }
 
 
@@ -612,12 +702,12 @@ function detectPhone() {
 detectPhone();
 
 
-
 /* =====================================================
    LOGIN
 ===================================================== */
 
 async function login() {
+
 
   const username =
     document
@@ -637,6 +727,10 @@ async function login() {
     document.getElementById("loginBtn");
 
 
+  /* =========================
+     VALIDATION
+  ========================== */
+
   if (!username || !password) {
 
     showMessage(
@@ -645,6 +739,7 @@ async function login() {
     );
 
     return;
+
   }
 
 
@@ -659,6 +754,11 @@ async function login() {
 
   try {
 
+
+    /* =========================
+       SEND LOGIN REQUEST
+    ========================== */
+
     const response =
       await fetch(
         API_URL,
@@ -667,8 +767,10 @@ async function login() {
           method: "POST",
 
           headers: {
+
             "Content-Type":
               "text/plain;charset=utf-8"
+
           },
 
           body:
@@ -688,6 +790,16 @@ async function login() {
       );
 
 
+    if (!response.ok) {
+
+      throw new Error(
+        "Server error: " +
+        response.status
+      );
+
+    }
+
+
     const data =
       await response.json();
 
@@ -698,12 +810,136 @@ async function login() {
     );
 
 
-    /* LOGIN SUCCESS */
+    /* =================================================
+       LOGIN SUCCESS
+    ================================================= */
 
     if (data.success === true) {
 
 
-      /* SAVE SESSION */
+      /* =========================
+         GET USER DATA
+      ========================== */
+
+      const loginUsername =
+        data.username ||
+        data.Username ||
+        username;
+
+
+      const userName =
+        data.name ||
+        data.Name ||
+        "";
+
+
+      const userRole =
+        data.role ||
+        data.Role ||
+        "";
+
+
+      const userStatus =
+        data.status ||
+        data.Status ||
+        "Active";
+
+
+      /* =========================
+         NORMALIZE ROLE
+      ========================== */
+
+      const role =
+        String(userRole)
+          .trim()
+          .toLowerCase();
+
+
+      /* =========================
+         NORMALIZE STATUS
+      ========================== */
+
+      const status =
+        String(userStatus)
+          .trim()
+          .toLowerCase();
+
+
+      console.log(
+        "Username:",
+        loginUsername
+      );
+
+      console.log(
+        "Name:",
+        userName
+      );
+
+      console.log(
+        "Role:",
+        role
+      );
+
+      console.log(
+        "Status:",
+        status
+      );
+
+
+      /* =================================================
+         STATUS CHECK
+      ================================================= */
+
+      if (
+        status !== "active"
+      ) {
+
+        showMessage(
+          "Your account is not active.",
+          "error"
+        );
+
+        button.disabled = false;
+
+        button.textContent =
+          "Login";
+
+        return;
+
+      }
+
+
+      /* =================================================
+         ROLE CHECK
+      ================================================= */
+
+      if (
+        !ROLE_PAGES[role]
+      ) {
+
+        showMessage(
+          "No dashboard assigned for this role.",
+          "error"
+        );
+
+        console.error(
+          "Unknown role:",
+          role
+        );
+
+        button.disabled = false;
+
+        button.textContent =
+          "Login";
+
+        return;
+
+      }
+
+
+      /* =================================================
+         SAVE SESSION
+      ================================================= */
 
       localStorage.setItem(
         "loggedIn",
@@ -713,56 +949,78 @@ async function login() {
 
       localStorage.setItem(
         "username",
-        data.username ||
-        username
+        loginUsername
       );
 
 
       localStorage.setItem(
         "name",
-        data.name ||
-        ""
+        userName
       );
 
 
       localStorage.setItem(
         "role",
-        data.role ||
-        ""
+        role
       );
 
 
       localStorage.setItem(
         "status",
-        data.status ||
-        "Active"
+        userStatus
       );
 
 
-      /* SUCCESS MESSAGE */
+      /* LOGIN TIME */
+
+      localStorage.setItem(
+        "loginTime",
+        Date.now()
+      );
+
+
+      /* LAST ACTIVITY */
+
+      localStorage.setItem(
+        "lastActivity",
+        Date.now()
+      );
+
+
+      /* =================================================
+         SUCCESS
+      ================================================= */
 
       showMessage(
-        "Login successful!",
+        "Login successful! Opening dashboard...",
         "success"
       );
 
 
-      /* GO DASHBOARD */
+      /* =================================================
+         ROLE BASED REDIRECT
+      ================================================= */
 
-      setTimeout(function() {
+      setTimeout(
+        function() {
 
-        window.location.href =
-          "dashboard.html";
+          window.location.href =
+            ROLE_PAGES[role];
 
-      }, 500);
+        },
+        500
+      );
 
 
     }
 
 
-    /* LOGIN FAILED */
+    /* =================================================
+       LOGIN FAILED
+    ================================================= */
 
     else {
+
 
       showMessage(
 
@@ -777,6 +1035,7 @@ async function login() {
       button.disabled =
         false;
 
+
       button.textContent =
         "Login";
 
@@ -787,6 +1046,7 @@ async function login() {
 
   catch(error) {
 
+
     console.error(
       "Login Error:",
       error
@@ -794,6 +1054,7 @@ async function login() {
 
 
     showMessage(
+      error.message ||
       "Unable to connect to server.",
       "error"
     );
@@ -802,13 +1063,13 @@ async function login() {
     button.disabled =
       false;
 
+
     button.textContent =
       "Login";
 
   }
 
 }
-
 
 
 /* =====================================================
@@ -819,6 +1080,7 @@ function showMessage(
   text,
   type
 ) {
+
 
   const message =
     document.getElementById(
@@ -842,6 +1104,7 @@ function showMessage(
 
 function hideMessage() {
 
+
   const message =
     document.getElementById(
       "message"
@@ -852,10 +1115,10 @@ function hideMessage() {
     "none";
 
 
-  message.className = "";
+  message.className =
+    "";
 
 }
-
 
 
 /* =====================================================
@@ -866,15 +1129,50 @@ document.addEventListener(
   "keydown",
   function(event) {
 
-    if (event.key === "Enter") {
 
-      login();
+    if (
+      event.key === "Enter"
+    ) {
+
+
+      const username =
+        document
+          .getElementById("username")
+          .value
+          .trim();
+
+
+      const password =
+        document
+          .getElementById("password")
+          .value
+          .trim();
+
+
+      if (
+        username &&
+        password &&
+        !document
+          .getElementById("loginBtn")
+          .disabled
+      ) {
+
+        login();
+
+      }
 
     }
 
   }
 );
 
+
+window.addEventListener(
+  "pageshow",
+  function() {
+
+  }
+);
 
 </script>
 
