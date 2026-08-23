@@ -1,13 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Data Dashboard</title>
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0"
+>
+
+<title>Support Dashboard</title>
+
 
 <style>
+
+/* =====================================================
+RESET
+===================================================== */
 
 *{
   margin:0;
@@ -16,36 +26,69 @@
   font-family:Arial,Helvetica,sans-serif;
 }
 
+
+/* =====================================================
+THEME
+===================================================== */
+
 :root{
+
   --bg:#f4f7f6;
+
   --card:#ffffff;
+
   --text:#1f2937;
+
   --muted:#6b7280;
+
   --border:#e5e7eb;
+
   --input:#ffffff;
+
   --thead:#f8fafc;
+
   --hover:#fafafa;
+
   --green:#087f5b;
+
   --green-dark:#066b4d;
+
   --shadow:rgba(0,0,0,.20);
+
 }
+
 
 body.dark{
+
   --bg:#111827;
+
   --card:#1f2937;
+
   --text:#f9fafb;
+
   --muted:#9ca3af;
+
   --border:#374151;
+
   --input:#111827;
+
   --thead:#172033;
+
   --hover:#263244;
+
   --shadow:rgba(0,0,0,.50);
+
 }
 
+
 body{
+
   background:var(--bg);
+
   color:var(--text);
+
   transition:.25s;
+
 }
 
 
@@ -54,7 +97,9 @@ HEADER
 ===================================================== */
 
 .header{
+
   width:100%;
+
   min-height:70px;
 
   background:var(--card);
@@ -62,36 +107,117 @@ HEADER
   border-bottom:1px solid var(--border);
 
   display:flex;
+
   align-items:center;
+
   justify-content:space-between;
 
   padding:0 25px;
 
   position:sticky;
+
   top:0;
+
   z-index:100;
 
-  transition:.25s;
 }
+
 
 .logo{
+
   font-size:22px;
+
   font-weight:700;
+
   color:var(--green);
+
 }
 
+
 .header-right{
+
   display:flex;
+
   align-items:center;
+
   gap:10px;
+
 }
 
 
 /* =====================================================
-THEME BUTTON
+BUTTON
 ===================================================== */
 
+button{
+
+  border:none;
+
+  cursor:pointer;
+
+  transition:.2s;
+
+}
+
+
+button:disabled{
+
+  cursor:not-allowed;
+
+  opacity:.5;
+
+}
+
+
+.btn{
+
+  padding:11px 17px;
+
+  border-radius:8px;
+
+  font-size:14px;
+
+  font-weight:600;
+
+}
+
+
+.btn-primary{
+
+  background:var(--green);
+
+  color:#ffffff;
+
+}
+
+
+.btn-primary:hover{
+
+  background:var(--green-dark);
+
+}
+
+
+.btn-refresh{
+
+  background:var(--input);
+
+  color:var(--text);
+
+  border:1px solid var(--border);
+
+}
+
+
+.btn-refresh:hover{
+
+  background:var(--hover);
+
+}
+
+
 .theme-btn{
+
   height:42px;
 
   padding:0 14px;
@@ -108,13 +234,35 @@ THEME BUTTON
 
   font-weight:600;
 
-  cursor:pointer;
-
-  transition:.2s;
 }
 
+
 .theme-btn:hover{
+
   background:var(--hover);
+
+}
+
+
+/* =====================================================
+USER INFO
+===================================================== */
+
+.user-info{
+
+  font-size:13px;
+
+  color:var(--muted);
+
+  margin-right:5px;
+
+}
+
+
+.user-info strong{
+
+  color:var(--green);
+
 }
 
 
@@ -123,6 +271,7 @@ MAIN
 ===================================================== */
 
 .container{
+
   width:100%;
 
   max-width:1500px;
@@ -130,6 +279,7 @@ MAIN
   margin:auto;
 
   padding:25px;
+
 }
 
 
@@ -138,6 +288,7 @@ TOP
 ===================================================== */
 
 .top-section{
+
   display:flex;
 
   justify-content:space-between;
@@ -147,85 +298,34 @@ TOP
   gap:15px;
 
   margin-bottom:20px;
+
 }
 
+
 .title h1{
+
   font-size:27px;
 
   margin-bottom:5px;
+
 }
 
+
 .title p{
+
   color:var(--muted);
 
   font-size:14px;
+
 }
 
 
 /* =====================================================
-BUTTON
-===================================================== */
-
-button{
-  border:none;
-
-  cursor:pointer;
-
-  transition:.2s;
-}
-
-button:disabled{
-  cursor:not-allowed;
-
-  opacity:.5;
-}
-
-.btn{
-  padding:11px 17px;
-
-  border-radius:8px;
-
-  font-size:14px;
-
-  font-weight:600;
-}
-
-.btn-primary{
-  background:var(--green);
-
-  color:#ffffff;
-}
-
-.btn-primary:hover{
-  background:var(--green-dark);
-}
-
-.btn-refresh{
-  background:var(--input);
-
-  color:var(--text);
-
-  border:1px solid var(--border);
-}
-
-.btn-refresh:hover{
-  background:var(--hover);
-}
-
-.btn-cancel{
-  background:var(--input);
-
-  color:var(--text);
-
-  border:1px solid var(--border);
-}
-
-
-/* =====================================================
-FILTER BOX
+SEARCH
 ===================================================== */
 
 .filter-box{
+
   background:var(--card);
 
   border:1px solid var(--border);
@@ -236,36 +336,46 @@ FILTER BOX
 
   margin-bottom:20px;
 
-  transition:.25s;
 }
 
+
 .filters{
+
   display:grid;
 
-  grid-template-columns:1fr;
+  grid-template-columns:1fr auto;
 
   gap:12px;
 
   align-items:end;
+
 }
 
+
 .field{
+
   display:flex;
 
   flex-direction:column;
 
   gap:6px;
+
 }
 
+
 .field label{
+
   font-size:12px;
 
   font-weight:600;
 
   color:var(--muted);
+
 }
 
+
 .field input{
+
   width:100%;
 
   height:42px;
@@ -283,10 +393,14 @@ FILTER BOX
   color:var(--text);
 
   font-size:14px;
+
 }
 
+
 .field input:focus{
+
   border-color:var(--green);
+
 }
 
 
@@ -295,6 +409,7 @@ TABLE
 ===================================================== */
 
 .table-box{
+
   background:var(--card);
 
   border:1px solid var(--border);
@@ -303,10 +418,11 @@ TABLE
 
   overflow:hidden;
 
-  transition:.25s;
 }
 
+
 .table-header{
+
   padding:16px 18px;
 
   border-bottom:1px solid var(--border);
@@ -316,33 +432,48 @@ TABLE
   justify-content:space-between;
 
   align-items:center;
+
 }
+
 
 .table-header h2{
+
   font-size:17px;
+
 }
 
+
 .total-count{
+
   font-size:13px;
 
   color:var(--muted);
+
 }
 
+
 .table-wrapper{
+
   width:100%;
 
   overflow-x:auto;
+
 }
 
+
 table{
+
   width:100%;
 
   border-collapse:collapse;
 
-  min-width:700px;
+  min-width:650px;
+
 }
 
+
 th{
+
   background:var(--thead);
 
   padding:14px;
@@ -356,9 +487,12 @@ th{
   white-space:nowrap;
 
   border-bottom:1px solid var(--border);
+
 }
 
+
 td{
+
   padding:14px;
 
   border-bottom:1px solid var(--border);
@@ -366,21 +500,23 @@ td{
   font-size:13px;
 
   white-space:nowrap;
+
 }
+
 
 tr:hover td{
+
   background:var(--hover);
+
 }
 
 
-/* =====================================================
-DATE
-===================================================== */
-
 .date-cell{
+
   color:var(--muted);
 
   font-weight:500;
+
 }
 
 
@@ -389,6 +525,7 @@ PAGINATION
 ===================================================== */
 
 .pagination-box{
+
   display:flex;
 
   justify-content:space-between;
@@ -398,23 +535,32 @@ PAGINATION
   padding:15px 18px;
 
   border-top:1px solid var(--border);
+
 }
 
+
 .page-info{
+
   font-size:13px;
 
   color:var(--muted);
+
 }
 
+
 .pagination{
+
   display:flex;
 
   gap:5px;
 
   flex-wrap:wrap;
+
 }
 
+
 .page-btn{
+
   min-width:35px;
 
   height:35px;
@@ -428,18 +574,25 @@ PAGINATION
   border-radius:6px;
 
   font-size:13px;
+
 }
+
 
 .page-btn:hover{
+
   background:var(--hover);
+
 }
 
+
 .page-btn.active{
+
   background:var(--green);
 
   color:#ffffff;
 
   border-color:var(--green);
+
 }
 
 
@@ -448,6 +601,7 @@ MODAL
 ===================================================== */
 
 .modal{
+
   position:fixed;
 
   inset:0;
@@ -463,20 +617,24 @@ MODAL
   padding:20px;
 
   z-index:999;
+
 }
+
 
 .modal.show{
+
   display:flex;
+
 }
 
+
 .modal-box{
+
   width:100%;
 
-  max-width:700px;
+  max-width:650px;
 
   max-height:95vh;
-
-  min-height:500px;
 
   overflow-y:auto;
 
@@ -487,13 +645,16 @@ MODAL
   border-radius:16px;
 
   box-shadow:
+
     0 20px 60px
+
     var(--shadow);
 
-  transition:.25s;
 }
 
+
 .modal-header{
+
   padding:20px 24px;
 
   border-bottom:1px solid var(--border);
@@ -511,13 +672,19 @@ MODAL
   background:var(--card);
 
   z-index:2;
+
 }
+
 
 .modal-header h2{
+
   font-size:20px;
+
 }
 
+
 .close-btn{
+
   width:36px;
 
   height:36px;
@@ -531,10 +698,14 @@ MODAL
   font-size:22px;
 
   color:var(--text);
+
 }
 
+
 .close-btn:hover{
+
   background:var(--hover);
+
 }
 
 
@@ -543,39 +714,56 @@ FORM
 ===================================================== */
 
 .form{
+
   padding:30px 25px;
+
 }
 
+
 .form-grid{
+
   display:grid;
 
   grid-template-columns:1fr 1fr;
 
   gap:22px 18px;
+
 }
 
+
 .form-group{
+
   display:flex;
 
   flex-direction:column;
 
   gap:9px;
+
 }
+
 
 .form-group.full{
+
   grid-column:1 / -1;
+
 }
 
+
 .form-group label{
+
   font-size:13px;
 
   font-weight:600;
 
   color:var(--text);
+
 }
 
+
 .form-group input,
+
 .form-group textarea{
+
   width:100%;
 
   border:1px solid var(--border);
@@ -592,41 +780,52 @@ FORM
 
   color:var(--text);
 
-  transition:.2s;
 }
+
 
 .form-group input{
+
   height:48px;
+
 }
+
 
 .form-group textarea{
-  min-height:160px;
+
+  min-height:150px;
 
   resize:vertical;
+
 }
 
+
 .form-group input:focus,
+
 .form-group textarea:focus{
+
   border-color:var(--green);
 
   box-shadow:
+
     0 0 0 2px
+
     rgba(8,127,91,.10);
+
 }
 
 
-/* =====================================================
-READ ONLY FIELDS
-===================================================== */
+/* READ ONLY INPUT */
 
-.readonly-field{
-  background:var(--thead) !important;
+.readonly-input{
 
-  color:var(--muted) !important;
+  background:
+
+    var(--thead) !important;
 
   cursor:not-allowed;
 
-  user-select:none;
+  color:var(--muted) !important;
+
 }
 
 
@@ -635,6 +834,7 @@ FORM FOOTER
 ===================================================== */
 
 .form-footer{
+
   display:flex;
 
   justify-content:flex-end;
@@ -643,7 +843,17 @@ FORM FOOTER
 
   padding-top:30px;
 
-  padding-bottom:10px;
+}
+
+
+.btn-cancel{
+
+  background:var(--input);
+
+  color:var(--text);
+
+  border:1px solid var(--border);
+
 }
 
 
@@ -652,19 +862,24 @@ LOADING
 ===================================================== */
 
 .loading{
+
   text-align:center;
 
   padding:45px 20px;
 
   color:var(--muted);
+
 }
 
+
 .empty{
+
   text-align:center;
 
   padding:55px 20px;
 
   color:var(--muted);
+
 }
 
 
@@ -673,6 +888,7 @@ TOAST
 ===================================================== */
 
 .toast{
+
   position:fixed;
 
   right:25px;
@@ -690,7 +906,9 @@ TOAST
   background:#111827;
 
   box-shadow:
+
     0 10px 30px
+
     rgba(0,0,0,.2);
 
   transform:translateY(100px);
@@ -702,20 +920,30 @@ TOAST
   z-index:2000;
 
   font-size:14px;
+
 }
 
+
 .toast.show{
+
   transform:translateY(0);
 
   opacity:1;
+
 }
+
 
 .toast.success{
+
   background:#087f5b;
+
 }
 
+
 .toast.error{
+
   background:#dc2626;
+
 }
 
 
@@ -723,24 +951,10 @@ TOAST
 MOBILE
 ===================================================== */
 
-@media(max-width:900px){
-
-  .top-section{
-    align-items:flex-start;
-
-    flex-direction:column;
-  }
-
-  .modal-box{
-    max-width:650px;
-  }
-
-}
-
-
-@media(max-width:600px){
+@media(max-width:700px){
 
   .header{
+
     height:auto;
 
     min-height:70px;
@@ -750,73 +964,114 @@ MOBILE
     gap:10px;
 
     flex-wrap:wrap;
+
   }
+
 
   .logo{
+
     font-size:18px;
+
   }
 
+
   .header-right{
-    gap:6px;
 
     width:100%;
 
     justify-content:flex-end;
+
+    flex-wrap:wrap;
+
   }
 
-  .header-right .btn,
-  .theme-btn{
-    padding:9px 10px;
 
-    font-size:12px;
+  .user-info{
 
-    height:38px;
+    width:100%;
+
+    text-align:right;
+
   }
+
 
   .container{
+
     padding:15px;
+
   }
+
+
+  .top-section{
+
+    align-items:flex-start;
+
+    flex-direction:column;
+
+  }
+
+
+  .filters{
+
+    grid-template-columns:1fr;
+
+  }
+
 
   .form-grid{
+
     grid-template-columns:1fr;
+
   }
+
 
   .form-group.full{
+
     grid-column:auto;
+
   }
+
 
   .form{
+
     padding:25px 18px;
+
   }
 
-  .form-group textarea{
-    min-height:140px;
-  }
 
   .modal{
+
     padding:10px;
+
   }
+
 
   .modal-box{
+
     max-height:96vh;
 
-    min-height:auto;
-
     border-radius:13px;
+
   }
 
+
   .pagination-box{
+
     flex-direction:column;
 
     gap:12px;
+
   }
 
+
   .toast{
+
     left:15px;
 
     right:15px;
 
     min-width:auto;
+
   }
 
 }
@@ -835,18 +1090,38 @@ HEADER
 
 <header class="header">
 
+
   <div class="logo">
-    DATA DASHBOARD
+
+    SUPPORT DASHBOARD
+
   </div>
 
+
   <div class="header-right">
+
+
+    <div class="user-info">
+
+      Logged in as:
+
+      <strong id="loggedUsername">
+
+        Loading...
+
+      </strong>
+
+    </div>
+
 
     <button
       class="theme-btn"
       id="themeBtn"
       onclick="toggleTheme()"
     >
+
       🌙 Dark
+
     </button>
 
 
@@ -855,7 +1130,9 @@ HEADER
       id="refreshBtn"
       onclick="loadData()"
     >
+
       🔄 Refresh
+
     </button>
 
 
@@ -863,7 +1140,9 @@ HEADER
       class="btn btn-primary"
       onclick="openEntryModal()"
     >
+
       ➕ New Entry
+
     </button>
 
   </div>
@@ -880,17 +1159,24 @@ MAIN
 
   <div class="top-section">
 
+
     <div class="title">
 
       <h1>
-        Data Dashboard
+
+        Support Data
+
       </h1>
 
+
       <p>
-        Manage your entries
+
+        View entries and add new support work.
+
       </p>
 
     </div>
+
 
   </div>
 
@@ -901,13 +1187,19 @@ MAIN
 
   <section class="filter-box">
 
+
     <div class="filters">
+
 
       <div class="field">
 
+
         <label>
+
           🔍 Search
+
         </label>
+
 
         <input
           type="text"
@@ -917,7 +1209,19 @@ MAIN
           autocomplete="off"
         >
 
+
       </div>
+
+
+      <button
+        class="btn btn-refresh"
+        onclick="clearSearch()"
+      >
+
+        Clear
+
+      </button>
+
 
     </div>
 
@@ -933,68 +1237,103 @@ MAIN
 
     <div class="table-header">
 
+
       <h2>
+
         All Entries
+
       </h2>
+
 
       <div class="total-count">
 
         Total:
+
         <strong id="totalCount">
+
           0
+
         </strong>
 
       </div>
+
 
     </div>
 
 
     <div class="table-wrapper">
 
+
       <table>
+
 
         <thead>
 
+
           <tr>
 
+
             <th>
+
               Name
+
             </th>
 
-            <th>
-              Ip
-            </th>
 
             <th>
+
+              IP
+
+            </th>
+
+
+            <th>
+
               Work
+
             </th>
 
+
             <th>
+
               Date
+
             </th>
+
 
           </tr>
+
 
         </thead>
 
 
         <tbody id="tableBody">
 
+
           <tr>
+
 
             <td colspan="4">
 
+
               <div class="loading">
-                Loading data...
+
+                ⏳ Loading data...
+
               </div>
+
 
             </td>
 
+
           </tr>
+
 
         </tbody>
 
+
       </table>
+
 
     </div>
 
@@ -1003,11 +1342,14 @@ MAIN
 
     <div class="pagination-box">
 
+
       <div
         class="page-info"
         id="pageInfo"
       >
+
         Page 1
+
       </div>
 
 
@@ -1015,6 +1357,7 @@ MAIN
         class="pagination"
         id="pagination"
       ></div>
+
 
     </div>
 
@@ -1040,8 +1383,11 @@ NEW ENTRY MODAL
 
     <div class="modal-header">
 
+
       <h2>
+
         New Entry
+
       </h2>
 
 
@@ -1049,8 +1395,11 @@ NEW ENTRY MODAL
         class="close-btn"
         onclick="closeEntryModal()"
       >
+
         ×
+
       </button>
+
 
     </div>
 
@@ -1065,24 +1414,25 @@ NEW ENTRY MODAL
       <div class="form-grid">
 
 
-        <!-- NAME -->
+        <!-- USERNAME / NAME -->
 
         <div class="form-group">
 
+
           <label>
+
             Name
+
           </label>
+
 
           <input
             type="text"
             id="nameInput"
-            name="Name"
-            class="readonly-field"
-            placeholder="Username"
-            autocomplete="off"
+            class="readonly-input"
             readonly
-            required
           >
+
 
         </div>
 
@@ -1091,18 +1441,22 @@ NEW ENTRY MODAL
 
         <div class="form-group">
 
+
           <label>
+
             IP
+
           </label>
+
 
           <input
             type="text"
             id="ipInput"
-            name="Ip"
             placeholder="Enter IP"
             autocomplete="off"
             required
           >
+
 
         </div>
 
@@ -1111,16 +1465,20 @@ NEW ENTRY MODAL
 
         <div class="form-group full">
 
+
           <label>
+
             Work
+
           </label>
+
 
           <textarea
             id="workInput"
-            name="Work"
             placeholder="Enter work"
             required
           ></textarea>
+
 
         </div>
 
@@ -1129,17 +1487,21 @@ NEW ENTRY MODAL
 
         <div class="form-group">
 
+
           <label>
+
             Date
+
           </label>
 
+
           <input
-            type="date"
+            type="text"
             id="dateInput"
-            name="Date"
-            class="readonly-field"
+            class="readonly-input"
             readonly
           >
+
 
         </div>
 
@@ -1155,7 +1517,9 @@ NEW ENTRY MODAL
           class="btn btn-cancel"
           onclick="closeEntryModal()"
         >
+
           Cancel
+
         </button>
 
 
@@ -1164,7 +1528,9 @@ NEW ENTRY MODAL
           class="btn btn-primary"
           id="submitBtn"
         >
+
           Save Entry
+
         </button>
 
 
@@ -1217,162 +1583,124 @@ let filteredData = [];
 
 let currentPage = 1;
 
-let inactivityTimer = null;
+let currentUsername = "";
 
 
 /* =====================================================
-GET LOGIN USERNAME
+LOGIN CHECK
 ===================================================== */
 
-function getLoggedInUsername(){
+function checkLogin(){
 
   let username = "";
 
 
-  /* Direct username */
+  /*
+    First priority:
+    username
+  */
 
   username =
     localStorage.getItem("username") ||
     "";
 
 
-  if(username){
+  /*
+    Try userData
+  */
 
-    return username.trim();
-
-  }
-
-
-  /* user */
-
-  const userValue =
-    localStorage.getItem("user");
-
-
-  if(userValue){
-
-    try{
-
-      const user =
-        JSON.parse(userValue);
-
-
-      if(
-        typeof user === "object" &&
-        user !== null
-      ){
-
-        username =
-          user.username ||
-          user.Username ||
-          user.name ||
-          user.Name ||
-          "";
-
-      }else{
-
-        username =
-          userValue;
-
-      }
-
-    }catch(error){
-
-      username =
-        userValue;
-
-    }
-
-  }
-
-
-  if(username){
-
-    return String(
-      username
-    ).trim();
-
-  }
-
-
-  /* userData */
-
-  const userDataValue =
-    localStorage.getItem("userData");
-
-
-  if(userDataValue){
+  if(!username){
 
     try{
 
       const userData =
         JSON.parse(
-          userDataValue
+          localStorage.getItem("userData") || "null"
         );
 
 
-      username =
-        userData.username ||
-        userData.Username ||
-        userData.name ||
-        userData.Name ||
-        "";
+      if(userData){
+
+        username =
+          userData.username ||
+          userData.Username ||
+          userData.userName ||
+          "";
+
+      }
 
     }catch(error){
 
-      username = "";
+      console.log(
+        "userData parse error"
+      );
 
     }
 
   }
 
 
-  if(username){
+  /*
+    Try loginData
+  */
 
-    return String(
-      username
-    ).trim();
-
-  }
-
-
-  /* loginData */
-
-  const loginDataValue =
-    localStorage.getItem(
-      "loginData"
-    );
-
-
-  if(loginDataValue){
+  if(!username){
 
     try{
 
       const loginData =
         JSON.parse(
-          loginDataValue
+          localStorage.getItem("loginData") || "null"
         );
 
 
-      username =
-        loginData.username ||
-        loginData.Username ||
-        loginData.name ||
-        loginData.Name ||
-        "";
+      if(loginData){
+
+        username =
+          loginData.username ||
+          loginData.Username ||
+          loginData.userName ||
+          "";
+
+      }
 
     }catch(error){
 
-      username = "";
+      console.log(
+        "loginData parse error"
+      );
 
     }
 
   }
 
 
-  return String(
-    username || ""
-  ).trim();
+  /*
+    No username = not logged in
+  */
+
+  if(!username){
+
+    window.location.replace(
+      "index.html"
+    );
+
+    return false;
+
+  }
+
+
+  currentUsername =
+    String(username).trim();
+
+
+  document.getElementById(
+    "loggedUsername"
+  ).textContent =
+    currentUsername;
+
+
+  return true;
 
 }
 
@@ -1383,6 +1711,9 @@ function getLoggedInUsername(){
 
 const INACTIVITY_LIMIT =
   5 * 60 * 1000;
+
+
+let inactivityTimer = null;
 
 
 function resetInactivityTimer(){
@@ -1412,29 +1743,36 @@ function autoLogout(){
     "username"
   );
 
+
   localStorage.removeItem(
     "user"
   );
+
 
   localStorage.removeItem(
     "userData"
   );
 
+
   localStorage.removeItem(
     "loginData"
   );
+
 
   localStorage.removeItem(
     "token"
   );
 
+
   localStorage.removeItem(
     "authToken"
   );
 
+
   localStorage.removeItem(
     "session"
   );
+
 
   localStorage.removeItem(
     "loggedIn"
@@ -1451,14 +1789,24 @@ function autoLogout(){
 }
 
 
+/* =====================================================
+USER ACTIVITY
+===================================================== */
+
 const activityEvents = [
 
   "mousemove",
+
   "mousedown",
+
   "keydown",
+
   "scroll",
+
   "touchstart",
+
   "click",
+
   "wheel"
 
 ];
@@ -1481,12 +1829,23 @@ resetInactivityTimer();
 
 
 /* =====================================================
-THEME
+INITIAL LOAD
 ===================================================== */
 
 document.addEventListener(
   "DOMContentLoaded",
   function(){
+
+    /*
+      Login check FIRST
+    */
+
+    if(!checkLogin()){
+
+      return;
+
+    }
+
 
     loadTheme();
 
@@ -1495,6 +1854,10 @@ document.addEventListener(
   }
 );
 
+
+/* =====================================================
+THEME
+===================================================== */
 
 function loadTheme(){
 
@@ -1598,14 +1961,18 @@ async function loadData(){
 
   try{
 
+
     const response =
       await fetch(
         API_URL +
         "?action=getData&_=" +
         Date.now(),
         {
+
           method:"GET",
+
           cache:"no-store"
+
         }
       );
 
@@ -1666,10 +2033,13 @@ async function loadData(){
     currentPage = 1;
 
 
-    applyFilters();
+    renderTable();
+
+    updateTotal();
 
 
   }catch(error){
+
 
     console.error(
       "Load Error:",
@@ -1691,6 +2061,7 @@ async function loadData(){
 
 
   }finally{
+
 
     refreshBtn.disabled =
       false;
@@ -1727,7 +2098,9 @@ function renderTable(){
         <td colspan="4">
 
           <div class="empty">
+
             No data found.
+
           </div>
 
         </td>
@@ -1769,32 +2142,44 @@ function renderTable(){
   pageData.forEach(
     function(row){
 
+
       html += `
 
         <tr>
 
           <td>
+
             ${escapeHTML(
               row.Name || ""
             )}
+
           </td>
 
+
           <td>
+
             ${escapeHTML(
               row.Ip || ""
             )}
+
           </td>
 
+
           <td>
+
             ${escapeHTML(
               row.Work || ""
             )}
+
           </td>
 
+
           <td class="date-cell">
+
             ${escapeHTML(
               row.Date || ""
             )}
+
           </td>
 
         </tr>
@@ -1833,6 +2218,7 @@ function applyFilters(){
   filteredData =
     allData.filter(
       function(row){
+
 
         if(!search){
 
@@ -1874,6 +2260,33 @@ function applyFilters(){
 
       }
     );
+
+
+  currentPage = 1;
+
+
+  renderTable();
+
+  updateTotal();
+
+}
+
+
+/* =====================================================
+CLEAR SEARCH
+===================================================== */
+
+function clearSearch(){
+
+  document
+    .getElementById(
+      "searchInput"
+    )
+    .value = "";
+
+
+  filteredData =
+    [...allData];
 
 
   currentPage = 1;
@@ -1944,7 +2357,9 @@ function renderPagination(){
           : ""
       }
     >
+
       ‹
+
     </button>
 
   `;
@@ -1980,7 +2395,9 @@ function renderPagination(){
         }"
         onclick="changePage(${i})"
       >
+
         ${i}
+
       </button>
 
     `;
@@ -1999,7 +2416,9 @@ function renderPagination(){
           : ""
       }
     >
+
       ›
+
     </button>
 
   `;
@@ -2065,18 +2484,17 @@ OPEN NEW ENTRY
 
 function openEntryModal(){
 
-  const username =
-    getLoggedInUsername();
+  /*
+    Re-check login
+  */
 
+  if(!currentUsername){
 
-  if(!username){
+    if(!checkLogin()){
 
-    showToast(
-      "Login username not found.",
-      "error"
-    );
+      return;
 
-    return;
+    }
 
   }
 
@@ -2089,7 +2507,7 @@ function openEntryModal(){
 
 
   /*
-    Name = login username
+    NAME = USERNAME
   */
 
   document
@@ -2097,11 +2515,11 @@ function openEntryModal(){
       "nameInput"
     )
     .value =
-    username;
+    currentUsername;
 
 
   /*
-    Date = today
+    DATE AUTO
   */
 
   document
@@ -2109,7 +2527,25 @@ function openEntryModal(){
       "dateInput"
     )
     .value =
-    getTodayInputDate();
+    getTodayDisplayDate();
+
+
+  /*
+    Clear IP / Work
+  */
+
+  document
+    .getElementById(
+      "ipInput"
+    )
+    .value = "";
+
+
+  document
+    .getElementById(
+      "workInput"
+    )
+    .value = "";
 
 
   document
@@ -2118,6 +2554,20 @@ function openEntryModal(){
     )
     .classList
     .add("show");
+
+
+  setTimeout(
+    function(){
+
+      document
+        .getElementById(
+          "ipInput"
+        )
+        .focus();
+
+    },
+    100
+  );
 
 }
 
@@ -2139,7 +2589,7 @@ function closeEntryModal(){
 
 
 /* =====================================================
-SUBMIT NEW ENTRY ONLY
+SUBMIT ENTRY
 ===================================================== */
 
 async function submitEntry(event){
@@ -2147,26 +2597,25 @@ async function submitEntry(event){
   event.preventDefault();
 
 
+  /*
+    Check login
+  */
+
+  if(!currentUsername){
+
+    if(!checkLogin()){
+
+      return;
+
+    }
+
+  }
+
+
   const submitBtn =
     document.getElementById(
       "submitBtn"
     );
-
-
-  const username =
-    getLoggedInUsername();
-
-
-  if(!username){
-
-    showToast(
-      "Login username not found.",
-      "error"
-    );
-
-    return;
-
-  }
 
 
   const ip =
@@ -2212,27 +2661,38 @@ async function submitEntry(event){
 
 
   /*
-    Always create.
-    No update action exists here.
+    DUPLICATE IP CHECK
   */
 
-  const payload = {
+  const normalizedIP =
+    ip.toLowerCase();
 
-    action:"create",
 
-    data:{
+  const duplicate =
+    allData.some(
+      function(row){
 
-      Name:username,
+        return String(
+          row.Ip || ""
+        )
+        .trim()
+        .toLowerCase() ===
+        normalizedIP;
 
-      Ip:ip,
+      }
+    );
 
-      Work:work,
 
-      Date:getTodayInputDate()
+  if(duplicate){
 
-    }
+    showToast(
+      "This IP already exists. Duplicate entry is not allowed.",
+      "error"
+    );
 
-  };
+    return;
+
+  }
 
 
   submitBtn.disabled =
@@ -2244,6 +2704,49 @@ async function submitEntry(event){
 
 
   try{
+
+
+    /*
+      Date auto generated
+    */
+
+    const today =
+      getTodayDisplayDate();
+
+
+    /*
+      NAME ALWAYS USERNAME
+    */
+
+    const payload = {
+
+      action:"create",
+
+
+      data:{
+
+        Name:
+          currentUsername,
+
+        Ip:
+          ip,
+
+        Work:
+          work,
+
+        Date:
+          today
+
+      }
+
+    };
+
+
+    console.log(
+      "Sending:",
+      payload
+    );
+
 
     const response =
       await fetch(
@@ -2294,7 +2797,7 @@ async function submitEntry(event){
 
       throw new Error(
         result.message ||
-        "Entry save failed."
+        "Save failed."
       );
 
     }
@@ -2314,19 +2817,49 @@ async function submitEntry(event){
 
   }catch(error){
 
+
     console.error(
       "Save Error:",
       error
     );
 
 
-    showToast(
-      error.message ||
-      "Failed to save entry.",
-      "error"
-    );
+    /*
+      Backend duplicate error
+    */
+
+    if(
+      String(
+        error.message
+      )
+      .toLowerCase()
+      .includes("duplicate")
+      ||
+      String(
+        error.message
+      )
+      .toLowerCase()
+      .includes("already")
+    ){
+
+      showToast(
+        "This IP already exists. Entry not added.",
+        "error"
+      );
+
+    }else{
+
+      showToast(
+        error.message ||
+        "Failed to save entry.",
+        "error"
+      );
+
+    }
+
 
   }finally{
+
 
     submitBtn.disabled =
       false;
@@ -2341,27 +2874,13 @@ async function submitEntry(event){
 
 
 /* =====================================================
-TODAY
+TODAY DATE
 ===================================================== */
 
-function getTodayInputDate(){
+function getTodayDisplayDate(){
 
   const now =
     new Date();
-
-
-  const year =
-    now.getFullYear();
-
-
-  const month =
-    String(
-      now.getMonth() + 1
-    )
-    .padStart(
-      2,
-      "0"
-    );
 
 
   const day =
@@ -2374,12 +2893,35 @@ function getTodayInputDate(){
     );
 
 
+  const month =
+    String(
+      now.getMonth() + 1
+    )
+    .padStart(
+      2,
+      "0"
+    );
+
+
+  const year =
+    now.getFullYear();
+
+
+  /*
+    DD-MM-YYYY
+
+    Example:
+    23-08-2026
+  */
+
   return (
-    year +
+
+    day +
     "-" +
     month +
     "-" +
-    day
+    year
+
   );
 
 }
@@ -2483,7 +3025,7 @@ function showToast(
         "toast";
 
     },
-    3000
+    3500
   );
 
 }
@@ -2552,7 +3094,7 @@ document
 
 
 /* =====================================================
-ESCAPE KEY
+ESCAPE
 ===================================================== */
 
 document.addEventListener(
@@ -2572,5 +3114,7 @@ document.addEventListener(
 
 </script>
 
+
 </body>
+
 </html>
