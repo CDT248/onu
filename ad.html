@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -47,14 +48,17 @@ body{
   transition:.25s;
 }
 
-/* =========================
+
+/* =====================================================
 HEADER
-========================= */
+===================================================== */
 
 .header{
   width:100%;
   min-height:70px;
+
   background:var(--card);
+
   border-bottom:1px solid var(--border);
 
   display:flex;
@@ -82,22 +86,26 @@ HEADER
   gap:10px;
 }
 
-/* =========================
+
+/* =====================================================
 THEME BUTTON
-========================= */
+===================================================== */
 
 .theme-btn{
   height:42px;
+
   padding:0 14px;
 
   border-radius:8px;
 
   background:var(--input);
+
   color:var(--text);
 
   border:1px solid var(--border);
 
   font-size:13px;
+
   font-weight:600;
 
   cursor:pointer;
@@ -109,66 +117,83 @@ THEME BUTTON
   background:var(--hover);
 }
 
-/* =========================
+
+/* =====================================================
 MAIN
-========================= */
+===================================================== */
 
 .container{
   width:100%;
+
   max-width:1500px;
+
   margin:auto;
+
   padding:25px;
 }
 
-/* =========================
+
+/* =====================================================
 TOP
-========================= */
+===================================================== */
 
 .top-section{
   display:flex;
+
   justify-content:space-between;
+
   align-items:center;
 
   gap:15px;
+
   margin-bottom:20px;
 }
 
 .title h1{
   font-size:27px;
+
   margin-bottom:5px;
 }
 
 .title p{
   color:var(--muted);
+
   font-size:14px;
 }
 
-/* =========================
+
+/* =====================================================
 BUTTON
-========================= */
+===================================================== */
 
 button{
   border:none;
+
   cursor:pointer;
+
   transition:.2s;
 }
 
 button:disabled{
   cursor:not-allowed;
+
   opacity:.5;
 }
 
 .btn{
   padding:11px 17px;
+
   border-radius:8px;
 
   font-size:14px;
+
   font-weight:600;
 }
 
 .btn-primary{
   background:var(--green);
-  color:#fff;
+
+  color:#ffffff;
 }
 
 .btn-primary:hover{
@@ -177,7 +202,9 @@ button:disabled{
 
 .btn-refresh{
   background:var(--input);
+
   color:var(--text);
+
   border:1px solid var(--border);
 }
 
@@ -187,21 +214,26 @@ button:disabled{
 
 .btn-cancel{
   background:var(--input);
+
   color:var(--text);
+
   border:1px solid var(--border);
 }
 
-/* =========================
+
+/* =====================================================
 FILTER BOX
-========================= */
+===================================================== */
 
 .filter-box{
   background:var(--card);
 
   border:1px solid var(--border);
+
   border-radius:12px;
 
   padding:18px;
+
   margin-bottom:20px;
 
   transition:.25s;
@@ -223,21 +255,27 @@ FILTER BOX
 
 .field{
   display:flex;
+
   flex-direction:column;
+
   gap:6px;
 }
 
 .field label{
   font-size:12px;
+
   font-weight:600;
+
   color:var(--muted);
 }
 
 .field input{
   width:100%;
+
   height:42px;
 
   border:1px solid var(--border);
+
   border-radius:8px;
 
   padding:0 12px;
@@ -245,6 +283,7 @@ FILTER BOX
   outline:none;
 
   background:var(--input);
+
   color:var(--text);
 
   font-size:14px;
@@ -254,14 +293,16 @@ FILTER BOX
   border-color:var(--green);
 }
 
-/* =========================
+
+/* =====================================================
 TABLE
-========================= */
+===================================================== */
 
 .table-box{
   background:var(--card);
 
   border:1px solid var(--border);
+
   border-radius:12px;
 
   overflow:hidden;
@@ -275,7 +316,9 @@ TABLE
   border-bottom:1px solid var(--border);
 
   display:flex;
+
   justify-content:space-between;
+
   align-items:center;
 }
 
@@ -285,17 +328,21 @@ TABLE
 
 .total-count{
   font-size:13px;
+
   color:var(--muted);
 }
 
 .table-wrapper{
   width:100%;
+
   overflow-x:auto;
 }
 
 table{
   width:100%;
+
   border-collapse:collapse;
+
   min-width:750px;
 }
 
@@ -329,17 +376,20 @@ tr:hover td{
   background:var(--hover);
 }
 
-/* =========================
+
+/* =====================================================
 ACTIONS
-========================= */
+===================================================== */
 
 .actions{
   display:flex;
+
   gap:7px;
 }
 
 .btn-edit{
   background:#e8f1ff;
+
   color:#2563eb;
 
   padding:7px 11px;
@@ -353,6 +403,7 @@ ACTIONS
 
 .btn-delete{
   background:#fee2e2;
+
   color:#dc2626;
 
   padding:7px 11px;
@@ -364,18 +415,21 @@ ACTIONS
   background:#fecaca;
 }
 
-/* =========================
+
+/* =====================================================
 DATE
-========================= */
+===================================================== */
 
 .date-cell{
   color:var(--muted);
+
   font-weight:500;
 }
 
-/* =========================
+
+/* =====================================================
 PAGINATION
-========================= */
+===================================================== */
 
 .pagination-box{
   display:flex;
@@ -391,22 +445,27 @@ PAGINATION
 
 .page-info{
   font-size:13px;
+
   color:var(--muted);
 }
 
 .pagination{
   display:flex;
+
   gap:5px;
+
   flex-wrap:wrap;
 }
 
 .page-btn{
   min-width:35px;
+
   height:35px;
 
   border:1px solid var(--border);
 
   background:var(--input);
+
   color:var(--text);
 
   border-radius:6px;
@@ -420,13 +479,16 @@ PAGINATION
 
 .page-btn.active{
   background:var(--green);
-  color:#fff;
+
+  color:#ffffff;
+
   border-color:var(--green);
 }
 
-/* =========================
+
+/* =====================================================
 MODAL
-========================= */
+===================================================== */
 
 .modal{
   position:fixed;
@@ -451,14 +513,9 @@ MODAL
 }
 
 .modal-box{
-
   width:100%;
 
   max-width:700px;
-
-  /*
-    FORM LONGER
-  */
 
   max-height:95vh;
 
@@ -505,6 +562,7 @@ MODAL
 
 .close-btn{
   width:36px;
+
   height:36px;
 
   border-radius:50%;
@@ -522,23 +580,18 @@ MODAL
   background:var(--hover);
 }
 
-/* =========================
+
+/* =====================================================
 FORM
-========================= */
+===================================================== */
 
 .form{
-
   padding:30px 25px;
-
-  /*
-    EXTRA SPACE
-  */
 
   min-height:520px;
 }
 
 .form-grid{
-
   display:grid;
 
   grid-template-columns:1fr 1fr;
@@ -547,7 +600,6 @@ FORM
 }
 
 .form-group{
-
   display:flex;
 
   flex-direction:column;
@@ -560,7 +612,6 @@ FORM
 }
 
 .form-group label{
-
   font-size:13px;
 
   font-weight:600;
@@ -570,7 +621,6 @@ FORM
 
 .form-group input,
 .form-group textarea{
-
   width:100%;
 
   border:1px solid var(--border);
@@ -591,12 +641,10 @@ FORM
 }
 
 .form-group input{
-
   height:48px;
 }
 
 .form-group textarea{
-
   min-height:160px;
 
   resize:vertical;
@@ -604,7 +652,6 @@ FORM
 
 .form-group input:focus,
 .form-group textarea:focus{
-
   border-color:var(--green);
 
   box-shadow:
@@ -613,7 +660,6 @@ FORM
 }
 
 .form-footer{
-
   display:flex;
 
   justify-content:flex-end;
@@ -625,9 +671,10 @@ FORM
   padding-bottom:10px;
 }
 
-/* =========================
+
+/* =====================================================
 LOADING
-========================= */
+===================================================== */
 
 .loading{
   text-align:center;
@@ -645,12 +692,12 @@ LOADING
   color:var(--muted);
 }
 
-/* =========================
+
+/* =====================================================
 TOAST
-========================= */
+===================================================== */
 
 .toast{
-
   position:fixed;
 
   right:25px;
@@ -663,7 +710,7 @@ TOAST
 
   border-radius:9px;
 
-  color:#fff;
+  color:#ffffff;
 
   background:#111827;
 
@@ -683,7 +730,6 @@ TOAST
 }
 
 .toast.show{
-
   transform:translateY(0);
 
   opacity:1;
@@ -697,9 +743,10 @@ TOAST
   background:#dc2626;
 }
 
-/* =========================
+
+/* =====================================================
 MOBILE
-========================= */
+===================================================== */
 
 @media(max-width:900px){
 
@@ -713,6 +760,7 @@ MOBILE
 
   .top-section{
     align-items:flex-start;
+
     flex-direction:column;
   }
 
@@ -722,10 +770,10 @@ MOBILE
 
 }
 
+
 @media(max-width:600px){
 
   .header{
-
     height:auto;
 
     min-height:70px;
@@ -742,7 +790,6 @@ MOBILE
   }
 
   .header-right{
-
     gap:6px;
 
     width:100%;
@@ -752,7 +799,6 @@ MOBILE
 
   .header-right .btn,
   .theme-btn{
-
     padding:9px 10px;
 
     font-size:12px;
@@ -793,7 +839,6 @@ MOBILE
   }
 
   .modal-box{
-
     max-height:96vh;
 
     min-height:auto;
@@ -802,14 +847,12 @@ MOBILE
   }
 
   .pagination-box{
-
     flex-direction:column;
 
     gap:12px;
   }
 
   .toast{
-
     left:15px;
 
     right:15px;
@@ -820,13 +863,16 @@ MOBILE
 }
 
 </style>
+
 </head>
+
 
 <body>
 
+
 <!-- =====================================================
 HEADER
-====================================================== -->
+===================================================== -->
 
 <header class="header">
 
@@ -836,7 +882,7 @@ HEADER
 
   <div class="header-right">
 
-    <!-- DARK / WHITE -->
+    <!-- DARK / WHITE BUTTON -->
 
     <button
       class="theme-btn"
@@ -846,6 +892,9 @@ HEADER
       🌙 Dark
     </button>
 
+
+    <!-- REFRESH -->
+
     <button
       class="btn btn-refresh"
       id="refreshBtn"
@@ -853,6 +902,9 @@ HEADER
     >
       🔄 Refresh
     </button>
+
+
+    <!-- NEW ENTRY -->
 
     <button
       class="btn btn-primary"
@@ -868,9 +920,10 @@ HEADER
 
 <!-- =====================================================
 MAIN
-====================================================== -->
+===================================================== -->
 
 <main class="container">
+
 
   <div class="top-section">
 
@@ -890,12 +943,15 @@ MAIN
 
 
   <!-- ===================================================
-  FILTERS
+  FILTER
   ==================================================== -->
 
   <section class="filter-box">
 
     <div class="filters">
+
+
+      <!-- SEARCH -->
 
       <div class="field search-field">
 
@@ -913,6 +969,8 @@ MAIN
       </div>
 
 
+      <!-- FROM -->
+
       <div class="field">
 
         <label>
@@ -927,6 +985,8 @@ MAIN
 
       </div>
 
+
+      <!-- TO -->
 
       <div class="field">
 
@@ -943,12 +1003,15 @@ MAIN
       </div>
 
 
+      <!-- CLEAR -->
+
       <button
         class="btn btn-refresh"
         onclick="clearFilters()"
       >
         Clear
       </button>
+
 
     </div>
 
@@ -960,6 +1023,7 @@ MAIN
   ==================================================== -->
 
   <section class="table-box">
+
 
     <div class="table-header">
 
@@ -987,15 +1051,25 @@ MAIN
 
           <tr>
 
-            <th>Name</th>
+            <th>
+              Name
+            </th>
 
-            <th>Ip</th>
+            <th>
+              Ip
+            </th>
 
-            <th>Work</th>
+            <th>
+              Work
+            </th>
 
-            <th>Date</th>
+            <th>
+              Date
+            </th>
 
-            <th>Action</th>
+            <th>
+              Action
+            </th>
 
           </tr>
 
@@ -1023,6 +1097,8 @@ MAIN
     </div>
 
 
+    <!-- PAGINATION -->
+
     <div class="pagination-box">
 
       <div
@@ -1040,27 +1116,32 @@ MAIN
 
     </div>
 
+
   </section>
+
 
 </main>
 
 
 <!-- =====================================================
 ENTRY MODAL
-====================================================== -->
+===================================================== -->
 
 <div
   class="modal"
   id="entryModal"
 >
 
+
   <div class="modal-box">
+
 
     <div class="modal-header">
 
       <h2 id="modalTitle">
         New Entry
       </h2>
+
 
       <button
         class="close-btn"
@@ -1077,6 +1158,7 @@ ENTRY MODAL
       id="entryForm"
       onsubmit="submitEntry(event)"
     >
+
 
       <div class="form-grid">
 
@@ -1161,6 +1243,7 @@ ENTRY MODAL
 
       <div class="form-footer">
 
+
         <button
           type="button"
           class="btn btn-cancel"
@@ -1178,9 +1261,12 @@ ENTRY MODAL
           Save Entry
         </button>
 
+
       </div>
 
+
     </form>
+
 
   </div>
 
@@ -1189,7 +1275,7 @@ ENTRY MODAL
 
 <!-- =====================================================
 TOAST
-====================================================== -->
+===================================================== -->
 
 <div
   class="toast"
@@ -1199,9 +1285,10 @@ TOAST
 
 <script>
 
+
 /* =====================================================
 GOOGLE APPS SCRIPT URL
-====================================================== */
+===================================================== */
 
 const API_URL =
 "https://script.google.com/macros/s/AKfycbx6fo2Nogf3ETCtS_B-o0HCFqEs3vYkJ9IT9uu_-3l1w8fNJw77mZipeyFm-zZcjUw-5Q/exec";
@@ -1209,14 +1296,14 @@ const API_URL =
 
 /* =====================================================
 SETTINGS
-====================================================== */
+===================================================== */
 
 const ROWS_PER_PAGE = 10;
 
 
 /* =====================================================
 GLOBAL DATA
-====================================================== */
+===================================================== */
 
 let allData = [];
 
@@ -1228,8 +1315,122 @@ let editingRow = null;
 
 
 /* =====================================================
+5 MINUTE AUTO LOGOUT
+===================================================== */
+
+const INACTIVITY_LIMIT = 5 * 60 * 1000;
+
+let inactivityTimer = null;
+
+
+/*
+  Reset inactivity timer
+*/
+
+function resetInactivityTimer(){
+
+  clearTimeout(inactivityTimer);
+
+  inactivityTimer = setTimeout(
+    autoLogout,
+    INACTIVITY_LIMIT
+  );
+
+}
+
+
+/*
+  Auto logout
+*/
+
+function autoLogout(){
+
+  clearTimeout(inactivityTimer);
+
+
+  /*
+    Remove common login/session values
+  */
+
+  localStorage.removeItem("username");
+
+  localStorage.removeItem("user");
+
+  localStorage.removeItem("userData");
+
+  localStorage.removeItem("loginData");
+
+  localStorage.removeItem("token");
+
+  localStorage.removeItem("authToken");
+
+  localStorage.removeItem("session");
+
+  localStorage.removeItem("loggedIn");
+
+
+  /*
+    Clear session storage
+  */
+
+  sessionStorage.clear();
+
+
+  /*
+    Go to login page
+  */
+
+  window.location.replace("index.html");
+
+}
+
+
+/*
+  User activity events
+*/
+
+const activityEvents = [
+
+  "mousemove",
+
+  "mousedown",
+
+  "keydown",
+
+  "scroll",
+
+  "touchstart",
+
+  "click",
+
+  "wheel"
+
+];
+
+
+activityEvents.forEach(
+  function(eventName){
+
+    document.addEventListener(
+      eventName,
+      resetInactivityTimer,
+      true
+    );
+
+  }
+);
+
+
+/*
+  Start timer immediately
+*/
+
+resetInactivityTimer();
+
+
+/* =====================================================
 THEME
-====================================================== */
+===================================================== */
 
 document.addEventListener(
   "DOMContentLoaded",
@@ -1246,13 +1447,19 @@ document.addEventListener(
 function loadTheme(){
 
   const savedTheme =
-    localStorage.getItem("dashboardTheme");
+    localStorage.getItem(
+      "dashboardTheme"
+    );
+
 
   if(savedTheme === "dark"){
 
-    document.body.classList.add("dark");
+    document.body.classList.add(
+      "dark"
+    );
 
   }
+
 
   updateThemeButton();
 
@@ -1261,15 +1468,24 @@ function loadTheme(){
 
 function toggleTheme(){
 
-  document.body.classList.toggle("dark");
+  document.body.classList.toggle(
+    "dark"
+  );
+
 
   const isDark =
-    document.body.classList.contains("dark");
+    document.body.classList.contains(
+      "dark"
+    );
+
 
   localStorage.setItem(
     "dashboardTheme",
-    isDark ? "dark" : "light"
+    isDark
+      ? "dark"
+      : "light"
   );
+
 
   updateThemeButton();
 
@@ -1279,20 +1495,33 @@ function toggleTheme(){
 function updateThemeButton(){
 
   const btn =
-    document.getElementById("themeBtn");
+    document.getElementById(
+      "themeBtn"
+    );
 
-  if(!btn) return;
+
+  if(!btn){
+
+    return;
+
+  }
+
 
   const isDark =
-    document.body.classList.contains("dark");
+    document.body.classList.contains(
+      "dark"
+    );
+
 
   if(isDark){
 
-    btn.textContent = "☀️ White";
+    btn.textContent =
+      "☀️ White";
 
   }else{
 
-    btn.textContent = "🌙 Dark";
+    btn.textContent =
+      "🌙 Dark";
 
   }
 
@@ -1301,21 +1530,28 @@ function updateThemeButton(){
 
 /* =====================================================
 LOAD DATA
-====================================================== */
+===================================================== */
 
 async function loadData(){
 
   const refreshBtn =
-    document.getElementById("refreshBtn");
+    document.getElementById(
+      "refreshBtn"
+    );
+
 
   refreshBtn.disabled = true;
+
 
   refreshBtn.textContent =
     "⏳ Loading...";
 
+
   showLoading();
 
+
   try{
+
 
     const response =
       await fetch(
@@ -1324,9 +1560,11 @@ async function loadData(){
         Date.now(),
         {
           method:"GET",
+
           cache:"no-store"
         }
       );
+
 
     if(!response.ok){
 
@@ -1337,15 +1575,20 @@ async function loadData(){
 
     }
 
+
     const result =
       await response.json();
+
 
     console.log(
       "API Response:",
       result
     );
 
-    if(result.success === false){
+
+    if(
+      result.success === false
+    ){
 
       throw new Error(
         result.message ||
@@ -1354,7 +1597,12 @@ async function loadData(){
 
     }
 
-    if(!Array.isArray(result.data)){
+
+    if(
+      !Array.isArray(
+        result.data
+      )
+    ){
 
       throw new Error(
         "Invalid data received from Google Sheet."
@@ -1362,32 +1610,43 @@ async function loadData(){
 
     }
 
-    allData = result.data;
 
-    filteredData = [...allData];
+    allData =
+      result.data;
+
+
+    filteredData =
+      [...allData];
+
 
     currentPage = 1;
+
 
     renderTable();
 
     updateTotal();
+
 
     showToast(
       "Data loaded successfully.",
       "success"
     );
 
+
   }catch(error){
+
 
     console.error(
       "Load Error:",
       error
     );
 
+
     showError(
       error.message ||
       "Failed to load data."
     );
+
 
     showToast(
       error.message ||
@@ -1395,9 +1654,13 @@ async function loadData(){
       "error"
     );
 
+
   }finally{
 
-    refreshBtn.disabled = false;
+
+    refreshBtn.disabled =
+      false;
+
 
     refreshBtn.textContent =
       "🔄 Refresh";
@@ -1409,14 +1672,19 @@ async function loadData(){
 
 /* =====================================================
 RENDER TABLE
-====================================================== */
+===================================================== */
 
 function renderTable(){
 
   const tbody =
-    document.getElementById("tableBody");
+    document.getElementById(
+      "tableBody"
+    );
 
-  if(filteredData.length === 0){
+
+  if(
+    filteredData.length === 0
+  ){
 
     tbody.innerHTML = `
 
@@ -1425,7 +1693,9 @@ function renderTable(){
         <td colspan="5">
 
           <div class="empty">
+
             No data found.
+
           </div>
 
         </td>
@@ -1434,19 +1704,25 @@ function renderTable(){
 
     `;
 
+
     renderPagination();
 
     return;
 
   }
 
+
   const start =
-    (currentPage - 1) *
+    (
+      currentPage - 1
+    ) *
     ROWS_PER_PAGE;
+
 
   const end =
     start +
     ROWS_PER_PAGE;
+
 
   const pageData =
     filteredData.slice(
@@ -1454,29 +1730,40 @@ function renderTable(){
       end
     );
 
+
   let html = "";
+
 
   pageData.forEach(
     function(row){
+
 
       html += `
 
         <tr>
 
           <td>
-            ${escapeHTML(row.Name || "")}
+            ${escapeHTML(
+              row.Name || ""
+            )}
           </td>
 
           <td>
-            ${escapeHTML(row.Ip || "")}
+            ${escapeHTML(
+              row.Ip || ""
+            )}
           </td>
 
           <td>
-            ${escapeHTML(row.Work || "")}
+            ${escapeHTML(
+              row.Work || ""
+            )}
           </td>
 
           <td class="date-cell">
-            ${escapeHTML(row.Date || "")}
+            ${escapeHTML(
+              row.Date || ""
+            )}
           </td>
 
           <td>
@@ -1510,7 +1797,10 @@ function renderTable(){
     }
   );
 
-  tbody.innerHTML = html;
+
+  tbody.innerHTML =
+    html;
+
 
   renderPagination();
 
@@ -1519,43 +1809,71 @@ function renderTable(){
 
 /* =====================================================
 SEARCH + DATE FILTER
-====================================================== */
+===================================================== */
 
 function applyFilters(){
 
   const search =
     document
-      .getElementById("searchInput")
+      .getElementById(
+        "searchInput"
+      )
       .value
       .toLowerCase()
       .trim();
 
+
   const fromDate =
-    document.getElementById("fromDate").value;
+    document.getElementById(
+      "fromDate"
+    ).value;
+
 
   const toDate =
-    document.getElementById("toDate").value;
+    document.getElementById(
+      "toDate"
+    ).value;
+
 
   filteredData =
     allData.filter(
       function(row){
 
+
         if(search){
 
-          const searchText =
 
-            String(row.Name || "") +
+          const searchText = (
+
+            String(
+              row.Name || ""
+            ) +
+
             " " +
-            String(row.Ip || "") +
+
+            String(
+              row.Ip || ""
+            ) +
+
             " " +
-            String(row.Work || "") +
+
+            String(
+              row.Work || ""
+            ) +
+
             " " +
-            String(row.Date || "");
+
+            String(
+              row.Date || ""
+            )
+
+          ).toLowerCase();
+
 
           if(
-            !searchText
-              .toLowerCase()
-              .includes(search)
+            !searchText.includes(
+              search
+            )
           ){
 
             return false;
@@ -1564,16 +1882,25 @@ function applyFilters(){
 
         }
 
-        if(fromDate || toDate){
+
+        if(
+          fromDate ||
+          toDate
+        ){
+
 
           const rowDate =
-            convertToFilterDate(row.Date);
+            convertToFilterDate(
+              row.Date
+            );
+
 
           if(!rowDate){
 
             return false;
 
           }
+
 
           if(
             fromDate &&
@@ -1583,6 +1910,7 @@ function applyFilters(){
             return false;
 
           }
+
 
           if(
             toDate &&
@@ -1595,12 +1923,15 @@ function applyFilters(){
 
         }
 
+
         return true;
 
       }
     );
 
+
   currentPage = 1;
+
 
   renderTable();
 
@@ -1611,25 +1942,37 @@ function applyFilters(){
 
 /* =====================================================
 CLEAR FILTER
-====================================================== */
+===================================================== */
 
 function clearFilters(){
 
-  document.getElementById(
-    "searchInput"
-  ).value = "";
+  document
+    .getElementById(
+      "searchInput"
+    )
+    .value = "";
 
-  document.getElementById(
-    "fromDate"
-  ).value = "";
 
-  document.getElementById(
-    "toDate"
-  ).value = "";
+  document
+    .getElementById(
+      "fromDate"
+    )
+    .value = "";
 
-  filteredData = [...allData];
+
+  document
+    .getElementById(
+      "toDate"
+    )
+    .value = "";
+
+
+  filteredData =
+    [...allData];
+
 
   currentPage = 1;
+
 
   renderTable();
 
@@ -1640,9 +1983,11 @@ function clearFilters(){
 
 /* =====================================================
 DATE CONVERSION
-====================================================== */
+===================================================== */
 
-function convertToFilterDate(value){
+function convertToFilterDate(
+  value
+){
 
   if(!value){
 
@@ -1650,26 +1995,44 @@ function convertToFilterDate(value){
 
   }
 
+
   const text =
     String(value).trim();
+
 
   const parsed =
     new Date(text);
 
-  if(!isNaN(parsed.getTime())){
+
+  if(
+    !isNaN(
+      parsed.getTime()
+    )
+  ){
 
     const year =
       parsed.getFullYear();
 
+
     const month =
       String(
-        parsed.getMonth()+1
-      ).padStart(2,"0");
+        parsed.getMonth() + 1
+      )
+      .padStart(
+        2,
+        "0"
+      );
+
 
     const day =
       String(
         parsed.getDate()
-      ).padStart(2,"0");
+      )
+      .padStart(
+        2,
+        "0"
+      );
+
 
     return (
       year +
@@ -1681,10 +2044,12 @@ function convertToFilterDate(value){
 
   }
 
+
   const match =
     text.match(
       /^(\d{2})-(\d{2})-(\d{4})$/
     );
+
 
   if(match){
 
@@ -1698,6 +2063,7 @@ function convertToFilterDate(value){
 
   }
 
+
   return "";
 
 }
@@ -1705,15 +2071,21 @@ function convertToFilterDate(value){
 
 /* =====================================================
 PAGINATION
-====================================================== */
+===================================================== */
 
 function renderPagination(){
 
   const pagination =
-    document.getElementById("pagination");
+    document.getElementById(
+      "pagination"
+    );
+
 
   const pageInfo =
-    document.getElementById("pageInfo");
+    document.getElementById(
+      "pageInfo"
+    );
+
 
   const totalPages =
     Math.ceil(
@@ -1721,32 +2093,45 @@ function renderPagination(){
       ROWS_PER_PAGE
     );
 
-  if(totalPages <= 1){
 
-    pagination.innerHTML = "";
+  if(
+    totalPages <= 1
+  ){
+
+    pagination.innerHTML =
+      "";
+
 
     pageInfo.textContent =
       filteredData.length
         ? "Page 1"
         : "Page 0";
 
+
     return;
 
   }
 
+
   let html = "";
+
 
   html += `
 
     <button
       class="page-btn"
       onclick="changePage(${currentPage - 1})"
-      ${currentPage === 1 ? "disabled" : ""}
+      ${
+        currentPage === 1
+          ? "disabled"
+          : ""
+      }
     >
       ‹
     </button>
 
   `;
+
 
   let startPage =
     Math.max(
@@ -1754,11 +2139,13 @@ function renderPagination(){
       currentPage - 2
     );
 
+
   let endPage =
     Math.min(
       totalPages,
       currentPage + 2
     );
+
 
   for(
     let i = startPage;
@@ -1783,6 +2170,7 @@ function renderPagination(){
 
   }
 
+
   html += `
 
     <button
@@ -1799,7 +2187,10 @@ function renderPagination(){
 
   `;
 
-  pagination.innerHTML = html;
+
+  pagination.innerHTML =
+    html;
+
 
   pageInfo.textContent =
     `Page ${currentPage} of ${totalPages}`;
@@ -1807,13 +2198,16 @@ function renderPagination(){
 }
 
 
-function changePage(page){
+function changePage(
+  page
+){
 
   const totalPages =
     Math.ceil(
       filteredData.length /
       ROWS_PER_PAGE
     );
+
 
   if(
     page < 1 ||
@@ -1824,7 +2218,10 @@ function changePage(page){
 
   }
 
-  currentPage = page;
+
+  currentPage =
+    page;
+
 
   renderTable();
 
@@ -1833,12 +2230,14 @@ function changePage(page){
 
 /* =====================================================
 UPDATE TOTAL
-====================================================== */
+===================================================== */
 
 function updateTotal(){
 
   document
-    .getElementById("totalCount")
+    .getElementById(
+      "totalCount"
+    )
     .textContent =
     filteredData.length;
 
@@ -1847,33 +2246,49 @@ function updateTotal(){
 
 /* =====================================================
 OPEN NEW ENTRY
-====================================================== */
+===================================================== */
 
 function openEntryModal(){
 
-  editingRow = null;
+  editingRow =
+    null;
+
 
   document
-    .getElementById("modalTitle")
+    .getElementById(
+      "modalTitle"
+    )
     .textContent =
     "New Entry";
 
+
   document
-    .getElementById("submitBtn")
+    .getElementById(
+      "submitBtn"
+    )
     .textContent =
     "Save Entry";
 
-  document
-    .getElementById("entryForm")
-    .reset();
 
   document
-    .getElementById("dateInput")
+    .getElementById(
+      "entryForm"
+    )
+    .reset();
+
+
+  document
+    .getElementById(
+      "dateInput"
+    )
     .value =
     getTodayInputDate();
 
+
   document
-    .getElementById("entryModal")
+    .getElementById(
+      "entryModal"
+    )
     .classList
     .add("show");
 
@@ -1882,35 +2297,45 @@ function openEntryModal(){
 
 /* =====================================================
 CLOSE MODAL
-====================================================== */
+===================================================== */
 
 function closeEntryModal(){
 
   document
-    .getElementById("entryModal")
+    .getElementById(
+      "entryModal"
+    )
     .classList
     .remove("show");
 
-  editingRow = null;
+
+  editingRow =
+    null;
 
 }
 
 
 /* =====================================================
 EDIT
-====================================================== */
+===================================================== */
 
-function editEntryByRow(rowNumber){
+function editEntryByRow(
+  rowNumber
+){
 
   const row =
     allData.find(
       function(item){
 
-        return Number(item._row) ===
-          Number(rowNumber);
+        return Number(
+          item._row
+        ) === Number(
+          rowNumber
+        );
 
       }
     );
+
 
   if(!row){
 
@@ -1923,40 +2348,65 @@ function editEntryByRow(rowNumber){
 
   }
 
-  editingRow = row;
+
+  editingRow =
+    row;
+
 
   document
-    .getElementById("modalTitle")
+    .getElementById(
+      "modalTitle"
+    )
     .textContent =
     "Edit Entry";
 
+
   document
-    .getElementById("submitBtn")
+    .getElementById(
+      "submitBtn"
+    )
     .textContent =
     "Update Entry";
 
+
   document
-    .getElementById("nameInput")
+    .getElementById(
+      "nameInput"
+    )
     .value =
     row.Name || "";
 
+
   document
-    .getElementById("ipInput")
+    .getElementById(
+      "ipInput"
+    )
     .value =
     row.Ip || "";
 
+
   document
-    .getElementById("workInput")
+    .getElementById(
+      "workInput"
+    )
     .value =
     row.Work || "";
 
-  document
-    .getElementById("dateInput")
-    .value =
-    convertToFilterDate(row.Date);
 
   document
-    .getElementById("entryModal")
+    .getElementById(
+      "dateInput"
+    )
+    .value =
+    convertToFilterDate(
+      row.Date
+    );
+
+
+  document
+    .getElementById(
+      "entryModal"
+    )
     .classList
     .add("show");
 
@@ -1965,37 +2415,55 @@ function editEntryByRow(rowNumber){
 
 /* =====================================================
 SUBMIT ENTRY
-====================================================== */
+===================================================== */
 
-async function submitEntry(event){
+async function submitEntry(
+  event
+){
 
   event.preventDefault();
 
+
   const submitBtn =
-    document.getElementById("submitBtn");
+    document.getElementById(
+      "submitBtn"
+    );
+
 
   const name =
     document
-      .getElementById("nameInput")
+      .getElementById(
+        "nameInput"
+      )
       .value
       .trim();
+
 
   const ip =
     document
-      .getElementById("ipInput")
+      .getElementById(
+        "ipInput"
+      )
       .value
       .trim();
+
 
   const work =
     document
-      .getElementById("workInput")
+      .getElementById(
+        "workInput"
+      )
       .value
       .trim();
 
+
   const date =
     document
-      .getElementById("dateInput")
+      .getElementById(
+        "dateInput"
+      )
       .value;
+
 
   if(!name){
 
@@ -2008,6 +2476,7 @@ async function submitEntry(event){
 
   }
 
+
   if(!ip){
 
     showToast(
@@ -2018,6 +2487,7 @@ async function submitEntry(event){
     return;
 
   }
+
 
   if(!work){
 
@@ -2030,14 +2500,19 @@ async function submitEntry(event){
 
   }
 
-  submitBtn.disabled = true;
+
+  submitBtn.disabled =
+    true;
+
 
   submitBtn.textContent =
     editingRow
       ? "Updating..."
       : "Saving...";
 
+
   try{
+
 
     const payload = {
 
@@ -2045,6 +2520,7 @@ async function submitEntry(event){
         editingRow
           ? "update"
           : "create",
+
 
       data:{
 
@@ -2058,10 +2534,12 @@ async function submitEntry(event){
 
       },
 
+
       oldData:
         editingRow || null
 
     };
+
 
     const response =
       await fetch(
@@ -2071,15 +2549,20 @@ async function submitEntry(event){
           method:"POST",
 
           headers:{
+
             "Content-Type":
               "text/plain;charset=utf-8"
+
           },
 
           body:
-            JSON.stringify(payload)
+            JSON.stringify(
+              payload
+            )
 
         }
       );
+
 
     if(!response.ok){
 
@@ -2090,15 +2573,20 @@ async function submitEntry(event){
 
     }
 
+
     const result =
       await response.json();
+
 
     console.log(
       "Save Response:",
       result
     );
 
-    if(result.success === false){
+
+    if(
+      result.success === false
+    ){
 
       throw new Error(
         result.message ||
@@ -2107,10 +2595,15 @@ async function submitEntry(event){
 
     }
 
+
     const wasEditing =
-      Boolean(editingRow);
+      Boolean(
+        editingRow
+      );
+
 
     closeEntryModal();
+
 
     showToast(
       wasEditing
@@ -2119,14 +2612,18 @@ async function submitEntry(event){
       "success"
     );
 
+
     await loadData();
 
+
   }catch(error){
+
 
     console.error(
       "Save Error:",
       error
     );
+
 
     showToast(
       error.message ||
@@ -2134,9 +2631,13 @@ async function submitEntry(event){
       "error"
     );
 
+
   }finally{
 
-    submitBtn.disabled = false;
+
+    submitBtn.disabled =
+      false;
+
 
     submitBtn.textContent =
       editingRow
@@ -2150,19 +2651,25 @@ async function submitEntry(event){
 
 /* =====================================================
 DELETE
-====================================================== */
+===================================================== */
 
-async function deleteEntryByRow(rowNumber){
+async function deleteEntryByRow(
+  rowNumber
+){
 
   const row =
     allData.find(
       function(item){
 
-        return Number(item._row) ===
-          Number(rowNumber);
+        return Number(
+          item._row
+        ) === Number(
+          rowNumber
+        );
 
       }
     );
+
 
   if(!row){
 
@@ -2175,14 +2682,18 @@ async function deleteEntryByRow(rowNumber){
 
   }
 
+
   const confirmed =
     confirm(
       "Are you sure you want to delete this entry?\n\n" +
+
       "Name: " +
       (row.Name || "") +
+
       "\nIP: " +
       (row.Ip || "")
     );
+
 
   if(!confirmed){
 
@@ -2190,7 +2701,9 @@ async function deleteEntryByRow(rowNumber){
 
   }
 
+
   try{
+
 
     const payload = {
 
@@ -2200,6 +2713,7 @@ async function deleteEntryByRow(rowNumber){
 
     };
 
+
     const response =
       await fetch(
         API_URL,
@@ -2208,15 +2722,20 @@ async function deleteEntryByRow(rowNumber){
           method:"POST",
 
           headers:{
+
             "Content-Type":
               "text/plain;charset=utf-8"
+
           },
 
           body:
-            JSON.stringify(payload)
+            JSON.stringify(
+              payload
+            )
 
         }
       );
+
 
     if(!response.ok){
 
@@ -2227,15 +2746,20 @@ async function deleteEntryByRow(rowNumber){
 
     }
 
+
     const result =
       await response.json();
+
 
     console.log(
       "Delete Response:",
       result
     );
 
-    if(result.success === false){
+
+    if(
+      result.success === false
+    ){
 
       throw new Error(
         result.message ||
@@ -2244,19 +2768,24 @@ async function deleteEntryByRow(rowNumber){
 
     }
 
+
     showToast(
       "Entry deleted successfully.",
       "success"
     );
 
+
     await loadData();
 
+
   }catch(error){
+
 
     console.error(
       "Delete Error:",
       error
     );
+
 
     showToast(
       error.message ||
@@ -2271,25 +2800,37 @@ async function deleteEntryByRow(rowNumber){
 
 /* =====================================================
 TODAY
-====================================================== */
+===================================================== */
 
 function getTodayInputDate(){
 
   const now =
     new Date();
 
+
   const year =
     now.getFullYear();
 
+
   const month =
     String(
-      now.getMonth()+1
-    ).padStart(2,"0");
+      now.getMonth() + 1
+    )
+    .padStart(
+      2,
+      "0"
+    );
+
 
   const day =
     String(
       now.getDate()
-    ).padStart(2,"0");
+    )
+    .padStart(
+      2,
+      "0"
+    );
+
 
   return (
     year +
@@ -2304,12 +2845,14 @@ function getTodayInputDate(){
 
 /* =====================================================
 LOADING
-====================================================== */
+===================================================== */
 
 function showLoading(){
 
   document
-    .getElementById("tableBody")
+    .getElementById(
+      "tableBody"
+    )
     .innerHTML = `
 
       <tr>
@@ -2333,12 +2876,16 @@ function showLoading(){
 
 /* =====================================================
 ERROR
-====================================================== */
+===================================================== */
 
-function showError(message){
+function showError(
+  message
+){
 
   document
-    .getElementById("tableBody")
+    .getElementById(
+      "tableBody"
+    )
     .innerHTML = `
 
       <tr>
@@ -2348,7 +2895,9 @@ function showError(message){
           <div class="empty">
 
             ❌
-            ${escapeHTML(message)}
+            ${escapeHTML(
+              message
+            )}
 
           </div>
 
@@ -2363,7 +2912,7 @@ function showError(message){
 
 /* =====================================================
 TOAST
-====================================================== */
+===================================================== */
 
 function showToast(
   message,
@@ -2371,14 +2920,21 @@ function showToast(
 ){
 
   const toast =
-    document.getElementById("toast");
+    document.getElementById(
+      "toast"
+    );
+
 
   toast.textContent =
     message;
 
+
   toast.className =
     "toast show " +
-    (type || "");
+    (
+      type || ""
+    );
+
 
   setTimeout(
     function(){
@@ -2395,9 +2951,11 @@ function showToast(
 
 /* =====================================================
 HTML SECURITY
-====================================================== */
+===================================================== */
 
-function escapeHTML(value){
+function escapeHTML(
+  value
+){
 
   return String(
     value ?? ""
@@ -2433,15 +2991,19 @@ function escapeHTML(value){
 
 /* =====================================================
 CLOSE MODAL OUTSIDE CLICK
-====================================================== */
+===================================================== */
 
 document
-  .getElementById("entryModal")
+  .getElementById(
+    "entryModal"
+  )
   .addEventListener(
     "click",
     function(event){
 
-      if(event.target === this){
+      if(
+        event.target === this
+      ){
 
         closeEntryModal();
 
@@ -2453,13 +3015,15 @@ document
 
 /* =====================================================
 ESCAPE KEY
-====================================================== */
+===================================================== */
 
 document.addEventListener(
   "keydown",
   function(event){
 
-    if(event.key === "Escape"){
+    if(
+      event.key === "Escape"
+    ){
 
       closeEntryModal();
 
