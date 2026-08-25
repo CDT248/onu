@@ -22,37 +22,125 @@
 }
 
 :root{
-  --green:#087f5b;
-  --green-dark:#066b4d;
-  --bg:#f3f7f5;
-  --card:#ffffff;
-  --text:#1f2937;
-  --muted:#6b7280;
-  --border:#e5e7eb;
-  --danger:#dc2626;
-  --shadow:rgba(0,0,0,.15);
+  --black:#050505;
+  --black2:#0b0b0b;
+  --card:#111111;
+  --card2:#151515;
+  --border:#292929;
+  --text:#ffffff;
+  --muted:#999999;
+  --green:#00c853;
+  --green2:#00a844;
+  --red:#ff3b30;
+  --shadow:rgba(0,0,0,.65);
+}
+
+html,
+body{
+  width:100%;
+  min-height:100%;
 }
 
 body{
 
   min-height:100vh;
 
+  background:
+    radial-gradient(
+      circle at top left,
+      rgba(0,200,83,.10),
+      transparent 30%
+    ),
+    radial-gradient(
+      circle at bottom right,
+      rgba(0,200,83,.07),
+      transparent 30%
+    ),
+    #050505;
+
+  color:var(--text);
+
   display:flex;
-
   justify-content:center;
-
   align-items:center;
 
   padding:20px;
 
+}
+
+
+/* =====================================================
+LOGIN WRAPPER
+===================================================== */
+
+.login-wrapper{
+
+  width:100%;
+  max-width:430px;
+
+}
+
+
+/* =====================================================
+BRAND
+===================================================== */
+
+.brand{
+
+  text-align:center;
+
+  margin-bottom:25px;
+
+}
+
+.brand-icon{
+
+  width:65px;
+  height:65px;
+
+  margin:0 auto 15px;
+
+  border-radius:18px;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
   background:
     linear-gradient(
-      135deg,
-      #f0fdf4,
-      #f8fafc
+      145deg,
+      #00c853,
+      #008f3b
     );
 
-  color:var(--text);
+  color:#fff;
+
+  font-size:30px;
+  font-weight:800;
+
+  box-shadow:
+    0 12px 35px
+    rgba(0,200,83,.22);
+
+}
+
+.brand h1{
+
+  font-size:26px;
+
+  font-weight:700;
+
+  letter-spacing:.3px;
+
+}
+
+.brand p{
+
+  margin-top:7px;
+
+  color:var(--muted);
+
+  font-size:13px;
 
 }
 
@@ -61,112 +149,55 @@ body{
 LOGIN CARD
 ===================================================== */
 
-.login-wrapper{
-
-  width:100%;
-
-  max-width:430px;
-
-}
-
-
 .login-card{
 
   width:100%;
 
-  background:var(--card);
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255,255,255,.035),
+      rgba(255,255,255,.015)
+    );
 
   border:1px solid var(--border);
 
-  border-radius:18px;
+  border-radius:20px;
 
-  padding:35px;
-
-  box-shadow:
-    0 20px 60px var(--shadow);
-
-}
-
-
-.logo{
-
-  width:70px;
-
-  height:70px;
-
-  margin:0 auto 18px;
-
-  border-radius:18px;
-
-  display:flex;
-
-  align-items:center;
-
-  justify-content:center;
-
-  background:var(--green);
-
-  color:#fff;
-
-  font-size:30px;
-
-  font-weight:700;
+  padding:30px;
 
   box-shadow:
-    0 10px 25px rgba(8,127,91,.25);
+    0 25px 70px
+    var(--shadow);
 
-}
-
-
-.title{
-
-  text-align:center;
-
-  font-size:27px;
-
-  font-weight:700;
-
-  margin-bottom:7px;
-
-}
-
-
-.subtitle{
-
-  text-align:center;
-
-  color:var(--muted);
-
-  font-size:14px;
-
-  margin-bottom:30px;
+  backdrop-filter:blur(15px);
 
 }
 
 
 /* =====================================================
-FORM
+FIELD
 ===================================================== */
 
-.form-group{
+.field{
 
-  margin-bottom:18px;
+  margin-bottom:19px;
 
 }
 
-
-.form-group label{
+.field label{
 
   display:block;
+
+  margin-bottom:8px;
 
   font-size:13px;
 
   font-weight:600;
 
-  margin-bottom:8px;
+  color:#d6d6d6;
 
 }
-
 
 .input-box{
 
@@ -174,6 +205,22 @@ FORM
 
 }
 
+.input-box .icon{
+
+  position:absolute;
+
+  left:14px;
+  top:50%;
+
+  transform:translateY(-50%);
+
+  color:#777;
+
+  font-size:16px;
+
+  pointer-events:none;
+
+}
 
 .input-box input{
 
@@ -181,17 +228,19 @@ FORM
 
   height:50px;
 
-  padding:0 14px;
+  padding:
+    0 45px
+    0 43px;
 
   border:1px solid var(--border);
 
-  border-radius:9px;
+  border-radius:10px;
 
   outline:none;
 
-  background:#fff;
+  background:#0b0b0b;
 
-  color:var(--text);
+  color:#fff;
 
   font-size:14px;
 
@@ -199,52 +248,129 @@ FORM
 
 }
 
+.input-box input::placeholder{
+
+  color:#626262;
+
+}
 
 .input-box input:focus{
 
   border-color:var(--green);
 
   box-shadow:
-    0 0 0 3px rgba(8,127,91,.08);
+    0 0 0 3px
+    rgba(0,200,83,.08);
 
 }
 
-
-.password-input{
-
-  padding-right:50px !important;
-
-}
-
-
-.show-password{
+.password-toggle{
 
   position:absolute;
 
-  right:10px;
-
+  right:8px;
   top:50%;
 
   transform:translateY(-50%);
 
-  width:35px;
+  width:36px;
+  height:36px;
 
-  height:35px;
+  border:none;
 
-  border-radius:7px;
+  border-radius:8px;
 
-  background:#f3f4f6;
+  background:transparent;
 
-  color:#374151;
+  color:#888;
+
+  cursor:pointer;
+
+  font-size:15px;
+
+}
+
+.password-toggle:hover{
+
+  color:#fff;
+
+  background:#181818;
+
+}
+
+
+/* =====================================================
+DEVICE
+===================================================== */
+
+.device-box{
+
+  width:100%;
+
+  min-height:50px;
+
+  display:flex;
+
+  align-items:center;
+
+  gap:12px;
+
+  padding:10px 13px;
+
+  border:1px solid var(--border);
+
+  border-radius:10px;
+
+  background:#0b0b0b;
+
+}
+
+.device-icon{
+
+  width:32px;
+  height:32px;
+
+  border-radius:8px;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  background:#191919;
 
   font-size:16px;
 
 }
 
+.device-info{
 
-.show-password:hover{
+  min-width:0;
 
-  background:#e5e7eb;
+}
+
+.device-name{
+
+  color:#fff;
+
+  font-size:13px;
+
+  font-weight:600;
+
+  overflow:hidden;
+
+  text-overflow:ellipsis;
+
+  white-space:nowrap;
+
+}
+
+.device-browser{
+
+  margin-top:3px;
+
+  color:#777;
+
+  font-size:11px;
 
 }
 
@@ -259,17 +385,22 @@ LOGIN BUTTON
 
   height:50px;
 
-  margin-top:8px;
+  margin-top:5px;
 
   border:none;
 
-  border-radius:9px;
+  border-radius:10px;
 
-  background:var(--green);
+  background:
+    linear-gradient(
+      135deg,
+      var(--green),
+      var(--green2)
+    );
 
   color:#fff;
 
-  font-size:15px;
+  font-size:14px;
 
   font-weight:700;
 
@@ -277,21 +408,35 @@ LOGIN BUTTON
 
   transition:.2s;
 
-}
+  box-shadow:
+    0 8px 25px
+    rgba(0,200,83,.15);
 
+}
 
 .login-btn:hover{
 
-  background:var(--green-dark);
+  transform:translateY(-1px);
+
+  box-shadow:
+    0 12px 30px
+    rgba(0,200,83,.23);
 
 }
 
+.login-btn:active{
+
+  transform:translateY(0);
+
+}
 
 .login-btn:disabled{
 
+  opacity:.6;
+
   cursor:not-allowed;
 
-  opacity:.6;
+  transform:none;
 
 }
 
@@ -304,18 +449,17 @@ MESSAGE
 
   display:none;
 
-  margin-top:17px;
+  margin-bottom:18px;
 
-  padding:12px 14px;
+  padding:12px 13px;
 
-  border-radius:8px;
+  border-radius:9px;
 
   font-size:13px;
 
-  line-height:1.5;
+  line-height:1.4;
 
 }
-
 
 .message.show{
 
@@ -323,38 +467,44 @@ MESSAGE
 
 }
 
-
 .message.error{
 
-  background:#fee2e2;
+  background:
+    rgba(255,59,48,.10);
 
-  color:#b91c1c;
+  border:1px solid
+    rgba(255,59,48,.25);
 
-  border:1px solid #fecaca;
+  color:#ff817a;
 
 }
-
 
 .message.success{
 
-  background:#dcfce7;
+  background:
+    rgba(0,200,83,.10);
 
-  color:#15803d;
+  border:1px solid
+    rgba(0,200,83,.25);
 
-  border:1px solid #bbf7d0;
+  color:#53e88b;
 
 }
 
 
-.footer{
+/* =====================================================
+FOOTER
+===================================================== */
+
+.login-footer{
 
   text-align:center;
 
-  margin-top:25px;
+  margin-top:20px;
 
-  color:var(--muted);
+  color:#666;
 
-  font-size:12px;
+  font-size:11px;
 
 }
 
@@ -363,35 +513,34 @@ MESSAGE
 LOADING
 ===================================================== */
 
-.loading-spinner{
+.spinner{
 
   display:inline-block;
 
-  width:16px;
+  width:15px;
+  height:15px;
 
-  height:16px;
+  margin-right:7px;
 
-  border:2px solid rgba(255,255,255,.4);
+  border:
+    2px solid
+    rgba(255,255,255,.3);
 
   border-top-color:#fff;
 
   border-radius:50%;
 
-  animation:spin .7s linear infinite;
+  vertical-align:-3px;
 
-  vertical-align:middle;
-
-  margin-right:7px;
+  animation:
+    spin .7s linear infinite;
 
 }
-
 
 @keyframes spin{
 
   to{
-
     transform:rotate(360deg);
-
   }
 
 }
@@ -409,30 +558,32 @@ MOBILE
 
   }
 
-
   .login-card{
 
-    padding:28px 20px;
+    padding:23px 18px;
 
-    border-radius:15px;
-
-  }
-
-
-  .title{
-
-    font-size:23px;
+    border-radius:16px;
 
   }
 
+  .brand{
 
-  .logo{
+    margin-bottom:20px;
 
-    width:62px;
+  }
 
-    height:62px;
+  .brand-icon{
+
+    width:58px;
+    height:58px;
 
     font-size:26px;
+
+  }
+
+  .brand h1{
+
+    font-size:23px;
 
   }
 
@@ -448,41 +599,60 @@ MOBILE
 
 <div class="login-wrapper">
 
-  <div class="login-card">
 
+  <!-- BRAND -->
 
-    <div class="logo">
+  <div class="brand">
+
+    <div class="brand-icon">
       🔐
     </div>
 
-
-    <h1 class="title">
-      Welcome Back
+    <h1>
+      Data Dashboard
     </h1>
 
-
-    <p class="subtitle">
-      Login to your Data Dashboard
+    <p>
+      Sign in to continue
     </p>
 
+  </div>
 
-    <!-- =================================================
-    LOGIN FORM
-    ================================================= -->
+
+  <!-- LOGIN CARD -->
+
+  <div class="login-card">
+
+
+    <!-- MESSAGE -->
+
+    <div
+      class="message"
+      id="message"
+    ></div>
+
+
+    <!-- FORM -->
 
     <form
       id="loginForm"
-      onsubmit="loginUser(event)"
+      onsubmit="login(event)"
     >
 
 
-      <div class="form-group">
+      <!-- USERNAME -->
+
+      <div class="field">
 
         <label>
           Username
         </label>
 
         <div class="input-box">
+
+          <span class="icon">
+            👤
+          </span>
 
           <input
             type="text"
@@ -497,7 +667,9 @@ MOBILE
       </div>
 
 
-      <div class="form-group">
+      <!-- PASSWORD -->
+
+      <div class="field">
 
         <label>
           Password
@@ -505,10 +677,13 @@ MOBILE
 
         <div class="input-box">
 
+          <span class="icon">
+            🔒
+          </span>
+
           <input
             type="password"
             id="password"
-            class="password-input"
             placeholder="Enter password"
             autocomplete="current-password"
             required
@@ -516,9 +691,9 @@ MOBILE
 
           <button
             type="button"
-            class="show-password"
-            id="showPasswordBtn"
+            class="password-toggle"
             onclick="togglePassword()"
+            id="passwordToggle"
           >
             👁
           </button>
@@ -527,6 +702,48 @@ MOBILE
 
       </div>
 
+
+      <!-- DEVICE -->
+
+      <div class="field">
+
+        <label>
+          Current Device
+        </label>
+
+        <div class="device-box">
+
+          <div
+            class="device-icon"
+            id="deviceIcon"
+          >
+            💻
+          </div>
+
+          <div class="device-info">
+
+            <div
+              class="device-name"
+              id="deviceName"
+            >
+              Detecting device...
+            </div>
+
+            <div
+              class="device-browser"
+              id="deviceBrowser"
+            >
+              Detecting browser...
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- LOGIN -->
 
       <button
         type="submit"
@@ -537,23 +754,18 @@ MOBILE
       </button>
 
 
-      <div
-        class="message"
-        id="message"
-      ></div>
-
-
     </form>
 
 
-    <div class="footer">
+  </div>
 
-      Data Dashboard System
 
-    </div>
+  <div class="login-footer">
 
+    Secure Dashboard Login
 
   </div>
+
 
 </div>
 
@@ -564,42 +776,274 @@ MOBILE
 API
 ===================================================== */
 
+/*
+  তোমার User Management / Login Apps Script URL
+*/
+
 const USER_API_URL =
 "https://script.google.com/macros/s/AKfycby1wEKzuThOiXdf9lVmoJVysfasR14ivssXFjGFfDnnc-d16uQRjNhel5LKNXDK4ZbxDw/exec";
 
 
-const DASHBOARD_PAGE =
-"dashboard.html";
+/* =====================================================
+PAGE
+===================================================== */
+
+const ADMIN_PAGE =
+"ad.html";
+
+const SUPPORT_PAGE =
+"2S.html";
+
+const CALL_PAGE =
+"2S.html";
 
 
 /* =====================================================
-PASSWORD SHOW / HIDE
+DEVICE DETECTION
+===================================================== */
+
+function getDeviceInfo(){
+
+  const ua =
+    navigator.userAgent || "";
+
+  let device =
+    "Unknown Device";
+
+  let icon =
+    "💻";
+
+
+  /*
+    Android
+  */
+
+  if(/Android/i.test(ua)){
+
+    device =
+      "Android Phone";
+
+    icon =
+      "📱";
+
+  }
+
+
+  /*
+    iPhone
+  */
+
+  else if(/iPhone/i.test(ua)){
+
+    device =
+      "iPhone";
+
+    icon =
+      "📱";
+
+  }
+
+
+  /*
+    iPad
+  */
+
+  else if(/iPad/i.test(ua)){
+
+    device =
+      "iPad";
+
+    icon =
+      "📱";
+
+  }
+
+
+  /*
+    Mac
+  */
+
+  else if(/Macintosh|Mac OS X/i.test(ua)){
+
+    device =
+      "Mac";
+
+    icon =
+      "💻";
+
+  }
+
+
+  /*
+    Windows
+  */
+
+  else if(/Windows/i.test(ua)){
+
+    device =
+      "Windows PC";
+
+    icon =
+      "💻";
+
+  }
+
+
+  /*
+    Linux
+  */
+
+  else if(/Linux/i.test(ua)){
+
+    device =
+      "Linux PC";
+
+    icon =
+      "💻";
+
+  }
+
+
+  /*
+    Browser
+  */
+
+  let browser =
+    "Unknown Browser";
+
+
+  if(
+    /Edg\//i.test(ua)
+  ){
+
+    browser =
+      "Microsoft Edge";
+
+  }
+
+  else if(
+    /OPR\//i.test(ua)
+  ){
+
+    browser =
+      "Opera";
+
+  }
+
+  else if(
+    /Chrome\//i.test(ua)
+    &&
+    !/Edg\//i.test(ua)
+  ){
+
+    browser =
+      "Google Chrome";
+
+  }
+
+  else if(
+    /Firefox\//i.test(ua)
+  ){
+
+    browser =
+      "Mozilla Firefox";
+
+  }
+
+  else if(
+    /Safari\//i.test(ua)
+    &&
+    !/Chrome\//i.test(ua)
+  ){
+
+    browser =
+      "Safari";
+
+  }
+
+
+  return {
+
+    device,
+    browser,
+    icon,
+
+    full:
+      device +
+      " • " +
+      browser
+
+  };
+
+}
+
+
+/* =====================================================
+SHOW DEVICE
+===================================================== */
+
+function showDevice(){
+
+  const info =
+    getDeviceInfo();
+
+
+  document.getElementById(
+    "deviceIcon"
+  ).textContent =
+    info.icon;
+
+
+  document.getElementById(
+    "deviceName"
+  ).textContent =
+    info.device;
+
+
+  document.getElementById(
+    "deviceBrowser"
+  ).textContent =
+    info.browser;
+
+}
+
+
+/* =====================================================
+PASSWORD TOGGLE
 ===================================================== */
 
 function togglePassword(){
 
-  const password =
+  const input =
     document.getElementById(
       "password"
     );
 
   const button =
     document.getElementById(
-      "showPasswordBtn"
+      "passwordToggle"
     );
 
 
-  if(password.type === "password"){
+  if(
+    input.type === "password"
+  ){
 
-    password.type = "text";
+    input.type =
+      "text";
 
-    button.textContent = "🙈";
+    button.textContent =
+      "🙈";
 
-  }else{
+  }
 
-    password.type = "password";
+  else{
 
-    button.textContent = "👁";
+    input.type =
+      "password";
+
+    button.textContent =
+      "👁";
 
   }
 
@@ -615,38 +1059,35 @@ function showMessage(
   type
 ){
 
-  const message =
+  const box =
     document.getElementById(
       "message"
     );
 
 
-  message.textContent =
+  box.textContent =
     text;
 
 
-  message.className =
+  box.className =
     "message show " +
-    (type || "error");
+    type;
 
 }
 
 
-/* =====================================================
-CLEAR MESSAGE
-===================================================== */
+function hideMessage(){
 
-function clearMessage(){
-
-  const message =
+  const box =
     document.getElementById(
       "message"
     );
 
-  message.className =
+
+  box.className =
     "message";
 
-  message.textContent =
+  box.textContent =
     "";
 
 }
@@ -656,28 +1097,24 @@ function clearMessage(){
 LOGIN
 ===================================================== */
 
-async function loginUser(event){
+async function login(event){
 
   event.preventDefault();
 
 
-  clearMessage();
+  hideMessage();
 
 
   const username =
     document.getElementById(
       "username"
-    )
-    .value
-    .trim();
+    ).value.trim();
 
 
   const password =
     document.getElementById(
       "password"
-    )
-    .value
-    .trim();
+    ).value.trim();
 
 
   if(!username){
@@ -710,32 +1147,38 @@ async function loginUser(event){
     );
 
 
-  button.disabled = true;
+  button.disabled =
+    true;
 
   button.innerHTML =
-    `
-      <span class="loading-spinner"></span>
-      Checking...
-    `;
+    '<span class="spinner"></span>Logging in...';
 
 
   try{
 
 
     /*
-      First GET request
+      Login API
     */
 
-    let response =
+    const url =
+      USER_API_URL +
+      "?action=login" +
+      "&username=" +
+      encodeURIComponent(username) +
+      "&password=" +
+      encodeURIComponent(password) +
+      "&device=" +
+      encodeURIComponent(
+        getDeviceInfo().full
+      ) +
+      "&_=" +
+      Date.now();
+
+
+    const response =
       await fetch(
-        USER_API_URL +
-        "?action=login" +
-        "&username=" +
-        encodeURIComponent(username) +
-        "&password=" +
-        encodeURIComponent(password) +
-        "&_=" +
-        Date.now(),
+        url,
         {
           method:"GET",
           cache:"no-store"
@@ -753,49 +1196,31 @@ async function loginUser(event){
     }
 
 
-    let result =
+    const result =
       await response.json();
 
 
-    /*
-      যদি backend login action support করে
-    */
+    console.log(
+      "Login response:",
+      result
+    );
+
 
     if(
-      result &&
-      (
-        result.success === true ||
-        result.success === false
-      )
+      result.success === false
     ){
 
-      if(result.success !== true){
-
-        throw new Error(
-          result.message ||
-          "Invalid username or password."
-        );
-
-      }
-
-    }else{
-
-      /*
-        কিছু backend অন্য format দিলে
-        users list থেকে check করার চেষ্টা
-      */
-
-      result =
-        await checkFromUsers(
-          username,
-          password
-        );
+      throw new Error(
+        result.message ||
+        "Invalid username or password."
+      );
 
     }
 
 
     /*
-      User data
+      বিভিন্ন Apps Script response format
+      support করার জন্য
     */
 
     const user =
@@ -804,61 +1229,98 @@ async function loginUser(event){
       result;
 
 
-    /*
-      Status check
-    */
+    const loggedUsername =
+      user.username ||
+      user.Username ||
+      result.username ||
+      result.Username ||
+      username;
+
+
+    const role =
+      String(
+        user.role ||
+        user.Role ||
+        result.role ||
+        result.Role ||
+        ""
+      )
+      .trim()
+      .toLowerCase();
+
 
     const status =
       String(
         user.status ||
         user.Status ||
+        result.status ||
+        result.Status ||
         "Active"
       )
       .trim()
       .toLowerCase();
 
 
-    if(
-      status === "blocked"
-    ){
+    /*
+      যদি API success দেয় কিন্তু role না দেয়
+    */
+
+    if(!role){
 
       throw new Error(
-        "Your account is blocked."
-      );
-
-    }
-
-
-    if(
-      status === "inactive"
-    ){
-
-      throw new Error(
-        "Your account is inactive."
+        "Login successful, but user role was not received."
       );
 
     }
 
 
     /*
-      Save login information
+      Blocked / inactive user
     */
 
-    localStorage.setItem(
-      "username",
-      username
-    );
+    if(
+      status === "blocked" ||
+      status === "inactive"
+    ){
+
+      throw new Error(
+        "Your account is " +
+        status +
+        ". Please contact administrator."
+      );
+
+    }
 
 
-    localStorage.setItem(
-      "Username",
-      username
-    );
-
+    /*
+      Session save
+    */
 
     localStorage.setItem(
       "dashboardAuth",
       "true"
+    );
+
+
+    localStorage.setItem(
+      "username",
+      String(loggedUsername)
+    );
+
+
+    localStorage.setItem(
+      "role",
+      role
+    );
+
+
+    /*
+      Additional compatibility keys
+    */
+
+    localStorage.setItem(
+      "Username",
+      String(loggedUsername)
     );
 
 
@@ -871,32 +1333,28 @@ async function loginUser(event){
     localStorage.setItem(
       "loginData",
       JSON.stringify({
+
         username:
-          username,
-
-        Username:
-          username,
-
-        name:
-          user.name ||
-          user.Name ||
-          username,
+          String(loggedUsername),
 
         role:
-          user.role ||
-          user.Role ||
-          "",
+          role,
 
         status:
-          user.status ||
-          user.Status ||
-          "Active"
+          status,
+
+        device:
+          getDeviceInfo().full,
+
+        loginTime:
+          new Date().toISOString()
+
       })
     );
 
 
     /*
-      Success
+      Success message
     */
 
     showMessage(
@@ -906,25 +1364,43 @@ async function loginUser(event){
 
 
     /*
-      একটু delay দিলে message দেখা যাবে
+      Role অনুযায়ী redirect
     */
 
     setTimeout(
       function(){
 
-        window.location.href =
-          DASHBOARD_PAGE;
+        redirectByRole(
+          role
+        );
 
       },
-      400
+      300
     );
 
 
   }catch(error){
 
     console.error(
-      "Login Error:",
+      "Login error:",
       error
+    );
+
+
+    /*
+      Login failed হলে session clear
+    */
+
+    localStorage.removeItem(
+      "dashboardAuth"
+    );
+
+    localStorage.removeItem(
+      "loggedIn"
+    );
+
+    localStorage.removeItem(
+      "role"
     );
 
 
@@ -935,9 +1411,8 @@ async function loginUser(event){
     );
 
 
-  }finally{
-
-    button.disabled = false;
+    button.disabled =
+      false;
 
     button.textContent =
       "Login";
@@ -948,102 +1423,185 @@ async function loginUser(event){
 
 
 /* =====================================================
-FALLBACK USER CHECK
+ROLE REDIRECT
 ===================================================== */
 
-async function checkFromUsers(
-  username,
-  password
-){
+function redirectByRole(role){
 
-  const response =
-    await fetch(
-      USER_API_URL +
-      "?action=getUsers&_=" +
-      Date.now(),
-      {
-        method:"GET",
-        cache:"no-store"
-      }
-    );
+  role =
+    String(role || "")
+      .trim()
+      .toLowerCase();
 
 
-  if(!response.ok){
-
-    throw new Error(
-      "Unable to connect to server."
-    );
-
-  }
+  let page =
+    "";
 
 
-  const result =
-    await response.json();
+  /*
+    ADMIN
+  */
 
+  if(
+    role === "admin"
+  ){
 
-  const users =
-    Array.isArray(
-      result.users
-    )
-      ? result.users
-      : Array.isArray(
-          result.data
-        )
-        ? result.data
-        : [];
-
-
-  const found =
-    users.find(
-      function(user){
-
-        const u =
-          String(
-            user.username ||
-            user.Username ||
-            ""
-          )
-          .trim()
-          .toLowerCase();
-
-
-        const p =
-          String(
-            user.password ||
-            user.Password ||
-            ""
-          )
-          .trim();
-
-
-        return (
-          u ===
-          username
-            .trim()
-            .toLowerCase()
-          &&
-          p === password
-        );
-
-      }
-    );
-
-
-  if(!found){
-
-    throw new Error(
-      "Invalid username or password."
-    );
+    page =
+      ADMIN_PAGE;
 
   }
 
 
-  return {
-    success:true,
-    user:found
-  };
+  /*
+    SUPPORT
+  */
+
+  else if(
+    role === "support"
+  ){
+
+    page =
+      SUPPORT_PAGE;
+
+  }
+
+
+  /*
+    CALL
+  */
+
+  else if(
+    role === "call"
+  ){
+
+    page =
+      CALL_PAGE;
+
+  }
+
+
+  /*
+    MANAGER
+    আপাতত access বন্ধ
+  */
+
+  else if(
+    role === "manager"
+  ){
+
+    showMessage(
+      "Manager dashboard is not configured.",
+      "error"
+    );
+
+    return;
+
+  }
+
+
+  /*
+    GUEST
+  */
+
+  else if(
+    role === "guest"
+  ){
+
+    showMessage(
+      "Guest dashboard is not configured.",
+      "error"
+    );
+
+    return;
+
+  }
+
+
+  else{
+
+    showMessage(
+      "Your account role is not allowed.",
+      "error"
+    );
+
+    return;
+
+  }
+
+
+  /*
+    Dashboard-এ যাও
+  */
+
+  window.location.replace(
+    page
+  );
 
 }
+
+
+/* =====================================================
+ALREADY LOGGED IN
+===================================================== */
+
+function checkExistingLogin(){
+
+  const auth =
+    localStorage.getItem(
+      "dashboardAuth"
+    );
+
+
+  const role =
+    localStorage.getItem(
+      "role"
+    );
+
+
+  /*
+    আগে থেকেই login থাকলে
+    আবার index-এ থাকার দরকার নেই।
+  */
+
+  if(
+    auth === "true" &&
+    role
+  ){
+
+    /*
+      automatic redirect বন্ধ রাখতে চাইলে
+      এই অংশ remove করতে পারো।
+    */
+
+    redirectByRole(
+      role
+    );
+
+  }
+
+}
+
+
+/* =====================================================
+INIT
+===================================================== */
+
+document.addEventListener(
+  "DOMContentLoaded",
+  function(){
+
+    showDevice();
+
+    /*
+      এখানে automatic redirect রাখা হয়েছে।
+      যদি login page সবসময় দেখতে চাও,
+      তাহলে নিচের line comment করে দিও।
+    */
+
+    checkExistingLogin();
+
+  }
+);
 
 
 /* =====================================================
@@ -1070,20 +1628,11 @@ document.addEventListener(
         )
       ){
 
-        const form =
-          document.getElementById(
+        document
+          .getElementById(
             "loginForm"
-          );
-
-
-        if(form){
-
-          /*
-            Browser-এর normal form submit
-            handle করবে।
-          */
-
-        }
+          )
+          .requestSubmit();
 
       }
 
@@ -1094,16 +1643,27 @@ document.addEventListener(
 
 
 /* =====================================================
-PAGE LOAD
+PREVENT BACK TO DASHBOARD
 ===================================================== */
 
-document.addEventListener(
-  "DOMContentLoaded",
+window.addEventListener(
+  "pageshow",
   function(){
 
-    document
-      .getElementById("username")
-      .focus();
+    /*
+      Page যদি browser cache থেকে আসে,
+      এবং session না থাকে তাহলে login page-তেই থাকবে।
+    */
+
+    if(
+      localStorage.getItem(
+        "dashboardAuth"
+      ) !== "true"
+    ){
+
+      return;
+
+    }
 
   }
 );
