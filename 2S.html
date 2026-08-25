@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Data Dashboard</title>
+<title>Support Dashboard</title>
 
 <style>
 
@@ -18,7 +18,6 @@
 }
 
 :root{
-
   --bg:#f4f7f6;
   --card:#ffffff;
   --text:#1f2937;
@@ -27,16 +26,16 @@
   --input:#ffffff;
   --thead:#f8fafc;
   --hover:#fafafa;
-
   --green:#087f5b;
   --green-dark:#066b4d;
-
+  --blue:#2563eb;
+  --red:#dc2626;
+  --orange:#d97706;
+  --purple:#7c3aed;
   --shadow:rgba(0,0,0,.20);
-
 }
 
 body.dark{
-
   --bg:#111827;
   --card:#1f2937;
   --text:#f9fafb;
@@ -45,976 +44,533 @@ body.dark{
   --input:#111827;
   --thead:#172033;
   --hover:#263244;
-
   --shadow:rgba(0,0,0,.50);
-
 }
 
 body{
-
   background:var(--bg);
   color:var(--text);
-
   transition:.25s;
-
 }
-
-
-/* =====================================================
-HEADER
-===================================================== */
-
-.header{
-
-  width:100%;
-  min-height:70px;
-
-  background:var(--card);
-
-  border-bottom:1px solid var(--border);
-
-  display:flex;
-
-  align-items:center;
-
-  justify-content:space-between;
-
-  padding:0 25px;
-
-  position:sticky;
-
-  top:0;
-
-  z-index:100;
-
-}
-
-.logo{
-
-  font-size:22px;
-
-  font-weight:700;
-
-  color:var(--green);
-
-}
-
-
-/* =====================================================
-HEADER RIGHT
-===================================================== */
-
-.header-right{
-
-  display:flex;
-
-  align-items:center;
-
-  gap:10px;
-
-}
-
-
-/* =====================================================
-USERNAME
-===================================================== */
-
-.logged-user{
-
-  height:42px;
-
-  padding:0 14px;
-
-  border:1px solid var(--border);
-
-  border-radius:8px;
-
-  background:var(--input);
-
-  color:var(--text);
-
-  display:flex;
-
-  align-items:center;
-
-  gap:7px;
-
-  font-size:13px;
-
-  font-weight:600;
-
-}
-
-
-/* =====================================================
-BUTTON
-===================================================== */
 
 button{
-
   border:none;
-
   cursor:pointer;
-
   transition:.2s;
-
 }
 
 button:disabled{
-
   cursor:not-allowed;
-
   opacity:.5;
+}
 
+.header{
+  width:100%;
+  min-height:70px;
+  background:var(--card);
+  border-bottom:1px solid var(--border);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 25px;
+  position:sticky;
+  top:0;
+  z-index:100;
+}
+
+.logo{
+  font-size:22px;
+  font-weight:700;
+  color:var(--green);
+}
+
+.header-right{
+  display:flex;
+  align-items:center;
+  gap:10px;
 }
 
 .btn{
-
   padding:11px 17px;
-
   border-radius:8px;
-
   font-size:14px;
-
   font-weight:600;
-
 }
 
 .btn-primary{
-
   background:var(--green);
-
-  color:#ffffff;
-
+  color:#fff;
 }
 
 .btn-primary:hover{
-
   background:var(--green-dark);
-
 }
 
-.btn-refresh{
-
+.btn-refresh,
+.theme-btn,
+.btn-cancel{
   background:var(--input);
-
   color:var(--text);
-
   border:1px solid var(--border);
-
 }
 
-.btn-refresh:hover{
-
+.btn-refresh:hover,
+.theme-btn:hover,
+.btn-cancel:hover{
   background:var(--hover);
-
 }
 
-
-/* =====================================================
-LOGOUT
-===================================================== */
+.theme-btn{
+  height:42px;
+  padding:0 14px;
+  border-radius:8px;
+  font-size:13px;
+  font-weight:600;
+}
 
 .btn-logout{
-
-  background:#fee2e2;
-
-  color:#dc2626;
-
-  border:1px solid #fecaca;
-
+  background:#dc2626;
+  color:#fff;
+  padding:11px 17px;
+  border-radius:8px;
+  font-size:14px;
+  font-weight:600;
 }
 
 .btn-logout:hover{
-
-  background:#fecaca;
-
+  background:#b91c1c;
 }
-
-
-/* =====================================================
-THEME
-===================================================== */
-
-.theme-btn{
-
-  height:42px;
-
-  padding:0 14px;
-
-  border-radius:8px;
-
-  background:var(--input);
-
-  color:var(--text);
-
-  border:1px solid var(--border);
-
-  font-size:13px;
-
-  font-weight:600;
-
-}
-
-.theme-btn:hover{
-
-  background:var(--hover);
-
-}
-
-
-/* =====================================================
-MAIN
-===================================================== */
 
 .container{
-
   width:100%;
-
   max-width:1500px;
-
   margin:auto;
-
   padding:25px;
-
 }
 
-
-/* =====================================================
-TOP
-===================================================== */
-
 .top-section{
-
   display:flex;
-
   justify-content:space-between;
-
   align-items:center;
-
   gap:15px;
-
   margin-bottom:20px;
-
 }
 
 .title h1{
-
   font-size:27px;
-
   margin-bottom:5px;
-
 }
 
 .title p{
-
   color:var(--muted);
-
   font-size:14px;
-
 }
 
-
-/* =====================================================
-FILTER
-===================================================== */
-
 .filter-box{
-
   background:var(--card);
-
   border:1px solid var(--border);
-
   border-radius:12px;
-
   padding:18px;
-
   margin-bottom:20px;
-
 }
 
 .filters{
-
   display:grid;
-
   grid-template-columns:1fr auto;
-
   gap:12px;
-
   align-items:end;
-
 }
 
 .field{
-
   display:flex;
-
   flex-direction:column;
-
   gap:6px;
-
 }
 
 .field label{
-
   font-size:12px;
-
   font-weight:600;
-
   color:var(--muted);
-
 }
 
-.field input{
-
+.field input,
+.field select{
   width:100%;
-
   height:42px;
-
   border:1px solid var(--border);
-
   border-radius:8px;
-
   padding:0 12px;
-
   outline:none;
-
   background:var(--input);
-
   color:var(--text);
-
   font-size:14px;
-
 }
 
-.field input:focus{
-
+.field input:focus,
+.field select:focus{
   border-color:var(--green);
-
 }
-
-
-/* =====================================================
-TABLE
-===================================================== */
 
 .table-box{
-
   background:var(--card);
-
   border:1px solid var(--border);
-
   border-radius:12px;
-
   overflow:hidden;
-
 }
 
 .table-header{
-
   padding:16px 18px;
-
   border-bottom:1px solid var(--border);
-
   display:flex;
-
   justify-content:space-between;
-
   align-items:center;
-
 }
 
 .table-header h2{
-
   font-size:17px;
-
 }
 
 .total-count{
-
   font-size:13px;
-
   color:var(--muted);
-
 }
 
 .table-wrapper{
-
   width:100%;
-
   overflow-x:auto;
-
 }
 
 table{
-
   width:100%;
-
   border-collapse:collapse;
-
-  min-width:650px;
-
+  min-width:700px;
 }
 
 th{
-
   background:var(--thead);
-
   padding:14px;
-
   text-align:left;
-
   font-size:12px;
-
   color:var(--muted);
-
   white-space:nowrap;
-
   border-bottom:1px solid var(--border);
-
 }
 
 td{
-
   padding:14px;
-
   border-bottom:1px solid var(--border);
-
   font-size:13px;
-
   white-space:nowrap;
-
 }
 
 tr:hover td{
-
   background:var(--hover);
-
 }
 
 .date-cell{
-
   color:var(--muted);
-
   font-weight:500;
-
 }
 
+.actions{
+  display:flex;
+  gap:7px;
+  align-items:center;
+}
 
-/* =====================================================
-PAGINATION
-===================================================== */
+.btn-sell{
+  padding:7px 11px;
+  border-radius:6px;
+  font-size:13px;
+  font-weight:600;
+  background:#fff7ed;
+  color:#d97706;
+}
+
+.btn-sell:hover{
+  background:#ffedd5;
+}
 
 .pagination-box{
-
   display:flex;
-
   justify-content:space-between;
-
   align-items:center;
-
   padding:15px 18px;
-
   border-top:1px solid var(--border);
-
 }
 
 .page-info{
-
   font-size:13px;
-
   color:var(--muted);
-
 }
 
 .pagination{
-
   display:flex;
-
   gap:5px;
-
   flex-wrap:wrap;
-
 }
 
 .page-btn{
-
   min-width:35px;
-
   height:35px;
-
   border:1px solid var(--border);
-
   background:var(--input);
-
   color:var(--text);
-
   border-radius:6px;
-
   font-size:13px;
-
 }
 
 .page-btn:hover{
-
   background:var(--hover);
-
 }
 
 .page-btn.active{
-
   background:var(--green);
-
-  color:#ffffff;
-
+  color:#fff;
   border-color:var(--green);
-
 }
 
-
-/* =====================================================
-MODAL
-===================================================== */
-
 .modal{
-
   position:fixed;
-
   inset:0;
-
   background:rgba(0,0,0,.55);
-
   display:none;
-
   justify-content:center;
-
   align-items:center;
-
   padding:20px;
-
   z-index:999;
-
 }
 
 .modal.show{
-
   display:flex;
-
 }
 
 .modal-box{
-
   width:100%;
-
   max-width:700px;
-
   max-height:95vh;
-
   overflow-y:auto;
-
   background:var(--card);
-
   color:var(--text);
-
   border-radius:16px;
-
-  box-shadow:
-
-    0 20px 60px
-
-    var(--shadow);
-
+  box-shadow:0 20px 60px var(--shadow);
 }
 
 .modal-header{
-
   padding:20px 24px;
-
   border-bottom:1px solid var(--border);
-
   display:flex;
-
   justify-content:space-between;
-
   align-items:center;
-
   position:sticky;
-
   top:0;
-
   background:var(--card);
-
   z-index:2;
-
 }
 
 .modal-header h2{
-
   font-size:20px;
-
 }
 
 .close-btn{
-
   width:36px;
-
   height:36px;
-
   border-radius:50%;
-
   background:var(--input);
-
   border:1px solid var(--border);
-
   font-size:22px;
-
   color:var(--text);
-
 }
 
 .close-btn:hover{
-
   background:var(--hover);
-
 }
 
-
-/* =====================================================
-FORM
-===================================================== */
-
 .form{
-
   padding:30px 25px;
-
 }
 
 .form-grid{
-
   display:grid;
-
   grid-template-columns:1fr 1fr;
-
   gap:22px 18px;
-
 }
 
 .form-group{
-
   display:flex;
-
   flex-direction:column;
-
   gap:9px;
-
 }
 
 .form-group.full{
-
   grid-column:1 / -1;
-
 }
 
 .form-group label{
-
   font-size:13px;
-
   font-weight:600;
-
-  color:var(--text);
-
 }
 
 .form-group input,
-
 .form-group textarea{
-
   width:100%;
-
   border:1px solid var(--border);
-
   border-radius:9px;
-
   padding:13px 14px;
-
   outline:none;
-
   font-size:14px;
-
   background:var(--input);
-
   color:var(--text);
-
 }
 
 .form-group input{
-
   height:48px;
-
 }
 
 .form-group textarea{
-
   min-height:150px;
-
   resize:vertical;
-
 }
 
 .form-group input:focus,
-
 .form-group textarea:focus{
-
   border-color:var(--green);
-
-  box-shadow:
-
-    0 0 0 2px
-
-    rgba(8,127,91,.10);
-
 }
 
-
-/* READ ONLY FIELD */
-
-.readonly-field{
-
-  background:var(--thead) !important;
-
+.form-group input[readonly]{
+  background:var(--thead);
+  color:var(--muted);
   cursor:not-allowed;
-
 }
-
-
-/* =====================================================
-FORM FOOTER
-===================================================== */
 
 .form-footer{
-
   display:flex;
-
   justify-content:flex-end;
-
   gap:10px;
-
   padding-top:30px;
-
 }
 
-
-/* =====================================================
-LOADING
-===================================================== */
-
 .loading{
-
   text-align:center;
-
   padding:45px 20px;
-
   color:var(--muted);
-
 }
 
 .empty{
-
   text-align:center;
-
   padding:55px 20px;
-
   color:var(--muted);
-
 }
 
-
-/* =====================================================
-TOAST
-===================================================== */
-
 .toast{
-
   position:fixed;
-
   right:25px;
-
   bottom:25px;
-
   min-width:260px;
-
   padding:14px 17px;
-
   border-radius:9px;
-
-  color:#ffffff;
-
+  color:#fff;
   background:#111827;
-
-  box-shadow:
-
-    0 10px 30px
-
-    rgba(0,0,0,.2);
-
+  box-shadow:0 10px 30px rgba(0,0,0,.2);
   transform:translateY(100px);
-
   opacity:0;
-
   transition:.3s;
-
-  z-index:2000;
-
+  z-index:3000;
   font-size:14px;
-
 }
 
 .toast.show{
-
   transform:translateY(0);
-
   opacity:1;
-
 }
 
 .toast.success{
-
   background:#087f5b;
-
 }
 
 .toast.error{
-
   background:#dc2626;
-
 }
-
-
-/* =====================================================
-MOBILE
-===================================================== */
 
 @media(max-width:900px){
 
-  .filters{
-
-    grid-template-columns:1fr;
-
-  }
-
   .top-section{
-
     align-items:flex-start;
-
     flex-direction:column;
-
   }
 
 }
-
 
 @media(max-width:600px){
 
   .header{
-
-    height:auto;
-
     min-height:70px;
-
     padding:12px 15px;
-
     gap:10px;
-
     flex-wrap:wrap;
-
   }
 
   .logo{
-
     font-size:18px;
-
   }
 
   .header-right{
-
     gap:6px;
-
     width:100%;
-
     justify-content:flex-end;
-
     flex-wrap:wrap;
-
   }
 
   .header-right .btn,
-
-  .theme-btn,
-
-  .logged-user{
-
+  .theme-btn{
     padding:9px 10px;
-
     font-size:12px;
-
     height:38px;
+  }
 
+  .btn-logout{
+    padding:9px 10px;
+    font-size:12px;
   }
 
   .container{
-
     padding:15px;
+  }
 
+  .filters{
+    grid-template-columns:1fr;
   }
 
   .form-grid{
-
     grid-template-columns:1fr;
-
   }
 
   .form-group.full{
-
     grid-column:auto;
-
   }
 
   .form{
-
     padding:25px 18px;
-
   }
 
   .modal{
-
     padding:10px;
-
   }
 
   .modal-box{
-
     max-height:96vh;
-
     border-radius:13px;
-
   }
 
   .pagination-box{
-
     flex-direction:column;
-
     gap:12px;
-
   }
 
   .toast{
-
     left:15px;
-
     right:15px;
-
     min-width:auto;
-
   }
 
 }
@@ -1023,37 +579,15 @@ MOBILE
 
 </head>
 
-
 <body>
-
-
-<!-- =====================================================
-HEADER
-===================================================== -->
 
 <header class="header">
 
   <div class="logo">
-
-    DATA DASHBOARD
-
+    SUPPORT DASHBOARD
   </div>
 
-
   <div class="header-right">
-
-
-    <!-- LOGGED USER -->
-
-    <div
-      class="logged-user"
-      id="loggedUser"
-    >
-      👤 Loading...
-    </div>
-
-
-    <!-- THEME -->
 
     <button
       class="theme-btn"
@@ -1063,9 +597,6 @@ HEADER
       🌙 Dark
     </button>
 
-
-    <!-- REFRESH -->
-
     <button
       class="btn btn-refresh"
       id="refreshBtn"
@@ -1074,9 +605,6 @@ HEADER
       🔄 Refresh
     </button>
 
-
-    <!-- NEW ENTRY -->
-
     <button
       class="btn btn-primary"
       onclick="openEntryModal()"
@@ -1084,12 +612,9 @@ HEADER
       ➕ New Entry
     </button>
 
-
-    <!-- LOGOUT -->
-
     <button
       class="btn btn-logout"
-      onclick="logout()"
+      onclick="logoutUser()"
     >
       🚪 Logout
     </button>
@@ -1099,33 +624,20 @@ HEADER
 </header>
 
 
-<!-- =====================================================
-MAIN
-===================================================== -->
-
 <main class="container">
-
 
   <div class="top-section">
 
     <div class="title">
 
-      <h1>
-        Data Dashboard
-      </h1>
+      <h1>Support Dashboard</h1>
 
-      <p>
-        View existing entries and create new entries.
-      </p>
+      <p>Manage your support entries</p>
 
     </div>
 
   </div>
 
-
-  <!-- ===================================================
-  SEARCH
-  ==================================================== -->
 
   <section class="filter-box">
 
@@ -1133,24 +645,20 @@ MAIN
 
       <div class="field search-field">
 
-        <label>
-          🔍 Search
-        </label>
+        <label>🔍 Search</label>
 
         <input
           type="text"
           id="searchInput"
-          placeholder="Search Name, IP, Work or Date..."
+          placeholder="Search Name, IP or Work..."
           oninput="applyFilters()"
-          autocomplete="off"
         >
 
       </div>
 
-
       <button
         class="btn btn-refresh"
-        onclick="clearSearch()"
+        onclick="clearFilters()"
       >
         Clear
       </button>
@@ -1160,26 +668,16 @@ MAIN
   </section>
 
 
-  <!-- ===================================================
-  TABLE
-  ==================================================== -->
-
   <section class="table-box">
-
 
     <div class="table-header">
 
-      <h2>
-        All Entries
-      </h2>
-
+      <h2>All Entries</h2>
 
       <div class="total-count">
 
         Total:
-        <strong id="totalCount">
-          0
-        </strong>
+        <strong id="totalCount">0</strong>
 
       </div>
 
@@ -1194,37 +692,24 @@ MAIN
 
           <tr>
 
-            <th>
-              Name
-            </th>
-
-            <th>
-              IP
-            </th>
-
-            <th>
-              Work
-            </th>
-
-            <th>
-              Date
-            </th>
+            <th>Name</th>
+            <th>IP</th>
+            <th>Work</th>
+            <th>Date</th>
+            <th>Action</th>
 
           </tr>
 
         </thead>
 
-
         <tbody id="tableBody">
 
           <tr>
 
-            <td colspan="4">
+            <td colspan="5">
 
               <div class="loading">
-
                 Loading data...
-
               </div>
 
             </td>
@@ -1238,8 +723,6 @@ MAIN
     </div>
 
 
-    <!-- PAGINATION -->
-
     <div class="pagination-box">
 
       <div
@@ -1249,7 +732,6 @@ MAIN
         Page 1
       </div>
 
-
       <div
         class="pagination"
         id="pagination"
@@ -1257,32 +739,25 @@ MAIN
 
     </div>
 
-
   </section>
-
 
 </main>
 
 
-<!-- =====================================================
-NEW ENTRY MODAL
-===================================================== -->
+<!-- ENTRY MODAL -->
 
 <div
   class="modal"
   id="entryModal"
 >
 
-
   <div class="modal-box">
-
 
     <div class="modal-header">
 
       <h2>
         New Entry
       </h2>
-
 
       <button
         class="close-btn"
@@ -1300,35 +775,25 @@ NEW ENTRY MODAL
       onsubmit="submitEntry(event)"
     >
 
-
       <div class="form-grid">
 
 
-        <!-- USERNAME -->
-
         <div class="form-group">
 
-          <label>
-            Username
-          </label>
+          <label>Username</label>
 
           <input
             type="text"
-            id="usernameInput"
+            id="nameInput"
             readonly
-            class="readonly-field"
           >
 
         </div>
 
 
-        <!-- IP -->
-
         <div class="form-group">
 
-          <label>
-            IP
-          </label>
+          <label>IP</label>
 
           <input
             type="text"
@@ -1341,13 +806,9 @@ NEW ENTRY MODAL
         </div>
 
 
-        <!-- WORK -->
-
         <div class="form-group full">
 
-          <label>
-            Work
-          </label>
+          <label>Work</label>
 
           <textarea
             id="workInput"
@@ -1358,19 +819,14 @@ NEW ENTRY MODAL
         </div>
 
 
-        <!-- DATE -->
-
         <div class="form-group">
 
-          <label>
-            Date
-          </label>
+          <label>Date</label>
 
           <input
-            type="date"
+            type="text"
             id="dateInput"
             readonly
-            class="readonly-field"
           >
 
         </div>
@@ -1381,15 +837,13 @@ NEW ENTRY MODAL
 
       <div class="form-footer">
 
-
         <button
           type="button"
-          class="btn btn-refresh"
+          class="btn btn-cancel"
           onclick="closeEntryModal()"
         >
           Cancel
         </button>
-
 
         <button
           type="submit"
@@ -1399,21 +853,14 @@ NEW ENTRY MODAL
           Save Entry
         </button>
 
-
       </div>
 
-
     </form>
-
 
   </div>
 
 </div>
 
-
-<!-- =====================================================
-TOAST
-===================================================== -->
 
 <div
   class="toast"
@@ -1425,23 +872,20 @@ TOAST
 
 
 /* =====================================================
-GOOGLE APPS SCRIPT URL
+API
 ===================================================== */
 
 const API_URL =
 "https://script.google.com/macros/s/AKfycbx6fo2Nogf3ETCtS_B-o0HCFqEs3vYkJ9IT9uu_-3l1w8fNJw77mZipeyFm-zZcjUw-5Q/exec";
 
 
-/* =====================================================
-SETTINGS
-===================================================== */
-
-const ROWS_PER_PAGE = 10;
+const LOGIN_PAGE =
+"index.html";
 
 
-/* =====================================================
-GLOBAL DATA
-===================================================== */
+const ROWS_PER_PAGE =
+10;
+
 
 let allData = [];
 
@@ -1451,102 +895,105 @@ let currentPage = 1;
 
 
 /* =====================================================
-LOGIN CHECK
+SESSION / URL PROTECTION
 ===================================================== */
 
-let loggedUsername = "";
+const SESSION_TIMEOUT =
+5 * 60 * 1000;
 
 
-function checkLogin(){
-
-  /*
-    প্রথমে username খুঁজবে
-  */
-
-  loggedUsername =
-    localStorage.getItem("username") ||
-    "";
+let inactivityTimer = null;
 
 
-  /*
-    যদি username না থাকে,
-    login page-এ পাঠাবে
-  */
+function getLoggedInUsername(){
 
-  if(!loggedUsername){
-
-    /*
-      অন্য possible login data
-    */
-
-    const userData =
-      localStorage.getItem("userData");
-
-    const loginData =
-      localStorage.getItem("loginData");
+  const keys = [
+    "username",
+    "Username",
+    "user",
+    "userData",
+    "loginData",
+    "loggedUser",
+    "currentUser",
+    "userInfo"
+  ];
 
 
-    if(userData){
+  for(const key of keys){
 
-      try{
+    const value =
+      localStorage.getItem(key);
 
-        const parsed =
-          JSON.parse(userData);
 
-        loggedUsername =
-          parsed.username ||
-          parsed.Username ||
-          parsed.user ||
-          "";
-
-      }catch(error){}
-
+    if(!value){
+      continue;
     }
 
 
-    if(!loggedUsername && loginData){
+    try{
 
-      try{
+      const parsed =
+        JSON.parse(value);
 
-        const parsed =
-          JSON.parse(loginData);
 
-        loggedUsername =
+      if(
+        parsed &&
+        typeof parsed === "object"
+      ){
+
+        const username =
           parsed.username ||
           parsed.Username ||
-          parsed.user ||
-          "";
+          parsed.userName ||
+          parsed.name ||
+          parsed.user;
 
-      }catch(error){}
+
+        if(username){
+
+          return String(
+            username
+          ).trim();
+
+        }
+
+      }
+
+    }catch(error){
+
+      return String(
+        value
+      ).trim();
 
     }
 
   }
 
 
-  /*
-    Still no login
-  */
+  return "";
 
-  if(!loggedUsername){
+}
+
+
+/* =====================================================
+CHECK LOGIN
+===================================================== */
+
+function checkLogin(){
+
+  const username =
+    getLoggedInUsername();
+
+
+  if(!username){
 
     window.location.replace(
-      "index.html"
+      LOGIN_PAGE
     );
 
     return false;
 
   }
-
-
-  /*
-    Show username
-  */
-
-  document.getElementById(
-    "loggedUser"
-  ).textContent =
-    "👤 " + loggedUsername;
 
 
   return true;
@@ -1558,81 +1005,38 @@ function checkLogin(){
 LOGOUT
 ===================================================== */
 
-function logout(){
+function logoutUser(){
 
-  const confirmed =
-    confirm(
-      "Are you sure you want to logout?"
+  try{
+
+    localStorage.clear();
+
+    sessionStorage.clear();
+
+
+    window.location.replace(
+      LOGIN_PAGE
+    );
+
+  }catch(error){
+
+    console.error(
+      "Logout Error:",
+      error
     );
 
 
-  if(!confirmed){
-
-    return;
+    window.location.href =
+      LOGIN_PAGE;
 
   }
-
-
-  /*
-    Clear login values
-  */
-
-  localStorage.removeItem(
-    "username"
-  );
-
-  localStorage.removeItem(
-    "user"
-  );
-
-  localStorage.removeItem(
-    "userData"
-  );
-
-  localStorage.removeItem(
-    "loginData"
-  );
-
-  localStorage.removeItem(
-    "token"
-  );
-
-  localStorage.removeItem(
-    "authToken"
-  );
-
-  localStorage.removeItem(
-    "session"
-  );
-
-  localStorage.removeItem(
-    "loggedIn"
-  );
-
-
-  sessionStorage.clear();
-
-
-  /*
-    Go login
-  */
-
-  window.location.replace(
-    "index.html"
-  );
 
 }
 
 
 /* =====================================================
-5 MINUTE AUTO LOGOUT
+AUTO LOGOUT
 ===================================================== */
-
-const INACTIVITY_LIMIT =
-  5 * 60 * 1000;
-
-let inactivityTimer = null;
-
 
 function resetInactivityTimer(){
 
@@ -1643,135 +1047,88 @@ function resetInactivityTimer(){
 
   inactivityTimer =
     setTimeout(
-      autoLogout,
-      INACTIVITY_LIMIT
+      function(){
+
+        showToast(
+          "Session expired. Please login again.",
+          "error"
+        );
+
+
+        setTimeout(
+          function(){
+
+            logoutUser();
+
+          },
+          500
+        );
+
+
+      },
+      SESSION_TIMEOUT
     );
-
-}
-
-
-function autoLogout(){
-
-  clearTimeout(
-    inactivityTimer
-  );
-
-
-  localStorage.removeItem(
-    "username"
-  );
-
-  localStorage.removeItem(
-    "user"
-  );
-
-  localStorage.removeItem(
-    "userData"
-  );
-
-  localStorage.removeItem(
-    "loginData"
-  );
-
-  localStorage.removeItem(
-    "token"
-  );
-
-  localStorage.removeItem(
-    "authToken"
-  );
-
-  localStorage.removeItem(
-    "session"
-  );
-
-  localStorage.removeItem(
-    "loggedIn"
-  );
-
-
-  sessionStorage.clear();
-
-
-  window.location.replace(
-    "index.html"
-  );
 
 }
 
 
 /* =====================================================
-USER ACTIVITY
+ACTIVITY DETECTION
 ===================================================== */
 
-const activityEvents = [
+function startActivityMonitor(){
 
-  "mousemove",
-  "mousedown",
-  "keydown",
-  "scroll",
-  "touchstart",
-  "click",
-  "wheel"
+  const events = [
+    "click",
+    "mousemove",
+    "mousedown",
+    "keydown",
+    "scroll",
+    "touchstart"
+  ];
 
-];
+
+  events.forEach(
+    function(eventName){
+
+      document.addEventListener(
+        eventName,
+        resetInactivityTimer,
+        {
+          passive:true
+        }
+      );
+
+    }
+  );
 
 
-activityEvents.forEach(
-  function(eventName){
+  resetInactivityTimer();
 
-    document.addEventListener(
-      eventName,
-      resetInactivityTimer,
-      true
-    );
-
-  }
-);
+}
 
 
 /* =====================================================
 THEME
 ===================================================== */
 
-document.addEventListener(
-  "DOMContentLoaded",
-  function(){
-
-    /*
-      Login check first
-    */
-
-    if(!checkLogin()){
-
-      return;
-
-    }
-
-
-    loadTheme();
-
-    loadData();
-
-    resetInactivityTimer();
-
-  }
-);
-
-
 function loadTheme(){
 
-  const savedTheme =
+  const saved =
     localStorage.getItem(
       "dashboardTheme"
     );
 
 
-  if(
-    savedTheme === "dark"
-  ){
+  if(saved === "dark"){
 
     document.body.classList.add(
+      "dark"
+    );
+
+  }else{
+
+    document.body.classList.remove(
       "dark"
     );
 
@@ -1790,7 +1147,7 @@ function toggleTheme(){
   );
 
 
-  const isDark =
+  const dark =
     document.body.classList.contains(
       "dark"
     );
@@ -1798,7 +1155,7 @@ function toggleTheme(){
 
   localStorage.setItem(
     "dashboardTheme",
-    isDark
+    dark
       ? "dark"
       : "light"
   );
@@ -1818,20 +1175,14 @@ function updateThemeButton(){
 
 
   if(!btn){
-
     return;
-
   }
 
 
-  const isDark =
+  btn.textContent =
     document.body.classList.contains(
       "dark"
-    );
-
-
-  btn.textContent =
-    isDark
+    )
       ? "☀️ White"
       : "🌙 Dark";
 
@@ -1844,17 +1195,22 @@ LOAD DATA
 
 async function loadData(){
 
-  const refreshBtn =
+  if(!checkLogin()){
+    return;
+  }
+
+
+  const btn =
     document.getElementById(
       "refreshBtn"
     );
 
 
-  refreshBtn.disabled =
+  btn.disabled =
     true;
 
 
-  refreshBtn.textContent =
+  btn.textContent =
     "⏳ Loading...";
 
 
@@ -1889,15 +1245,7 @@ async function loadData(){
       await response.json();
 
 
-    console.log(
-      "API Response:",
-      result
-    );
-
-
-    if(
-      result.success === false
-    ){
+    if(result.success === false){
 
       throw new Error(
         result.message ||
@@ -1907,14 +1255,12 @@ async function loadData(){
     }
 
 
-    if(
-      !Array.isArray(
-        result.data
-      )
-    ){
+    if(!Array.isArray(
+      result.data
+    )){
 
       throw new Error(
-        "Invalid data received from Google Sheet."
+        "Invalid data received."
       );
 
     }
@@ -1928,7 +1274,8 @@ async function loadData(){
       [...allData];
 
 
-    currentPage = 1;
+    currentPage =
+      1;
 
 
     renderTable();
@@ -1959,11 +1306,11 @@ async function loadData(){
 
   }finally{
 
-    refreshBtn.disabled =
+    btn.disabled =
       false;
 
 
-    refreshBtn.textContent =
+    btn.textContent =
       "🔄 Refresh";
 
   }
@@ -1988,21 +1335,13 @@ function renderTable(){
   ){
 
     tbody.innerHTML = `
-
       <tr>
-
-        <td colspan="4">
-
+        <td colspan="5">
           <div class="empty">
-
             No data found.
-
           </div>
-
         </td>
-
       </tr>
-
     `;
 
 
@@ -2014,21 +1353,14 @@ function renderTable(){
 
 
   const start =
-    (
-      currentPage - 1
-    ) *
-    ROWS_PER_PAGE;
-
-
-  const end =
-    start +
+    (currentPage - 1) *
     ROWS_PER_PAGE;
 
 
   const pageData =
     filteredData.slice(
       start,
-      end
+      start + ROWS_PER_PAGE
     );
 
 
@@ -2039,41 +1371,48 @@ function renderTable(){
     function(row){
 
       html += `
-
         <tr>
 
           <td>
             ${escapeHTML(
-              row.Name ||
-              row.Username ||
-              ""
+              row.Name || ""
             )}
           </td>
 
           <td>
             ${escapeHTML(
-              row.Ip ||
-              row.IP ||
-              ""
+              row.Ip || ""
             )}
           </td>
 
           <td>
             ${escapeHTML(
-              row.Work ||
-              ""
+              row.Work || ""
             )}
           </td>
 
           <td class="date-cell">
             ${escapeHTML(
-              row.Date ||
-              ""
+              row.Date || ""
             )}
           </td>
 
-        </tr>
+          <td>
 
+            <div class="actions">
+
+              <button
+                class="btn-sell"
+                onclick="sellEntryByRow(${Number(row._row)})"
+              >
+                💰 Sell
+              </button>
+
+            </div>
+
+          </td>
+
+        </tr>
       `;
 
     }
@@ -2090,7 +1429,7 @@ function renderTable(){
 
 
 /* =====================================================
-SEARCH
+FILTER
 ===================================================== */
 
 function applyFilters(){
@@ -2109,55 +1448,49 @@ function applyFilters(){
     allData.filter(
       function(row){
 
-        if(!search){
+        if(search){
 
-          return true;
+          const text =
+            (
+              String(
+                row.Name || ""
+              ) +
+              " " +
+              String(
+                row.Ip || ""
+              ) +
+              " " +
+              String(
+                row.Work || ""
+              ) +
+              " " +
+              String(
+                row.Date || ""
+              )
+            ).toLowerCase();
+
+
+          if(
+            !text.includes(
+              search
+            )
+          ){
+
+            return false;
+
+          }
 
         }
 
 
-        const searchText = (
-
-          String(
-            row.Name ||
-            row.Username ||
-            ""
-          ) +
-
-          " " +
-
-          String(
-            row.Ip ||
-            row.IP ||
-            ""
-          ) +
-
-          " " +
-
-          String(
-            row.Work ||
-            ""
-          ) +
-
-          " " +
-
-          String(
-            row.Date ||
-            ""
-          )
-
-        ).toLowerCase();
-
-
-        return searchText.includes(
-          search
-        );
+        return true;
 
       }
     );
 
 
-  currentPage = 1;
+  currentPage =
+    1;
 
 
   renderTable();
@@ -2168,23 +1501,22 @@ function applyFilters(){
 
 
 /* =====================================================
-CLEAR SEARCH
+CLEAR FILTER
 ===================================================== */
 
-function clearSearch(){
+function clearFilters(){
 
-  document
-    .getElementById(
-      "searchInput"
-    )
-    .value = "";
+  document.getElementById(
+    "searchInput"
+  ).value = "";
 
 
   filteredData =
     [...allData];
 
 
-  currentPage = 1;
+  currentPage =
+    1;
 
 
   renderTable();
@@ -2219,9 +1551,7 @@ function renderPagination(){
     );
 
 
-  if(
-    totalPages <= 1
-  ){
+  if(totalPages <= 1){
 
     pagination.innerHTML =
       "";
@@ -2238,19 +1568,12 @@ function renderPagination(){
   }
 
 
-  let html = "";
-
-
-  html += `
+  let html = `
 
     <button
       class="page-btn"
       onclick="changePage(${currentPage - 1})"
-      ${
-        currentPage === 1
-          ? "disabled"
-          : ""
-      }
+      ${currentPage === 1 ? "disabled" : ""}
     >
       ‹
     </button>
@@ -2258,14 +1581,14 @@ function renderPagination(){
   `;
 
 
-  let startPage =
+  const start =
     Math.max(
       1,
       currentPage - 2
     );
 
 
-  let endPage =
+  const end =
     Math.min(
       totalPages,
       currentPage + 2
@@ -2273,13 +1596,12 @@ function renderPagination(){
 
 
   for(
-    let i = startPage;
-    i <= endPage;
+    let i = start;
+    i <= end;
     i++
   ){
 
     html += `
-
       <button
         class="page-btn ${
           i === currentPage
@@ -2290,7 +1612,6 @@ function renderPagination(){
       >
         ${i}
       </button>
-
     `;
 
   }
@@ -2357,92 +1678,86 @@ TOTAL
 
 function updateTotal(){
 
-  document
-    .getElementById(
-      "totalCount"
-    )
-    .textContent =
+  document.getElementById(
+    "totalCount"
+  ).textContent =
     filteredData.length;
 
 }
 
 
 /* =====================================================
-OPEN ENTRY MODAL
+ENTRY MODAL
 ===================================================== */
 
 function openEntryModal(){
 
+  if(!checkLogin()){
+    return;
+  }
+
+
+  const username =
+    getLoggedInUsername();
+
+
+  if(!username){
+
+    logoutUser();
+
+    return;
+
+  }
+
+
+  document.getElementById(
+    "entryForm"
+  ).reset();
+
+
   /*
-    Username automatic
+    Username automatically
+    বসবে
   */
 
-  document
-    .getElementById(
-      "usernameInput"
-    )
-    .value =
-    loggedUsername;
+  document.getElementById(
+    "nameInput"
+  ).value =
+    username;
 
 
   /*
-    Date automatic
+    Date automatically বসবে
   */
 
-  document
-    .getElementById(
-      "dateInput"
-    )
-    .value =
-    getTodayInputDate();
+  document.getElementById(
+    "dateInput"
+  ).value =
+    getTodayDisplayDate();
 
 
-  /*
-    Clear IP + Work
-  */
-
-  document
-    .getElementById(
-      "ipInput"
-    )
-    .value = "";
-
-
-  document
-    .getElementById(
-      "workInput"
-    )
-    .value = "";
-
-
-  document
-    .getElementById(
-      "entryModal"
-    )
-    .classList
-    .add("show");
+  document.getElementById(
+    "entryModal"
+  ).classList.add(
+    "show"
+  );
 
 }
 
-
-/* =====================================================
-CLOSE MODAL
-===================================================== */
 
 function closeEntryModal(){
 
-  document
-    .getElementById(
-      "entryModal"
-    )
-    .classList
-    .remove("show");
+  document.getElementById(
+    "entryModal"
+  ).classList.remove(
+    "show"
+  );
 
 }
 
 
 /* =====================================================
-SUBMIT NEW ENTRY
+SUBMIT ENTRY
 ===================================================== */
 
 async function submitEntry(event){
@@ -2450,48 +1765,50 @@ async function submitEntry(event){
   event.preventDefault();
 
 
-  const submitBtn =
+  if(!checkLogin()){
+    return;
+  }
+
+
+  const btn =
     document.getElementById(
       "submitBtn"
     );
 
 
+  /*
+    Username আবার server এ যাওয়ার আগে
+    login থেকে নেওয়া হচ্ছে।
+  */
+
   const username =
-    loggedUsername;
+    getLoggedInUsername();
 
 
   const ip =
-    document
-      .getElementById(
-        "ipInput"
-      )
-      .value
-      .trim();
+    document.getElementById(
+      "ipInput"
+    ).value.trim();
 
 
   const work =
-    document
-      .getElementById(
-        "workInput"
-      )
-      .value
-      .trim();
+    document.getElementById(
+      "workInput"
+    ).value.trim();
 
+
+  /*
+    Date browser থেকে নেওয়া হচ্ছে
+    এবং user edit করতে পারবে না।
+  */
 
   const date =
-    document
-      .getElementById(
-        "dateInput"
-      )
-      .value;
+    getTodayDisplayDate();
 
 
   if(!username){
 
-    showToast(
-      "Login session not found.",
-      "error"
-    );
+    logoutUser();
 
     return;
 
@@ -2522,58 +1839,15 @@ async function submitEntry(event){
   }
 
 
-  /* =================================================
-  DUPLICATE IP CHECK
-  ================================================= */
-
-  const duplicateIP =
-    allData.some(
-      function(row){
-
-        const oldIP =
-          String(
-            row.Ip ||
-            row.IP ||
-            ""
-          )
-          .trim()
-          .toLowerCase();
-
-
-        return (
-          oldIP ===
-          ip.toLowerCase()
-        );
-
-      }
-    );
-
-
-  if(duplicateIP){
-
-    showToast(
-      "This IP has already been entered.",
-      "error"
-    );
-
-    return;
-
-  }
-
-
-  submitBtn.disabled =
+  btn.disabled =
     true;
 
 
-  submitBtn.textContent =
+  btn.textContent =
     "Saving...";
 
 
   try{
-
-    /*
-      New entry only
-    */
 
     const payload = {
 
@@ -2581,11 +1855,19 @@ async function submitEntry(event){
 
       data:{
 
+        /*
+          Name = logged in username
+        */
+
         Name:username,
 
         Ip:ip,
 
         Work:work,
+
+        /*
+          Date = automatic
+        */
 
         Date:date
 
@@ -2598,21 +1880,17 @@ async function submitEntry(event){
       await fetch(
         API_URL,
         {
-
           method:"POST",
 
           headers:{
-
             "Content-Type":
               "text/plain;charset=utf-8"
-
           },
 
           body:
             JSON.stringify(
               payload
             )
-
         }
       );
 
@@ -2631,19 +1909,11 @@ async function submitEntry(event){
       await response.json();
 
 
-    console.log(
-      "Save Response:",
-      result
-    );
-
-
-    if(
-      result.success === false
-    ){
+    if(result.success === false){
 
       throw new Error(
         result.message ||
-        "Entry save failed."
+        "Save failed."
       );
 
     }
@@ -2663,15 +1933,8 @@ async function submitEntry(event){
 
   }catch(error){
 
-    console.error(
-      "Save Error:",
-      error
-    );
+    console.error(error);
 
-
-    /*
-      যদি backend duplicate IP detect করে
-    */
 
     showToast(
       error.message ||
@@ -2682,12 +1945,168 @@ async function submitEntry(event){
 
   }finally{
 
-    submitBtn.disabled =
+    btn.disabled =
       false;
 
 
-    submitBtn.textContent =
+    btn.textContent =
       "Save Entry";
+
+  }
+
+}
+
+
+/* =====================================================
+SELL ENTRY
+===================================================== */
+
+async function sellEntryByRow(
+  rowNumber
+){
+
+  if(!checkLogin()){
+    return;
+  }
+
+
+  const row =
+    allData.find(
+      item =>
+        Number(item._row) ===
+        Number(rowNumber)
+    );
+
+
+  if(!row){
+
+    showToast(
+      "Entry not found.",
+      "error"
+    );
+
+    return;
+
+  }
+
+
+  const username =
+    getLoggedInUsername();
+
+
+  if(!username){
+
+    logoutUser();
+
+    return;
+
+  }
+
+
+  const confirmed =
+    confirm(
+      "Sell this entry?\n\n" +
+
+      "Name: " +
+      (row.Name || "") +
+
+      "\nIP: " +
+      (row.Ip || "") +
+
+      "\nWork: " +
+      (row.Work || "") +
+
+      "\n\nSold by: " +
+      username +
+
+      "\n\nThis entry will move to Sell sheet."
+    );
+
+
+  if(!confirmed){
+    return;
+  }
+
+
+  try{
+
+    const payload = {
+
+      action:"sell",
+
+      username:username,
+
+      data:{
+        ...row,
+        Username:username
+      }
+
+    };
+
+
+    const response =
+      await fetch(
+        API_URL,
+        {
+          method:"POST",
+
+          headers:{
+            "Content-Type":
+              "text/plain;charset=utf-8"
+          },
+
+          body:
+            JSON.stringify(
+              payload
+            )
+        }
+      );
+
+
+    if(!response.ok){
+
+      throw new Error(
+        "Server error: " +
+        response.status
+      );
+
+    }
+
+
+    const result =
+      await response.json();
+
+
+    if(result.success === false){
+
+      throw new Error(
+        result.message ||
+        "Sell failed."
+      );
+
+    }
+
+
+    showToast(
+      "Sold successfully by " +
+      username,
+      "success"
+    );
+
+
+    await loadData();
+
+
+  }catch(error){
+
+    console.error(error);
+
+
+    showToast(
+      error.message ||
+      "Failed to sell entry.",
+      "error"
+    );
 
   }
 
@@ -2698,44 +2117,40 @@ async function submitEntry(event){
 TODAY DATE
 ===================================================== */
 
-function getTodayInputDate(){
+function getTodayDisplayDate(){
 
   const now =
     new Date();
+
+
+  const day =
+    String(
+      now.getDate()
+    ).padStart(
+      2,
+      "0"
+    );
+
+
+  const month =
+    String(
+      now.getMonth() + 1
+    ).padStart(
+      2,
+      "0"
+    );
 
 
   const year =
     now.getFullYear();
 
 
-  const month =
-    String(
-      now.getMonth() + 1
-    )
-    .padStart(
-      2,
-      "0"
-    );
-
-
-  const day =
-    String(
-      now.getDate()
-    )
-    .padStart(
-      2,
-      "0"
-    );
-
-
   return (
-
-    year +
+    day +
     "-" +
     month +
     "-" +
-    day
-
+    year
   );
 
 }
@@ -2747,27 +2162,23 @@ LOADING
 
 function showLoading(){
 
-  document
-    .getElementById(
-      "tableBody"
-    )
-    .innerHTML = `
+  document.getElementById(
+    "tableBody"
+  ).innerHTML = `
 
-      <tr>
+    <tr>
 
-        <td colspan="4">
+      <td colspan="5">
 
-          <div class="loading">
+        <div class="loading">
+          ⏳ Loading data...
+        </div>
 
-            ⏳ Loading data...
+      </td>
 
-          </div>
+    </tr>
 
-        </td>
-
-      </tr>
-
-    `;
+  `;
 
 }
 
@@ -2776,32 +2187,33 @@ function showLoading(){
 ERROR
 ===================================================== */
 
-function showError(message){
+function showError(
+  message
+){
 
-  document
-    .getElementById(
-      "tableBody"
-    )
-    .innerHTML = `
+  document.getElementById(
+    "tableBody"
+  ).innerHTML = `
 
-      <tr>
+    <tr>
 
-        <td colspan="4">
+      <td colspan="5">
 
-          <div class="empty">
+        <div class="empty">
 
-            ❌
-            ${escapeHTML(
+          ❌ ${
+            escapeHTML(
               message
-            )}
+            )
+          }
 
-          </div>
+        </div>
 
-        </td>
+      </td>
 
-      </tr>
+    </tr>
 
-    `;
+  `;
 
 }
 
@@ -2827,9 +2239,7 @@ function showToast(
 
   toast.className =
     "toast show " +
-    (
-      type || ""
-    );
+    (type || "");
 
 
   setTimeout(
@@ -2846,10 +2256,12 @@ function showToast(
 
 
 /* =====================================================
-HTML SECURITY
+ESCAPE HTML
 ===================================================== */
 
-function escapeHTML(value){
+function escapeHTML(
+  value
+){
 
   return String(
     value ?? ""
@@ -2884,7 +2296,7 @@ function escapeHTML(value){
 
 
 /* =====================================================
-MODAL OUTSIDE CLICK
+OUTSIDE CLICK
 ===================================================== */
 
 document
@@ -2908,7 +2320,7 @@ document
 
 
 /* =====================================================
-ESCAPE
+ESC KEY
 ===================================================== */
 
 document.addEventListener(
@@ -2926,7 +2338,51 @@ document.addEventListener(
   }
 );
 
+
+/* =====================================================
+PAGE LOAD
+===================================================== */
+
+document.addEventListener(
+  "DOMContentLoaded",
+  function(){
+
+    /*
+      প্রথমেই login check
+    */
+
+    if(!checkLogin()){
+      return;
+    }
+
+
+    /*
+      Theme localStorage থেকে load
+      হবে এবং login/logout এর পরেও
+      একই থাকবে।
+    */
+
+    loadTheme();
+
+
+    /*
+      5 minute inactivity timer
+    */
+
+    startActivityMonitor();
+
+
+    /*
+      Data load
+    */
+
+    loadData();
+
+  }
+);
+
 </script>
 
 </body>
+
 </html>
