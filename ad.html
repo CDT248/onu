@@ -31,6 +31,7 @@
   --blue:#2563eb;
   --red:#dc2626;
   --orange:#d97706;
+  --purple:#7c3aed;
   --shadow:rgba(0,0,0,.20);
 }
 
@@ -137,19 +138,13 @@ button:disabled{
   font-weight:600;
 }
 
-
-/* =====================================================
-USER BUTTON
-===================================================== */
-
 .btn-users{
-  background:#eef2ff;
-  color:#4f46e5;
-  border:1px solid #c7d2fe;
+  background:#7c3aed;
+  color:#fff;
 }
 
 .btn-users:hover{
-  background:#e0e7ff;
+  background:#6d28d9;
 }
 
 
@@ -214,7 +209,8 @@ FILTER
   color:var(--muted);
 }
 
-.field input{
+.field input,
+.field select{
   width:100%;
   height:42px;
   border:1px solid var(--border);
@@ -226,7 +222,8 @@ FILTER
   font-size:14px;
 }
 
-.field input:focus{
+.field input:focus,
+.field select:focus{
   border-color:var(--green);
 }
 
@@ -516,6 +513,110 @@ FORM
 
 
 /* =====================================================
+USER MODAL
+===================================================== */
+
+.user-modal-box{
+  max-width:1100px;
+}
+
+.user-toolbar{
+  padding:16px 24px;
+  border-bottom:1px solid var(--border);
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
+}
+
+.user-total{
+  font-size:13px;
+  color:var(--muted);
+}
+
+.user-table-wrapper{
+  width:100%;
+  overflow-x:auto;
+  padding:0 20px;
+}
+
+.user-table{
+  min-width:800px;
+}
+
+.user-actions{
+  display:flex;
+  gap:6px;
+}
+
+.user-action{
+  padding:7px 10px;
+  border-radius:6px;
+  font-size:12px;
+  font-weight:600;
+}
+
+.user-action.edit{
+  background:#e8f1ff;
+  color:#2563eb;
+}
+
+.user-action.block{
+  background:#fff7ed;
+  color:#d97706;
+}
+
+.user-action.unblock{
+  background:#dcfce7;
+  color:#15803d;
+}
+
+.user-action.delete{
+  background:#fee2e2;
+  color:#dc2626;
+}
+
+.status-badge,
+.role-badge{
+  display:inline-flex;
+  align-items:center;
+  padding:5px 9px;
+  border-radius:20px;
+  font-size:11px;
+  font-weight:700;
+}
+
+.status-active{
+  background:#dcfce7;
+  color:#15803d;
+}
+
+.status-blocked{
+  background:#fee2e2;
+  color:#dc2626;
+}
+
+.status-inactive{
+  background:#f3f4f6;
+  color:#6b7280;
+}
+
+.role-badge{
+  background:#ede9fe;
+  color:#6d28d9;
+}
+
+
+/* =====================================================
+USER FORM MODAL
+===================================================== */
+
+.user-form-modal-box{
+  max-width:650px;
+}
+
+
+/* =====================================================
 LOADING
 ===================================================== */
 
@@ -549,7 +650,7 @@ TOAST
   transform:translateY(100px);
   opacity:0;
   transition:.3s;
-  z-index:2000;
+  z-index:3000;
   font-size:14px;
 }
 
@@ -564,138 +665,6 @@ TOAST
 
 .toast.error{
   background:#dc2626;
-}
-
-
-/* =====================================================
-USER MODAL
-===================================================== */
-
-.user-modal-box{
-  max-width:1050px;
-}
-
-.user-toolbar{
-  padding:18px 24px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:12px;
-  border-bottom:1px solid var(--border);
-}
-
-.user-search{
-  flex:1;
-  max-width:450px;
-}
-
-.user-search input{
-  width:100%;
-  height:42px;
-  border:1px solid var(--border);
-  border-radius:8px;
-  padding:0 13px;
-  outline:none;
-  background:var(--input);
-  color:var(--text);
-}
-
-.user-search input:focus{
-  border-color:var(--green);
-}
-
-.user-table-wrapper{
-  width:100%;
-  overflow-x:auto;
-  padding:0 24px 20px;
-}
-
-.user-table{
-  min-width:700px;
-}
-
-.user-table th,
-.user-table td{
-  padding:13px 12px;
-}
-
-.user-status{
-  display:inline-flex;
-  align-items:center;
-  gap:6px;
-  padding:5px 10px;
-  border-radius:20px;
-  font-size:12px;
-  font-weight:700;
-}
-
-.user-status.active{
-  background:#dcfce7;
-  color:#15803d;
-}
-
-.user-status.blocked{
-  background:#fee2e2;
-  color:#dc2626;
-}
-
-.user-status.inactive{
-  background:#fef3c7;
-  color:#b45309;
-}
-
-.user-action{
-  padding:7px 10px;
-  border-radius:6px;
-  font-size:12px;
-  font-weight:700;
-  margin-right:4px;
-}
-
-.user-edit-btn{
-  background:#e8f1ff;
-  color:#2563eb;
-}
-
-.user-toggle-btn{
-  background:#fff7ed;
-  color:#d97706;
-}
-
-.user-delete-btn{
-  background:#fee2e2;
-  color:#dc2626;
-}
-
-.user-edit-btn:hover{
-  background:#dbeafe;
-}
-
-.user-toggle-btn:hover{
-  background:#ffedd5;
-}
-
-.user-delete-btn:hover{
-  background:#fecaca;
-}
-
-.user-empty{
-  text-align:center;
-  padding:45px 20px;
-  color:var(--muted);
-}
-
-
-/* =====================================================
-USER FORM MODAL
-===================================================== */
-
-.user-form-modal{
-  z-index:1200;
-}
-
-.user-form-box{
-  max-width:650px;
 }
 
 
@@ -791,20 +760,6 @@ MOBILE
     min-width:auto;
   }
 
-  .user-toolbar{
-    flex-direction:column;
-    align-items:stretch;
-    padding:15px;
-  }
-
-  .user-search{
-    max-width:none;
-  }
-
-  .user-table-wrapper{
-    padding:0 15px 15px;
-  }
-
 }
 
 </style>
@@ -886,9 +841,7 @@ MAIN
   </div>
 
 
-  <!-- ===================================================
-  FILTER
-  ==================================================== -->
+  <!-- FILTER -->
 
   <section class="filter-box">
 
@@ -952,9 +905,7 @@ MAIN
   </section>
 
 
-  <!-- ===================================================
-  TABLE
-  ==================================================== -->
+  <!-- TABLE -->
 
   <section class="table-box">
 
@@ -985,13 +936,9 @@ MAIN
           <tr>
 
             <th>Name</th>
-
             <th>IP</th>
-
             <th>Work</th>
-
             <th>Date</th>
-
             <th>Action</th>
 
           </tr>
@@ -1078,9 +1025,7 @@ ENTRY MODAL
 
         <div class="form-group">
 
-          <label>
-            Name
-          </label>
+          <label>Name</label>
 
           <input
             type="text"
@@ -1095,9 +1040,7 @@ ENTRY MODAL
 
         <div class="form-group">
 
-          <label>
-            IP
-          </label>
+          <label>IP</label>
 
           <input
             type="text"
@@ -1112,9 +1055,7 @@ ENTRY MODAL
 
         <div class="form-group full">
 
-          <label>
-            Work
-          </label>
+          <label>Work</label>
 
           <textarea
             id="workInput"
@@ -1127,9 +1068,7 @@ ENTRY MODAL
 
         <div class="form-group">
 
-          <label>
-            Date
-          </label>
+          <label>Date</label>
 
           <input
             type="date"
@@ -1169,7 +1108,7 @@ ENTRY MODAL
 
 
 <!-- =====================================================
-USER MANAGEMENT MODAL
+USER LIST MODAL
 ===================================================== -->
 
 <div
@@ -1181,13 +1120,9 @@ USER MANAGEMENT MODAL
 
     <div class="modal-header">
 
-      <div>
-
-        <h2>
-          👤 User Management
-        </h2>
-
-      </div>
+      <h2>
+        👤 User Management
+      </h2>
 
       <button
         class="close-btn"
@@ -1201,24 +1136,34 @@ USER MANAGEMENT MODAL
 
     <div class="user-toolbar">
 
-      <div class="user-search">
+      <div class="user-total">
 
-        <input
-          type="text"
-          id="userSearchInput"
-          placeholder="🔍 Search username, name or role..."
-          oninput="filterUsers()"
-        >
+        Total Users:
+        <strong id="userTotal">
+          0
+        </strong>
 
       </div>
 
 
-      <button
-        class="btn btn-primary"
-        onclick="openAddUserModal()"
-      >
-        ➕ Add User
-      </button>
+      <div>
+
+        <button
+          class="btn btn-refresh"
+          onclick="loadUsers()"
+          id="userRefreshBtn"
+        >
+          🔄 Refresh
+        </button>
+
+        <button
+          class="btn btn-primary"
+          onclick="openAddUserModal()"
+        >
+          ➕ Add User
+        </button>
+
+      </div>
 
     </div>
 
@@ -1232,15 +1177,10 @@ USER MANAGEMENT MODAL
           <tr>
 
             <th>Username</th>
-
             <th>Password</th>
-
             <th>Name</th>
-
             <th>Role</th>
-
             <th>Status</th>
-
             <th>Action</th>
 
           </tr>
@@ -1255,7 +1195,7 @@ USER MANAGEMENT MODAL
             <td colspan="6">
 
               <div class="loading">
-                ⏳ Loading users...
+                Loading users...
               </div>
 
             </td>
@@ -1278,11 +1218,11 @@ ADD / EDIT USER MODAL
 ===================================================== -->
 
 <div
-  class="modal user-form-modal"
+  class="modal"
   id="userFormModal"
 >
 
-  <div class="modal-box user-form-box">
+  <div class="modal-box user-form-modal-box">
 
     <div class="modal-header">
 
@@ -1308,6 +1248,9 @@ ADD / EDIT USER MODAL
 
       <div class="form-grid">
 
+
+        <!-- USERNAME -->
+
         <div class="form-group">
 
           <label>
@@ -1324,6 +1267,8 @@ ADD / EDIT USER MODAL
 
         </div>
 
+
+        <!-- PASSWORD -->
 
         <div class="form-group">
 
@@ -1342,6 +1287,8 @@ ADD / EDIT USER MODAL
         </div>
 
 
+        <!-- NAME -->
+
         <div class="form-group">
 
           <label>
@@ -1358,6 +1305,8 @@ ADD / EDIT USER MODAL
 
         </div>
 
+
+        <!-- ROLE -->
 
         <div class="form-group">
 
@@ -1386,18 +1335,20 @@ ADD / EDIT USER MODAL
               Call
             </option>
 
-            <option value="guest">
-              Guest
-            </option>
-
             <option value="manager">
               Manager
+            </option>
+
+            <option value="guest">
+              Guest
             </option>
 
           </select>
 
         </div>
 
+
+        <!-- STATUS -->
 
         <div class="form-group">
 
@@ -1409,6 +1360,10 @@ ADD / EDIT USER MODAL
             id="userStatus"
             required
           >
+
+            <option value="">
+              Select Status
+            </option>
 
             <option value="Active">
               Active
@@ -1425,6 +1380,7 @@ ADD / EDIT USER MODAL
           </select>
 
         </div>
+
 
       </div>
 
@@ -1505,8 +1461,6 @@ USER SETTINGS
 ===================================================== */
 
 let allUsers = [];
-
-let filteredUsers = [];
 
 let editingUser = null;
 
@@ -1610,7 +1564,6 @@ function requireUsername(){
       "Logged-in username পাওয়া যায়নি.",
       "error"
     );
-
 
     return null;
 
@@ -2035,14 +1988,12 @@ function renderTable(){
                 ✏️ Edit
               </button>
 
-
               <button
                 class="btn-delete"
                 onclick="deleteEntryByRow(${rowNumber})"
               >
                 🗑️ Delete
               </button>
-
 
               <button
                 class="btn-sell"
@@ -2176,9 +2127,7 @@ function applyFilters(){
     );
 
 
-  currentPage =
-    1;
-
+  currentPage = 1;
 
   renderTable();
 
@@ -2197,9 +2146,11 @@ function clearFilters(){
     "searchInput"
   ).value = "";
 
+
   document.getElementById(
     "fromDate"
   ).value = "";
+
 
   document.getElementById(
     "toDate"
@@ -2210,9 +2161,7 @@ function clearFilters(){
     [...allData];
 
 
-  currentPage =
-    1;
-
+  currentPage = 1;
 
   renderTable();
 
@@ -2324,8 +2273,7 @@ function renderPagination(){
     totalPages <= 1
   ){
 
-    pagination.innerHTML =
-      "";
+    pagination.innerHTML = "";
 
     pageInfo.textContent =
       filteredData.length
@@ -2448,12 +2396,10 @@ TOTAL
 
 function updateTotal(){
 
-  document
-    .getElementById(
-      "totalCount"
-    )
-    .textContent =
-      filteredData.length;
+  document.getElementById(
+    "totalCount"
+  ).textContent =
+    filteredData.length;
 
 }
 
@@ -2464,8 +2410,7 @@ OPEN ENTRY
 
 function openEntryModal(){
 
-  editingRow =
-    null;
+  editingRow = null;
 
 
   document.getElementById(
@@ -2493,24 +2438,27 @@ function openEntryModal(){
 
   document.getElementById(
     "entryModal"
-  ).classList.add("show");
+  ).classList.add(
+    "show"
+  );
 
 }
 
 
 /* =====================================================
-CLOSE ENTRY MODAL
+CLOSE ENTRY
 ===================================================== */
 
 function closeEntryModal(){
 
   document.getElementById(
     "entryModal"
-  ).classList.remove("show");
+  ).classList.remove(
+    "show"
+  );
 
 
-  editingRow =
-    null;
+  editingRow = null;
 
 }
 
@@ -2525,8 +2473,11 @@ function editEntryByRow(rowNumber){
     allData.find(
       function(item){
 
-        return Number(item._row) ===
-               Number(rowNumber);
+        return Number(
+          item._row
+        ) === Number(
+          rowNumber
+        );
 
       }
     );
@@ -2588,7 +2539,9 @@ function editEntryByRow(rowNumber){
 
   document.getElementById(
     "entryModal"
-  ).classList.add("show");
+  ).classList.add(
+    "show"
+  );
 
 }
 
@@ -2694,10 +2647,12 @@ async function submitEntry(event){
           : "create",
 
       data:{
+
         Name:name,
         Ip:ip,
         Work:work,
         Date:date
+
       },
 
       oldData:
@@ -2781,6 +2736,7 @@ async function submitEntry(event){
       "error"
     );
 
+
   }finally{
 
     submitBtn.disabled =
@@ -2807,8 +2763,11 @@ async function deleteEntryByRow(rowNumber){
     allData.find(
       function(item){
 
-        return Number(item._row) ===
-               Number(rowNumber);
+        return Number(
+          item._row
+        ) === Number(
+          rowNumber
+        );
 
       }
     );
@@ -2868,8 +2827,11 @@ async function deleteEntryByRow(rowNumber){
       username:username,
 
       data:{
+
         ...row,
+
         Username:username
+
       }
 
     };
@@ -2894,16 +2856,6 @@ async function deleteEntryByRow(rowNumber){
 
         }
       );
-
-
-    if(!response.ok){
-
-      throw new Error(
-        "Server error: " +
-        response.status
-      );
-
-    }
 
 
     const result =
@@ -2935,7 +2887,6 @@ async function deleteEntryByRow(rowNumber){
   }catch(error){
 
     console.error(
-      "Delete Error:",
       error
     );
 
@@ -2961,8 +2912,11 @@ async function sellEntryByRow(rowNumber){
     allData.find(
       function(item){
 
-        return Number(item._row) ===
-               Number(rowNumber);
+        return Number(
+          item._row
+        ) === Number(
+          rowNumber
+        );
 
       }
     );
@@ -3025,8 +2979,11 @@ async function sellEntryByRow(rowNumber){
       username:username,
 
       data:{
+
         ...row,
+
         Username:username
+
       }
 
     };
@@ -3051,16 +3008,6 @@ async function sellEntryByRow(rowNumber){
 
         }
       );
-
-
-    if(!response.ok){
-
-      throw new Error(
-        "Server error: " +
-        response.status
-      );
-
-    }
 
 
     const result =
@@ -3092,7 +3039,6 @@ async function sellEntryByRow(rowNumber){
   }catch(error){
 
     console.error(
-      "Sell Error:",
       error
     );
 
@@ -3100,6 +3046,1160 @@ async function sellEntryByRow(rowNumber){
     showToast(
       error.message ||
       "Failed to sell entry.",
+      "error"
+    );
+
+  }
+
+}
+
+
+/* =====================================================
+USER MODAL
+===================================================== */
+
+function openUserModal(){
+
+  document.getElementById(
+    "userModal"
+  ).classList.add(
+    "show"
+  );
+
+
+  loadUsers();
+
+}
+
+
+function closeUserModal(){
+
+  document.getElementById(
+    "userModal"
+  ).classList.remove(
+    "show"
+  );
+
+}
+
+
+/* =====================================================
+LOAD USERS
+===================================================== */
+
+async function loadUsers(){
+
+  const body =
+    document.getElementById(
+      "userTableBody"
+    );
+
+
+  const refreshBtn =
+    document.getElementById(
+      "userRefreshBtn"
+    );
+
+
+  body.innerHTML = `
+
+    <tr>
+
+      <td colspan="6">
+
+        <div class="loading">
+          ⏳ Loading users...
+        </div>
+
+      </td>
+
+    </tr>
+
+  `;
+
+
+  refreshBtn.disabled =
+    true;
+
+
+  refreshBtn.textContent =
+    "⏳ Loading...";
+
+
+  try{
+
+    const response =
+      await fetch(
+
+        USER_API_URL +
+        "?action=getUsers&_=" +
+        Date.now(),
+
+        {
+          method:"GET",
+          cache:"no-store"
+        }
+
+      );
+
+
+    if(!response.ok){
+
+      throw new Error(
+        "User server error: " +
+        response.status
+      );
+
+    }
+
+
+    const result =
+      await response.json();
+
+
+    if(
+      result.success === false
+    ){
+
+      throw new Error(
+        result.message ||
+        "Failed to load users."
+      );
+
+    }
+
+
+    allUsers =
+      Array.isArray(
+        result.users
+      )
+        ? result.users
+        : (
+            Array.isArray(
+              result.data
+            )
+              ? result.data
+              : []
+          );
+
+
+    document.getElementById(
+      "userTotal"
+    ).textContent =
+      allUsers.length;
+
+
+    renderUsers();
+
+
+  }catch(error){
+
+    console.error(
+      "User Load Error:",
+      error
+    );
+
+
+    body.innerHTML = `
+
+      <tr>
+
+        <td colspan="6">
+
+          <div class="empty">
+
+            ❌
+            ${escapeHTML(
+              error.message ||
+              "Failed to load users."
+            )}
+
+          </div>
+
+        </td>
+
+      </tr>
+
+    `;
+
+
+    showToast(
+      error.message ||
+      "Failed to load users.",
+      "error"
+    );
+
+
+  }finally{
+
+    refreshBtn.disabled =
+      false;
+
+    refreshBtn.textContent =
+      "🔄 Refresh";
+
+  }
+
+}
+
+
+/* =====================================================
+RENDER USERS
+===================================================== */
+
+function renderUsers(){
+
+  const body =
+    document.getElementById(
+      "userTableBody"
+    );
+
+
+  if(
+    !allUsers.length
+  ){
+
+    body.innerHTML = `
+
+      <tr>
+
+        <td colspan="6">
+
+          <div class="empty">
+            No users found.
+          </div>
+
+        </td>
+
+      </tr>
+
+    `;
+
+    return;
+
+  }
+
+
+  let html = "";
+
+
+  allUsers.forEach(
+    function(user,index){
+
+      const username =
+        user.username ||
+        user.Username ||
+        "";
+
+
+      const password =
+        user.password ||
+        user.Password ||
+        "";
+
+
+      const name =
+        user.name ||
+        user.Name ||
+        "";
+
+
+      const role =
+        user.role ||
+        user.Role ||
+        "";
+
+
+      const status =
+        user.status ||
+        user.Status ||
+        "Active";
+
+
+      const row =
+        Number(
+          user._row ||
+          user.row ||
+          0
+        );
+
+
+      let statusClass =
+        "status-inactive";
+
+
+      if(
+        String(status)
+          .toLowerCase()
+          === "active"
+      ){
+
+        statusClass =
+          "status-active";
+
+      }
+
+
+      if(
+        String(status)
+          .toLowerCase()
+          === "blocked"
+      ){
+
+        statusClass =
+          "status-blocked";
+
+      }
+
+
+      const safeUser =
+        encodeURIComponent(
+          username
+        );
+
+
+      html += `
+
+        <tr>
+
+          <td>
+            <strong>
+              ${escapeHTML(username)}
+            </strong>
+          </td>
+
+          <td>
+            ${escapeHTML(password)}
+          </td>
+
+          <td>
+            ${escapeHTML(name)}
+          </td>
+
+          <td>
+
+            <span class="role-badge">
+
+              ${escapeHTML(
+                role || "—"
+              )}
+
+            </span>
+
+          </td>
+
+          <td>
+
+            <span
+              class="status-badge ${statusClass}"
+            >
+
+              ${escapeHTML(
+                status
+              )}
+
+            </span>
+
+          </td>
+
+          <td>
+
+            <div class="user-actions">
+
+              <button
+                class="user-action edit"
+                onclick="editUser(${row},'${safeUser}')"
+              >
+                ✏️ Edit
+              </button>
+
+              ${
+                String(status).toLowerCase()
+                === "blocked"
+
+                ?
+
+                `
+                <button
+                  class="user-action unblock"
+                  onclick="unblockUser(${row},'${safeUser}')"
+                >
+                  🔓 Unblock
+                </button>
+                `
+
+                :
+
+                `
+                <button
+                  class="user-action block"
+                  onclick="blockUser(${row},'${safeUser}')"
+                >
+                  🔒 Block
+                </button>
+                `
+              }
+
+              <button
+                class="user-action delete"
+                onclick="deleteUser(${row},'${safeUser}')"
+              >
+                🗑️ Delete
+              </button>
+
+            </div>
+
+          </td>
+
+        </tr>
+
+      `;
+
+    }
+  );
+
+
+  body.innerHTML =
+    html;
+
+}
+
+
+/* =====================================================
+OPEN ADD USER
+===================================================== */
+
+function openAddUserModal(){
+
+  editingUser =
+    null;
+
+
+  document.getElementById(
+    "userFormTitle"
+  ).textContent =
+    "Add User";
+
+
+  document.getElementById(
+    "userSubmitBtn"
+  ).textContent =
+    "Add User";
+
+
+  document.getElementById(
+    "userForm"
+  ).reset();
+
+
+  document.getElementById(
+    "userStatus"
+  ).value =
+    "Active";
+
+
+  document.getElementById(
+    "userFormModal"
+  ).classList.add(
+    "show"
+  );
+
+}
+
+
+/* =====================================================
+EDIT USER
+===================================================== */
+
+function editUser(
+  rowNumber,
+  encodedUsername
+){
+
+  const username =
+    decodeURIComponent(
+      encodedUsername
+    );
+
+
+  const user =
+    allUsers.find(
+      function(item){
+
+        const itemRow =
+          Number(
+            item._row ||
+            item.row ||
+            0
+          );
+
+
+        const itemUsername =
+          String(
+            item.username ||
+            item.Username ||
+            ""
+          );
+
+
+        return (
+
+          itemRow ===
+          Number(rowNumber)
+
+          ||
+
+          itemUsername.toLowerCase()
+          ===
+          username.toLowerCase()
+
+        );
+
+      }
+    );
+
+
+  if(!user){
+
+    showToast(
+      "User not found.",
+      "error"
+    );
+
+    return;
+
+  }
+
+
+  editingUser =
+    user;
+
+
+  document.getElementById(
+    "userFormTitle"
+  ).textContent =
+    "Edit User";
+
+
+  document.getElementById(
+    "userSubmitBtn"
+  ).textContent =
+    "Update User";
+
+
+  document.getElementById(
+    "userUsername"
+  ).value =
+    user.username ||
+    user.Username ||
+    "";
+
+
+  document.getElementById(
+    "userPassword"
+  ).value =
+    user.password ||
+    user.Password ||
+    "";
+
+
+  document.getElementById(
+    "userName"
+  ).value =
+    user.name ||
+    user.Name ||
+    "";
+
+
+  document.getElementById(
+    "userRole"
+  ).value =
+    user.role ||
+    user.Role ||
+    "";
+
+
+  document.getElementById(
+    "userStatus"
+  ).value =
+    user.status ||
+    user.Status ||
+    "Active";
+
+
+  document.getElementById(
+    "userFormModal"
+  ).classList.add(
+    "show"
+  );
+
+}
+
+
+/* =====================================================
+CLOSE USER FORM
+===================================================== */
+
+function closeUserFormModal(){
+
+  document.getElementById(
+    "userFormModal"
+  ).classList.remove(
+    "show"
+  );
+
+
+  editingUser =
+    null;
+
+}
+
+
+/* =====================================================
+SUBMIT USER
+===================================================== */
+
+async function submitUser(event){
+
+  event.preventDefault();
+
+
+  const button =
+    document.getElementById(
+      "userSubmitBtn"
+    );
+
+
+  const username =
+    document.getElementById(
+      "userUsername"
+    ).value.trim();
+
+
+  const password =
+    document.getElementById(
+      "userPassword"
+    ).value.trim();
+
+
+  const name =
+    document.getElementById(
+      "userName"
+    ).value.trim();
+
+
+  const role =
+    document.getElementById(
+      "userRole"
+    ).value;
+
+
+  const status =
+    document.getElementById(
+      "userStatus"
+    ).value;
+
+
+  if(!username){
+
+    showToast(
+      "Username is required.",
+      "error"
+    );
+
+    return;
+
+  }
+
+
+  if(!password){
+
+    showToast(
+      "Password is required.",
+      "error"
+    );
+
+    return;
+
+  }
+
+
+  if(!name){
+
+    showToast(
+      "Name is required.",
+      "error"
+    );
+
+    return;
+
+  }
+
+
+  if(!role){
+
+    showToast(
+      "Please select Role.",
+      "error"
+    );
+
+    return;
+
+  }
+
+
+  if(!status){
+
+    showToast(
+      "Please select Status.",
+      "error"
+    );
+
+    return;
+
+  }
+
+
+  const isEditing =
+    Boolean(
+      editingUser
+    );
+
+
+  button.disabled =
+    true;
+
+
+  button.textContent =
+    isEditing
+      ? "Updating..."
+      : "Adding...";
+
+
+  try{
+
+    const payload = {
+
+      action:
+        isEditing
+          ? "updateUser"
+          : "addUser",
+
+      username:
+        username,
+
+      password:
+        password,
+
+      name:
+        name,
+
+      role:
+        role,
+
+      status:
+        status
+
+    };
+
+
+    if(isEditing){
+
+      payload.row =
+        Number(
+          editingUser._row ||
+          editingUser.row ||
+          0
+        );
+
+
+      payload.oldUsername =
+        editingUser.username ||
+        editingUser.Username ||
+        "";
+
+    }
+
+
+    const response =
+      await fetch(
+        USER_API_URL,
+        {
+
+          method:"POST",
+
+          headers:{
+            "Content-Type":
+              "text/plain;charset=utf-8"
+          },
+
+          body:
+            JSON.stringify(
+              payload
+            )
+
+        }
+      );
+
+
+    if(!response.ok){
+
+      throw new Error(
+        "User server error: " +
+        response.status
+      );
+
+    }
+
+
+    const result =
+      await response.json();
+
+
+    if(
+      result.success === false
+    ){
+
+      throw new Error(
+        result.message ||
+        "User operation failed."
+      );
+
+    }
+
+
+    closeUserFormModal();
+
+
+    showToast(
+      isEditing
+        ? "User updated successfully."
+        : "User added successfully.",
+      "success"
+    );
+
+
+    await loadUsers();
+
+
+  }catch(error){
+
+    console.error(
+      "User Save Error:",
+      error
+    );
+
+
+    showToast(
+      error.message ||
+      "Failed to save user.",
+      "error"
+    );
+
+  }finally{
+
+    button.disabled =
+      false;
+
+
+    button.textContent =
+      isEditing
+        ? "Update User"
+        : "Add User";
+
+  }
+
+}
+
+
+/* =====================================================
+BLOCK USER
+===================================================== */
+
+async function blockUser(
+  rowNumber,
+  encodedUsername
+){
+
+  const username =
+    decodeURIComponent(
+      encodedUsername
+    );
+
+
+  const confirmed =
+    confirm(
+      "Block user \"" +
+      username +
+      "\"?"
+    );
+
+
+  if(!confirmed){
+    return;
+  }
+
+
+  await changeUserStatus(
+    rowNumber,
+    username,
+    "Blocked"
+  );
+
+}
+
+
+/* =====================================================
+UNBLOCK USER
+===================================================== */
+
+async function unblockUser(
+  rowNumber,
+  encodedUsername
+){
+
+  const username =
+    decodeURIComponent(
+      encodedUsername
+    );
+
+
+  await changeUserStatus(
+    rowNumber,
+    username,
+    "Active"
+  );
+
+}
+
+
+/* =====================================================
+CHANGE USER STATUS
+===================================================== */
+
+async function changeUserStatus(
+  rowNumber,
+  username,
+  status
+){
+
+  try{
+
+    const payload = {
+
+      action:
+        status === "Blocked"
+          ? "blockUser"
+          : "unblockUser",
+
+      row:
+        Number(
+          rowNumber
+        ),
+
+      username:
+        username,
+
+      status:
+        status
+
+    };
+
+
+    const response =
+      await fetch(
+        USER_API_URL,
+        {
+
+          method:"POST",
+
+          headers:{
+            "Content-Type":
+              "text/plain;charset=utf-8"
+          },
+
+          body:
+            JSON.stringify(
+              payload
+            )
+
+        }
+      );
+
+
+    if(!response.ok){
+
+      throw new Error(
+        "User server error: " +
+        response.status
+      );
+
+    }
+
+
+    const result =
+      await response.json();
+
+
+    if(
+      result.success === false
+    ){
+
+      throw new Error(
+        result.message ||
+        "Status update failed."
+      );
+
+    }
+
+
+    showToast(
+      username +
+      " is now " +
+      status +
+      ".",
+      "success"
+    );
+
+
+    await loadUsers();
+
+
+  }catch(error){
+
+    console.error(
+      "Status Error:",
+      error
+    );
+
+
+    showToast(
+      error.message ||
+      "Failed to update status.",
+      "error"
+    );
+
+  }
+
+}
+
+
+/* =====================================================
+DELETE USER
+===================================================== */
+
+async function deleteUser(
+  rowNumber,
+  encodedUsername
+){
+
+  const username =
+    decodeURIComponent(
+      encodedUsername
+    );
+
+
+  const confirmed =
+    confirm(
+
+      "Delete user \"" +
+      username +
+      "\"?\n\n" +
+      "This action cannot be undone."
+
+    );
+
+
+  if(!confirmed){
+    return;
+  }
+
+
+  try{
+
+    const payload = {
+
+      action:
+        "deleteUser",
+
+      row:
+        Number(
+          rowNumber
+        ),
+
+      username:
+        username
+
+    };
+
+
+    const response =
+      await fetch(
+        USER_API_URL,
+        {
+
+          method:"POST",
+
+          headers:{
+            "Content-Type":
+              "text/plain;charset=utf-8"
+          },
+
+          body:
+            JSON.stringify(
+              payload
+            )
+
+        }
+      );
+
+
+    if(!response.ok){
+
+      throw new Error(
+        "User server error: " +
+        response.status
+      );
+
+    }
+
+
+    const result =
+      await response.json();
+
+
+    if(
+      result.success === false
+    ){
+
+      throw new Error(
+        result.message ||
+        "Delete failed."
+      );
+
+    }
+
+
+    showToast(
+      "User deleted successfully.",
+      "success"
+    );
+
+
+    await loadUsers();
+
+
+  }catch(error){
+
+    console.error(
+      "Delete User Error:",
+      error
+    );
+
+
+    showToast(
+      error.message ||
+      "Failed to delete user.",
       "error"
     );
 
@@ -3125,13 +4225,19 @@ function getTodayInputDate(){
   const month =
     String(
       now.getMonth() + 1
-    ).padStart(2,"0");
+    ).padStart(
+      2,
+      "0"
+    );
 
 
   const day =
     String(
       now.getDate()
-    ).padStart(2,"0");
+    ).padStart(
+      2,
+      "0"
+    );
 
 
   return (
@@ -3189,7 +4295,9 @@ function showError(message){
         <div class="empty">
 
           ❌
-          ${escapeHTML(message)}
+          ${escapeHTML(
+            message
+          )}
 
         </div>
 
@@ -3280,1167 +4388,7 @@ function escapeHTML(value){
 
 
 /* =====================================================
-=====================================================
-USER MANAGEMENT
-=====================================================
-===================================================== */
-
-
-/* =====================================================
-OPEN USER MODAL
-===================================================== */
-
-function openUserModal(){
-
-  document.getElementById(
-    "userModal"
-  ).classList.add("show");
-
-
-  document.getElementById(
-    "userSearchInput"
-  ).value = "";
-
-
-  loadUsers();
-
-}
-
-
-/* =====================================================
-CLOSE USER MODAL
-===================================================== */
-
-function closeUserModal(){
-
-  document.getElementById(
-    "userModal"
-  ).classList.remove("show");
-
-
-  closeUserFormModal();
-
-}
-
-
-/* =====================================================
-LOAD USERS
-===================================================== */
-
-async function loadUsers(){
-
-  const tbody =
-    document.getElementById(
-      "userTableBody"
-    );
-
-
-  tbody.innerHTML = `
-
-    <tr>
-
-      <td colspan="6">
-
-        <div class="loading">
-          ⏳ Loading users...
-        </div>
-
-      </td>
-
-    </tr>
-
-  `;
-
-
-  try{
-
-    const response =
-      await fetch(
-
-        USER_API_URL +
-        "?action=getUsers&_=" +
-        Date.now(),
-
-        {
-          method:"GET",
-          cache:"no-store"
-        }
-
-      );
-
-
-    if(!response.ok){
-
-      throw new Error(
-        "User server error: " +
-        response.status
-      );
-
-    }
-
-
-    const result =
-      await response.json();
-
-
-    if(
-      result.success === false
-    ){
-
-      throw new Error(
-        result.message ||
-        "Failed to load users."
-      );
-
-    }
-
-
-    if(
-      !Array.isArray(
-        result.data
-      )
-    ){
-
-      throw new Error(
-        "Invalid user data received."
-      );
-
-    }
-
-
-    allUsers =
-      result.data;
-
-
-    filteredUsers =
-      [...allUsers];
-
-
-    renderUsers();
-
-
-  }catch(error){
-
-    console.error(
-      "User Load Error:",
-      error
-    );
-
-
-    tbody.innerHTML = `
-
-      <tr>
-
-        <td colspan="6">
-
-          <div class="user-empty">
-
-            ❌
-            ${escapeHTML(
-              error.message ||
-              "Failed to load users."
-            )}
-
-          </div>
-
-        </td>
-
-      </tr>
-
-    `;
-
-
-    showToast(
-      error.message ||
-      "Failed to load users.",
-      "error"
-    );
-
-  }
-
-}
-
-
-/* =====================================================
-RENDER USERS
-===================================================== */
-
-function renderUsers(){
-
-  const tbody =
-    document.getElementById(
-      "userTableBody"
-    );
-
-
-  if(
-    filteredUsers.length === 0
-  ){
-
-    tbody.innerHTML = `
-
-      <tr>
-
-        <td colspan="6">
-
-          <div class="user-empty">
-            No users found.
-          </div>
-
-        </td>
-
-      </tr>
-
-    `;
-
-    return;
-
-  }
-
-
-  let html = "";
-
-
-  filteredUsers.forEach(
-    function(user){
-
-      const username =
-        user.Username ||
-        user.username ||
-        "";
-
-
-      const password =
-        user.Password ||
-        user.password ||
-        "";
-
-
-      const name =
-        user.Name ||
-        user.name ||
-        "";
-
-
-      const role =
-        user.Role ||
-        user.role ||
-        "";
-
-
-      const status =
-        user.Status ||
-        user.status ||
-        "Inactive";
-
-
-      let statusClass =
-        "inactive";
-
-
-      const statusLower =
-        String(
-          status
-        ).toLowerCase();
-
-
-      if(
-        statusLower === "active"
-      ){
-
-        statusClass =
-          "active";
-
-      }else if(
-        statusLower === "blocked"
-      ){
-
-        statusClass =
-          "blocked";
-
-      }
-
-
-      html += `
-
-        <tr>
-
-          <td>
-            <strong>
-              ${escapeHTML(username)}
-            </strong>
-          </td>
-
-          <td>
-            ${escapeHTML(password)}
-          </td>
-
-          <td>
-            ${escapeHTML(name)}
-          </td>
-
-          <td>
-            ${escapeHTML(role)}
-          </td>
-
-          <td>
-
-            <span
-              class="user-status ${statusClass}"
-            >
-              ${statusClass === "active" ? "●" : "●"}
-              ${escapeHTML(status)}
-            </span>
-
-          </td>
-
-          <td>
-
-            <button
-              class="user-action user-edit-btn"
-              onclick='editUser(${JSON.stringify(user).replace(/'/g,"&#039;")})'
-            >
-              ✏️ Edit
-            </button>
-
-
-            <button
-              class="user-action user-toggle-btn"
-              onclick='toggleUserStatus(${JSON.stringify(user).replace(/'/g,"&#039;")})'
-            >
-              ${statusLower === "active"
-                ? "🚫 Block"
-                : "✅ Active"}
-            </button>
-
-
-            <button
-              class="user-action user-delete-btn"
-              onclick='deleteUser(${JSON.stringify(user).replace(/'/g,"&#039;")})'
-            >
-              🗑️ Delete
-            </button>
-
-          </td>
-
-        </tr>
-
-      `;
-
-    }
-  );
-
-
-  tbody.innerHTML =
-    html;
-
-}
-
-
-/* =====================================================
-FILTER USERS
-===================================================== */
-
-function filterUsers(){
-
-  const search =
-    document.getElementById(
-      "userSearchInput"
-    ).value
-    .toLowerCase()
-    .trim();
-
-
-  if(!search){
-
-    filteredUsers =
-      [...allUsers];
-
-    renderUsers();
-
-    return;
-
-  }
-
-
-  filteredUsers =
-    allUsers.filter(
-      function(user){
-
-        const username =
-          String(
-            user.Username ||
-            user.username ||
-            ""
-          );
-
-
-        const name =
-          String(
-            user.Name ||
-            user.name ||
-            ""
-          );
-
-
-        const role =
-          String(
-            user.Role ||
-            user.role ||
-            ""
-          );
-
-
-        const status =
-          String(
-            user.Status ||
-            user.status ||
-            ""
-          );
-
-
-        const text =
-          (
-            username +
-            " " +
-            name +
-            " " +
-            role +
-            " " +
-            status
-          ).toLowerCase();
-
-
-        return text.includes(
-          search
-        );
-
-      }
-    );
-
-
-  renderUsers();
-
-}
-
-
-/* =====================================================
-OPEN ADD USER
-===================================================== */
-
-function openAddUserModal(){
-
-  editingUser =
-    null;
-
-
-  document.getElementById(
-    "userFormTitle"
-  ).textContent =
-    "Add User";
-
-
-  document.getElementById(
-    "userSubmitBtn"
-  ).textContent =
-    "Add User";
-
-
-  document.getElementById(
-    "userForm"
-  ).reset();
-
-
-  document.getElementById(
-    "userStatus"
-  ).value =
-    "Active";
-
-
-  document.getElementById(
-    "userFormModal"
-  ).classList.add("show");
-
-}
-
-
-/* =====================================================
-EDIT USER
-===================================================== */
-
-function editUser(user){
-
-  editingUser =
-    user;
-
-
-  const username =
-    user.Username ||
-    user.username ||
-    "";
-
-
-  const password =
-    user.Password ||
-    user.password ||
-    "";
-
-
-  const name =
-    user.Name ||
-    user.name ||
-    "";
-
-
-  const role =
-    user.Role ||
-    user.role ||
-    "";
-
-
-  const status =
-    user.Status ||
-    user.status ||
-    "Active";
-
-
-  document.getElementById(
-    "userFormTitle"
-  ).textContent =
-    "Edit User";
-
-
-  document.getElementById(
-    "userSubmitBtn"
-  ).textContent =
-    "Update User";
-
-
-  document.getElementById(
-    "userUsername"
-  ).value =
-    username;
-
-
-  document.getElementById(
-    "userPassword"
-  ).value =
-    password;
-
-
-  document.getElementById(
-    "userName"
-  ).value =
-    name;
-
-
-  document.getElementById(
-    "userRole"
-  ).value =
-    role;
-
-
-  document.getElementById(
-    "userStatus"
-  ).value =
-    status;
-
-
-  document.getElementById(
-    "userFormModal"
-  ).classList.add("show");
-
-}
-
-
-/* =====================================================
-CLOSE USER FORM
-===================================================== */
-
-function closeUserFormModal(){
-
-  document.getElementById(
-    "userFormModal"
-  ).classList.remove("show");
-
-
-  editingUser =
-    null;
-
-}
-
-
-/* =====================================================
-SUBMIT USER
-===================================================== */
-
-async function submitUser(event){
-
-  event.preventDefault();
-
-
-  const submitBtn =
-    document.getElementById(
-      "userSubmitBtn"
-    );
-
-
-  const username =
-    document.getElementById(
-      "userUsername"
-    ).value.trim();
-
-
-  const password =
-    document.getElementById(
-      "userPassword"
-    ).value.trim();
-
-
-  const name =
-    document.getElementById(
-      "userName"
-    ).value.trim();
-
-
-  const role =
-    document.getElementById(
-      "userRole"
-    ).value;
-
-
-  const status =
-    document.getElementById(
-      "userStatus"
-    ).value;
-
-
-  if(!username){
-
-    showToast(
-      "Username is required.",
-      "error"
-    );
-
-    return;
-
-  }
-
-
-  if(!password){
-
-    showToast(
-      "Password is required.",
-      "error"
-    );
-
-    return;
-
-  }
-
-
-  if(!name){
-
-    showToast(
-      "Name is required.",
-      "error"
-    );
-
-    return;
-
-  }
-
-
-  if(!role){
-
-    showToast(
-      "Please select Role.",
-      "error"
-    );
-
-    return;
-
-  }
-
-
-  const isEdit =
-    Boolean(
-      editingUser
-    );
-
-
-  submitBtn.disabled =
-    true;
-
-
-  submitBtn.textContent =
-    isEdit
-      ? "Updating..."
-      : "Adding...";
-
-
-  try{
-
-    const payload = {
-
-      action:
-        isEdit
-          ? "updateUser"
-          : "addUser",
-
-      data:{
-
-        Username:username,
-
-        Password:password,
-
-        Name:name,
-
-        Role:role,
-
-        Status:status
-
-      },
-
-      oldData:
-        editingUser || null
-
-    };
-
-
-    const response =
-      await fetch(
-        USER_API_URL,
-        {
-
-          method:"POST",
-
-          headers:{
-            "Content-Type":
-              "text/plain;charset=utf-8"
-          },
-
-          body:
-            JSON.stringify(
-              payload
-            )
-
-        }
-      );
-
-
-    if(!response.ok){
-
-      throw new Error(
-        "Server error: " +
-        response.status
-      );
-
-    }
-
-
-    const result =
-      await response.json();
-
-
-    if(
-      result.success === false
-    ){
-
-      throw new Error(
-        result.message ||
-        (
-          isEdit
-            ? "User update failed."
-            : "User add failed."
-        )
-      );
-
-    }
-
-
-    closeUserFormModal();
-
-
-    showToast(
-      isEdit
-        ? "User updated successfully."
-        : "User added successfully.",
-      "success"
-    );
-
-
-    await loadUsers();
-
-
-  }catch(error){
-
-    console.error(
-      "User Save Error:",
-      error
-    );
-
-
-    showToast(
-      error.message ||
-      "User operation failed.",
-      "error"
-    );
-
-  }finally{
-
-    submitBtn.disabled =
-      false;
-
-
-    submitBtn.textContent =
-      isEdit
-        ? "Update User"
-        : "Add User";
-
-  }
-
-}
-
-
-/* =====================================================
-TOGGLE USER STATUS
-===================================================== */
-
-async function toggleUserStatus(user){
-
-  const username =
-    user.Username ||
-    user.username ||
-    "";
-
-
-  const currentStatus =
-    user.Status ||
-    user.status ||
-    "Inactive";
-
-
-  const newStatus =
-    String(
-      currentStatus
-    ).toLowerCase() === "active"
-      ? "Blocked"
-      : "Active";
-
-
-  const confirmed =
-    confirm(
-
-      newStatus === "Blocked"
-
-        ? "Block user \"" +
-          username +
-          "\"?"
-
-        : "Activate user \"" +
-          username +
-          "\"?"
-
-    );
-
-
-  if(!confirmed){
-    return;
-  }
-
-
-  try{
-
-    const payload = {
-
-      action:"updateUser",
-
-      data:{
-
-        Username:
-          user.Username ||
-          user.username ||
-          "",
-
-        Password:
-          user.Password ||
-          user.password ||
-          "",
-
-        Name:
-          user.Name ||
-          user.name ||
-          "",
-
-        Role:
-          user.Role ||
-          user.role ||
-          "",
-
-        Status:newStatus
-
-      },
-
-      oldData:user
-
-    };
-
-
-    const response =
-      await fetch(
-        USER_API_URL,
-        {
-
-          method:"POST",
-
-          headers:{
-            "Content-Type":
-              "text/plain;charset=utf-8"
-          },
-
-          body:
-            JSON.stringify(
-              payload
-            )
-
-        }
-      );
-
-
-    if(!response.ok){
-
-      throw new Error(
-        "Server error: " +
-        response.status
-      );
-
-    }
-
-
-    const result =
-      await response.json();
-
-
-    if(
-      result.success === false
-    ){
-
-      throw new Error(
-        result.message ||
-        "Status update failed."
-      );
-
-    }
-
-
-    showToast(
-      newStatus === "Active"
-        ? "User activated successfully."
-        : "User blocked successfully.",
-      "success"
-    );
-
-
-    await loadUsers();
-
-
-  }catch(error){
-
-    console.error(
-      "Status Error:",
-      error
-    );
-
-
-    showToast(
-      error.message ||
-      "Status update failed.",
-      "error"
-    );
-
-  }
-
-}
-
-
-/* =====================================================
-DELETE USER
-===================================================== */
-
-async function deleteUser(user){
-
-  const username =
-    user.Username ||
-    user.username ||
-    "";
-
-
-  const confirmed =
-    confirm(
-
-      "Delete this user?\n\n" +
-
-      "Username: " +
-      username +
-
-      "\nName: " +
-      (
-        user.Name ||
-        user.name ||
-        ""
-      ) +
-
-      "\n\nThis action cannot be undone."
-
-    );
-
-
-  if(!confirmed){
-    return;
-  }
-
-
-  try{
-
-    const payload = {
-
-      action:"deleteUser",
-
-      data:{
-
-        ...user
-
-      }
-
-    };
-
-
-    const response =
-      await fetch(
-        USER_API_URL,
-        {
-
-          method:"POST",
-
-          headers:{
-            "Content-Type":
-              "text/plain;charset=utf-8"
-          },
-
-          body:
-            JSON.stringify(
-              payload
-            )
-
-        }
-      );
-
-
-    if(!response.ok){
-
-      throw new Error(
-        "Server error: " +
-        response.status
-      );
-
-    }
-
-
-    const result =
-      await response.json();
-
-
-    if(
-      result.success === false
-    ){
-
-      throw new Error(
-        result.message ||
-        "User delete failed."
-      );
-
-    }
-
-
-    showToast(
-      "User deleted successfully.",
-      "success"
-    );
-
-
-    await loadUsers();
-
-
-  }catch(error){
-
-    console.error(
-      "User Delete Error:",
-      error
-    );
-
-
-    showToast(
-      error.message ||
-      "Failed to delete user.",
-      "error"
-    );
-
-  }
-
-}
-
-
-/* =====================================================
-USER MODAL OUTSIDE CLICK
-===================================================== */
-
-document
-  .getElementById(
-    "userModal"
-  )
-  .addEventListener(
-    "click",
-    function(event){
-
-      if(
-        event.target === this
-      ){
-
-        closeUserModal();
-
-      }
-
-    }
-  );
-
-
-/* =====================================================
-USER FORM MODAL OUTSIDE CLICK
-===================================================== */
-
-document
-  .getElementById(
-    "userFormModal"
-  )
-  .addEventListener(
-    "click",
-    function(event){
-
-      if(
-        event.target === this
-      ){
-
-        closeUserFormModal();
-
-      }
-
-    }
-  );
-
-
-/* =====================================================
-ENTRY MODAL OUTSIDE CLICK
+OUTSIDE CLICK
 ===================================================== */
 
 document
@@ -4463,6 +4411,46 @@ document
   );
 
 
+document
+  .getElementById(
+    "userModal"
+  )
+  .addEventListener(
+    "click",
+    function(event){
+
+      if(
+        event.target === this
+      ){
+
+        closeUserModal();
+
+      }
+
+    }
+  );
+
+
+document
+  .getElementById(
+    "userFormModal"
+  )
+  .addEventListener(
+    "click",
+    function(event){
+
+      if(
+        event.target === this
+      ){
+
+        closeUserFormModal();
+
+      }
+
+    }
+  );
+
+
 /* =====================================================
 ESC KEY
 ===================================================== */
@@ -4477,9 +4465,9 @@ document.addEventListener(
 
       closeEntryModal();
 
-      closeUserFormModal();
-
       closeUserModal();
+
+      closeUserFormModal();
 
     }
 
