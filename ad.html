@@ -1256,6 +1256,13 @@ const LOGIN_PAGE = "index.html";
 
 const ROWS_PER_PAGE = 10;
 
+/*
+  5 Minutes Auto Logout
+*/
+const AUTO_LOGOUT_TIME = 5 * 60 * 1000;
+
+let autoLogoutTimer = null;
+
 let allData = [];
 let filteredData = [];
 let currentPage = 1;
@@ -1329,6 +1336,102 @@ function getLoggedInUsername(){
 
 
 /* =====================================================
+URL PROTECTION + 5 MINUTE AUTO LOGOUT
+===================================================== */
+
+function checkPageAccess(){
+
+  const username =
+    getLoggedInUsername();
+
+  if(!username){
+
+    window.location.replace(
+      LOGIN_PAGE
+    );
+
+    return false;
+
+  }
+
+  startAutoLogoutTimer();
+
+  return true;
+
+}
+
+
+/* =====================================================
+AUTO LOGOUT TIMER
+===================================================== */
+
+function startAutoLogoutTimer(){
+
+  clearTimeout(
+    autoLogoutTimer
+  );
+
+  autoLogoutTimer =
+    setTimeout(
+      function(){
+
+        alert(
+          "Your session has expired.\nPlease login again."
+        );
+
+        logoutUser();
+
+      },
+      AUTO_LOGOUT_TIME
+    );
+
+}
+
+
+/* =====================================================
+RESET AUTO LOGOUT ON ACTIVITY
+===================================================== */
+
+function resetAutoLogoutTimer(){
+
+  const username =
+    getLoggedInUsername();
+
+  if(!username){
+    return;
+  }
+
+  startAutoLogoutTimer();
+
+}
+
+
+/* =====================================================
+USER ACTIVITY
+===================================================== */
+
+[
+  "click",
+  "mousemove",
+  "keydown",
+  "scroll",
+  "touchstart"
+].forEach(
+  function(eventName){
+
+    document.addEventListener(
+      eventName,
+      resetAutoLogoutTimer,
+      {
+        passive:true
+      }
+    );
+
+  }
+);
+
+
+/* =====================================================
 LOGOUT
 ===================================================== */
 
@@ -1336,17 +1439,13 @@ function logoutUser(){
 
   try{
 
-    /*
-      সব session/login data clear
-    */
+    clearTimeout(
+      autoLogoutTimer
+    );
 
     localStorage.clear();
 
     sessionStorage.clear();
-
-    /*
-      Login page এ পাঠানো
-    */
 
     window.location.replace(
       LOGIN_PAGE
@@ -2300,11 +2399,6 @@ function requireUsername(){
   let username =
     getLoggedInUsername();
 
-  /*
-    Login security নেই,
-    তাই username না থাকলে Guest ব্যবহার হবে।
-  */
-
   if(!username){
 
     username =
@@ -2512,8 +2606,8 @@ async function sellEntryByRow(rowNumber){
             JSON.stringify(
               payload
             )
-        }
-      );
+          }
+        );
 
     if(!response.ok){
 
@@ -3740,11 +3834,6 @@ document
     }
   );
 
-
-/* =====================================================
-ESC KEY
-===================================================== */
-
 document.addEventListener(
   "keydown",
   function(event){
@@ -3765,13 +3854,14 @@ document.addEventListener(
 );
 
 
-/* =====================================================
-PAGE LOAD
-===================================================== */
-
 document.addEventListener(
   "DOMContentLoaded",
   function(){
+
+
+    if(!checkPageAccess()){
+      return;
+    }
 
     loadTheme();
 
