@@ -53,7 +53,6 @@ body{
   transition:.25s;
 }
 
-
 /* =====================================================
 HEADER
 ===================================================== */
@@ -83,7 +82,6 @@ HEADER
   align-items:center;
   gap:10px;
 }
-
 
 /* =====================================================
 BUTTON
@@ -147,6 +145,20 @@ button:disabled{
   background:#6d28d9;
 }
 
+/* LOGOUT */
+
+.btn-logout{
+  background:#dc2626;
+  color:#fff;
+  padding:11px 17px;
+  border-radius:8px;
+  font-size:14px;
+  font-weight:600;
+}
+
+.btn-logout:hover{
+  background:#b91c1c;
+}
 
 /* =====================================================
 MAIN
@@ -176,7 +188,6 @@ MAIN
   color:var(--muted);
   font-size:14px;
 }
-
 
 /* =====================================================
 FILTER
@@ -226,7 +237,6 @@ FILTER
 .field select:focus{
   border-color:var(--green);
 }
-
 
 /* =====================================================
 TABLE
@@ -293,7 +303,6 @@ tr:hover td{
   font-weight:500;
 }
 
-
 /* =====================================================
 ACTIONS
 ===================================================== */
@@ -340,7 +349,6 @@ ACTIONS
   background:#ffedd5;
 }
 
-
 /* =====================================================
 PAGINATION
 ===================================================== */
@@ -383,7 +391,6 @@ PAGINATION
   color:#fff;
   border-color:var(--green);
 }
-
 
 /* =====================================================
 MODAL
@@ -444,7 +451,6 @@ MODAL
 .close-btn:hover{
   background:var(--hover);
 }
-
 
 /* =====================================================
 FORM
@@ -510,7 +516,6 @@ FORM
   gap:10px;
   padding-top:30px;
 }
-
 
 /* =====================================================
 USER MODAL
@@ -606,16 +611,6 @@ USER MODAL
   color:#6d28d9;
 }
 
-
-/* =====================================================
-USER FORM MODAL
-===================================================== */
-
-.user-form-modal-box{
-  max-width:650px;
-}
-
-
 /* =====================================================
 LOADING
 ===================================================== */
@@ -631,7 +626,6 @@ LOADING
   padding:55px 20px;
   color:var(--muted);
 }
-
 
 /* =====================================================
 TOAST
@@ -666,7 +660,6 @@ TOAST
 .toast.error{
   background:#dc2626;
 }
-
 
 /* =====================================================
 MOBILE
@@ -714,6 +707,11 @@ MOBILE
     padding:9px 10px;
     font-size:12px;
     height:38px;
+  }
+
+  .btn-logout{
+    padding:9px 10px;
+    font-size:12px;
   }
 
   .container{
@@ -766,9 +764,7 @@ MOBILE
 
 </head>
 
-
 <body>
-
 
 <!-- =====================================================
 HEADER
@@ -812,10 +808,16 @@ HEADER
       ➕ New Entry
     </button>
 
+    <button
+      class="btn btn-logout"
+      onclick="logoutUser()"
+    >
+      🚪 Logout
+    </button>
+
   </div>
 
 </header>
-
 
 <!-- =====================================================
 MAIN
@@ -839,6 +841,7 @@ MAIN
 
   </div>
 
+  <!-- FILTER -->
 
   <section class="filter-box">
 
@@ -857,7 +860,6 @@ MAIN
 
       </div>
 
-
       <div class="field">
 
         <label>📅 From Date</label>
@@ -869,7 +871,6 @@ MAIN
         >
 
       </div>
-
 
       <div class="field">
 
@@ -883,7 +884,6 @@ MAIN
 
       </div>
 
-
       <button
         class="btn btn-refresh"
         onclick="clearFilters()"
@@ -895,6 +895,7 @@ MAIN
 
   </section>
 
+  <!-- TABLE -->
 
   <section class="table-box">
 
@@ -903,14 +904,11 @@ MAIN
       <h2>All Entries</h2>
 
       <div class="total-count">
-
         Total:
         <strong id="totalCount">0</strong>
-
       </div>
 
     </div>
-
 
     <div class="table-wrapper">
 
@@ -919,17 +917,14 @@ MAIN
         <thead>
 
           <tr>
-
             <th>Name</th>
             <th>IP</th>
             <th>Work</th>
             <th>Date</th>
             <th>Action</th>
-
           </tr>
 
         </thead>
-
 
         <tbody id="tableBody">
 
@@ -951,7 +946,6 @@ MAIN
 
     </div>
 
-
     <div class="pagination-box">
 
       <div
@@ -971,7 +965,6 @@ MAIN
   </section>
 
 </main>
-
 
 <!-- =====================================================
 ENTRY MODAL
@@ -999,7 +992,6 @@ ENTRY MODAL
 
     </div>
 
-
     <form
       class="form"
       id="entryForm"
@@ -1022,7 +1014,6 @@ ENTRY MODAL
 
         </div>
 
-
         <div class="form-group">
 
           <label>IP</label>
@@ -1037,7 +1028,6 @@ ENTRY MODAL
 
         </div>
 
-
         <div class="form-group full">
 
           <label>Work</label>
@@ -1049,7 +1039,6 @@ ENTRY MODAL
           ></textarea>
 
         </div>
-
 
         <div class="form-group">
 
@@ -1063,7 +1052,6 @@ ENTRY MODAL
         </div>
 
       </div>
-
 
       <div class="form-footer">
 
@@ -1091,7 +1079,6 @@ ENTRY MODAL
 
 </div>
 
-
 <!-- =====================================================
 USER LIST MODAL
 ===================================================== -->
@@ -1105,9 +1092,7 @@ USER LIST MODAL
 
     <div class="modal-header">
 
-      <h2>
-        👤 User Management
-      </h2>
+      <h2>👤 User Management</h2>
 
       <button
         class="close-btn"
@@ -1118,7 +1103,6 @@ USER LIST MODAL
 
     </div>
 
-
     <div class="user-toolbar">
 
       <div class="user-total">
@@ -1127,7 +1111,6 @@ USER LIST MODAL
         <strong id="userTotal">0</strong>
 
       </div>
-
 
       <div>
 
@@ -1150,7 +1133,6 @@ USER LIST MODAL
 
     </div>
 
-
     <div class="user-table-wrapper">
 
       <table class="user-table">
@@ -1158,18 +1140,15 @@ USER LIST MODAL
         <thead>
 
           <tr>
-
             <th>Username</th>
             <th>Password</th>
             <th>Name</th>
             <th>Role</th>
             <th>Status</th>
             <th>Action</th>
-
           </tr>
 
         </thead>
-
 
         <tbody id="userTableBody">
 
@@ -1195,9 +1174,8 @@ USER LIST MODAL
 
 </div>
 
-
 <!-- =====================================================
-ADD / EDIT USER MODAL
+ADD / EDIT USER
 ===================================================== -->
 
 <div
@@ -1222,7 +1200,6 @@ ADD / EDIT USER MODAL
 
     </div>
 
-
     <form
       class="form"
       id="userForm"
@@ -1230,7 +1207,6 @@ ADD / EDIT USER MODAL
     >
 
       <div class="form-grid">
-
 
         <div class="form-group">
 
@@ -1246,7 +1222,6 @@ ADD / EDIT USER MODAL
 
         </div>
 
-
         <div class="form-group">
 
           <label>Password</label>
@@ -1261,7 +1236,6 @@ ADD / EDIT USER MODAL
 
         </div>
 
-
         <div class="form-group">
 
           <label>Name</label>
@@ -1275,7 +1249,6 @@ ADD / EDIT USER MODAL
           >
 
         </div>
-
 
         <div class="form-group">
 
@@ -1314,7 +1287,6 @@ ADD / EDIT USER MODAL
 
         </div>
 
-
         <div class="form-group">
 
           <label>Status</label>
@@ -1344,9 +1316,7 @@ ADD / EDIT USER MODAL
 
         </div>
 
-
       </div>
-
 
       <div class="form-footer">
 
@@ -1374,7 +1344,6 @@ ADD / EDIT USER MODAL
 
 </div>
 
-
 <!-- =====================================================
 TOAST
 ===================================================== -->
@@ -1383,7 +1352,6 @@ TOAST
   class="toast"
   id="toast"
 ></div>
-
 
 <script>
 
@@ -1394,33 +1362,36 @@ API
 const API_URL =
 "https://script.google.com/macros/s/AKfycbx6fo2Nogf3ETCtS_B-o0HCFqEs3vYkJ9IT9uu_-3l1w8fNJw77mZipeyFm-zZcjUw-5Q/exec";
 
-
 const USER_API_URL =
 "https://script.google.com/macros/s/AKfycby1wEKzuThOiXdf9lVmoJVysfasR14ivssXFjGFfDnnc-d16uQRjNhel5LKNXDK4ZbxDw/exec";
 
+const LOGIN_PAGE =
+"index.html";
 
-/* =====================================================
-SECURITY
-===================================================== */
-
-const LOGIN_PAGE = "index.html";
+const ROWS_PER_PAGE = 10;
 
 const INACTIVITY_LIMIT =
-  5 * 60 * 1000;
+5 * 60 * 1000;
+
+let allData = [];
+let filteredData = [];
+let currentPage = 1;
+let editingRow = null;
+
+let allUsers = [];
+let editingUser = null;
 
 let inactivityTimer = null;
-
-let redirecting = false;
+let isLoggingOut = false;
 
 
 /* =====================================================
-GET LOGGED-IN USERNAME
+LOGIN USERNAME
 ===================================================== */
 
 function getLoggedInUsername(){
 
-  const possibleKeys = [
-
+  const keys = [
     "username",
     "Username",
     "user",
@@ -1429,71 +1400,47 @@ function getLoggedInUsername(){
     "loggedUser",
     "currentUser",
     "userInfo"
-
   ];
 
-
-  for(
-    let i = 0;
-    i < possibleKeys.length;
-    i++
-  ){
-
-    const key =
-      possibleKeys[i];
+  for(const key of keys){
 
     const value =
       localStorage.getItem(key);
 
-
     if(!value){
       continue;
     }
-
 
     try{
 
       const parsed =
         JSON.parse(value);
 
-
       if(
-        typeof parsed === "object" &&
-        parsed !== null
+        parsed &&
+        typeof parsed === "object"
       ){
 
         const username =
           parsed.username ||
           parsed.Username ||
           parsed.userName ||
-          parsed.user ||
-          parsed.name;
-
+          parsed.name ||
+          parsed.user;
 
         if(username){
-
-          return String(
-            username
-          ).trim();
-
+          return String(username).trim();
         }
 
       }
 
-    }catch(error){
+    }catch(e){
 
-      const text =
-        String(value).trim();
-
-
-      if(text){
-        return text;
-      }
+      return String(value).trim();
 
     }
 
   }
-
 
   return "";
 
@@ -1501,23 +1448,30 @@ function getLoggedInUsername(){
 
 
 /* =====================================================
-LOGIN CHECK
+SECURITY CHECK
 ===================================================== */
 
 function checkLogin(){
 
-  if(redirecting){
-    return false;
-  }
-
+  const auth =
+    localStorage.getItem(
+      "dashboardAuth"
+    );
 
   const username =
     getLoggedInUsername();
 
 
-  if(!username){
+  /*
+    Login session না থাকলে dashboard বন্ধ।
+  */
 
-    securityLogout();
+  if(
+    auth !== "true" ||
+    !username
+  ){
+
+    forceGoToLogin();
 
     return false;
 
@@ -1530,63 +1484,18 @@ function checkLogin(){
 
 
 /* =====================================================
-SECURITY LOGOUT
+GO LOGIN
 ===================================================== */
 
-function securityLogout(){
+function forceGoToLogin(){
 
-  if(redirecting){
+  if(isLoggingOut){
     return;
   }
 
+  isLoggingOut = true;
 
-  redirecting = true;
-
-
-  clearTimeout(
-    inactivityTimer
-  );
-
-
-  const removeKeys = [
-
-    "username",
-    "Username",
-    "user",
-    "userData",
-    "loginData",
-    "loggedUser",
-    "currentUser",
-    "userInfo",
-    "token",
-    "authToken",
-    "session",
-    "loggedIn"
-
-  ];
-
-
-  removeKeys.forEach(
-    function(key){
-
-      localStorage.removeItem(
-        key
-      );
-
-    }
-  );
-
-
-  try{
-
-    sessionStorage.clear();
-
-  }catch(error){
-
-    console.log(error);
-
-  }
-
+  clearLoginSession();
 
   window.location.replace(
     LOGIN_PAGE
@@ -1596,22 +1505,94 @@ function securityLogout(){
 
 
 /* =====================================================
-RESET 5 MINUTE TIMER
+CLEAR LOGIN DATA
 ===================================================== */
 
-function resetInactivityTimer(){
+function clearLoginSession(){
 
-  if(redirecting){
+  const keys = [
+
+    "username",
+    "Username",
+    "user",
+    "userData",
+    "loginData",
+    "loggedUser",
+    "currentUser",
+    "userInfo",
+
+    "token",
+    "authToken",
+    "session",
+    "loggedIn",
+
+    "dashboardAuth"
+
+  ];
+
+  keys.forEach(
+    key =>
+      localStorage.removeItem(key)
+  );
+
+  sessionStorage.clear();
+
+}
+
+
+/* =====================================================
+LOGOUT
+===================================================== */
+
+function logoutUser(){
+
+  if(isLoggingOut){
     return;
   }
 
 
-  if(!getLoggedInUsername()){
+  const ok =
+    confirm(
+      "Are you sure you want to logout?"
+    );
 
-    securityLogout();
 
+  if(!ok){
     return;
+  }
 
+
+  isLoggingOut = true;
+
+
+  clearTimeout(
+    inactivityTimer
+  );
+
+
+  clearLoginSession();
+
+
+  /*
+    replace ব্যবহার করছি যাতে Back history
+    ব্যবহার করে dashboard-এ ফিরে আসা কঠিন হয়।
+  */
+
+  window.location.replace(
+    LOGIN_PAGE
+  );
+
+}
+
+
+/* =====================================================
+AUTO LOGOUT TIMER
+===================================================== */
+
+function resetInactivityTimer(){
+
+  if(isLoggingOut){
+    return;
   }
 
 
@@ -1622,11 +1603,7 @@ function resetInactivityTimer(){
 
   inactivityTimer =
     setTimeout(
-      function(){
-
-        securityLogout();
-
-      },
+      autoLogout,
       INACTIVITY_LIMIT
     );
 
@@ -1634,11 +1611,39 @@ function resetInactivityTimer(){
 
 
 /* =====================================================
-USER ACTIVITY
+AUTO LOGOUT
 ===================================================== */
 
-const securityEvents = [
+function autoLogout(){
 
+  if(isLoggingOut){
+    return;
+  }
+
+
+  isLoggingOut = true;
+
+
+  clearTimeout(
+    inactivityTimer
+  );
+
+
+  clearLoginSession();
+
+
+  window.location.replace(
+    LOGIN_PAGE
+  );
+
+}
+
+
+/* =====================================================
+ACTIVITY LISTENER
+===================================================== */
+
+[
   "mousemove",
   "mousedown",
   "keydown",
@@ -1646,13 +1651,8 @@ const securityEvents = [
   "touchstart",
   "click",
   "wheel",
-  "input",
-  "change"
-
-];
-
-
-securityEvents.forEach(
+  "touchmove"
+].forEach(
   function(eventName){
 
     document.addEventListener(
@@ -1660,21 +1660,13 @@ securityEvents.forEach(
       function(){
 
         if(
-          redirecting
-        ){
-          return;
-        }
-
-
-        if(
-          getLoggedInUsername()
+          !isLoggingOut &&
+          localStorage.getItem(
+            "dashboardAuth"
+          ) === "true"
         ){
 
           resetInactivityTimer();
-
-        }else{
-
-          securityLogout();
 
         }
 
@@ -1687,65 +1679,27 @@ securityEvents.forEach(
 
 
 /* =====================================================
-INITIAL SECURITY CHECK
+PAGE SHOW / BACK BUTTON SECURITY
 ===================================================== */
-
-(function(){
-
-  const username =
-    getLoggedInUsername();
-
-
-  if(!username){
-
-    securityLogout();
-
-    return;
-
-  }
-
-
-  resetInactivityTimer();
-
-})();
-
-
-/* =====================================================
-BACK BUTTON PROTECTION
-===================================================== */
-
-history.pushState(
-  null,
-  "",
-  location.href
-);
-
 
 window.addEventListener(
-  "popstate",
+  "pageshow",
   function(){
 
-    history.pushState(
-      null,
-      "",
-      location.href
-    );
-
-
     if(
-      !getLoggedInUsername()
+      !checkLogin()
     ){
-
-      securityLogout();
-
+      return;
     }
+
+    resetInactivityTimer();
 
   }
 );
 
 
 /* =====================================================
-PAGE VISIBILITY CHECK
+VISIBILITY CHECK
 ===================================================== */
 
 document.addEventListener(
@@ -1758,15 +1712,10 @@ document.addEventListener(
     ){
 
       if(
-        !getLoggedInUsername()
+        !checkLogin()
       ){
-
-        securityLogout();
-
         return;
-
       }
-
 
       resetInactivityTimer();
 
@@ -1777,22 +1726,23 @@ document.addEventListener(
 
 
 /* =====================================================
-SETTINGS
+INITIAL SECURITY
 ===================================================== */
 
-const ROWS_PER_PAGE = 10;
+if(
+  !checkLogin()
+){
 
-let allData = [];
+  /*
+    Login না থাকলে নিচের dashboard
+    initialization বন্ধ হবে।
+  */
 
-let filteredData = [];
+}else{
 
-let currentPage = 1;
+  resetInactivityTimer();
 
-let editingRow = null;
-
-let allUsers = [];
-
-let editingUser = null;
+}
 
 
 /* =====================================================
@@ -1809,10 +1759,10 @@ document.addEventListener(
       return;
     }
 
-
     loadTheme();
-
     loadData();
+
+    resetInactivityTimer();
 
   }
 );
@@ -1824,22 +1774,16 @@ THEME
 
 function loadTheme(){
 
-  const savedTheme =
+  const saved =
     localStorage.getItem(
       "dashboardTheme"
     );
 
-
-  if(
-    savedTheme === "dark"
-  ){
-
+  if(saved === "dark"){
     document.body.classList.add(
       "dark"
     );
-
   }
-
 
   updateThemeButton();
 
@@ -1852,20 +1796,15 @@ function toggleTheme(){
     "dark"
   );
 
-
-  const isDark =
+  const dark =
     document.body.classList.contains(
       "dark"
     );
 
-
   localStorage.setItem(
     "dashboardTheme",
-    isDark
-      ? "dark"
-      : "light"
+    dark ? "dark" : "light"
   );
-
 
   updateThemeButton();
 
@@ -1879,20 +1818,14 @@ function updateThemeButton(){
       "themeBtn"
     );
 
-
   if(!btn){
     return;
   }
 
-
-  const isDark =
+  btn.textContent =
     document.body.classList.contains(
       "dark"
-    );
-
-
-  btn.textContent =
-    isDark
+    )
       ? "☀️ White"
       : "🌙 Dark";
 
@@ -1910,18 +1843,13 @@ async function loadData(){
   }
 
 
-  const refreshBtn =
+  const btn =
     document.getElementById(
       "refreshBtn"
     );
 
-
-  refreshBtn.disabled =
-    true;
-
-  refreshBtn.textContent =
-    "⏳ Loading...";
-
+  btn.disabled = true;
+  btn.textContent = "⏳ Loading...";
 
   showLoading();
 
@@ -1930,26 +1858,21 @@ async function loadData(){
 
     const response =
       await fetch(
-
         API_URL +
         "?action=getData&_=" +
         Date.now(),
-
         {
           method:"GET",
           cache:"no-store"
         }
-
       );
 
 
     if(!response.ok){
-
       throw new Error(
         "Server error: " +
         response.status
       );
-
     }
 
 
@@ -1957,45 +1880,30 @@ async function loadData(){
       await response.json();
 
 
-    if(
-      result.success === false
-    ){
-
+    if(result.success === false){
       throw new Error(
         result.message ||
         "Failed to load data."
       );
-
     }
 
 
-    if(
-      !Array.isArray(
-        result.data
-      )
-    ){
-
+    if(!Array.isArray(result.data)){
       throw new Error(
         "Invalid data received."
       );
-
     }
 
 
     allData =
       result.data;
 
-
     filteredData =
       [...allData];
 
-
-    currentPage =
-      1;
-
+    currentPage = 1;
 
     renderTable();
-
     updateTotal();
 
 
@@ -2006,12 +1914,10 @@ async function loadData(){
       error
     );
 
-
     showError(
       error.message ||
       "Failed to load data."
     );
-
 
     showToast(
       error.message ||
@@ -2022,11 +1928,8 @@ async function loadData(){
 
   }finally{
 
-    refreshBtn.disabled =
-      false;
-
-    refreshBtn.textContent =
-      "🔄 Refresh";
+    btn.disabled = false;
+    btn.textContent = "🔄 Refresh";
 
   }
 
@@ -2034,7 +1937,7 @@ async function loadData(){
 
 
 /* =====================================================
-RENDER TABLE
+RENDER DATA
 ===================================================== */
 
 function renderTable(){
@@ -2050,21 +1953,14 @@ function renderTable(){
   ){
 
     tbody.innerHTML = `
-
       <tr>
-
         <td colspan="5">
-
           <div class="empty">
             No data found.
           </div>
-
         </td>
-
       </tr>
-
     `;
-
 
     renderPagination();
 
@@ -2074,21 +1970,13 @@ function renderTable(){
 
 
   const start =
-    (
-      currentPage - 1
-    ) *
+    (currentPage - 1) *
     ROWS_PER_PAGE;
-
-
-  const end =
-    start +
-    ROWS_PER_PAGE;
-
 
   const pageData =
     filteredData.slice(
       start,
-      end
+      start + ROWS_PER_PAGE
     );
 
 
@@ -2099,37 +1987,26 @@ function renderTable(){
     function(row){
 
       const rowNumber =
-        Number(
-          row._row
-        );
+        Number(row._row);
 
 
       html += `
-
         <tr>
 
           <td>
-            ${escapeHTML(
-              row.Name || ""
-            )}
+            ${escapeHTML(row.Name || "")}
           </td>
 
           <td>
-            ${escapeHTML(
-              row.Ip || ""
-            )}
+            ${escapeHTML(row.Ip || "")}
           </td>
 
           <td>
-            ${escapeHTML(
-              row.Work || ""
-            )}
+            ${escapeHTML(row.Work || "")}
           </td>
 
           <td class="date-cell">
-            ${escapeHTML(
-              row.Date || ""
-            )}
+            ${escapeHTML(row.Date || "")}
           </td>
 
           <td>
@@ -2162,16 +2039,13 @@ function renderTable(){
           </td>
 
         </tr>
-
       `;
 
     }
   );
 
 
-  tbody.innerHTML =
-    html;
-
+  tbody.innerHTML = html;
 
   renderPagination();
 
@@ -2186,19 +2060,15 @@ function applyFilters(){
 
   const search =
     document
-      .getElementById(
-        "searchInput"
-      )
+      .getElementById("searchInput")
       .value
       .toLowerCase()
       .trim();
-
 
   const fromDate =
     document.getElementById(
       "fromDate"
     ).value;
-
 
   const toDate =
     document.getElementById(
@@ -2212,27 +2082,22 @@ function applyFilters(){
 
         if(search){
 
-          const searchText = (
-
-            String(row.Name || "") +
-            " " +
-            String(row.Ip || "") +
-            " " +
-            String(row.Work || "") +
-            " " +
-            String(row.Date || "")
-
-          ).toLowerCase();
+          const text =
+            (
+              String(row.Name || "") +
+              " " +
+              String(row.Ip || "") +
+              " " +
+              String(row.Work || "") +
+              " " +
+              String(row.Date || "")
+            ).toLowerCase();
 
 
           if(
-            !searchText.includes(
-              search
-            )
+            !text.includes(search)
           ){
-
             return false;
-
           }
 
         }
@@ -2248,29 +2113,22 @@ function applyFilters(){
               row.Date
             );
 
-
           if(!rowDate){
             return false;
           }
-
 
           if(
             fromDate &&
             rowDate < fromDate
           ){
-
             return false;
-
           }
-
 
           if(
             toDate &&
             rowDate > toDate
           ){
-
             return false;
-
           }
 
         }
@@ -2285,7 +2143,6 @@ function applyFilters(){
   currentPage = 1;
 
   renderTable();
-
   updateTotal();
 
 }
@@ -2301,25 +2158,20 @@ function clearFilters(){
     "searchInput"
   ).value = "";
 
-
   document.getElementById(
     "fromDate"
   ).value = "";
-
 
   document.getElementById(
     "toDate"
   ).value = "";
 
-
   filteredData =
     [...allData];
-
 
   currentPage = 1;
 
   renderTable();
-
   updateTotal();
 
 }
@@ -2345,31 +2197,19 @@ function convertToFilterDate(value){
 
 
   if(
-    !isNaN(
-      parsed.getTime()
-    )
+    !isNaN(parsed.getTime())
   ){
 
-    const year =
-      parsed.getFullYear();
-
-    const month =
+    return (
+      parsed.getFullYear() +
+      "-" +
       String(
         parsed.getMonth() + 1
-      ).padStart(2,"0");
-
-    const day =
+      ).padStart(2,"0") +
+      "-" +
       String(
         parsed.getDate()
-      ).padStart(2,"0");
-
-
-    return (
-      year +
-      "-" +
-      month +
-      "-" +
-      day
+      ).padStart(2,"0")
     );
 
   }
@@ -2410,12 +2250,10 @@ function renderPagination(){
       "pagination"
     );
 
-
   const pageInfo =
     document.getElementById(
       "pageInfo"
     );
-
 
   const totalPages =
     Math.ceil(
@@ -2424,9 +2262,7 @@ function renderPagination(){
     );
 
 
-  if(
-    totalPages <= 1
-  ){
+  if(totalPages <= 1){
 
     pagination.innerHTML = "";
 
@@ -2440,10 +2276,7 @@ function renderPagination(){
   }
 
 
-  let html = "";
-
-
-  html += `
+  let html = `
 
     <button
       class="page-btn"
@@ -2452,18 +2285,16 @@ function renderPagination(){
     >
       ‹
     </button>
-
   `;
 
 
-  let startPage =
+  const start =
     Math.max(
       1,
       currentPage - 2
     );
 
-
-  let endPage =
+  const end =
     Math.min(
       totalPages,
       currentPage + 2
@@ -2471,13 +2302,12 @@ function renderPagination(){
 
 
   for(
-    let i = startPage;
-    i <= endPage;
+    let i = start;
+    i <= end;
     i++
   ){
 
     html += `
-
       <button
         class="page-btn ${
           i === currentPage
@@ -2488,28 +2318,27 @@ function renderPagination(){
       >
         ${i}
       </button>
-
     `;
 
   }
 
 
   html += `
-
     <button
       class="page-btn"
       onclick="changePage(${currentPage + 1})"
-      ${currentPage === totalPages ? "disabled" : ""}
+      ${
+        currentPage === totalPages
+          ? "disabled"
+          : ""
+      }
     >
       ›
     </button>
-
   `;
 
 
-  pagination.innerHTML =
-    html;
-
+  pagination.innerHTML = html;
 
   pageInfo.textContent =
     `Page ${currentPage} of ${totalPages}`;
@@ -2530,15 +2359,11 @@ function changePage(page){
     page < 1 ||
     page > totalPages
   ){
-
     return;
-
   }
 
 
-  currentPage =
-    page;
-
+  currentPage = page;
 
   renderTable();
 
@@ -2560,7 +2385,7 @@ function updateTotal(){
 
 
 /* =====================================================
-OPEN ENTRY
+ENTRY MODAL
 ===================================================== */
 
 function openEntryModal(){
@@ -2572,51 +2397,35 @@ function openEntryModal(){
 
   editingRow = null;
 
-
   document.getElementById(
     "modalTitle"
-  ).textContent =
-    "New Entry";
-
+  ).textContent = "New Entry";
 
   document.getElementById(
     "submitBtn"
-  ).textContent =
-    "Save Entry";
-
+  ).textContent = "Save Entry";
 
   document.getElementById(
     "entryForm"
   ).reset();
-
 
   document.getElementById(
     "dateInput"
   ).value =
     getTodayInputDate();
 
-
   document.getElementById(
     "entryModal"
-  ).classList.add(
-    "show"
-  );
+  ).classList.add("show");
 
 }
 
-
-/* =====================================================
-CLOSE ENTRY
-===================================================== */
 
 function closeEntryModal(){
 
   document.getElementById(
     "entryModal"
-  ).classList.remove(
-    "show"
-  );
-
+  ).classList.remove("show");
 
   editingRow = null;
 
@@ -2636,15 +2445,9 @@ function editEntryByRow(rowNumber){
 
   const row =
     allData.find(
-      function(item){
-
-        return Number(
-          item._row
-        ) === Number(
-          rowNumber
-        );
-
-      }
+      item =>
+        Number(item._row) ===
+        Number(rowNumber)
     );
 
 
@@ -2660,39 +2463,28 @@ function editEntryByRow(rowNumber){
   }
 
 
-  editingRow =
-    row;
+  editingRow = row;
 
 
   document.getElementById(
     "modalTitle"
-  ).textContent =
-    "Edit Entry";
-
+  ).textContent = "Edit Entry";
 
   document.getElementById(
     "submitBtn"
-  ).textContent =
-    "Update Entry";
-
+  ).textContent = "Update Entry";
 
   document.getElementById(
     "nameInput"
-  ).value =
-    row.Name || "";
-
+  ).value = row.Name || "";
 
   document.getElementById(
     "ipInput"
-  ).value =
-    row.Ip || "";
-
+  ).value = row.Ip || "";
 
   document.getElementById(
     "workInput"
-  ).value =
-    row.Work || "";
-
+  ).value = row.Work || "";
 
   document.getElementById(
     "dateInput"
@@ -2701,18 +2493,15 @@ function editEntryByRow(rowNumber){
       row.Date
     );
 
-
   document.getElementById(
     "entryModal"
-  ).classList.add(
-    "show"
-  );
+  ).classList.add("show");
 
 }
 
 
 /* =====================================================
-CREATE / UPDATE ENTRY
+SUBMIT ENTRY
 ===================================================== */
 
 async function submitEntry(event){
@@ -2725,29 +2514,25 @@ async function submitEntry(event){
   }
 
 
-  const submitBtn =
+  const btn =
     document.getElementById(
       "submitBtn"
     );
-
 
   const name =
     document.getElementById(
       "nameInput"
     ).value.trim();
 
-
   const ip =
     document.getElementById(
       "ipInput"
     ).value.trim();
 
-
   const work =
     document.getElementById(
       "workInput"
     ).value.trim();
-
 
   const date =
     document.getElementById(
@@ -2756,53 +2541,38 @@ async function submitEntry(event){
 
 
   if(!name){
-
     showToast(
       "Please enter Name.",
       "error"
     );
-
     return;
-
   }
 
-
   if(!ip){
-
     showToast(
       "Please enter IP.",
       "error"
     );
-
     return;
-
   }
 
-
   if(!work){
-
     showToast(
       "Please enter Work.",
       "error"
     );
-
     return;
-
   }
 
 
-  const wasEditing =
-    Boolean(
-      editingRow
-    );
+  const editing =
+    Boolean(editingRow);
 
 
-  submitBtn.disabled =
-    true;
+  btn.disabled = true;
 
-
-  submitBtn.textContent =
-    wasEditing
+  btn.textContent =
+    editing
       ? "Updating..."
       : "Saving...";
 
@@ -2812,17 +2582,15 @@ async function submitEntry(event){
     const payload = {
 
       action:
-        wasEditing
+        editing
           ? "update"
           : "create",
 
       data:{
-
         Name:name,
         Ip:ip,
         Work:work,
         Date:date
-
       },
 
       oldData:
@@ -2835,30 +2603,22 @@ async function submitEntry(event){
       await fetch(
         API_URL,
         {
-
           method:"POST",
-
           headers:{
             "Content-Type":
               "text/plain;charset=utf-8"
           },
-
           body:
-            JSON.stringify(
-              payload
-            )
-
+            JSON.stringify(payload)
         }
       );
 
 
     if(!response.ok){
-
       throw new Error(
         "Server error: " +
         response.status
       );
-
     }
 
 
@@ -2866,15 +2626,11 @@ async function submitEntry(event){
       await response.json();
 
 
-    if(
-      result.success === false
-    ){
-
+    if(result.success === false){
       throw new Error(
         result.message ||
         "Save failed."
       );
-
     }
 
 
@@ -2882,7 +2638,7 @@ async function submitEntry(event){
 
 
     showToast(
-      wasEditing
+      editing
         ? "Entry updated successfully."
         : "Entry added successfully.",
       "success"
@@ -2894,11 +2650,7 @@ async function submitEntry(event){
 
   }catch(error){
 
-    console.error(
-      "Save Error:",
-      error
-    );
-
+    console.error(error);
 
     showToast(
       error.message ||
@@ -2909,16 +2661,43 @@ async function submitEntry(event){
 
   }finally{
 
-    submitBtn.disabled =
-      false;
+    btn.disabled = false;
 
-
-    submitBtn.textContent =
-      wasEditing
+    btn.textContent =
+      editing
         ? "Update Entry"
         : "Save Entry";
 
   }
+
+}
+
+
+/* =====================================================
+USERNAME
+===================================================== */
+
+function requireUsername(){
+
+  if(!checkLogin()){
+    return null;
+  }
+
+
+  const username =
+    getLoggedInUsername();
+
+
+  if(!username){
+
+    forceGoToLogin();
+
+    return null;
+
+  }
+
+
+  return username;
 
 }
 
@@ -2929,22 +2708,11 @@ DELETE ENTRY
 
 async function deleteEntryByRow(rowNumber){
 
-  if(!checkLogin()){
-    return;
-  }
-
-
   const row =
     allData.find(
-      function(item){
-
-        return Number(
-          item._row
-        ) === Number(
-          rowNumber
-        );
-
-      }
+      item =>
+        Number(item._row) ===
+        Number(rowNumber)
     );
 
 
@@ -2961,34 +2729,24 @@ async function deleteEntryByRow(rowNumber){
 
 
   const username =
-    getLoggedInUsername();
+    requireUsername();
 
 
   if(!username){
-
-    securityLogout();
-
     return;
-
   }
 
 
   const confirmed =
     confirm(
-
       "Delete this entry?\n\n" +
-
       "Name: " +
       (row.Name || "") +
-
       "\nIP: " +
       (row.Ip || "") +
-
       "\n\nDeleted by: " +
       username +
-
       "\n\nThis entry will move to Deleted sheet."
-
     );
 
 
@@ -3006,11 +2764,8 @@ async function deleteEntryByRow(rowNumber){
       username:username,
 
       data:{
-
         ...row,
-
         Username:username
-
       }
 
     };
@@ -3020,36 +2775,34 @@ async function deleteEntryByRow(rowNumber){
       await fetch(
         API_URL,
         {
-
           method:"POST",
-
           headers:{
             "Content-Type":
               "text/plain;charset=utf-8"
           },
-
           body:
-            JSON.stringify(
-              payload
-            )
-
+            JSON.stringify(payload)
         }
       );
+
+
+    if(!response.ok){
+      throw new Error(
+        "Server error: " +
+        response.status
+      );
+    }
 
 
     const result =
       await response.json();
 
 
-    if(
-      result.success === false
-    ){
-
+    if(result.success === false){
       throw new Error(
         result.message ||
         "Delete failed."
       );
-
     }
 
 
@@ -3065,10 +2818,7 @@ async function deleteEntryByRow(rowNumber){
 
   }catch(error){
 
-    console.error(
-      error
-    );
-
+    console.error(error);
 
     showToast(
       error.message ||
@@ -3087,22 +2837,11 @@ SELL ENTRY
 
 async function sellEntryByRow(rowNumber){
 
-  if(!checkLogin()){
-    return;
-  }
-
-
   const row =
     allData.find(
-      function(item){
-
-        return Number(
-          item._row
-        ) === Number(
-          rowNumber
-        );
-
-      }
+      item =>
+        Number(item._row) ===
+        Number(rowNumber)
     );
 
 
@@ -3119,37 +2858,26 @@ async function sellEntryByRow(rowNumber){
 
 
   const username =
-    getLoggedInUsername();
+    requireUsername();
 
 
   if(!username){
-
-    securityLogout();
-
     return;
-
   }
 
 
   const confirmed =
     confirm(
-
       "Sell this entry?\n\n" +
-
       "Name: " +
       (row.Name || "") +
-
       "\nIP: " +
       (row.Ip || "") +
-
       "\nWork: " +
       (row.Work || "") +
-
       "\n\nSold by: " +
       username +
-
       "\n\nThis entry will move to Sell sheet."
-
     );
 
 
@@ -3167,11 +2895,8 @@ async function sellEntryByRow(rowNumber){
       username:username,
 
       data:{
-
         ...row,
-
         Username:username
-
       }
 
     };
@@ -3181,36 +2906,34 @@ async function sellEntryByRow(rowNumber){
       await fetch(
         API_URL,
         {
-
           method:"POST",
-
           headers:{
             "Content-Type":
               "text/plain;charset=utf-8"
           },
-
           body:
-            JSON.stringify(
-              payload
-            )
-
+            JSON.stringify(payload)
         }
       );
+
+
+    if(!response.ok){
+      throw new Error(
+        "Server error: " +
+        response.status
+      );
+    }
 
 
     const result =
       await response.json();
 
 
-    if(
-      result.success === false
-    ){
-
+    if(result.success === false){
       throw new Error(
         result.message ||
         "Sell failed."
       );
-
     }
 
 
@@ -3226,10 +2949,7 @@ async function sellEntryByRow(rowNumber){
 
   }catch(error){
 
-    console.error(
-      error
-    );
-
+    console.error(error);
 
     showToast(
       error.message ||
@@ -3252,13 +2972,9 @@ function openUserModal(){
     return;
   }
 
-
   document.getElementById(
     "userModal"
-  ).classList.add(
-    "show"
-  );
-
+  ).classList.add("show");
 
   loadUsers();
 
@@ -3269,9 +2985,7 @@ function closeUserModal(){
 
   document.getElementById(
     "userModal"
-  ).classList.remove(
-    "show"
-  );
+  ).classList.remove("show");
 
 }
 
@@ -3292,62 +3006,46 @@ async function loadUsers(){
       "userTableBody"
     );
 
-
-  const refreshBtn =
+  const btn =
     document.getElementById(
       "userRefreshBtn"
     );
 
 
   body.innerHTML = `
-
     <tr>
-
       <td colspan="6">
-
         <div class="loading">
           ⏳ Loading users...
         </div>
-
       </td>
-
     </tr>
-
   `;
 
 
-  refreshBtn.disabled =
-    true;
-
-
-  refreshBtn.textContent =
-    "⏳ Loading...";
+  btn.disabled = true;
+  btn.textContent = "⏳ Loading...";
 
 
   try{
 
     const response =
       await fetch(
-
         USER_API_URL +
         "?action=getUsers&_=" +
         Date.now(),
-
         {
           method:"GET",
           cache:"no-store"
         }
-
       );
 
 
     if(!response.ok){
-
       throw new Error(
         "User server error: " +
         response.status
       );
-
     }
 
 
@@ -3355,30 +3053,20 @@ async function loadUsers(){
       await response.json();
 
 
-    if(
-      result.success === false
-    ){
-
+    if(result.success === false){
       throw new Error(
         result.message ||
         "Failed to load users."
       );
-
     }
 
 
     allUsers =
-      Array.isArray(
-        result.users
-      )
+      Array.isArray(result.users)
         ? result.users
-        : (
-            Array.isArray(
-              result.data
-            )
-              ? result.data
-              : []
-          );
+        : Array.isArray(result.data)
+          ? result.data
+          : [];
 
 
     document.getElementById(
@@ -3392,32 +3080,19 @@ async function loadUsers(){
 
   }catch(error){
 
-    console.error(
-      "User Load Error:",
-      error
-    );
-
+    console.error(error);
 
     body.innerHTML = `
-
       <tr>
-
         <td colspan="6">
-
           <div class="empty">
-
-            ❌
-            ${escapeHTML(
+            ❌ ${escapeHTML(
               error.message ||
               "Failed to load users."
             )}
-
           </div>
-
         </td>
-
       </tr>
-
     `;
 
 
@@ -3430,11 +3105,8 @@ async function loadUsers(){
 
   }finally{
 
-    refreshBtn.disabled =
-      false;
-
-    refreshBtn.textContent =
-      "🔄 Refresh";
+    btn.disabled = false;
+    btn.textContent = "🔄 Refresh";
 
   }
 
@@ -3453,24 +3125,16 @@ function renderUsers(){
     );
 
 
-  if(
-    !allUsers.length
-  ){
+  if(!allUsers.length){
 
     body.innerHTML = `
-
       <tr>
-
         <td colspan="6">
-
           <div class="empty">
             No users found.
           </div>
-
         </td>
-
       </tr>
-
     `;
 
     return;
@@ -3489,30 +3153,25 @@ function renderUsers(){
         user.Username ||
         "";
 
-
       const password =
         user.password ||
         user.Password ||
         "";
-
 
       const name =
         user.name ||
         user.Name ||
         "";
 
-
       const role =
         user.role ||
         user.Role ||
         "";
 
-
       const status =
         user.status ||
         user.Status ||
         "Active";
-
 
       const row =
         Number(
@@ -3527,37 +3186,30 @@ function renderUsers(){
 
 
       if(
-        String(status)
-          .toLowerCase()
-          === "active"
+        String(status).toLowerCase() ===
+        "active"
       ){
-
         statusClass =
           "status-active";
-
       }
 
 
       if(
-        String(status)
-          .toLowerCase()
-          === "blocked"
+        String(status).toLowerCase() ===
+        "blocked"
       ){
-
         statusClass =
           "status-blocked";
-
       }
 
 
-      const safeUser =
+      const safe =
         encodeURIComponent(
           username
         );
 
 
       html += `
-
         <tr>
 
           <td>
@@ -3575,29 +3227,19 @@ function renderUsers(){
           </td>
 
           <td>
-
             <span class="role-badge">
-
               ${escapeHTML(
                 role || "—"
               )}
-
             </span>
-
           </td>
 
           <td>
-
             <span
               class="status-badge ${statusClass}"
             >
-
-              ${escapeHTML(
-                status
-              )}
-
+              ${escapeHTML(status)}
             </span>
-
           </td>
 
           <td>
@@ -3606,32 +3248,28 @@ function renderUsers(){
 
               <button
                 class="user-action edit"
-                onclick="editUser(${row},'${safeUser}')"
+                onclick="editUser(${row},'${safe}')"
               >
                 ✏️ Edit
               </button>
 
               ${
-                String(status).toLowerCase()
-                === "blocked"
-
+                String(status).toLowerCase() ===
+                "blocked"
                 ?
-
                 `
                 <button
                   class="user-action unblock"
-                  onclick="unblockUser(${row},'${safeUser}')"
+                  onclick="unblockUser(${row},'${safe}')"
                 >
                   🔓 Unblock
                 </button>
                 `
-
                 :
-
                 `
                 <button
                   class="user-action block"
-                  onclick="blockUser(${row},'${safeUser}')"
+                  onclick="blockUser(${row},'${safe}')"
                 >
                   🔒 Block
                 </button>
@@ -3640,7 +3278,7 @@ function renderUsers(){
 
               <button
                 class="user-action delete"
-                onclick="deleteUser(${row},'${safeUser}')"
+                onclick="deleteUser(${row},'${safe}')"
               >
                 🗑️ Delete
               </button>
@@ -3650,21 +3288,19 @@ function renderUsers(){
           </td>
 
         </tr>
-
       `;
 
     }
   );
 
 
-  body.innerHTML =
-    html;
+  body.innerHTML = html;
 
 }
 
 
 /* =====================================================
-OPEN ADD USER
+ADD USER
 ===================================================== */
 
 function openAddUserModal(){
@@ -3674,20 +3310,17 @@ function openAddUserModal(){
   }
 
 
-  editingUser =
-    null;
+  editingUser = null;
 
 
   document.getElementById(
     "userFormTitle"
-  ).textContent =
-    "Add User";
+  ).textContent = "Add User";
 
 
   document.getElementById(
     "userSubmitBtn"
-  ).textContent =
-    "Add User";
+  ).textContent = "Add User";
 
 
   document.getElementById(
@@ -3697,15 +3330,12 @@ function openAddUserModal(){
 
   document.getElementById(
     "userStatus"
-  ).value =
-    "Active";
+  ).value = "Active";
 
 
   document.getElementById(
     "userFormModal"
-  ).classList.add(
-    "show"
-  );
+  ).classList.add("show");
 
 }
 
@@ -3734,15 +3364,14 @@ function editUser(
     allUsers.find(
       function(item){
 
-        const itemRow =
+        const row =
           Number(
             item._row ||
             item.row ||
             0
           );
 
-
-        const itemUsername =
+        const name =
           String(
             item.username ||
             item.Username ||
@@ -3751,16 +3380,9 @@ function editUser(
 
 
         return (
-
-          itemRow ===
-          Number(rowNumber)
-
-          ||
-
-          itemUsername.toLowerCase()
-          ===
+          row === Number(rowNumber) ||
+          name.toLowerCase() ===
           username.toLowerCase()
-
         );
 
       }
@@ -3779,20 +3401,17 @@ function editUser(
   }
 
 
-  editingUser =
-    user;
+  editingUser = user;
 
 
   document.getElementById(
     "userFormTitle"
-  ).textContent =
-    "Edit User";
+  ).textContent = "Edit User";
 
 
   document.getElementById(
     "userSubmitBtn"
-  ).textContent =
-    "Update User";
+  ).textContent = "Update User";
 
 
   document.getElementById(
@@ -3837,9 +3456,7 @@ function editUser(
 
   document.getElementById(
     "userFormModal"
-  ).classList.add(
-    "show"
-  );
+  ).classList.add("show");
 
 }
 
@@ -3852,13 +3469,9 @@ function closeUserFormModal(){
 
   document.getElementById(
     "userFormModal"
-  ).classList.remove(
-    "show"
-  );
+  ).classList.remove("show");
 
-
-  editingUser =
-    null;
+  editingUser = null;
 
 }
 
@@ -3888,24 +3501,20 @@ async function submitUser(event){
       "userUsername"
     ).value.trim();
 
-
   const password =
     document.getElementById(
       "userPassword"
     ).value.trim();
-
 
   const name =
     document.getElementById(
       "userName"
     ).value.trim();
 
-
   const role =
     document.getElementById(
       "userRole"
     ).value;
-
 
   const status =
     document.getElementById(
@@ -3914,77 +3523,54 @@ async function submitUser(event){
 
 
   if(!username){
-
     showToast(
       "Username is required.",
       "error"
     );
-
     return;
-
   }
 
-
   if(!password){
-
     showToast(
       "Password is required.",
       "error"
     );
-
     return;
-
   }
 
-
   if(!name){
-
     showToast(
       "Name is required.",
       "error"
     );
-
     return;
-
   }
 
-
   if(!role){
-
     showToast(
       "Please select Role.",
       "error"
     );
-
     return;
-
   }
 
-
   if(!status){
-
     showToast(
       "Please select Status.",
       "error"
     );
-
     return;
-
   }
 
 
-  const isEditing =
-    Boolean(
-      editingUser
-    );
+  const editing =
+    Boolean(editingUser);
 
 
-  button.disabled =
-    true;
-
+  button.disabled = true;
 
   button.textContent =
-    isEditing
+    editing
       ? "Updating..."
       : "Adding...";
 
@@ -3994,29 +3580,20 @@ async function submitUser(event){
     const payload = {
 
       action:
-        isEditing
+        editing
           ? "updateUser"
           : "addUser",
 
-      username:
-        username,
-
-      password:
-        password,
-
-      name:
-        name,
-
-      role:
-        role,
-
-      status:
-        status
+      username,
+      password,
+      name,
+      role,
+      status
 
     };
 
 
-    if(isEditing){
+    if(editing){
 
       payload.row =
         Number(
@@ -4024,7 +3601,6 @@ async function submitUser(event){
           editingUser.row ||
           0
         );
-
 
       payload.oldUsername =
         editingUser.username ||
@@ -4038,30 +3614,22 @@ async function submitUser(event){
       await fetch(
         USER_API_URL,
         {
-
           method:"POST",
-
           headers:{
             "Content-Type":
               "text/plain;charset=utf-8"
           },
-
           body:
-            JSON.stringify(
-              payload
-            )
-
+            JSON.stringify(payload)
         }
       );
 
 
     if(!response.ok){
-
       throw new Error(
         "User server error: " +
         response.status
       );
-
     }
 
 
@@ -4069,15 +3637,11 @@ async function submitUser(event){
       await response.json();
 
 
-    if(
-      result.success === false
-    ){
-
+    if(result.success === false){
       throw new Error(
         result.message ||
         "User operation failed."
       );
-
     }
 
 
@@ -4085,7 +3649,7 @@ async function submitUser(event){
 
 
     showToast(
-      isEditing
+      editing
         ? "User updated successfully."
         : "User added successfully.",
       "success"
@@ -4097,11 +3661,7 @@ async function submitUser(event){
 
   }catch(error){
 
-    console.error(
-      "User Save Error:",
-      error
-    );
-
+    console.error(error);
 
     showToast(
       error.message ||
@@ -4109,14 +3669,13 @@ async function submitUser(event){
       "error"
     );
 
+
   }finally{
 
-    button.disabled =
-      false;
-
+    button.disabled = false;
 
     button.textContent =
-      isEditing
+      editing
         ? "Update User"
         : "Add User";
 
@@ -4126,7 +3685,7 @@ async function submitUser(event){
 
 
 /* =====================================================
-BLOCK USER
+BLOCK
 ===================================================== */
 
 async function blockUser(
@@ -4134,26 +3693,21 @@ async function blockUser(
   encodedUsername
 ){
 
-  if(!checkLogin()){
-    return;
-  }
-
-
   const username =
     decodeURIComponent(
       encodedUsername
     );
 
 
-  const confirmed =
+  const ok =
     confirm(
-      "Block user \"" +
+      'Block user "' +
       username +
-      "\"?"
+      '"?'
     );
 
 
-  if(!confirmed){
+  if(!ok){
     return;
   }
 
@@ -4168,18 +3722,13 @@ async function blockUser(
 
 
 /* =====================================================
-UNBLOCK USER
+UNBLOCK
 ===================================================== */
 
 async function unblockUser(
   rowNumber,
   encodedUsername
 ){
-
-  if(!checkLogin()){
-    return;
-  }
-
 
   const username =
     decodeURIComponent(
@@ -4197,7 +3746,7 @@ async function unblockUser(
 
 
 /* =====================================================
-CHANGE USER STATUS
+CHANGE STATUS
 ===================================================== */
 
 async function changeUserStatus(
@@ -4220,16 +3769,11 @@ async function changeUserStatus(
           ? "blockUser"
           : "unblockUser",
 
-      row:
-        Number(
-          rowNumber
-        ),
+      row:Number(rowNumber),
 
-      username:
-        username,
+      username,
 
-      status:
-        status
+      status
 
     };
 
@@ -4238,30 +3782,22 @@ async function changeUserStatus(
       await fetch(
         USER_API_URL,
         {
-
           method:"POST",
-
           headers:{
             "Content-Type":
               "text/plain;charset=utf-8"
           },
-
           body:
-            JSON.stringify(
-              payload
-            )
-
+            JSON.stringify(payload)
         }
       );
 
 
     if(!response.ok){
-
       throw new Error(
         "User server error: " +
         response.status
       );
-
     }
 
 
@@ -4269,15 +3805,11 @@ async function changeUserStatus(
       await response.json();
 
 
-    if(
-      result.success === false
-    ){
-
+    if(result.success === false){
       throw new Error(
         result.message ||
         "Status update failed."
       );
-
     }
 
 
@@ -4295,11 +3827,7 @@ async function changeUserStatus(
 
   }catch(error){
 
-    console.error(
-      "Status Error:",
-      error
-    );
-
+    console.error(error);
 
     showToast(
       error.message ||
@@ -4332,18 +3860,16 @@ async function deleteUser(
     );
 
 
-  const confirmed =
+  const ok =
     confirm(
-
-      "Delete user \"" +
+      'Delete user "' +
       username +
-      "\"?\n\n" +
+      '"?\n\n' +
       "This action cannot be undone."
-
     );
 
 
-  if(!confirmed){
+  if(!ok){
     return;
   }
 
@@ -4352,16 +3878,11 @@ async function deleteUser(
 
     const payload = {
 
-      action:
-        "deleteUser",
+      action:"deleteUser",
 
-      row:
-        Number(
-          rowNumber
-        ),
+      row:Number(rowNumber),
 
-      username:
-        username
+      username
 
     };
 
@@ -4370,30 +3891,22 @@ async function deleteUser(
       await fetch(
         USER_API_URL,
         {
-
           method:"POST",
-
           headers:{
             "Content-Type":
               "text/plain;charset=utf-8"
           },
-
           body:
-            JSON.stringify(
-              payload
-            )
-
+            JSON.stringify(payload)
         }
       );
 
 
     if(!response.ok){
-
       throw new Error(
         "User server error: " +
         response.status
       );
-
     }
 
 
@@ -4401,15 +3914,11 @@ async function deleteUser(
       await response.json();
 
 
-    if(
-      result.success === false
-    ){
-
+    if(result.success === false){
       throw new Error(
         result.message ||
         "Delete failed."
       );
-
     }
 
 
@@ -4424,11 +3933,7 @@ async function deleteUser(
 
   }catch(error){
 
-    console.error(
-      "Delete User Error:",
-      error
-    );
-
+    console.error(error);
 
     showToast(
       error.message ||
@@ -4447,38 +3952,18 @@ TODAY
 
 function getTodayInputDate(){
 
-  const now =
-    new Date();
-
-
-  const year =
-    now.getFullYear();
-
-
-  const month =
-    String(
-      now.getMonth() + 1
-    ).padStart(
-      2,
-      "0"
-    );
-
-
-  const day =
-    String(
-      now.getDate()
-    ).padStart(
-      2,
-      "0"
-    );
-
+  const now = new Date();
 
   return (
-    year +
+    now.getFullYear() +
     "-" +
-    month +
+    String(
+      now.getMonth() + 1
+    ).padStart(2,"0") +
     "-" +
-    day
+    String(
+      now.getDate()
+    ).padStart(2,"0")
   );
 
 }
@@ -4493,19 +3978,13 @@ function showLoading(){
   document.getElementById(
     "tableBody"
   ).innerHTML = `
-
     <tr>
-
       <td colspan="5">
-
         <div class="loading">
           ⏳ Loading data...
         </div>
-
       </td>
-
     </tr>
-
   `;
 
 }
@@ -4520,24 +3999,13 @@ function showError(message){
   document.getElementById(
     "tableBody"
   ).innerHTML = `
-
     <tr>
-
       <td colspan="5">
-
         <div class="empty">
-
-          ❌
-          ${escapeHTML(
-            message
-          )}
-
+          ❌ ${escapeHTML(message)}
         </div>
-
       </td>
-
     </tr>
-
   `;
 
 }
@@ -4564,9 +4032,7 @@ function showToast(
 
   toast.className =
     "toast show " +
-    (
-      type || ""
-    );
+    (type || "");
 
 
   setTimeout(
@@ -4591,31 +4057,11 @@ function escapeHTML(value){
   return String(
     value ?? ""
   )
-
-  .replace(
-    /&/g,
-    "&amp;"
-  )
-
-  .replace(
-    /</g,
-    "&lt;"
-  )
-
-  .replace(
-    />/g,
-    "&gt;"
-  )
-
-  .replace(
-    /"/g,
-    "&quot;"
-  )
-
-  .replace(
-    /'/g,
-    "&#039;"
-  );
+  .replace(/&/g,"&amp;")
+  .replace(/</g,"&lt;")
+  .replace(/>/g,"&gt;")
+  .replace(/"/g,"&quot;")
+  .replace(/'/g,"&#039;");
 
 }
 
@@ -4625,9 +4071,7 @@ OUTSIDE CLICK
 ===================================================== */
 
 document
-  .getElementById(
-    "entryModal"
-  )
+  .getElementById("entryModal")
   .addEventListener(
     "click",
     function(event){
@@ -4635,9 +4079,7 @@ document
       if(
         event.target === this
       ){
-
         closeEntryModal();
-
       }
 
     }
@@ -4645,9 +4087,7 @@ document
 
 
 document
-  .getElementById(
-    "userModal"
-  )
+  .getElementById("userModal")
   .addEventListener(
     "click",
     function(event){
@@ -4655,9 +4095,7 @@ document
       if(
         event.target === this
       ){
-
         closeUserModal();
-
       }
 
     }
@@ -4665,9 +4103,7 @@ document
 
 
 document
-  .getElementById(
-    "userFormModal"
-  )
+  .getElementById("userFormModal")
   .addEventListener(
     "click",
     function(event){
@@ -4675,9 +4111,7 @@ document
       if(
         event.target === this
       ){
-
         closeUserFormModal();
-
       }
 
     }
@@ -4697,9 +4131,7 @@ document.addEventListener(
     ){
 
       closeEntryModal();
-
       closeUserModal();
-
       closeUserFormModal();
 
     }
