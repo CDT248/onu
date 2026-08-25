@@ -27,6 +27,9 @@
   --hover:#fafafa;
   --green:#087f5b;
   --green-dark:#066b4d;
+  --blue:#2563eb;
+  --red:#dc2626;
+  --orange:#d97706;
   --shadow:rgba(0,0,0,.20);
 }
 
@@ -48,7 +51,6 @@ body{
   transition:.25s;
 }
 
-
 /* =====================================================
 HEADER
 ===================================================== */
@@ -56,22 +58,15 @@ HEADER
 .header{
   width:100%;
   min-height:70px;
-
   background:var(--card);
-
   border-bottom:1px solid var(--border);
-
   display:flex;
   align-items:center;
   justify-content:space-between;
-
   padding:0 25px;
-
   position:sticky;
   top:0;
   z-index:100;
-
-  transition:.25s;
 }
 
 .logo{
@@ -86,37 +81,58 @@ HEADER
   gap:10px;
 }
 
-
 /* =====================================================
-THEME BUTTON
+BUTTONS
 ===================================================== */
 
-.theme-btn{
-  height:42px;
-
-  padding:0 14px;
-
-  border-radius:8px;
-
-  background:var(--input);
-
-  color:var(--text);
-
-  border:1px solid var(--border);
-
-  font-size:13px;
-
-  font-weight:600;
-
+button{
+  border:none;
   cursor:pointer;
-
   transition:.2s;
 }
 
-.theme-btn:hover{
+button:disabled{
+  cursor:not-allowed;
+  opacity:.5;
+}
+
+.btn{
+  padding:11px 17px;
+  border-radius:8px;
+  font-size:14px;
+  font-weight:600;
+}
+
+.btn-primary{
+  background:var(--green);
+  color:#fff;
+}
+
+.btn-primary:hover{
+  background:var(--green-dark);
+}
+
+.btn-refresh,
+.theme-btn,
+.btn-cancel{
+  background:var(--input);
+  color:var(--text);
+  border:1px solid var(--border);
+}
+
+.btn-refresh:hover,
+.theme-btn:hover,
+.btn-cancel:hover{
   background:var(--hover);
 }
 
+.theme-btn{
+  height:42px;
+  padding:0 14px;
+  border-radius:8px;
+  font-size:13px;
+  font-weight:600;
+}
 
 /* =====================================================
 MAIN
@@ -124,168 +140,69 @@ MAIN
 
 .container{
   width:100%;
-
   max-width:1500px;
-
   margin:auto;
-
   padding:25px;
 }
 
-
-/* =====================================================
-TOP
-===================================================== */
-
 .top-section{
   display:flex;
-
   justify-content:space-between;
-
   align-items:center;
-
   gap:15px;
-
   margin-bottom:20px;
 }
 
 .title h1{
   font-size:27px;
-
   margin-bottom:5px;
 }
 
 .title p{
   color:var(--muted);
-
   font-size:14px;
 }
 
-
 /* =====================================================
-BUTTON
-===================================================== */
-
-button{
-  border:none;
-
-  cursor:pointer;
-
-  transition:.2s;
-}
-
-button:disabled{
-  cursor:not-allowed;
-
-  opacity:.5;
-}
-
-.btn{
-  padding:11px 17px;
-
-  border-radius:8px;
-
-  font-size:14px;
-
-  font-weight:600;
-}
-
-.btn-primary{
-  background:var(--green);
-
-  color:#ffffff;
-}
-
-.btn-primary:hover{
-  background:var(--green-dark);
-}
-
-.btn-refresh{
-  background:var(--input);
-
-  color:var(--text);
-
-  border:1px solid var(--border);
-}
-
-.btn-refresh:hover{
-  background:var(--hover);
-}
-
-.btn-cancel{
-  background:var(--input);
-
-  color:var(--text);
-
-  border:1px solid var(--border);
-}
-
-
-/* =====================================================
-FILTER BOX
+FILTER
 ===================================================== */
 
 .filter-box{
   background:var(--card);
-
   border:1px solid var(--border);
-
   border-radius:12px;
-
   padding:18px;
-
   margin-bottom:20px;
-
-  transition:.25s;
 }
 
 .filters{
   display:grid;
-
-  grid-template-columns:
-    2fr
-    1fr
-    1fr
-    auto;
-
+  grid-template-columns:2fr 1fr 1fr auto;
   gap:12px;
-
   align-items:end;
 }
 
 .field{
   display:flex;
-
   flex-direction:column;
-
   gap:6px;
 }
 
 .field label{
   font-size:12px;
-
   font-weight:600;
-
   color:var(--muted);
 }
 
 .field input{
   width:100%;
-
   height:42px;
-
   border:1px solid var(--border);
-
   border-radius:8px;
-
   padding:0 12px;
-
   outline:none;
-
   background:var(--input);
-
   color:var(--text);
-
   font-size:14px;
 }
 
@@ -293,32 +210,22 @@ FILTER BOX
   border-color:var(--green);
 }
 
-
 /* =====================================================
 TABLE
 ===================================================== */
 
 .table-box{
   background:var(--card);
-
   border:1px solid var(--border);
-
   border-radius:12px;
-
   overflow:hidden;
-
-  transition:.25s;
 }
 
 .table-header{
   padding:16px 18px;
-
   border-bottom:1px solid var(--border);
-
   display:flex;
-
   justify-content:space-between;
-
   align-items:center;
 }
 
@@ -328,47 +235,34 @@ TABLE
 
 .total-count{
   font-size:13px;
-
   color:var(--muted);
 }
 
 .table-wrapper{
   width:100%;
-
   overflow-x:auto;
 }
 
 table{
   width:100%;
-
   border-collapse:collapse;
-
-  min-width:750px;
+  min-width:900px;
 }
 
 th{
   background:var(--thead);
-
   padding:14px;
-
   text-align:left;
-
   font-size:12px;
-
   color:var(--muted);
-
   white-space:nowrap;
-
   border-bottom:1px solid var(--border);
 }
 
 td{
   padding:14px;
-
   border-bottom:1px solid var(--border);
-
   font-size:13px;
-
   white-space:nowrap;
 }
 
@@ -376,25 +270,28 @@ tr:hover td{
   background:var(--hover);
 }
 
-
 /* =====================================================
 ACTIONS
 ===================================================== */
 
 .actions{
   display:flex;
-
   gap:7px;
+  align-items:center;
+}
+
+.btn-edit,
+.btn-delete,
+.btn-sell{
+  padding:7px 11px;
+  border-radius:6px;
+  font-size:13px;
+  font-weight:600;
 }
 
 .btn-edit{
   background:#e8f1ff;
-
   color:#2563eb;
-
-  padding:7px 11px;
-
-  border-radius:6px;
 }
 
 .btn-edit:hover{
@@ -403,18 +300,21 @@ ACTIONS
 
 .btn-delete{
   background:#fee2e2;
-
   color:#dc2626;
-
-  padding:7px 11px;
-
-  border-radius:6px;
 }
 
 .btn-delete:hover{
   background:#fecaca;
 }
 
+.btn-sell{
+  background:#fff7ed;
+  color:#d97706;
+}
+
+.btn-sell:hover{
+  background:#ffedd5;
+}
 
 /* =====================================================
 DATE
@@ -422,10 +322,8 @@ DATE
 
 .date-cell{
   color:var(--muted);
-
   font-weight:500;
 }
-
 
 /* =====================================================
 PAGINATION
@@ -433,43 +331,30 @@ PAGINATION
 
 .pagination-box{
   display:flex;
-
   justify-content:space-between;
-
   align-items:center;
-
   padding:15px 18px;
-
   border-top:1px solid var(--border);
 }
 
 .page-info{
   font-size:13px;
-
   color:var(--muted);
 }
 
 .pagination{
   display:flex;
-
   gap:5px;
-
   flex-wrap:wrap;
 }
 
 .page-btn{
   min-width:35px;
-
   height:35px;
-
   border:1px solid var(--border);
-
   background:var(--input);
-
   color:var(--text);
-
   border-radius:6px;
-
   font-size:13px;
 }
 
@@ -479,12 +364,9 @@ PAGINATION
 
 .page-btn.active{
   background:var(--green);
-
-  color:#ffffff;
-
+  color:#fff;
   border-color:var(--green);
 }
-
 
 /* =====================================================
 MODAL
@@ -492,19 +374,12 @@ MODAL
 
 .modal{
   position:fixed;
-
   inset:0;
-
   background:rgba(0,0,0,.55);
-
   display:none;
-
   justify-content:center;
-
   align-items:center;
-
   padding:20px;
-
   z-index:999;
 }
 
@@ -514,45 +389,24 @@ MODAL
 
 .modal-box{
   width:100%;
-
   max-width:700px;
-
   max-height:95vh;
-
-  min-height:600px;
-
   overflow-y:auto;
-
   background:var(--card);
-
   color:var(--text);
-
   border-radius:16px;
-
-  box-shadow:
-    0 20px 60px
-    var(--shadow);
-
-  transition:.25s;
+  box-shadow:0 20px 60px var(--shadow);
 }
 
 .modal-header{
   padding:20px 24px;
-
   border-bottom:1px solid var(--border);
-
   display:flex;
-
   justify-content:space-between;
-
   align-items:center;
-
   position:sticky;
-
   top:0;
-
   background:var(--card);
-
   z-index:2;
 }
 
@@ -562,17 +416,11 @@ MODAL
 
 .close-btn{
   width:36px;
-
   height:36px;
-
   border-radius:50%;
-
   background:var(--input);
-
   border:1px solid var(--border);
-
   font-size:22px;
-
   color:var(--text);
 }
 
@@ -580,30 +428,23 @@ MODAL
   background:var(--hover);
 }
 
-
 /* =====================================================
 FORM
 ===================================================== */
 
 .form{
   padding:30px 25px;
-
-  min-height:520px;
 }
 
 .form-grid{
   display:grid;
-
   grid-template-columns:1fr 1fr;
-
   gap:22px 18px;
 }
 
 .form-group{
   display:flex;
-
   flex-direction:column;
-
   gap:9px;
 }
 
@@ -613,31 +454,19 @@ FORM
 
 .form-group label{
   font-size:13px;
-
   font-weight:600;
-
-  color:var(--text);
 }
 
 .form-group input,
 .form-group textarea{
   width:100%;
-
   border:1px solid var(--border);
-
   border-radius:9px;
-
   padding:13px 14px;
-
   outline:none;
-
   font-size:14px;
-
   background:var(--input);
-
   color:var(--text);
-
-  transition:.2s;
 }
 
 .form-group input{
@@ -646,52 +475,37 @@ FORM
 
 .form-group textarea{
   min-height:160px;
-
   resize:vertical;
 }
 
 .form-group input:focus,
 .form-group textarea:focus{
   border-color:var(--green);
-
-  box-shadow:
-    0 0 0 2px
-    rgba(8,127,91,.10);
+  box-shadow:0 0 0 2px rgba(8,127,91,.10);
 }
 
 .form-footer{
   display:flex;
-
   justify-content:flex-end;
-
   gap:10px;
-
   padding-top:30px;
-
-  padding-bottom:10px;
 }
 
-
 /* =====================================================
-LOADING
+LOADING / EMPTY
 ===================================================== */
 
 .loading{
   text-align:center;
-
   padding:45px 20px;
-
   color:var(--muted);
 }
 
 .empty{
   text-align:center;
-
   padding:55px 20px;
-
   color:var(--muted);
 }
-
 
 /* =====================================================
 TOAST
@@ -699,39 +513,23 @@ TOAST
 
 .toast{
   position:fixed;
-
   right:25px;
-
   bottom:25px;
-
   min-width:260px;
-
   padding:14px 17px;
-
   border-radius:9px;
-
-  color:#ffffff;
-
+  color:#fff;
   background:#111827;
-
-  box-shadow:
-    0 10px 30px
-    rgba(0,0,0,.2);
-
+  box-shadow:0 10px 30px rgba(0,0,0,.2);
   transform:translateY(100px);
-
   opacity:0;
-
   transition:.3s;
-
   z-index:2000;
-
   font-size:14px;
 }
 
 .toast.show{
   transform:translateY(0);
-
   opacity:1;
 }
 
@@ -742,7 +540,6 @@ TOAST
 .toast.error{
   background:#dc2626;
 }
-
 
 /* =====================================================
 MOBILE
@@ -760,28 +557,16 @@ MOBILE
 
   .top-section{
     align-items:flex-start;
-
     flex-direction:column;
   }
-
-  .modal-box{
-    max-width:650px;
-  }
-
 }
-
 
 @media(max-width:600px){
 
   .header{
-    height:auto;
-
     min-height:70px;
-
     padding:12px 15px;
-
     gap:10px;
-
     flex-wrap:wrap;
   }
 
@@ -791,18 +576,14 @@ MOBILE
 
   .header-right{
     gap:6px;
-
     width:100%;
-
     justify-content:flex-end;
   }
 
   .header-right .btn,
   .theme-btn{
     padding:9px 10px;
-
     font-size:12px;
-
     height:38px;
   }
 
@@ -830,34 +611,34 @@ MOBILE
     padding:25px 18px;
   }
 
-  .form-group textarea{
-    min-height:140px;
-  }
-
   .modal{
     padding:10px;
   }
 
   .modal-box{
     max-height:96vh;
-
-    min-height:auto;
-
     border-radius:13px;
   }
 
   .pagination-box{
     flex-direction:column;
-
     gap:12px;
   }
 
   .toast{
     left:15px;
-
     right:15px;
-
     min-width:auto;
+  }
+
+  .actions{
+    gap:5px;
+  }
+
+  .btn-edit,
+  .btn-delete,
+  .btn-sell{
+    padding:7px 9px;
   }
 
 }
@@ -866,9 +647,7 @@ MOBILE
 
 </head>
 
-
 <body>
-
 
 <!-- =====================================================
 HEADER
@@ -882,8 +661,6 @@ HEADER
 
   <div class="header-right">
 
-    <!-- DARK / WHITE BUTTON -->
-
     <button
       class="theme-btn"
       id="themeBtn"
@@ -892,9 +669,6 @@ HEADER
       🌙 Dark
     </button>
 
-
-    <!-- REFRESH -->
-
     <button
       class="btn btn-refresh"
       id="refreshBtn"
@@ -902,9 +676,6 @@ HEADER
     >
       🔄 Refresh
     </button>
-
-
-    <!-- NEW ENTRY -->
 
     <button
       class="btn btn-primary"
@@ -923,7 +694,6 @@ MAIN
 ===================================================== -->
 
 <main class="container">
-
 
   <div class="top-section">
 
@@ -950,9 +720,6 @@ MAIN
 
     <div class="filters">
 
-
-      <!-- SEARCH -->
-
       <div class="field search-field">
 
         <label>
@@ -969,8 +736,6 @@ MAIN
       </div>
 
 
-      <!-- FROM -->
-
       <div class="field">
 
         <label>
@@ -985,8 +750,6 @@ MAIN
 
       </div>
 
-
-      <!-- TO -->
 
       <div class="field">
 
@@ -1003,15 +766,12 @@ MAIN
       </div>
 
 
-      <!-- CLEAR -->
-
       <button
         class="btn btn-refresh"
         onclick="clearFilters()"
       >
         Clear
       </button>
-
 
     </div>
 
@@ -1023,7 +783,6 @@ MAIN
   ==================================================== -->
 
   <section class="table-box">
-
 
     <div class="table-header">
 
@@ -1051,30 +810,19 @@ MAIN
 
           <tr>
 
-            <th>
-              Name
-            </th>
+            <th>Name</th>
 
-            <th>
-              Ip
-            </th>
+            <th>Ip</th>
 
-            <th>
-              Work
-            </th>
+            <th>Work</th>
 
-            <th>
-              Date
-            </th>
+            <th>Date</th>
 
-            <th>
-              Action
-            </th>
+            <th>Action</th>
 
           </tr>
 
         </thead>
-
 
         <tbody id="tableBody">
 
@@ -1097,8 +845,6 @@ MAIN
     </div>
 
 
-    <!-- PAGINATION -->
-
     <div class="pagination-box">
 
       <div
@@ -1108,7 +854,6 @@ MAIN
         Page 1
       </div>
 
-
       <div
         class="pagination"
         id="pagination"
@@ -1116,9 +861,7 @@ MAIN
 
     </div>
 
-
   </section>
-
 
 </main>
 
@@ -1132,16 +875,13 @@ ENTRY MODAL
   id="entryModal"
 >
 
-
   <div class="modal-box">
-
 
     <div class="modal-header">
 
       <h2 id="modalTitle">
         New Entry
       </h2>
-
 
       <button
         class="close-btn"
@@ -1159,11 +899,7 @@ ENTRY MODAL
       onsubmit="submitEntry(event)"
     >
 
-
       <div class="form-grid">
-
-
-        <!-- NAME -->
 
         <div class="form-group">
 
@@ -1174,7 +910,6 @@ ENTRY MODAL
           <input
             type="text"
             id="nameInput"
-            name="Name"
             placeholder="Enter name"
             autocomplete="off"
             required
@@ -1182,8 +917,6 @@ ENTRY MODAL
 
         </div>
 
-
-        <!-- IP -->
 
         <div class="form-group">
 
@@ -1194,7 +927,6 @@ ENTRY MODAL
           <input
             type="text"
             id="ipInput"
-            name="Ip"
             placeholder="Enter IP"
             autocomplete="off"
             required
@@ -1202,8 +934,6 @@ ENTRY MODAL
 
         </div>
 
-
-        <!-- WORK -->
 
         <div class="form-group full">
 
@@ -1213,15 +943,12 @@ ENTRY MODAL
 
           <textarea
             id="workInput"
-            name="Work"
             placeholder="Enter work"
             required
           ></textarea>
 
         </div>
 
-
-        <!-- DATE -->
 
         <div class="form-group">
 
@@ -1232,17 +959,14 @@ ENTRY MODAL
           <input
             type="date"
             id="dateInput"
-            name="Date"
           >
 
         </div>
-
 
       </div>
 
 
       <div class="form-footer">
-
 
         <button
           type="button"
@@ -1252,7 +976,6 @@ ENTRY MODAL
           Cancel
         </button>
 
-
         <button
           type="submit"
           class="btn btn-primary"
@@ -1261,12 +984,9 @@ ENTRY MODAL
           Save Entry
         </button>
 
-
       </div>
 
-
     </form>
-
 
   </div>
 
@@ -1284,7 +1004,6 @@ TOAST
 
 
 <script>
-
 
 /* =====================================================
 GOOGLE APPS SCRIPT URL
@@ -1318,93 +1037,59 @@ let editingRow = null;
 5 MINUTE AUTO LOGOUT
 ===================================================== */
 
-const INACTIVITY_LIMIT = 5 * 60 * 1000;
+const INACTIVITY_LIMIT =
+5 * 60 * 1000;
 
 let inactivityTimer = null;
 
 
-/*
-  Reset inactivity timer
-*/
-
 function resetInactivityTimer(){
 
-  clearTimeout(inactivityTimer);
+  clearTimeout(
+    inactivityTimer
+  );
 
-  inactivityTimer = setTimeout(
-    autoLogout,
-    INACTIVITY_LIMIT
+  inactivityTimer =
+    setTimeout(
+      autoLogout,
+      INACTIVITY_LIMIT
+    );
+
+}
+
+
+function autoLogout(){
+
+  clearTimeout(
+    inactivityTimer
+  );
+
+  localStorage.removeItem("username");
+  localStorage.removeItem("user");
+  localStorage.removeItem("userData");
+  localStorage.removeItem("loginData");
+  localStorage.removeItem("token");
+  localStorage.removeItem("authToken");
+  localStorage.removeItem("session");
+  localStorage.removeItem("loggedIn");
+
+  sessionStorage.clear();
+
+  window.location.replace(
+    "index.html"
   );
 
 }
 
 
-/*
-  Auto logout
-*/
-
-function autoLogout(){
-
-  clearTimeout(inactivityTimer);
-
-
-  /*
-    Remove common login/session values
-  */
-
-  localStorage.removeItem("username");
-
-  localStorage.removeItem("user");
-
-  localStorage.removeItem("userData");
-
-  localStorage.removeItem("loginData");
-
-  localStorage.removeItem("token");
-
-  localStorage.removeItem("authToken");
-
-  localStorage.removeItem("session");
-
-  localStorage.removeItem("loggedIn");
-
-
-  /*
-    Clear session storage
-  */
-
-  sessionStorage.clear();
-
-
-  /*
-    Go to login page
-  */
-
-  window.location.replace("index.html");
-
-}
-
-
-/*
-  User activity events
-*/
-
 const activityEvents = [
-
   "mousemove",
-
   "mousedown",
-
   "keydown",
-
   "scroll",
-
   "touchstart",
-
   "click",
-
   "wheel"
-
 ];
 
 
@@ -1420,10 +1105,6 @@ activityEvents.forEach(
   }
 );
 
-
-/*
-  Start timer immediately
-*/
 
 resetInactivityTimer();
 
@@ -1452,7 +1133,9 @@ function loadTheme(){
     );
 
 
-  if(savedTheme === "dark"){
+  if(
+    savedTheme === "dark"
+  ){
 
     document.body.classList.add(
       "dark"
@@ -1501,9 +1184,7 @@ function updateThemeButton(){
 
 
   if(!btn){
-
     return;
-
   }
 
 
@@ -1513,17 +1194,10 @@ function updateThemeButton(){
     );
 
 
-  if(isDark){
-
-    btn.textContent =
-      "☀️ White";
-
-  }else{
-
-    btn.textContent =
-      "🌙 Dark";
-
-  }
+  btn.textContent =
+    isDark
+      ? "☀️ White"
+      : "🌙 Dark";
 
 }
 
@@ -1542,7 +1216,6 @@ async function loadData(){
 
   refreshBtn.disabled = true;
 
-
   refreshBtn.textContent =
     "⏳ Loading...";
 
@@ -1552,7 +1225,6 @@ async function loadData(){
 
   try{
 
-
     const response =
       await fetch(
         API_URL +
@@ -1560,7 +1232,6 @@ async function loadData(){
         Date.now(),
         {
           method:"GET",
-
           cache:"no-store"
         }
       );
@@ -1578,12 +1249,6 @@ async function loadData(){
 
     const result =
       await response.json();
-
-
-    console.log(
-      "API Response:",
-      result
-    );
 
 
     if(
@@ -1614,39 +1279,27 @@ async function loadData(){
     allData =
       result.data;
 
-
     filteredData =
       [...allData];
 
-
     currentPage = 1;
-
 
     renderTable();
 
     updateTotal();
 
 
-    showToast(
-      "Data loaded successfully.",
-      "success"
-    );
-
-
   }catch(error){
-
 
     console.error(
       "Load Error:",
       error
     );
 
-
     showError(
       error.message ||
       "Failed to load data."
     );
-
 
     showToast(
       error.message ||
@@ -1657,10 +1310,8 @@ async function loadData(){
 
   }finally{
 
-
     refreshBtn.disabled =
       false;
-
 
     refreshBtn.textContent =
       "🔄 Refresh";
@@ -1693,9 +1344,7 @@ function renderTable(){
         <td colspan="5">
 
           <div class="empty">
-
             No data found.
-
           </div>
 
         </td>
@@ -1703,7 +1352,6 @@ function renderTable(){
       </tr>
 
     `;
-
 
     renderPagination();
 
@@ -1736,6 +1384,9 @@ function renderTable(){
 
   pageData.forEach(
     function(row){
+
+      const rowNumber =
+        Number(row._row);
 
 
       html += `
@@ -1772,18 +1423,28 @@ function renderTable(){
 
               <button
                 class="btn-edit"
-                onclick="editEntryByRow(${Number(row._row)})"
+                onclick="editEntryByRow(${rowNumber})"
                 title="Edit"
               >
-                ✏️
+                ✏️ Edit
               </button>
+
 
               <button
                 class="btn-delete"
-                onclick="deleteEntryByRow(${Number(row._row)})"
+                onclick="deleteEntryByRow(${rowNumber})"
                 title="Delete"
               >
-                🗑️
+                🗑️ Delete
+              </button>
+
+
+              <button
+                class="btn-sell"
+                onclick="sellEntryByRow(${rowNumber})"
+                title="Sell"
+              >
+                💰 Sell
               </button>
 
             </div>
@@ -1839,9 +1500,7 @@ function applyFilters(){
     allData.filter(
       function(row){
 
-
         if(search){
-
 
           const searchText = (
 
@@ -1888,7 +1547,6 @@ function applyFilters(){
           toDate
         ){
 
-
           const rowDate =
             convertToFilterDate(
               row.Date
@@ -1896,9 +1554,7 @@ function applyFilters(){
 
 
           if(!rowDate){
-
             return false;
-
           }
 
 
@@ -1931,7 +1587,6 @@ function applyFilters(){
 
 
   currentPage = 1;
-
 
   renderTable();
 
@@ -1973,7 +1628,6 @@ function clearFilters(){
 
   currentPage = 1;
 
-
   renderTable();
 
   updateTotal();
@@ -1990,9 +1644,7 @@ function convertToFilterDate(
 ){
 
   if(!value){
-
     return "";
-
   }
 
 
@@ -2017,8 +1669,7 @@ function convertToFilterDate(
     const month =
       String(
         parsed.getMonth() + 1
-      )
-      .padStart(
+      ).padStart(
         2,
         "0"
       );
@@ -2027,8 +1678,7 @@ function convertToFilterDate(
     const day =
       String(
         parsed.getDate()
-      )
-      .padStart(
+      ).padStart(
         2,
         "0"
       );
@@ -2101,12 +1751,10 @@ function renderPagination(){
     pagination.innerHTML =
       "";
 
-
     pageInfo.textContent =
       filteredData.length
         ? "Page 1"
         : "Page 0";
-
 
     return;
 
@@ -2121,11 +1769,7 @@ function renderPagination(){
     <button
       class="page-btn"
       onclick="changePage(${currentPage - 1})"
-      ${
-        currentPage === 1
-          ? "disabled"
-          : ""
-      }
+      ${currentPage === 1 ? "disabled" : ""}
     >
       ‹
     </button>
@@ -2176,11 +1820,7 @@ function renderPagination(){
     <button
       class="page-btn"
       onclick="changePage(${currentPage + 1})"
-      ${
-        currentPage === totalPages
-          ? "disabled"
-          : ""
-      }
+      ${currentPage === totalPages ? "disabled" : ""}
     >
       ›
     </button>
@@ -2198,9 +1838,7 @@ function renderPagination(){
 }
 
 
-function changePage(
-  page
-){
+function changePage(page){
 
   const totalPages =
     Math.ceil(
@@ -2239,7 +1877,7 @@ function updateTotal(){
       "totalCount"
     )
     .textContent =
-    filteredData.length;
+      filteredData.length;
 
 }
 
@@ -2259,7 +1897,7 @@ function openEntryModal(){
       "modalTitle"
     )
     .textContent =
-    "New Entry";
+      "New Entry";
 
 
   document
@@ -2267,7 +1905,7 @@ function openEntryModal(){
       "submitBtn"
     )
     .textContent =
-    "Save Entry";
+      "Save Entry";
 
 
   document
@@ -2282,7 +1920,7 @@ function openEntryModal(){
       "dateInput"
     )
     .value =
-    getTodayInputDate();
+      getTodayInputDate();
 
 
   document
@@ -2358,7 +1996,7 @@ function editEntryByRow(
       "modalTitle"
     )
     .textContent =
-    "Edit Entry";
+      "Edit Entry";
 
 
   document
@@ -2366,7 +2004,7 @@ function editEntryByRow(
       "submitBtn"
     )
     .textContent =
-    "Update Entry";
+      "Update Entry";
 
 
   document
@@ -2374,7 +2012,7 @@ function editEntryByRow(
       "nameInput"
     )
     .value =
-    row.Name || "";
+      row.Name || "";
 
 
   document
@@ -2382,7 +2020,7 @@ function editEntryByRow(
       "ipInput"
     )
     .value =
-    row.Ip || "";
+      row.Ip || "";
 
 
   document
@@ -2390,7 +2028,7 @@ function editEntryByRow(
       "workInput"
     )
     .value =
-    row.Work || "";
+      row.Work || "";
 
 
   document
@@ -2398,9 +2036,9 @@ function editEntryByRow(
       "dateInput"
     )
     .value =
-    convertToFilterDate(
-      row.Date
-    );
+      convertToFilterDate(
+        row.Date
+      );
 
 
   document
@@ -2501,39 +2139,37 @@ async function submitEntry(
   }
 
 
+  const wasEditing =
+    Boolean(
+      editingRow
+    );
+
+
   submitBtn.disabled =
     true;
 
 
   submitBtn.textContent =
-    editingRow
+    wasEditing
       ? "Updating..."
       : "Saving...";
 
 
   try{
 
-
     const payload = {
 
       action:
-        editingRow
+        wasEditing
           ? "update"
           : "create",
 
-
       data:{
-
         Name:name,
-
         Ip:ip,
-
         Work:work,
-
         Date:date
-
       },
-
 
       oldData:
         editingRow || null
@@ -2545,21 +2181,17 @@ async function submitEntry(
       await fetch(
         API_URL,
         {
-
           method:"POST",
 
           headers:{
-
             "Content-Type":
               "text/plain;charset=utf-8"
-
           },
 
           body:
             JSON.stringify(
               payload
             )
-
         }
       );
 
@@ -2578,12 +2210,6 @@ async function submitEntry(
       await response.json();
 
 
-    console.log(
-      "Save Response:",
-      result
-    );
-
-
     if(
       result.success === false
     ){
@@ -2594,12 +2220,6 @@ async function submitEntry(
       );
 
     }
-
-
-    const wasEditing =
-      Boolean(
-        editingRow
-      );
 
 
     closeEntryModal();
@@ -2618,7 +2238,6 @@ async function submitEntry(
 
   }catch(error){
 
-
     console.error(
       "Save Error:",
       error
@@ -2634,13 +2253,11 @@ async function submitEntry(
 
   }finally{
 
-
     submitBtn.disabled =
       false;
 
-
     submitBtn.textContent =
-      editingRow
+      wasEditing
         ? "Update Entry"
         : "Save Entry";
 
@@ -2685,25 +2302,26 @@ async function deleteEntryByRow(
 
   const confirmed =
     confirm(
-      "Are you sure you want to delete this entry?\n\n" +
+
+      "Delete this entry?\n\n" +
 
       "Name: " +
       (row.Name || "") +
 
       "\nIP: " +
-      (row.Ip || "")
+      (row.Ip || "") +
+
+      "\n\nThis entry will be moved to the Deleted sheet."
+
     );
 
 
   if(!confirmed){
-
     return;
-
   }
 
 
   try{
-
 
     const payload = {
 
@@ -2718,21 +2336,17 @@ async function deleteEntryByRow(
       await fetch(
         API_URL,
         {
-
           method:"POST",
 
           headers:{
-
             "Content-Type":
               "text/plain;charset=utf-8"
-
           },
 
           body:
             JSON.stringify(
               payload
             )
-
         }
       );
 
@@ -2751,12 +2365,6 @@ async function deleteEntryByRow(
       await response.json();
 
 
-    console.log(
-      "Delete Response:",
-      result
-    );
-
-
     if(
       result.success === false
     ){
@@ -2770,7 +2378,7 @@ async function deleteEntryByRow(
 
 
     showToast(
-      "Entry deleted successfully.",
+      "Entry moved to Deleted sheet.",
       "success"
     );
 
@@ -2779,7 +2387,6 @@ async function deleteEntryByRow(
 
 
   }catch(error){
-
 
     console.error(
       "Delete Error:",
@@ -2790,6 +2397,148 @@ async function deleteEntryByRow(
     showToast(
       error.message ||
       "Failed to delete entry.",
+      "error"
+    );
+
+  }
+
+}
+
+
+/* =====================================================
+SELL
+===================================================== */
+
+async function sellEntryByRow(
+  rowNumber
+){
+
+  const row =
+    allData.find(
+      function(item){
+
+        return Number(
+          item._row
+        ) === Number(
+          rowNumber
+        );
+
+      }
+    );
+
+
+  if(!row){
+
+    showToast(
+      "Entry not found.",
+      "error"
+    );
+
+    return;
+
+  }
+
+
+  const confirmed =
+    confirm(
+
+      "Sell this entry?\n\n" +
+
+      "Name: " +
+      (row.Name || "") +
+
+      "\nIP: " +
+      (row.Ip || "") +
+
+      "\nWork: " +
+      (row.Work || "") +
+
+      "\n\nThis entry will be moved to the Sell sheet."
+
+    );
+
+
+  if(!confirmed){
+    return;
+  }
+
+
+  try{
+
+    const payload = {
+
+      action:"sell",
+
+      data:row
+
+    };
+
+
+    const response =
+      await fetch(
+        API_URL,
+        {
+          method:"POST",
+
+          headers:{
+            "Content-Type":
+              "text/plain;charset=utf-8"
+          },
+
+          body:
+            JSON.stringify(
+              payload
+            )
+        }
+      );
+
+
+    if(!response.ok){
+
+      throw new Error(
+        "Server error: " +
+        response.status
+      );
+
+    }
+
+
+    const result =
+      await response.json();
+
+
+    if(
+      result.success === false
+    ){
+
+      throw new Error(
+        result.message ||
+        "Sell failed."
+      );
+
+    }
+
+
+    showToast(
+      "Entry moved to Sell sheet.",
+      "success"
+    );
+
+
+    await loadData();
+
+
+  }catch(error){
+
+    console.error(
+      "Sell Error:",
+      error
+    );
+
+
+    showToast(
+      error.message ||
+      "Failed to sell entry.",
       "error"
     );
 
@@ -2815,8 +2564,7 @@ function getTodayInputDate(){
   const month =
     String(
       now.getMonth() + 1
-    )
-    .padStart(
+    ).padStart(
       2,
       "0"
     );
@@ -2825,8 +2573,7 @@ function getTodayInputDate(){
   const day =
     String(
       now.getDate()
-    )
-    .padStart(
+    ).padStart(
       2,
       "0"
     );
@@ -2860,9 +2607,7 @@ function showLoading(){
         <td colspan="5">
 
           <div class="loading">
-
             ⏳ Loading data...
-
           </div>
 
         </td>
