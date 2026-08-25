@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 
 <meta charset="UTF-8">
@@ -51,6 +52,7 @@ body{
   transition:.25s;
 }
 
+
 /* =====================================================
 HEADER
 ===================================================== */
@@ -81,8 +83,9 @@ HEADER
   gap:10px;
 }
 
+
 /* =====================================================
-BUTTONS
+BUTTON
 ===================================================== */
 
 button{
@@ -134,6 +137,7 @@ button:disabled{
   font-weight:600;
 }
 
+
 /* =====================================================
 MAIN
 ===================================================== */
@@ -162,6 +166,7 @@ MAIN
   color:var(--muted);
   font-size:14px;
 }
+
 
 /* =====================================================
 FILTER
@@ -209,6 +214,7 @@ FILTER
 .field input:focus{
   border-color:var(--green);
 }
+
 
 /* =====================================================
 TABLE
@@ -270,6 +276,12 @@ tr:hover td{
   background:var(--hover);
 }
 
+.date-cell{
+  color:var(--muted);
+  font-weight:500;
+}
+
+
 /* =====================================================
 ACTIONS
 ===================================================== */
@@ -316,14 +328,6 @@ ACTIONS
   background:#ffedd5;
 }
 
-/* =====================================================
-DATE
-===================================================== */
-
-.date-cell{
-  color:var(--muted);
-  font-weight:500;
-}
 
 /* =====================================================
 PAGINATION
@@ -367,6 +371,7 @@ PAGINATION
   color:#fff;
   border-color:var(--green);
 }
+
 
 /* =====================================================
 MODAL
@@ -428,6 +433,7 @@ MODAL
   background:var(--hover);
 }
 
+
 /* =====================================================
 FORM
 ===================================================== */
@@ -474,14 +480,13 @@ FORM
 }
 
 .form-group textarea{
-  min-height:160px;
+  min-height:150px;
   resize:vertical;
 }
 
 .form-group input:focus,
 .form-group textarea:focus{
   border-color:var(--green);
-  box-shadow:0 0 0 2px rgba(8,127,91,.10);
 }
 
 .form-footer{
@@ -491,8 +496,9 @@ FORM
   padding-top:30px;
 }
 
+
 /* =====================================================
-LOADING / EMPTY
+LOADING
 ===================================================== */
 
 .loading{
@@ -506,6 +512,7 @@ LOADING / EMPTY
   padding:55px 20px;
   color:var(--muted);
 }
+
 
 /* =====================================================
 TOAST
@@ -541,6 +548,7 @@ TOAST
   background:#dc2626;
 }
 
+
 /* =====================================================
 MOBILE
 ===================================================== */
@@ -559,6 +567,7 @@ MOBILE
     align-items:flex-start;
     flex-direction:column;
   }
+
 }
 
 @media(max-width:600px){
@@ -631,23 +640,15 @@ MOBILE
     min-width:auto;
   }
 
-  .actions{
-    gap:5px;
-  }
-
-  .btn-edit,
-  .btn-delete,
-  .btn-sell{
-    padding:7px 9px;
-  }
-
 }
 
 </style>
 
 </head>
 
+
 <body>
+
 
 <!-- =====================================================
 HEADER
@@ -812,7 +813,7 @@ MAIN
 
             <th>Name</th>
 
-            <th>Ip</th>
+            <th>IP</th>
 
             <th>Work</th>
 
@@ -823,6 +824,7 @@ MAIN
           </tr>
 
         </thead>
+
 
         <tbody id="tableBody">
 
@@ -1005,6 +1007,7 @@ TOAST
 
 <script>
 
+
 /* =====================================================
 GOOGLE APPS SCRIPT URL
 ===================================================== */
@@ -1019,11 +1022,6 @@ SETTINGS
 
 const ROWS_PER_PAGE = 10;
 
-
-/* =====================================================
-GLOBAL DATA
-===================================================== */
-
 let allData = [];
 
 let filteredData = [];
@@ -1034,11 +1032,136 @@ let editingRow = null;
 
 
 /* =====================================================
-5 MINUTE AUTO LOGOUT
+GET LOGGED-IN USERNAME
+===================================================== */
+
+function getLoggedInUsername(){
+
+  const possibleKeys = [
+
+    "username",
+
+    "Username",
+
+    "user",
+
+    "userData",
+
+    "loginData",
+
+    "loggedUser",
+
+    "currentUser",
+
+    "userInfo"
+
+  ];
+
+
+  for(
+    let i = 0;
+    i < possibleKeys.length;
+    i++
+  ){
+
+    const key =
+      possibleKeys[i];
+
+    const value =
+      localStorage.getItem(
+        key
+      );
+
+
+    if(!value){
+      continue;
+    }
+
+
+    try{
+
+      const parsed =
+        JSON.parse(value);
+
+
+      if(
+        typeof parsed === "object" &&
+        parsed !== null
+      ){
+
+        const username =
+
+          parsed.username ||
+
+          parsed.Username ||
+
+          parsed.userName ||
+
+          parsed.name ||
+
+          parsed.user;
+
+
+        if(username){
+
+          return String(
+            username
+          ).trim();
+
+        }
+
+      }
+
+    }catch(error){
+
+      return String(
+        value
+      ).trim();
+
+    }
+
+  }
+
+
+  return "";
+
+}
+
+
+/* =====================================================
+CHECK USERNAME
+===================================================== */
+
+function requireUsername(){
+
+  const username =
+    getLoggedInUsername();
+
+
+  if(!username){
+
+    showToast(
+      "Logged-in username পাওয়া যায়নি.",
+      "error"
+    );
+
+
+    return null;
+
+  }
+
+
+  return username;
+
+}
+
+
+/* =====================================================
+AUTO LOGOUT
 ===================================================== */
 
 const INACTIVITY_LIMIT =
-5 * 60 * 1000;
+ 5 * 60 * 1000;
 
 let inactivityTimer = null;
 
@@ -1048,6 +1171,7 @@ function resetInactivityTimer(){
   clearTimeout(
     inactivityTimer
   );
+
 
   inactivityTimer =
     setTimeout(
@@ -1064,16 +1188,42 @@ function autoLogout(){
     inactivityTimer
   );
 
-  localStorage.removeItem("username");
-  localStorage.removeItem("user");
-  localStorage.removeItem("userData");
-  localStorage.removeItem("loginData");
-  localStorage.removeItem("token");
-  localStorage.removeItem("authToken");
-  localStorage.removeItem("session");
-  localStorage.removeItem("loggedIn");
+
+  localStorage.removeItem(
+    "username"
+  );
+
+  localStorage.removeItem(
+    "user"
+  );
+
+  localStorage.removeItem(
+    "userData"
+  );
+
+  localStorage.removeItem(
+    "loginData"
+  );
+
+  localStorage.removeItem(
+    "token"
+  );
+
+  localStorage.removeItem(
+    "authToken"
+  );
+
+  localStorage.removeItem(
+    "session"
+  );
+
+  localStorage.removeItem(
+    "loggedIn"
+  );
+
 
   sessionStorage.clear();
+
 
   window.location.replace(
     "index.html"
@@ -1082,7 +1232,7 @@ function autoLogout(){
 }
 
 
-const activityEvents = [
+[
   "mousemove",
   "mousedown",
   "keydown",
@@ -1090,10 +1240,7 @@ const activityEvents = [
   "touchstart",
   "click",
   "wheel"
-];
-
-
-activityEvents.forEach(
+].forEach(
   function(eventName){
 
     document.addEventListener(
@@ -1110,7 +1257,7 @@ resetInactivityTimer();
 
 
 /* =====================================================
-THEME
+PAGE LOAD
 ===================================================== */
 
 document.addEventListener(
@@ -1124,6 +1271,10 @@ document.addEventListener(
   }
 );
 
+
+/* =====================================================
+THEME
+===================================================== */
 
 function loadTheme(){
 
@@ -1214,7 +1365,8 @@ async function loadData(){
     );
 
 
-  refreshBtn.disabled = true;
+  refreshBtn.disabled =
+    true;
 
   refreshBtn.textContent =
     "⏳ Loading...";
@@ -1227,13 +1379,17 @@ async function loadData(){
 
     const response =
       await fetch(
+
         API_URL +
         "?action=getData&_=" +
         Date.now(),
+
         {
           method:"GET",
+
           cache:"no-store"
         }
+
       );
 
 
@@ -1270,7 +1426,7 @@ async function loadData(){
     ){
 
       throw new Error(
-        "Invalid data received from Google Sheet."
+        "Invalid data received."
       );
 
     }
@@ -1279,10 +1435,14 @@ async function loadData(){
     allData =
       result.data;
 
+
     filteredData =
       [...allData];
 
-    currentPage = 1;
+
+    currentPage =
+      1;
+
 
     renderTable();
 
@@ -1296,10 +1456,12 @@ async function loadData(){
       error
     );
 
+
     showError(
       error.message ||
       "Failed to load data."
     );
+
 
     showToast(
       error.message ||
@@ -1353,6 +1515,7 @@ function renderTable(){
 
     `;
 
+
     renderPagination();
 
     return;
@@ -1386,7 +1549,9 @@ function renderTable(){
     function(row){
 
       const rowNumber =
-        Number(row._row);
+        Number(
+          row._row
+        );
 
 
       html += `
@@ -1424,7 +1589,6 @@ function renderTable(){
               <button
                 class="btn-edit"
                 onclick="editEntryByRow(${rowNumber})"
-                title="Edit"
               >
                 ✏️ Edit
               </button>
@@ -1433,7 +1597,6 @@ function renderTable(){
               <button
                 class="btn-delete"
                 onclick="deleteEntryByRow(${rowNumber})"
-                title="Delete"
               >
                 🗑️ Delete
               </button>
@@ -1442,7 +1605,6 @@ function renderTable(){
               <button
                 class="btn-sell"
                 onclick="sellEntryByRow(${rowNumber})"
-                title="Sell"
               >
                 💰 Sell
               </button>
@@ -1469,7 +1631,7 @@ function renderTable(){
 
 
 /* =====================================================
-SEARCH + DATE FILTER
+FILTER
 ===================================================== */
 
 function applyFilters(){
@@ -1586,7 +1748,9 @@ function applyFilters(){
     );
 
 
-  currentPage = 1;
+  currentPage =
+    1;
+
 
   renderTable();
 
@@ -1626,7 +1790,9 @@ function clearFilters(){
     [...allData];
 
 
-  currentPage = 1;
+  currentPage =
+    1;
+
 
   renderTable();
 
@@ -1636,7 +1802,7 @@ function clearFilters(){
 
 
 /* =====================================================
-DATE CONVERSION
+DATE
 ===================================================== */
 
 function convertToFilterDate(
@@ -1751,10 +1917,12 @@ function renderPagination(){
     pagination.innerHTML =
       "";
 
+
     pageInfo.textContent =
       filteredData.length
         ? "Page 1"
         : "Page 0";
+
 
     return;
 
@@ -1867,7 +2035,7 @@ function changePage(page){
 
 
 /* =====================================================
-UPDATE TOTAL
+TOTAL
 ===================================================== */
 
 function updateTotal(){
@@ -1883,7 +2051,7 @@ function updateTotal(){
 
 
 /* =====================================================
-OPEN NEW ENTRY
+OPEN ENTRY
 ===================================================== */
 
 function openEntryModal(){
@@ -2052,7 +2220,7 @@ function editEntryByRow(
 
 
 /* =====================================================
-SUBMIT ENTRY
+CREATE / UPDATE
 ===================================================== */
 
 async function submitEntry(
@@ -2165,10 +2333,15 @@ async function submitEntry(
           : "create",
 
       data:{
+
         Name:name,
+
         Ip:ip,
+
         Work:work,
+
         Date:date
+
       },
 
       oldData:
@@ -2181,6 +2354,7 @@ async function submitEntry(
       await fetch(
         API_URL,
         {
+
           method:"POST",
 
           headers:{
@@ -2192,6 +2366,7 @@ async function submitEntry(
             JSON.stringify(
               payload
             )
+
         }
       );
 
@@ -2256,6 +2431,7 @@ async function submitEntry(
     submitBtn.disabled =
       false;
 
+
     submitBtn.textContent =
       wasEditing
         ? "Update Entry"
@@ -2300,6 +2476,17 @@ async function deleteEntryByRow(
   }
 
 
+  const username =
+    requireUsername();
+
+
+  if(!username){
+
+    return;
+
+  }
+
+
   const confirmed =
     confirm(
 
@@ -2311,7 +2498,10 @@ async function deleteEntryByRow(
       "\nIP: " +
       (row.Ip || "") +
 
-      "\n\nThis entry will be moved to the Deleted sheet."
+      "\n\nDeleted by: " +
+      username +
+
+      "\n\nThis entry will move to Deleted sheet."
 
     );
 
@@ -2327,7 +2517,15 @@ async function deleteEntryByRow(
 
       action:"delete",
 
-      data:row
+      username:username,
+
+      data:{
+
+        ...row,
+
+        Username:username
+
+      }
 
     };
 
@@ -2336,6 +2534,7 @@ async function deleteEntryByRow(
       await fetch(
         API_URL,
         {
+
           method:"POST",
 
           headers:{
@@ -2347,6 +2546,7 @@ async function deleteEntryByRow(
             JSON.stringify(
               payload
             )
+
         }
       );
 
@@ -2378,7 +2578,8 @@ async function deleteEntryByRow(
 
 
     showToast(
-      "Entry moved to Deleted sheet.",
+      "Deleted successfully by " +
+      username,
       "success"
     );
 
@@ -2439,6 +2640,17 @@ async function sellEntryByRow(
   }
 
 
+  const username =
+    requireUsername();
+
+
+  if(!username){
+
+    return;
+
+  }
+
+
   const confirmed =
     confirm(
 
@@ -2453,7 +2665,10 @@ async function sellEntryByRow(
       "\nWork: " +
       (row.Work || "") +
 
-      "\n\nThis entry will be moved to the Sell sheet."
+      "\n\nSold by: " +
+      username +
+
+      "\n\nThis entry will move to Sell sheet."
 
     );
 
@@ -2469,7 +2684,15 @@ async function sellEntryByRow(
 
       action:"sell",
 
-      data:row
+      username:username,
+
+      data:{
+
+        ...row,
+
+        Username:username
+
+      }
 
     };
 
@@ -2478,6 +2701,7 @@ async function sellEntryByRow(
       await fetch(
         API_URL,
         {
+
           method:"POST",
 
           headers:{
@@ -2489,6 +2713,7 @@ async function sellEntryByRow(
             JSON.stringify(
               payload
             )
+
         }
       );
 
@@ -2520,7 +2745,8 @@ async function sellEntryByRow(
 
 
     showToast(
-      "Entry moved to Sell sheet.",
+      "Sold successfully by " +
+      username,
       "success"
     );
 
@@ -2695,7 +2921,7 @@ function showToast(
 
 
 /* =====================================================
-HTML SECURITY
+ESCAPE HTML
 ===================================================== */
 
 function escapeHTML(
@@ -2735,7 +2961,7 @@ function escapeHTML(
 
 
 /* =====================================================
-CLOSE MODAL OUTSIDE CLICK
+MODAL OUTSIDE CLICK
 ===================================================== */
 
 document
@@ -2759,7 +2985,7 @@ document
 
 
 /* =====================================================
-ESCAPE KEY
+ESC KEY
 ===================================================== */
 
 document.addEventListener(
