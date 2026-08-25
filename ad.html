@@ -1,9 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0"
+>
 
 <title>Data Dashboard</title>
 
@@ -17,6 +22,7 @@
 }
 
 :root{
+
   --bg:#f4f7f6;
   --card:#ffffff;
   --text:#1f2937;
@@ -25,16 +31,21 @@
   --input:#ffffff;
   --thead:#f8fafc;
   --hover:#fafafa;
+
   --green:#087f5b;
   --green-dark:#066b4d;
+
   --blue:#2563eb;
   --red:#dc2626;
   --orange:#d97706;
   --purple:#7c3aed;
+
   --shadow:rgba(0,0,0,.20);
+
 }
 
 body.dark{
+
   --bg:#111827;
   --card:#1f2937;
   --text:#f9fafb;
@@ -43,620 +54,997 @@ body.dark{
   --input:#111827;
   --thead:#172033;
   --hover:#263244;
+
   --shadow:rgba(0,0,0,.50);
+
 }
 
 body{
+
   background:var(--bg);
   color:var(--text);
   transition:.25s;
+
 }
+
 
 /* =====================================================
 HEADER
 ===================================================== */
 
 .header{
+
   width:100%;
   min-height:70px;
+
   background:var(--card);
+
   border-bottom:1px solid var(--border);
+
   display:flex;
   align-items:center;
   justify-content:space-between;
+
   padding:0 25px;
+
   position:sticky;
   top:0;
+
   z-index:100;
+
 }
 
 .logo{
+
   font-size:22px;
   font-weight:700;
   color:var(--green);
+
 }
 
 .header-right{
+
   display:flex;
   align-items:center;
   gap:10px;
+
 }
+
 
 /* =====================================================
 BUTTON
 ===================================================== */
 
 button{
+
   border:none;
   cursor:pointer;
   transition:.2s;
+
 }
 
 button:disabled{
+
   cursor:not-allowed;
   opacity:.5;
+
 }
 
 .btn{
+
   padding:11px 17px;
+
   border-radius:8px;
+
   font-size:14px;
+
   font-weight:600;
+
 }
 
 .btn-primary{
+
   background:var(--green);
   color:#fff;
+
 }
 
 .btn-primary:hover{
+
   background:var(--green-dark);
+
 }
 
 .btn-refresh,
 .theme-btn,
 .btn-cancel{
+
   background:var(--input);
+
   color:var(--text);
+
   border:1px solid var(--border);
+
 }
 
 .btn-refresh:hover,
 .theme-btn:hover,
 .btn-cancel:hover{
+
   background:var(--hover);
+
 }
 
 .theme-btn{
+
   height:42px;
+
   padding:0 14px;
+
   border-radius:8px;
+
   font-size:13px;
+
   font-weight:600;
+
 }
 
 .btn-users{
+
   background:#7c3aed;
   color:#fff;
+
 }
 
 .btn-users:hover{
+
   background:#6d28d9;
+
 }
 
+
+/* =====================================================
+LOGOUT
+===================================================== */
+
 .btn-logout{
+
   background:#dc2626;
+
   color:#fff;
+
   padding:11px 17px;
+
   border-radius:8px;
+
   font-size:14px;
+
   font-weight:600;
+
 }
 
 .btn-logout:hover{
+
   background:#b91c1c;
+
 }
+
 
 /* =====================================================
 MAIN
 ===================================================== */
 
 .container{
+
   width:100%;
+
   max-width:1500px;
+
   margin:auto;
+
   padding:25px;
+
 }
 
 .top-section{
+
   display:flex;
+
   justify-content:space-between;
+
   align-items:center;
+
   gap:15px;
+
   margin-bottom:20px;
+
 }
 
 .title h1{
+
   font-size:27px;
+
   margin-bottom:5px;
+
 }
 
 .title p{
+
   color:var(--muted);
+
   font-size:14px;
+
 }
+
 
 /* =====================================================
 FILTER
 ===================================================== */
 
 .filter-box{
+
   background:var(--card);
+
   border:1px solid var(--border);
+
   border-radius:12px;
+
   padding:18px;
+
   margin-bottom:20px;
+
 }
 
 .filters{
+
   display:grid;
+
   grid-template-columns:2fr 1fr 1fr auto;
+
   gap:12px;
+
   align-items:end;
+
 }
 
 .field{
+
   display:flex;
+
   flex-direction:column;
+
   gap:6px;
+
 }
 
 .field label{
+
   font-size:12px;
+
   font-weight:600;
+
   color:var(--muted);
+
 }
 
 .field input,
 .field select{
+
   width:100%;
+
   height:42px;
+
   border:1px solid var(--border);
+
   border-radius:8px;
+
   padding:0 12px;
+
   outline:none;
+
   background:var(--input);
+
   color:var(--text);
+
   font-size:14px;
+
 }
 
 .field input:focus,
 .field select:focus{
+
   border-color:var(--green);
+
 }
+
 
 /* =====================================================
 TABLE
 ===================================================== */
 
 .table-box{
+
   background:var(--card);
+
   border:1px solid var(--border);
+
   border-radius:12px;
+
   overflow:hidden;
+
 }
 
 .table-header{
+
   padding:16px 18px;
+
   border-bottom:1px solid var(--border);
+
   display:flex;
+
   justify-content:space-between;
+
   align-items:center;
+
 }
 
 .table-header h2{
+
   font-size:17px;
+
 }
 
 .total-count{
+
   font-size:13px;
+
   color:var(--muted);
+
 }
 
 .table-wrapper{
+
   width:100%;
+
   overflow-x:auto;
+
 }
 
 table{
+
   width:100%;
+
   border-collapse:collapse;
+
   min-width:900px;
+
 }
 
 th{
+
   background:var(--thead);
+
   padding:14px;
+
   text-align:left;
+
   font-size:12px;
+
   color:var(--muted);
+
   white-space:nowrap;
+
   border-bottom:1px solid var(--border);
+
 }
 
 td{
+
   padding:14px;
+
   border-bottom:1px solid var(--border);
+
   font-size:13px;
+
   white-space:nowrap;
+
 }
 
 tr:hover td{
+
   background:var(--hover);
+
 }
 
 .date-cell{
+
   color:var(--muted);
+
   font-weight:500;
+
 }
+
 
 /* =====================================================
 ACTIONS
 ===================================================== */
 
 .actions{
+
   display:flex;
+
   gap:7px;
+
   align-items:center;
+
 }
 
 .btn-edit,
 .btn-delete,
 .btn-sell{
+
   padding:7px 11px;
+
   border-radius:6px;
+
   font-size:13px;
+
   font-weight:600;
+
 }
 
 .btn-edit{
+
   background:#e8f1ff;
+
   color:#2563eb;
+
 }
 
 .btn-edit:hover{
+
   background:#dbeafe;
+
 }
 
 .btn-delete{
+
   background:#fee2e2;
+
   color:#dc2626;
+
 }
 
 .btn-delete:hover{
+
   background:#fecaca;
+
 }
 
 .btn-sell{
+
   background:#fff7ed;
+
   color:#d97706;
+
 }
 
 .btn-sell:hover{
+
   background:#ffedd5;
+
 }
+
 
 /* =====================================================
 PAGINATION
 ===================================================== */
 
 .pagination-box{
+
   display:flex;
+
   justify-content:space-between;
+
   align-items:center;
+
   padding:15px 18px;
+
   border-top:1px solid var(--border);
+
 }
 
 .page-info{
+
   font-size:13px;
+
   color:var(--muted);
+
 }
 
 .pagination{
+
   display:flex;
+
   gap:5px;
+
   flex-wrap:wrap;
+
 }
 
 .page-btn{
+
   min-width:35px;
+
   height:35px;
+
   border:1px solid var(--border);
+
   background:var(--input);
+
   color:var(--text);
+
   border-radius:6px;
+
   font-size:13px;
+
 }
 
 .page-btn:hover{
+
   background:var(--hover);
+
 }
 
 .page-btn.active{
+
   background:var(--green);
+
   color:#fff;
+
   border-color:var(--green);
+
 }
+
 
 /* =====================================================
 MODAL
 ===================================================== */
 
 .modal{
+
   position:fixed;
+
   inset:0;
+
   background:rgba(0,0,0,.55);
+
   display:none;
+
   justify-content:center;
+
   align-items:center;
+
   padding:20px;
+
   z-index:999;
+
 }
 
 .modal.show{
+
   display:flex;
+
 }
 
 .modal-box{
+
   width:100%;
+
   max-width:700px;
+
   max-height:95vh;
+
   overflow-y:auto;
+
   background:var(--card);
+
   color:var(--text);
+
   border-radius:16px;
+
   box-shadow:0 20px 60px var(--shadow);
+
 }
 
 .modal-header{
+
   padding:20px 24px;
+
   border-bottom:1px solid var(--border);
+
   display:flex;
+
   justify-content:space-between;
+
   align-items:center;
+
   position:sticky;
+
   top:0;
+
   background:var(--card);
+
   z-index:2;
+
 }
 
 .modal-header h2{
+
   font-size:20px;
+
 }
 
 .close-btn{
+
   width:36px;
+
   height:36px;
+
   border-radius:50%;
+
   background:var(--input);
+
   border:1px solid var(--border);
+
   font-size:22px;
+
   color:var(--text);
+
 }
 
 .close-btn:hover{
+
   background:var(--hover);
+
 }
+
 
 /* =====================================================
 FORM
 ===================================================== */
 
 .form{
+
   padding:30px 25px;
+
 }
 
 .form-grid{
+
   display:grid;
+
   grid-template-columns:1fr 1fr;
+
   gap:22px 18px;
+
 }
 
 .form-group{
+
   display:flex;
+
   flex-direction:column;
+
   gap:9px;
+
 }
 
 .form-group.full{
+
   grid-column:1 / -1;
+
 }
 
 .form-group label{
+
   font-size:13px;
+
   font-weight:600;
+
 }
 
 .form-group input,
 .form-group textarea,
 .form-group select{
+
   width:100%;
+
   border:1px solid var(--border);
+
   border-radius:9px;
+
   padding:13px 14px;
+
   outline:none;
+
   font-size:14px;
+
   background:var(--input);
+
   color:var(--text);
+
 }
 
 .form-group input,
 .form-group select{
+
   height:48px;
+
 }
 
 .form-group textarea{
+
   min-height:150px;
+
   resize:vertical;
+
 }
 
 .form-group input:focus,
 .form-group textarea:focus,
 .form-group select:focus{
+
   border-color:var(--green);
+
 }
 
 .form-footer{
+
   display:flex;
+
   justify-content:flex-end;
+
   gap:10px;
+
   padding-top:30px;
+
 }
+
 
 /* =====================================================
 USER MODAL
 ===================================================== */
 
 .user-modal-box{
+
   max-width:1100px;
+
 }
 
 .user-toolbar{
+
   padding:16px 24px;
+
   border-bottom:1px solid var(--border);
+
   display:flex;
+
   justify-content:space-between;
+
   align-items:center;
+
   gap:12px;
+
 }
 
 .user-total{
+
   font-size:13px;
+
   color:var(--muted);
+
 }
 
 .user-table-wrapper{
+
   width:100%;
+
   overflow-x:auto;
+
   padding:0 20px;
+
 }
 
 .user-table{
+
   min-width:800px;
+
 }
 
 .user-actions{
+
   display:flex;
+
   gap:6px;
+
 }
 
 .user-action{
+
   padding:7px 10px;
+
   border-radius:6px;
+
   font-size:12px;
+
   font-weight:600;
+
 }
 
 .user-action.edit{
+
   background:#e8f1ff;
+
   color:#2563eb;
+
 }
 
 .user-action.block{
+
   background:#fff7ed;
+
   color:#d97706;
+
 }
 
 .user-action.unblock{
+
   background:#dcfce7;
+
   color:#15803d;
+
 }
 
 .user-action.delete{
+
   background:#fee2e2;
+
   color:#dc2626;
+
 }
 
 .status-badge,
 .role-badge{
+
   display:inline-flex;
+
   align-items:center;
+
   padding:5px 9px;
+
   border-radius:20px;
+
   font-size:11px;
+
   font-weight:700;
+
 }
 
 .status-active{
+
   background:#dcfce7;
+
   color:#15803d;
+
 }
 
 .status-blocked{
+
   background:#fee2e2;
+
   color:#dc2626;
+
 }
 
 .status-inactive{
+
   background:#f3f4f6;
+
   color:#6b7280;
+
 }
 
 .role-badge{
+
   background:#ede9fe;
+
   color:#6d28d9;
+
 }
+
 
 /* =====================================================
 LOADING
 ===================================================== */
 
 .loading{
+
   text-align:center;
+
   padding:45px 20px;
+
   color:var(--muted);
+
 }
 
 .empty{
+
   text-align:center;
+
   padding:55px 20px;
+
   color:var(--muted);
+
 }
+
 
 /* =====================================================
 TOAST
 ===================================================== */
 
 .toast{
+
   position:fixed;
+
   right:25px;
+
   bottom:25px;
+
   min-width:260px;
+
   padding:14px 17px;
+
   border-radius:9px;
+
   color:#fff;
+
   background:#111827;
+
   box-shadow:0 10px 30px rgba(0,0,0,.2);
+
   transform:translateY(100px);
+
   opacity:0;
+
   transition:.3s;
+
   z-index:3000;
+
   font-size:14px;
+
 }
 
 .toast.show{
+
   transform:translateY(0);
+
   opacity:1;
+
 }
 
 .toast.success{
+
   background:#087f5b;
+
 }
 
 .toast.error{
+
   background:#dc2626;
+
 }
+
 
 /* =====================================================
 MOBILE
@@ -665,16 +1053,23 @@ MOBILE
 @media(max-width:900px){
 
   .filters{
+
     grid-template-columns:1fr 1fr;
+
   }
 
   .search-field{
+
     grid-column:1 / -1;
+
   }
 
   .top-section{
+
     align-items:flex-start;
+
     flex-direction:column;
+
   }
 
 }
@@ -682,77 +1077,120 @@ MOBILE
 @media(max-width:600px){
 
   .header{
+
     min-height:70px;
+
     padding:12px 15px;
+
     gap:10px;
+
     flex-wrap:wrap;
+
   }
 
   .logo{
+
     font-size:18px;
+
   }
 
   .header-right{
+
     gap:6px;
+
     width:100%;
+
     justify-content:flex-end;
+
     flex-wrap:wrap;
+
   }
 
   .header-right .btn,
   .theme-btn{
+
     padding:9px 10px;
+
     font-size:12px;
+
     height:38px;
+
   }
 
   .btn-logout{
+
     padding:9px 10px;
+
     font-size:12px;
+
   }
 
   .container{
+
     padding:15px;
+
   }
 
   .filters{
+
     grid-template-columns:1fr;
+
   }
 
   .search-field{
+
     grid-column:auto;
+
   }
 
   .form-grid{
+
     grid-template-columns:1fr;
+
   }
 
   .form-group.full{
+
     grid-column:auto;
+
   }
 
   .form{
+
     padding:25px 18px;
+
   }
 
   .modal{
+
     padding:10px;
+
   }
 
   .modal-box{
+
     max-height:96vh;
+
     border-radius:13px;
+
   }
 
   .pagination-box{
+
     flex-direction:column;
+
     gap:12px;
+
   }
 
   .toast{
+
     left:15px;
+
     right:15px;
+
     min-width:auto;
+
   }
 
 }
@@ -761,7 +1199,9 @@ MOBILE
 
 </head>
 
+
 <body>
+
 
 <!-- =====================================================
 HEADER
@@ -773,6 +1213,7 @@ HEADER
     DATA DASHBOARD
   </div>
 
+
   <div class="header-right">
 
     <button
@@ -783,6 +1224,7 @@ HEADER
       🌙 Dark
     </button>
 
+
     <button
       class="btn btn-refresh"
       id="refreshBtn"
@@ -791,6 +1233,7 @@ HEADER
       🔄 Refresh
     </button>
 
+
     <button
       class="btn btn-users"
       onclick="openUserModal()"
@@ -798,12 +1241,14 @@ HEADER
       👤 Users
     </button>
 
+
     <button
       class="btn btn-primary"
       onclick="openEntryModal()"
     >
       ➕ New Entry
     </button>
+
 
     <button
       class="btn btn-logout"
@@ -823,6 +1268,7 @@ MAIN
 
 <main class="container">
 
+
   <div class="top-section">
 
     <div class="title">
@@ -840,15 +1286,20 @@ MAIN
   </div>
 
 
-  <!-- FILTER -->
+  <!-- ===================================================
+  FILTER
+  =================================================== -->
 
   <section class="filter-box">
 
     <div class="filters">
 
+
       <div class="field search-field">
 
-        <label>🔍 Search</label>
+        <label>
+          🔍 Search
+        </label>
 
         <input
           type="text"
@@ -862,7 +1313,9 @@ MAIN
 
       <div class="field">
 
-        <label>📅 From Date</label>
+        <label>
+          📅 From Date
+        </label>
 
         <input
           type="date"
@@ -875,7 +1328,9 @@ MAIN
 
       <div class="field">
 
-        <label>📅 To Date</label>
+        <label>
+          📅 To Date
+        </label>
 
         <input
           type="date"
@@ -893,23 +1348,31 @@ MAIN
         Clear
       </button>
 
+
     </div>
 
   </section>
 
 
-  <!-- TABLE -->
+  <!-- ===================================================
+  TABLE
+  =================================================== -->
 
   <section class="table-box">
 
+
     <div class="table-header">
 
-      <h2>All Entries</h2>
+      <h2>
+        All Entries
+      </h2>
 
       <div class="total-count">
 
         Total:
-        <strong id="totalCount">0</strong>
+        <strong id="totalCount">
+          0
+        </strong>
 
       </div>
 
@@ -923,11 +1386,17 @@ MAIN
         <thead>
 
           <tr>
+
             <th>Name</th>
+
             <th>IP</th>
+
             <th>Work</th>
+
             <th>Date</th>
+
             <th>Action</th>
+
           </tr>
 
         </thead>
@@ -956,6 +1425,7 @@ MAIN
 
     <div class="pagination-box">
 
+
       <div
         class="page-info"
         id="pageInfo"
@@ -963,14 +1433,18 @@ MAIN
         Page 1
       </div>
 
+
       <div
         class="pagination"
         id="pagination"
       ></div>
 
+
     </div>
 
+
   </section>
+
 
 </main>
 
@@ -986,11 +1460,13 @@ ENTRY MODAL
 
   <div class="modal-box">
 
+
     <div class="modal-header">
 
       <h2 id="modalTitle">
         New Entry
       </h2>
+
 
       <button
         class="close-btn"
@@ -1008,11 +1484,15 @@ ENTRY MODAL
       onsubmit="submitEntry(event)"
     >
 
+
       <div class="form-grid">
+
 
         <div class="form-group">
 
-          <label>Name</label>
+          <label>
+            Name
+          </label>
 
           <input
             type="text"
@@ -1027,7 +1507,9 @@ ENTRY MODAL
 
         <div class="form-group">
 
-          <label>IP</label>
+          <label>
+            IP
+          </label>
 
           <input
             type="text"
@@ -1042,7 +1524,9 @@ ENTRY MODAL
 
         <div class="form-group full">
 
-          <label>Work</label>
+          <label>
+            Work
+          </label>
 
           <textarea
             id="workInput"
@@ -1055,7 +1539,9 @@ ENTRY MODAL
 
         <div class="form-group">
 
-          <label>Date</label>
+          <label>
+            Date
+          </label>
 
           <input
             type="date"
@@ -1063,6 +1549,7 @@ ENTRY MODAL
           >
 
         </div>
+
 
       </div>
 
@@ -1088,6 +1575,7 @@ ENTRY MODAL
 
       </div>
 
+
     </form>
 
   </div>
@@ -1106,9 +1594,13 @@ USER LIST MODAL
 
   <div class="modal-box user-modal-box">
 
+
     <div class="modal-header">
 
-      <h2>👤 User Management</h2>
+      <h2>
+        👤 User Management
+      </h2>
+
 
       <button
         class="close-btn"
@@ -1122,10 +1614,13 @@ USER LIST MODAL
 
     <div class="user-toolbar">
 
+
       <div class="user-total">
 
         Total Users:
-        <strong id="userTotal">0</strong>
+        <strong id="userTotal">
+          0
+        </strong>
 
       </div>
 
@@ -1150,22 +1645,31 @@ USER LIST MODAL
 
       </div>
 
+
     </div>
 
 
     <div class="user-table-wrapper">
+
 
       <table class="user-table">
 
         <thead>
 
           <tr>
+
             <th>Username</th>
+
             <th>Password</th>
+
             <th>Name</th>
+
             <th>Role</th>
+
             <th>Status</th>
+
             <th>Action</th>
+
           </tr>
 
         </thead>
@@ -1189,6 +1693,7 @@ USER LIST MODAL
 
       </table>
 
+
     </div>
 
   </div>
@@ -1205,13 +1710,15 @@ ADD / EDIT USER
   id="userFormModal"
 >
 
-  <div class="modal-box user-form-modal-box">
+  <div class="modal-box">
+
 
     <div class="modal-header">
 
       <h2 id="userFormTitle">
         Add User
       </h2>
+
 
       <button
         class="close-btn"
@@ -1229,11 +1736,15 @@ ADD / EDIT USER
       onsubmit="submitUser(event)"
     >
 
+
       <div class="form-grid">
+
 
         <div class="form-group">
 
-          <label>Username</label>
+          <label>
+            Username
+          </label>
 
           <input
             type="text"
@@ -1248,7 +1759,9 @@ ADD / EDIT USER
 
         <div class="form-group">
 
-          <label>Password</label>
+          <label>
+            Password
+          </label>
 
           <input
             type="text"
@@ -1263,7 +1776,9 @@ ADD / EDIT USER
 
         <div class="form-group">
 
-          <label>Name</label>
+          <label>
+            Name
+          </label>
 
           <input
             type="text"
@@ -1278,7 +1793,9 @@ ADD / EDIT USER
 
         <div class="form-group">
 
-          <label>Role</label>
+          <label>
+            Role
+          </label>
 
           <select
             id="userRole"
@@ -1316,7 +1833,9 @@ ADD / EDIT USER
 
         <div class="form-group">
 
-          <label>Status</label>
+          <label>
+            Status
+          </label>
 
           <select
             id="userStatus"
@@ -1343,6 +1862,7 @@ ADD / EDIT USER
 
         </div>
 
+
       </div>
 
 
@@ -1366,6 +1886,7 @@ ADD / EDIT USER
         </button>
 
       </div>
+
 
     </form>
 
@@ -1393,20 +1914,20 @@ API
 const API_URL =
 "https://script.google.com/macros/s/AKfycbx6fo2Nogf3ETCtS_B-o0HCFqEs3vYkJ9IT9uu_-3l1w8fNJw77mZipeyFm-zZcjUw-5Q/exec";
 
+
 const USER_API_URL =
 "https://script.google.com/macros/s/AKfycby1wEKzuThOiXdf9lVmoJVysfasR14ivssXFjGFfDnnc-d16uQRjNhel5LKNXDK4ZbxDw/exec";
+
 
 const LOGIN_PAGE =
 "index.html";
 
+
 const ROWS_PER_PAGE = 10;
 
 
-/* =====================================================
-GLOBAL VARIABLES
-===================================================== */
-
 let allData = [];
+
 let filteredData = [];
 
 let currentPage = 1;
@@ -1414,24 +1935,18 @@ let currentPage = 1;
 let editingRow = null;
 
 let allUsers = [];
+
 let editingUser = null;
 
 
 /* =====================================================
 GET USERNAME
-=====================================================
-
-Login security নেই।
-
-তবে Delete/Sell করার সময় username পাঠানোর
-জন্য localStorage থেকে username নেওয়ার চেষ্টা করবে।
-
-না পাওয়া গেলে Unknown ব্যবহার করবে।
 ===================================================== */
 
 function getLoggedInUsername(){
 
   const keys = [
+
     "username",
     "Username",
     "user",
@@ -1440,21 +1955,28 @@ function getLoggedInUsername(){
     "loggedUser",
     "currentUser",
     "userInfo"
+
   ];
 
-  for(const key of keys){
+
+  for(
+    const key of keys
+  ){
 
     const value =
       localStorage.getItem(key);
+
 
     if(!value){
       continue;
     }
 
+
     try{
 
       const parsed =
         JSON.parse(value);
+
 
       if(
         parsed &&
@@ -1465,22 +1987,28 @@ function getLoggedInUsername(){
           parsed.username ||
           parsed.Username ||
           parsed.userName ||
-          parsed.name ||
           parsed.user;
+
 
         if(username){
 
-          return String(username).trim();
+          return String(
+            username
+          ).trim();
 
         }
 
       }
 
-    }catch(error){
+    }catch(e){
 
-      if(String(value).trim()){
+      if(
+        String(value).trim()
+      ){
 
-        return String(value).trim();
+        return String(
+          value
+        ).trim();
 
       }
 
@@ -1488,16 +2016,14 @@ function getLoggedInUsername(){
 
   }
 
-  return "Unknown";
+
+  return "Admin";
 
 }
 
 
 /* =====================================================
 LOGOUT
-
-শুধু Logout button চাপলে index.html যাবে।
-Dashboard নিজে থেকে কখনো redirect করবে না।
 ===================================================== */
 
 function logoutUser(){
@@ -1507,64 +2033,22 @@ function logoutUser(){
       "Are you sure you want to logout?"
     );
 
+
   if(!ok){
     return;
   }
 
 
-  const keys = [
-
-    "username",
-    "Username",
-    "user",
-    "userData",
-    "loginData",
-    "loggedUser",
-    "currentUser",
-    "userInfo",
-
-    "token",
-    "authToken",
-    "session",
-    "loggedIn",
-
-    "dashboardAuth"
-
-  ];
-
-
-  keys.forEach(
-    key =>
-      localStorage.removeItem(key)
-  );
-
-
-  try{
-    sessionStorage.clear();
-  }catch(error){}
-
+  /*
+    Dashboard নিজে থেকে login check করবে না।
+    Logout চাপলেই শুধু index.html-এ যাবে।
+  */
 
   window.location.replace(
     LOGIN_PAGE
   );
 
 }
-
-
-/* =====================================================
-PAGE LOAD
-===================================================== */
-
-document.addEventListener(
-  "DOMContentLoaded",
-  function(){
-
-    loadTheme();
-
-    loadData();
-
-  }
-);
 
 
 /* =====================================================
@@ -1579,7 +2063,9 @@ function loadTheme(){
     );
 
 
-  if(saved === "dark"){
+  if(
+    saved === "dark"
+  ){
 
     document.body.classList.add(
       "dark"
@@ -1654,14 +2140,10 @@ async function loadData(){
     );
 
 
-  if(btn){
+  btn.disabled = true;
 
-    btn.disabled = true;
-
-    btn.textContent =
-      "⏳ Loading...";
-
-  }
+  btn.textContent =
+    "⏳ Loading...";
 
 
   showLoading();
@@ -1695,7 +2177,9 @@ async function loadData(){
       await response.json();
 
 
-    if(result.success === false){
+    if(
+      result.success === false
+    ){
 
       throw new Error(
         result.message ||
@@ -1705,7 +2189,11 @@ async function loadData(){
     }
 
 
-    if(!Array.isArray(result.data)){
+    if(
+      !Array.isArray(
+        result.data
+      )
+    ){
 
       throw new Error(
         "Invalid data received."
@@ -1753,14 +2241,10 @@ async function loadData(){
 
   }finally{
 
-    if(btn){
+    btn.disabled = false;
 
-      btn.disabled = false;
-
-      btn.textContent =
-        "🔄 Refresh";
-
-    }
+    btn.textContent =
+      "🔄 Refresh";
 
   }
 
@@ -1768,7 +2252,7 @@ async function loadData(){
 
 
 /* =====================================================
-RENDER DATA
+RENDER TABLE
 ===================================================== */
 
 function renderTable(){
@@ -1784,13 +2268,19 @@ function renderTable(){
   ){
 
     tbody.innerHTML = `
+
       <tr>
+
         <td colspan="5">
+
           <div class="empty">
             No data found.
           </div>
+
         </td>
+
       </tr>
+
     `;
 
 
@@ -1802,7 +2292,9 @@ function renderTable(){
 
 
   const start =
-    (currentPage - 1) *
+    (
+      currentPage - 1
+    ) *
     ROWS_PER_PAGE;
 
 
@@ -1820,10 +2312,13 @@ function renderTable(){
     function(row){
 
       const rowNumber =
-        Number(row._row);
+        Number(
+          row._row
+        );
 
 
       html += `
+
         <tr>
 
           <td>
@@ -1832,11 +2327,13 @@ function renderTable(){
             )}
           </td>
 
+
           <td>
             ${escapeHTML(
               row.Ip || ""
             )}
           </td>
+
 
           <td>
             ${escapeHTML(
@@ -1844,15 +2341,18 @@ function renderTable(){
             )}
           </td>
 
+
           <td class="date-cell">
             ${escapeHTML(
               row.Date || ""
             )}
           </td>
 
+
           <td>
 
             <div class="actions">
+
 
               <button
                 class="btn-edit"
@@ -1861,12 +2361,14 @@ function renderTable(){
                 ✏️ Edit
               </button>
 
+
               <button
                 class="btn-delete"
                 onclick="deleteEntryByRow(${rowNumber})"
               >
                 🗑️ Delete
               </button>
+
 
               <button
                 class="btn-sell"
@@ -1875,11 +2377,13 @@ function renderTable(){
                 💰 Sell
               </button>
 
+
             </div>
 
           </td>
 
         </tr>
+
       `;
 
     }
@@ -1946,11 +2450,14 @@ function applyFilters(){
               String(
                 row.Date || ""
               )
-            ).toLowerCase();
+            )
+            .toLowerCase();
 
 
           if(
-            !text.includes(search)
+            !text.includes(
+              search
+            )
           ){
 
             return false;
@@ -2008,6 +2515,7 @@ function applyFilters(){
 
   currentPage = 1;
 
+
   renderTable();
 
   updateTotal();
@@ -2054,15 +2562,60 @@ function clearFilters(){
 DATE
 ===================================================== */
 
-function convertToFilterDate(value){
+function convertToFilterDate(
+  value
+){
 
   if(!value){
+
     return "";
+
   }
 
 
   const text =
-    String(value).trim();
+    String(
+      value
+    ).trim();
+
+
+  const parsed =
+    new Date(
+      text
+    );
+
+
+  if(
+    !isNaN(
+      parsed.getTime()
+    )
+  ){
+
+    return (
+
+      parsed.getFullYear() +
+
+      "-" +
+
+      String(
+        parsed.getMonth() + 1
+      ).padStart(
+        2,
+        "0"
+      ) +
+
+      "-" +
+
+      String(
+        parsed.getDate()
+      ).padStart(
+        2,
+        "0"
+      )
+
+    );
+
+  }
 
 
   const match =
@@ -2074,36 +2627,13 @@ function convertToFilterDate(value){
   if(match){
 
     return (
+
       match[3] +
       "-" +
       match[2] +
       "-" +
       match[1]
-    );
 
-  }
-
-
-  const parsed =
-    new Date(text);
-
-
-  if(
-    !isNaN(
-      parsed.getTime()
-    )
-  ){
-
-    return (
-      parsed.getFullYear() +
-      "-" +
-      String(
-        parsed.getMonth() + 1
-      ).padStart(2,"0") +
-      "-" +
-      String(
-        parsed.getDate()
-      ).padStart(2,"0")
     );
 
   }
@@ -2139,7 +2669,9 @@ function renderPagination(){
     );
 
 
-  if(totalPages <= 1){
+  if(
+    totalPages <= 1
+  ){
 
     pagination.innerHTML =
       "";
@@ -2161,7 +2693,11 @@ function renderPagination(){
     <button
       class="page-btn"
       onclick="changePage(${currentPage - 1})"
-      ${currentPage === 1 ? "disabled" : ""}
+      ${
+        currentPage === 1
+          ? "disabled"
+          : ""
+      }
     >
       ‹
     </button>
@@ -2190,6 +2726,7 @@ function renderPagination(){
   ){
 
     html += `
+
       <button
         class="page-btn ${
           i === currentPage
@@ -2200,6 +2737,7 @@ function renderPagination(){
       >
         ${i}
       </button>
+
     `;
 
   }
@@ -2280,7 +2818,8 @@ ENTRY MODAL
 
 function openEntryModal(){
 
-  editingRow = null;
+  editingRow =
+    null;
 
 
   document.getElementById(
@@ -2324,7 +2863,8 @@ function closeEntryModal(){
   );
 
 
-  editingRow = null;
+  editingRow =
+    null;
 
 }
 
@@ -2333,13 +2873,19 @@ function closeEntryModal(){
 EDIT ENTRY
 ===================================================== */
 
-function editEntryByRow(rowNumber){
+function editEntryByRow(
+  rowNumber
+){
 
   const row =
     allData.find(
       item =>
-        Number(item._row) ===
-        Number(rowNumber)
+        Number(
+          item._row
+        ) ===
+        Number(
+          rowNumber
+        )
     );
 
 
@@ -2410,7 +2956,9 @@ function editEntryByRow(rowNumber){
 SUBMIT ENTRY
 ===================================================== */
 
-async function submitEntry(event){
+async function submitEntry(
+  event
+){
 
   event.preventDefault();
 
@@ -2424,19 +2972,25 @@ async function submitEntry(event){
   const name =
     document.getElementById(
       "nameInput"
-    ).value.trim();
+    )
+    .value
+    .trim();
 
 
   const ip =
     document.getElementById(
       "ipInput"
-    ).value.trim();
+    )
+    .value
+    .trim();
 
 
   const work =
     document.getElementById(
       "workInput"
-    ).value.trim();
+    )
+    .value
+    .trim();
 
 
   const date =
@@ -2482,10 +3036,13 @@ async function submitEntry(event){
 
 
   const editing =
-    Boolean(editingRow);
+    Boolean(
+      editingRow
+    );
 
 
-  btn.disabled = true;
+  btn.disabled =
+    true;
 
 
   btn.textContent =
@@ -2505,15 +3062,21 @@ async function submitEntry(event){
 
 
       data:{
+
         Name:name,
+
         Ip:ip,
+
         Work:work,
+
         Date:date
+
       },
 
 
       oldData:
-        editingRow || null
+        editingRow ||
+        null
 
     };
 
@@ -2522,11 +3085,14 @@ async function submitEntry(event){
       await fetch(
         API_URL,
         {
+
           method:"POST",
 
           headers:{
+
             "Content-Type":
               "text/plain;charset=utf-8"
+
           },
 
           body:
@@ -2594,7 +3160,8 @@ async function submitEntry(event){
 
   }finally{
 
-    btn.disabled = false;
+    btn.disabled =
+      false;
 
 
     btn.textContent =
@@ -2608,7 +3175,7 @@ async function submitEntry(event){
 
 
 /* =====================================================
-USERNAME FOR DELETE / SELL
+USERNAME
 ===================================================== */
 
 function requireUsername(){
@@ -2622,13 +3189,19 @@ function requireUsername(){
 DELETE ENTRY
 ===================================================== */
 
-async function deleteEntryByRow(rowNumber){
+async function deleteEntryByRow(
+  rowNumber
+){
 
   const row =
     allData.find(
       item =>
-        Number(item._row) ===
-        Number(rowNumber)
+        Number(
+          item._row
+        ) ===
+        Number(
+          rowNumber
+        )
     );
 
 
@@ -2654,10 +3227,14 @@ async function deleteEntryByRow(rowNumber){
       "Delete this entry?\n\n" +
 
       "Name: " +
-      (row.Name || "") +
+      (
+        row.Name || ""
+      ) +
 
       "\nIP: " +
-      (row.Ip || "") +
+      (
+        row.Ip || ""
+      ) +
 
       "\n\nDeleted by: " +
       username +
@@ -2668,7 +3245,9 @@ async function deleteEntryByRow(rowNumber){
 
 
   if(!confirmed){
+
     return;
+
   }
 
 
@@ -2681,8 +3260,11 @@ async function deleteEntryByRow(rowNumber){
       username:username,
 
       data:{
+
         ...row,
+
         Username:username
+
       }
 
     };
@@ -2692,11 +3274,14 @@ async function deleteEntryByRow(rowNumber){
       await fetch(
         API_URL,
         {
+
           method:"POST",
 
           headers:{
+
             "Content-Type":
               "text/plain;charset=utf-8"
+
           },
 
           body:
@@ -2766,13 +3351,19 @@ async function deleteEntryByRow(rowNumber){
 SELL ENTRY
 ===================================================== */
 
-async function sellEntryByRow(rowNumber){
+async function sellEntryByRow(
+  rowNumber
+){
 
   const row =
     allData.find(
       item =>
-        Number(item._row) ===
-        Number(rowNumber)
+        Number(
+          item._row
+        ) ===
+        Number(
+          rowNumber
+        )
     );
 
 
@@ -2798,13 +3389,19 @@ async function sellEntryByRow(rowNumber){
       "Sell this entry?\n\n" +
 
       "Name: " +
-      (row.Name || "") +
+      (
+        row.Name || ""
+      ) +
 
       "\nIP: " +
-      (row.Ip || "") +
+      (
+        row.Ip || ""
+      ) +
 
       "\nWork: " +
-      (row.Work || "") +
+      (
+        row.Work || ""
+      ) +
 
       "\n\nSold by: " +
       username +
@@ -2815,7 +3412,9 @@ async function sellEntryByRow(rowNumber){
 
 
   if(!confirmed){
+
     return;
+
   }
 
 
@@ -2828,8 +3427,11 @@ async function sellEntryByRow(rowNumber){
       username:username,
 
       data:{
+
         ...row,
+
         Username:username
+
       }
 
     };
@@ -2839,11 +3441,14 @@ async function sellEntryByRow(rowNumber){
       await fetch(
         API_URL,
         {
+
           method:"POST",
 
           headers:{
+
             "Content-Type":
               "text/plain;charset=utf-8"
+
           },
 
           body:
@@ -2973,7 +3578,9 @@ async function loadUsers(){
   `;
 
 
-  btn.disabled = true;
+  btn.disabled =
+    true;
+
 
   btn.textContent =
     "⏳ Loading...";
@@ -2987,8 +3594,11 @@ async function loadUsers(){
         "?action=getUsers&_=" +
         Date.now(),
         {
+
           method:"GET",
+
           cache:"no-store"
+
         }
       );
 
@@ -3080,7 +3690,9 @@ async function loadUsers(){
 
   }finally{
 
-    btn.disabled = false;
+    btn.disabled =
+      false;
+
 
     btn.textContent =
       "🔄 Refresh";
@@ -3102,7 +3714,9 @@ function renderUsers(){
     );
 
 
-  if(!allUsers.length){
+  if(
+    !allUsers.length
+  ){
 
     body.innerHTML = `
 
@@ -3209,34 +3823,29 @@ function renderUsers(){
 
         <tr>
 
+
           <td>
 
             <strong>
-              ${
-                escapeHTML(
-                  username
-                )
-              }
+              ${escapeHTML(
+                username
+              )}
             </strong>
 
           </td>
 
 
           <td>
-            ${
-              escapeHTML(
-                password
-              )
-            }
+            ${escapeHTML(
+              password
+            )}
           </td>
 
 
           <td>
-            ${
-              escapeHTML(
-                name
-              )
-            }
+            ${escapeHTML(
+              name
+            )}
           </td>
 
 
@@ -3244,11 +3853,10 @@ function renderUsers(){
 
             <span class="role-badge">
 
-              ${
-                escapeHTML(
-                  role || "—"
-                )
-              }
+              ${escapeHTML(
+                role ||
+                "—"
+              )}
 
             </span>
 
@@ -3261,11 +3869,9 @@ function renderUsers(){
               class="status-badge ${statusClass}"
             >
 
-              ${
-                escapeHTML(
-                  status
-                )
-              }
+              ${escapeHTML(
+                status
+              )}
 
             </span>
 
@@ -3275,6 +3881,7 @@ function renderUsers(){
           <td>
 
             <div class="user-actions">
+
 
               <button
                 class="user-action edit"
@@ -3315,6 +3922,7 @@ function renderUsers(){
                 </button>
 
                 `
+
               }
 
 
@@ -3325,9 +3933,11 @@ function renderUsers(){
                 🗑️ Delete
               </button>
 
+
             </div>
 
           </td>
+
 
         </tr>
 
@@ -3349,7 +3959,8 @@ ADD USER
 
 function openAddUserModal(){
 
-  editingUser = null;
+  editingUser =
+    null;
 
 
   document.getElementById(
@@ -3537,7 +4148,9 @@ function closeUserFormModal(){
 SUBMIT USER
 ===================================================== */
 
-async function submitUser(event){
+async function submitUser(
+  event
+){
 
   event.preventDefault();
 
@@ -3551,19 +4164,25 @@ async function submitUser(event){
   const username =
     document.getElementById(
       "userUsername"
-    ).value.trim();
+    )
+    .value
+    .trim();
 
 
   const password =
     document.getElementById(
       "userPassword"
-    ).value.trim();
+    )
+    .value
+    .trim();
 
 
   const name =
     document.getElementById(
       "userName"
-    ).value.trim();
+    )
+    .value
+    .trim();
 
 
   const role =
@@ -3644,7 +4263,8 @@ async function submitUser(event){
     );
 
 
-  button.disabled = true;
+  button.disabled =
+    true;
 
 
   button.textContent =
@@ -3662,10 +4282,15 @@ async function submitUser(event){
           ? "updateUser"
           : "addUser",
 
+
       username,
+
       password,
+
       name,
+
       role,
+
       status
 
     };
@@ -3693,11 +4318,14 @@ async function submitUser(event){
       await fetch(
         USER_API_URL,
         {
+
           method:"POST",
 
           headers:{
+
             "Content-Type":
               "text/plain;charset=utf-8"
+
           },
 
           body:
@@ -3765,7 +4393,8 @@ async function submitUser(event){
 
   }finally{
 
-    button.disabled = false;
+    button.disabled =
+      false;
 
 
     button.textContent =
@@ -3802,7 +4431,9 @@ async function blockUser(
 
 
   if(!ok){
+
     return;
+
   }
 
 
@@ -3858,12 +4489,15 @@ async function changeUserStatus(
           ? "blockUser"
           : "unblockUser",
 
+
       row:
         Number(
           rowNumber
         ),
 
+
       username,
+
 
       status
 
@@ -3874,11 +4508,14 @@ async function changeUserStatus(
       await fetch(
         USER_API_URL,
         {
+
           method:"POST",
 
           headers:{
+
             "Content-Type":
               "text/plain;charset=utf-8"
+
           },
 
           body:
@@ -3973,7 +4610,9 @@ async function deleteUser(
 
 
   if(!ok){
+
     return;
+
   }
 
 
@@ -3997,11 +4636,14 @@ async function deleteUser(
       await fetch(
         USER_API_URL,
         {
+
           method:"POST",
 
           headers:{
+
             "Content-Type":
               "text/plain;charset=utf-8"
+
           },
 
           body:
@@ -4079,14 +4721,18 @@ function getTodayInputDate(){
   return (
 
     now.getFullYear() +
+
     "-" +
+
     String(
       now.getMonth() + 1
     ).padStart(
       2,
       "0"
     ) +
+
     "-" +
+
     String(
       now.getDate()
     ).padStart(
@@ -4182,7 +4828,10 @@ function showToast(
 
   toast.className =
     "toast show " +
-    (type || "");
+    (
+      type ||
+      ""
+    );
 
 
   setTimeout(
@@ -4209,27 +4858,22 @@ function escapeHTML(
   return String(
     value ?? ""
   )
-
   .replace(
     /&/g,
     "&amp;"
   )
-
   .replace(
     /</g,
     "&lt;"
   )
-
   .replace(
     />/g,
     "&gt;"
   )
-
   .replace(
     /"/g,
     "&quot;"
   )
-
   .replace(
     /'/g,
     "&#039;"
@@ -4325,7 +4969,29 @@ document.addEventListener(
   }
 );
 
+
+/* =====================================================
+PAGE LOAD
+===================================================== */
+
+document.addEventListener(
+  "DOMContentLoaded",
+  function(){
+
+    /*
+      এখানে কোনো login/security check নেই।
+      Dashboard সরাসরি load হবে।
+    */
+
+    loadTheme();
+
+    loadData();
+
+  }
+);
+
 </script>
 
 </body>
+
 </html>
