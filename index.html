@@ -10,431 +10,612 @@
   content="width=device-width, initial-scale=1.0"
 >
 
-<title>Login</title>
+<title>User Login</title>
 
 <style>
+
+/* =====================================================
+   RESET
+===================================================== */
 
 *{
   margin:0;
   padding:0;
   box-sizing:border-box;
-  font-family:Arial,Helvetica,sans-serif;
+  font-family:
+    "Poppins",
+    Arial,
+    Helvetica,
+    sans-serif;
 }
 
-:root{
-  --black:#050505;
-  --black2:#0b0b0b;
-  --card:#111111;
-  --card2:#151515;
-  --border:#292929;
-  --text:#ffffff;
-  --muted:#999999;
-  --green:#00c853;
-  --green2:#00a844;
-  --red:#ff3b30;
-  --shadow:rgba(0,0,0,.65);
-}
 
-html,
-body{
-  width:100%;
-  min-height:100%;
-}
+/* =====================================================
+   BODY
+===================================================== */
 
 body{
 
   min-height:100vh;
 
-  background:
-    radial-gradient(
-      circle at top left,
-      rgba(0,200,83,.10),
-      transparent 30%
-    ),
-    radial-gradient(
-      circle at bottom right,
-      rgba(0,200,83,.07),
-      transparent 30%
-    ),
-    #050505;
-
-  color:var(--text);
+  overflow:hidden;
 
   display:flex;
+
   justify-content:center;
+
   align-items:center;
-
-  padding:20px;
-
-}
-
-
-/* =====================================================
-LOGIN WRAPPER
-===================================================== */
-
-.login-wrapper{
-
-  width:100%;
-  max-width:430px;
-
-}
-
-
-/* =====================================================
-BRAND
-===================================================== */
-
-.brand{
-
-  text-align:center;
-
-  margin-bottom:25px;
-
-}
-
-.brand-icon{
-
-  width:65px;
-  height:65px;
-
-  margin:0 auto 15px;
-
-  border-radius:18px;
-
-  display:flex;
-  align-items:center;
-  justify-content:center;
 
   background:
     linear-gradient(
-      145deg,
-      #00c853,
-      #008f3b
+      180deg,
+      #83cbe9 0%,
+      #65bce0 50%,
+      #32a9d8 100%
     );
-
-  color:#fff;
-
-  font-size:30px;
-  font-weight:800;
-
-  box-shadow:
-    0 12px 35px
-    rgba(0,200,83,.22);
-
-}
-
-.brand h1{
-
-  font-size:26px;
-
-  font-weight:700;
-
-  letter-spacing:.3px;
-
-}
-
-.brand p{
-
-  margin-top:7px;
-
-  color:var(--muted);
-
-  font-size:13px;
-
-}
-
-
-/* =====================================================
-LOGIN CARD
-===================================================== */
-
-.login-card{
-
-  width:100%;
-
-  background:
-    linear-gradient(
-      145deg,
-      rgba(255,255,255,.035),
-      rgba(255,255,255,.015)
-    );
-
-  border:1px solid var(--border);
-
-  border-radius:20px;
-
-  padding:30px;
-
-  box-shadow:
-    0 25px 70px
-    var(--shadow);
-
-  backdrop-filter:blur(15px);
-
-}
-
-
-/* =====================================================
-FIELD
-===================================================== */
-
-.field{
-
-  margin-bottom:19px;
-
-}
-
-.field label{
-
-  display:block;
-
-  margin-bottom:8px;
-
-  font-size:13px;
-
-  font-weight:600;
-
-  color:#d6d6d6;
-
-}
-
-.input-box{
 
   position:relative;
 
 }
 
-.input-box .icon{
+
+/* =====================================================
+   SKY GLOW
+===================================================== */
+
+body::before{
+
+  content:"";
 
   position:absolute;
 
-  left:14px;
-  top:50%;
+  width:600px;
+  height:600px;
 
-  transform:translateY(-50%);
+  top:-250px;
+  right:-180px;
 
-  color:#777;
-
-  font-size:16px;
+  background:
+    radial-gradient(
+      circle,
+      rgba(255,255,255,.28),
+      transparent 68%
+    );
 
   pointer-events:none;
 
 }
 
-.input-box input{
 
-  width:100%;
+/* =====================================================
+   CLOUDS
+===================================================== */
 
-  height:50px;
-
-  padding:
-    0 45px
-    0 43px;
-
-  border:1px solid var(--border);
-
-  border-radius:10px;
-
-  outline:none;
-
-  background:#0b0b0b;
-
-  color:#fff;
-
-  font-size:14px;
-
-  transition:.2s;
-
-}
-
-.input-box input::placeholder{
-
-  color:#626262;
-
-}
-
-.input-box input:focus{
-
-  border-color:var(--green);
-
-  box-shadow:
-    0 0 0 3px
-    rgba(0,200,83,.08);
-
-}
-
-.password-toggle{
+.cloud{
 
   position:absolute;
 
-  right:8px;
-  top:50%;
+  background:
+    rgba(255,255,255,.38);
 
-  transform:translateY(-50%);
+  border-radius:100px;
 
-  width:36px;
-  height:36px;
+  filter:blur(.2px);
 
-  border:none;
+  opacity:.85;
 
-  border-radius:8px;
-
-  background:transparent;
-
-  color:#888;
-
-  cursor:pointer;
-
-  font-size:15px;
+  pointer-events:none;
 
 }
 
-.password-toggle:hover{
 
-  color:#fff;
+/* cloud 1 */
 
-  background:#181818;
+.cloud-1{
+
+  width:230px;
+  height:75px;
+
+  left:-70px;
+  bottom:220px;
+
+}
+
+
+.cloud-1::before{
+
+  content:"";
+
+  position:absolute;
+
+  width:105px;
+  height:105px;
+
+  left:35px;
+  bottom:25px;
+
+  background:
+    rgba(255,255,255,.38);
+
+  border-radius:50%;
+
+}
+
+
+.cloud-1::after{
+
+  content:"";
+
+  position:absolute;
+
+  width:90px;
+  height:90px;
+
+  left:115px;
+  bottom:20px;
+
+  background:
+    rgba(255,255,255,.38);
+
+  border-radius:50%;
+
+}
+
+
+/* cloud 2 */
+
+.cloud-2{
+
+  width:260px;
+  height:82px;
+
+  right:-85px;
+  top:105px;
+
+}
+
+
+.cloud-2::before{
+
+  content:"";
+
+  position:absolute;
+
+  width:110px;
+  height:110px;
+
+  left:50px;
+  bottom:20px;
+
+  background:
+    rgba(255,255,255,.38);
+
+  border-radius:50%;
+
+}
+
+
+.cloud-2::after{
+
+  content:"";
+
+  position:absolute;
+
+  width:105px;
+  height:105px;
+
+  right:20px;
+  bottom:15px;
+
+  background:
+    rgba(255,255,255,.38);
+
+  border-radius:50%;
+
+}
+
+
+/* cloud 3 */
+
+.cloud-3{
+
+  width:300px;
+  height:90px;
+
+  right:-90px;
+  bottom:100px;
+
+}
+
+
+.cloud-3::before{
+
+  content:"";
+
+  position:absolute;
+
+  width:120px;
+  height:120px;
+
+  left:50px;
+  bottom:20px;
+
+  background:
+    rgba(255,255,255,.30);
+
+  border-radius:50%;
+
+}
+
+
+.cloud-3::after{
+
+  content:"";
+
+  position:absolute;
+
+  width:100px;
+  height:100px;
+
+  right:45px;
+  bottom:15px;
+
+  background:
+    rgba(255,255,255,.30);
+
+  border-radius:50%;
 
 }
 
 
 /* =====================================================
-DEVICE
+   LOGIN WRAPPER
+===================================================== */
+
+.login-wrapper{
+
+  width:100%;
+
+  min-height:100vh;
+
+  display:flex;
+
+  justify-content:center;
+
+  align-items:center;
+
+  padding:25px;
+
+  position:relative;
+
+  z-index:5;
+
+}
+
+
+/* =====================================================
+   LOGIN CARD
+===================================================== */
+
+.login-card{
+
+  width:340px;
+
+  min-height:520px;
+
+  padding:42px 30px 35px;
+
+  border-radius:28px;
+
+  background:
+    rgba(255,255,255,.25);
+
+  border:
+    1px solid
+    rgba(255,255,255,.35);
+
+  box-shadow:
+    0 25px 60px
+    rgba(0,80,130,.18);
+
+  backdrop-filter:
+    blur(12px);
+
+  -webkit-backdrop-filter:
+    blur(12px);
+
+  display:flex;
+
+  flex-direction:column;
+
+  align-items:center;
+
+  position:relative;
+
+}
+
+
+/* =====================================================
+   USER ICON
+===================================================== */
+
+.user-icon{
+
+  width:58px;
+  height:58px;
+
+  position:relative;
+
+  margin-bottom:12px;
+
+}
+
+
+/* head */
+
+.user-icon::before{
+
+  content:"";
+
+  position:absolute;
+
+  width:23px;
+  height:23px;
+
+  background:#075284;
+
+  border-radius:50%;
+
+  left:50%;
+  top:0;
+
+  transform:
+    translateX(-50%);
+
+}
+
+
+/* body */
+
+.user-icon::after{
+
+  content:"";
+
+  position:absolute;
+
+  width:42px;
+  height:28px;
+
+  background:#075284;
+
+  border-radius:
+    25px 25px 10px 10px;
+
+  left:50%;
+  bottom:2px;
+
+  transform:
+    translateX(-50%);
+
+}
+
+
+/* =====================================================
+   TITLE
+===================================================== */
+
+.login-title{
+
+  font-size:25px;
+
+  font-weight:400;
+
+  color:#111827;
+
+  margin-bottom:30px;
+
+  letter-spacing:.2px;
+
+}
+
+
+/* =====================================================
+   FORM
+===================================================== */
+
+.login-form{
+
+  width:100%;
+
+  display:flex;
+
+  flex-direction:column;
+
+  align-items:center;
+
+}
+
+
+/* =====================================================
+   INPUT
+===================================================== */
+
+.input-box{
+
+  width:100%;
+
+  height:48px;
+
+  border:none;
+
+  outline:none;
+
+  border-radius:18px;
+
+  background:
+    rgba(255,255,255,.96);
+
+  color:#222;
+
+  font-size:15px;
+
+  padding:
+    0 17px;
+
+  margin-bottom:14px;
+
+  box-shadow:
+    0 5px 12px
+    rgba(0,0,0,.14);
+
+  transition:.2s;
+
+}
+
+
+.input-box::placeholder{
+
+  color:#999;
+
+}
+
+
+.input-box:focus{
+
+  background:#fff;
+
+  box-shadow:
+    0 0 0 2px
+    rgba(7,82,132,.20),
+    0 7px 15px
+    rgba(0,0,0,.15);
+
+}
+
+
+/* =====================================================
+   DEVICE
 ===================================================== */
 
 .device-box{
 
   width:100%;
 
-  min-height:50px;
+  margin-top:2px;
 
-  display:flex;
+  margin-bottom:17px;
 
-  align-items:center;
+  text-align:center;
 
-  gap:12px;
+  color:#173e57;
 
-  padding:10px 13px;
+  font-size:12px;
 
-  border:1px solid var(--border);
-
-  border-radius:10px;
-
-  background:#0b0b0b;
+  line-height:1.5;
 
 }
 
-.device-icon{
 
-  width:32px;
-  height:32px;
-
-  border-radius:8px;
-
-  display:flex;
-  align-items:center;
-  justify-content:center;
-
-  background:#191919;
-
-  font-size:16px;
-
-}
-
-.device-info{
-
-  min-width:0;
-
-}
-
-.device-name{
-
-  color:#fff;
-
-  font-size:13px;
+.device-box span{
 
   font-weight:600;
-
-  overflow:hidden;
-
-  text-overflow:ellipsis;
-
-  white-space:nowrap;
-
-}
-
-.device-browser{
-
-  margin-top:3px;
-
-  color:#777;
-
-  font-size:11px;
 
 }
 
 
 /* =====================================================
-LOGIN BUTTON
+   FORGOT PASSWORD
+===================================================== */
+
+.forgot{
+
+  border:none;
+
+  background:transparent;
+
+  color:#173e57;
+
+  font-size:15px;
+
+  cursor:pointer;
+
+  margin-top:0;
+
+  margin-bottom:30px;
+
+}
+
+
+.forgot:hover{
+
+  text-decoration:underline;
+
+}
+
+
+/* =====================================================
+   LOGIN BUTTON
 ===================================================== */
 
 .login-btn{
 
-  width:100%;
+  width:170px;
 
-  height:50px;
-
-  margin-top:5px;
+  height:52px;
 
   border:none;
 
-  border-radius:10px;
+  border-radius:18px;
 
-  background:
-    linear-gradient(
-      135deg,
-      var(--green),
-      var(--green2)
-    );
+  background:#075284;
 
-  color:#fff;
+  color:white;
 
-  font-size:14px;
+  font-size:21px;
 
-  font-weight:700;
+  font-weight:500;
 
   cursor:pointer;
 
-  transition:.2s;
-
   box-shadow:
-    0 8px 25px
-    rgba(0,200,83,.15);
+    0 7px 15px
+    rgba(0,55,90,.25);
+
+  transition:
+    transform .2s,
+    background .2s,
+    box-shadow .2s;
 
 }
+
 
 .login-btn:hover{
 
-  transform:translateY(-1px);
+  background:#06466f;
+
+  transform:
+    translateY(-2px);
 
   box-shadow:
-    0 12px 30px
-    rgba(0,200,83,.23);
+    0 10px 20px
+    rgba(0,55,90,.28);
 
 }
+
 
 .login-btn:active{
 
-  transform:translateY(0);
+  transform:
+    translateY(0);
 
 }
 
+
 .login-btn:disabled{
 
-  opacity:.6;
-
   cursor:not-allowed;
+
+  opacity:.7;
 
   transform:none;
 
@@ -442,100 +623,68 @@ LOGIN BUTTON
 
 
 /* =====================================================
-MESSAGE
+   MESSAGE
 ===================================================== */
 
 .message{
 
-  display:none;
+  width:100%;
 
-  margin-bottom:18px;
+  min-height:22px;
 
-  padding:12px 13px;
-
-  border-radius:9px;
-
-  font-size:13px;
-
-  line-height:1.4;
-
-}
-
-.message.show{
-
-  display:block;
-
-}
-
-.message.error{
-
-  background:
-    rgba(255,59,48,.10);
-
-  border:1px solid
-    rgba(255,59,48,.25);
-
-  color:#ff817a;
-
-}
-
-.message.success{
-
-  background:
-    rgba(0,200,83,.10);
-
-  border:1px solid
-    rgba(0,200,83,.25);
-
-  color:#53e88b;
-
-}
-
-
-/* =====================================================
-FOOTER
-===================================================== */
-
-.login-footer{
+  margin-top:18px;
 
   text-align:center;
 
-  margin-top:20px;
+  font-size:13px;
 
-  color:#666;
+  font-weight:500;
 
-  font-size:11px;
+}
+
+
+.message.error{
+
+  color:#b91c1c;
+
+}
+
+
+.message.success{
+
+  color:#047857;
 
 }
 
 
 /* =====================================================
-LOADING
+   LOADING
 ===================================================== */
 
-.spinner{
+.loader{
 
   display:inline-block;
 
-  width:15px;
-  height:15px;
-
-  margin-right:7px;
+  width:16px;
+  height:16px;
 
   border:
     2px solid
-    rgba(255,255,255,.3);
+    rgba(255,255,255,.45);
 
   border-top-color:#fff;
 
   border-radius:50%;
 
-  vertical-align:-3px;
-
   animation:
     spin .7s linear infinite;
 
+  vertical-align:middle;
+
+  margin-right:7px;
+
 }
+
 
 @keyframes spin{
 
@@ -547,43 +696,99 @@ LOADING
 
 
 /* =====================================================
-MOBILE
+   FOOTER
+===================================================== */
+
+.login-footer{
+
+  margin-top:auto;
+
+  padding-top:25px;
+
+  color:#27516a;
+
+  font-size:11px;
+
+  text-align:center;
+
+}
+
+
+/* =====================================================
+   MOBILE
 ===================================================== */
 
 @media(max-width:500px){
 
-  body{
+  .login-wrapper{
 
-    padding:15px;
+    padding:18px;
 
   }
+
 
   .login-card{
 
-    padding:23px 18px;
+    width:320px;
 
-    border-radius:16px;
+    min-height:500px;
 
-  }
+    padding:
+      38px 25px 30px;
 
-  .brand{
-
-    margin-bottom:20px;
-
-  }
-
-  .brand-icon{
-
-    width:58px;
-    height:58px;
-
-    font-size:26px;
+    border-radius:25px;
 
   }
 
-  .brand h1{
 
-    font-size:23px;
+  .login-title{
+
+    font-size:24px;
+
+  }
+
+
+  .input-box{
+
+    height:47px;
+
+  }
+
+
+  .login-btn{
+
+    width:165px;
+
+    height:50px;
+
+  }
+
+}
+
+
+@media(max-height:650px){
+
+  .login-card{
+
+    min-height:480px;
+
+    padding-top:30px;
+
+    padding-bottom:25px;
+
+  }
+
+
+  .login-title{
+
+    margin-bottom:22px;
+
+  }
+
+
+  .forgot{
+
+    margin-bottom:22px;
 
   }
 
@@ -597,150 +802,92 @@ MOBILE
 <body>
 
 
+<!-- =====================================================
+     CLOUDS
+===================================================== -->
+
+<div class="cloud cloud-1"></div>
+
+<div class="cloud cloud-2"></div>
+
+<div class="cloud cloud-3"></div>
+
+
+<!-- =====================================================
+     LOGIN
+===================================================== -->
+
 <div class="login-wrapper">
-
-
-  <!-- BRAND -->
-
-  <div class="brand">
-
-    <div class="brand-icon">
-      🔐
-    </div>
-
-    <h1>
-      Data Dashboard
-    </h1>
-
-    <p>
-      Sign in to continue
-    </p>
-
-  </div>
-
-
-  <!-- LOGIN CARD -->
 
   <div class="login-card">
 
 
-    <!-- MESSAGE -->
+    <!-- USER ICON -->
 
-    <div
-      class="message"
-      id="message"
-    ></div>
+    <div class="user-icon"></div>
+
+
+    <!-- TITLE -->
+
+    <h1 class="login-title">
+      User Login
+    </h1>
 
 
     <!-- FORM -->
 
     <form
+      class="login-form"
       id="loginForm"
-      onsubmit="login(event)"
+      onsubmit="loginUser(event)"
     >
 
 
       <!-- USERNAME -->
 
-      <div class="field">
-
-        <label>
-          Username
-        </label>
-
-        <div class="input-box">
-
-          <span class="icon">
-            👤
-          </span>
-
-          <input
-            type="text"
-            id="username"
-            placeholder="Enter username"
-            autocomplete="username"
-            required
-          >
-
-        </div>
-
-      </div>
+      <input
+        class="input-box"
+        type="text"
+        id="username"
+        placeholder="Username"
+        autocomplete="username"
+        required
+      >
 
 
       <!-- PASSWORD -->
 
-      <div class="field">
-
-        <label>
-          Password
-        </label>
-
-        <div class="input-box">
-
-          <span class="icon">
-            🔒
-          </span>
-
-          <input
-            type="password"
-            id="password"
-            placeholder="Enter password"
-            autocomplete="current-password"
-            required
-          >
-
-          <button
-            type="button"
-            class="password-toggle"
-            onclick="togglePassword()"
-            id="passwordToggle"
-          >
-            👁
-          </button>
-
-        </div>
-
-      </div>
+      <input
+        class="input-box"
+        type="password"
+        id="password"
+        placeholder="Password"
+        autocomplete="current-password"
+        required
+      >
 
 
       <!-- DEVICE -->
 
-      <div class="field">
+      <div class="device-box">
 
-        <label>
-          Current Device
-        </label>
-
-        <div class="device-box">
-
-          <div
-            class="device-icon"
-            id="deviceIcon"
-          >
-            💻
-          </div>
-
-          <div class="device-info">
-
-            <div
-              class="device-name"
-              id="deviceName"
-            >
-              Detecting device...
-            </div>
-
-            <div
-              class="device-browser"
-              id="deviceBrowser"
-            >
-              Detecting browser...
-            </div>
-
-          </div>
-
-        </div>
+        💻 Device:
+        <span id="deviceName">
+          Detecting...
+        </span>
 
       </div>
+
+
+      <!-- FORGOT -->
+
+      <button
+        type="button"
+        class="forgot"
+        onclick="forgotPassword()"
+      >
+        Forgot Password?
+      </button>
 
 
       <!-- LOGIN -->
@@ -754,18 +901,27 @@ MOBILE
       </button>
 
 
+      <!-- MESSAGE -->
+
+      <div
+        class="message"
+        id="message"
+      ></div>
+
+
     </form>
 
 
+    <!-- FOOTER -->
+
+    <div class="login-footer">
+
+      Secure User Login System
+
+    </div>
+
+
   </div>
-
-
-  <div class="login-footer">
-
-    Secure Dashboard Login
-
-  </div>
-
 
 </div>
 
@@ -773,188 +929,145 @@ MOBILE
 <script>
 
 /* =====================================================
-API
+   USER API
 ===================================================== */
-
-/*
-  তোমার User Management / Login Apps Script URL
-*/
 
 const USER_API_URL =
 "https://script.google.com/macros/s/AKfycby1wEKzuThOiXdf9lVmoJVysfasR14ivssXFjGFfDnnc-d16uQRjNhel5LKNXDK4ZbxDw/exec";
 
 
 /* =====================================================
-PAGE
+   PAGE ROUTES
 ===================================================== */
 
-const ADMIN_PAGE =
-"ad.html";
+const ROUTES = {
 
-const SUPPORT_PAGE =
-"2S.html";
+  admin:
+    "ad.html",
 
-const CALL_PAGE =
-"2S.html";
+  support:
+    "2S.html",
+
+  call:
+    "2S.html",
+
+  manager:
+    "ad.html",
+
+  guest:
+    "2S.html"
+
+};
 
 
 /* =====================================================
-DEVICE DETECTION
+   GET DEVICE NAME
 ===================================================== */
 
-function getDeviceInfo(){
+function getDeviceName(){
 
   const ua =
     navigator.userAgent || "";
 
-  let device =
-    "Unknown Device";
 
-  let icon =
-    "💻";
+  let device = "Unknown Device";
 
 
-  /*
-    Android
-  */
+  /* Android */
 
   if(/Android/i.test(ua)){
 
-    device =
-      "Android Phone";
+    const match =
+      ua.match(
+        /Android[^;)]*(?:;\s*([^;)]+))?/i
+      );
 
-    icon =
-      "📱";
+    device =
+      match && match[1]
+        ? match[1].trim()
+        : "Android Device";
 
   }
 
 
-  /*
-    iPhone
-  */
+  /* iPhone */
 
   else if(/iPhone/i.test(ua)){
 
     device =
       "iPhone";
 
-    icon =
-      "📱";
-
   }
 
 
-  /*
-    iPad
-  */
+  /* iPad */
 
   else if(/iPad/i.test(ua)){
 
     device =
       "iPad";
 
-    icon =
-      "📱";
-
   }
 
 
-  /*
-    Mac
-  */
-
-  else if(/Macintosh|Mac OS X/i.test(ua)){
-
-    device =
-      "Mac";
-
-    icon =
-      "💻";
-
-  }
-
-
-  /*
-    Windows
-  */
+  /* Windows */
 
   else if(/Windows/i.test(ua)){
 
     device =
       "Windows PC";
 
-    icon =
-      "💻";
+  }
+
+
+  /* Mac */
+
+  else if(/Macintosh|Mac OS/i.test(ua)){
+
+    device =
+      "Mac";
 
   }
 
 
-  /*
-    Linux
-  */
+  /* Linux */
 
   else if(/Linux/i.test(ua)){
 
     device =
       "Linux PC";
 
-    icon =
-      "💻";
-
   }
 
 
-  /*
-    Browser
-  */
+  /* Browser */
 
   let browser =
-    "Unknown Browser";
+    "Browser";
 
 
-  if(
-    /Edg\//i.test(ua)
-  ){
+  if(/Edg/i.test(ua)){
 
     browser =
       "Microsoft Edge";
 
   }
 
-  else if(
-    /OPR\//i.test(ua)
-  ){
-
-    browser =
-      "Opera";
-
-  }
-
-  else if(
-    /Chrome\//i.test(ua)
-    &&
-    !/Edg\//i.test(ua)
-  ){
+  else if(/Chrome/i.test(ua)){
 
     browser =
       "Google Chrome";
 
   }
 
-  else if(
-    /Firefox\//i.test(ua)
-  ){
+  else if(/Firefox/i.test(ua)){
 
     browser =
       "Mozilla Firefox";
 
   }
 
-  else if(
-    /Safari\//i.test(ua)
-    &&
-    !/Chrome\//i.test(ua)
-  ){
+  else if(/Safari/i.test(ua)){
 
     browser =
       "Safari";
@@ -962,147 +1075,30 @@ function getDeviceInfo(){
   }
 
 
-  return {
-
-    device,
-    browser,
-    icon,
-
-    full:
-      device +
-      " • " +
-      browser
-
-  };
+  return device +
+    " • " +
+    browser;
 
 }
 
 
 /* =====================================================
-SHOW DEVICE
+   SHOW DEVICE
 ===================================================== */
 
-function showDevice(){
-
-  const info =
-    getDeviceInfo();
-
-
-  document.getElementById(
-    "deviceIcon"
-  ).textContent =
-    info.icon;
-
-
-  document.getElementById(
-    "deviceName"
-  ).textContent =
-    info.device;
-
-
-  document.getElementById(
-    "deviceBrowser"
-  ).textContent =
-    info.browser;
-
-}
+document.getElementById(
+  "deviceName"
+).textContent =
+  getDeviceName();
 
 
 /* =====================================================
-PASSWORD TOGGLE
+   LOGIN
 ===================================================== */
 
-function togglePassword(){
-
-  const input =
-    document.getElementById(
-      "password"
-    );
-
-  const button =
-    document.getElementById(
-      "passwordToggle"
-    );
-
-
-  if(
-    input.type === "password"
-  ){
-
-    input.type =
-      "text";
-
-    button.textContent =
-      "🙈";
-
-  }
-
-  else{
-
-    input.type =
-      "password";
-
-    button.textContent =
-      "👁";
-
-  }
-
-}
-
-
-/* =====================================================
-MESSAGE
-===================================================== */
-
-function showMessage(
-  text,
-  type
-){
-
-  const box =
-    document.getElementById(
-      "message"
-    );
-
-
-  box.textContent =
-    text;
-
-
-  box.className =
-    "message show " +
-    type;
-
-}
-
-
-function hideMessage(){
-
-  const box =
-    document.getElementById(
-      "message"
-    );
-
-
-  box.className =
-    "message";
-
-  box.textContent =
-    "";
-
-}
-
-
-/* =====================================================
-LOGIN
-===================================================== */
-
-async function login(event){
+async function loginUser(event){
 
   event.preventDefault();
-
-
-  hideMessage();
 
 
   const username =
@@ -1115,6 +1111,18 @@ async function login(event){
     document.getElementById(
       "password"
     ).value.trim();
+
+
+  const loginBtn =
+    document.getElementById(
+      "loginBtn"
+    );
+
+
+  const message =
+    document.getElementById(
+      "message"
+    );
 
 
   if(!username){
@@ -1141,44 +1149,29 @@ async function login(event){
   }
 
 
-  const button =
-    document.getElementById(
-      "loginBtn"
-    );
+  loginBtn.disabled = true;
 
 
-  button.disabled =
-    true;
+  loginBtn.innerHTML =
+    '<span class="loader"></span>Login...';
 
-  button.innerHTML =
-    '<span class="spinner"></span>Logging in...';
+
+  message.className =
+    "message";
+
+
+  message.textContent =
+    "";
 
 
   try{
 
 
-    /*
-      Login API
-    */
-
-    const url =
-      USER_API_URL +
-      "?action=login" +
-      "&username=" +
-      encodeURIComponent(username) +
-      "&password=" +
-      encodeURIComponent(password) +
-      "&device=" +
-      encodeURIComponent(
-        getDeviceInfo().full
-      ) +
-      "&_=" +
-      Date.now();
-
-
     const response =
       await fetch(
-        url,
+        USER_API_URL +
+        "?action=getUsers&_=" +
+        Date.now(),
         {
           method:"GET",
           cache:"no-store"
@@ -1200,100 +1193,183 @@ async function login(event){
       await response.json();
 
 
-    console.log(
-      "Login response:",
-      result
-    );
-
-
-    if(
-      result.success === false
-    ){
+    if(result.success === false){
 
       throw new Error(
         result.message ||
-        "Invalid username or password."
+        "Unable to connect to server."
       );
 
     }
 
 
-    /*
-      বিভিন্ন Apps Script response format
-      support করার জন্য
-    */
+    const users =
+      Array.isArray(result.users)
+        ? result.users
+        : Array.isArray(result.data)
+          ? result.data
+          : [];
+
+
+    const enteredUsername =
+      username.toLowerCase();
+
 
     const user =
-      result.user ||
-      result.data ||
-      result;
+      users.find(
+        function(item){
+
+          const u =
+            String(
+              item.username ||
+              item.Username ||
+              ""
+            )
+            .trim()
+            .toLowerCase();
 
 
-    const loggedUsername =
-      user.username ||
-      user.Username ||
-      result.username ||
-      result.Username ||
-      username;
+          const p =
+            String(
+              item.password ||
+              item.Password ||
+              ""
+            )
+            .trim();
 
 
-    const role =
-      String(
-        user.role ||
-        user.Role ||
-        result.role ||
-        result.Role ||
-        ""
-      )
-      .trim()
-      .toLowerCase();
+          return (
+            u === enteredUsername &&
+            p === password
+          );
 
+        }
+      );
+
+
+    /* =================================================
+       USER NOT FOUND
+    ================================================= */
+
+    if(!user){
+
+      showMessage(
+        "❌ Invalid username or password.",
+        "error"
+      );
+
+      loginBtn.disabled = false;
+
+      loginBtn.textContent =
+        "Login";
+
+      return;
+
+    }
+
+
+    /* =================================================
+       STATUS
+    ================================================= */
 
     const status =
       String(
         user.status ||
         user.Status ||
-        result.status ||
-        result.Status ||
         "Active"
       )
       .trim()
       .toLowerCase();
 
 
-    /*
-      যদি API success দেয় কিন্তু role না দেয়
-    */
+    if(status !== "active"){
 
-    if(!role){
-
-      throw new Error(
-        "Login successful, but user role was not received."
-      );
-
-    }
-
-
-    /*
-      Blocked / inactive user
-    */
-
-    if(
-      status === "blocked" ||
-      status === "inactive"
-    ){
-
-      throw new Error(
-        "Your account is " +
+      showMessage(
+        "❌ Your account is " +
         status +
-        ". Please contact administrator."
+        ". Please contact administrator.",
+        "error"
       );
+
+      loginBtn.disabled = false;
+
+      loginBtn.textContent =
+        "Login";
+
+      return;
 
     }
 
 
+    /* =================================================
+       ROLE
+    ================================================= */
+
+    const role =
+      String(
+        user.role ||
+        user.Role ||
+        ""
+      )
+      .trim()
+      .toLowerCase();
+
+
+    const targetPage =
+      ROUTES[role];
+
+
+    if(!targetPage){
+
+      showMessage(
+        "❌ Your account role is not configured.",
+        "error"
+      );
+
+      loginBtn.disabled = false;
+
+      loginBtn.textContent =
+        "Login";
+
+      return;
+
+    }
+
+
+    /* =================================================
+       SAVE LOGIN SESSION
+    ================================================= */
+
+    const loggedUser = {
+
+      username:
+        user.username ||
+        user.Username ||
+        username,
+
+      name:
+        user.name ||
+        user.Name ||
+        "",
+
+      role:
+        role,
+
+      status:
+        "Active",
+
+      device:
+        getDeviceName(),
+
+      loginTime:
+        new Date().toISOString()
+
+    };
+
+
     /*
-      Session save
+      Dashboard-এর existing security
+      checkLogin() যেন কাজ করে।
     */
 
     localStorage.setItem(
@@ -1304,117 +1380,100 @@ async function login(event){
 
     localStorage.setItem(
       "username",
-      String(loggedUsername)
+      loggedUser.username
     );
 
 
     localStorage.setItem(
-      "role",
-      role
-    );
-
-
-    /*
-      Additional compatibility keys
-    */
-
-    localStorage.setItem(
-      "Username",
-      String(loggedUsername)
-    );
-
-
-    localStorage.setItem(
-      "loggedIn",
-      "true"
+      "userData",
+      JSON.stringify(
+        loggedUser
+      )
     );
 
 
     localStorage.setItem(
       "loginData",
-      JSON.stringify({
-
-        username:
-          String(loggedUsername),
-
-        role:
-          role,
-
-        status:
-          status,
-
-        device:
-          getDeviceInfo().full,
-
-        loginTime:
-          new Date().toISOString()
-
-      })
+      JSON.stringify(
+        loggedUser
+      )
     );
 
 
-    /*
-      Success message
-    */
+    localStorage.setItem(
+      "loggedUser",
+      JSON.stringify(
+        loggedUser
+      )
+    );
+
+
+    localStorage.setItem(
+      "currentUser",
+      JSON.stringify(
+        loggedUser
+      )
+    );
+
+
+    localStorage.setItem(
+      "userInfo",
+      JSON.stringify(
+        loggedUser
+      )
+    );
+
+
+    sessionStorage.setItem(
+      "dashboardAuth",
+      "true"
+    );
+
 
     showMessage(
-      "Login successful. Opening dashboard...",
+      "✓ Login successful. Opening dashboard...",
       "success"
     );
 
 
     /*
-      Role অনুযায়ী redirect
+      একটু delay যাতে success message
+      দেখা যায়।
     */
 
     setTimeout(
       function(){
 
-        redirectByRole(
-          role
+        window.location.replace(
+          targetPage
         );
 
       },
-      300
+      500
     );
 
 
   }catch(error){
 
     console.error(
-      "Login error:",
+      "Login Error:",
       error
     );
 
 
-    /*
-      Login failed হলে session clear
-    */
-
-    localStorage.removeItem(
-      "dashboardAuth"
-    );
-
-    localStorage.removeItem(
-      "loggedIn"
-    );
-
-    localStorage.removeItem(
-      "role"
-    );
-
-
     showMessage(
-      error.message ||
-      "Login failed. Please try again.",
+      "❌ " +
+      (
+        error.message ||
+        "Login failed."
+      ),
       "error"
     );
 
 
-    button.disabled =
-      false;
+    loginBtn.disabled = false;
 
-    button.textContent =
+    loginBtn.textContent =
       "Login";
 
   }
@@ -1423,216 +1482,134 @@ async function login(event){
 
 
 /* =====================================================
-ROLE REDIRECT
+   MESSAGE
 ===================================================== */
 
-function redirectByRole(role){
+function showMessage(
+  text,
+  type
+){
 
-  role =
-    String(role || "")
-      .trim()
-      .toLowerCase();
-
-
-  let page =
-    "";
-
-
-  /*
-    ADMIN
-  */
-
-  if(
-    role === "admin"
-  ){
-
-    page =
-      ADMIN_PAGE;
-
-  }
-
-
-  /*
-    SUPPORT
-  */
-
-  else if(
-    role === "support"
-  ){
-
-    page =
-      SUPPORT_PAGE;
-
-  }
-
-
-  /*
-    CALL
-  */
-
-  else if(
-    role === "call"
-  ){
-
-    page =
-      CALL_PAGE;
-
-  }
-
-
-  /*
-    MANAGER
-    আপাতত access বন্ধ
-  */
-
-  else if(
-    role === "manager"
-  ){
-
-    showMessage(
-      "Manager dashboard is not configured.",
-      "error"
+  const message =
+    document.getElementById(
+      "message"
     );
 
-    return;
 
-  }
+  message.textContent =
+    text;
 
 
-  /*
-    GUEST
-  */
-
-  else if(
-    role === "guest"
-  ){
-
-    showMessage(
-      "Guest dashboard is not configured.",
-      "error"
+  message.className =
+    "message " +
+    (
+      type ||
+      ""
     );
 
-    return;
-
-  }
+}
 
 
-  else{
+/* =====================================================
+   FORGOT PASSWORD
+===================================================== */
 
-    showMessage(
-      "Your account role is not allowed.",
-      "error"
-    );
+function forgotPassword(){
 
-    return;
-
-  }
-
-
-  /*
-    Dashboard-এ যাও
-  */
-
-  window.location.replace(
-    page
+  showMessage(
+    "Please contact your administrator to reset your password.",
+    "error"
   );
 
 }
 
 
 /* =====================================================
-ALREADY LOGGED IN
+   ENTER KEY
 ===================================================== */
 
-function checkExistingLogin(){
+document.getElementById(
+  "username"
+).addEventListener(
+  "keydown",
+  function(event){
 
-  const auth =
-    localStorage.getItem(
-      "dashboardAuth"
-    );
+    if(event.key === "Enter"){
 
+      document.getElementById(
+        "password"
+      ).focus();
 
-  const role =
-    localStorage.getItem(
-      "role"
-    );
-
-
-  /*
-    আগে থেকেই login থাকলে
-    আবার index-এ থাকার দরকার নেই।
-  */
-
-  if(
-    auth === "true" &&
-    role
-  ){
-
-    /*
-      automatic redirect বন্ধ রাখতে চাইলে
-      এই অংশ remove করতে পারো।
-    */
-
-    redirectByRole(
-      role
-    );
-
-  }
-
-}
-
-
-/* =====================================================
-INIT
-===================================================== */
-
-document.addEventListener(
-  "DOMContentLoaded",
-  function(){
-
-    showDevice();
-
-    /*
-      এখানে automatic redirect রাখা হয়েছে।
-      যদি login page সবসময় দেখতে চাও,
-      তাহলে নিচের line comment করে দিও।
-    */
-
-    checkExistingLogin();
+    }
 
   }
 );
 
 
 /* =====================================================
-ENTER KEY
+   IF ALREADY LOGGED IN
 ===================================================== */
 
-document.addEventListener(
-  "keydown",
-  function(event){
+window.addEventListener(
+  "pageshow",
+  function(){
+
+    const auth =
+      localStorage.getItem(
+        "dashboardAuth"
+      );
+
+
+    const userData =
+      localStorage.getItem(
+        "userData"
+      );
+
 
     if(
-      event.key === "Enter"
+      auth === "true" &&
+      userData
     ){
 
-      const active =
-        document.activeElement;
+      try{
+
+        const user =
+          JSON.parse(
+            userData
+          );
 
 
-      if(
-        active &&
-        (
-          active.id === "username" ||
-          active.id === "password"
-        )
-      ){
-
-        document
-          .getElementById(
-            "loginForm"
+        const role =
+          String(
+            user.role ||
+            ""
           )
-          .requestSubmit();
+          .toLowerCase();
+
+
+        const target =
+          ROUTES[role];
+
+
+        if(target){
+
+          /*
+            Browser Back দিয়ে index এ
+            এলে আবার dashboard-এ পাঠাবে।
+          */
+
+          window.location.replace(
+            target
+          );
+
+        }
+
+      }catch(error){
+
+        console.log(
+          "Session check error",
+          error
+        );
 
       }
 
@@ -1643,25 +1620,33 @@ document.addEventListener(
 
 
 /* =====================================================
-PREVENT BACK TO DASHBOARD
+   PREVENT BACK AFTER LOGIN
 ===================================================== */
 
+history.pushState(
+  null,
+  "",
+  location.href
+);
+
+
 window.addEventListener(
-  "pageshow",
+  "popstate",
   function(){
 
-    /*
-      Page যদি browser cache থেকে আসে,
-      এবং session না থাকে তাহলে login page-তেই থাকবে।
-    */
-
-    if(
+    const auth =
       localStorage.getItem(
         "dashboardAuth"
-      ) !== "true"
-    ){
+      );
 
-      return;
+
+    if(auth === "true"){
+
+      history.pushState(
+        null,
+        "",
+        location.href
+      );
 
     }
 
