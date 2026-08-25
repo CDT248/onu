@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
 
 <meta charset="UTF-8">
@@ -908,8 +907,10 @@ MAIN
       <h2>All Entries</h2>
 
       <div class="total-count">
+
         Total:
         <strong id="totalCount">0</strong>
+
       </div>
 
     </div>
@@ -1076,6 +1077,7 @@ ENTRY MODAL
           Cancel
         </button>
 
+
         <button
           type="submit"
           class="btn btn-primary"
@@ -1137,6 +1139,7 @@ USER LIST MODAL
         >
           🔄 Refresh
         </button>
+
 
         <button
           class="btn btn-primary"
@@ -1353,6 +1356,7 @@ ADD / EDIT USER
           Cancel
         </button>
 
+
         <button
           type="submit"
           class="btn btn-primary"
@@ -1392,11 +1396,21 @@ const API_URL =
 const USER_API_URL =
 "https://script.google.com/macros/s/AKfycby1wEKzuThOiXdf9lVmoJVysfasR14ivssXFjGFfDnnc-d16uQRjNhel5LKNXDK4ZbxDw/exec";
 
+const LOGIN_PAGE =
+"index.html";
+
 const ROWS_PER_PAGE = 10;
+
+
+/* =====================================================
+GLOBAL VARIABLES
+===================================================== */
 
 let allData = [];
 let filteredData = [];
+
 let currentPage = 1;
+
 let editingRow = null;
 
 let allUsers = [];
@@ -1404,16 +1418,16 @@ let editingUser = null;
 
 
 /* =====================================================
-USERNAME
+GET USERNAME
+=====================================================
+
+Login security নেই।
+
+তবে Delete/Sell করার সময় username পাঠানোর
+জন্য localStorage থেকে username নেওয়ার চেষ্টা করবে।
+
+না পাওয়া গেলে Unknown ব্যবহার করবে।
 ===================================================== */
-
-/*
-  Login security নেই।
-
-  শুধু Delete / Sell করার সময় কোন username
-  দিয়ে কাজটি করা হয়েছে সেটা নেওয়ার জন্য
-  localStorage থেকে username খোঁজা হচ্ছে।
-*/
 
 function getLoggedInUsername(){
 
@@ -1456,45 +1470,82 @@ function getLoggedInUsername(){
 
         if(username){
 
-          return String(
-            username
-          ).trim();
+          return String(username).trim();
 
         }
 
       }
 
-    }catch(e){
+    }catch(error){
 
-      return String(
-        value
-      ).trim();
+      if(String(value).trim()){
+
+        return String(value).trim();
+
+      }
 
     }
 
   }
 
-  return "";
+  return "Unknown";
 
 }
 
 
 /* =====================================================
 LOGOUT
+
+শুধু Logout button চাপলে index.html যাবে।
+Dashboard নিজে থেকে কখনো redirect করবে না।
 ===================================================== */
 
 function logoutUser(){
 
-  /*
-    Login security বাদ দেওয়া হয়েছে।
+  const ok =
+    confirm(
+      "Are you sure you want to logout?"
+    );
 
-    তাই Logout button চাপলে শুধু একটি message
-    দেখাবে। Dashboard থেকে redirect করবে না।
-  */
+  if(!ok){
+    return;
+  }
 
-  showToast(
-    "Login security is disabled.",
-    "success"
+
+  const keys = [
+
+    "username",
+    "Username",
+    "user",
+    "userData",
+    "loginData",
+    "loggedUser",
+    "currentUser",
+    "userInfo",
+
+    "token",
+    "authToken",
+    "session",
+    "loggedIn",
+
+    "dashboardAuth"
+
+  ];
+
+
+  keys.forEach(
+    key =>
+      localStorage.removeItem(key)
+  );
+
+
+  try{
+    sessionStorage.clear();
+  }catch(error){}
+
+
+  window.location.replace(
+    LOGIN_PAGE
   );
 
 }
@@ -1527,6 +1578,7 @@ function loadTheme(){
       "dashboardTheme"
     );
 
+
   if(saved === "dark"){
 
     document.body.classList.add(
@@ -1534,6 +1586,7 @@ function loadTheme(){
     );
 
   }
+
 
   updateThemeButton();
 
@@ -1546,10 +1599,12 @@ function toggleTheme(){
     "dark"
   );
 
+
   const dark =
     document.body.classList.contains(
       "dark"
     );
+
 
   localStorage.setItem(
     "dashboardTheme",
@@ -1557,6 +1612,7 @@ function toggleTheme(){
       ? "dark"
       : "light"
   );
+
 
   updateThemeButton();
 
@@ -1570,9 +1626,11 @@ function updateThemeButton(){
       "themeBtn"
     );
 
+
   if(!btn){
     return;
   }
+
 
   btn.textContent =
     document.body.classList.contains(
@@ -1595,10 +1653,16 @@ async function loadData(){
       "refreshBtn"
     );
 
-  btn.disabled = true;
 
-  btn.textContent =
-    "⏳ Loading...";
+  if(btn){
+
+    btn.disabled = true;
+
+    btn.textContent =
+      "⏳ Loading...";
+
+  }
+
 
   showLoading();
 
@@ -1653,10 +1717,13 @@ async function loadData(){
     allData =
       result.data;
 
+
     filteredData =
       [...allData];
 
+
     currentPage = 1;
+
 
     renderTable();
 
@@ -1670,10 +1737,12 @@ async function loadData(){
       error
     );
 
+
     showError(
       error.message ||
       "Failed to load data."
     );
+
 
     showToast(
       error.message ||
@@ -1684,10 +1753,14 @@ async function loadData(){
 
   }finally{
 
-    btn.disabled = false;
+    if(btn){
 
-    btn.textContent =
-      "🔄 Refresh";
+      btn.disabled = false;
+
+      btn.textContent =
+        "🔄 Refresh";
+
+    }
 
   }
 
@@ -1720,6 +1793,7 @@ function renderTable(){
       </tr>
     `;
 
+
     renderPagination();
 
     return;
@@ -1746,9 +1820,7 @@ function renderTable(){
     function(row){
 
       const rowNumber =
-        Number(
-          row._row
-        );
+        Number(row._row);
 
 
       html += `
@@ -1817,6 +1889,7 @@ function renderTable(){
   tbody.innerHTML =
     html;
 
+
   renderPagination();
 
 }
@@ -1877,9 +1950,7 @@ function applyFilters(){
 
 
           if(
-            !text.includes(
-              search
-            )
+            !text.includes(search)
           ){
 
             return false;
@@ -1954,9 +2025,11 @@ function clearFilters(){
     "searchInput"
   ).value = "";
 
+
   document.getElementById(
     "fromDate"
   ).value = "";
+
 
   document.getElementById(
     "toDate"
@@ -1966,7 +2039,9 @@ function clearFilters(){
   filteredData =
     [...allData];
 
+
   currentPage = 1;
+
 
   renderTable();
 
@@ -1979,9 +2054,7 @@ function clearFilters(){
 DATE
 ===================================================== */
 
-function convertToFilterDate(
-  value
-){
+function convertToFilterDate(value){
 
   if(!value){
     return "";
@@ -1989,42 +2062,7 @@ function convertToFilterDate(
 
 
   const text =
-    String(
-      value
-    ).trim();
-
-
-  const parsed =
-    new Date(
-      text
-    );
-
-
-  if(
-    !isNaN(
-      parsed.getTime()
-    )
-  ){
-
-    return (
-      parsed.getFullYear() +
-      "-" +
-      String(
-        parsed.getMonth() + 1
-      ).padStart(
-        2,
-        "0"
-      ) +
-      "-" +
-      String(
-        parsed.getDate()
-      ).padStart(
-        2,
-        "0"
-      )
-    );
-
-  }
+    String(value).trim();
 
 
   const match =
@@ -2041,6 +2079,31 @@ function convertToFilterDate(
       match[2] +
       "-" +
       match[1]
+    );
+
+  }
+
+
+  const parsed =
+    new Date(text);
+
+
+  if(
+    !isNaN(
+      parsed.getTime()
+    )
+  ){
+
+    return (
+      parsed.getFullYear() +
+      "-" +
+      String(
+        parsed.getMonth() + 1
+      ).padStart(2,"0") +
+      "-" +
+      String(
+        parsed.getDate()
+      ).padStart(2,"0")
     );
 
   }
@@ -2076,17 +2139,17 @@ function renderPagination(){
     );
 
 
-  if(
-    totalPages <= 1
-  ){
+  if(totalPages <= 1){
 
     pagination.innerHTML =
       "";
+
 
     pageInfo.textContent =
       filteredData.length
         ? "Page 1"
         : "Page 0";
+
 
     return;
 
@@ -2169,9 +2232,7 @@ function renderPagination(){
 }
 
 
-function changePage(
-  page
-){
+function changePage(page){
 
   const totalPages =
     Math.ceil(
@@ -2192,6 +2253,7 @@ function changePage(
 
   currentPage =
     page;
+
 
   renderTable();
 
@@ -2218,8 +2280,7 @@ ENTRY MODAL
 
 function openEntryModal(){
 
-  editingRow =
-    null;
+  editingRow = null;
 
 
   document.getElementById(
@@ -2262,8 +2323,8 @@ function closeEntryModal(){
     "show"
   );
 
-  editingRow =
-    null;
+
+  editingRow = null;
 
 }
 
@@ -2272,19 +2333,13 @@ function closeEntryModal(){
 EDIT ENTRY
 ===================================================== */
 
-function editEntryByRow(
-  rowNumber
-){
+function editEntryByRow(rowNumber){
 
   const row =
     allData.find(
       item =>
-        Number(
-          item._row
-        ) ===
-        Number(
-          rowNumber
-        )
+        Number(item._row) ===
+        Number(rowNumber)
     );
 
 
@@ -2355,9 +2410,7 @@ function editEntryByRow(
 SUBMIT ENTRY
 ===================================================== */
 
-async function submitEntry(
-  event
-){
+async function submitEntry(event){
 
   event.preventDefault();
 
@@ -2429,13 +2482,10 @@ async function submitEntry(
 
 
   const editing =
-    Boolean(
-      editingRow
-    );
+    Boolean(editingRow);
 
 
-  btn.disabled =
-    true;
+  btn.disabled = true;
 
 
   btn.textContent =
@@ -2453,6 +2503,7 @@ async function submitEntry(
           ? "update"
           : "create",
 
+
       data:{
         Name:name,
         Ip:ip,
@@ -2460,9 +2511,9 @@ async function submitEntry(
         Date:date
       },
 
+
       oldData:
-        editingRow ||
-        null
+        editingRow || null
 
     };
 
@@ -2482,6 +2533,7 @@ async function submitEntry(
             JSON.stringify(
               payload
             )
+
         }
       );
 
@@ -2542,8 +2594,7 @@ async function submitEntry(
 
   }finally{
 
-    btn.disabled =
-      false;
+    btn.disabled = false;
 
 
     btn.textContent =
@@ -2562,18 +2613,7 @@ USERNAME FOR DELETE / SELL
 
 function requireUsername(){
 
-  const username =
-    getLoggedInUsername();
-
-
-  /*
-    Login security নেই।
-    Username না থাকলে default হিসেবে
-    Unknown ব্যবহার করা হবে।
-  */
-
-  return username ||
-    "Unknown";
+  return getLoggedInUsername();
 
 }
 
@@ -2582,19 +2622,13 @@ function requireUsername(){
 DELETE ENTRY
 ===================================================== */
 
-async function deleteEntryByRow(
-  rowNumber
-){
+async function deleteEntryByRow(rowNumber){
 
   const row =
     allData.find(
       item =>
-        Number(
-          item._row
-        ) ===
-        Number(
-          rowNumber
-        )
+        Number(item._row) ===
+        Number(rowNumber)
     );
 
 
@@ -2616,6 +2650,7 @@ async function deleteEntryByRow(
 
   const confirmed =
     confirm(
+
       "Delete this entry?\n\n" +
 
       "Name: " +
@@ -2628,6 +2663,7 @@ async function deleteEntryByRow(
       username +
 
       "\n\nThis entry will move to Deleted sheet."
+
     );
 
 
@@ -2667,6 +2703,7 @@ async function deleteEntryByRow(
             JSON.stringify(
               payload
             )
+
         }
       );
 
@@ -2729,19 +2766,13 @@ async function deleteEntryByRow(
 SELL ENTRY
 ===================================================== */
 
-async function sellEntryByRow(
-  rowNumber
-){
+async function sellEntryByRow(rowNumber){
 
   const row =
     allData.find(
       item =>
-        Number(
-          item._row
-        ) ===
-        Number(
-          rowNumber
-        )
+        Number(item._row) ===
+        Number(rowNumber)
     );
 
 
@@ -2763,6 +2794,7 @@ async function sellEntryByRow(
 
   const confirmed =
     confirm(
+
       "Sell this entry?\n\n" +
 
       "Name: " +
@@ -2778,6 +2810,7 @@ async function sellEntryByRow(
       username +
 
       "\n\nThis entry will move to Sell sheet."
+
     );
 
 
@@ -2817,6 +2850,7 @@ async function sellEntryByRow(
             JSON.stringify(
               payload
             )
+
         }
       );
 
@@ -2939,9 +2973,7 @@ async function loadUsers(){
   `;
 
 
-  btn.disabled =
-    true;
-
+  btn.disabled = true;
 
   btn.textContent =
     "⏳ Loading...";
@@ -3048,9 +3080,7 @@ async function loadUsers(){
 
   }finally{
 
-    btn.disabled =
-      false;
-
+    btn.disabled = false;
 
     btn.textContent =
       "🔄 Refresh";
@@ -3095,8 +3125,7 @@ function renderUsers(){
   }
 
 
-  let html =
-    "";
+  let html = "";
 
 
   allUsers.forEach(
@@ -3183,25 +3212,31 @@ function renderUsers(){
           <td>
 
             <strong>
-              ${escapeHTML(
-                username
-              )}
+              ${
+                escapeHTML(
+                  username
+                )
+              }
             </strong>
 
           </td>
 
 
           <td>
-            ${escapeHTML(
-              password
-            )}
+            ${
+              escapeHTML(
+                password
+              )
+            }
           </td>
 
 
           <td>
-            ${escapeHTML(
-              name
-            )}
+            ${
+              escapeHTML(
+                name
+              )
+            }
           </td>
 
 
@@ -3209,9 +3244,11 @@ function renderUsers(){
 
             <span class="role-badge">
 
-              ${escapeHTML(
-                role || "—"
-              )}
+              ${
+                escapeHTML(
+                  role || "—"
+                )
+              }
 
             </span>
 
@@ -3224,9 +3261,11 @@ function renderUsers(){
               class="status-badge ${statusClass}"
             >
 
-              ${escapeHTML(
-                status
-              )}
+              ${
+                escapeHTML(
+                  status
+                )
+              }
 
             </span>
 
@@ -3310,8 +3349,7 @@ ADD USER
 
 function openAddUserModal(){
 
-  editingUser =
-    null;
+  editingUser = null;
 
 
   document.getElementById(
@@ -3382,12 +3420,17 @@ function editUser(
 
 
         return (
+
           row ===
           Number(
             rowNumber
-          ) ||
+          )
+
+          ||
+
           name.toLowerCase() ===
           username.toLowerCase()
+
         );
 
       }
@@ -3494,9 +3537,7 @@ function closeUserFormModal(){
 SUBMIT USER
 ===================================================== */
 
-async function submitUser(
-  event
-){
+async function submitUser(event){
 
   event.preventDefault();
 
@@ -3603,8 +3644,7 @@ async function submitUser(
     );
 
 
-  button.disabled =
-    true;
+  button.disabled = true;
 
 
   button.textContent =
@@ -3664,6 +3704,7 @@ async function submitUser(
             JSON.stringify(
               payload
             )
+
         }
       );
 
@@ -3724,8 +3765,7 @@ async function submitUser(
 
   }finally{
 
-    button.disabled =
-      false;
+    button.disabled = false;
 
 
     button.textContent =
@@ -3845,6 +3885,7 @@ async function changeUserStatus(
             JSON.stringify(
               payload
             )
+
         }
       );
 
@@ -3922,10 +3963,12 @@ async function deleteUser(
 
   const ok =
     confirm(
+
       'Delete user "' +
       username +
       '"?\n\n' +
       "This action cannot be undone."
+
     );
 
 
@@ -3965,6 +4008,7 @@ async function deleteUser(
             JSON.stringify(
               payload
             )
+
         }
       );
 
@@ -4033,6 +4077,7 @@ function getTodayInputDate(){
 
 
   return (
+
     now.getFullYear() +
     "-" +
     String(
@@ -4048,6 +4093,7 @@ function getTodayInputDate(){
       2,
       "0"
     )
+
   );
 
 }
@@ -4205,8 +4251,7 @@ document
     function(event){
 
       if(
-        event.target ===
-        this
+        event.target === this
       ){
 
         closeEntryModal();
@@ -4226,8 +4271,7 @@ document
     function(event){
 
       if(
-        event.target ===
-        this
+        event.target === this
       ){
 
         closeUserModal();
@@ -4247,8 +4291,7 @@ document
     function(event){
 
       if(
-        event.target ===
-        this
+        event.target === this
       ){
 
         closeUserFormModal();
@@ -4268,8 +4311,7 @@ document.addEventListener(
   function(event){
 
     if(
-      event.key ===
-      "Escape"
+      event.key === "Escape"
     ){
 
       closeEntryModal();
