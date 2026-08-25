@@ -798,7 +798,6 @@ HEADER
       🔄 Refresh
     </button>
 
-    <!-- USER BUTTON -->
     <button
       class="btn btn-users"
       onclick="openUserModal()"
@@ -841,17 +840,13 @@ MAIN
   </div>
 
 
-  <!-- FILTER -->
-
   <section class="filter-box">
 
     <div class="filters">
 
       <div class="field search-field">
 
-        <label>
-          🔍 Search
-        </label>
+        <label>🔍 Search</label>
 
         <input
           type="text"
@@ -865,9 +860,7 @@ MAIN
 
       <div class="field">
 
-        <label>
-          📅 From Date
-        </label>
+        <label>📅 From Date</label>
 
         <input
           type="date"
@@ -880,9 +873,7 @@ MAIN
 
       <div class="field">
 
-        <label>
-          📅 To Date
-        </label>
+        <label>📅 To Date</label>
 
         <input
           type="date"
@@ -905,22 +896,16 @@ MAIN
   </section>
 
 
-  <!-- TABLE -->
-
   <section class="table-box">
 
     <div class="table-header">
 
-      <h2>
-        All Entries
-      </h2>
+      <h2>All Entries</h2>
 
       <div class="total-count">
 
         Total:
-        <strong id="totalCount">
-          0
-        </strong>
+        <strong id="totalCount">0</strong>
 
       </div>
 
@@ -1139,9 +1124,7 @@ USER LIST MODAL
       <div class="user-total">
 
         Total Users:
-        <strong id="userTotal">
-          0
-        </strong>
+        <strong id="userTotal">0</strong>
 
       </div>
 
@@ -1249,13 +1232,9 @@ ADD / EDIT USER MODAL
       <div class="form-grid">
 
 
-        <!-- USERNAME -->
-
         <div class="form-group">
 
-          <label>
-            Username
-          </label>
+          <label>Username</label>
 
           <input
             type="text"
@@ -1268,13 +1247,9 @@ ADD / EDIT USER MODAL
         </div>
 
 
-        <!-- PASSWORD -->
-
         <div class="form-group">
 
-          <label>
-            Password
-          </label>
+          <label>Password</label>
 
           <input
             type="text"
@@ -1287,13 +1262,9 @@ ADD / EDIT USER MODAL
         </div>
 
 
-        <!-- NAME -->
-
         <div class="form-group">
 
-          <label>
-            Name
-          </label>
+          <label>Name</label>
 
           <input
             type="text"
@@ -1306,13 +1277,9 @@ ADD / EDIT USER MODAL
         </div>
 
 
-        <!-- ROLE -->
-
         <div class="form-group">
 
-          <label>
-            Role
-          </label>
+          <label>Role</label>
 
           <select
             id="userRole"
@@ -1348,13 +1315,9 @@ ADD / EDIT USER MODAL
         </div>
 
 
-        <!-- STATUS -->
-
         <div class="form-group">
 
-          <label>
-            Status
-          </label>
+          <label>Status</label>
 
           <select
             id="userStatus"
@@ -1424,45 +1387,30 @@ TOAST
 
 <script>
 
-
 /* =====================================================
-DATA API
+API
 ===================================================== */
 
 const API_URL =
 "https://script.google.com/macros/s/AKfycbx6fo2Nogf3ETCtS_B-o0HCFqEs3vYkJ9IT9uu_-3l1w8fNJw77mZipeyFm-zZcjUw-5Q/exec";
 
 
-/* =====================================================
-USER API
-===================================================== */
-
 const USER_API_URL =
 "https://script.google.com/macros/s/AKfycby1wEKzuThOiXdf9lVmoJVysfasR14ivssXFjGFfDnnc-d16uQRjNhel5LKNXDK4ZbxDw/exec";
 
 
 /* =====================================================
-SETTINGS
+SECURITY
 ===================================================== */
 
-const ROWS_PER_PAGE = 10;
+const LOGIN_PAGE = "index.html";
 
-let allData = [];
+const INACTIVITY_LIMIT =
+  5 * 60 * 1000;
 
-let filteredData = [];
+let inactivityTimer = null;
 
-let currentPage = 1;
-
-let editingRow = null;
-
-
-/* =====================================================
-USER SETTINGS
-===================================================== */
-
-let allUsers = [];
-
-let editingUser = null;
+let redirecting = false;
 
 
 /* =====================================================
@@ -1518,8 +1466,8 @@ function getLoggedInUsername(){
           parsed.username ||
           parsed.Username ||
           parsed.userName ||
-          parsed.name ||
-          parsed.user;
+          parsed.user ||
+          parsed.name;
 
 
         if(username){
@@ -1534,9 +1482,13 @@ function getLoggedInUsername(){
 
     }catch(error){
 
-      return String(
-        value
-      ).trim();
+      const text =
+        String(value).trim();
+
+
+      if(text){
+        return text;
+      }
 
     }
 
@@ -1549,10 +1501,15 @@ function getLoggedInUsername(){
 
 
 /* =====================================================
-CHECK USERNAME
+LOGIN CHECK
 ===================================================== */
 
-function requireUsername(){
+function checkLogin(){
+
+  if(redirecting){
+    return false;
+  }
+
 
   const username =
     getLoggedInUsername();
@@ -1560,32 +1517,103 @@ function requireUsername(){
 
   if(!username){
 
-    showToast(
-      "Logged-in username পাওয়া যায়নি.",
-      "error"
-    );
+    securityLogout();
 
-    return null;
+    return false;
 
   }
 
 
-  return username;
+  return true;
 
 }
 
 
 /* =====================================================
-AUTO LOGOUT
+SECURITY LOGOUT
 ===================================================== */
 
-const INACTIVITY_LIMIT =
-  5 * 60 * 1000;
+function securityLogout(){
 
-let inactivityTimer = null;
+  if(redirecting){
+    return;
+  }
 
+
+  redirecting = true;
+
+
+  clearTimeout(
+    inactivityTimer
+  );
+
+
+  const removeKeys = [
+
+    "username",
+    "Username",
+    "user",
+    "userData",
+    "loginData",
+    "loggedUser",
+    "currentUser",
+    "userInfo",
+    "token",
+    "authToken",
+    "session",
+    "loggedIn"
+
+  ];
+
+
+  removeKeys.forEach(
+    function(key){
+
+      localStorage.removeItem(
+        key
+      );
+
+    }
+  );
+
+
+  try{
+
+    sessionStorage.clear();
+
+  }catch(error){
+
+    console.log(error);
+
+  }
+
+
+  window.location.replace(
+    LOGIN_PAGE
+  );
+
+}
+
+
+/* =====================================================
+RESET 5 MINUTE TIMER
+===================================================== */
 
 function resetInactivityTimer(){
+
+  if(redirecting){
+    return;
+  }
+
+
+  if(!getLoggedInUsername()){
+
+    securityLogout();
+
+    return;
+
+  }
+
 
   clearTimeout(
     inactivityTimer
@@ -1594,54 +1622,63 @@ function resetInactivityTimer(){
 
   inactivityTimer =
     setTimeout(
-      autoLogout,
+      function(){
+
+        securityLogout();
+
+      },
       INACTIVITY_LIMIT
     );
 
 }
 
 
-function autoLogout(){
+/* =====================================================
+USER ACTIVITY
+===================================================== */
 
-  clearTimeout(
-    inactivityTimer
-  );
+const securityEvents = [
 
-
-  localStorage.removeItem("username");
-  localStorage.removeItem("user");
-  localStorage.removeItem("userData");
-  localStorage.removeItem("loginData");
-  localStorage.removeItem("token");
-  localStorage.removeItem("authToken");
-  localStorage.removeItem("session");
-  localStorage.removeItem("loggedIn");
-
-
-  sessionStorage.clear();
-
-
-  window.location.replace(
-    "index.html"
-  );
-
-}
-
-
-[
   "mousemove",
   "mousedown",
   "keydown",
   "scroll",
   "touchstart",
   "click",
-  "wheel"
-].forEach(
+  "wheel",
+  "input",
+  "change"
+
+];
+
+
+securityEvents.forEach(
   function(eventName){
 
     document.addEventListener(
       eventName,
-      resetInactivityTimer,
+      function(){
+
+        if(
+          redirecting
+        ){
+          return;
+        }
+
+
+        if(
+          getLoggedInUsername()
+        ){
+
+          resetInactivityTimer();
+
+        }else{
+
+          securityLogout();
+
+        }
+
+      },
       true
     );
 
@@ -1649,7 +1686,113 @@ function autoLogout(){
 );
 
 
-resetInactivityTimer();
+/* =====================================================
+INITIAL SECURITY CHECK
+===================================================== */
+
+(function(){
+
+  const username =
+    getLoggedInUsername();
+
+
+  if(!username){
+
+    securityLogout();
+
+    return;
+
+  }
+
+
+  resetInactivityTimer();
+
+})();
+
+
+/* =====================================================
+BACK BUTTON PROTECTION
+===================================================== */
+
+history.pushState(
+  null,
+  "",
+  location.href
+);
+
+
+window.addEventListener(
+  "popstate",
+  function(){
+
+    history.pushState(
+      null,
+      "",
+      location.href
+    );
+
+
+    if(
+      !getLoggedInUsername()
+    ){
+
+      securityLogout();
+
+    }
+
+  }
+);
+
+
+/* =====================================================
+PAGE VISIBILITY CHECK
+===================================================== */
+
+document.addEventListener(
+  "visibilitychange",
+  function(){
+
+    if(
+      document.visibilityState ===
+      "visible"
+    ){
+
+      if(
+        !getLoggedInUsername()
+      ){
+
+        securityLogout();
+
+        return;
+
+      }
+
+
+      resetInactivityTimer();
+
+    }
+
+  }
+);
+
+
+/* =====================================================
+SETTINGS
+===================================================== */
+
+const ROWS_PER_PAGE = 10;
+
+let allData = [];
+
+let filteredData = [];
+
+let currentPage = 1;
+
+let editingRow = null;
+
+let allUsers = [];
+
+let editingUser = null;
 
 
 /* =====================================================
@@ -1659,6 +1802,13 @@ PAGE LOAD
 document.addEventListener(
   "DOMContentLoaded",
   function(){
+
+    if(
+      !checkLogin()
+    ){
+      return;
+    }
+
 
     loadTheme();
 
@@ -1754,6 +1904,11 @@ LOAD DATA
 ===================================================== */
 
 async function loadData(){
+
+  if(!checkLogin()){
+    return;
+  }
+
 
   const refreshBtn =
     document.getElementById(
@@ -2410,6 +2565,11 @@ OPEN ENTRY
 
 function openEntryModal(){
 
+  if(!checkLogin()){
+    return;
+  }
+
+
   editingRow = null;
 
 
@@ -2468,6 +2628,11 @@ EDIT ENTRY
 ===================================================== */
 
 function editEntryByRow(rowNumber){
+
+  if(!checkLogin()){
+    return;
+  }
+
 
   const row =
     allData.find(
@@ -2553,6 +2718,11 @@ CREATE / UPDATE ENTRY
 async function submitEntry(event){
 
   event.preventDefault();
+
+
+  if(!checkLogin()){
+    return;
+  }
 
 
   const submitBtn =
@@ -2759,6 +2929,11 @@ DELETE ENTRY
 
 async function deleteEntryByRow(rowNumber){
 
+  if(!checkLogin()){
+    return;
+  }
+
+
   const row =
     allData.find(
       function(item){
@@ -2786,11 +2961,15 @@ async function deleteEntryByRow(rowNumber){
 
 
   const username =
-    requireUsername();
+    getLoggedInUsername();
 
 
   if(!username){
+
+    securityLogout();
+
     return;
+
   }
 
 
@@ -2908,6 +3087,11 @@ SELL ENTRY
 
 async function sellEntryByRow(rowNumber){
 
+  if(!checkLogin()){
+    return;
+  }
+
+
   const row =
     allData.find(
       function(item){
@@ -2935,11 +3119,15 @@ async function sellEntryByRow(rowNumber){
 
 
   const username =
-    requireUsername();
+    getLoggedInUsername();
 
 
   if(!username){
+
+    securityLogout();
+
     return;
+
   }
 
 
@@ -3060,6 +3248,11 @@ USER MODAL
 
 function openUserModal(){
 
+  if(!checkLogin()){
+    return;
+  }
+
+
   document.getElementById(
     "userModal"
   ).classList.add(
@@ -3088,6 +3281,11 @@ LOAD USERS
 ===================================================== */
 
 async function loadUsers(){
+
+  if(!checkLogin()){
+    return;
+  }
+
 
   const body =
     document.getElementById(
@@ -3284,7 +3482,7 @@ function renderUsers(){
 
 
   allUsers.forEach(
-    function(user,index){
+    function(user){
 
       const username =
         user.username ||
@@ -3471,6 +3669,11 @@ OPEN ADD USER
 
 function openAddUserModal(){
 
+  if(!checkLogin()){
+    return;
+  }
+
+
   editingUser =
     null;
 
@@ -3515,6 +3718,11 @@ function editUser(
   rowNumber,
   encodedUsername
 ){
+
+  if(!checkLogin()){
+    return;
+  }
+
 
   const username =
     decodeURIComponent(
@@ -3662,6 +3870,11 @@ SUBMIT USER
 async function submitUser(event){
 
   event.preventDefault();
+
+
+  if(!checkLogin()){
+    return;
+  }
 
 
   const button =
@@ -3921,6 +4134,11 @@ async function blockUser(
   encodedUsername
 ){
 
+  if(!checkLogin()){
+    return;
+  }
+
+
   const username =
     decodeURIComponent(
       encodedUsername
@@ -3958,6 +4176,11 @@ async function unblockUser(
   encodedUsername
 ){
 
+  if(!checkLogin()){
+    return;
+  }
+
+
   const username =
     decodeURIComponent(
       encodedUsername
@@ -3982,6 +4205,11 @@ async function changeUserStatus(
   username,
   status
 ){
+
+  if(!checkLogin()){
+    return;
+  }
+
 
   try{
 
@@ -4092,6 +4320,11 @@ async function deleteUser(
   rowNumber,
   encodedUsername
 ){
+
+  if(!checkLogin()){
+    return;
+  }
+
 
   const username =
     decodeURIComponent(
