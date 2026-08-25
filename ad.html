@@ -4,9 +4,13 @@
 <head>
 
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Data Dashboard</title>
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0"
+>
+
+<title>Admin Dashboard</title>
 
 <style>
 
@@ -17,745 +21,1953 @@
   font-family:Arial,Helvetica,sans-serif;
 }
 
-:root{
-  --bg:#f4f7f6;
-  --card:#ffffff;
-  --text:#1f2937;
-  --muted:#6b7280;
-  --border:#e5e7eb;
-  --input:#ffffff;
-  --thead:#f8fafc;
-  --hover:#fafafa;
-  --green:#087f5b;
-  --green-dark:#066b4d;
-  --blue:#2563eb;
-  --red:#dc2626;
-  --orange:#d97706;
-  --purple:#7c3aed;
-  --shadow:rgba(0,0,0,.20);
-}
-
-body.dark{
-  --bg:#111827;
-  --card:#1f2937;
-  --text:#f9fafb;
-  --muted:#9ca3af;
-  --border:#374151;
-  --input:#111827;
-  --thead:#172033;
-  --hover:#263244;
-  --shadow:rgba(0,0,0,.50);
+html,
+body{
+  width:100%;
+  min-height:100%;
 }
 
 body{
-  background:var(--bg);
-  color:var(--text);
-  transition:.25s;
+
+  background:
+    radial-gradient(
+      circle at top left,
+      rgba(0,208,132,.08),
+      transparent 30%
+    ),
+    radial-gradient(
+      circle at bottom right,
+      rgba(255,0,70,.06),
+      transparent 30%
+    ),
+    #070a0e;
+
+  color:#fff;
+
+  overflow-x:hidden;
 }
 
+
 /* =====================================================
-HEADER
+   APP
 ===================================================== */
 
-.header{
-  width:100%;
-  min-height:70px;
-  background:var(--card);
-  border-bottom:1px solid var(--border);
+.app{
   display:flex;
-  align-items:center;
-  justify-content:space-between;
-  padding:0 25px;
-  position:sticky;
+  min-height:100vh;
+}
+
+
+/* =====================================================
+   SIDEBAR
+===================================================== */
+
+.sidebar{
+
+  width:250px;
+  min-width:250px;
+
+  background:
+    linear-gradient(
+      180deg,
+      #10161d,
+      #0b1016
+    );
+
+  border-right:
+    1px solid rgba(255,255,255,.07);
+
+  position:fixed;
+
+  left:0;
   top:0;
+  bottom:0;
+
   z-index:100;
-}
 
-.logo{
-  font-size:22px;
-  font-weight:700;
-  color:var(--green);
-}
+  transition:.3s ease;
 
-.header-right{
-  display:flex;
-  align-items:center;
-  gap:10px;
-}
-
-/* =====================================================
-BUTTON
-===================================================== */
-
-button{
-  border:none;
-  cursor:pointer;
-  transition:.2s;
-}
-
-button:disabled{
-  cursor:not-allowed;
-  opacity:.5;
-}
-
-.btn{
-  padding:11px 17px;
-  border-radius:8px;
-  font-size:14px;
-  font-weight:600;
-}
-
-.btn-primary{
-  background:var(--green);
-  color:#fff;
-}
-
-.btn-primary:hover{
-  background:var(--green-dark);
-}
-
-.btn-refresh,
-.theme-btn,
-.btn-cancel{
-  background:var(--input);
-  color:var(--text);
-  border:1px solid var(--border);
-}
-
-.btn-refresh:hover,
-.theme-btn:hover,
-.btn-cancel:hover{
-  background:var(--hover);
-}
-
-.theme-btn{
-  height:42px;
-  padding:0 14px;
-  border-radius:8px;
-  font-size:13px;
-  font-weight:600;
-}
-
-.btn-users{
-  background:#7c3aed;
-  color:#fff;
-}
-
-.btn-users:hover{
-  background:#6d28d9;
-}
-
-/* LOGOUT */
-
-.btn-logout{
-  background:#dc2626;
-  color:#fff;
-  padding:11px 17px;
-  border-radius:8px;
-  font-size:14px;
-  font-weight:600;
-}
-
-.btn-logout:hover{
-  background:#b91c1c;
-}
-
-/* =====================================================
-MAIN
-===================================================== */
-
-.container{
-  width:100%;
-  max-width:1500px;
-  margin:auto;
-  padding:25px;
-}
-
-.top-section{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:15px;
-  margin-bottom:20px;
-}
-
-.title h1{
-  font-size:27px;
-  margin-bottom:5px;
-}
-
-.title p{
-  color:var(--muted);
-  font-size:14px;
-}
-
-/* =====================================================
-FILTER
-===================================================== */
-
-.filter-box{
-  background:var(--card);
-  border:1px solid var(--border);
-  border-radius:12px;
-  padding:18px;
-  margin-bottom:20px;
-}
-
-.filters{
-  display:grid;
-  grid-template-columns:2fr 1fr 1fr auto;
-  gap:12px;
-  align-items:end;
-}
-
-.field{
   display:flex;
   flex-direction:column;
-  gap:6px;
 }
 
-.field label{
-  font-size:12px;
-  font-weight:600;
-  color:var(--muted);
+
+.sidebar.collapsed{
+
+  width:76px;
+  min-width:76px;
+
 }
 
-.field input,
-.field select{
-  width:100%;
-  height:42px;
-  border:1px solid var(--border);
-  border-radius:8px;
-  padding:0 12px;
-  outline:none;
-  background:var(--input);
-  color:var(--text);
-  font-size:14px;
+
+.sidebar-top{
+
+  height:75px;
+
+  display:flex;
+  align-items:center;
+
+  padding:0 18px;
+
+  border-bottom:
+    1px solid rgba(255,255,255,.06);
+
 }
 
-.field input:focus,
-.field select:focus{
-  border-color:var(--green);
-}
 
-/* =====================================================
-TABLE
-===================================================== */
+.brand{
 
-.table-box{
-  background:var(--card);
-  border:1px solid var(--border);
-  border-radius:12px;
+  display:flex;
+  align-items:center;
+  gap:12px;
+
   overflow:hidden;
 }
 
-.table-header{
-  padding:16px 18px;
-  border-bottom:1px solid var(--border);
+
+.brand-icon{
+
+  width:42px;
+  height:42px;
+
+  flex-shrink:0;
+
+  border-radius:12px;
+
   display:flex;
-  justify-content:space-between;
   align-items:center;
+  justify-content:center;
+
+  background:
+    linear-gradient(
+      135deg,
+      #00d084,
+      #00a86b
+    );
+
+  color:#03150c;
+
+  font-size:20px;
+
+  font-weight:800;
+
+  box-shadow:
+    0 8px 25px rgba(0,208,132,.15);
 }
 
-.table-header h2{
+
+.brand-text{
+
+  white-space:nowrap;
+
   font-size:17px;
+
+  font-weight:700;
+
+  color:#f1f4f7;
+
 }
 
-.total-count{
-  font-size:13px;
-  color:var(--muted);
+
+.sidebar.collapsed .brand-text{
+  display:none;
 }
 
-.table-wrapper{
-  width:100%;
-  overflow-x:auto;
-}
-
-table{
-  width:100%;
-  border-collapse:collapse;
-  min-width:900px;
-}
-
-th{
-  background:var(--thead);
-  padding:14px;
-  text-align:left;
-  font-size:12px;
-  color:var(--muted);
-  white-space:nowrap;
-  border-bottom:1px solid var(--border);
-}
-
-td{
-  padding:14px;
-  border-bottom:1px solid var(--border);
-  font-size:13px;
-  white-space:nowrap;
-}
-
-tr:hover td{
-  background:var(--hover);
-}
-
-.date-cell{
-  color:var(--muted);
-  font-weight:500;
-}
 
 /* =====================================================
-ACTIONS
+   MENU
+===================================================== */
+
+.menu{
+
+  padding:18px 12px;
+
+  flex:1;
+}
+
+
+.menu-title{
+
+  color:#596471;
+
+  font-size:10px;
+
+  letter-spacing:1.2px;
+
+  padding:0 10px 10px;
+
+}
+
+
+.sidebar.collapsed .menu-title{
+  display:none;
+}
+
+
+.menu-item{
+
+  width:100%;
+
+  height:48px;
+
+  border:none;
+
+  background:transparent;
+
+  color:#8993a0;
+
+  border-radius:12px;
+
+  margin-bottom:6px;
+
+  display:flex;
+
+  align-items:center;
+
+  gap:13px;
+
+  padding:0 13px;
+
+  cursor:pointer;
+
+  text-align:left;
+
+  transition:.2s;
+
+  font-size:13px;
+
+}
+
+
+.menu-item:hover{
+
+  background:
+    rgba(255,255,255,.045);
+
+  color:#fff;
+
+}
+
+
+.menu-item.active{
+
+  background:
+    rgba(0,208,132,.10);
+
+  color:#00d084;
+
+}
+
+
+.menu-icon{
+
+  width:24px;
+
+  min-width:24px;
+
+  text-align:center;
+
+  font-size:17px;
+
+}
+
+
+.menu-label{
+  white-space:nowrap;
+}
+
+
+.sidebar.collapsed .menu-label{
+  display:none;
+}
+
+
+.sidebar.collapsed .menu-item{
+
+  justify-content:center;
+
+  padding:0;
+
+}
+
+
+/* =====================================================
+   SIDEBAR BOTTOM
+===================================================== */
+
+.sidebar-bottom{
+
+  padding:12px;
+
+  border-top:
+    1px solid rgba(255,255,255,.06);
+
+}
+
+
+.user-mini{
+
+  display:flex;
+
+  align-items:center;
+
+  gap:10px;
+
+  padding:10px;
+
+  border-radius:12px;
+
+  background:
+    rgba(255,255,255,.035);
+
+}
+
+
+.user-avatar{
+
+  width:38px;
+  height:38px;
+
+  min-width:38px;
+
+  border-radius:50%;
+
+  display:flex;
+
+  align-items:center;
+  justify-content:center;
+
+  background:
+    linear-gradient(
+      135deg,
+      #00d084,
+      #008f60
+    );
+
+  color:#03150c;
+
+  font-weight:800;
+
+  font-size:14px;
+
+}
+
+
+.user-mini-info{
+
+  overflow:hidden;
+
+}
+
+
+.user-mini-name{
+
+  font-size:12px;
+
+  font-weight:700;
+
+  white-space:nowrap;
+
+  overflow:hidden;
+
+  text-overflow:ellipsis;
+
+}
+
+
+.user-mini-role{
+
+  color:#68727f;
+
+  font-size:10px;
+
+  margin-top:3px;
+
+}
+
+
+.sidebar.collapsed .user-mini-info{
+  display:none;
+}
+
+
+.sidebar.collapsed .user-mini{
+  justify-content:center;
+}
+
+
+/* =====================================================
+   MAIN
+===================================================== */
+
+.main{
+
+  margin-left:250px;
+
+  width:
+    calc(100% - 250px);
+
+  min-height:100vh;
+
+  transition:.3s ease;
+
+}
+
+
+.main.expanded{
+
+  margin-left:76px;
+
+  width:
+    calc(100% - 76px);
+
+}
+
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+.header{
+
+  height:75px;
+
+  padding:0 25px;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:space-between;
+
+  background:
+    rgba(7,10,14,.82);
+
+  border-bottom:
+    1px solid rgba(255,255,255,.07);
+
+  backdrop-filter:blur(15px);
+
+  position:sticky;
+
+  top:0;
+
+  z-index:50;
+
+}
+
+
+.header-left{
+
+  display:flex;
+
+  align-items:center;
+
+  gap:14px;
+
+}
+
+
+.toggle-btn{
+
+  width:42px;
+  height:42px;
+
+  border:none;
+
+  border-radius:11px;
+
+  background:#121820;
+
+  border:
+    1px solid rgba(255,255,255,.06);
+
+  color:#b5bec8;
+
+  cursor:pointer;
+
+  font-size:19px;
+
+  transition:.2s;
+
+}
+
+
+.toggle-btn:hover{
+
+  color:#00d084;
+
+  border-color:
+    rgba(0,208,132,.25);
+
+}
+
+
+.header-title{
+
+  font-size:18px;
+
+  font-weight:700;
+
+}
+
+
+.header-subtitle{
+
+  color:#66717e;
+
+  font-size:11px;
+
+  margin-top:3px;
+
+}
+
+
+.header-right{
+
+  display:flex;
+
+  align-items:center;
+
+  gap:10px;
+
+}
+
+
+.header-btn{
+
+  height:40px;
+
+  padding:0 13px;
+
+  border-radius:10px;
+
+  border:
+    1px solid rgba(255,255,255,.07);
+
+  background:#11171e;
+
+  color:#aeb7c1;
+
+  cursor:pointer;
+
+  font-size:12px;
+
+  transition:.2s;
+
+}
+
+
+.header-btn:hover{
+
+  color:#fff;
+
+  border-color:
+    rgba(255,255,255,.14);
+
+}
+
+
+.header-btn.logout:hover{
+
+  color:#ff647b;
+
+  border-color:
+    rgba(255,70,100,.2);
+
+}
+
+
+/* =====================================================
+   CONTENT
+===================================================== */
+
+.content{
+
+  padding:25px;
+
+}
+
+
+/* =====================================================
+   WELCOME
+===================================================== */
+
+.welcome{
+
+  margin-bottom:22px;
+
+}
+
+
+.welcome h1{
+
+  font-size:25px;
+
+  font-weight:700;
+
+}
+
+
+.welcome p{
+
+  color:#697480;
+
+  font-size:12px;
+
+  margin-top:7px;
+
+}
+
+
+/* =====================================================
+   STATS
+===================================================== */
+
+.stats{
+
+  display:grid;
+
+  grid-template-columns:
+    repeat(4,1fr);
+
+  gap:15px;
+
+  margin-bottom:24px;
+
+}
+
+
+.stat-card{
+
+  background:
+    rgba(17,23,30,.88);
+
+  border:
+    1px solid rgba(255,255,255,.07);
+
+  border-radius:16px;
+
+  padding:20px;
+
+  position:relative;
+
+  overflow:hidden;
+
+}
+
+
+.stat-card::after{
+
+  content:"";
+
+  position:absolute;
+
+  width:100px;
+  height:100px;
+
+  right:-40px;
+  top:-40px;
+
+  border-radius:50%;
+
+  background:
+    rgba(0,208,132,.04);
+
+}
+
+
+.stat-top{
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:space-between;
+
+}
+
+
+.stat-icon{
+
+  width:42px;
+  height:42px;
+
+  border-radius:12px;
+
+  display:flex;
+
+  align-items:center;
+  justify-content:center;
+
+  background:
+    rgba(0,208,132,.08);
+
+  font-size:19px;
+
+}
+
+
+.stat-card.blocked .stat-icon{
+
+  background:
+    rgba(255,70,90,.08);
+
+}
+
+
+.stat-card.inactive .stat-icon{
+
+  background:
+    rgba(255,190,50,.08);
+
+}
+
+
+.stat-label{
+
+  color:#737e8a;
+
+  font-size:11px;
+
+  margin-top:16px;
+
+}
+
+
+.stat-number{
+
+  font-size:27px;
+
+  font-weight:700;
+
+  margin-top:4px;
+
+}
+
+
+/* =====================================================
+   TOOLBAR
+===================================================== */
+
+.toolbar{
+
+  background:
+    rgba(17,23,30,.88);
+
+  border:
+    1px solid rgba(255,255,255,.07);
+
+  border-radius:16px;
+
+  padding:14px;
+
+  display:flex;
+
+  gap:10px;
+
+  align-items:center;
+
+  justify-content:space-between;
+
+  margin-bottom:15px;
+
+}
+
+
+.search-box{
+
+  flex:1;
+
+  max-width:430px;
+
+  position:relative;
+
+}
+
+
+.search-box span{
+
+  position:absolute;
+
+  left:14px;
+
+  top:50%;
+
+  transform:translateY(-50%);
+
+  color:#5f6a76;
+
+}
+
+
+.search-box input{
+
+  width:100%;
+
+  height:43px;
+
+  padding:
+    0 14px 0 39px;
+
+  border-radius:10px;
+
+  border:
+    1px solid #252c35;
+
+  background:#0c1015;
+
+  color:#fff;
+
+  outline:none;
+
+  font-size:12px;
+
+}
+
+
+.search-box input:focus{
+
+  border-color:#00d084;
+
+  box-shadow:
+    0 0 0 3px
+    rgba(0,208,132,.07);
+
+}
+
+
+.add-btn{
+
+  height:43px;
+
+  padding:0 18px;
+
+  border:none;
+
+  border-radius:10px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #00d084,
+      #00a86b
+    );
+
+  color:#03150c;
+
+  font-size:12px;
+
+  font-weight:700;
+
+  cursor:pointer;
+
+  transition:.2s;
+
+}
+
+
+.add-btn:hover{
+
+  transform:translateY(-1px);
+
+  box-shadow:
+    0 8px 25px
+    rgba(0,208,132,.18);
+
+}
+
+
+/* =====================================================
+   TABLE
+===================================================== */
+
+.table-card{
+
+  background:
+    rgba(17,23,30,.88);
+
+  border:
+    1px solid rgba(255,255,255,.07);
+
+  border-radius:16px;
+
+  overflow:hidden;
+
+}
+
+
+.table-head{
+
+  padding:18px 20px;
+
+  display:flex;
+
+  justify-content:space-between;
+
+  align-items:center;
+
+  border-bottom:
+    1px solid rgba(255,255,255,.06);
+
+}
+
+
+.table-title{
+
+  font-size:14px;
+
+  font-weight:700;
+
+}
+
+
+.table-count{
+
+  color:#697481;
+
+  font-size:11px;
+
+}
+
+
+.table-wrap{
+
+  overflow-x:auto;
+
+}
+
+
+table{
+
+  width:100%;
+
+  border-collapse:collapse;
+
+  min-width:800px;
+
+}
+
+
+thead{
+
+  background:
+    rgba(255,255,255,.025);
+
+}
+
+
+th{
+
+  text-align:left;
+
+  color:#697481;
+
+  font-size:10px;
+
+  letter-spacing:.4px;
+
+  font-weight:600;
+
+  padding:14px 18px;
+
+  white-space:nowrap;
+
+}
+
+
+td{
+
+  padding:15px 18px;
+
+  border-top:
+    1px solid rgba(255,255,255,.045);
+
+  font-size:12px;
+
+  color:#d8dde3;
+
+  white-space:nowrap;
+
+}
+
+
+tbody tr{
+
+  transition:.15s;
+
+}
+
+
+tbody tr:hover{
+
+  background:
+    rgba(255,255,255,.018);
+
+}
+
+
+/* =====================================================
+   USER
+===================================================== */
+
+.user-cell{
+
+  display:flex;
+
+  align-items:center;
+
+  gap:11px;
+
+}
+
+
+.table-avatar{
+
+  width:34px;
+  height:34px;
+
+  border-radius:10px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #00d084,
+      #008f60
+    );
+
+  display:flex;
+
+  align-items:center;
+  justify-content:center;
+
+  color:#03150c;
+
+  font-size:12px;
+
+  font-weight:800;
+
+  flex-shrink:0;
+
+}
+
+
+.user-main{
+
+  font-weight:700;
+
+  color:#e8edf2;
+
+}
+
+
+.user-sub{
+
+  color:#68737f;
+
+  font-size:10px;
+
+  margin-top:3px;
+
+}
+
+
+/* =====================================================
+   BADGES
+===================================================== */
+
+.badge{
+
+  display:inline-flex;
+
+  align-items:center;
+
+  gap:6px;
+
+  padding:5px 9px;
+
+  border-radius:20px;
+
+  font-size:10px;
+
+  font-weight:600;
+
+}
+
+
+.badge::before{
+
+  content:"";
+
+  width:6px;
+  height:6px;
+
+  border-radius:50%;
+
+  background:currentColor;
+
+}
+
+
+.badge.active{
+
+  color:#00d084;
+
+  background:
+    rgba(0,208,132,.08);
+
+}
+
+
+.badge.blocked{
+
+  color:#ff647b;
+
+  background:
+    rgba(255,70,100,.08);
+
+}
+
+
+.badge.inactive{
+
+  color:#ffbd45;
+
+  background:
+    rgba(255,190,60,.08);
+
+}
+
+
+.role-badge{
+
+  color:#9ca7b3;
+
+  background:
+    rgba(255,255,255,.05);
+
+  padding:5px 9px;
+
+  border-radius:7px;
+
+  font-size:10px;
+
+}
+
+
+/* =====================================================
+   ACTIONS
 ===================================================== */
 
 .actions{
+
   display:flex;
-  gap:7px;
-  align-items:center;
-}
 
-.btn-edit,
-.btn-delete,
-.btn-sell{
-  padding:7px 11px;
-  border-radius:6px;
-  font-size:13px;
-  font-weight:600;
-}
-
-.btn-edit{
-  background:#e8f1ff;
-  color:#2563eb;
-}
-
-.btn-edit:hover{
-  background:#dbeafe;
-}
-
-.btn-delete{
-  background:#fee2e2;
-  color:#dc2626;
-}
-
-.btn-delete:hover{
-  background:#fecaca;
-}
-
-.btn-sell{
-  background:#fff7ed;
-  color:#d97706;
-}
-
-.btn-sell:hover{
-  background:#ffedd5;
-}
-
-/* =====================================================
-PAGINATION
-===================================================== */
-
-.pagination-box{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding:15px 18px;
-  border-top:1px solid var(--border);
-}
-
-.page-info{
-  font-size:13px;
-  color:var(--muted);
-}
-
-.pagination{
-  display:flex;
-  gap:5px;
-  flex-wrap:wrap;
-}
-
-.page-btn{
-  min-width:35px;
-  height:35px;
-  border:1px solid var(--border);
-  background:var(--input);
-  color:var(--text);
-  border-radius:6px;
-  font-size:13px;
-}
-
-.page-btn:hover{
-  background:var(--hover);
-}
-
-.page-btn.active{
-  background:var(--green);
-  color:#fff;
-  border-color:var(--green);
-}
-
-/* =====================================================
-MODAL
-===================================================== */
-
-.modal{
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,.55);
-  display:none;
-  justify-content:center;
-  align-items:center;
-  padding:20px;
-  z-index:999;
-}
-
-.modal.show{
-  display:flex;
-}
-
-.modal-box{
-  width:100%;
-  max-width:700px;
-  max-height:95vh;
-  overflow-y:auto;
-  background:var(--card);
-  color:var(--text);
-  border-radius:16px;
-  box-shadow:0 20px 60px var(--shadow);
-}
-
-.modal-header{
-  padding:20px 24px;
-  border-bottom:1px solid var(--border);
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  position:sticky;
-  top:0;
-  background:var(--card);
-  z-index:2;
-}
-
-.modal-header h2{
-  font-size:20px;
-}
-
-.close-btn{
-  width:36px;
-  height:36px;
-  border-radius:50%;
-  background:var(--input);
-  border:1px solid var(--border);
-  font-size:22px;
-  color:var(--text);
-}
-
-.close-btn:hover{
-  background:var(--hover);
-}
-
-/* =====================================================
-FORM
-===================================================== */
-
-.form{
-  padding:30px 25px;
-}
-
-.form-grid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:22px 18px;
-}
-
-.form-group{
-  display:flex;
-  flex-direction:column;
-  gap:9px;
-}
-
-.form-group.full{
-  grid-column:1 / -1;
-}
-
-.form-group label{
-  font-size:13px;
-  font-weight:600;
-}
-
-.form-group input,
-.form-group textarea,
-.form-group select{
-  width:100%;
-  border:1px solid var(--border);
-  border-radius:9px;
-  padding:13px 14px;
-  outline:none;
-  font-size:14px;
-  background:var(--input);
-  color:var(--text);
-}
-
-.form-group input,
-.form-group select{
-  height:48px;
-}
-
-.form-group textarea{
-  min-height:150px;
-  resize:vertical;
-}
-
-.form-group input:focus,
-.form-group textarea:focus,
-.form-group select:focus{
-  border-color:var(--green);
-}
-
-.form-footer{
-  display:flex;
-  justify-content:flex-end;
-  gap:10px;
-  padding-top:30px;
-}
-
-/* =====================================================
-USER MODAL
-===================================================== */
-
-.user-modal-box{
-  max-width:1100px;
-}
-
-.user-toolbar{
-  padding:16px 24px;
-  border-bottom:1px solid var(--border);
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:12px;
-}
-
-.user-total{
-  font-size:13px;
-  color:var(--muted);
-}
-
-.user-table-wrapper{
-  width:100%;
-  overflow-x:auto;
-  padding:0 20px;
-}
-
-.user-table{
-  min-width:800px;
-}
-
-.user-actions{
-  display:flex;
   gap:6px;
+
 }
 
-.user-action{
-  padding:7px 10px;
-  border-radius:6px;
-  font-size:12px;
-  font-weight:600;
+
+.action-btn{
+
+  width:34px;
+  height:34px;
+
+  border-radius:9px;
+
+  border:
+    1px solid rgba(255,255,255,.07);
+
+  background:#11171e;
+
+  color:#8d98a5;
+
+  cursor:pointer;
+
+  transition:.2s;
+
 }
 
-.user-action.edit{
-  background:#e8f1ff;
-  color:#2563eb;
+
+.action-btn:hover{
+
+  color:#fff;
+
+  border-color:
+    rgba(255,255,255,.15);
+
 }
 
-.user-action.block{
-  background:#fff7ed;
-  color:#d97706;
+
+.action-btn.edit:hover{
+
+  color:#00d084;
+
+  border-color:
+    rgba(0,208,132,.2);
+
 }
 
-.user-action.unblock{
-  background:#dcfce7;
-  color:#15803d;
+
+.action-btn.delete:hover{
+
+  color:#ff647b;
+
+  border-color:
+    rgba(255,70,100,.2);
+
 }
 
-.user-action.delete{
-  background:#fee2e2;
-  color:#dc2626;
+
+.action-btn.block:hover{
+
+  color:#ffbd45;
+
+  border-color:
+    rgba(255,190,60,.2);
+
 }
 
-.status-badge,
-.role-badge{
-  display:inline-flex;
-  align-items:center;
-  padding:5px 9px;
-  border-radius:20px;
-  font-size:11px;
-  font-weight:700;
-}
-
-.status-active{
-  background:#dcfce7;
-  color:#15803d;
-}
-
-.status-blocked{
-  background:#fee2e2;
-  color:#dc2626;
-}
-
-.status-inactive{
-  background:#f3f4f6;
-  color:#6b7280;
-}
-
-.role-badge{
-  background:#ede9fe;
-  color:#6d28d9;
-}
 
 /* =====================================================
-LOADING
+   LOADING
 ===================================================== */
 
 .loading{
+
   text-align:center;
-  padding:45px 20px;
-  color:var(--muted);
+
+  padding:45px;
+
+  color:#68737f;
+
+  font-size:12px;
+
 }
 
-.empty{
-  text-align:center;
-  padding:55px 20px;
-  color:var(--muted);
+
+.spinner{
+
+  width:30px;
+  height:30px;
+
+  border-radius:50%;
+
+  border:
+    3px solid
+    rgba(255,255,255,.08);
+
+  border-top-color:
+    #00d084;
+
+  animation:
+    spin .8s linear infinite;
+
+  margin:0 auto 12px;
+
 }
+
+
+@keyframes spin{
+
+  to{
+    transform:rotate(360deg);
+  }
+
+}
+
 
 /* =====================================================
-TOAST
+   EMPTY
+===================================================== */
+
+.empty{
+
+  text-align:center;
+
+  padding:45px;
+
+  color:#626d79;
+
+  font-size:12px;
+
+}
+
+
+/* =====================================================
+   MODAL
+===================================================== */
+
+.modal{
+
+  position:fixed;
+
+  inset:0;
+
+  z-index:500;
+
+  background:
+    rgba(0,0,0,.72);
+
+  backdrop-filter:
+    blur(8px);
+
+  display:none;
+
+  align-items:center;
+
+  justify-content:center;
+
+  padding:20px;
+
+}
+
+
+.modal.show{
+
+  display:flex;
+
+}
+
+
+.modal-box{
+
+  width:100%;
+
+  max-width:520px;
+
+  max-height:
+    calc(100vh - 40px);
+
+  overflow-y:auto;
+
+  background:#11171e;
+
+  border:
+    1px solid rgba(255,255,255,.08);
+
+  border-radius:20px;
+
+  box-shadow:
+    0 30px 90px rgba(0,0,0,.6);
+
+  animation:
+    modalShow .25s ease;
+
+}
+
+
+@keyframes modalShow{
+
+  from{
+
+    opacity:0;
+
+    transform:
+      translateY(15px)
+      scale(.98);
+
+  }
+
+  to{
+
+    opacity:1;
+
+    transform:
+      translateY(0)
+      scale(1);
+
+  }
+
+}
+
+
+.modal-head{
+
+  padding:20px;
+
+  border-bottom:
+    1px solid rgba(255,255,255,.06);
+
+  display:flex;
+
+  justify-content:space-between;
+
+  align-items:center;
+
+}
+
+
+.modal-title{
+
+  font-size:16px;
+
+  font-weight:700;
+
+}
+
+
+.close-btn{
+
+  width:34px;
+  height:34px;
+
+  border:none;
+
+  border-radius:9px;
+
+  background:#181f27;
+
+  color:#8b96a2;
+
+  cursor:pointer;
+
+  font-size:17px;
+
+}
+
+
+.close-btn:hover{
+
+  color:#fff;
+
+}
+
+
+.modal-body{
+
+  padding:20px;
+
+}
+
+
+.form-grid{
+
+  display:grid;
+
+  grid-template-columns:
+    1fr 1fr;
+
+  gap:14px;
+
+}
+
+
+.form-group{
+
+  display:flex;
+
+  flex-direction:column;
+
+}
+
+
+.form-group.full{
+
+  grid-column:
+    1 / -1;
+
+}
+
+
+.form-group label{
+
+  color:#8b96a2;
+
+  font-size:10px;
+
+  margin-bottom:7px;
+
+}
+
+
+.form-group input,
+.form-group select{
+
+  width:100%;
+
+  height:44px;
+
+  padding:0 12px;
+
+  border-radius:9px;
+
+  border:
+    1px solid #252c35;
+
+  background:#0c1015;
+
+  color:#fff;
+
+  outline:none;
+
+  font-size:12px;
+
+}
+
+
+.form-group input:focus,
+.form-group select:focus{
+
+  border-color:#00d084;
+
+  box-shadow:
+    0 0 0 3px
+    rgba(0,208,132,.06);
+
+}
+
+
+.form-group select option{
+
+  background:#11171e;
+
+  color:#fff;
+
+}
+
+
+.modal-footer{
+
+  padding:16px 20px 20px;
+
+  display:flex;
+
+  gap:10px;
+
+  justify-content:flex-end;
+
+}
+
+
+.cancel-btn{
+
+  height:43px;
+
+  padding:0 17px;
+
+  border-radius:9px;
+
+  border:
+    1px solid rgba(255,255,255,.08);
+
+  background:#171e26;
+
+  color:#a5afb9;
+
+  cursor:pointer;
+
+}
+
+
+.save-btn{
+
+  height:43px;
+
+  padding:0 20px;
+
+  border:none;
+
+  border-radius:9px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #00d084,
+      #00a86b
+    );
+
+  color:#03150c;
+
+  font-weight:700;
+
+  cursor:pointer;
+
+}
+
+
+.save-btn:disabled{
+
+  opacity:.55;
+
+  cursor:not-allowed;
+
+}
+
+
+/* =====================================================
+   DELETE AREA
+===================================================== */
+
+.delete-area{
+
+  margin-top:18px;
+
+  padding-top:18px;
+
+  border-top:
+    1px solid rgba(255,255,255,.06);
+
+}
+
+
+.delete-btn{
+
+  height:40px;
+
+  padding:0 14px;
+
+  border-radius:9px;
+
+  border:
+    1px solid rgba(255,70,100,.15);
+
+  background:
+    rgba(255,70,100,.06);
+
+  color:#ff647b;
+
+  cursor:pointer;
+
+  font-size:11px;
+
+}
+
+
+.delete-btn:hover{
+
+  background:
+    rgba(255,70,100,.1);
+
+}
+
+
+/* =====================================================
+   TOAST
 ===================================================== */
 
 .toast{
+
   position:fixed;
-  right:25px;
-  bottom:25px;
-  min-width:260px;
-  padding:14px 17px;
-  border-radius:9px;
-  color:#fff;
-  background:#111827;
-  box-shadow:0 10px 30px rgba(0,0,0,.2);
-  transform:translateY(100px);
+
+  right:22px;
+  bottom:22px;
+
+  z-index:1000;
+
+  min-width:250px;
+
+  max-width:350px;
+
+  padding:13px 16px;
+
+  border-radius:11px;
+
+  background:#151c24;
+
+  border:
+    1px solid rgba(255,255,255,.08);
+
+  box-shadow:
+    0 15px 40px rgba(0,0,0,.35);
+
+  color:#dce2e8;
+
+  font-size:12px;
+
+  transform:
+    translateY(20px);
+
   opacity:0;
-  transition:.3s;
-  z-index:3000;
-  font-size:14px;
+
+  pointer-events:none;
+
+  transition:.25s;
+
 }
+
 
 .toast.show{
-  transform:translateY(0);
+
+  transform:
+    translateY(0);
+
   opacity:1;
+
 }
+
 
 .toast.success{
-  background:#087f5b;
+
+  border-color:
+    rgba(0,208,132,.25);
+
 }
+
 
 .toast.error{
-  background:#dc2626;
+
+  border-color:
+    rgba(255,70,100,.25);
+
 }
+
 
 /* =====================================================
-MOBILE
+   ACCESS DENIED
 ===================================================== */
 
-@media(max-width:900px){
+.access-denied{
 
-  .filters{
-    grid-template-columns:1fr 1fr;
-  }
+  position:fixed;
 
-  .search-field{
-    grid-column:1 / -1;
-  }
+  inset:0;
 
-  .top-section{
-    align-items:flex-start;
-    flex-direction:column;
+  z-index:2000;
+
+  display:none;
+
+  align-items:center;
+
+  justify-content:center;
+
+  background:#070a0e;
+
+}
+
+
+.access-box{
+
+  width:90%;
+
+  max-width:380px;
+
+  padding:35px;
+
+  border-radius:20px;
+
+  text-align:center;
+
+  background:#11171e;
+
+  border:
+    1px solid rgba(255,255,255,.08);
+
+}
+
+
+.access-icon{
+
+  font-size:42px;
+
+  margin-bottom:15px;
+
+}
+
+
+.access-box h2{
+
+  font-size:20px;
+
+}
+
+
+.access-box p{
+
+  color:#707b87;
+
+  font-size:12px;
+
+  line-height:1.6;
+
+  margin:10px 0 20px;
+
+}
+
+
+.access-box button{
+
+  height:42px;
+
+  padding:0 20px;
+
+  border:none;
+
+  border-radius:9px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #00d084,
+      #00a86b
+    );
+
+  color:#03150c;
+
+  font-weight:700;
+
+  cursor:pointer;
+
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media(max-width:1000px){
+
+  .stats{
+
+    grid-template-columns:
+      repeat(2,1fr);
+
   }
 
 }
 
-@media(max-width:600px){
+
+@media(max-width:700px){
+
+  .sidebar{
+
+    transform:
+      translateX(-100%);
+
+    width:250px;
+
+  }
+
+
+  .sidebar.mobile-open{
+
+    transform:
+      translateX(0);
+
+  }
+
+
+  .main,
+  .main.expanded{
+
+    margin-left:0;
+
+    width:100%;
+
+  }
+
 
   .header{
-    min-height:70px;
-    padding:12px 15px;
-    gap:10px;
-    flex-wrap:wrap;
+
+    padding:0 15px;
+
   }
 
-  .logo{
-    font-size:18px;
+
+  .header-subtitle{
+
+    display:none;
+
   }
 
-  .header-right{
-    gap:6px;
-    width:100%;
-    justify-content:flex-end;
-    flex-wrap:wrap;
-  }
 
-  .header-right .btn,
-  .theme-btn{
-    padding:9px 10px;
-    font-size:12px;
-    height:38px;
-  }
+  .content{
 
-  .btn-logout{
-    padding:9px 10px;
-    font-size:12px;
-  }
-
-  .container{
     padding:15px;
+
   }
 
-  .filters{
-    grid-template-columns:1fr;
+
+  .stats{
+
+    grid-template-columns:
+      1fr 1fr;
+
+    gap:10px;
+
   }
 
-  .search-field{
-    grid-column:auto;
+
+  .stat-card{
+
+    padding:15px;
+
   }
+
+
+  .stat-number{
+
+    font-size:23px;
+
+  }
+
+
+  .toolbar{
+
+    flex-direction:column;
+
+    align-items:stretch;
+
+  }
+
+
+  .search-box{
+
+    max-width:none;
+
+  }
+
 
   .form-grid{
+
     grid-template-columns:1fr;
+
   }
+
 
   .form-group.full{
+
     grid-column:auto;
+
   }
 
-  .form{
-    padding:25px 18px;
+
+  .header-right .header-btn{
+
+    padding:0 10px;
+
   }
 
-  .modal{
-    padding:10px;
+}
+
+
+@media(max-width:450px){
+
+  .stats{
+
+    grid-template-columns:1fr 1fr;
+
   }
 
-  .modal-box{
-    max-height:96vh;
-    border-radius:13px;
+
+  .welcome h1{
+
+    font-size:21px;
+
   }
 
-  .pagination-box{
-    flex-direction:column;
-    gap:12px;
+
+  .header-title{
+
+    font-size:15px;
+
   }
 
-  .toast{
-    left:15px;
-    right:15px;
-    min-width:auto;
+
+  .header-btn span{
+
+    display:none;
+
   }
 
 }
@@ -764,177 +1976,439 @@ MOBILE
 
 </head>
 
+
 <body>
 
+
 <!-- =====================================================
-HEADER
+     ACCESS DENIED
 ===================================================== -->
+
+<div
+  class="access-denied"
+  id="accessDenied"
+>
+
+  <div class="access-box">
+
+    <div class="access-icon">
+      🔒
+    </div>
+
+    <h2>
+      Access Denied
+    </h2>
+
+    <p>
+      This page is available only for
+      authorized administrators.
+    </p>
+
+    <button
+      onclick="goLogin()"
+    >
+      Go to Login
+    </button>
+
+  </div>
+
+</div>
+
+
+<!-- =====================================================
+     APP
+===================================================== -->
+
+<div
+  class="app"
+  id="app"
+  style="display:none;"
+>
+
+
+<!-- =====================================================
+     SIDEBAR
+===================================================== -->
+
+<aside
+  class="sidebar"
+  id="sidebar"
+>
+
+
+  <div class="sidebar-top">
+
+    <div class="brand">
+
+      <div class="brand-icon">
+        A
+      </div>
+
+      <div class="brand-text">
+        Admin Panel
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <div class="menu">
+
+    <div class="menu-title">
+      ADMINISTRATION
+    </div>
+
+
+    <button
+      class="menu-item active"
+      onclick="showSection('users',this)"
+    >
+
+      <span class="menu-icon">
+        👥
+      </span>
+
+      <span class="menu-label">
+        User Management
+      </span>
+
+    </button>
+
+
+    <button
+      class="menu-item"
+      onclick="refreshUsers()"
+    >
+
+      <span class="menu-icon">
+        🔄
+      </span>
+
+      <span class="menu-label">
+        Refresh Users
+      </span>
+
+    </button>
+
+  </div>
+
+
+  <div class="sidebar-bottom">
+
+    <div class="user-mini">
+
+      <div
+        class="user-avatar"
+        id="sidebarAvatar"
+      >
+        A
+      </div>
+
+      <div class="user-mini-info">
+
+        <div
+          class="user-mini-name"
+          id="sidebarName"
+        >
+          Admin
+        </div>
+
+        <div class="user-mini-role">
+          Administrator
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</aside>
+
+
+<!-- =====================================================
+     MAIN
+===================================================== -->
+
+<main
+  class="main"
+  id="main"
+>
+
+
+<!-- HEADER -->
 
 <header class="header">
 
-  <div class="logo">
-    DATA DASHBOARD
+  <div class="header-left">
+
+    <button
+      class="toggle-btn"
+      id="toggleBtn"
+      onclick="toggleSidebar()"
+    >
+      ☰
+    </button>
+
+    <div>
+
+      <div class="header-title">
+        Admin Dashboard
+      </div>
+
+      <div class="header-subtitle">
+        User Control & Management
+      </div>
+
+    </div>
+
   </div>
+
 
   <div class="header-right">
 
     <button
-      class="theme-btn"
-      id="themeBtn"
-      onclick="toggleTheme()"
+      class="header-btn"
+      onclick="refreshUsers()"
     >
-      🌙 Dark
+      🔄 <span>Refresh</span>
     </button>
 
     <button
-      class="btn btn-refresh"
-      id="refreshBtn"
-      onclick="loadData()"
+      class="header-btn logout"
+      onclick="logout()"
     >
-      🔄 Refresh
-    </button>
-
-    <button
-      class="btn btn-users"
-      onclick="openUserModal()"
-    >
-      👤 Users
-    </button>
-
-    <button
-      class="btn btn-primary"
-      onclick="openEntryModal()"
-    >
-      ➕ New Entry
-    </button>
-
-    <button
-      class="btn btn-logout"
-      onclick="logoutUser()"
-    >
-      🚪 Logout
+      🚪 <span>Logout</span>
     </button>
 
   </div>
 
 </header>
 
-<!-- =====================================================
-MAIN
-===================================================== -->
 
-<main class="container">
+<!-- CONTENT -->
 
-  <div class="top-section">
+<section class="content">
 
-    <div class="title">
 
-      <h1>
-        Data Dashboard
-      </h1>
+  <div class="welcome">
 
-      <p>
-        Manage your entries
-      </p>
+    <h1>
+      Hello, <span id="welcomeName">Admin</span> 👋
+    </h1>
 
-    </div>
+    <p>
+      Manage users, roles and account status from here.
+    </p>
 
   </div>
 
-  <!-- FILTER -->
 
-  <section class="filter-box">
+  <!-- =================================================
+       STATS
+  ================================================== -->
 
-    <div class="filters">
+  <div class="stats">
 
-      <div class="field search-field">
 
-        <label>🔍 Search</label>
+    <div class="stat-card">
 
-        <input
-          type="text"
-          id="searchInput"
-          placeholder="Search Name, IP or Work..."
-          oninput="applyFilters()"
-        >
+      <div class="stat-top">
 
-      </div>
-
-      <div class="field">
-
-        <label>📅 From Date</label>
-
-        <input
-          type="date"
-          id="fromDate"
-          onchange="applyFilters()"
-        >
+        <div class="stat-icon">
+          👥
+        </div>
 
       </div>
 
-      <div class="field">
-
-        <label>📅 To Date</label>
-
-        <input
-          type="date"
-          id="toDate"
-          onchange="applyFilters()"
-        >
-
+      <div class="stat-label">
+        TOTAL USERS
       </div>
 
-      <button
-        class="btn btn-refresh"
-        onclick="clearFilters()"
+      <div
+        class="stat-number"
+        id="totalUsers"
       >
-        Clear
-      </button>
-
-    </div>
-
-  </section>
-
-  <!-- TABLE -->
-
-  <section class="table-box">
-
-    <div class="table-header">
-
-      <h2>All Entries</h2>
-
-      <div class="total-count">
-        Total:
-        <strong id="totalCount">0</strong>
+        0
       </div>
 
     </div>
 
-    <div class="table-wrapper">
+
+    <div class="stat-card">
+
+      <div class="stat-top">
+
+        <div class="stat-icon">
+          ✓
+        </div>
+
+      </div>
+
+      <div class="stat-label">
+        ACTIVE USERS
+      </div>
+
+      <div
+        class="stat-number"
+        id="activeUsers"
+      >
+        0
+      </div>
+
+    </div>
+
+
+    <div class="stat-card blocked">
+
+      <div class="stat-top">
+
+        <div class="stat-icon">
+          ⛔
+        </div>
+
+      </div>
+
+      <div class="stat-label">
+        BLOCKED USERS
+      </div>
+
+      <div
+        class="stat-number"
+        id="blockedUsers"
+      >
+        0
+      </div>
+
+    </div>
+
+
+    <div class="stat-card inactive">
+
+      <div class="stat-top">
+
+        <div class="stat-icon">
+          ◷
+        </div>
+
+      </div>
+
+      <div class="stat-label">
+        INACTIVE USERS
+      </div>
+
+      <div
+        class="stat-number"
+        id="inactiveUsers"
+      >
+        0
+      </div>
+
+    </div>
+
+
+  </div>
+
+
+  <!-- =================================================
+       TOOLBAR
+  ================================================== -->
+
+  <div class="toolbar">
+
+    <div class="search-box">
+
+      <span>
+        🔎
+      </span>
+
+      <input
+        type="text"
+        id="searchInput"
+        placeholder="Search username, name, role or status..."
+        oninput="filterUsers()"
+      >
+
+    </div>
+
+
+    <button
+      class="add-btn"
+      onclick="openAddModal()"
+    >
+      ＋ Add User
+    </button>
+
+  </div>
+
+
+  <!-- =================================================
+       TABLE
+  ================================================== -->
+
+  <div class="table-card">
+
+
+    <div class="table-head">
+
+      <div class="table-title">
+        Users
+      </div>
+
+      <div
+        class="table-count"
+        id="tableCount"
+      >
+        0 users
+      </div>
+
+    </div>
+
+
+    <div class="table-wrap">
 
       <table>
 
         <thead>
 
           <tr>
-            <th>Name</th>
-            <th>IP</th>
-            <th>Work</th>
-            <th>Date</th>
-            <th>Action</th>
+
+            <th>
+              USER
+            </th>
+
+            <th>
+              ROLE
+            </th>
+
+            <th>
+              STATUS
+            </th>
+
+            <th>
+              ACTIONS
+            </th>
+
           </tr>
 
         </thead>
 
-        <tbody id="tableBody">
+
+        <tbody
+          id="userTable"
+        >
 
           <tr>
 
-            <td colspan="5">
+            <td
+              colspan="4"
+              class="loading"
+            >
 
-              <div class="loading">
-                Loading data...
-              </div>
+              <div class="spinner"></div>
+
+              Loading users...
 
             </td>
 
@@ -946,318 +2420,106 @@ MAIN
 
     </div>
 
-    <div class="pagination-box">
+  </div>
 
-      <div
-        class="page-info"
-        id="pageInfo"
-      >
-        Page 1
-      </div>
 
-      <div
-        class="pagination"
-        id="pagination"
-      ></div>
-
-    </div>
-
-  </section>
+</section>
 
 </main>
 
-<!-- =====================================================
-ENTRY MODAL
-===================================================== -->
-
-<div
-  class="modal"
-  id="entryModal"
->
-
-  <div class="modal-box">
-
-    <div class="modal-header">
-
-      <h2 id="modalTitle">
-        New Entry
-      </h2>
-
-      <button
-        class="close-btn"
-        onclick="closeEntryModal()"
-      >
-        ×
-      </button>
-
-    </div>
-
-    <form
-      class="form"
-      id="entryForm"
-      onsubmit="submitEntry(event)"
-    >
-
-      <div class="form-grid">
-
-        <div class="form-group">
-
-          <label>Name</label>
-
-          <input
-            type="text"
-            id="nameInput"
-            placeholder="Enter name"
-            autocomplete="off"
-            required
-          >
-
-        </div>
-
-        <div class="form-group">
-
-          <label>IP</label>
-
-          <input
-            type="text"
-            id="ipInput"
-            placeholder="Enter IP"
-            autocomplete="off"
-            required
-          >
-
-        </div>
-
-        <div class="form-group full">
-
-          <label>Work</label>
-
-          <textarea
-            id="workInput"
-            placeholder="Enter work"
-            required
-          ></textarea>
-
-        </div>
-
-        <div class="form-group">
-
-          <label>Date</label>
-
-          <input
-            type="date"
-            id="dateInput"
-          >
-
-        </div>
-
-      </div>
-
-      <div class="form-footer">
-
-        <button
-          type="button"
-          class="btn btn-cancel"
-          onclick="closeEntryModal()"
-        >
-          Cancel
-        </button>
-
-        <button
-          type="submit"
-          class="btn btn-primary"
-          id="submitBtn"
-        >
-          Save Entry
-        </button>
-
-      </div>
-
-    </form>
-
-  </div>
-
 </div>
 
+
 <!-- =====================================================
-USER LIST MODAL
+     USER MODAL
 ===================================================== -->
 
 <div
   class="modal"
   id="userModal"
+  onclick="modalBackground(event)"
 >
 
-  <div class="modal-box user-modal-box">
+  <div class="modal-box">
 
-    <div class="modal-header">
 
-      <h2>👤 User Management</h2>
+    <div class="modal-head">
 
-      <button
-        class="close-btn"
-        onclick="closeUserModal()"
+      <div
+        class="modal-title"
+        id="modalTitle"
       >
-        ×
-      </button>
-
-    </div>
-
-    <div class="user-toolbar">
-
-      <div class="user-total">
-
-        Total Users:
-        <strong id="userTotal">0</strong>
-
-      </div>
-
-      <div>
-
-        <button
-          class="btn btn-refresh"
-          onclick="loadUsers()"
-          id="userRefreshBtn"
-        >
-          🔄 Refresh
-        </button>
-
-        <button
-          class="btn btn-primary"
-          onclick="openAddUserModal()"
-        >
-          ➕ Add User
-        </button>
-
-      </div>
-
-    </div>
-
-    <div class="user-table-wrapper">
-
-      <table class="user-table">
-
-        <thead>
-
-          <tr>
-            <th>Username</th>
-            <th>Password</th>
-            <th>Name</th>
-            <th>Role</th>
-            <th>Status</th>
-            <th>Action</th>
-          </tr>
-
-        </thead>
-
-        <tbody id="userTableBody">
-
-          <tr>
-
-            <td colspan="6">
-
-              <div class="loading">
-                Loading users...
-              </div>
-
-            </td>
-
-          </tr>
-
-        </tbody>
-
-      </table>
-
-    </div>
-
-  </div>
-
-</div>
-
-<!-- =====================================================
-ADD / EDIT USER
-===================================================== -->
-
-<div
-  class="modal"
-  id="userFormModal"
->
-
-  <div class="modal-box user-form-modal-box">
-
-    <div class="modal-header">
-
-      <h2 id="userFormTitle">
         Add User
-      </h2>
+      </div>
 
       <button
         class="close-btn"
-        onclick="closeUserFormModal()"
+        onclick="closeModal()"
       >
         ×
       </button>
 
     </div>
 
-    <form
-      class="form"
-      id="userForm"
-      onsubmit="submitUser(event)"
-    >
+
+    <div class="modal-body">
+
 
       <div class="form-grid">
 
+
         <div class="form-group">
 
-          <label>Username</label>
+          <label>
+            USERNAME
+          </label>
 
           <input
             type="text"
-            id="userUsername"
+            id="formUsername"
             placeholder="Enter username"
-            autocomplete="off"
-            required
           >
 
         </div>
 
+
         <div class="form-group">
 
-          <label>Password</label>
+          <label>
+            PASSWORD
+          </label>
 
           <input
             type="text"
-            id="userPassword"
+            id="formPassword"
             placeholder="Enter password"
-            autocomplete="off"
-            required
           >
 
         </div>
 
+
         <div class="form-group">
 
-          <label>Name</label>
+          <label>
+            NAME
+          </label>
 
           <input
             type="text"
-            id="userName"
+            id="formName"
             placeholder="Enter name"
-            autocomplete="off"
-            required
           >
 
         </div>
 
+
         <div class="form-group">
 
-          <label>Role</label>
+          <label>
+            ROLE
+          </label>
 
-          <select
-            id="userRole"
-            required
-          >
+          <select id="formRole">
 
             <option value="">
               Select Role
@@ -1275,30 +2537,18 @@ ADD / EDIT USER
               Call
             </option>
 
-            <option value="manager">
-              Manager
-            </option>
-
-            <option value="guest">
-              Guest
-            </option>
-
           </select>
 
         </div>
 
+
         <div class="form-group">
 
-          <label>Status</label>
+          <label>
+            STATUS
+          </label>
 
-          <select
-            id="userStatus"
-            required
-          >
-
-            <option value="">
-              Select Status
-            </option>
+          <select id="formStatus">
 
             <option value="Active">
               Active
@@ -1316,36 +2566,56 @@ ADD / EDIT USER
 
         </div>
 
+
       </div>
 
-      <div class="form-footer">
+
+      <div
+        class="delete-area"
+        id="deleteArea"
+        style="display:none;"
+      >
 
         <button
-          type="button"
-          class="btn btn-cancel"
-          onclick="closeUserFormModal()"
+          class="delete-btn"
+          onclick="deleteCurrentUser()"
         >
-          Cancel
-        </button>
-
-        <button
-          type="submit"
-          class="btn btn-primary"
-          id="userSubmitBtn"
-        >
-          Add User
+          🗑 Delete This User
         </button>
 
       </div>
 
-    </form>
+
+    </div>
+
+
+    <div class="modal-footer">
+
+      <button
+        class="cancel-btn"
+        onclick="closeModal()"
+      >
+        Cancel
+      </button>
+
+      <button
+        class="save-btn"
+        id="saveBtn"
+        onclick="saveUser()"
+      >
+        Save User
+      </button>
+
+    </div>
+
 
   </div>
 
 </div>
 
+
 <!-- =====================================================
-TOAST
+     TOAST
 ===================================================== -->
 
 <div
@@ -1353,125 +2623,225 @@ TOAST
   id="toast"
 ></div>
 
+
 <script>
 
+
 /* =====================================================
-API
+   API
 ===================================================== */
 
 const API_URL =
-"https://script.google.com/macros/s/AKfycbx6fo2Nogf3ETCtS_B-o0HCFqEs3vYkJ9IT9uu_-3l1w8fNJw77mZipeyFm-zZcjUw-5Q/exec";
-
-const USER_API_URL =
-"https://script.google.com/macros/s/AKfycby1wEKzuThOiXdf9lVmoJVysfasR14ivssXFjGFfDnnc-d16uQRjNhel5LKNXDK4ZbxDw/exec";
-
-const LOGIN_PAGE =
-"index.html";
-
-const ROWS_PER_PAGE = 10;
-
-const INACTIVITY_LIMIT =
-5 * 60 * 1000;
-
-let allData = [];
-let filteredData = [];
-let currentPage = 1;
-let editingRow = null;
-
-let allUsers = [];
-let editingUser = null;
-
-let inactivityTimer = null;
-let isLoggingOut = false;
+  "https://script.google.com/macros/s/AKfycby1wEKzuThOiXdf9lVmoJVysfasR14ivssXFjGFfDnnc-d16uQRjNhel5LKNXDK4ZbxDw/exec";
 
 
 /* =====================================================
-LOGIN USERNAME
+   SESSION
 ===================================================== */
 
-function getLoggedInUsername(){
+const SESSION_KEY =
+  "LOGIN_SESSION";
 
-  const keys = [
-    "username",
-    "Username",
-    "user",
-    "userData",
-    "loginData",
-    "loggedUser",
-    "currentUser",
-    "userInfo"
-  ];
 
-  for(const key of keys){
+/* =====================================================
+   INACTIVITY
+   10 MINUTES
+===================================================== */
 
-    const value =
-      localStorage.getItem(key);
+const INACTIVITY_LIMIT =
+  10 * 60 * 1000;
 
-    if(!value){
-      continue;
-    }
 
-    try{
+/* =====================================================
+   DATA
+===================================================== */
 
-      const parsed =
-        JSON.parse(value);
+let users = [];
 
-      if(
-        parsed &&
-        typeof parsed === "object"
-      ){
+let filteredUsers = [];
 
-        const username =
-          parsed.username ||
-          parsed.Username ||
-          parsed.userName ||
-          parsed.name ||
-          parsed.user;
+let editingRow = 0;
 
-        if(username){
-          return String(username).trim();
-        }
 
-      }
+/* =====================================================
+   SESSION GET
+===================================================== */
 
-    }catch(e){
+function getSession(){
 
-      return String(value).trim();
+  try{
+
+    const raw =
+      localStorage.getItem(
+        SESSION_KEY
+      );
+
+    if(!raw){
+
+      return null;
 
     }
+
+    const session =
+      JSON.parse(raw);
+
+    if(
+      !session ||
+      session.loggedIn !== true
+    ){
+
+      return null;
+
+    }
+
+    return session;
 
   }
 
-  return "";
+  catch(error){
+
+    console.error(
+      "Session error:",
+      error
+    );
+
+    return null;
+
+  }
 
 }
 
 
 /* =====================================================
-SECURITY CHECK
+   CLEAR SESSION
 ===================================================== */
 
-function checkLogin(){
+function clearSession(){
 
-  const auth =
-    localStorage.getItem(
-      "dashboardAuth"
+  const keys = [
+
+    SESSION_KEY,
+
+    "loggedIn",
+
+    "username",
+
+    "name",
+
+    "role",
+
+    "status",
+
+    "loginTime",
+
+    "lastActivity"
+
+  ];
+
+
+  keys.forEach(
+    function(key){
+
+      localStorage.removeItem(
+        key
+      );
+
+    }
+  );
+
+}
+
+
+/* =====================================================
+   UPDATE ACTIVITY
+===================================================== */
+
+function updateActivity(){
+
+  const session =
+    getSession();
+
+  if(!session){
+
+    return;
+
+  }
+
+
+  session.lastActivity =
+    Date.now();
+
+
+  localStorage.setItem(
+
+    SESSION_KEY,
+
+    JSON.stringify(session)
+
+  );
+
+
+  localStorage.setItem(
+    "lastActivity",
+    String(Date.now())
+  );
+
+}
+
+
+/* =====================================================
+   SECURITY CHECK
+===================================================== */
+
+function securityCheck(){
+
+  const session =
+    getSession();
+
+
+  if(!session){
+
+    showAccessDenied();
+
+    return false;
+
+  }
+
+
+  const role =
+    String(
+      session.role || ""
+    )
+    .trim()
+    .toLowerCase();
+
+
+  if(role !== "admin"){
+
+    showAccessDenied();
+
+    return false;
+
+  }
+
+
+  const lastActivity =
+    Number(
+      session.lastActivity ||
+      session.loginTime ||
+      0
     );
 
-  const username =
-    getLoggedInUsername();
-
-
-  /*
-    Login session না থাকলে dashboard বন্ধ।
-  */
 
   if(
-    auth !== "true" ||
-    !username
+    lastActivity &&
+    Date.now() - lastActivity >
+    INACTIVITY_LIMIT
   ){
 
-    forceGoToLogin();
+    clearSession();
+
+    showAccessDenied();
 
     return false;
 
@@ -1484,222 +2854,130 @@ function checkLogin(){
 
 
 /* =====================================================
-GO LOGIN
+   ACCESS DENIED
 ===================================================== */
 
-function forceGoToLogin(){
+function showAccessDenied(){
 
-  if(isLoggingOut){
-    return;
-  }
+  document.getElementById(
+    "app"
+  ).style.display =
+    "none";
 
-  isLoggingOut = true;
 
-  clearLoginSession();
+  document.getElementById(
+    "accessDenied"
+  ).style.display =
+    "flex";
+
+}
+
+
+/* =====================================================
+   GO LOGIN
+===================================================== */
+
+function goLogin(){
+
+  clearSession();
 
   window.location.replace(
-    LOGIN_PAGE
+    "index.html"
   );
 
 }
 
 
 /* =====================================================
-CLEAR LOGIN DATA
+   INITIALIZE
 ===================================================== */
 
-function clearLoginSession(){
+function initialize(){
 
-  const keys = [
+  if(!securityCheck()){
 
-    "username",
-    "Username",
-    "user",
-    "userData",
-    "loginData",
-    "loggedUser",
-    "currentUser",
-    "userInfo",
-
-    "token",
-    "authToken",
-    "session",
-    "loggedIn",
-
-    "dashboardAuth"
-
-  ];
-
-  keys.forEach(
-    key =>
-      localStorage.removeItem(key)
-  );
-
-  sessionStorage.clear();
-
-}
-
-
-/* =====================================================
-LOGOUT
-===================================================== */
-
-function logoutUser(){
-
-  if(isLoggingOut){
     return;
+
   }
 
 
-  const ok =
-    confirm(
-      "Are you sure you want to logout?"
-    );
+  const session =
+    getSession();
 
 
-  if(!ok){
-    return;
-  }
+  const name =
+    session.name ||
+    session.username ||
+    "Admin";
 
 
-  isLoggingOut = true;
+  document.getElementById(
+    "welcomeName"
+  ).textContent =
+    name;
 
 
-  clearTimeout(
-    inactivityTimer
-  );
+  document.getElementById(
+    "sidebarName"
+  ).textContent =
+    name;
 
 
-  clearLoginSession();
+  document.getElementById(
+    "sidebarAvatar"
+  ).textContent =
+    getInitials(name);
 
 
-  /*
-    replace ব্যবহার করছি যাতে Back history
-    ব্যবহার করে dashboard-এ ফিরে আসা কঠিন হয়।
-  */
+  document.getElementById(
+    "app"
+  ).style.display =
+    "flex";
 
-  window.location.replace(
-    LOGIN_PAGE
-  );
+
+  loadUsers();
 
 }
 
 
 /* =====================================================
-AUTO LOGOUT TIMER
+   INITIAL
 ===================================================== */
 
-function resetInactivityTimer(){
-
-  if(isLoggingOut){
-    return;
-  }
-
-
-  clearTimeout(
-    inactivityTimer
-  );
-
-
-  inactivityTimer =
-    setTimeout(
-      autoLogout,
-      INACTIVITY_LIMIT
-    );
-
-}
-
-
-/* =====================================================
-AUTO LOGOUT
-===================================================== */
-
-function autoLogout(){
-
-  if(isLoggingOut){
-    return;
-  }
-
-
-  isLoggingOut = true;
-
-
-  clearTimeout(
-    inactivityTimer
-  );
-
-
-  clearLoginSession();
-
-
-  window.location.replace(
-    LOGIN_PAGE
-  );
-
-}
-
-
-/* =====================================================
-ACTIVITY LISTENER
-===================================================== */
-
-[
-  "mousemove",
-  "mousedown",
-  "keydown",
-  "scroll",
-  "touchstart",
-  "click",
-  "wheel",
-  "touchmove"
-].forEach(
-  function(eventName){
-
-    document.addEventListener(
-      eventName,
-      function(){
-
-        if(
-          !isLoggingOut &&
-          localStorage.getItem(
-            "dashboardAuth"
-          ) === "true"
-        ){
-
-          resetInactivityTimer();
-
-        }
-
-      },
-      true
-    );
-
-  }
+window.addEventListener(
+  "DOMContentLoaded",
+  initialize
 );
 
 
 /* =====================================================
-PAGE SHOW / BACK BUTTON SECURITY
+   BF CACHE SECURITY
 ===================================================== */
 
 window.addEventListener(
   "pageshow",
-  function(){
+  function(event){
 
     if(
-      !checkLogin()
+      event.persisted
     ){
-      return;
-    }
 
-    resetInactivityTimer();
+      if(
+        !securityCheck()
+      ){
+
+        return;
+
+      }
+
+    }
 
   }
 );
 
 
 /* =====================================================
-VISIBILITY CHECK
+   VISIBILITY CHECK
 ===================================================== */
 
 document.addEventListener(
@@ -1712,12 +2990,12 @@ document.addEventListener(
     ){
 
       if(
-        !checkLogin()
+        !securityCheck()
       ){
-        return;
-      }
 
-      resetInactivityTimer();
+        return;
+
+      }
 
     }
 
@@ -1726,132 +3004,118 @@ document.addEventListener(
 
 
 /* =====================================================
-INITIAL SECURITY
+   ACTIVITY EVENTS
 ===================================================== */
 
-if(
-  !checkLogin()
-){
+[
+  "click",
+  "mousemove",
+  "keydown",
+  "scroll",
+  "touchstart"
+].forEach(
+  function(eventName){
 
-  /*
-    Login না থাকলে নিচের dashboard
-    initialization বন্ধ হবে।
-  */
+    document.addEventListener(
+      eventName,
+      updateActivity,
+      {passive:true}
+    );
 
-}else{
-
-  resetInactivityTimer();
-
-}
+  }
+);
 
 
 /* =====================================================
-PAGE LOAD
+   SESSION WATCH
 ===================================================== */
 
-document.addEventListener(
-  "DOMContentLoaded",
+setInterval(
   function(){
 
     if(
-      !checkLogin()
+      !securityCheck()
     ){
+
       return;
+
     }
 
-    loadTheme();
-    loadData();
-
-    resetInactivityTimer();
-
-  }
+  },
+  15000
 );
 
 
 /* =====================================================
-THEME
+   INITIALS
 ===================================================== */
 
-function loadTheme(){
+function getInitials(name){
 
-  const saved =
-    localStorage.getItem(
-      "dashboardTheme"
-    );
+  const text =
+    String(
+      name || "A"
+    ).trim();
 
-  if(saved === "dark"){
-    document.body.classList.add(
-      "dark"
-    );
+
+  if(!text){
+
+    return "A";
+
   }
 
-  updateThemeButton();
 
-}
-
-
-function toggleTheme(){
-
-  document.body.classList.toggle(
-    "dark"
-  );
-
-  const dark =
-    document.body.classList.contains(
-      "dark"
-    );
-
-  localStorage.setItem(
-    "dashboardTheme",
-    dark ? "dark" : "light"
-  );
-
-  updateThemeButton();
-
-}
+  const parts =
+    text.split(/\s+/);
 
 
-function updateThemeButton(){
+  if(parts.length >= 2){
 
-  const btn =
-    document.getElementById(
-      "themeBtn"
-    );
+    return (
+      parts[0][0] +
+      parts[parts.length - 1][0]
+    ).toUpperCase();
 
-  if(!btn){
-    return;
   }
 
-  btn.textContent =
-    document.body.classList.contains(
-      "dark"
-    )
-      ? "☀️ White"
-      : "🌙 Dark";
+
+  return text
+    .substring(0,2)
+    .toUpperCase();
 
 }
 
 
 /* =====================================================
-LOAD DATA
+   LOAD USERS
 ===================================================== */
 
-async function loadData(){
+async function loadUsers(){
 
-  if(!checkLogin()){
-    return;
-  }
-
-
-  const btn =
+  const table =
     document.getElementById(
-      "refreshBtn"
+      "userTable"
     );
 
-  btn.disabled = true;
-  btn.textContent = "⏳ Loading...";
 
-  showLoading();
+  table.innerHTML = `
+
+    <tr>
+
+      <td
+        colspan="4"
+        class="loading"
+      >
+
+        <div class="spinner"></div>
+
+        Loading users...
+
+      </td>
+
+    </tr>
+
+  `;
 
 
   try{
@@ -1859,1240 +3123,83 @@ async function loadData(){
     const response =
       await fetch(
         API_URL +
-        "?action=getData&_=" +
-        Date.now(),
-        {
-          method:"GET",
-          cache:"no-store"
-        }
-      );
-
-
-    if(!response.ok){
-      throw new Error(
-        "Server error: " +
-        response.status
-      );
-    }
-
-
-    const result =
-      await response.json();
-
-
-    if(result.success === false){
-      throw new Error(
-        result.message ||
-        "Failed to load data."
-      );
-    }
-
-
-    if(!Array.isArray(result.data)){
-      throw new Error(
-        "Invalid data received."
-      );
-    }
-
-
-    allData =
-      result.data;
-
-    filteredData =
-      [...allData];
-
-    currentPage = 1;
-
-    renderTable();
-    updateTotal();
-
-
-  }catch(error){
-
-    console.error(
-      "Load Error:",
-      error
-    );
-
-    showError(
-      error.message ||
-      "Failed to load data."
-    );
-
-    showToast(
-      error.message ||
-      "Data loading failed.",
-      "error"
-    );
-
-
-  }finally{
-
-    btn.disabled = false;
-    btn.textContent = "🔄 Refresh";
-
-  }
-
-}
-
-
-/* =====================================================
-RENDER DATA
-===================================================== */
-
-function renderTable(){
-
-  const tbody =
-    document.getElementById(
-      "tableBody"
-    );
-
-
-  if(
-    filteredData.length === 0
-  ){
-
-    tbody.innerHTML = `
-      <tr>
-        <td colspan="5">
-          <div class="empty">
-            No data found.
-          </div>
-        </td>
-      </tr>
-    `;
-
-    renderPagination();
-
-    return;
-
-  }
-
-
-  const start =
-    (currentPage - 1) *
-    ROWS_PER_PAGE;
-
-  const pageData =
-    filteredData.slice(
-      start,
-      start + ROWS_PER_PAGE
-    );
-
-
-  let html = "";
-
-
-  pageData.forEach(
-    function(row){
-
-      const rowNumber =
-        Number(row._row);
-
-
-      html += `
-        <tr>
-
-          <td>
-            ${escapeHTML(row.Name || "")}
-          </td>
-
-          <td>
-            ${escapeHTML(row.Ip || "")}
-          </td>
-
-          <td>
-            ${escapeHTML(row.Work || "")}
-          </td>
-
-          <td class="date-cell">
-            ${escapeHTML(row.Date || "")}
-          </td>
-
-          <td>
-
-            <div class="actions">
-
-              <button
-                class="btn-edit"
-                onclick="editEntryByRow(${rowNumber})"
-              >
-                ✏️ Edit
-              </button>
-
-              <button
-                class="btn-delete"
-                onclick="deleteEntryByRow(${rowNumber})"
-              >
-                🗑️ Delete
-              </button>
-
-              <button
-                class="btn-sell"
-                onclick="sellEntryByRow(${rowNumber})"
-              >
-                💰 Sell
-              </button>
-
-            </div>
-
-          </td>
-
-        </tr>
-      `;
-
-    }
-  );
-
-
-  tbody.innerHTML = html;
-
-  renderPagination();
-
-}
-
-
-/* =====================================================
-FILTER
-===================================================== */
-
-function applyFilters(){
-
-  const search =
-    document
-      .getElementById("searchInput")
-      .value
-      .toLowerCase()
-      .trim();
-
-  const fromDate =
-    document.getElementById(
-      "fromDate"
-    ).value;
-
-  const toDate =
-    document.getElementById(
-      "toDate"
-    ).value;
-
-
-  filteredData =
-    allData.filter(
-      function(row){
-
-        if(search){
-
-          const text =
-            (
-              String(row.Name || "") +
-              " " +
-              String(row.Ip || "") +
-              " " +
-              String(row.Work || "") +
-              " " +
-              String(row.Date || "")
-            ).toLowerCase();
-
-
-          if(
-            !text.includes(search)
-          ){
-            return false;
-          }
-
-        }
-
-
-        if(
-          fromDate ||
-          toDate
-        ){
-
-          const rowDate =
-            convertToFilterDate(
-              row.Date
-            );
-
-          if(!rowDate){
-            return false;
-          }
-
-          if(
-            fromDate &&
-            rowDate < fromDate
-          ){
-            return false;
-          }
-
-          if(
-            toDate &&
-            rowDate > toDate
-          ){
-            return false;
-          }
-
-        }
-
-
-        return true;
-
-      }
-    );
-
-
-  currentPage = 1;
-
-  renderTable();
-  updateTotal();
-
-}
-
-
-/* =====================================================
-CLEAR FILTER
-===================================================== */
-
-function clearFilters(){
-
-  document.getElementById(
-    "searchInput"
-  ).value = "";
-
-  document.getElementById(
-    "fromDate"
-  ).value = "";
-
-  document.getElementById(
-    "toDate"
-  ).value = "";
-
-  filteredData =
-    [...allData];
-
-  currentPage = 1;
-
-  renderTable();
-  updateTotal();
-
-}
-
-
-/* =====================================================
-DATE
-===================================================== */
-
-function convertToFilterDate(value){
-
-  if(!value){
-    return "";
-  }
-
-
-  const text =
-    String(value).trim();
-
-
-  const parsed =
-    new Date(text);
-
-
-  if(
-    !isNaN(parsed.getTime())
-  ){
-
-    return (
-      parsed.getFullYear() +
-      "-" +
-      String(
-        parsed.getMonth() + 1
-      ).padStart(2,"0") +
-      "-" +
-      String(
-        parsed.getDate()
-      ).padStart(2,"0")
-    );
-
-  }
-
-
-  const match =
-    text.match(
-      /^(\d{2})-(\d{2})-(\d{4})$/
-    );
-
-
-  if(match){
-
-    return (
-      match[3] +
-      "-" +
-      match[2] +
-      "-" +
-      match[1]
-    );
-
-  }
-
-
-  return "";
-
-}
-
-
-/* =====================================================
-PAGINATION
-===================================================== */
-
-function renderPagination(){
-
-  const pagination =
-    document.getElementById(
-      "pagination"
-    );
-
-  const pageInfo =
-    document.getElementById(
-      "pageInfo"
-    );
-
-  const totalPages =
-    Math.ceil(
-      filteredData.length /
-      ROWS_PER_PAGE
-    );
-
-
-  if(totalPages <= 1){
-
-    pagination.innerHTML = "";
-
-    pageInfo.textContent =
-      filteredData.length
-        ? "Page 1"
-        : "Page 0";
-
-    return;
-
-  }
-
-
-  let html = `
-
-    <button
-      class="page-btn"
-      onclick="changePage(${currentPage - 1})"
-      ${currentPage === 1 ? "disabled" : ""}
-    >
-      ‹
-    </button>
-  `;
-
-
-  const start =
-    Math.max(
-      1,
-      currentPage - 2
-    );
-
-  const end =
-    Math.min(
-      totalPages,
-      currentPage + 2
-    );
-
-
-  for(
-    let i = start;
-    i <= end;
-    i++
-  ){
-
-    html += `
-      <button
-        class="page-btn ${
-          i === currentPage
-            ? "active"
-            : ""
-        }"
-        onclick="changePage(${i})"
-      >
-        ${i}
-      </button>
-    `;
-
-  }
-
-
-  html += `
-    <button
-      class="page-btn"
-      onclick="changePage(${currentPage + 1})"
-      ${
-        currentPage === totalPages
-          ? "disabled"
-          : ""
-      }
-    >
-      ›
-    </button>
-  `;
-
-
-  pagination.innerHTML = html;
-
-  pageInfo.textContent =
-    `Page ${currentPage} of ${totalPages}`;
-
-}
-
-
-function changePage(page){
-
-  const totalPages =
-    Math.ceil(
-      filteredData.length /
-      ROWS_PER_PAGE
-    );
-
-
-  if(
-    page < 1 ||
-    page > totalPages
-  ){
-    return;
-  }
-
-
-  currentPage = page;
-
-  renderTable();
-
-}
-
-
-/* =====================================================
-TOTAL
-===================================================== */
-
-function updateTotal(){
-
-  document.getElementById(
-    "totalCount"
-  ).textContent =
-    filteredData.length;
-
-}
-
-
-/* =====================================================
-ENTRY MODAL
-===================================================== */
-
-function openEntryModal(){
-
-  if(!checkLogin()){
-    return;
-  }
-
-
-  editingRow = null;
-
-  document.getElementById(
-    "modalTitle"
-  ).textContent = "New Entry";
-
-  document.getElementById(
-    "submitBtn"
-  ).textContent = "Save Entry";
-
-  document.getElementById(
-    "entryForm"
-  ).reset();
-
-  document.getElementById(
-    "dateInput"
-  ).value =
-    getTodayInputDate();
-
-  document.getElementById(
-    "entryModal"
-  ).classList.add("show");
-
-}
-
-
-function closeEntryModal(){
-
-  document.getElementById(
-    "entryModal"
-  ).classList.remove("show");
-
-  editingRow = null;
-
-}
-
-
-/* =====================================================
-EDIT ENTRY
-===================================================== */
-
-function editEntryByRow(rowNumber){
-
-  if(!checkLogin()){
-    return;
-  }
-
-
-  const row =
-    allData.find(
-      item =>
-        Number(item._row) ===
-        Number(rowNumber)
-    );
-
-
-  if(!row){
-
-    showToast(
-      "Entry not found.",
-      "error"
-    );
-
-    return;
-
-  }
-
-
-  editingRow = row;
-
-
-  document.getElementById(
-    "modalTitle"
-  ).textContent = "Edit Entry";
-
-  document.getElementById(
-    "submitBtn"
-  ).textContent = "Update Entry";
-
-  document.getElementById(
-    "nameInput"
-  ).value = row.Name || "";
-
-  document.getElementById(
-    "ipInput"
-  ).value = row.Ip || "";
-
-  document.getElementById(
-    "workInput"
-  ).value = row.Work || "";
-
-  document.getElementById(
-    "dateInput"
-  ).value =
-    convertToFilterDate(
-      row.Date
-    );
-
-  document.getElementById(
-    "entryModal"
-  ).classList.add("show");
-
-}
-
-
-/* =====================================================
-SUBMIT ENTRY
-===================================================== */
-
-async function submitEntry(event){
-
-  event.preventDefault();
-
-
-  if(!checkLogin()){
-    return;
-  }
-
-
-  const btn =
-    document.getElementById(
-      "submitBtn"
-    );
-
-  const name =
-    document.getElementById(
-      "nameInput"
-    ).value.trim();
-
-  const ip =
-    document.getElementById(
-      "ipInput"
-    ).value.trim();
-
-  const work =
-    document.getElementById(
-      "workInput"
-    ).value.trim();
-
-  const date =
-    document.getElementById(
-      "dateInput"
-    ).value;
-
-
-  if(!name){
-    showToast(
-      "Please enter Name.",
-      "error"
-    );
-    return;
-  }
-
-  if(!ip){
-    showToast(
-      "Please enter IP.",
-      "error"
-    );
-    return;
-  }
-
-  if(!work){
-    showToast(
-      "Please enter Work.",
-      "error"
-    );
-    return;
-  }
-
-
-  const editing =
-    Boolean(editingRow);
-
-
-  btn.disabled = true;
-
-  btn.textContent =
-    editing
-      ? "Updating..."
-      : "Saving...";
-
-
-  try{
-
-    const payload = {
-
-      action:
-        editing
-          ? "update"
-          : "create",
-
-      data:{
-        Name:name,
-        Ip:ip,
-        Work:work,
-        Date:date
-      },
-
-      oldData:
-        editingRow || null
-
-    };
-
-
-    const response =
-      await fetch(
-        API_URL,
-        {
-          method:"POST",
-          headers:{
-            "Content-Type":
-              "text/plain;charset=utf-8"
-          },
-          body:
-            JSON.stringify(payload)
-        }
-      );
-
-
-    if(!response.ok){
-      throw new Error(
-        "Server error: " +
-        response.status
-      );
-    }
-
-
-    const result =
-      await response.json();
-
-
-    if(result.success === false){
-      throw new Error(
-        result.message ||
-        "Save failed."
-      );
-    }
-
-
-    closeEntryModal();
-
-
-    showToast(
-      editing
-        ? "Entry updated successfully."
-        : "Entry added successfully.",
-      "success"
-    );
-
-
-    await loadData();
-
-
-  }catch(error){
-
-    console.error(error);
-
-    showToast(
-      error.message ||
-      "Failed to save entry.",
-      "error"
-    );
-
-
-  }finally{
-
-    btn.disabled = false;
-
-    btn.textContent =
-      editing
-        ? "Update Entry"
-        : "Save Entry";
-
-  }
-
-}
-
-
-/* =====================================================
-USERNAME
-===================================================== */
-
-function requireUsername(){
-
-  if(!checkLogin()){
-    return null;
-  }
-
-
-  const username =
-    getLoggedInUsername();
-
-
-  if(!username){
-
-    forceGoToLogin();
-
-    return null;
-
-  }
-
-
-  return username;
-
-}
-
-
-/* =====================================================
-DELETE ENTRY
-===================================================== */
-
-async function deleteEntryByRow(rowNumber){
-
-  const row =
-    allData.find(
-      item =>
-        Number(item._row) ===
-        Number(rowNumber)
-    );
-
-
-  if(!row){
-
-    showToast(
-      "Entry not found.",
-      "error"
-    );
-
-    return;
-
-  }
-
-
-  const username =
-    requireUsername();
-
-
-  if(!username){
-    return;
-  }
-
-
-  const confirmed =
-    confirm(
-      "Delete this entry?\n\n" +
-      "Name: " +
-      (row.Name || "") +
-      "\nIP: " +
-      (row.Ip || "") +
-      "\n\nDeleted by: " +
-      username +
-      "\n\nThis entry will move to Deleted sheet."
-    );
-
-
-  if(!confirmed){
-    return;
-  }
-
-
-  try{
-
-    const payload = {
-
-      action:"delete",
-
-      username:username,
-
-      data:{
-        ...row,
-        Username:username
-      }
-
-    };
-
-
-    const response =
-      await fetch(
-        API_URL,
-        {
-          method:"POST",
-          headers:{
-            "Content-Type":
-              "text/plain;charset=utf-8"
-          },
-          body:
-            JSON.stringify(payload)
-        }
-      );
-
-
-    if(!response.ok){
-      throw new Error(
-        "Server error: " +
-        response.status
-      );
-    }
-
-
-    const result =
-      await response.json();
-
-
-    if(result.success === false){
-      throw new Error(
-        result.message ||
-        "Delete failed."
-      );
-    }
-
-
-    showToast(
-      "Deleted successfully by " +
-      username,
-      "success"
-    );
-
-
-    await loadData();
-
-
-  }catch(error){
-
-    console.error(error);
-
-    showToast(
-      error.message ||
-      "Failed to delete entry.",
-      "error"
-    );
-
-  }
-
-}
-
-
-/* =====================================================
-SELL ENTRY
-===================================================== */
-
-async function sellEntryByRow(rowNumber){
-
-  const row =
-    allData.find(
-      item =>
-        Number(item._row) ===
-        Number(rowNumber)
-    );
-
-
-  if(!row){
-
-    showToast(
-      "Entry not found.",
-      "error"
-    );
-
-    return;
-
-  }
-
-
-  const username =
-    requireUsername();
-
-
-  if(!username){
-    return;
-  }
-
-
-  const confirmed =
-    confirm(
-      "Sell this entry?\n\n" +
-      "Name: " +
-      (row.Name || "") +
-      "\nIP: " +
-      (row.Ip || "") +
-      "\nWork: " +
-      (row.Work || "") +
-      "\n\nSold by: " +
-      username +
-      "\n\nThis entry will move to Sell sheet."
-    );
-
-
-  if(!confirmed){
-    return;
-  }
-
-
-  try{
-
-    const payload = {
-
-      action:"sell",
-
-      username:username,
-
-      data:{
-        ...row,
-        Username:username
-      }
-
-    };
-
-
-    const response =
-      await fetch(
-        API_URL,
-        {
-          method:"POST",
-          headers:{
-            "Content-Type":
-              "text/plain;charset=utf-8"
-          },
-          body:
-            JSON.stringify(payload)
-        }
-      );
-
-
-    if(!response.ok){
-      throw new Error(
-        "Server error: " +
-        response.status
-      );
-    }
-
-
-    const result =
-      await response.json();
-
-
-    if(result.success === false){
-      throw new Error(
-        result.message ||
-        "Sell failed."
-      );
-    }
-
-
-    showToast(
-      "Sold successfully by " +
-      username,
-      "success"
-    );
-
-
-    await loadData();
-
-
-  }catch(error){
-
-    console.error(error);
-
-    showToast(
-      error.message ||
-      "Failed to sell entry.",
-      "error"
-    );
-
-  }
-
-}
-
-
-/* =====================================================
-USER MODAL
-===================================================== */
-
-function openUserModal(){
-
-  if(!checkLogin()){
-    return;
-  }
-
-  document.getElementById(
-    "userModal"
-  ).classList.add("show");
-
-  loadUsers();
-
-}
-
-
-function closeUserModal(){
-
-  document.getElementById(
-    "userModal"
-  ).classList.remove("show");
-
-}
-
-
-/* =====================================================
-LOAD USERS
-===================================================== */
-
-async function loadUsers(){
-
-  if(!checkLogin()){
-    return;
-  }
-
-
-  const body =
-    document.getElementById(
-      "userTableBody"
-    );
-
-  const btn =
-    document.getElementById(
-      "userRefreshBtn"
-    );
-
-
-  body.innerHTML = `
-    <tr>
-      <td colspan="6">
-        <div class="loading">
-          ⏳ Loading users...
-        </div>
-      </td>
-    </tr>
-  `;
-
-
-  btn.disabled = true;
-  btn.textContent = "⏳ Loading...";
-
-
-  try{
-
-    const response =
-      await fetch(
-        USER_API_URL +
         "?action=getUsers&_=" +
-        Date.now(),
-        {
-          method:"GET",
-          cache:"no-store"
-        }
+        Date.now()
       );
 
 
     if(!response.ok){
+
       throw new Error(
-        "User server error: " +
+        "Server error: " +
         response.status
       );
+
     }
 
 
-    const result =
+    const data =
       await response.json();
 
 
-    if(result.success === false){
+    if(
+      data.success !== true
+    ){
+
       throw new Error(
-        result.message ||
-        "Failed to load users."
+        data.message ||
+        "Unable to load users."
       );
+
     }
 
 
-    allUsers =
-      Array.isArray(result.users)
-        ? result.users
-        : Array.isArray(result.data)
-          ? result.data
-          : [];
+    users =
+      Array.isArray(data.users)
+        ? data.users
+        : (
+          Array.isArray(data.data)
+            ? data.data
+            : []
+        );
 
 
-    document.getElementById(
-      "userTotal"
-    ).textContent =
-      allUsers.length;
+    filteredUsers =
+      [...users];
 
+
+    updateStats();
 
     renderUsers();
 
+  }
 
-  }catch(error){
+  catch(error){
 
-    console.error(error);
+    console.error(
+      "Load users error:",
+      error
+    );
 
-    body.innerHTML = `
+
+    table.innerHTML = `
+
       <tr>
-        <td colspan="6">
-          <div class="empty">
-            ❌ ${escapeHTML(
-              error.message ||
-              "Failed to load users."
-            )}
-          </div>
+
+        <td
+          colspan="4"
+          class="empty"
+        >
+
+          ❌ ${escapeHtml(
+            error.message ||
+            "Failed to load users."
+          )}
+
         </td>
+
       </tr>
+
     `;
 
 
@@ -3102,39 +3209,153 @@ async function loadUsers(){
       "error"
     );
 
-
-  }finally{
-
-    btn.disabled = false;
-    btn.textContent = "🔄 Refresh";
-
   }
 
 }
 
 
 /* =====================================================
-RENDER USERS
+   REFRESH
+===================================================== */
+
+function refreshUsers(){
+
+  if(
+    !securityCheck()
+  ){
+
+    return;
+
+  }
+
+
+  loadUsers();
+
+}
+
+
+/* =====================================================
+   UPDATE STATS
+===================================================== */
+
+function updateStats(){
+
+  let active = 0;
+
+  let blocked = 0;
+
+  let inactive = 0;
+
+
+  users.forEach(
+    function(user){
+
+      const status =
+        String(
+          user.status ||
+          user.Status ||
+          "Active"
+        )
+        .trim()
+        .toLowerCase();
+
+
+      if(status === "active"){
+
+        active++;
+
+      }
+
+      else if(
+        status === "blocked" ||
+        status === "block"
+      ){
+
+        blocked++;
+
+      }
+
+      else if(
+        status === "inactive" ||
+        status === "off"
+      ){
+
+        inactive++;
+
+      }
+
+    }
+  );
+
+
+  document.getElementById(
+    "totalUsers"
+  ).textContent =
+    users.length;
+
+
+  document.getElementById(
+    "activeUsers"
+  ).textContent =
+    active;
+
+
+  document.getElementById(
+    "blockedUsers"
+  ).textContent =
+    blocked;
+
+
+  document.getElementById(
+    "inactiveUsers"
+  ).textContent =
+    inactive;
+
+}
+
+
+/* =====================================================
+   RENDER USERS
 ===================================================== */
 
 function renderUsers(){
 
-  const body =
+  const table =
     document.getElementById(
-      "userTableBody"
+      "userTable"
     );
 
 
-  if(!allUsers.length){
+  document.getElementById(
+    "tableCount"
+  ).textContent =
+    filteredUsers.length +
+    (
+      filteredUsers.length === 1
+        ? " user"
+        : " users"
+    );
 
-    body.innerHTML = `
+
+  if(
+    filteredUsers.length === 0
+  ){
+
+    table.innerHTML = `
+
       <tr>
-        <td colspan="6">
-          <div class="empty">
-            No users found.
-          </div>
+
+        <td
+          colspan="4"
+          class="empty"
+        >
+
+          No users found.
+
         </td>
+
       </tr>
+
     `;
 
     return;
@@ -3142,248 +3363,334 @@ function renderUsers(){
   }
 
 
-  let html = "";
+  table.innerHTML =
+    filteredUsers
+      .map(
+        function(user){
 
+          return createUserRow(
+            user
+          );
 
-  allUsers.forEach(
-    function(user){
-
-      const username =
-        user.username ||
-        user.Username ||
-        "";
-
-      const password =
-        user.password ||
-        user.Password ||
-        "";
-
-      const name =
-        user.name ||
-        user.Name ||
-        "";
-
-      const role =
-        user.role ||
-        user.Role ||
-        "";
-
-      const status =
-        user.status ||
-        user.Status ||
-        "Active";
-
-      const row =
-        Number(
-          user._row ||
-          user.row ||
-          0
-        );
-
-
-      let statusClass =
-        "status-inactive";
-
-
-      if(
-        String(status).toLowerCase() ===
-        "active"
-      ){
-        statusClass =
-          "status-active";
-      }
-
-
-      if(
-        String(status).toLowerCase() ===
-        "blocked"
-      ){
-        statusClass =
-          "status-blocked";
-      }
-
-
-      const safe =
-        encodeURIComponent(
-          username
-        );
-
-
-      html += `
-        <tr>
-
-          <td>
-            <strong>
-              ${escapeHTML(username)}
-            </strong>
-          </td>
-
-          <td>
-            ${escapeHTML(password)}
-          </td>
-
-          <td>
-            ${escapeHTML(name)}
-          </td>
-
-          <td>
-            <span class="role-badge">
-              ${escapeHTML(
-                role || "—"
-              )}
-            </span>
-          </td>
-
-          <td>
-            <span
-              class="status-badge ${statusClass}"
-            >
-              ${escapeHTML(status)}
-            </span>
-          </td>
-
-          <td>
-
-            <div class="user-actions">
-
-              <button
-                class="user-action edit"
-                onclick="editUser(${row},'${safe}')"
-              >
-                ✏️ Edit
-              </button>
-
-              ${
-                String(status).toLowerCase() ===
-                "blocked"
-                ?
-                `
-                <button
-                  class="user-action unblock"
-                  onclick="unblockUser(${row},'${safe}')"
-                >
-                  🔓 Unblock
-                </button>
-                `
-                :
-                `
-                <button
-                  class="user-action block"
-                  onclick="blockUser(${row},'${safe}')"
-                >
-                  🔒 Block
-                </button>
-                `
-              }
-
-              <button
-                class="user-action delete"
-                onclick="deleteUser(${row},'${safe}')"
-              >
-                🗑️ Delete
-              </button>
-
-            </div>
-
-          </td>
-
-        </tr>
-      `;
-
-    }
-  );
-
-
-  body.innerHTML = html;
+        }
+      )
+      .join("");
 
 }
 
 
 /* =====================================================
-ADD USER
+   CREATE USER ROW
 ===================================================== */
 
-function openAddUserModal(){
-
-  if(!checkLogin()){
-    return;
-  }
-
-
-  editingUser = null;
-
-
-  document.getElementById(
-    "userFormTitle"
-  ).textContent = "Add User";
-
-
-  document.getElementById(
-    "userSubmitBtn"
-  ).textContent = "Add User";
-
-
-  document.getElementById(
-    "userForm"
-  ).reset();
-
-
-  document.getElementById(
-    "userStatus"
-  ).value = "Active";
-
-
-  document.getElementById(
-    "userFormModal"
-  ).classList.add("show");
-
-}
-
-
-/* =====================================================
-EDIT USER
-===================================================== */
-
-function editUser(
-  rowNumber,
-  encodedUsername
-){
-
-  if(!checkLogin()){
-    return;
-  }
-
+function createUserRow(user){
 
   const username =
-    decodeURIComponent(
-      encodedUsername
+    String(
+      user.username ||
+      user.Username ||
+      ""
     );
 
 
+  const name =
+    String(
+      user.name ||
+      user.Name ||
+      ""
+    );
+
+
+  const role =
+    String(
+      user.role ||
+      user.Role ||
+      ""
+    );
+
+
+  const status =
+    String(
+      user.status ||
+      user.Status ||
+      "Active"
+    );
+
+
+  const row =
+    Number(
+      user._row ||
+      user.row ||
+      0
+    );
+
+
+  const statusClass =
+    status
+      .toLowerCase()
+      .replace(
+        /[^a-z]/g,
+        ""
+      );
+
+
+  const initials =
+    getInitials(
+      name ||
+      username
+    );
+
+
+  const isBlocked =
+    status.toLowerCase() ===
+    "blocked";
+
+
+  const actionIcon =
+    isBlocked
+      ? "✓"
+      : "⛔";
+
+
+  const actionTitle =
+    isBlocked
+      ? "Unblock"
+      : "Block";
+
+
+  return `
+
+    <tr>
+
+      <td>
+
+        <div class="user-cell">
+
+          <div class="table-avatar">
+            ${escapeHtml(initials)}
+          </div>
+
+          <div>
+
+            <div class="user-main">
+              ${escapeHtml(
+                name || username
+              )}
+            </div>
+
+            <div class="user-sub">
+              @${escapeHtml(
+                username
+              )}
+            </div>
+
+          </div>
+
+        </div>
+
+      </td>
+
+
+      <td>
+
+        <span class="role-badge">
+          ${escapeHtml(
+            role || "—"
+          )}
+        </span>
+
+      </td>
+
+
+      <td>
+
+        <span
+          class="badge ${
+            statusClass === "blocked"
+              ? "blocked"
+              : (
+                statusClass === "inactive"
+                  ? "inactive"
+                  : "active"
+              )
+          }"
+        >
+
+          ${escapeHtml(status)}
+
+        </span>
+
+      </td>
+
+
+      <td>
+
+        <div class="actions">
+
+          <button
+            class="action-btn edit"
+            title="Edit"
+            onclick="openEditModal(${row})"
+          >
+            ✎
+          </button>
+
+
+          <button
+            class="action-btn block"
+            title="${actionTitle}"
+            onclick="toggleBlock(
+              ${row},
+              '${escapeJs(username)}',
+              '${escapeJs(status)}'
+            )"
+          >
+            ${actionIcon}
+          </button>
+
+
+          <button
+            class="action-btn delete"
+            title="Delete"
+            onclick="confirmDelete(
+              ${row},
+              '${escapeJs(username)}'
+            )"
+          >
+            🗑
+          </button>
+
+        </div>
+
+      </td>
+
+    </tr>
+
+  `;
+
+}
+
+
+/* =====================================================
+   SEARCH
+===================================================== */
+
+function filterUsers(){
+
+  const query =
+    document.getElementById(
+      "searchInput"
+    )
+    .value
+    .trim()
+    .toLowerCase();
+
+
+  if(!query){
+
+    filteredUsers =
+      [...users];
+
+  }
+
+  else{
+
+    filteredUsers =
+      users.filter(
+        function(user){
+
+          const text = [
+
+            user.username ||
+            user.Username ||
+            "",
+
+            user.name ||
+            user.Name ||
+            "",
+
+            user.role ||
+            user.Role ||
+            "",
+
+            user.status ||
+            user.Status ||
+            ""
+
+          ]
+          .join(" ")
+          .toLowerCase();
+
+
+          return text.includes(
+            query
+          );
+
+        }
+      );
+
+  }
+
+
+  renderUsers();
+
+}
+
+
+/* =====================================================
+   OPEN ADD
+===================================================== */
+
+function openAddModal(){
+
+  editingRow = 0;
+
+
+  document.getElementById(
+    "modalTitle"
+  ).textContent =
+    "Add User";
+
+
+  document.getElementById(
+    "saveBtn"
+  ).textContent =
+    "Save User";
+
+
+  document.getElementById(
+    "deleteArea"
+  ).style.display =
+    "none";
+
+
+  clearForm();
+
+
+  document.getElementById(
+    "userModal"
+  ).classList.add(
+    "show"
+  );
+
+}
+
+
+/* =====================================================
+   OPEN EDIT
+===================================================== */
+
+function openEditModal(row){
+
   const user =
-    allUsers.find(
+    users.find(
       function(item){
 
-        const row =
-          Number(
-            item._row ||
-            item.row ||
-            0
-          );
-
-        const name =
-          String(
-            item.username ||
-            item.Username ||
-            ""
-          );
-
-
-        return (
-          row === Number(rowNumber) ||
-          name.toLowerCase() ===
-          username.toLowerCase()
-        );
+        return Number(
+          item._row ||
+          item.row ||
+          0
+        ) === Number(row);
 
       }
     );
@@ -3401,21 +3708,30 @@ function editUser(
   }
 
 
-  editingUser = user;
+  editingRow =
+    Number(row);
 
 
   document.getElementById(
-    "userFormTitle"
-  ).textContent = "Edit User";
+    "modalTitle"
+  ).textContent =
+    "Edit User";
 
 
   document.getElementById(
-    "userSubmitBtn"
-  ).textContent = "Update User";
+    "saveBtn"
+  ).textContent =
+    "Update User";
 
 
   document.getElementById(
-    "userUsername"
+    "deleteArea"
+  ).style.display =
+    "block";
+
+
+  document.getElementById(
+    "formUsername"
   ).value =
     user.username ||
     user.Username ||
@@ -3423,7 +3739,7 @@ function editUser(
 
 
   document.getElementById(
-    "userPassword"
+    "formPassword"
   ).value =
     user.password ||
     user.Password ||
@@ -3431,7 +3747,7 @@ function editUser(
 
 
   document.getElementById(
-    "userName"
+    "formName"
   ).value =
     user.name ||
     user.Name ||
@@ -3439,7 +3755,7 @@ function editUser(
 
 
   document.getElementById(
-    "userRole"
+    "formRole"
   ).value =
     user.role ||
     user.Role ||
@@ -3447,132 +3763,202 @@ function editUser(
 
 
   document.getElementById(
-    "userStatus"
+    "formStatus"
   ).value =
-    user.status ||
-    user.Status ||
+    normalizeStatus(
+      user.status ||
+      user.Status ||
+      "Active"
+    );
+
+
+  document.getElementById(
+    "userModal"
+  ).classList.add(
+    "show"
+  );
+
+}
+
+
+/* =====================================================
+   CLEAR FORM
+===================================================== */
+
+function clearForm(){
+
+  document.getElementById(
+    "formUsername"
+  ).value =
+    "";
+
+
+  document.getElementById(
+    "formPassword"
+  ).value =
+    "";
+
+
+  document.getElementById(
+    "formName"
+  ).value =
+    "";
+
+
+  document.getElementById(
+    "formRole"
+  ).value =
+    "";
+
+
+  document.getElementById(
+    "formStatus"
+  ).value =
     "Active";
 
+}
+
+
+/* =====================================================
+   CLOSE MODAL
+===================================================== */
+
+function closeModal(){
 
   document.getElementById(
-    "userFormModal"
-  ).classList.add("show");
+    "userModal"
+  ).classList.remove(
+    "show"
+  );
 
 }
 
 
 /* =====================================================
-CLOSE USER FORM
+   MODAL BACKGROUND
 ===================================================== */
 
-function closeUserFormModal(){
+function modalBackground(event){
 
-  document.getElementById(
-    "userFormModal"
-  ).classList.remove("show");
+  if(
+    event.target.id ===
+    "userModal"
+  ){
 
-  editingUser = null;
+    closeModal();
+
+  }
 
 }
 
 
 /* =====================================================
-SUBMIT USER
+   SAVE USER
 ===================================================== */
 
-async function submitUser(event){
+async function saveUser(){
 
-  event.preventDefault();
+  if(
+    !securityCheck()
+  ){
 
-
-  if(!checkLogin()){
     return;
+
+  }
+
+
+  const username =
+    document.getElementById(
+      "formUsername"
+    ).value.trim();
+
+
+  const password =
+    document.getElementById(
+      "formPassword"
+    ).value.trim();
+
+
+  const name =
+    document.getElementById(
+      "formName"
+    ).value.trim();
+
+
+  const role =
+    document.getElementById(
+      "formRole"
+    ).value.trim();
+
+
+  const status =
+    document.getElementById(
+      "formStatus"
+    ).value.trim();
+
+
+  if(!username){
+
+    showToast(
+      "Username is required.",
+      "error"
+    );
+
+    return;
+
+  }
+
+
+  if(!password){
+
+    showToast(
+      "Password is required.",
+      "error"
+    );
+
+    return;
+
+  }
+
+
+  if(!name){
+
+    showToast(
+      "Name is required.",
+      "error"
+    );
+
+    return;
+
+  }
+
+
+  if(!role){
+
+    showToast(
+      "Role is required.",
+      "error"
+    );
+
+    return;
+
   }
 
 
   const button =
     document.getElementById(
-      "userSubmitBtn"
+      "saveBtn"
     );
 
 
-  const username =
-    document.getElementById(
-      "userUsername"
-    ).value.trim();
+  button.disabled =
+    true;
 
-  const password =
-    document.getElementById(
-      "userPassword"
-    ).value.trim();
-
-  const name =
-    document.getElementById(
-      "userName"
-    ).value.trim();
-
-  const role =
-    document.getElementById(
-      "userRole"
-    ).value;
-
-  const status =
-    document.getElementById(
-      "userStatus"
-    ).value;
-
-
-  if(!username){
-    showToast(
-      "Username is required.",
-      "error"
-    );
-    return;
-  }
-
-  if(!password){
-    showToast(
-      "Password is required.",
-      "error"
-    );
-    return;
-  }
-
-  if(!name){
-    showToast(
-      "Name is required.",
-      "error"
-    );
-    return;
-  }
-
-  if(!role){
-    showToast(
-      "Please select Role.",
-      "error"
-    );
-    return;
-  }
-
-  if(!status){
-    showToast(
-      "Please select Status.",
-      "error"
-    );
-    return;
-  }
-
-
-  const editing =
-    Boolean(editingUser);
-
-
-  button.disabled = true;
 
   button.textContent =
-    editing
+    editingRow
       ? "Updating..."
-      : "Adding...";
+      : "Saving...";
 
 
   try{
@@ -3580,104 +3966,127 @@ async function submitUser(event){
     const payload = {
 
       action:
-        editing
+        editingRow
           ? "updateUser"
           : "addUser",
 
-      username,
-      password,
-      name,
-      role,
-      status
+      username:
+        username,
+
+      password:
+        password,
+
+      name:
+        name,
+
+      role:
+        role,
+
+      status:
+        status
 
     };
 
 
-    if(editing){
+    if(editingRow){
 
       payload.row =
-        Number(
-          editingUser._row ||
-          editingUser.row ||
-          0
-        );
-
-      payload.oldUsername =
-        editingUser.username ||
-        editingUser.Username ||
-        "";
+        editingRow;
 
     }
 
 
     const response =
       await fetch(
-        USER_API_URL,
+        API_URL,
         {
+
           method:"POST",
+
           headers:{
             "Content-Type":
               "text/plain;charset=utf-8"
           },
+
           body:
-            JSON.stringify(payload)
+            JSON.stringify(
+              payload
+            )
+
         }
       );
 
 
     if(!response.ok){
+
       throw new Error(
-        "User server error: " +
+        "Server error: " +
         response.status
       );
+
     }
 
 
-    const result =
+    const data =
       await response.json();
 
 
-    if(result.success === false){
+    if(
+      data.success !== true
+    ){
+
       throw new Error(
-        result.message ||
-        "User operation failed."
+        data.message ||
+        "Operation failed."
       );
+
     }
 
 
-    closeUserFormModal();
+    closeModal();
 
 
     showToast(
-      editing
-        ? "User updated successfully."
-        : "User added successfully.",
+      data.message ||
+      (
+        editingRow
+          ? "User updated successfully."
+          : "User added successfully."
+      ),
       "success"
     );
 
 
     await loadUsers();
 
+  }
 
-  }catch(error){
+  catch(error){
 
-    console.error(error);
+    console.error(
+      "Save user error:",
+      error
+    );
+
 
     showToast(
       error.message ||
-      "Failed to save user.",
+      "Unable to save user.",
       "error"
     );
 
+  }
 
-  }finally{
+  finally{
 
-    button.disabled = false;
+    button.disabled =
+      false;
+
 
     button.textContent =
-      editing
+      editingRow
         ? "Update User"
-        : "Add User";
+        : "Save User";
 
   }
 
@@ -3685,153 +4094,141 @@ async function submitUser(event){
 
 
 /* =====================================================
-BLOCK
+   BLOCK / UNBLOCK
 ===================================================== */
 
-async function blockUser(
-  rowNumber,
-  encodedUsername
-){
-
-  const username =
-    decodeURIComponent(
-      encodedUsername
-    );
-
-
-  const ok =
-    confirm(
-      'Block user "' +
-      username +
-      '"?'
-    );
-
-
-  if(!ok){
-    return;
-  }
-
-
-  await changeUserStatus(
-    rowNumber,
-    username,
-    "Blocked"
-  );
-
-}
-
-
-/* =====================================================
-UNBLOCK
-===================================================== */
-
-async function unblockUser(
-  rowNumber,
-  encodedUsername
-){
-
-  const username =
-    decodeURIComponent(
-      encodedUsername
-    );
-
-
-  await changeUserStatus(
-    rowNumber,
-    username,
-    "Active"
-  );
-
-}
-
-
-/* =====================================================
-CHANGE STATUS
-===================================================== */
-
-async function changeUserStatus(
-  rowNumber,
+async function toggleBlock(
+  row,
   username,
-  status
+  currentStatus
 ){
 
-  if(!checkLogin()){
+  if(
+    !securityCheck()
+  ){
+
     return;
+
+  }
+
+
+  const blocked =
+    String(
+      currentStatus || ""
+    )
+    .toLowerCase() ===
+    "blocked";
+
+
+  const action =
+    blocked
+      ? "unblockUser"
+      : "blockUser";
+
+
+  const question =
+    blocked
+      ? (
+        "Unblock user \"" +
+        username +
+        "\"?"
+      )
+      : (
+        "Block user \"" +
+        username +
+        "\"?"
+      );
+
+
+  if(
+    !confirm(question)
+  ){
+
+    return;
+
   }
 
 
   try{
 
-    const payload = {
-
-      action:
-        status === "Blocked"
-          ? "blockUser"
-          : "unblockUser",
-
-      row:Number(rowNumber),
-
-      username,
-
-      status
-
-    };
-
-
     const response =
       await fetch(
-        USER_API_URL,
+        API_URL,
         {
+
           method:"POST",
+
           headers:{
             "Content-Type":
               "text/plain;charset=utf-8"
           },
+
           body:
-            JSON.stringify(payload)
+            JSON.stringify({
+
+              action:
+                action,
+
+              row:
+                row,
+
+              username:
+                username
+
+            })
+
         }
       );
 
 
     if(!response.ok){
+
       throw new Error(
-        "User server error: " +
+        "Server error: " +
         response.status
       );
+
     }
 
 
-    const result =
+    const data =
       await response.json();
 
 
-    if(result.success === false){
+    if(
+      data.success !== true
+    ){
+
       throw new Error(
-        result.message ||
+        data.message ||
         "Status update failed."
       );
+
     }
 
 
     showToast(
-      username +
-      " is now " +
-      status +
-      ".",
+      data.message ||
+      "Status updated.",
       "success"
     );
 
 
     await loadUsers();
 
+  }
 
-  }catch(error){
+  catch(error){
 
-    console.error(error);
+    console.error(
+      "Status error:",
+      error
+    );
+
 
     showToast(
       error.message ||
-      "Failed to update status.",
+      "Unable to update status.",
       "error"
     );
 
@@ -3841,88 +4238,116 @@ async function changeUserStatus(
 
 
 /* =====================================================
-DELETE USER
+   CONFIRM DELETE
+===================================================== */
+
+function confirmDelete(
+  row,
+  username
+){
+
+  if(
+    !securityCheck()
+  ){
+
+    return;
+
+  }
+
+
+  if(
+    !confirm(
+      "Are you sure you want to delete user \"" +
+      username +
+      "\"?"
+    )
+  ){
+
+    return;
+
+  }
+
+
+  deleteUser(
+    row,
+    username
+  );
+
+}
+
+
+/* =====================================================
+   DELETE USER
 ===================================================== */
 
 async function deleteUser(
-  rowNumber,
-  encodedUsername
+  row,
+  username
 ){
-
-  if(!checkLogin()){
-    return;
-  }
-
-
-  const username =
-    decodeURIComponent(
-      encodedUsername
-    );
-
-
-  const ok =
-    confirm(
-      'Delete user "' +
-      username +
-      '"?\n\n' +
-      "This action cannot be undone."
-    );
-
-
-  if(!ok){
-    return;
-  }
-
 
   try{
 
-    const payload = {
-
-      action:"deleteUser",
-
-      row:Number(rowNumber),
-
-      username
-
-    };
-
-
     const response =
       await fetch(
-        USER_API_URL,
+        API_URL,
         {
+
           method:"POST",
+
           headers:{
             "Content-Type":
               "text/plain;charset=utf-8"
           },
+
           body:
-            JSON.stringify(payload)
+            JSON.stringify({
+
+              action:
+                "deleteUser",
+
+              row:
+                row,
+
+              username:
+                username
+
+            })
+
         }
       );
 
 
     if(!response.ok){
+
       throw new Error(
-        "User server error: " +
+        "Server error: " +
         response.status
       );
+
     }
 
 
-    const result =
+    const data =
       await response.json();
 
 
-    if(result.success === false){
+    if(
+      data.success !== true
+    ){
+
       throw new Error(
-        result.message ||
+        data.message ||
         "Delete failed."
       );
+
     }
 
 
+    closeModal();
+
+
     showToast(
+      data.message ||
       "User deleted successfully.",
       "success"
     );
@@ -3930,14 +4355,19 @@ async function deleteUser(
 
     await loadUsers();
 
+  }
 
-  }catch(error){
+  catch(error){
 
-    console.error(error);
+    console.error(
+      "Delete error:",
+      error
+    );
+
 
     showToast(
       error.message ||
-      "Failed to delete user.",
+      "Unable to delete user.",
       "error"
     );
 
@@ -3947,73 +4377,133 @@ async function deleteUser(
 
 
 /* =====================================================
-TODAY
+   DELETE CURRENT USER
 ===================================================== */
 
-function getTodayInputDate(){
+function deleteCurrentUser(){
 
-  const now = new Date();
+  const username =
+    document.getElementById(
+      "formUsername"
+    ).value.trim();
 
-  return (
-    now.getFullYear() +
-    "-" +
-    String(
-      now.getMonth() + 1
-    ).padStart(2,"0") +
-    "-" +
-    String(
-      now.getDate()
-    ).padStart(2,"0")
+
+  if(!editingRow){
+
+    return;
+
+  }
+
+
+  confirmDelete(
+    editingRow,
+    username
   );
 
 }
 
 
 /* =====================================================
-LOADING
+   NORMALIZE STATUS
 ===================================================== */
 
-function showLoading(){
+function normalizeStatus(status){
 
-  document.getElementById(
-    "tableBody"
-  ).innerHTML = `
-    <tr>
-      <td colspan="5">
-        <div class="loading">
-          ⏳ Loading data...
-        </div>
-      </td>
-    </tr>
-  `;
+  const value =
+    String(
+      status || ""
+    )
+    .trim()
+    .toLowerCase();
+
+
+  if(value === "blocked"){
+
+    return "Blocked";
+
+  }
+
+
+  if(value === "inactive"){
+
+    return "Inactive";
+
+  }
+
+
+  return "Active";
 
 }
 
 
 /* =====================================================
-ERROR
+   ESCAPE HTML
 ===================================================== */
 
-function showError(message){
+function escapeHtml(value){
 
-  document.getElementById(
-    "tableBody"
-  ).innerHTML = `
-    <tr>
-      <td colspan="5">
-        <div class="empty">
-          ❌ ${escapeHTML(message)}
-        </div>
-      </td>
-    </tr>
-  `;
+  return String(
+    value ?? ""
+  )
+  .replace(
+    /&/g,
+    "&amp;"
+  )
+  .replace(
+    /</g,
+    "&lt;"
+  )
+  .replace(
+    />/g,
+    "&gt;"
+  )
+  .replace(
+    /"/g,
+    "&quot;"
+  )
+  .replace(
+    /'/g,
+    "&#039;"
+  );
 
 }
 
 
 /* =====================================================
-TOAST
+   ESCAPE JS
 ===================================================== */
+
+function escapeJs(value){
+
+  return String(
+    value ?? ""
+  )
+  .replace(
+    /\\/g,
+    "\\\\"
+  )
+  .replace(
+    /'/g,
+    "\\'"
+  )
+  .replace(
+    /\r/g,
+    "\\r"
+  )
+  .replace(
+    /\n/g,
+    "\\n"
+  );
+
+}
+
+
+/* =====================================================
+   TOAST
+===================================================== */
+
+let toastTimer;
+
 
 function showToast(
   message,
@@ -4031,95 +4521,124 @@ function showToast(
 
 
   toast.className =
-    "toast show " +
-    (type || "");
+    "toast " +
+    (
+      type ||
+      "success"
+    );
 
 
-  setTimeout(
+  requestAnimationFrame(
     function(){
 
-      toast.className =
-        "toast";
+      toast.classList.add(
+        "show"
+      );
 
-    },
-    3000
+    }
+  );
+
+
+  clearTimeout(
+    toastTimer
+  );
+
+
+  toastTimer =
+    setTimeout(
+      function(){
+
+        toast.classList.remove(
+          "show"
+        );
+
+      },
+      3000
+    );
+
+}
+
+
+/* =====================================================
+   SIDEBAR
+===================================================== */
+
+function toggleSidebar(){
+
+  const sidebar =
+    document.getElementById(
+      "sidebar"
+    );
+
+
+  const main =
+    document.getElementById(
+      "main"
+    );
+
+
+  if(
+    window.innerWidth <= 700
+  ){
+
+    sidebar.classList.toggle(
+      "mobile-open"
+    );
+
+    return;
+
+  }
+
+
+  sidebar.classList.toggle(
+    "collapsed"
+  );
+
+
+  main.classList.toggle(
+    "expanded"
   );
 
 }
 
 
 /* =====================================================
-ESCAPE HTML
+   SECTION
 ===================================================== */
 
-function escapeHTML(value){
+function showSection(
+  section,
+  button
+){
 
-  return String(
-    value ?? ""
-  )
-  .replace(/&/g,"&amp;")
-  .replace(/</g,"&lt;")
-  .replace(/>/g,"&gt;")
-  .replace(/"/g,"&quot;")
-  .replace(/'/g,"&#039;");
+  document
+    .querySelectorAll(
+      ".menu-item"
+    )
+    .forEach(
+      function(item){
+
+        item.classList.remove(
+          "active"
+        );
+
+      }
+    );
+
+
+  if(button){
+
+    button.classList.add(
+      "active"
+    );
+
+  }
 
 }
 
 
 /* =====================================================
-OUTSIDE CLICK
-===================================================== */
-
-document
-  .getElementById("entryModal")
-  .addEventListener(
-    "click",
-    function(event){
-
-      if(
-        event.target === this
-      ){
-        closeEntryModal();
-      }
-
-    }
-  );
-
-
-document
-  .getElementById("userModal")
-  .addEventListener(
-    "click",
-    function(event){
-
-      if(
-        event.target === this
-      ){
-        closeUserModal();
-      }
-
-    }
-  );
-
-
-document
-  .getElementById("userFormModal")
-  .addEventListener(
-    "click",
-    function(event){
-
-      if(
-        event.target === this
-      ){
-        closeUserFormModal();
-      }
-
-    }
-  );
-
-
-/* =====================================================
-ESC KEY
+   ESC KEY
 ===================================================== */
 
 document.addEventListener(
@@ -4130,11 +4649,59 @@ document.addEventListener(
       event.key === "Escape"
     ){
 
-      closeEntryModal();
-      closeUserModal();
-      closeUserFormModal();
+      closeModal();
 
     }
+
+  }
+);
+
+
+/* =====================================================
+   LOGOUT
+===================================================== */
+
+function logout(){
+
+  if(
+    !confirm(
+      "Are you sure you want to logout?"
+    )
+  ){
+
+    return;
+
+  }
+
+
+  clearSession();
+
+
+  /*
+    replace ব্যবহার করার কারণে
+    browser history দিয়ে সহজে
+    dashboard-এ ফিরে আসা যাবে না।
+  */
+
+  window.location.replace(
+    "index.html"
+  );
+
+}
+
+
+/* =====================================================
+   PREVENT BACK CACHE
+===================================================== */
+
+window.addEventListener(
+  "beforeunload",
+  function(){
+
+    /*
+      Page unload-এর সময় কোনো
+      sensitive data রাখছি না।
+    */
 
   }
 );
@@ -4142,4 +4709,5 @@ document.addEventListener(
 </script>
 
 </body>
+
 </html>
