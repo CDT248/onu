@@ -896,6 +896,7 @@ tr:hover td{
 
 </main>
 
+
 <!-- ENTRY MODAL -->
 
 <div
@@ -1007,6 +1008,7 @@ tr:hover td{
 
 </div>
 
+
 <!-- USER MODAL -->
 
 <div
@@ -1099,6 +1101,7 @@ tr:hover td{
   </div>
 
 </div>
+
 
 <!-- USER FORM -->
 
@@ -1235,10 +1238,12 @@ tr:hover td{
 
 </div>
 
+
 <div
   class="toast"
   id="toast"
 ></div>
+
 
 <script>
 
@@ -1257,11 +1262,15 @@ const LOGIN_PAGE = "index.html";
 const ROWS_PER_PAGE = 10;
 
 /*
-  5 Minutes Auto Logout
+  5 MINUTES
 */
-const AUTO_LOGOUT_TIME = 5 * 60 * 1000;
+const AUTO_LOGOUT_TIME =
+  5 * 60 * 1000;
 
-let autoLogoutTimer = null;
+
+/* =====================================================
+GLOBAL VARIABLES
+===================================================== */
 
 let allData = [];
 let filteredData = [];
@@ -1271,6 +1280,8 @@ let editingRow = null;
 
 let allUsers = [];
 let editingUser = null;
+
+let inactivityTimer = null;
 
 
 /* =====================================================
@@ -1317,14 +1328,20 @@ function getLoggedInUsername(){
           parsed.user;
 
         if(username){
-          return String(username).trim();
+
+          return String(
+            username
+          ).trim();
+
         }
 
       }
 
     }catch(error){
 
-      return String(value).trim();
+      return String(
+        value
+      ).trim();
 
     }
 
@@ -1336,13 +1353,18 @@ function getLoggedInUsername(){
 
 
 /* =====================================================
-URL PROTECTION + 5 MINUTE AUTO LOGOUT
+LOGIN / URL PROTECTION
 ===================================================== */
 
-function checkPageAccess(){
+function checkLogin(){
 
   const username =
     getLoggedInUsername();
+
+  /*
+    Login information না থাকলে
+    সরাসরি index.html এ পাঠাবে।
+  */
 
   if(!username){
 
@@ -1354,8 +1376,6 @@ function checkPageAccess(){
 
   }
 
-  startAutoLogoutTimer();
-
   return true;
 
 }
@@ -1365,21 +1385,17 @@ function checkPageAccess(){
 AUTO LOGOUT TIMER
 ===================================================== */
 
-function startAutoLogoutTimer(){
+function resetAutoLogoutTimer(){
 
   clearTimeout(
-    autoLogoutTimer
+    inactivityTimer
   );
 
-  autoLogoutTimer =
+  inactivityTimer =
     setTimeout(
       function(){
 
-        alert(
-          "Your session has expired.\nPlease login again."
-        );
-
-        logoutUser();
+        autoLogout();
 
       },
       AUTO_LOGOUT_TIME
@@ -1389,79 +1405,191 @@ function startAutoLogoutTimer(){
 
 
 /* =====================================================
-RESET AUTO LOGOUT ON ACTIVITY
+ACTIVITY DETECTION
 ===================================================== */
 
-function resetAutoLogoutTimer(){
+function setupActivityDetection(){
 
-  const username =
-    getLoggedInUsername();
+  const events = [
 
-  if(!username){
-    return;
-  }
+    "click",
+    "mousemove",
+    "mousedown",
+    "keydown",
+    "scroll",
+    "touchstart",
+    "touchmove",
+    "input"
 
-  startAutoLogoutTimer();
+  ];
+
+  events.forEach(
+    function(eventName){
+
+      document.addEventListener(
+        eventName,
+        resetAutoLogoutTimer,
+        {
+          passive:true
+        }
+      );
+
+    }
+  );
+
+  /*
+    প্রথম timer চালু
+  */
+
+  resetAutoLogoutTimer();
 
 }
 
 
 /* =====================================================
-USER ACTIVITY
+AUTO LOGOUT
 ===================================================== */
 
-[
-  "click",
-  "mousemove",
-  "keydown",
-  "scroll",
-  "touchstart"
-].forEach(
-  function(eventName){
+function autoLogout(){
 
-    document.addEventListener(
-      eventName,
-      resetAutoLogoutTimer,
-      {
-        passive:true
-      }
+  clearTimeout(
+    inactivityTimer
+  );
+
+  /*
+    Theme save করে রাখছি
+  */
+
+  const savedTheme =
+    localStorage.getItem(
+      "dashboardTheme"
+    );
+
+  /*
+    Login related keys remove
+  */
+
+  const loginKeys = [
+
+    "username",
+    "Username",
+    "user",
+    "userData",
+    "loginData",
+    "loggedUser",
+    "currentUser",
+    "userInfo"
+
+  ];
+
+  loginKeys.forEach(
+    function(key){
+
+      localStorage.removeItem(
+        key
+      );
+
+    }
+  );
+
+  /*
+    Session clear
+  */
+
+  sessionStorage.clear();
+
+  /*
+    Theme আবার restore
+  */
+
+  if(savedTheme){
+
+    localStorage.setItem(
+      "dashboardTheme",
+      savedTheme
     );
 
   }
-);
+
+  /*
+    Login page
+  */
+
+  window.location.replace(
+    LOGIN_PAGE
+  );
+
+}
 
 
 /* =====================================================
-LOGOUT
+MANUAL LOGOUT
 ===================================================== */
 
 function logoutUser(){
 
-  try{
+  clearTimeout(
+    inactivityTimer
+  );
 
-    clearTimeout(
-      autoLogoutTimer
+  /*
+    Theme delete করা হবে না
+  */
+
+  const savedTheme =
+    localStorage.getItem(
+      "dashboardTheme"
     );
 
-    localStorage.clear();
+  /*
+    শুধু login data remove
+  */
 
-    sessionStorage.clear();
+  const loginKeys = [
 
-    window.location.replace(
-      LOGIN_PAGE
+    "username",
+    "Username",
+    "user",
+    "userData",
+    "loginData",
+    "loggedUser",
+    "currentUser",
+    "userInfo"
+
+  ];
+
+  loginKeys.forEach(
+    function(key){
+
+      localStorage.removeItem(
+        key
+      );
+
+    }
+  );
+
+  /*
+    Session clear
+  */
+
+  sessionStorage.clear();
+
+  /*
+    Theme নিশ্চিতভাবে save থাকবে
+  */
+
+  if(savedTheme){
+
+    localStorage.setItem(
+      "dashboardTheme",
+      savedTheme
     );
-
-  }catch(error){
-
-    console.error(
-      "Logout Error:",
-      error
-    );
-
-    window.location.href =
-      LOGIN_PAGE;
 
   }
+
+  window.location.replace(
+    LOGIN_PAGE
+  );
 
 }
 
@@ -1483,6 +1611,12 @@ function loadTheme(){
       "dark"
     );
 
+  }else{
+
+    document.body.classList.remove(
+      "dark"
+    );
+
   }
 
   updateThemeButton();
@@ -1500,6 +1634,11 @@ function toggleTheme(){
     document.body.classList.contains(
       "dark"
     );
+
+  /*
+    Theme আলাদা key-তে save হবে।
+    Logout করলে এই key delete হবে না।
+  */
 
   localStorage.setItem(
     "dashboardTheme",
@@ -2396,13 +2535,18 @@ USERNAME
 
 function requireUsername(){
 
-  let username =
+  const username =
     getLoggedInUsername();
+
+  /*
+    Login না থাকলে সরাসরি logout
+  */
 
   if(!username){
 
-    username =
-      "Guest";
+    autoLogout();
+
+    return "";
 
   }
 
@@ -2437,6 +2581,10 @@ async function deleteEntryByRow(rowNumber){
 
   const username =
     requireUsername();
+
+  if(!username){
+    return;
+  }
 
   const confirmed =
     confirm(
@@ -2558,6 +2706,10 @@ async function sellEntryByRow(rowNumber){
   const username =
     requireUsername();
 
+  if(!username){
+    return;
+  }
+
   const confirmed =
     confirm(
       "Sell this entry?\n\n" +
@@ -2606,8 +2758,8 @@ async function sellEntryByRow(rowNumber){
             JSON.stringify(
               payload
             )
-          }
-        );
+        }
+      );
 
     if(!response.ok){
 
@@ -2659,6 +2811,10 @@ USER MODAL
 
 function openUserModal(){
 
+  if(!checkLogin()){
+    return;
+  }
+
   document.getElementById(
     "userModal"
   ).classList.add(
@@ -2686,6 +2842,10 @@ LOAD USERS
 ===================================================== */
 
 async function loadUsers(){
+
+  if(!checkLogin()){
+    return;
+  }
 
   const body =
     document.getElementById(
@@ -3005,6 +3165,10 @@ ADD USER
 
 function openAddUserModal(){
 
+  if(!checkLogin()){
+    return;
+  }
+
   editingUser =
     null;
 
@@ -3044,6 +3208,10 @@ function editUser(
   rowNumber,
   encodedUsername
 ){
+
+  if(!checkLogin()){
+    return;
+  }
 
   const username =
     decodeURIComponent(
@@ -3172,6 +3340,10 @@ SUBMIT USER
 async function submitUser(event){
 
   event.preventDefault();
+
+  if(!checkLogin()){
+    return;
+  }
 
   const button =
     document.getElementById(
@@ -3388,6 +3560,10 @@ async function blockUser(
   encodedUsername
 ){
 
+  if(!checkLogin()){
+    return;
+  }
+
   const username =
     decodeURIComponent(
       encodedUsername
@@ -3422,6 +3598,10 @@ async function unblockUser(
   encodedUsername
 ){
 
+  if(!checkLogin()){
+    return;
+  }
+
   const username =
     decodeURIComponent(
       encodedUsername
@@ -3445,6 +3625,10 @@ async function changeUserStatus(
   username,
   status
 ){
+
+  if(!checkLogin()){
+    return;
+  }
 
   try{
 
@@ -3537,6 +3721,10 @@ async function deleteUser(
   rowNumber,
   encodedUsername
 ){
+
+  if(!checkLogin()){
+    return;
+  }
 
   const username =
     decodeURIComponent(
@@ -3834,6 +4022,11 @@ document
     }
   );
 
+
+/* =====================================================
+ESC KEY
+===================================================== */
+
 document.addEventListener(
   "keydown",
   function(event){
@@ -3854,16 +4047,39 @@ document.addEventListener(
 );
 
 
+/* =====================================================
+PAGE LOAD
+===================================================== */
+
 document.addEventListener(
   "DOMContentLoaded",
   function(){
 
+    /*
+      প্রথমেই Login check
+    */
 
-    if(!checkPageAccess()){
+    if(!checkLogin()){
+
       return;
+
     }
 
+    /*
+      Saved Dark/White Theme load
+    */
+
     loadTheme();
+
+    /*
+      5 Minute Auto Logout শুরু
+    */
+
+    setupActivityDetection();
+
+    /*
+      Dashboard Data load
+    */
 
     loadData();
 
