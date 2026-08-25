@@ -3,364 +3,442 @@
 
 <head>
 
-  <meta charset="UTF-8">
+<meta charset="UTF-8">
 
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0">
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0"
+>
 
-  <title>Login</title>
+<title>Login</title>
 
-  <style>
+<style>
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: Arial, Helvetica, sans-serif;
-    }
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:Arial,Helvetica,sans-serif;
+}
 
-    body {
-      min-height: 100vh;
+:root{
+  --green:#087f5b;
+  --green-dark:#066b4d;
+  --bg:#f3f7f5;
+  --card:#ffffff;
+  --text:#1f2937;
+  --muted:#6b7280;
+  --border:#e5e7eb;
+  --danger:#dc2626;
+  --shadow:rgba(0,0,0,.15);
+}
 
-      display: flex;
-      justify-content: center;
-      align-items: center;
+body{
 
-      padding: 20px;
+  min-height:100vh;
 
-      background:
-        radial-gradient(
-          circle at top left,
-          rgba(0, 255, 140, 0.12),
-          transparent 35%
-        ),
-        radial-gradient(
-          circle at bottom right,
-          rgba(255, 0, 60, 0.10),
-          transparent 35%
-        ),
-        #070a0e;
+  display:flex;
 
-      color: white;
-    }
+  justify-content:center;
 
-    .login-card {
-      width: 100%;
-      max-width: 420px;
+  align-items:center;
 
-      padding: 35px 30px;
+  padding:20px;
 
-      background: rgba(18, 22, 28, 0.96);
+  background:
+    linear-gradient(
+      135deg,
+      #f0fdf4,
+      #f8fafc
+    );
 
-      border: 1px solid rgba(255,255,255,0.08);
+  color:var(--text);
 
-      border-radius: 24px;
+}
 
-      box-shadow:
-        0 25px 70px rgba(0,0,0,0.60);
 
-      backdrop-filter: blur(15px);
+/* =====================================================
+LOGIN CARD
+===================================================== */
 
-      animation: cardShow 0.7s ease;
-    }
+.login-wrapper{
 
-    @keyframes cardShow {
+  width:100%;
 
-      from {
-        opacity: 0;
-        transform: translateY(25px);
-      }
+  max-width:430px;
 
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+}
 
-    }
 
-    .logo {
-      width: 78px;
-      height: 78px;
+.login-card{
 
-      margin: 0 auto 18px;
+  width:100%;
 
-      border-radius: 50%;
+  background:var(--card);
 
-      display: flex;
-      align-items: center;
-      justify-content: center;
+  border:1px solid var(--border);
 
-      font-size: 34px;
+  border-radius:18px;
 
-      background:
-        linear-gradient(
-          135deg,
-          #00d084,
-          #00a86b
-        );
+  padding:35px;
 
-      box-shadow:
-        0 0 40px rgba(0,208,132,0.25);
-    }
+  box-shadow:
+    0 20px 60px var(--shadow);
 
-    .title {
-      text-align: center;
-    }
+}
 
-    .title h1 {
-      font-size: 30px;
-      font-weight: 700;
 
-      margin-bottom: 8px;
-    }
+.logo{
 
-    .title p {
-      color: #8e97a4;
+  width:70px;
 
-      font-size: 14px;
+  height:70px;
 
-      margin-bottom: 30px;
-    }
+  margin:0 auto 18px;
 
-    .input-group {
-      margin-bottom: 18px;
-    }
+  border-radius:18px;
 
-    .input-group label {
-      display: block;
+  display:flex;
 
-      margin-bottom: 8px;
+  align-items:center;
 
-      color: #aeb6c2;
+  justify-content:center;
 
-      font-size: 13px;
-    }
+  background:var(--green);
 
-    .input-group input {
-      width: 100%;
-      height: 53px;
+  color:#fff;
 
-      padding: 0 16px;
+  font-size:30px;
 
-      border-radius: 12px;
+  font-weight:700;
 
-      border: 1px solid #252c35;
+  box-shadow:
+    0 10px 25px rgba(8,127,91,.25);
 
-      background: #0c1015;
+}
 
-      color: white;
 
-      outline: none;
+.title{
 
-      font-size: 15px;
+  text-align:center;
 
-      transition: 0.25s;
-    }
+  font-size:27px;
 
-    .input-group input::placeholder {
-      color: #555e69;
-    }
+  font-weight:700;
 
-    .input-group input:focus {
-      border-color: #00d084;
+  margin-bottom:7px;
 
-      box-shadow:
-        0 0 0 3px rgba(0,208,132,0.08);
-    }
+}
 
-    .login-btn {
-      width: 100%;
-      height: 54px;
 
-      margin-top: 5px;
+.subtitle{
 
-      border: none;
+  text-align:center;
 
-      border-radius: 12px;
+  color:var(--muted);
 
-      background:
-        linear-gradient(
-          135deg,
-          #00d084,
-          #00a86b
-        );
+  font-size:14px;
 
-      color: #04100a;
+  margin-bottom:30px;
 
-      font-size: 16px;
+}
 
-      font-weight: 700;
 
-      cursor: pointer;
+/* =====================================================
+FORM
+===================================================== */
 
-      transition: 0.25s;
-    }
+.form-group{
 
-    .login-btn:hover {
-      transform: translateY(-2px);
+  margin-bottom:18px;
 
-      box-shadow:
-        0 10px 30px rgba(0,208,132,0.25);
-    }
+}
 
-    .login-btn:active {
-      transform: scale(0.98);
-    }
 
-    .login-btn:disabled {
-      opacity: 0.6;
+.form-group label{
 
-      cursor: not-allowed;
+  display:block;
 
-      transform: none;
+  font-size:13px;
 
-      box-shadow: none;
-    }
+  font-weight:600;
 
-    #message {
-      display: none;
+  margin-bottom:8px;
 
-      text-align: center;
+}
 
-      margin-top: 16px;
 
-      padding: 11px;
+.input-box{
 
-      border-radius: 10px;
+  position:relative;
 
-      font-size: 13px;
-    }
+}
 
-    #message.error {
-      display: block;
 
-      color: #ff667d;
+.input-box input{
 
-      background:
-        rgba(255,60,85,0.08);
+  width:100%;
 
-      border:
-        1px solid rgba(255,60,85,0.15);
-    }
+  height:50px;
 
-    #message.success {
-      display: block;
+  padding:0 14px;
 
-      color: #00d084;
+  border:1px solid var(--border);
 
-      background:
-        rgba(0,208,132,0.08);
+  border-radius:9px;
 
-      border:
-        1px solid rgba(0,208,132,0.15);
-    }
+  outline:none;
 
-    .phone-box {
-      margin-top: 25px;
+  background:#fff;
 
-      padding: 15px;
+  color:var(--text);
 
-      border-radius: 13px;
+  font-size:14px;
 
-      background: #0c1015;
+  transition:.2s;
 
-      border: 1px solid #202731;
+}
 
-      display: flex;
 
-      align-items: center;
+.input-box input:focus{
 
-      gap: 12px;
-    }
+  border-color:var(--green);
 
-    .phone-icon {
-      width: 42px;
-      height: 42px;
+  box-shadow:
+    0 0 0 3px rgba(8,127,91,.08);
 
-      border-radius: 10px;
+}
 
-      display: flex;
 
-      align-items: center;
+.password-input{
 
-      justify-content: center;
+  padding-right:50px !important;
 
-      background:
-        rgba(0,208,132,0.08);
+}
 
-      font-size: 21px;
 
-      flex-shrink: 0;
-    }
+.show-password{
 
-    .phone-info {
-      min-width: 0;
-    }
+  position:absolute;
 
-    .phone-title {
-      color: #707985;
+  right:10px;
 
-      font-size: 10px;
+  top:50%;
 
-      letter-spacing: 0.5px;
+  transform:translateY(-50%);
 
-      margin-bottom: 4px;
-    }
+  width:35px;
 
-    #phoneName {
-      color: #e2e7ed;
+  height:35px;
 
-      font-size: 13px;
+  border-radius:7px;
 
-      font-weight: 600;
+  background:#f3f4f6;
 
-      white-space: nowrap;
+  color:#374151;
 
-      overflow: hidden;
+  font-size:16px;
 
-      text-overflow: ellipsis;
-    }
+}
 
-    #phoneDetails {
-      color: #737d89;
 
-      font-size: 11px;
+.show-password:hover{
 
-      margin-top: 3px;
+  background:#e5e7eb;
 
-      white-space: nowrap;
+}
 
-      overflow: hidden;
 
-      text-overflow: ellipsis;
-    }
+/* =====================================================
+LOGIN BUTTON
+===================================================== */
 
-    .footer {
-      text-align: center;
+.login-btn{
 
-      margin-top: 22px;
+  width:100%;
 
-      color: #5e6672;
+  height:50px;
 
-      font-size: 11px;
-    }
+  margin-top:8px;
 
-    @media(max-width:480px) {
+  border:none;
 
-      .login-card {
-        padding: 30px 22px;
+  border-radius:9px;
 
-        border-radius: 20px;
-      }
+  background:var(--green);
 
-      .title h1 {
-        font-size: 27px;
-      }
+  color:#fff;
 
-    }
+  font-size:15px;
 
-  </style>
+  font-weight:700;
+
+  cursor:pointer;
+
+  transition:.2s;
+
+}
+
+
+.login-btn:hover{
+
+  background:var(--green-dark);
+
+}
+
+
+.login-btn:disabled{
+
+  cursor:not-allowed;
+
+  opacity:.6;
+
+}
+
+
+/* =====================================================
+MESSAGE
+===================================================== */
+
+.message{
+
+  display:none;
+
+  margin-top:17px;
+
+  padding:12px 14px;
+
+  border-radius:8px;
+
+  font-size:13px;
+
+  line-height:1.5;
+
+}
+
+
+.message.show{
+
+  display:block;
+
+}
+
+
+.message.error{
+
+  background:#fee2e2;
+
+  color:#b91c1c;
+
+  border:1px solid #fecaca;
+
+}
+
+
+.message.success{
+
+  background:#dcfce7;
+
+  color:#15803d;
+
+  border:1px solid #bbf7d0;
+
+}
+
+
+.footer{
+
+  text-align:center;
+
+  margin-top:25px;
+
+  color:var(--muted);
+
+  font-size:12px;
+
+}
+
+
+/* =====================================================
+LOADING
+===================================================== */
+
+.loading-spinner{
+
+  display:inline-block;
+
+  width:16px;
+
+  height:16px;
+
+  border:2px solid rgba(255,255,255,.4);
+
+  border-top-color:#fff;
+
+  border-radius:50%;
+
+  animation:spin .7s linear infinite;
+
+  vertical-align:middle;
+
+  margin-right:7px;
+
+}
+
+
+@keyframes spin{
+
+  to{
+
+    transform:rotate(360deg);
+
+  }
+
+}
+
+
+/* =====================================================
+MOBILE
+===================================================== */
+
+@media(max-width:500px){
+
+  body{
+
+    padding:15px;
+
+  }
+
+
+  .login-card{
+
+    padding:28px 20px;
+
+    border-radius:15px;
+
+  }
+
+
+  .title{
+
+    font-size:23px;
+
+  }
+
+
+  .logo{
+
+    width:62px;
+
+    height:62px;
+
+    font-size:26px;
+
+  }
+
+}
+
+</style>
 
 </head>
 
@@ -368,988 +446,160 @@
 <body>
 
 
+<div class="login-wrapper">
+
   <div class="login-card">
 
 
     <div class="logo">
-      👋
+      🔐
     </div>
 
 
-    <div class="title">
-
-      <h1>
-        Hello!
-      </h1>
-
-      <p>
-        Login to continue to your dashboard
-      </p>
-
-    </div>
+    <h1 class="title">
+      Welcome Back
+    </h1>
 
 
-    <!-- USERNAME -->
-
-    <div class="input-group">
-
-      <label>
-        Username
-      </label>
-
-      <input
-        type="text"
-        id="username"
-        placeholder="Enter username"
-        autocomplete="username"
-      >
-
-    </div>
+    <p class="subtitle">
+      Login to your Data Dashboard
+    </p>
 
 
-    <!-- PASSWORD -->
+    <!-- =================================================
+    LOGIN FORM
+    ================================================= -->
 
-    <div class="input-group">
-
-      <label>
-        Password
-      </label>
-
-      <input
-        type="password"
-        id="password"
-        placeholder="Enter password"
-        autocomplete="current-password"
-      >
-
-    </div>
+    <form
+      id="loginForm"
+      onsubmit="loginUser(event)"
+    >
 
 
-    <!-- LOGIN BUTTON -->
+      <div class="form-group">
 
-    <button
-      class="login-btn"
-      id="loginBtn"
-      onclick="login()">
+        <label>
+          Username
+        </label>
 
-      Login
+        <div class="input-box">
 
-    </button>
+          <input
+            type="text"
+            id="username"
+            placeholder="Enter username"
+            autocomplete="username"
+            required
+          >
 
-
-    <!-- MESSAGE -->
-
-    <div id="message"></div>
-
-
-    <!-- DEVICE -->
-
-    <div class="phone-box">
-
-      <div class="phone-icon">
-        📱
-      </div>
-
-      <div class="phone-info">
-
-        <div class="phone-title">
-          YOUR DEVICE
-        </div>
-
-        <div id="phoneName">
-          Detecting device...
-        </div>
-
-        <div id="phoneDetails">
-          Please wait...
         </div>
 
       </div>
 
-    </div>
+
+      <div class="form-group">
+
+        <label>
+          Password
+        </label>
+
+        <div class="input-box">
+
+          <input
+            type="password"
+            id="password"
+            class="password-input"
+            placeholder="Enter password"
+            autocomplete="current-password"
+            required
+          >
+
+          <button
+            type="button"
+            class="show-password"
+            id="showPasswordBtn"
+            onclick="togglePassword()"
+          >
+            👁
+          </button>
+
+        </div>
+
+      </div>
+
+
+      <button
+        type="submit"
+        class="login-btn"
+        id="loginBtn"
+      >
+        Login
+      </button>
+
+
+      <div
+        class="message"
+        id="message"
+      ></div>
+
+
+    </form>
 
 
     <div class="footer">
-      Secure Login System
+
+      Data Dashboard System
+
     </div>
 
 
   </div>
 
+</div>
 
 
 <script>
 
-
 /* =====================================================
-   GOOGLE APPS SCRIPT WEB APP URL
+API
 ===================================================== */
 
-const API_URL =
-  "https://script.google.com/macros/s/AKfycby1wEKzuThOiXdf9lVmoJVysfasR14ivssXFjGFfDnnc-d16uQRjNhel5LKNXDK4ZbxDw/exec";
+const USER_API_URL =
+"https://script.google.com/macros/s/AKfycby1wEKzuThOiXdf9lVmoJVysfasR14ivssXFjGFfDnnc-d16uQRjNhel5LKNXDK4ZbxDw/exec";
 
 
-/* =====================================================
-   ROLE → DASHBOARD
-===================================================== */
-
-const ROLE_PAGES = {
-
-  admin: "ad.html",
-
-  support: "2S.html",
-
-  call: "2S.html"
-
-};
+const DASHBOARD_PAGE =
+"dashboard.html";
 
 
 /* =====================================================
-   SESSION KEY
+PASSWORD SHOW / HIDE
 ===================================================== */
 
-const SESSION_KEY = "LOGIN_SESSION";
-
-
-/* =====================================================
-   GET SESSION
-===================================================== */
-
-function getSession() {
-
-  try {
-
-    const session =
-      localStorage.getItem(
-        SESSION_KEY
-      );
-
-    if (!session) {
-      return null;
-    }
-
-    const data =
-      JSON.parse(session);
-
-    if (
-      !data ||
-      data.loggedIn !== true
-    ) {
-
-      return null;
-
-    }
-
-    return data;
-
-  }
-
-  catch(error) {
-
-    console.error(
-      "Session read error:",
-      error
-    );
-
-    return null;
-
-  }
-
-}
-
-
-/* =====================================================
-   SAVE SESSION
-===================================================== */
-
-function saveSession(data) {
-
-  const session = {
-
-    loggedIn: true,
-
-    username:
-      data.username || "",
-
-    name:
-      data.name || "",
-
-    role:
-      data.role || "",
-
-    status:
-      data.status || "Active",
-
-    loginTime:
-      Date.now(),
-
-    lastActivity:
-      Date.now()
-
-  };
-
-
-  localStorage.setItem(
-
-    SESSION_KEY,
-
-    JSON.stringify(session)
-
-  );
-
-
-  /*
-    Compatibility values.
-    Dashboard যদি এগুলো ব্যবহার করে,
-    তাহলে সেগুলোও থাকবে।
-  */
-
-  localStorage.setItem(
-    "loggedIn",
-    "true"
-  );
-
-  localStorage.setItem(
-    "username",
-    session.username
-  );
-
-  localStorage.setItem(
-    "name",
-    session.name
-  );
-
-  localStorage.setItem(
-    "role",
-    session.role
-  );
-
-  localStorage.setItem(
-    "status",
-    session.status
-  );
-
-  localStorage.setItem(
-    "loginTime",
-    session.loginTime
-  );
-
-  localStorage.setItem(
-    "lastActivity",
-    session.lastActivity
-  );
-
-}
-
-
-/* =====================================================
-   CLEAR SESSION
-===================================================== */
-
-function clearSession() {
-
-  localStorage.removeItem(
-    SESSION_KEY
-  );
-
-  localStorage.removeItem(
-    "loggedIn"
-  );
-
-  localStorage.removeItem(
-    "username"
-  );
-
-  localStorage.removeItem(
-    "name"
-  );
-
-  localStorage.removeItem(
-    "role"
-  );
-
-  localStorage.removeItem(
-    "status"
-  );
-
-  localStorage.removeItem(
-    "loginTime"
-  );
-
-  localStorage.removeItem(
-    "lastActivity"
-  );
-
-}
-
-
-/* =====================================================
-   INDEX PAGE SESSION CHECK
-   IMPORTANT:
-   এখানে login করার সময় redirect করা হবে না।
-   শুধু আগে থেকে valid session থাকলে dashboard খুলবে।
-===================================================== */
-
-function checkExistingSession() {
-
-  const session =
-    getSession();
-
-
-  if (
-    !session ||
-    session.loggedIn !== true
-  ) {
-
-    return;
-
-  }
-
-
-  const role =
-    String(
-      session.role || ""
-    )
-    .trim()
-    .toLowerCase();
-
-
-  if (
-    !ROLE_PAGES[role]
-  ) {
-
-    clearSession();
-
-    return;
-
-  }
-
-
-  /*
-    যদি index page-এ valid login session
-    আগে থেকেই থাকে, dashboard-এ পাঠাবে।
-  */
-
-  window.location.replace(
-    ROLE_PAGES[role]
-  );
-
-}
-
-
-/*
-  Page load হওয়ার পরে check করবে।
-*/
-
-window.addEventListener(
-  "DOMContentLoaded",
-  function() {
-
-    checkExistingSession();
-
-  }
-);
-
-
-/* =====================================================
-   DEVICE DETECTION
-===================================================== */
-
-function detectPhone() {
-
-  const ua =
-    navigator.userAgent;
-
-  let device =
-    "Unknown Device";
-
-  let os =
-    "Unknown OS";
-
-  let browser =
-    "Unknown Browser";
-
-
-  /* DEVICE */
-
-  if (/iPhone/i.test(ua)) {
-
-    device =
-      "Apple iPhone";
-
-  }
-
-  else if (/iPad/i.test(ua)) {
-
-    device =
-      "Apple iPad";
-
-  }
-
-  else if (/Samsung/i.test(ua)) {
-
-    device =
-      "Samsung Galaxy";
-
-  }
-
-  else if (
-    /SM-[A-Z0-9-]+/i.test(ua)
-  ) {
-
-    device =
-      "Samsung Galaxy";
-
-  }
-
-  else if (/Xiaomi/i.test(ua)) {
-
-    device =
-      "Xiaomi";
-
-  }
-
-  else if (/Redmi/i.test(ua)) {
-
-    device =
-      "Redmi";
-
-  }
-
-  else if (/Huawei/i.test(ua)) {
-
-    device =
-      "Huawei";
-
-  }
-
-  else if (/OPPO/i.test(ua)) {
-
-    device =
-      "OPPO";
-
-  }
-
-  else if (/vivo/i.test(ua)) {
-
-    device =
-      "Vivo";
-
-  }
-
-  else if (/realme/i.test(ua)) {
-
-    device =
-      "Realme";
-
-  }
-
-  else if (/OnePlus/i.test(ua)) {
-
-    device =
-      "OnePlus";
-
-  }
-
-  else if (/Android/i.test(ua)) {
-
-    device =
-      "Android Phone";
-
-  }
-
-  else if (/Windows/i.test(ua)) {
-
-    device =
-      "Windows PC";
-
-  }
-
-  else if (/Macintosh/i.test(ua)) {
-
-    device =
-      "Mac";
-
-  }
-
-
-  /* OS */
-
-  if (
-    /Windows NT 10/i.test(ua)
-  ) {
-
-    os =
-      "Windows 10/11";
-
-  }
-
-  else if (/Android/i.test(ua)) {
-
-    const match =
-      ua.match(
-        /Android\s([0-9.]+)/i
-      );
-
-    os =
-      match
-        ? "Android " + match[1]
-        : "Android";
-
-  }
-
-  else if (
-    /iPhone|iPad/i.test(ua)
-  ) {
-
-    const match =
-      ua.match(
-        /OS\s([0-9\_]+)/i
-      );
-
-    os =
-      match
-        ? "iOS " +
-          match[1].replace(
-            /\_/g,
-            "."
-          )
-        : "iOS";
-
-  }
-
-  else if (/Mac OS X/i.test(ua)) {
-
-    os =
-      "macOS";
-
-  }
-
-  else if (/Linux/i.test(ua)) {
-
-    os =
-      "Linux";
-
-  }
-
-
-  /* BROWSER */
-
-  if (/Edg/i.test(ua)) {
-
-    browser =
-      "Microsoft Edge";
-
-  }
-
-  else if (/Chrome/i.test(ua)) {
-
-    browser =
-      "Google Chrome";
-
-  }
-
-  else if (/Firefox/i.test(ua)) {
-
-    browser =
-      "Mozilla Firefox";
-
-  }
-
-  else if (
-    /Safari/i.test(ua) &&
-    !/Chrome/i.test(ua)
-  ) {
-
-    browser =
-      "Safari";
-
-  }
-
-
-  document.getElementById(
-    "phoneName"
-  ).textContent =
-    device;
-
-
-  document.getElementById(
-    "phoneDetails"
-  ).textContent =
-    os + " • " + browser;
-
-}
-
-
-detectPhone();
-
-
-/* =====================================================
-   LOGIN
-===================================================== */
-
-async function login() {
-
-
-  const username =
-    document
-      .getElementById(
-        "username"
-      )
-      .value
-      .trim();
-
+function togglePassword(){
 
   const password =
-    document
-      .getElementById(
-        "password"
-      )
-      .value
-      .trim();
-
+    document.getElementById(
+      "password"
+    );
 
   const button =
     document.getElementById(
-      "loginBtn"
+      "showPasswordBtn"
     );
 
 
-  /* VALIDATION */
+  if(password.type === "password"){
 
-  if (
-    !username ||
-    !password
-  ) {
+    password.type = "text";
 
-    showMessage(
-      "Please enter username and password.",
-      "error"
-    );
+    button.textContent = "🙈";
 
-    return;
+  }else{
 
-  }
+    password.type = "password";
 
-
-  button.disabled =
-    true;
-
-  button.textContent =
-    "Logging in...";
-
-
-  hideMessage();
-
-
-  try {
-
-
-    /* =================================================
-       LOGIN REQUEST
-    ================================================= */
-
-    const response =
-      await fetch(
-        API_URL,
-        {
-
-          method:
-            "POST",
-
-          headers: {
-
-            "Content-Type":
-              "text/plain;charset=utf-8"
-
-          },
-
-          body:
-            JSON.stringify({
-
-              action:
-                "login",
-
-              username:
-                username,
-
-              password:
-                password
-
-            })
-
-        }
-      );
-
-
-    if (!response.ok) {
-
-      throw new Error(
-        "Server error: " +
-        response.status
-      );
-
-    }
-
-
-    const data =
-      await response.json();
-
-
-    console.log(
-      "Server Response:",
-      data
-    );
-
-
-    /* =================================================
-       LOGIN SUCCESS
-    ================================================= */
-
-    if (
-      data.success === true
-    ) {
-
-
-      const loginUsername =
-        data.username ||
-        data.Username ||
-        username;
-
-
-      const userName =
-        data.name ||
-        data.Name ||
-        "";
-
-
-      const userRole =
-        data.role ||
-        data.Role ||
-        "";
-
-
-      const userStatus =
-        data.status ||
-        data.Status ||
-        "Active";
-
-
-      /* NORMALIZE ROLE */
-
-      const role =
-        String(
-          userRole
-        )
-        .trim()
-        .toLowerCase();
-
-
-      /* NORMALIZE STATUS */
-
-      const status =
-        String(
-          userStatus
-        )
-        .trim()
-        .toLowerCase();
-
-
-      console.log(
-        "Username:",
-        loginUsername
-      );
-
-      console.log(
-        "Name:",
-        userName
-      );
-
-      console.log(
-        "Role:",
-        role
-      );
-
-      console.log(
-        "Status:",
-        status
-      );
-
-
-      /* STATUS CHECK */
-
-      if (
-        status !== "active"
-      ) {
-
-        showMessage(
-          "Your account is not active.",
-          "error"
-        );
-
-        button.disabled =
-          false;
-
-        button.textContent =
-          "Login";
-
-        return;
-
-      }
-
-
-      /* ROLE CHECK */
-
-      if (
-        !ROLE_PAGES[role]
-      ) {
-
-        showMessage(
-          "No dashboard assigned for this role.",
-          "error"
-        );
-
-        console.error(
-          "Unknown role:",
-          role
-        );
-
-        button.disabled =
-          false;
-
-        button.textContent =
-          "Login";
-
-        return;
-
-      }
-
-
-      /* =================================================
-         SAVE SESSION
-      ================================================= */
-
-      saveSession({
-
-        username:
-          loginUsername,
-
-        name:
-          userName,
-
-        role:
-          role,
-
-        status:
-          userStatus
-
-      });
-
-
-      /* =================================================
-         VERIFY SESSION
-      ================================================= */
-
-      const savedSession =
-        getSession();
-
-
-      if (
-        !savedSession ||
-        savedSession.loggedIn !== true
-      ) {
-
-        throw new Error(
-          "Unable to create login session."
-        );
-
-      }
-
-
-      /* =================================================
-         SUCCESS
-      ================================================= */
-
-      showMessage(
-        "Login successful! Opening dashboard...",
-        "success"
-      );
-
-
-      /*
-        replace ব্যবহার করা হচ্ছে।
-        তাই login page browser history-তে
-        আগের মতো পড়ে থাকবে না।
-      */
-
-      setTimeout(
-        function() {
-
-          window.location.replace(
-            ROLE_PAGES[role]
-          );
-
-        },
-        500
-      );
-
-
-    }
-
-
-    /* =================================================
-       LOGIN FAILED
-    ================================================= */
-
-    else {
-
-      showMessage(
-
-        data.message ||
-        "Invalid username or password.",
-
-        "error"
-
-      );
-
-
-      button.disabled =
-        false;
-
-
-      button.textContent =
-        "Login";
-
-    }
-
-
-  }
-
-  catch(error) {
-
-
-    console.error(
-      "Login Error:",
-      error
-    );
-
-
-    showMessage(
-
-      error.message ||
-      "Unable to connect to server.",
-
-      "error"
-
-    );
-
-
-    button.disabled =
-      false;
-
-
-    button.textContent =
-      "Login";
+    button.textContent = "👁";
 
   }
 
@@ -1357,14 +607,13 @@ async function login() {
 
 
 /* =====================================================
-   MESSAGE
+MESSAGE
 ===================================================== */
 
 function showMessage(
   text,
   type
-) {
-
+){
 
   const message =
     document.getElementById(
@@ -1377,83 +626,466 @@ function showMessage(
 
 
   message.className =
-    type;
-
-
-  message.style.display =
-    "block";
+    "message show " +
+    (type || "error");
 
 }
 
 
-function hideMessage() {
+/* =====================================================
+CLEAR MESSAGE
+===================================================== */
 
+function clearMessage(){
 
   const message =
     document.getElementById(
       "message"
     );
 
-
-  message.style.display =
-    "none";
-
-
   message.className =
+    "message";
+
+  message.textContent =
     "";
 
 }
 
 
 /* =====================================================
-   ENTER KEY LOGIN
+LOGIN
 ===================================================== */
 
-document.addEventListener(
-  "keydown",
-  function(event) {
+async function loginUser(event){
+
+  event.preventDefault();
 
 
-    if (
-      event.key !== "Enter"
-    ) {
+  clearMessage();
 
-      return;
+
+  const username =
+    document.getElementById(
+      "username"
+    )
+    .value
+    .trim();
+
+
+  const password =
+    document.getElementById(
+      "password"
+    )
+    .value
+    .trim();
+
+
+  if(!username){
+
+    showMessage(
+      "Please enter username.",
+      "error"
+    );
+
+    return;
+
+  }
+
+
+  if(!password){
+
+    showMessage(
+      "Please enter password.",
+      "error"
+    );
+
+    return;
+
+  }
+
+
+  const button =
+    document.getElementById(
+      "loginBtn"
+    );
+
+
+  button.disabled = true;
+
+  button.innerHTML =
+    `
+      <span class="loading-spinner"></span>
+      Checking...
+    `;
+
+
+  try{
+
+
+    /*
+      First GET request
+    */
+
+    let response =
+      await fetch(
+        USER_API_URL +
+        "?action=login" +
+        "&username=" +
+        encodeURIComponent(username) +
+        "&password=" +
+        encodeURIComponent(password) +
+        "&_=" +
+        Date.now(),
+        {
+          method:"GET",
+          cache:"no-store"
+        }
+      );
+
+
+    if(!response.ok){
+
+      throw new Error(
+        "Server error: " +
+        response.status
+      );
 
     }
 
 
-    const username =
-      document
-        .getElementById(
-          "username"
-        )
-        .value
-        .trim();
+    let result =
+      await response.json();
 
 
-    const password =
-      document
-        .getElementById(
-          "password"
-        )
-        .value
-        .trim();
+    /*
+      যদি backend login action support করে
+    */
+
+    if(
+      result &&
+      (
+        result.success === true ||
+        result.success === false
+      )
+    ){
+
+      if(result.success !== true){
+
+        throw new Error(
+          result.message ||
+          "Invalid username or password."
+        );
+
+      }
+
+    }else{
+
+      /*
+        কিছু backend অন্য format দিলে
+        users list থেকে check করার চেষ্টা
+      */
+
+      result =
+        await checkFromUsers(
+          username,
+          password
+        );
+
+    }
 
 
-    const button =
-      document.getElementById(
-        "loginBtn"
+    /*
+      User data
+    */
+
+    const user =
+      result.user ||
+      result.data ||
+      result;
+
+
+    /*
+      Status check
+    */
+
+    const status =
+      String(
+        user.status ||
+        user.Status ||
+        "Active"
+      )
+      .trim()
+      .toLowerCase();
+
+
+    if(
+      status === "blocked"
+    ){
+
+      throw new Error(
+        "Your account is blocked."
       );
 
+    }
 
-    if (
-      username &&
-      password &&
-      !button.disabled
-    ) {
 
-      login();
+    if(
+      status === "inactive"
+    ){
+
+      throw new Error(
+        "Your account is inactive."
+      );
+
+    }
+
+
+    /*
+      Save login information
+    */
+
+    localStorage.setItem(
+      "username",
+      username
+    );
+
+
+    localStorage.setItem(
+      "Username",
+      username
+    );
+
+
+    localStorage.setItem(
+      "dashboardAuth",
+      "true"
+    );
+
+
+    localStorage.setItem(
+      "loggedIn",
+      "true"
+    );
+
+
+    localStorage.setItem(
+      "loginData",
+      JSON.stringify({
+        username:
+          username,
+
+        Username:
+          username,
+
+        name:
+          user.name ||
+          user.Name ||
+          username,
+
+        role:
+          user.role ||
+          user.Role ||
+          "",
+
+        status:
+          user.status ||
+          user.Status ||
+          "Active"
+      })
+    );
+
+
+    /*
+      Success
+    */
+
+    showMessage(
+      "Login successful. Opening dashboard...",
+      "success"
+    );
+
+
+    /*
+      একটু delay দিলে message দেখা যাবে
+    */
+
+    setTimeout(
+      function(){
+
+        window.location.href =
+          DASHBOARD_PAGE;
+
+      },
+      400
+    );
+
+
+  }catch(error){
+
+    console.error(
+      "Login Error:",
+      error
+    );
+
+
+    showMessage(
+      error.message ||
+      "Login failed. Please try again.",
+      "error"
+    );
+
+
+  }finally{
+
+    button.disabled = false;
+
+    button.textContent =
+      "Login";
+
+  }
+
+}
+
+
+/* =====================================================
+FALLBACK USER CHECK
+===================================================== */
+
+async function checkFromUsers(
+  username,
+  password
+){
+
+  const response =
+    await fetch(
+      USER_API_URL +
+      "?action=getUsers&_=" +
+      Date.now(),
+      {
+        method:"GET",
+        cache:"no-store"
+      }
+    );
+
+
+  if(!response.ok){
+
+    throw new Error(
+      "Unable to connect to server."
+    );
+
+  }
+
+
+  const result =
+    await response.json();
+
+
+  const users =
+    Array.isArray(
+      result.users
+    )
+      ? result.users
+      : Array.isArray(
+          result.data
+        )
+        ? result.data
+        : [];
+
+
+  const found =
+    users.find(
+      function(user){
+
+        const u =
+          String(
+            user.username ||
+            user.Username ||
+            ""
+          )
+          .trim()
+          .toLowerCase();
+
+
+        const p =
+          String(
+            user.password ||
+            user.Password ||
+            ""
+          )
+          .trim();
+
+
+        return (
+          u ===
+          username
+            .trim()
+            .toLowerCase()
+          &&
+          p === password
+        );
+
+      }
+    );
+
+
+  if(!found){
+
+    throw new Error(
+      "Invalid username or password."
+    );
+
+  }
+
+
+  return {
+    success:true,
+    user:found
+  };
+
+}
+
+
+/* =====================================================
+ENTER KEY
+===================================================== */
+
+document.addEventListener(
+  "keydown",
+  function(event){
+
+    if(
+      event.key === "Enter"
+    ){
+
+      const active =
+        document.activeElement;
+
+
+      if(
+        active &&
+        (
+          active.id === "username" ||
+          active.id === "password"
+        )
+      ){
+
+        const form =
+          document.getElementById(
+            "loginForm"
+          );
+
+
+        if(form){
+
+          /*
+            Browser-এর normal form submit
+            handle করবে।
+          */
+
+        }
+
+      }
 
     }
 
@@ -1462,27 +1094,19 @@ document.addEventListener(
 
 
 /* =====================================================
-   PREVENT BF CACHE PROBLEM
+PAGE LOAD
 ===================================================== */
 
-window.addEventListener(
-  "pageshow",
-  function(event) {
+document.addEventListener(
+  "DOMContentLoaded",
+  function(){
 
-    /*
-      Back/forward cache থেকে index এলে
-      session আবার check করবে।
-    */
-
-    if (event.persisted) {
-
-      checkExistingSession();
-
-    }
+    document
+      .getElementById("username")
+      .focus();
 
   }
 );
-
 
 </script>
 
