@@ -505,121 +505,391 @@ const ROLE_PAGES = {
 
 
 /* =====================================================
+   SESSION KEY
+===================================================== */
+
+const SESSION_KEY = "LOGIN_SESSION";
+
+
+/* =====================================================
+   GET SESSION
+===================================================== */
+
+function getSession() {
+
+  try {
+
+    const session =
+      localStorage.getItem(
+        SESSION_KEY
+      );
+
+    if (!session) {
+      return null;
+    }
+
+    const data =
+      JSON.parse(session);
+
+    if (
+      !data ||
+      data.loggedIn !== true
+    ) {
+
+      return null;
+
+    }
+
+    return data;
+
+  }
+
+  catch(error) {
+
+    console.error(
+      "Session read error:",
+      error
+    );
+
+    return null;
+
+  }
+
+}
+
+
+/* =====================================================
+   SAVE SESSION
+===================================================== */
+
+function saveSession(data) {
+
+  const session = {
+
+    loggedIn: true,
+
+    username:
+      data.username || "",
+
+    name:
+      data.name || "",
+
+    role:
+      data.role || "",
+
+    status:
+      data.status || "Active",
+
+    loginTime:
+      Date.now(),
+
+    lastActivity:
+      Date.now()
+
+  };
+
+
+  localStorage.setItem(
+
+    SESSION_KEY,
+
+    JSON.stringify(session)
+
+  );
+
+
+  /*
+    Compatibility values.
+    Dashboard যদি এগুলো ব্যবহার করে,
+    তাহলে সেগুলোও থাকবে।
+  */
+
+  localStorage.setItem(
+    "loggedIn",
+    "true"
+  );
+
+  localStorage.setItem(
+    "username",
+    session.username
+  );
+
+  localStorage.setItem(
+    "name",
+    session.name
+  );
+
+  localStorage.setItem(
+    "role",
+    session.role
+  );
+
+  localStorage.setItem(
+    "status",
+    session.status
+  );
+
+  localStorage.setItem(
+    "loginTime",
+    session.loginTime
+  );
+
+  localStorage.setItem(
+    "lastActivity",
+    session.lastActivity
+  );
+
+}
+
+
+/* =====================================================
+   CLEAR SESSION
+===================================================== */
+
+function clearSession() {
+
+  localStorage.removeItem(
+    SESSION_KEY
+  );
+
+  localStorage.removeItem(
+    "loggedIn"
+  );
+
+  localStorage.removeItem(
+    "username"
+  );
+
+  localStorage.removeItem(
+    "name"
+  );
+
+  localStorage.removeItem(
+    "role"
+  );
+
+  localStorage.removeItem(
+    "status"
+  );
+
+  localStorage.removeItem(
+    "loginTime"
+  );
+
+  localStorage.removeItem(
+    "lastActivity"
+  );
+
+}
+
+
+/* =====================================================
+   INDEX PAGE SESSION CHECK
+   IMPORTANT:
+   এখানে login করার সময় redirect করা হবে না।
+   শুধু আগে থেকে valid session থাকলে dashboard খুলবে।
+===================================================== */
+
+function checkExistingSession() {
+
+  const session =
+    getSession();
+
+
+  if (
+    !session ||
+    session.loggedIn !== true
+  ) {
+
+    return;
+
+  }
+
+
+  const role =
+    String(
+      session.role || ""
+    )
+    .trim()
+    .toLowerCase();
+
+
+  if (
+    !ROLE_PAGES[role]
+  ) {
+
+    clearSession();
+
+    return;
+
+  }
+
+
+  /*
+    যদি index page-এ valid login session
+    আগে থেকেই থাকে, dashboard-এ পাঠাবে।
+  */
+
+  window.location.replace(
+    ROLE_PAGES[role]
+  );
+
+}
+
+
+/*
+  Page load হওয়ার পরে check করবে।
+*/
+
+window.addEventListener(
+  "DOMContentLoaded",
+  function() {
+
+    checkExistingSession();
+
+  }
+);
+
+
+/* =====================================================
    DEVICE DETECTION
 ===================================================== */
 
 function detectPhone() {
 
-  const ua = navigator.userAgent;
+  const ua =
+    navigator.userAgent;
 
-  let device = "Unknown Device";
-  let os = "Unknown OS";
-  let browser = "Unknown Browser";
+  let device =
+    "Unknown Device";
+
+  let os =
+    "Unknown OS";
+
+  let browser =
+    "Unknown Browser";
 
 
-  /* =========================
-     DEVICE
-  ========================== */
+  /* DEVICE */
 
   if (/iPhone/i.test(ua)) {
 
-    device = "Apple iPhone";
+    device =
+      "Apple iPhone";
 
   }
 
   else if (/iPad/i.test(ua)) {
 
-    device = "Apple iPad";
+    device =
+      "Apple iPad";
 
   }
 
   else if (/Samsung/i.test(ua)) {
 
-    device = "Samsung Galaxy";
+    device =
+      "Samsung Galaxy";
 
   }
 
-  else if (/SM-[A-Z0-9-]+/i.test(ua)) {
+  else if (
+    /SM-[A-Z0-9-]+/i.test(ua)
+  ) {
 
-    device = "Samsung Galaxy";
+    device =
+      "Samsung Galaxy";
 
   }
 
   else if (/Xiaomi/i.test(ua)) {
 
-    device = "Xiaomi";
+    device =
+      "Xiaomi";
 
   }
 
   else if (/Redmi/i.test(ua)) {
 
-    device = "Redmi";
+    device =
+      "Redmi";
 
   }
 
   else if (/Huawei/i.test(ua)) {
 
-    device = "Huawei";
+    device =
+      "Huawei";
 
   }
 
   else if (/OPPO/i.test(ua)) {
 
-    device = "OPPO";
+    device =
+      "OPPO";
 
   }
 
   else if (/vivo/i.test(ua)) {
 
-    device = "Vivo";
+    device =
+      "Vivo";
 
   }
 
   else if (/realme/i.test(ua)) {
 
-    device = "Realme";
+    device =
+      "Realme";
 
   }
 
   else if (/OnePlus/i.test(ua)) {
 
-    device = "OnePlus";
+    device =
+      "OnePlus";
 
   }
 
   else if (/Android/i.test(ua)) {
 
-    device = "Android Phone";
+    device =
+      "Android Phone";
 
   }
 
   else if (/Windows/i.test(ua)) {
 
-    device = "Windows PC";
+    device =
+      "Windows PC";
 
   }
 
   else if (/Macintosh/i.test(ua)) {
 
-    device = "Mac";
+    device =
+      "Mac";
 
   }
 
 
-  /* =========================
-     OS
-  ========================== */
+  /* OS */
 
-  if (/Windows NT 10/i.test(ua)) {
+  if (
+    /Windows NT 10/i.test(ua)
+  ) {
 
-    os = "Windows 10/11";
+    os =
+      "Windows 10/11";
 
   }
 
   else if (/Android/i.test(ua)) {
 
     const match =
-      ua.match(/Android\s([0-9.]+)/i);
+      ua.match(
+        /Android\s([0-9.]+)/i
+      );
 
     os =
       match
@@ -628,51 +898,61 @@ function detectPhone() {
 
   }
 
-  else if (/iPhone|iPad/i.test(ua)) {
+  else if (
+    /iPhone|iPad/i.test(ua)
+  ) {
 
     const match =
-      ua.match(/OS\s([0-9\_]+)/i);
+      ua.match(
+        /OS\s([0-9\_]+)/i
+      );
 
     os =
       match
         ? "iOS " +
-          match[1].replace(/\_/g, ".")
+          match[1].replace(
+            /\_/g,
+            "."
+          )
         : "iOS";
 
   }
 
   else if (/Mac OS X/i.test(ua)) {
 
-    os = "macOS";
+    os =
+      "macOS";
 
   }
 
   else if (/Linux/i.test(ua)) {
 
-    os = "Linux";
+    os =
+      "Linux";
 
   }
 
 
-  /* =========================
-     BROWSER
-  ========================== */
+  /* BROWSER */
 
   if (/Edg/i.test(ua)) {
 
-    browser = "Microsoft Edge";
+    browser =
+      "Microsoft Edge";
 
   }
 
   else if (/Chrome/i.test(ua)) {
 
-    browser = "Google Chrome";
+    browser =
+      "Google Chrome";
 
   }
 
   else if (/Firefox/i.test(ua)) {
 
-    browser = "Mozilla Firefox";
+    browser =
+      "Mozilla Firefox";
 
   }
 
@@ -681,14 +961,16 @@ function detectPhone() {
     !/Chrome/i.test(ua)
   ) {
 
-    browser = "Safari";
+    browser =
+      "Safari";
 
   }
 
 
   document.getElementById(
     "phoneName"
-  ).textContent = device;
+  ).textContent =
+    device;
 
 
   document.getElementById(
@@ -711,27 +993,34 @@ async function login() {
 
   const username =
     document
-      .getElementById("username")
+      .getElementById(
+        "username"
+      )
       .value
       .trim();
 
 
   const password =
     document
-      .getElementById("password")
+      .getElementById(
+        "password"
+      )
       .value
       .trim();
 
 
   const button =
-    document.getElementById("loginBtn");
+    document.getElementById(
+      "loginBtn"
+    );
 
 
-  /* =========================
-     VALIDATION
-  ========================== */
+  /* VALIDATION */
 
-  if (!username || !password) {
+  if (
+    !username ||
+    !password
+  ) {
 
     showMessage(
       "Please enter username and password.",
@@ -743,7 +1032,8 @@ async function login() {
   }
 
 
-  button.disabled = true;
+  button.disabled =
+    true;
 
   button.textContent =
     "Logging in...";
@@ -755,16 +1045,17 @@ async function login() {
   try {
 
 
-    /* =========================
-       SEND LOGIN REQUEST
-    ========================== */
+    /* =================================================
+       LOGIN REQUEST
+    ================================================= */
 
     const response =
       await fetch(
         API_URL,
         {
 
-          method: "POST",
+          method:
+            "POST",
 
           headers: {
 
@@ -776,7 +1067,8 @@ async function login() {
           body:
             JSON.stringify({
 
-              action: "login",
+              action:
+                "login",
 
               username:
                 username,
@@ -814,12 +1106,10 @@ async function login() {
        LOGIN SUCCESS
     ================================================= */
 
-    if (data.success === true) {
+    if (
+      data.success === true
+    ) {
 
-
-      /* =========================
-         GET USER DATA
-      ========================== */
 
       const loginUsername =
         data.username ||
@@ -845,24 +1135,24 @@ async function login() {
         "Active";
 
 
-      /* =========================
-         NORMALIZE ROLE
-      ========================== */
+      /* NORMALIZE ROLE */
 
       const role =
-        String(userRole)
-          .trim()
-          .toLowerCase();
+        String(
+          userRole
+        )
+        .trim()
+        .toLowerCase();
 
 
-      /* =========================
-         NORMALIZE STATUS
-      ========================== */
+      /* NORMALIZE STATUS */
 
       const status =
-        String(userStatus)
-          .trim()
-          .toLowerCase();
+        String(
+          userStatus
+        )
+        .trim()
+        .toLowerCase();
 
 
       console.log(
@@ -886,9 +1176,7 @@ async function login() {
       );
 
 
-      /* =================================================
-         STATUS CHECK
-      ================================================= */
+      /* STATUS CHECK */
 
       if (
         status !== "active"
@@ -899,7 +1187,8 @@ async function login() {
           "error"
         );
 
-        button.disabled = false;
+        button.disabled =
+          false;
 
         button.textContent =
           "Login";
@@ -909,9 +1198,7 @@ async function login() {
       }
 
 
-      /* =================================================
-         ROLE CHECK
-      ================================================= */
+      /* ROLE CHECK */
 
       if (
         !ROLE_PAGES[role]
@@ -927,7 +1214,8 @@ async function login() {
           role
         );
 
-        button.disabled = false;
+        button.disabled =
+          false;
 
         button.textContent =
           "Login";
@@ -941,50 +1229,41 @@ async function login() {
          SAVE SESSION
       ================================================= */
 
-      localStorage.setItem(
-        "loggedIn",
-        "true"
-      );
+      saveSession({
+
+        username:
+          loginUsername,
+
+        name:
+          userName,
+
+        role:
+          role,
+
+        status:
+          userStatus
+
+      });
 
 
-      localStorage.setItem(
-        "username",
-        loginUsername
-      );
+      /* =================================================
+         VERIFY SESSION
+      ================================================= */
+
+      const savedSession =
+        getSession();
 
 
-      localStorage.setItem(
-        "name",
-        userName
-      );
+      if (
+        !savedSession ||
+        savedSession.loggedIn !== true
+      ) {
 
+        throw new Error(
+          "Unable to create login session."
+        );
 
-      localStorage.setItem(
-        "role",
-        role
-      );
-
-
-      localStorage.setItem(
-        "status",
-        userStatus
-      );
-
-
-      /* LOGIN TIME */
-
-      localStorage.setItem(
-        "loginTime",
-        Date.now()
-      );
-
-
-      /* LAST ACTIVITY */
-
-      localStorage.setItem(
-        "lastActivity",
-        Date.now()
-      );
+      }
 
 
       /* =================================================
@@ -997,15 +1276,18 @@ async function login() {
       );
 
 
-      /* =================================================
-         ROLE BASED REDIRECT
-      ================================================= */
+      /*
+        replace ব্যবহার করা হচ্ছে।
+        তাই login page browser history-তে
+        আগের মতো পড়ে থাকবে না।
+      */
 
       setTimeout(
         function() {
 
-          window.location.href =
-            ROLE_PAGES[role];
+          window.location.replace(
+            ROLE_PAGES[role]
+          );
 
         },
         500
@@ -1020,7 +1302,6 @@ async function login() {
     ================================================= */
 
     else {
-
 
       showMessage(
 
@@ -1054,9 +1335,12 @@ async function login() {
 
 
     showMessage(
+
       error.message ||
       "Unable to connect to server.",
+
       "error"
+
     );
 
 
@@ -1131,35 +1415,45 @@ document.addEventListener(
 
 
     if (
-      event.key === "Enter"
+      event.key !== "Enter"
     ) {
 
+      return;
 
-      const username =
-        document
-          .getElementById("username")
-          .value
-          .trim();
+    }
 
 
-      const password =
-        document
-          .getElementById("password")
-          .value
-          .trim();
+    const username =
+      document
+        .getElementById(
+          "username"
+        )
+        .value
+        .trim();
 
 
-      if (
-        username &&
-        password &&
-        !document
-          .getElementById("loginBtn")
-          .disabled
-      ) {
+    const password =
+      document
+        .getElementById(
+          "password"
+        )
+        .value
+        .trim();
 
-        login();
 
-      }
+    const button =
+      document.getElementById(
+        "loginBtn"
+      );
+
+
+    if (
+      username &&
+      password &&
+      !button.disabled
+    ) {
+
+      login();
 
     }
 
@@ -1167,15 +1461,30 @@ document.addEventListener(
 );
 
 
+/* =====================================================
+   PREVENT BF CACHE PROBLEM
+===================================================== */
+
 window.addEventListener(
   "pageshow",
-  function() {
+  function(event) {
+
+    /*
+      Back/forward cache থেকে index এলে
+      session আবার check করবে।
+    */
+
+    if (event.persisted) {
+
+      checkExistingSession();
+
+    }
 
   }
 );
 
-</script>
 
+</script>
 
 </body>
 
