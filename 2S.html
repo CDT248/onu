@@ -19,10 +19,6 @@
 >
 <style>
 
-/* =====================================================
-   GLOBAL
-===================================================== */
-
 *{
   margin:0;
   padding:0;
@@ -53,10 +49,6 @@
 }
 
 
-/* =====================================================
-   DARK MODE
-===================================================== */
-
 body.dark{
 
   --bg:#111827;
@@ -73,10 +65,6 @@ body.dark{
 }
 
 
-/* =====================================================
-   BODY
-===================================================== */
-
 body{
 
   background:var(--bg);
@@ -87,11 +75,6 @@ body{
     color .25s;
 
 }
-
-
-/* =====================================================
-   BUTTON
-===================================================== */
 
 button{
 
@@ -108,10 +91,6 @@ button:disabled{
 
 }
 
-
-/* =====================================================
-   HEADER
-===================================================== */
 
 .header{
 
@@ -152,10 +131,6 @@ button:disabled{
 }
 
 
-/* =====================================================
-   HEADER RIGHT
-===================================================== */
-
 .header-right{
 
   display:flex;
@@ -166,10 +141,6 @@ button:disabled{
 
 }
 
-
-/* =====================================================
-   USERNAME DISPLAY
-===================================================== */
 
 .header-user{
 
@@ -221,10 +192,6 @@ button:disabled{
 
 }
 
-
-/* =====================================================
-   BUTTON
-===================================================== */
 
 .btn{
 
@@ -279,10 +246,6 @@ button:disabled{
 }
 
 
-/* =====================================================
-   THEME BUTTON
-===================================================== */
-
 .theme-btn{
 
   height:42px;
@@ -298,10 +261,6 @@ button:disabled{
 
 }
 
-
-/* =====================================================
-   LOGOUT
-===================================================== */
 
 .btn-logout{
 
@@ -328,10 +287,6 @@ button:disabled{
 }
 
 
-/* =====================================================
-   CONTAINER
-===================================================== */
-
 .container{
 
   width:100%;
@@ -344,10 +299,6 @@ button:disabled{
 
 }
 
-
-/* =====================================================
-   TOP SECTION
-===================================================== */
 
 .top-section{
 
@@ -381,10 +332,6 @@ button:disabled{
 
 }
 
-
-/* =====================================================
-   FILTER
-===================================================== */
 
 .filter-box{
 
@@ -470,10 +417,6 @@ button:disabled{
 
 }
 
-
-/* =====================================================
-   TABLE
-===================================================== */
 
 .table-box{
 
@@ -592,10 +535,6 @@ tr:hover td{
 }
 
 
-/* =====================================================
-   ACTION
-===================================================== */
-
 .actions{
 
   display:flex;
@@ -631,10 +570,6 @@ tr:hover td{
 
 }
 
-
-/* =====================================================
-   PAGINATION
-===================================================== */
 
 .pagination-box{
 
@@ -710,10 +645,6 @@ tr:hover td{
 
 }
 
-
-/* =====================================================
-   MODAL
-===================================================== */
 
 .modal{
 
@@ -824,10 +755,6 @@ tr:hover td{
 
 }
 
-
-/* =====================================================
-   FORM
-===================================================== */
 
 .form{
 
@@ -950,10 +877,6 @@ tr:hover td{
 }
 
 
-/* =====================================================
-   LOADING / EMPTY
-===================================================== */
-
 .loading{
 
   text-align:center;
@@ -977,10 +900,6 @@ tr:hover td{
 
 }
 
-
-/* =====================================================
-   TOAST
-===================================================== */
 
 .toast{
 
@@ -1041,10 +960,6 @@ tr:hover td{
 
 }
 
-
-/* =====================================================
-   RESPONSIVE
-===================================================== */
 
 @media(max-width:900px){
 
@@ -1218,10 +1133,6 @@ tr:hover td{
 <body>
 
 
-<!-- =====================================================
-HEADER
-===================================================== -->
-
 <header class="header">
 
 
@@ -1254,8 +1165,6 @@ HEADER
     </div>
 
 
-    <!-- THEME -->
-
     <button
       class="theme-btn"
       id="themeBtn"
@@ -1265,7 +1174,7 @@ HEADER
     </button>
 
 
-    <!-- REFRESH -->
+
 
     <button
       class="btn btn-refresh"
@@ -1276,7 +1185,6 @@ HEADER
     </button>
 
 
-    <!-- NEW ENTRY -->
 
     <button
       class="btn btn-primary"
@@ -1286,7 +1194,7 @@ HEADER
     </button>
 
 
-    <!-- LOGOUT -->
+
 
     <button
       class="btn btn-logout"
@@ -1299,10 +1207,6 @@ HEADER
 
 </header>
 
-
-<!-- =====================================================
-MAIN
-===================================================== -->
 
 <main class="container">
 
@@ -1325,8 +1229,6 @@ MAIN
 
   </div>
 
-
-  <!-- FILTER -->
 
   <section class="filter-box">
 
@@ -1365,9 +1267,6 @@ MAIN
 
 
   </section>
-
-
-  <!-- TABLE -->
 
   <section class="table-box">
 
@@ -1479,10 +1378,6 @@ MAIN
 </main>
 
 
-<!-- =====================================================
-ENTRY MODAL
-===================================================== -->
-
 <div
   class="modal"
   id="entryModal"
@@ -1520,9 +1415,6 @@ ENTRY MODAL
 
       <div class="form-grid">
 
-
-        <!-- USERNAME -->
-
         <div class="form-group">
 
 
@@ -1540,8 +1432,6 @@ ENTRY MODAL
 
         </div>
 
-
-        <!-- IP -->
 
         <div class="form-group">
 
@@ -1563,8 +1453,6 @@ ENTRY MODAL
         </div>
 
 
-        <!-- WORK -->
-
         <div class="form-group full">
 
 
@@ -1582,8 +1470,6 @@ ENTRY MODAL
 
         </div>
 
-
-        <!-- DATE -->
 
         <div class="form-group">
 
@@ -1639,10 +1525,6 @@ ENTRY MODAL
 </div>
 
 
-<!-- =====================================================
-TOAST
-===================================================== -->
-
 <div
   class="toast"
   id="toast"
@@ -1651,35 +1533,15 @@ TOAST
 
 <script>
 
-
-/* =====================================================
-API
-===================================================== */
-
 const API_URL =
 "https://script.google.com/macros/s/AKfycbx6fo2Nogf3ETCtS_B-o0HCFqEs3vYkJ9IT9uu_-3l1w8fNJw77mZipeyFm-zZcjUw-5Q/exec";
 
 
-/* =====================================================
-LOGIN PAGE
-===================================================== */
-
 const LOGIN_PAGE =
 "index.html";
 
-
-/* =====================================================
-ROWS PER PAGE
-===================================================== */
-
 const ROWS_PER_PAGE =
 10;
-
-
-/* =====================================================
-AUTO LOGOUT
-5 MINUTES
-===================================================== */
 
 const SESSION_TIMEOUT =
 5 * 60 * 1000;
@@ -1689,20 +1551,11 @@ let inactivityTimer =
 null;
 
 
-/* =====================================================
-DATA
-===================================================== */
-
 let allData = [];
 
 let filteredData = [];
 
 let currentPage = 1;
-
-
-/* =====================================================
-GET USERNAME
-===================================================== */
 
 function getLoggedInUsername(){
 
@@ -1791,11 +1644,6 @@ function getLoggedInUsername(){
 
 }
 
-
-/* =====================================================
-SHOW USERNAME
-===================================================== */
-
 function showLoggedInUsername(){
 
 
@@ -1830,11 +1678,6 @@ function showLoggedInUsername(){
 
 }
 
-
-/* =====================================================
-LOGIN CHECK / URL PROTECTION
-===================================================== */
-
 function checkLogin(){
 
 
@@ -1862,24 +1705,10 @@ function checkLogin(){
 
 }
 
-
-/* =====================================================
-LOGOUT
-IMPORTANT:
-THEME WILL NOT BE DELETED
-===================================================== */
-
 function logoutUser(){
 
 
   try{
-
-
-    /*
-      Theme save করে রাখছি
-      যাতে logout/login এর পরেও
-      dark mode থাকে।
-    */
 
     const savedTheme =
       localStorage.getItem(
@@ -1887,16 +1716,8 @@ function logoutUser(){
       );
 
 
-    /*
-      সব login/session data remove
-    */
-
     localStorage.clear();
 
-
-    /*
-      Theme আবার restore
-    */
 
     if(savedTheme){
 
@@ -1908,25 +1729,11 @@ function logoutUser(){
     }
 
 
-    /*
-      Session storage
-    */
-
     sessionStorage.clear();
-
-
-    /*
-      Timer বন্ধ
-    */
 
     clearTimeout(
       inactivityTimer
     );
-
-
-    /*
-      Login page
-    */
 
     window.location.replace(
       LOGIN_PAGE
@@ -1950,10 +1757,6 @@ function logoutUser(){
 }
 
 
-/* =====================================================
-AUTO LOGOUT TIMER
-===================================================== */
-
 function resetInactivityTimer(){
 
 
@@ -1961,11 +1764,6 @@ function resetInactivityTimer(){
     inactivityTimer
   );
 
-
-  /*
-    User 5 minute কিছু না করলে
-    logout হবে।
-  */
 
   inactivityTimer =
     setTimeout(
@@ -1994,10 +1792,6 @@ function resetInactivityTimer(){
 
 }
 
-
-/* =====================================================
-ACTIVITY MONITOR
-===================================================== */
 
 function startActivityMonitor(){
 
@@ -2032,18 +1826,10 @@ function startActivityMonitor(){
   );
 
 
-  /*
-    প্রথম timer start
-  */
-
   resetInactivityTimer();
 
 }
 
-
-/* =====================================================
-THEME LOAD
-===================================================== */
 
 function loadTheme(){
 
@@ -2078,10 +1864,6 @@ function loadTheme(){
 }
 
 
-/* =====================================================
-THEME TOGGLE
-===================================================== */
-
 function toggleTheme(){
 
 
@@ -2096,10 +1878,6 @@ function toggleTheme(){
     );
 
 
-  /*
-    Theme আলাদা key তে save
-  */
-
   localStorage.setItem(
     "dashboardTheme",
     dark
@@ -2112,10 +1890,6 @@ function toggleTheme(){
 
 }
 
-
-/* =====================================================
-THEME BUTTON
-===================================================== */
 
 function updateThemeButton(){
 
@@ -2154,10 +1928,6 @@ function updateThemeButton(){
 
 }
 
-
-/* =====================================================
-LOAD DATA
-===================================================== */
 
 async function loadData(){
 
@@ -2300,10 +2070,6 @@ async function loadData(){
 
 }
 
-
-/* =====================================================
-RENDER TABLE
-===================================================== */
 
 function renderTable(){
 
@@ -2450,10 +2216,6 @@ function renderTable(){
 }
 
 
-/* =====================================================
-FILTER
-===================================================== */
-
 function applyFilters(){
 
 
@@ -2533,11 +2295,6 @@ function applyFilters(){
 
 }
 
-
-/* =====================================================
-CLEAR FILTER
-===================================================== */
-
 function clearFilters(){
 
 
@@ -2561,10 +2318,6 @@ function clearFilters(){
 
 }
 
-
-/* =====================================================
-PAGINATION
-===================================================== */
 
 function renderPagination(){
 
@@ -2719,10 +2472,6 @@ function renderPagination(){
 }
 
 
-/* =====================================================
-CHANGE PAGE
-===================================================== */
-
 function changePage(page){
 
 
@@ -2754,10 +2503,6 @@ function changePage(page){
 }
 
 
-/* =====================================================
-TOTAL
-===================================================== */
-
 function updateTotal(){
 
 
@@ -2768,10 +2513,6 @@ function updateTotal(){
 
 }
 
-
-/* =====================================================
-OPEN ENTRY MODAL
-===================================================== */
 
 function openEntryModal(){
 
@@ -2801,19 +2542,11 @@ function openEntryModal(){
   ).reset();
 
 
-  /*
-    Username automatic
-  */
-
   document.getElementById(
     "nameInput"
   ).value =
     username;
 
-
-  /*
-    Date automatic
-  */
 
   document.getElementById(
     "dateInput"
@@ -2830,10 +2563,6 @@ function openEntryModal(){
 }
 
 
-/* =====================================================
-CLOSE MODAL
-===================================================== */
-
 function closeEntryModal(){
 
 
@@ -2845,10 +2574,6 @@ function closeEntryModal(){
 
 }
 
-
-/* =====================================================
-SUBMIT ENTRY
-===================================================== */
 
 async function submitEntry(event){
 
@@ -2888,10 +2613,6 @@ async function submitEntry(event){
     .value
     .trim();
 
-
-  /*
-    Date auto
-  */
 
   const date =
     getTodayDisplayDate();
@@ -2947,20 +2668,12 @@ async function submitEntry(event){
 
       data:{
 
-        /*
-          Name = logged username
-          User edit করতে পারবে না
-        */
-
         Name:username,
 
         Ip:ip,
 
         Work:work,
 
-        /*
-          Date automatic
-        */
 
         Date:date
 
@@ -3060,10 +2773,6 @@ async function submitEntry(event){
 
 }
 
-
-/* =====================================================
-SELL
-===================================================== */
 
 async function sellEntryByRow(
   rowNumber
@@ -3238,10 +2947,6 @@ async function sellEntryByRow(
 }
 
 
-/* =====================================================
-TODAY DATE
-===================================================== */
-
 function getTodayDisplayDate(){
 
 
@@ -3284,10 +2989,6 @@ function getTodayDisplayDate(){
 }
 
 
-/* =====================================================
-LOADING
-===================================================== */
-
 function showLoading(){
 
 
@@ -3313,10 +3014,6 @@ function showLoading(){
 
 }
 
-
-/* =====================================================
-ERROR
-===================================================== */
 
 function showError(
   message
@@ -3349,10 +3046,6 @@ function showError(
 
 }
 
-
-/* =====================================================
-TOAST
-===================================================== */
 
 function showToast(
   message,
@@ -3389,10 +3082,6 @@ function showToast(
 
 }
 
-
-/* =====================================================
-ESCAPE HTML
-===================================================== */
 
 function escapeHTML(
   value
@@ -3431,10 +3120,6 @@ function escapeHTML(
 }
 
 
-/* =====================================================
-OUTSIDE MODAL CLICK
-===================================================== */
-
 document
   .getElementById(
     "entryModal"
@@ -3457,9 +3142,6 @@ document
   );
 
 
-/* =====================================================
-ESC KEY
-===================================================== */
 
 document.addEventListener(
   "keydown",
@@ -3479,18 +3161,9 @@ document.addEventListener(
 );
 
 
-/* =====================================================
-PAGE LOAD
-===================================================== */
-
 document.addEventListener(
   "DOMContentLoaded",
   function(){
-
-
-    /*
-      1. URL Protection
-    */
 
     if(!checkLogin()){
 
@@ -3498,32 +3171,12 @@ document.addEventListener(
 
     }
 
-
-    /*
-      2. Username show
-    */
-
     showLoggedInUsername();
-
-
-    /*
-      3. Theme load
-      Login/logout হলেও theme থাকবে
-    */
 
     loadTheme();
 
-
-    /*
-      4. 5 minute auto logout
-    */
-
     startActivityMonitor();
 
-
-    /*
-      5. Load dashboard data
-    */
 
     loadData();
 
