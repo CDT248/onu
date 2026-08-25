@@ -31,6 +31,7 @@
   --blue:#2563eb;
   --red:#dc2626;
   --orange:#d97706;
+  --purple:#7c3aed;
   --shadow:rgba(0,0,0,.20);
 }
 
@@ -137,6 +138,15 @@ button:disabled{
   font-weight:600;
 }
 
+.btn-users{
+  background:#7c3aed;
+  color:#fff;
+}
+
+.btn-users:hover{
+  background:#6d28d9;
+}
+
 
 /* =====================================================
 MAIN
@@ -199,7 +209,8 @@ FILTER
   color:var(--muted);
 }
 
-.field input{
+.field input,
+.field select{
   width:100%;
   height:42px;
   border:1px solid var(--border);
@@ -211,7 +222,8 @@ FILTER
   font-size:14px;
 }
 
-.field input:focus{
+.field input:focus,
+.field select:focus{
   border-color:var(--green);
 }
 
@@ -464,7 +476,8 @@ FORM
 }
 
 .form-group input,
-.form-group textarea{
+.form-group textarea,
+.form-group select{
   width:100%;
   border:1px solid var(--border);
   border-radius:9px;
@@ -475,7 +488,8 @@ FORM
   color:var(--text);
 }
 
-.form-group input{
+.form-group input,
+.form-group select{
   height:48px;
 }
 
@@ -485,7 +499,8 @@ FORM
 }
 
 .form-group input:focus,
-.form-group textarea:focus{
+.form-group textarea:focus,
+.form-group select:focus{
   border-color:var(--green);
 }
 
@@ -494,6 +509,110 @@ FORM
   justify-content:flex-end;
   gap:10px;
   padding-top:30px;
+}
+
+
+/* =====================================================
+USER MODAL
+===================================================== */
+
+.user-modal-box{
+  max-width:1100px;
+}
+
+.user-toolbar{
+  padding:16px 24px;
+  border-bottom:1px solid var(--border);
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
+}
+
+.user-total{
+  font-size:13px;
+  color:var(--muted);
+}
+
+.user-table-wrapper{
+  width:100%;
+  overflow-x:auto;
+  padding:0 20px;
+}
+
+.user-table{
+  min-width:800px;
+}
+
+.user-actions{
+  display:flex;
+  gap:6px;
+}
+
+.user-action{
+  padding:7px 10px;
+  border-radius:6px;
+  font-size:12px;
+  font-weight:600;
+}
+
+.user-action.edit{
+  background:#e8f1ff;
+  color:#2563eb;
+}
+
+.user-action.block{
+  background:#fff7ed;
+  color:#d97706;
+}
+
+.user-action.unblock{
+  background:#dcfce7;
+  color:#15803d;
+}
+
+.user-action.delete{
+  background:#fee2e2;
+  color:#dc2626;
+}
+
+.status-badge,
+.role-badge{
+  display:inline-flex;
+  align-items:center;
+  padding:5px 9px;
+  border-radius:20px;
+  font-size:11px;
+  font-weight:700;
+}
+
+.status-active{
+  background:#dcfce7;
+  color:#15803d;
+}
+
+.status-blocked{
+  background:#fee2e2;
+  color:#dc2626;
+}
+
+.status-inactive{
+  background:#f3f4f6;
+  color:#6b7280;
+}
+
+.role-badge{
+  background:#ede9fe;
+  color:#6d28d9;
+}
+
+
+/* =====================================================
+USER FORM MODAL
+===================================================== */
+
+.user-form-modal-box{
+  max-width:650px;
 }
 
 
@@ -531,7 +650,7 @@ TOAST
   transform:translateY(100px);
   opacity:0;
   transition:.3s;
-  z-index:2000;
+  z-index:3000;
   font-size:14px;
 }
 
@@ -546,52 +665,6 @@ TOAST
 
 .toast.error{
   background:#dc2626;
-}
-
-
-/* =====================================================
-SECURITY LOGOUT OVERLAY
-===================================================== */
-
-.security-overlay{
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,.75);
-  display:none;
-  align-items:center;
-  justify-content:center;
-  z-index:99999;
-  padding:20px;
-}
-
-.security-overlay.show{
-  display:flex;
-}
-
-.security-box{
-  width:100%;
-  max-width:400px;
-  background:var(--card);
-  color:var(--text);
-  border-radius:16px;
-  padding:30px;
-  text-align:center;
-  box-shadow:0 20px 60px rgba(0,0,0,.35);
-}
-
-.security-icon{
-  font-size:45px;
-  margin-bottom:15px;
-}
-
-.security-box h2{
-  margin-bottom:10px;
-}
-
-.security-box p{
-  color:var(--muted);
-  font-size:14px;
-  line-height:1.6;
 }
 
 
@@ -633,6 +706,7 @@ MOBILE
     gap:6px;
     width:100%;
     justify-content:flex-end;
+    flex-wrap:wrap;
   }
 
   .header-right .btn,
@@ -724,6 +798,14 @@ HEADER
       🔄 Refresh
     </button>
 
+    <!-- USER BUTTON -->
+    <button
+      class="btn btn-users"
+      onclick="openUserModal()"
+    >
+      👤 Users
+    </button>
+
     <button
       class="btn btn-primary"
       onclick="openEntryModal()"
@@ -759,9 +841,7 @@ MAIN
   </div>
 
 
-  <!-- ===================================================
-  FILTER
-  ==================================================== -->
+  <!-- FILTER -->
 
   <section class="filter-box">
 
@@ -825,9 +905,7 @@ MAIN
   </section>
 
 
-  <!-- ===================================================
-  TABLE
-  ==================================================== -->
+  <!-- TABLE -->
 
   <section class="table-box">
 
@@ -858,13 +936,9 @@ MAIN
           <tr>
 
             <th>Name</th>
-
             <th>IP</th>
-
             <th>Work</th>
-
             <th>Date</th>
-
             <th>Action</th>
 
           </tr>
@@ -951,9 +1025,7 @@ ENTRY MODAL
 
         <div class="form-group">
 
-          <label>
-            Name
-          </label>
+          <label>Name</label>
 
           <input
             type="text"
@@ -968,9 +1040,7 @@ ENTRY MODAL
 
         <div class="form-group">
 
-          <label>
-            IP
-          </label>
+          <label>IP</label>
 
           <input
             type="text"
@@ -985,9 +1055,7 @@ ENTRY MODAL
 
         <div class="form-group full">
 
-          <label>
-            Work
-          </label>
+          <label>Work</label>
 
           <textarea
             id="workInput"
@@ -1000,9 +1068,7 @@ ENTRY MODAL
 
         <div class="form-group">
 
-          <label>
-            Date
-          </label>
+          <label>Date</label>
 
           <input
             type="date"
@@ -1042,27 +1108,304 @@ ENTRY MODAL
 
 
 <!-- =====================================================
-SECURITY OVERLAY
+USER LIST MODAL
 ===================================================== -->
 
 <div
-  class="security-overlay"
-  id="securityOverlay"
+  class="modal"
+  id="userModal"
 >
 
-  <div class="security-box">
+  <div class="modal-box user-modal-box">
 
-    <div class="security-icon">
-      🔒
+    <div class="modal-header">
+
+      <h2>
+        👤 User Management
+      </h2>
+
+      <button
+        class="close-btn"
+        onclick="closeUserModal()"
+      >
+        ×
+      </button>
+
     </div>
 
-    <h2>
-      Session Expired
-    </h2>
 
-    <p>
-      You were automatically logged out because there was no activity for 5 minutes.
-    </p>
+    <div class="user-toolbar">
+
+      <div class="user-total">
+
+        Total Users:
+        <strong id="userTotal">
+          0
+        </strong>
+
+      </div>
+
+
+      <div>
+
+        <button
+          class="btn btn-refresh"
+          onclick="loadUsers()"
+          id="userRefreshBtn"
+        >
+          🔄 Refresh
+        </button>
+
+        <button
+          class="btn btn-primary"
+          onclick="openAddUserModal()"
+        >
+          ➕ Add User
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <div class="user-table-wrapper">
+
+      <table class="user-table">
+
+        <thead>
+
+          <tr>
+
+            <th>Username</th>
+            <th>Password</th>
+            <th>Name</th>
+            <th>Role</th>
+            <th>Status</th>
+            <th>Action</th>
+
+          </tr>
+
+        </thead>
+
+
+        <tbody id="userTableBody">
+
+          <tr>
+
+            <td colspan="6">
+
+              <div class="loading">
+                Loading users...
+              </div>
+
+            </td>
+
+          </tr>
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- =====================================================
+ADD / EDIT USER MODAL
+===================================================== -->
+
+<div
+  class="modal"
+  id="userFormModal"
+>
+
+  <div class="modal-box user-form-modal-box">
+
+    <div class="modal-header">
+
+      <h2 id="userFormTitle">
+        Add User
+      </h2>
+
+      <button
+        class="close-btn"
+        onclick="closeUserFormModal()"
+      >
+        ×
+      </button>
+
+    </div>
+
+
+    <form
+      class="form"
+      id="userForm"
+      onsubmit="submitUser(event)"
+    >
+
+      <div class="form-grid">
+
+
+        <!-- USERNAME -->
+
+        <div class="form-group">
+
+          <label>
+            Username
+          </label>
+
+          <input
+            type="text"
+            id="userUsername"
+            placeholder="Enter username"
+            autocomplete="off"
+            required
+          >
+
+        </div>
+
+
+        <!-- PASSWORD -->
+
+        <div class="form-group">
+
+          <label>
+            Password
+          </label>
+
+          <input
+            type="text"
+            id="userPassword"
+            placeholder="Enter password"
+            autocomplete="off"
+            required
+          >
+
+        </div>
+
+
+        <!-- NAME -->
+
+        <div class="form-group">
+
+          <label>
+            Name
+          </label>
+
+          <input
+            type="text"
+            id="userName"
+            placeholder="Enter name"
+            autocomplete="off"
+            required
+          >
+
+        </div>
+
+
+        <!-- ROLE -->
+
+        <div class="form-group">
+
+          <label>
+            Role
+          </label>
+
+          <select
+            id="userRole"
+            required
+          >
+
+            <option value="">
+              Select Role
+            </option>
+
+            <option value="admin">
+              Admin
+            </option>
+
+            <option value="support">
+              Support
+            </option>
+
+            <option value="call">
+              Call
+            </option>
+
+            <option value="manager">
+              Manager
+            </option>
+
+            <option value="guest">
+              Guest
+            </option>
+
+          </select>
+
+        </div>
+
+
+        <!-- STATUS -->
+
+        <div class="form-group">
+
+          <label>
+            Status
+          </label>
+
+          <select
+            id="userStatus"
+            required
+          >
+
+            <option value="">
+              Select Status
+            </option>
+
+            <option value="Active">
+              Active
+            </option>
+
+            <option value="Blocked">
+              Blocked
+            </option>
+
+            <option value="Inactive">
+              Inactive
+            </option>
+
+          </select>
+
+        </div>
+
+
+      </div>
+
+
+      <div class="form-footer">
+
+        <button
+          type="button"
+          class="btn btn-cancel"
+          onclick="closeUserFormModal()"
+        >
+          Cancel
+        </button>
+
+        <button
+          type="submit"
+          class="btn btn-primary"
+          id="userSubmitBtn"
+        >
+          Add User
+        </button>
+
+      </div>
+
+    </form>
 
   </div>
 
@@ -1083,7 +1426,7 @@ TOAST
 
 
 /* =====================================================
-GOOGLE APPS SCRIPT URL
+DATA API
 ===================================================== */
 
 const API_URL =
@@ -1091,13 +1434,18 @@ const API_URL =
 
 
 /* =====================================================
+USER API
+===================================================== */
+
+const USER_API_URL =
+"https://script.google.com/macros/s/AKfycby1wEKzuThOiXdf9lVmoJVysfasR14ivssXFjGFfDnnc-d16uQRjNhel5LKNXDK4ZbxDw/exec";
+
+
+/* =====================================================
 SETTINGS
 ===================================================== */
 
 const ROWS_PER_PAGE = 10;
-
-const INACTIVITY_LIMIT =
-  5 * 60 * 1000;
 
 let allData = [];
 
@@ -1107,9 +1455,14 @@ let currentPage = 1;
 
 let editingRow = null;
 
-let inactivityTimer = null;
 
-let isLoggingOut = false;
+/* =====================================================
+USER SETTINGS
+===================================================== */
+
+let allUsers = [];
+
+let editingUser = null;
 
 
 /* =====================================================
@@ -1142,9 +1495,7 @@ function getLoggedInUsername(){
       possibleKeys[i];
 
     const value =
-      localStorage.getItem(
-        key
-      );
+      localStorage.getItem(key);
 
 
     if(!value){
@@ -1164,15 +1515,10 @@ function getLoggedInUsername(){
       ){
 
         const username =
-
           parsed.username ||
-
           parsed.Username ||
-
           parsed.userName ||
-
           parsed.name ||
-
           parsed.user;
 
 
@@ -1188,15 +1534,9 @@ function getLoggedInUsername(){
 
     }catch(error){
 
-      const text =
-        String(value).trim();
-
-
-      if(text){
-
-        return text;
-
-      }
+      return String(
+        value
+      ).trim();
 
     }
 
@@ -1209,10 +1549,10 @@ function getLoggedInUsername(){
 
 
 /* =====================================================
-CHECK LOGIN
+CHECK USERNAME
 ===================================================== */
 
-function checkLogin(){
+function requireUsername(){
 
   const username =
     getLoggedInUsername();
@@ -1220,192 +1560,88 @@ function checkLogin(){
 
   if(!username){
 
-    forceLogout();
+    showToast(
+      "Logged-in username পাওয়া যায়নি.",
+      "error"
+    );
 
-    return false;
+    return null;
 
   }
 
 
-  return true;
+  return username;
 
 }
 
 
 /* =====================================================
-FORCE LOGOUT
+AUTO LOGOUT
 ===================================================== */
 
-function forceLogout(){
+const INACTIVITY_LIMIT =
+  5 * 60 * 1000;
 
-  if(isLoggingOut){
-    return;
-  }
+let inactivityTimer = null;
 
-
-  isLoggingOut = true;
-
-
-  if(inactivityTimer){
-
-    clearTimeout(
-      inactivityTimer
-    );
-
-    inactivityTimer = null;
-
-  }
-
-
-  const overlay =
-    document.getElementById(
-      "securityOverlay"
-    );
-
-
-  if(overlay){
-
-    overlay.classList.add(
-      "show"
-    );
-
-  }
-
-
-  /*
-    Remove all possible login/session keys
-  */
-
-  const loginKeys = [
-
-    "username",
-    "Username",
-    "user",
-    "userData",
-    "loginData",
-    "loggedUser",
-    "currentUser",
-    "userInfo",
-    "token",
-    "authToken",
-    "session",
-    "loggedIn"
-
-  ];
-
-
-  loginKeys.forEach(
-    function(key){
-
-      localStorage.removeItem(
-        key
-      );
-
-    }
-  );
-
-
-  sessionStorage.clear();
-
-
-  /*
-    Small delay so logout message can appear
-  */
-
-  setTimeout(
-    function(){
-
-      window.location.replace(
-        "index.html"
-      );
-
-    },
-    500
-  );
-
-}
-
-
-/* =====================================================
-RESET INACTIVITY TIMER
-===================================================== */
 
 function resetInactivityTimer(){
 
-  if(isLoggingOut){
-    return;
-  }
-
-
-  /*
-    If login no longer exists,
-    immediately logout.
-  */
-
-  const username =
-    getLoggedInUsername();
-
-
-  if(!username){
-
-    forceLogout();
-
-    return;
-
-  }
-
-
-  if(inactivityTimer){
-
-    clearTimeout(
-      inactivityTimer
-    );
-
-  }
+  clearTimeout(
+    inactivityTimer
+  );
 
 
   inactivityTimer =
     setTimeout(
-      function(){
-
-        forceLogout();
-
-      },
+      autoLogout,
       INACTIVITY_LIMIT
     );
 
 }
 
 
-/* =====================================================
-USER ACTIVITY EVENTS
-===================================================== */
+function autoLogout(){
 
-const securityActivityEvents = [
+  clearTimeout(
+    inactivityTimer
+  );
 
+
+  localStorage.removeItem("username");
+  localStorage.removeItem("user");
+  localStorage.removeItem("userData");
+  localStorage.removeItem("loginData");
+  localStorage.removeItem("token");
+  localStorage.removeItem("authToken");
+  localStorage.removeItem("session");
+  localStorage.removeItem("loggedIn");
+
+
+  sessionStorage.clear();
+
+
+  window.location.replace(
+    "index.html"
+  );
+
+}
+
+
+[
   "mousemove",
   "mousedown",
   "keydown",
   "scroll",
   "touchstart",
   "click",
-  "wheel",
-  "pointerdown",
-  "pointermove"
-
-];
-
-
-securityActivityEvents.forEach(
+  "wheel"
+].forEach(
   function(eventName){
 
     document.addEventListener(
       eventName,
-      function(){
-
-        resetInactivityTimer();
-
-      },
+      resetInactivityTimer,
       true
     );
 
@@ -1413,121 +1649,7 @@ securityActivityEvents.forEach(
 );
 
 
-/* =====================================================
-INITIAL LOGIN CHECK
-===================================================== */
-
-(function(){
-
-  const username =
-    getLoggedInUsername();
-
-
-  if(!username){
-
-    /*
-      Don't allow dashboard without login.
-    */
-
-    window.location.replace(
-      "index.html"
-    );
-
-    return;
-
-  }
-
-
-  resetInactivityTimer();
-
-})();
-
-
-/* =====================================================
-PAGE VISIBILITY CHECK
-===================================================== */
-
-document.addEventListener(
-  "visibilitychange",
-  function(){
-
-    if(
-      document.visibilityState ===
-      "visible"
-    ){
-
-      if(!checkLogin()){
-
-        return;
-
-      }
-
-
-      resetInactivityTimer();
-
-    }
-
-  }
-);
-
-
-/* =====================================================
-PAGE SHOW / BFCACHE SECURITY
-===================================================== */
-
-window.addEventListener(
-  "pageshow",
-  function(event){
-
-    if(
-      event.persisted ||
-      !getLoggedInUsername()
-    ){
-
-      if(!isLoggingOut){
-
-        forceLogout();
-
-      }
-
-    }
-
-  }
-);
-
-
-/* =====================================================
-BACK BUTTON SECURITY
-===================================================== */
-
-history.pushState(
-  null,
-  "",
-  window.location.href
-);
-
-
-window.addEventListener(
-  "popstate",
-  function(){
-
-    if(!getLoggedInUsername()){
-
-      forceLogout();
-
-      return;
-
-    }
-
-
-    history.pushState(
-      null,
-      "",
-      window.location.href
-    );
-
-  }
-);
+resetInactivityTimer();
 
 
 /* =====================================================
@@ -1538,18 +1660,9 @@ document.addEventListener(
   "DOMContentLoaded",
   function(){
 
-    if(!checkLogin()){
-
-      return;
-
-    }
-
-
     loadTheme();
 
     loadData();
-
-    resetInactivityTimer();
 
   }
 );
@@ -1585,11 +1698,6 @@ function loadTheme(){
 
 function toggleTheme(){
 
-  if(!checkLogin()){
-    return;
-  }
-
-
   document.body.classList.toggle(
     "dark"
   );
@@ -1610,8 +1718,6 @@ function toggleTheme(){
 
 
   updateThemeButton();
-
-  resetInactivityTimer();
 
 }
 
@@ -1648,14 +1754,6 @@ LOAD DATA
 ===================================================== */
 
 async function loadData(){
-
-  if(!checkLogin()){
-    return;
-  }
-
-
-  resetInactivityTimer();
-
 
   const refreshBtn =
     document.getElementById(
@@ -1744,8 +1842,6 @@ async function loadData(){
     renderTable();
 
     updateTotal();
-
-    resetInactivityTimer();
 
 
   }catch(error){
@@ -1892,14 +1988,12 @@ function renderTable(){
                 ✏️ Edit
               </button>
 
-
               <button
                 class="btn-delete"
                 onclick="deleteEntryByRow(${rowNumber})"
               >
                 🗑️ Delete
               </button>
-
 
               <button
                 class="btn-sell"
@@ -1935,14 +2029,6 @@ FILTER
 
 function applyFilters(){
 
-  if(!checkLogin()){
-    return;
-  }
-
-
-  resetInactivityTimer();
-
-
   const search =
     document
       .getElementById(
@@ -1973,27 +2059,13 @@ function applyFilters(){
 
           const searchText = (
 
-            String(
-              row.Name || ""
-            ) +
-
+            String(row.Name || "") +
             " " +
-
-            String(
-              row.Ip || ""
-            ) +
-
+            String(row.Ip || "") +
             " " +
-
-            String(
-              row.Work || ""
-            ) +
-
+            String(row.Work || "") +
             " " +
-
-            String(
-              row.Date || ""
-            )
+            String(row.Date || "")
 
           ).toLowerCase();
 
@@ -2055,9 +2127,7 @@ function applyFilters(){
     );
 
 
-  currentPage =
-    1;
-
+  currentPage = 1;
 
   renderTable();
 
@@ -2072,42 +2142,26 @@ CLEAR FILTER
 
 function clearFilters(){
 
-  if(!checkLogin()){
-    return;
-  }
+  document.getElementById(
+    "searchInput"
+  ).value = "";
 
 
-  resetInactivityTimer();
+  document.getElementById(
+    "fromDate"
+  ).value = "";
 
 
-  document
-    .getElementById(
-      "searchInput"
-    )
-    .value = "";
-
-
-  document
-    .getElementById(
-      "fromDate"
-    )
-    .value = "";
-
-
-  document
-    .getElementById(
-      "toDate"
-    )
-    .value = "";
+  document.getElementById(
+    "toDate"
+  ).value = "";
 
 
   filteredData =
     [...allData];
 
 
-  currentPage =
-    1;
-
+  currentPage = 1;
 
   renderTable();
 
@@ -2120,9 +2174,7 @@ function clearFilters(){
 DATE
 ===================================================== */
 
-function convertToFilterDate(
-  value
-){
+function convertToFilterDate(value){
 
   if(!value){
     return "";
@@ -2146,23 +2198,15 @@ function convertToFilterDate(
     const year =
       parsed.getFullYear();
 
-
     const month =
       String(
         parsed.getMonth() + 1
-      ).padStart(
-        2,
-        "0"
-      );
-
+      ).padStart(2,"0");
 
     const day =
       String(
         parsed.getDate()
-      ).padStart(
-        2,
-        "0"
-      );
+      ).padStart(2,"0");
 
 
     return (
@@ -2229,15 +2273,12 @@ function renderPagination(){
     totalPages <= 1
   ){
 
-    pagination.innerHTML =
-      "";
-
+    pagination.innerHTML = "";
 
     pageInfo.textContent =
       filteredData.length
         ? "Page 1"
         : "Page 0";
-
 
     return;
 
@@ -2323,14 +2364,6 @@ function renderPagination(){
 
 function changePage(page){
 
-  if(!checkLogin()){
-    return;
-  }
-
-
-  resetInactivityTimer();
-
-
   const totalPages =
     Math.ceil(
       filteredData.length /
@@ -2363,12 +2396,10 @@ TOTAL
 
 function updateTotal(){
 
-  document
-    .getElementById(
-      "totalCount"
-    )
-    .textContent =
-      filteredData.length;
+  document.getElementById(
+    "totalCount"
+  ).textContent =
+    filteredData.length;
 
 }
 
@@ -2379,102 +2410,64 @@ OPEN ENTRY
 
 function openEntryModal(){
 
-  if(!checkLogin()){
-    return;
-  }
+  editingRow = null;
 
 
-  resetInactivityTimer();
+  document.getElementById(
+    "modalTitle"
+  ).textContent =
+    "New Entry";
 
 
-  editingRow =
-    null;
+  document.getElementById(
+    "submitBtn"
+  ).textContent =
+    "Save Entry";
 
 
-  document
-    .getElementById(
-      "modalTitle"
-    )
-    .textContent =
-      "New Entry";
+  document.getElementById(
+    "entryForm"
+  ).reset();
 
 
-  document
-    .getElementById(
-      "submitBtn"
-    )
-    .textContent =
-      "Save Entry";
+  document.getElementById(
+    "dateInput"
+  ).value =
+    getTodayInputDate();
 
 
-  document
-    .getElementById(
-      "entryForm"
-    )
-    .reset();
-
-
-  document
-    .getElementById(
-      "dateInput"
-    )
-    .value =
-      getTodayInputDate();
-
-
-  document
-    .getElementById(
-      "entryModal"
-    )
-    .classList
-    .add("show");
+  document.getElementById(
+    "entryModal"
+  ).classList.add(
+    "show"
+  );
 
 }
 
 
 /* =====================================================
-CLOSE MODAL
+CLOSE ENTRY
 ===================================================== */
 
 function closeEntryModal(){
 
-  if(!checkLogin()){
-    return;
-  }
+  document.getElementById(
+    "entryModal"
+  ).classList.remove(
+    "show"
+  );
 
 
-  resetInactivityTimer();
-
-
-  document
-    .getElementById(
-      "entryModal"
-    )
-    .classList
-    .remove("show");
-
-
-  editingRow =
-    null;
+  editingRow = null;
 
 }
 
 
 /* =====================================================
-EDIT
+EDIT ENTRY
 ===================================================== */
 
-function editEntryByRow(
-  rowNumber
-){
-
-  if(!checkLogin()){
-    return;
-  }
-
-
-  resetInactivityTimer();
-
+function editEntryByRow(rowNumber){
 
   const row =
     allData.find(
@@ -2506,83 +2499,60 @@ function editEntryByRow(
     row;
 
 
-  document
-    .getElementById(
-      "modalTitle"
-    )
-    .textContent =
-      "Edit Entry";
+  document.getElementById(
+    "modalTitle"
+  ).textContent =
+    "Edit Entry";
 
 
-  document
-    .getElementById(
-      "submitBtn"
-    )
-    .textContent =
-      "Update Entry";
+  document.getElementById(
+    "submitBtn"
+  ).textContent =
+    "Update Entry";
 
 
-  document
-    .getElementById(
-      "nameInput"
-    )
-    .value =
-      row.Name || "";
+  document.getElementById(
+    "nameInput"
+  ).value =
+    row.Name || "";
 
 
-  document
-    .getElementById(
-      "ipInput"
-    )
-    .value =
-      row.Ip || "";
+  document.getElementById(
+    "ipInput"
+  ).value =
+    row.Ip || "";
 
 
-  document
-    .getElementById(
-      "workInput"
-    )
-    .value =
-      row.Work || "";
+  document.getElementById(
+    "workInput"
+  ).value =
+    row.Work || "";
 
 
-  document
-    .getElementById(
-      "dateInput"
-    )
-    .value =
-      convertToFilterDate(
-        row.Date
-      );
+  document.getElementById(
+    "dateInput"
+  ).value =
+    convertToFilterDate(
+      row.Date
+    );
 
 
-  document
-    .getElementById(
-      "entryModal"
-    )
-    .classList
-    .add("show");
+  document.getElementById(
+    "entryModal"
+  ).classList.add(
+    "show"
+  );
 
 }
 
 
 /* =====================================================
-CREATE / UPDATE
+CREATE / UPDATE ENTRY
 ===================================================== */
 
-async function submitEntry(
-  event
-){
+async function submitEntry(event){
 
   event.preventDefault();
-
-
-  if(!checkLogin()){
-    return;
-  }
-
-
-  resetInactivityTimer();
 
 
   const submitBtn =
@@ -2592,38 +2562,27 @@ async function submitEntry(
 
 
   const name =
-    document
-      .getElementById(
-        "nameInput"
-      )
-      .value
-      .trim();
+    document.getElementById(
+      "nameInput"
+    ).value.trim();
 
 
   const ip =
-    document
-      .getElementById(
-        "ipInput"
-      )
-      .value
-      .trim();
+    document.getElementById(
+      "ipInput"
+    ).value.trim();
 
 
   const work =
-    document
-      .getElementById(
-        "workInput"
-      )
-      .value
-      .trim();
+    document.getElementById(
+      "workInput"
+    ).value.trim();
 
 
   const date =
-    document
-      .getElementById(
-        "dateInput"
-      )
-      .value;
+    document.getElementById(
+      "dateInput"
+    ).value;
 
 
   if(!name){
@@ -2690,11 +2649,8 @@ async function submitEntry(
       data:{
 
         Name:name,
-
         Ip:ip,
-
         Work:work,
-
         Date:date
 
       },
@@ -2763,9 +2719,6 @@ async function submitEntry(
     );
 
 
-    resetInactivityTimer();
-
-
     await loadData();
 
 
@@ -2801,20 +2754,10 @@ async function submitEntry(
 
 
 /* =====================================================
-DELETE
+DELETE ENTRY
 ===================================================== */
 
-async function deleteEntryByRow(
-  rowNumber
-){
-
-  if(!checkLogin()){
-    return;
-  }
-
-
-  resetInactivityTimer();
-
+async function deleteEntryByRow(rowNumber){
 
   const row =
     allData.find(
@@ -2843,15 +2786,11 @@ async function deleteEntryByRow(
 
 
   const username =
-    getLoggedInUsername();
+    requireUsername();
 
 
   if(!username){
-
-    forceLogout();
-
     return;
-
   }
 
 
@@ -2877,9 +2816,6 @@ async function deleteEntryByRow(
   if(!confirmed){
     return;
   }
-
-
-  resetInactivityTimer();
 
 
   try{
@@ -2922,16 +2858,6 @@ async function deleteEntryByRow(
       );
 
 
-    if(!response.ok){
-
-      throw new Error(
-        "Server error: " +
-        response.status
-      );
-
-    }
-
-
     const result =
       await response.json();
 
@@ -2955,16 +2881,12 @@ async function deleteEntryByRow(
     );
 
 
-    resetInactivityTimer();
-
-
     await loadData();
 
 
   }catch(error){
 
     console.error(
-      "Delete Error:",
       error
     );
 
@@ -2981,20 +2903,10 @@ async function deleteEntryByRow(
 
 
 /* =====================================================
-SELL
+SELL ENTRY
 ===================================================== */
 
-async function sellEntryByRow(
-  rowNumber
-){
-
-  if(!checkLogin()){
-    return;
-  }
-
-
-  resetInactivityTimer();
-
+async function sellEntryByRow(rowNumber){
 
   const row =
     allData.find(
@@ -3023,15 +2935,11 @@ async function sellEntryByRow(
 
 
   const username =
-    getLoggedInUsername();
+    requireUsername();
 
 
   if(!username){
-
-    forceLogout();
-
     return;
-
   }
 
 
@@ -3060,9 +2968,6 @@ async function sellEntryByRow(
   if(!confirmed){
     return;
   }
-
-
-  resetInactivityTimer();
 
 
   try{
@@ -3105,16 +3010,6 @@ async function sellEntryByRow(
       );
 
 
-    if(!response.ok){
-
-      throw new Error(
-        "Server error: " +
-        response.status
-      );
-
-    }
-
-
     const result =
       await response.json();
 
@@ -3138,16 +3033,12 @@ async function sellEntryByRow(
     );
 
 
-    resetInactivityTimer();
-
-
     await loadData();
 
 
   }catch(error){
 
     console.error(
-      "Sell Error:",
       error
     );
 
@@ -3155,6 +3046,1160 @@ async function sellEntryByRow(
     showToast(
       error.message ||
       "Failed to sell entry.",
+      "error"
+    );
+
+  }
+
+}
+
+
+/* =====================================================
+USER MODAL
+===================================================== */
+
+function openUserModal(){
+
+  document.getElementById(
+    "userModal"
+  ).classList.add(
+    "show"
+  );
+
+
+  loadUsers();
+
+}
+
+
+function closeUserModal(){
+
+  document.getElementById(
+    "userModal"
+  ).classList.remove(
+    "show"
+  );
+
+}
+
+
+/* =====================================================
+LOAD USERS
+===================================================== */
+
+async function loadUsers(){
+
+  const body =
+    document.getElementById(
+      "userTableBody"
+    );
+
+
+  const refreshBtn =
+    document.getElementById(
+      "userRefreshBtn"
+    );
+
+
+  body.innerHTML = `
+
+    <tr>
+
+      <td colspan="6">
+
+        <div class="loading">
+          ⏳ Loading users...
+        </div>
+
+      </td>
+
+    </tr>
+
+  `;
+
+
+  refreshBtn.disabled =
+    true;
+
+
+  refreshBtn.textContent =
+    "⏳ Loading...";
+
+
+  try{
+
+    const response =
+      await fetch(
+
+        USER_API_URL +
+        "?action=getUsers&_=" +
+        Date.now(),
+
+        {
+          method:"GET",
+          cache:"no-store"
+        }
+
+      );
+
+
+    if(!response.ok){
+
+      throw new Error(
+        "User server error: " +
+        response.status
+      );
+
+    }
+
+
+    const result =
+      await response.json();
+
+
+    if(
+      result.success === false
+    ){
+
+      throw new Error(
+        result.message ||
+        "Failed to load users."
+      );
+
+    }
+
+
+    allUsers =
+      Array.isArray(
+        result.users
+      )
+        ? result.users
+        : (
+            Array.isArray(
+              result.data
+            )
+              ? result.data
+              : []
+          );
+
+
+    document.getElementById(
+      "userTotal"
+    ).textContent =
+      allUsers.length;
+
+
+    renderUsers();
+
+
+  }catch(error){
+
+    console.error(
+      "User Load Error:",
+      error
+    );
+
+
+    body.innerHTML = `
+
+      <tr>
+
+        <td colspan="6">
+
+          <div class="empty">
+
+            ❌
+            ${escapeHTML(
+              error.message ||
+              "Failed to load users."
+            )}
+
+          </div>
+
+        </td>
+
+      </tr>
+
+    `;
+
+
+    showToast(
+      error.message ||
+      "Failed to load users.",
+      "error"
+    );
+
+
+  }finally{
+
+    refreshBtn.disabled =
+      false;
+
+    refreshBtn.textContent =
+      "🔄 Refresh";
+
+  }
+
+}
+
+
+/* =====================================================
+RENDER USERS
+===================================================== */
+
+function renderUsers(){
+
+  const body =
+    document.getElementById(
+      "userTableBody"
+    );
+
+
+  if(
+    !allUsers.length
+  ){
+
+    body.innerHTML = `
+
+      <tr>
+
+        <td colspan="6">
+
+          <div class="empty">
+            No users found.
+          </div>
+
+        </td>
+
+      </tr>
+
+    `;
+
+    return;
+
+  }
+
+
+  let html = "";
+
+
+  allUsers.forEach(
+    function(user,index){
+
+      const username =
+        user.username ||
+        user.Username ||
+        "";
+
+
+      const password =
+        user.password ||
+        user.Password ||
+        "";
+
+
+      const name =
+        user.name ||
+        user.Name ||
+        "";
+
+
+      const role =
+        user.role ||
+        user.Role ||
+        "";
+
+
+      const status =
+        user.status ||
+        user.Status ||
+        "Active";
+
+
+      const row =
+        Number(
+          user._row ||
+          user.row ||
+          0
+        );
+
+
+      let statusClass =
+        "status-inactive";
+
+
+      if(
+        String(status)
+          .toLowerCase()
+          === "active"
+      ){
+
+        statusClass =
+          "status-active";
+
+      }
+
+
+      if(
+        String(status)
+          .toLowerCase()
+          === "blocked"
+      ){
+
+        statusClass =
+          "status-blocked";
+
+      }
+
+
+      const safeUser =
+        encodeURIComponent(
+          username
+        );
+
+
+      html += `
+
+        <tr>
+
+          <td>
+            <strong>
+              ${escapeHTML(username)}
+            </strong>
+          </td>
+
+          <td>
+            ${escapeHTML(password)}
+          </td>
+
+          <td>
+            ${escapeHTML(name)}
+          </td>
+
+          <td>
+
+            <span class="role-badge">
+
+              ${escapeHTML(
+                role || "—"
+              )}
+
+            </span>
+
+          </td>
+
+          <td>
+
+            <span
+              class="status-badge ${statusClass}"
+            >
+
+              ${escapeHTML(
+                status
+              )}
+
+            </span>
+
+          </td>
+
+          <td>
+
+            <div class="user-actions">
+
+              <button
+                class="user-action edit"
+                onclick="editUser(${row},'${safeUser}')"
+              >
+                ✏️ Edit
+              </button>
+
+              ${
+                String(status).toLowerCase()
+                === "blocked"
+
+                ?
+
+                `
+                <button
+                  class="user-action unblock"
+                  onclick="unblockUser(${row},'${safeUser}')"
+                >
+                  🔓 Unblock
+                </button>
+                `
+
+                :
+
+                `
+                <button
+                  class="user-action block"
+                  onclick="blockUser(${row},'${safeUser}')"
+                >
+                  🔒 Block
+                </button>
+                `
+              }
+
+              <button
+                class="user-action delete"
+                onclick="deleteUser(${row},'${safeUser}')"
+              >
+                🗑️ Delete
+              </button>
+
+            </div>
+
+          </td>
+
+        </tr>
+
+      `;
+
+    }
+  );
+
+
+  body.innerHTML =
+    html;
+
+}
+
+
+/* =====================================================
+OPEN ADD USER
+===================================================== */
+
+function openAddUserModal(){
+
+  editingUser =
+    null;
+
+
+  document.getElementById(
+    "userFormTitle"
+  ).textContent =
+    "Add User";
+
+
+  document.getElementById(
+    "userSubmitBtn"
+  ).textContent =
+    "Add User";
+
+
+  document.getElementById(
+    "userForm"
+  ).reset();
+
+
+  document.getElementById(
+    "userStatus"
+  ).value =
+    "Active";
+
+
+  document.getElementById(
+    "userFormModal"
+  ).classList.add(
+    "show"
+  );
+
+}
+
+
+/* =====================================================
+EDIT USER
+===================================================== */
+
+function editUser(
+  rowNumber,
+  encodedUsername
+){
+
+  const username =
+    decodeURIComponent(
+      encodedUsername
+    );
+
+
+  const user =
+    allUsers.find(
+      function(item){
+
+        const itemRow =
+          Number(
+            item._row ||
+            item.row ||
+            0
+          );
+
+
+        const itemUsername =
+          String(
+            item.username ||
+            item.Username ||
+            ""
+          );
+
+
+        return (
+
+          itemRow ===
+          Number(rowNumber)
+
+          ||
+
+          itemUsername.toLowerCase()
+          ===
+          username.toLowerCase()
+
+        );
+
+      }
+    );
+
+
+  if(!user){
+
+    showToast(
+      "User not found.",
+      "error"
+    );
+
+    return;
+
+  }
+
+
+  editingUser =
+    user;
+
+
+  document.getElementById(
+    "userFormTitle"
+  ).textContent =
+    "Edit User";
+
+
+  document.getElementById(
+    "userSubmitBtn"
+  ).textContent =
+    "Update User";
+
+
+  document.getElementById(
+    "userUsername"
+  ).value =
+    user.username ||
+    user.Username ||
+    "";
+
+
+  document.getElementById(
+    "userPassword"
+  ).value =
+    user.password ||
+    user.Password ||
+    "";
+
+
+  document.getElementById(
+    "userName"
+  ).value =
+    user.name ||
+    user.Name ||
+    "";
+
+
+  document.getElementById(
+    "userRole"
+  ).value =
+    user.role ||
+    user.Role ||
+    "";
+
+
+  document.getElementById(
+    "userStatus"
+  ).value =
+    user.status ||
+    user.Status ||
+    "Active";
+
+
+  document.getElementById(
+    "userFormModal"
+  ).classList.add(
+    "show"
+  );
+
+}
+
+
+/* =====================================================
+CLOSE USER FORM
+===================================================== */
+
+function closeUserFormModal(){
+
+  document.getElementById(
+    "userFormModal"
+  ).classList.remove(
+    "show"
+  );
+
+
+  editingUser =
+    null;
+
+}
+
+
+/* =====================================================
+SUBMIT USER
+===================================================== */
+
+async function submitUser(event){
+
+  event.preventDefault();
+
+
+  const button =
+    document.getElementById(
+      "userSubmitBtn"
+    );
+
+
+  const username =
+    document.getElementById(
+      "userUsername"
+    ).value.trim();
+
+
+  const password =
+    document.getElementById(
+      "userPassword"
+    ).value.trim();
+
+
+  const name =
+    document.getElementById(
+      "userName"
+    ).value.trim();
+
+
+  const role =
+    document.getElementById(
+      "userRole"
+    ).value;
+
+
+  const status =
+    document.getElementById(
+      "userStatus"
+    ).value;
+
+
+  if(!username){
+
+    showToast(
+      "Username is required.",
+      "error"
+    );
+
+    return;
+
+  }
+
+
+  if(!password){
+
+    showToast(
+      "Password is required.",
+      "error"
+    );
+
+    return;
+
+  }
+
+
+  if(!name){
+
+    showToast(
+      "Name is required.",
+      "error"
+    );
+
+    return;
+
+  }
+
+
+  if(!role){
+
+    showToast(
+      "Please select Role.",
+      "error"
+    );
+
+    return;
+
+  }
+
+
+  if(!status){
+
+    showToast(
+      "Please select Status.",
+      "error"
+    );
+
+    return;
+
+  }
+
+
+  const isEditing =
+    Boolean(
+      editingUser
+    );
+
+
+  button.disabled =
+    true;
+
+
+  button.textContent =
+    isEditing
+      ? "Updating..."
+      : "Adding...";
+
+
+  try{
+
+    const payload = {
+
+      action:
+        isEditing
+          ? "updateUser"
+          : "addUser",
+
+      username:
+        username,
+
+      password:
+        password,
+
+      name:
+        name,
+
+      role:
+        role,
+
+      status:
+        status
+
+    };
+
+
+    if(isEditing){
+
+      payload.row =
+        Number(
+          editingUser._row ||
+          editingUser.row ||
+          0
+        );
+
+
+      payload.oldUsername =
+        editingUser.username ||
+        editingUser.Username ||
+        "";
+
+    }
+
+
+    const response =
+      await fetch(
+        USER_API_URL,
+        {
+
+          method:"POST",
+
+          headers:{
+            "Content-Type":
+              "text/plain;charset=utf-8"
+          },
+
+          body:
+            JSON.stringify(
+              payload
+            )
+
+        }
+      );
+
+
+    if(!response.ok){
+
+      throw new Error(
+        "User server error: " +
+        response.status
+      );
+
+    }
+
+
+    const result =
+      await response.json();
+
+
+    if(
+      result.success === false
+    ){
+
+      throw new Error(
+        result.message ||
+        "User operation failed."
+      );
+
+    }
+
+
+    closeUserFormModal();
+
+
+    showToast(
+      isEditing
+        ? "User updated successfully."
+        : "User added successfully.",
+      "success"
+    );
+
+
+    await loadUsers();
+
+
+  }catch(error){
+
+    console.error(
+      "User Save Error:",
+      error
+    );
+
+
+    showToast(
+      error.message ||
+      "Failed to save user.",
+      "error"
+    );
+
+  }finally{
+
+    button.disabled =
+      false;
+
+
+    button.textContent =
+      isEditing
+        ? "Update User"
+        : "Add User";
+
+  }
+
+}
+
+
+/* =====================================================
+BLOCK USER
+===================================================== */
+
+async function blockUser(
+  rowNumber,
+  encodedUsername
+){
+
+  const username =
+    decodeURIComponent(
+      encodedUsername
+    );
+
+
+  const confirmed =
+    confirm(
+      "Block user \"" +
+      username +
+      "\"?"
+    );
+
+
+  if(!confirmed){
+    return;
+  }
+
+
+  await changeUserStatus(
+    rowNumber,
+    username,
+    "Blocked"
+  );
+
+}
+
+
+/* =====================================================
+UNBLOCK USER
+===================================================== */
+
+async function unblockUser(
+  rowNumber,
+  encodedUsername
+){
+
+  const username =
+    decodeURIComponent(
+      encodedUsername
+    );
+
+
+  await changeUserStatus(
+    rowNumber,
+    username,
+    "Active"
+  );
+
+}
+
+
+/* =====================================================
+CHANGE USER STATUS
+===================================================== */
+
+async function changeUserStatus(
+  rowNumber,
+  username,
+  status
+){
+
+  try{
+
+    const payload = {
+
+      action:
+        status === "Blocked"
+          ? "blockUser"
+          : "unblockUser",
+
+      row:
+        Number(
+          rowNumber
+        ),
+
+      username:
+        username,
+
+      status:
+        status
+
+    };
+
+
+    const response =
+      await fetch(
+        USER_API_URL,
+        {
+
+          method:"POST",
+
+          headers:{
+            "Content-Type":
+              "text/plain;charset=utf-8"
+          },
+
+          body:
+            JSON.stringify(
+              payload
+            )
+
+        }
+      );
+
+
+    if(!response.ok){
+
+      throw new Error(
+        "User server error: " +
+        response.status
+      );
+
+    }
+
+
+    const result =
+      await response.json();
+
+
+    if(
+      result.success === false
+    ){
+
+      throw new Error(
+        result.message ||
+        "Status update failed."
+      );
+
+    }
+
+
+    showToast(
+      username +
+      " is now " +
+      status +
+      ".",
+      "success"
+    );
+
+
+    await loadUsers();
+
+
+  }catch(error){
+
+    console.error(
+      "Status Error:",
+      error
+    );
+
+
+    showToast(
+      error.message ||
+      "Failed to update status.",
+      "error"
+    );
+
+  }
+
+}
+
+
+/* =====================================================
+DELETE USER
+===================================================== */
+
+async function deleteUser(
+  rowNumber,
+  encodedUsername
+){
+
+  const username =
+    decodeURIComponent(
+      encodedUsername
+    );
+
+
+  const confirmed =
+    confirm(
+
+      "Delete user \"" +
+      username +
+      "\"?\n\n" +
+      "This action cannot be undone."
+
+    );
+
+
+  if(!confirmed){
+    return;
+  }
+
+
+  try{
+
+    const payload = {
+
+      action:
+        "deleteUser",
+
+      row:
+        Number(
+          rowNumber
+        ),
+
+      username:
+        username
+
+    };
+
+
+    const response =
+      await fetch(
+        USER_API_URL,
+        {
+
+          method:"POST",
+
+          headers:{
+            "Content-Type":
+              "text/plain;charset=utf-8"
+          },
+
+          body:
+            JSON.stringify(
+              payload
+            )
+
+        }
+      );
+
+
+    if(!response.ok){
+
+      throw new Error(
+        "User server error: " +
+        response.status
+      );
+
+    }
+
+
+    const result =
+      await response.json();
+
+
+    if(
+      result.success === false
+    ){
+
+      throw new Error(
+        result.message ||
+        "Delete failed."
+      );
+
+    }
+
+
+    showToast(
+      "User deleted successfully.",
+      "success"
+    );
+
+
+    await loadUsers();
+
+
+  }catch(error){
+
+    console.error(
+      "Delete User Error:",
+      error
+    );
+
+
+    showToast(
+      error.message ||
+      "Failed to delete user.",
       "error"
     );
 
@@ -3212,25 +4257,23 @@ LOADING
 
 function showLoading(){
 
-  document
-    .getElementById(
-      "tableBody"
-    )
-    .innerHTML = `
+  document.getElementById(
+    "tableBody"
+  ).innerHTML = `
 
-      <tr>
+    <tr>
 
-        <td colspan="5">
+      <td colspan="5">
 
-          <div class="loading">
-            ⏳ Loading data...
-          </div>
+        <div class="loading">
+          ⏳ Loading data...
+        </div>
 
-        </td>
+      </td>
 
-      </tr>
+    </tr>
 
-    `;
+  `;
 
 }
 
@@ -3239,34 +4282,30 @@ function showLoading(){
 ERROR
 ===================================================== */
 
-function showError(
-  message
-){
+function showError(message){
 
-  document
-    .getElementById(
-      "tableBody"
-    )
-    .innerHTML = `
+  document.getElementById(
+    "tableBody"
+  ).innerHTML = `
 
-      <tr>
+    <tr>
 
-        <td colspan="5">
+      <td colspan="5">
 
-          <div class="empty">
+        <div class="empty">
 
-            ❌
-            ${escapeHTML(
-              message
-            )}
+          ❌
+          ${escapeHTML(
+            message
+          )}
 
-          </div>
+        </div>
 
-        </td>
+      </td>
 
-      </tr>
+    </tr>
 
-    `;
+  `;
 
 }
 
@@ -3314,9 +4353,7 @@ function showToast(
 ESCAPE HTML
 ===================================================== */
 
-function escapeHTML(
-  value
-){
+function escapeHTML(value){
 
   return String(
     value ?? ""
@@ -3351,7 +4388,7 @@ function escapeHTML(
 
 
 /* =====================================================
-MODAL OUTSIDE CLICK
+OUTSIDE CLICK
 ===================================================== */
 
 document
@@ -3374,6 +4411,46 @@ document
   );
 
 
+document
+  .getElementById(
+    "userModal"
+  )
+  .addEventListener(
+    "click",
+    function(event){
+
+      if(
+        event.target === this
+      ){
+
+        closeUserModal();
+
+      }
+
+    }
+  );
+
+
+document
+  .getElementById(
+    "userFormModal"
+  )
+  .addEventListener(
+    "click",
+    function(event){
+
+      if(
+        event.target === this
+      ){
+
+        closeUserFormModal();
+
+      }
+
+    }
+  );
+
+
 /* =====================================================
 ESC KEY
 ===================================================== */
@@ -3386,21 +4463,11 @@ document.addEventListener(
       event.key === "Escape"
     ){
 
-      const modal =
-        document.getElementById(
-          "entryModal"
-        );
+      closeEntryModal();
 
+      closeUserModal();
 
-      if(
-        modal.classList.contains(
-          "show"
-        )
-      ){
-
-        closeEntryModal();
-
-      }
+      closeUserFormModal();
 
     }
 
