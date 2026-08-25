@@ -903,8 +903,6 @@ tr:hover td{
 </main>
 
 
-<!-- ENTRY MODAL -->
-
 <div
   class="modal"
   id="entryModal"
@@ -1015,8 +1013,6 @@ tr:hover td{
 </div>
 
 
-<!-- USER MODAL -->
-
 <div
   class="modal"
   id="userModal"
@@ -1108,8 +1104,6 @@ tr:hover td{
 
 </div>
 
-
-<!-- USER FORM -->
 
 <div
   class="modal"
@@ -1253,10 +1247,6 @@ tr:hover td{
 
 <script>
 
-/* =====================================================
-API
-===================================================== */
-
 const API_URL =
 "https://script.google.com/macros/s/AKfycbx6fo2Nogf3ETCtS_B-o0HCFqEs3vYkJ9IT9uu_-3l1w8fNJw77mZipeyFm-zZcjUw-5Q/exec";
 
@@ -1267,16 +1257,8 @@ const LOGIN_PAGE = "index.html";
 
 const ROWS_PER_PAGE = 10;
 
-/*
-  5 MINUTES
-*/
 const AUTO_LOGOUT_TIME =
   5 * 60 * 1000;
-
-
-/* =====================================================
-GLOBAL VARIABLES
-===================================================== */
 
 let allData = [];
 let filteredData = [];
@@ -1288,11 +1270,6 @@ let allUsers = [];
 let editingUser = null;
 
 let inactivityTimer = null;
-
-
-/* =====================================================
-GET USERNAME
-===================================================== */
 
 function getLoggedInUsername(){
 
@@ -1358,19 +1335,10 @@ function getLoggedInUsername(){
 }
 
 
-/* =====================================================
-LOGIN / URL PROTECTION
-===================================================== */
-
 function checkLogin(){
 
   const username =
     getLoggedInUsername();
-
-  /*
-    Login information না থাকলে
-    সরাসরি index.html এ পাঠাবে।
-  */
 
   if(!username){
 
@@ -1386,10 +1354,6 @@ function checkLogin(){
 
 }
 
-
-/* =====================================================
-AUTO LOGOUT TIMER
-===================================================== */
 
 function resetAutoLogoutTimer(){
 
@@ -1409,10 +1373,6 @@ function resetAutoLogoutTimer(){
 
 }
 
-
-/* =====================================================
-ACTIVITY DETECTION
-===================================================== */
 
 function setupActivityDetection(){
 
@@ -1443,18 +1403,10 @@ function setupActivityDetection(){
     }
   );
 
-  /*
-    প্রথম timer চালু
-  */
-
   resetAutoLogoutTimer();
 
 }
 
-
-/* =====================================================
-AUTO LOGOUT
-===================================================== */
 
 function autoLogout(){
 
@@ -1462,18 +1414,11 @@ function autoLogout(){
     inactivityTimer
   );
 
-  /*
-    Theme save করে রাখছি
-  */
-
   const savedTheme =
     localStorage.getItem(
       "dashboardTheme"
     );
 
-  /*
-    Login related keys remove
-  */
 
   const loginKeys = [
 
@@ -1498,15 +1443,9 @@ function autoLogout(){
     }
   );
 
-  /*
-    Session clear
-  */
 
   sessionStorage.clear();
 
-  /*
-    Theme আবার restore
-  */
 
   if(savedTheme){
 
@@ -1517,9 +1456,6 @@ function autoLogout(){
 
   }
 
-  /*
-    Login page
-  */
 
   window.location.replace(
     LOGIN_PAGE
@@ -1527,10 +1463,6 @@ function autoLogout(){
 
 }
 
-
-/* =====================================================
-MANUAL LOGOUT
-===================================================== */
 
 function logoutUser(){
 
@@ -1538,18 +1470,10 @@ function logoutUser(){
     inactivityTimer
   );
 
-  /*
-    Theme delete করা হবে না
-  */
-
   const savedTheme =
     localStorage.getItem(
       "dashboardTheme"
     );
-
-  /*
-    শুধু login data remove
-  */
 
   const loginKeys = [
 
@@ -1574,15 +1498,9 @@ function logoutUser(){
     }
   );
 
-  /*
-    Session clear
-  */
 
   sessionStorage.clear();
 
-  /*
-    Theme নিশ্চিতভাবে save থাকবে
-  */
 
   if(savedTheme){
 
@@ -1598,11 +1516,6 @@ function logoutUser(){
   );
 
 }
-
-
-/* =====================================================
-THEME
-===================================================== */
 
 function loadTheme(){
 
@@ -1641,11 +1554,6 @@ function toggleTheme(){
       "dark"
     );
 
-  /*
-    Theme আলাদা key-তে save হবে।
-    Logout করলে এই key delete হবে না।
-  */
-
   localStorage.setItem(
     "dashboardTheme",
     dark
@@ -1678,10 +1586,6 @@ function updateThemeButton(){
 
 }
 
-
-/* =====================================================
-LOAD DATA
-===================================================== */
 
 async function loadData(){
 
@@ -1780,10 +1684,6 @@ async function loadData(){
 
 }
 
-
-/* =====================================================
-RENDER TABLE
-===================================================== */
 
 function renderTable(){
 
@@ -1899,11 +1799,6 @@ function renderTable(){
 
 }
 
-
-/* =====================================================
-FILTER
-===================================================== */
-
 function applyFilters(){
 
   const search =
@@ -2009,11 +1904,6 @@ function applyFilters(){
 
 }
 
-
-/* =====================================================
-CLEAR FILTER
-===================================================== */
-
 function clearFilters(){
 
   document.getElementById(
@@ -2038,11 +1928,6 @@ function clearFilters(){
   updateTotal();
 
 }
-
-
-/* =====================================================
-DATE
-===================================================== */
 
 function convertToFilterDate(value){
 
@@ -2096,11 +1981,6 @@ function convertToFilterDate(value){
   return "";
 
 }
-
-
-/* =====================================================
-PAGINATION
-===================================================== */
 
 function renderPagination(){
 
@@ -2228,11 +2108,6 @@ function changePage(page){
 
 }
 
-
-/* =====================================================
-TOTAL
-===================================================== */
-
 function updateTotal(){
 
   document.getElementById(
@@ -2241,11 +2116,6 @@ function updateTotal(){
     filteredData.length;
 
 }
-
-
-/* =====================================================
-ENTRY MODAL
-===================================================== */
 
 function openEntryModal(){
 
@@ -2292,11 +2162,6 @@ function closeEntryModal(){
     null;
 
 }
-
-
-/* =====================================================
-EDIT ENTRY
-===================================================== */
 
 function editEntryByRow(rowNumber){
 
@@ -2360,11 +2225,6 @@ function editEntryByRow(rowNumber){
   );
 
 }
-
-
-/* =====================================================
-SUBMIT ENTRY
-===================================================== */
 
 async function submitEntry(event){
 
@@ -2535,18 +2395,10 @@ async function submitEntry(event){
 }
 
 
-/* =====================================================
-USERNAME
-===================================================== */
-
 function requireUsername(){
 
   const username =
     getLoggedInUsername();
-
-  /*
-    Login না থাকলে সরাসরি logout
-  */
 
   if(!username){
 
@@ -2559,11 +2411,6 @@ function requireUsername(){
   return username;
 
 }
-
-
-/* =====================================================
-DELETE ENTRY
-===================================================== */
 
 async function deleteEntryByRow(rowNumber){
 
@@ -2683,11 +2530,6 @@ async function deleteEntryByRow(rowNumber){
   }
 
 }
-
-
-/* =====================================================
-SELL ENTRY
-===================================================== */
 
 async function sellEntryByRow(rowNumber){
 
@@ -2810,11 +2652,6 @@ async function sellEntryByRow(rowNumber){
 
 }
 
-
-/* =====================================================
-USER MODAL
-===================================================== */
-
 function openUserModal(){
 
   if(!checkLogin()){
@@ -2841,11 +2678,6 @@ function closeUserModal(){
   );
 
 }
-
-
-/* =====================================================
-LOAD USERS
-===================================================== */
 
 async function loadUsers(){
 
@@ -2965,11 +2797,6 @@ async function loadUsers(){
   }
 
 }
-
-
-/* =====================================================
-RENDER USERS
-===================================================== */
 
 function renderUsers(){
 
@@ -3164,11 +2991,6 @@ function renderUsers(){
 
 }
 
-
-/* =====================================================
-ADD USER
-===================================================== */
-
 function openAddUserModal(){
 
   if(!checkLogin()){
@@ -3204,11 +3026,6 @@ function openAddUserModal(){
   );
 
 }
-
-
-/* =====================================================
-EDIT USER
-===================================================== */
 
 function editUser(
   rowNumber,
@@ -3320,11 +3137,6 @@ function editUser(
 
 }
 
-
-/* =====================================================
-CLOSE USER FORM
-===================================================== */
-
 function closeUserFormModal(){
 
   document.getElementById(
@@ -3338,10 +3150,6 @@ function closeUserFormModal(){
 
 }
 
-
-/* =====================================================
-SUBMIT USER
-===================================================== */
 
 async function submitUser(event){
 
@@ -3557,10 +3365,6 @@ async function submitUser(event){
 }
 
 
-/* =====================================================
-BLOCK
-===================================================== */
-
 async function blockUser(
   rowNumber,
   encodedUsername
@@ -3595,10 +3399,6 @@ async function blockUser(
 }
 
 
-/* =====================================================
-UNBLOCK
-===================================================== */
-
 async function unblockUser(
   rowNumber,
   encodedUsername
@@ -3620,11 +3420,6 @@ async function unblockUser(
   );
 
 }
-
-
-/* =====================================================
-CHANGE USER STATUS
-===================================================== */
 
 async function changeUserStatus(
   rowNumber,
@@ -3717,11 +3512,6 @@ async function changeUserStatus(
   }
 
 }
-
-
-/* =====================================================
-DELETE USER
-===================================================== */
 
 async function deleteUser(
   rowNumber,
@@ -3823,11 +3613,6 @@ async function deleteUser(
 
 }
 
-
-/* =====================================================
-TODAY
-===================================================== */
-
 function getTodayInputDate(){
 
   const now =
@@ -3853,11 +3638,6 @@ function getTodayInputDate(){
 
 }
 
-
-/* =====================================================
-LOADING
-===================================================== */
-
 function showLoading(){
 
   document.getElementById(
@@ -3873,11 +3653,6 @@ function showLoading(){
   `;
 
 }
-
-
-/* =====================================================
-ERROR
-===================================================== */
 
 function showError(message){
 
@@ -3897,10 +3672,6 @@ function showError(message){
 
 }
 
-
-/* =====================================================
-TOAST
-===================================================== */
 
 function showToast(
   message,
@@ -3932,10 +3703,6 @@ function showToast(
 }
 
 
-/* =====================================================
-ESCAPE HTML
-===================================================== */
-
 function escapeHTML(value){
 
   return String(
@@ -3963,11 +3730,6 @@ function escapeHTML(value){
   );
 
 }
-
-
-/* =====================================================
-OUTSIDE CLICK
-===================================================== */
 
 document
   .getElementById(
@@ -4029,10 +3791,6 @@ document
   );
 
 
-/* =====================================================
-ESC KEY
-===================================================== */
-
 document.addEventListener(
   "keydown",
   function(event){
@@ -4053,17 +3811,11 @@ document.addEventListener(
 );
 
 
-/* =====================================================
-PAGE LOAD
-===================================================== */
-
 document.addEventListener(
   "DOMContentLoaded",
   function(){
 
-    /*
-      প্রথমেই Login check
-    */
+
 
     if(!checkLogin()){
 
@@ -4071,21 +3823,11 @@ document.addEventListener(
 
     }
 
-    /*
-      Saved Dark/White Theme load
-    */
-
     loadTheme();
 
-    /*
-      5 Minute Auto Logout শুরু
-    */
 
     setupActivityDetection();
 
-    /*
-      Dashboard Data load
-    */
 
     loadData();
 
