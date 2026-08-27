@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="en">
 
 <head>
@@ -7,13 +8,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Data Dashboard</title>
-  
+
 <link
   rel="icon"
   type="image/png"
   sizes="128x128"
   href="https://cdn-icons-png.flaticon.com/128/17163/17163834.png"
 >
+
 <style>
 
 *{
@@ -191,7 +193,7 @@ button:disabled{
 
 .filters{
   display:grid;
-  grid-template-columns:2fr 1fr 1fr auto;
+  grid-template-columns:2fr 1fr 1fr 1fr auto;
   gap:12px;
   align-items:end;
 }
@@ -224,6 +226,22 @@ button:disabled{
 .field input:focus,
 .field select:focus{
   border-color:var(--green);
+}
+
+.section-select{
+  font-weight:600;
+}
+
+.section-select.user{
+  border-color:#087f5b;
+}
+
+.section-select.deleted{
+  border-color:#dc2626;
+}
+
+.section-select.sell{
+  border-color:#d97706;
 }
 
 .table-box{
@@ -726,42 +744,44 @@ tr:hover td{
 
   <div class="header-right">
 
-    <button
-      class="theme-btn"
-      id="themeBtn"
-      onclick="toggleTheme()"
-    >
-      🌙 Dark
-    </button>
+```
+<button
+  class="theme-btn"
+  id="themeBtn"
+  onclick="toggleTheme()"
+>
+  🌙 Dark
+</button>
 
-    <button
-      class="btn btn-refresh"
-      id="refreshBtn"
-      onclick="loadData()"
-    >
-      🔄 Refresh
-    </button>
+<button
+  class="btn btn-refresh"
+  id="refreshBtn"
+  onclick="loadData()"
+>
+  🔄 Refresh
+</button>
 
-    <button
-      class="btn btn-users"
-      onclick="openUserModal()"
-    >
-      👤 Users
-    </button>
+<button
+  class="btn btn-users"
+  onclick="openUserModal()"
+>
+  👤 Users
+</button>
 
-    <button
-      class="btn btn-primary"
-      onclick="openEntryModal()"
-    >
-      ➕ New Entry
-    </button>
+<button
+  class="btn btn-primary"
+  onclick="openEntryModal()"
+>
+  ➕ New Entry
+</button>
 
-    <button
-      class="btn btn-logout"
-      onclick="logoutUser()"
-    >
-      🚪 Logout
-    </button>
+<button
+  class="btn btn-logout"
+  onclick="logoutUser()"
+>
+  🚪 Logout
+</button>
+```
 
   </div>
 
@@ -771,137 +791,176 @@ tr:hover td{
 
   <div class="top-section">
 
-    <div class="title">
+```
+<div class="title">
 
-      <h1>Data Dashboard</h1>
+  <h1 id="pageTitle">
+    User Data
+  </h1>
 
-      <p>Manage your entries</p>
+  <p id="pageSubtitle">
+    Manage your user entries
+  </p>
 
-    </div>
+</div>
+```
 
   </div>
 
   <section class="filter-box">
 
-    <div class="filters">
+```
+<div class="filters">
 
-      <div class="field search-field">
+  <div class="field search-field">
 
-        <label>🔍 Search</label>
+    <label>🔍 Search</label>
 
-        <input
-          type="text"
-          id="searchInput"
-          placeholder="Search Name, IP or Work..."
-          oninput="applyFilters()"
-        >
+    <input
+      type="text"
+      id="searchInput"
+      placeholder="Search Name, IP or Work..."
+      oninput="applyFilters()"
+    >
 
-      </div>
+  </div>
 
-      <div class="field">
+  <div class="field">
 
-        <label>📅 From Date</label>
+    <label>📅 From Date</label>
 
-        <input
-          type="date"
-          id="fromDate"
-          onchange="applyFilters()"
-        >
+    <input
+      type="date"
+      id="fromDate"
+      onchange="applyFilters()"
+    >
 
-      </div>
+  </div>
 
-      <div class="field">
+  <div class="field">
 
-        <label>📅 To Date</label>
+    <label>📅 To Date</label>
 
-        <input
-          type="date"
-          id="toDate"
-          onchange="applyFilters()"
-        >
+    <input
+      type="date"
+      id="toDate"
+      onchange="applyFilters()"
+    >
 
-      </div>
+  </div>
 
-      <button
-        class="btn btn-refresh"
-        onclick="clearFilters()"
-      >
-        Clear
-      </button>
+  <div class="field">
 
-    </div>
+    <label>📂 Data Type</label>
+
+    <select
+      id="dataType"
+      class="section-select user"
+      onchange="changeDataType()"
+    >
+
+      <option value="user">
+        👤 User
+      </option>
+
+      <option value="deleted">
+        🗑️ Deleted
+      </option>
+
+      <option value="sell">
+        💰 Sell
+      </option>
+
+    </select>
+
+  </div>
+
+  <button
+    class="btn btn-refresh"
+    onclick="clearFilters()"
+  >
+    Clear
+  </button>
+
+</div>
+```
 
   </section>
 
   <section class="table-box">
 
-    <div class="table-header">
+```
+<div class="table-header">
 
-      <h2>All Entries</h2>
+  <h2 id="tableTitle">
+    👤 User Entries
+  </h2>
 
-      <div class="total-count">
-        Total:
-        <strong id="totalCount">0</strong>
-      </div>
+  <div class="total-count">
+    Total:
+    <strong id="totalCount">0</strong>
+  </div>
 
-    </div>
+</div>
 
-    <div class="table-wrapper">
+<div class="table-wrapper">
 
-      <table>
+  <table>
 
-        <thead>
+    <thead>
 
-          <tr>
-            <th>Name</th>
-            <th>IP</th>
-            <th>Work</th>
-            <th>Date</th>
-            <th>Action</th>
-          </tr>
+      <tr>
+        <th>Name</th>
+        <th>IP</th>
+        <th>Work</th>
+        <th>Date</th>
+        <th>Action</th>
+      </tr>
 
-        </thead>
+    </thead>
 
-        <tbody id="tableBody">
+    <tbody id="tableBody">
 
-          <tr>
+      <tr>
 
-            <td colspan="5">
+        <td colspan="5">
 
-              <div class="loading">
-                Loading data...
-              </div>
+          <div class="loading">
+            Loading data...
+          </div>
 
-            </td>
+        </td>
 
-          </tr>
+      </tr>
 
-        </tbody>
+    </tbody>
 
-      </table>
+  </table>
 
-    </div>
+</div>
 
-    <div class="pagination-box">
+<div class="pagination-box">
 
-      <div
-        class="page-info"
-        id="pageInfo"
-      >
-        Page 1
-      </div>
+  <div
+    class="page-info"
+    id="pageInfo"
+  >
+    Page 1
+  </div>
 
-      <div
-        class="pagination"
-        id="pagination"
-      ></div>
+  <div
+    class="pagination"
+    id="pagination"
+  ></div>
 
-    </div>
+</div>
+```
 
   </section>
 
 </main>
 
+<!-- ENTRY MODAL -->
 
 <div
   class="modal"
@@ -910,108 +969,111 @@ tr:hover td{
 
   <div class="modal-box">
 
-    <div class="modal-header">
+```
+<div class="modal-header">
 
-      <h2 id="modalTitle">
-        New Entry
-      </h2>
+  <h2 id="modalTitle">
+    New Entry
+  </h2>
 
-      <button
-        class="close-btn"
-        onclick="closeEntryModal()"
+  <button
+    class="close-btn"
+    onclick="closeEntryModal()"
+  >
+    ×
+  </button>
+
+</div>
+
+<form
+  class="form"
+  id="entryForm"
+  onsubmit="submitEntry(event)"
+>
+
+  <div class="form-grid">
+
+    <div class="form-group">
+
+      <label>Name</label>
+
+      <input
+        type="text"
+        id="nameInput"
+        placeholder="Enter name"
+        autocomplete="off"
+        required
       >
-        ×
-      </button>
 
     </div>
 
-    <form
-      class="form"
-      id="entryForm"
-      onsubmit="submitEntry(event)"
+    <div class="form-group">
+
+      <label>IP</label>
+
+      <input
+        type="text"
+        id="ipInput"
+        placeholder="Enter IP"
+        autocomplete="off"
+        required
+      >
+
+    </div>
+
+    <div class="form-group full">
+
+      <label>Work</label>
+
+      <textarea
+        id="workInput"
+        placeholder="Enter work"
+        required
+      ></textarea>
+
+    </div>
+
+    <div class="form-group">
+
+      <label>Date</label>
+
+      <input
+        type="date"
+        id="dateInput"
+      >
+
+    </div>
+
+  </div>
+
+  <div class="form-footer">
+
+    <button
+      type="button"
+      class="btn btn-cancel"
+      onclick="closeEntryModal()"
     >
+      Cancel
+    </button>
 
-      <div class="form-grid">
+    <button
+      type="submit"
+      class="btn btn-primary"
+      id="submitBtn"
+    >
+      Save Entry
+    </button>
 
-        <div class="form-group">
+  </div>
 
-          <label>Name</label>
-
-          <input
-            type="text"
-            id="nameInput"
-            placeholder="Enter name"
-            autocomplete="off"
-            required
-          >
-
-        </div>
-
-        <div class="form-group">
-
-          <label>IP</label>
-
-          <input
-            type="text"
-            id="ipInput"
-            placeholder="Enter IP"
-            autocomplete="off"
-            required
-          >
-
-        </div>
-
-        <div class="form-group full">
-
-          <label>Work</label>
-
-          <textarea
-            id="workInput"
-            placeholder="Enter work"
-            required
-          ></textarea>
-
-        </div>
-
-        <div class="form-group">
-
-          <label>Date</label>
-
-          <input
-            type="date"
-            id="dateInput"
-          >
-
-        </div>
-
-      </div>
-
-      <div class="form-footer">
-
-        <button
-          type="button"
-          class="btn btn-cancel"
-          onclick="closeEntryModal()"
-        >
-          Cancel
-        </button>
-
-        <button
-          type="submit"
-          class="btn btn-primary"
-          id="submitBtn"
-        >
-          Save Entry
-        </button>
-
-      </div>
-
-    </form>
+</form>
+```
 
   </div>
 
 </div>
 
+<!-- USER MODAL -->
 
 <div
   class="modal"
@@ -1020,90 +1082,93 @@ tr:hover td{
 
   <div class="modal-box user-modal-box">
 
-    <div class="modal-header">
+```
+<div class="modal-header">
 
-      <h2>👤 User Management</h2>
+  <h2>👤 User Management</h2>
 
-      <button
-        class="close-btn"
-        onclick="closeUserModal()"
-      >
-        ×
-      </button>
+  <button
+    class="close-btn"
+    onclick="closeUserModal()"
+  >
+    ×
+  </button>
 
-    </div>
+</div>
 
-    <div class="user-toolbar">
+<div class="user-toolbar">
 
-      <div class="user-total">
+  <div class="user-total">
 
-        Total Users:
-        <strong id="userTotal">0</strong>
+    Total Users:
+    <strong id="userTotal">0</strong>
 
-      </div>
+  </div>
 
-      <div>
+  <div>
 
-        <button
-          class="btn btn-refresh"
-          onclick="loadUsers()"
-          id="userRefreshBtn"
-        >
-          🔄 Refresh
-        </button>
+    <button
+      class="btn btn-refresh"
+      onclick="loadUsers()"
+      id="userRefreshBtn"
+    >
+      🔄 Refresh
+    </button>
 
-        <button
-          class="btn btn-primary"
-          onclick="openAddUserModal()"
-        >
-          ➕ Add User
-        </button>
-
-      </div>
-
-    </div>
-
-    <div class="user-table-wrapper">
-
-      <table class="user-table">
-
-        <thead>
-
-          <tr>
-            <th>Username</th>
-            <th>Password</th>
-            <th>Name</th>
-            <th>Role</th>
-            <th>Status</th>
-            <th>Action</th>
-          </tr>
-
-        </thead>
-
-        <tbody id="userTableBody">
-
-          <tr>
-
-            <td colspan="6">
-
-              <div class="loading">
-                Loading users...
-              </div>
-
-            </td>
-
-          </tr>
-
-        </tbody>
-
-      </table>
-
-    </div>
+    <button
+      class="btn btn-primary"
+      onclick="openAddUserModal()"
+    >
+      ➕ Add User
+    </button>
 
   </div>
 
 </div>
 
+<div class="user-table-wrapper">
+
+  <table class="user-table">
+
+    <thead>
+
+      <tr>
+        <th>Username</th>
+        <th>Password</th>
+        <th>Name</th>
+        <th>Role</th>
+        <th>Status</th>
+        <th>Action</th>
+      </tr>
+
+    </thead>
+
+    <tbody id="userTableBody">
+
+      <tr>
+
+        <td colspan="6">
+
+          <div class="loading">
+            Loading users...
+          </div>
+
+        </td>
+
+      </tr>
+
+    </tbody>
+
+  </table>
+
+</div>
+```
+
+  </div>
+
+</div>
+
+<!-- USER FORM MODAL -->
 
 <div
   class="modal"
@@ -1112,136 +1177,135 @@ tr:hover td{
 
   <div class="modal-box">
 
-    <div class="modal-header">
+```
+<div class="modal-header">
 
-      <h2 id="userFormTitle">
-        Add User
-      </h2>
+  <h2 id="userFormTitle">
+    Add User
+  </h2>
 
-      <button
-        class="close-btn"
-        onclick="closeUserFormModal()"
+  <button
+    class="close-btn"
+    onclick="closeUserFormModal()"
+  >
+    ×
+  </button>
+
+</div>
+
+<form
+  class="form"
+  id="userForm"
+  onsubmit="submitUser(event)"
+>
+
+  <div class="form-grid">
+
+    <div class="form-group">
+
+      <label>Username</label>
+
+      <input
+        type="text"
+        id="userUsername"
+        placeholder="Enter username"
+        autocomplete="off"
+        required
       >
-        ×
-      </button>
 
     </div>
 
-    <form
-      class="form"
-      id="userForm"
-      onsubmit="submitUser(event)"
+    <div class="form-group">
+
+      <label>Password</label>
+
+      <input
+        type="text"
+        id="userPassword"
+        placeholder="Enter password"
+        autocomplete="off"
+        required
+      >
+
+    </div>
+
+    <div class="form-group">
+
+      <label>Name</label>
+
+      <input
+        type="text"
+        id="userName"
+        placeholder="Enter name"
+        autocomplete="off"
+        required
+      >
+
+    </div>
+
+    <div class="form-group">
+
+      <label>Role</label>
+
+      <select id="userRole" required>
+
+        <option value="">Select Role</option>
+        <option value="admin">Admin</option>
+        <option value="support">Support</option>
+        <option value="call">Call</option>
+
+      </select>
+
+    </div>
+
+    <div class="form-group">
+
+      <label>Status</label>
+
+      <select id="userStatus" required>
+
+        <option value="">Select Status</option>
+        <option value="Active">Active</option>
+        <option value="Blocked">Blocked</option>
+        <option value="Inactive">Inactive</option>
+
+      </select>
+
+    </div>
+
+  </div>
+
+  <div class="form-footer">
+
+    <button
+      type="button"
+      class="btn btn-cancel"
+      onclick="closeUserFormModal()"
     >
+      Cancel
+    </button>
 
-      <div class="form-grid">
+    <button
+      type="submit"
+      class="btn btn-primary"
+      id="userSubmitBtn"
+    >
+      Add User
+    </button>
 
-        <div class="form-group">
+  </div>
 
-          <label>Username</label>
-
-          <input
-            type="text"
-            id="userUsername"
-            placeholder="Enter username"
-            autocomplete="off"
-            required
-          >
-
-        </div>
-
-        <div class="form-group">
-
-          <label>Password</label>
-
-          <input
-            type="text"
-            id="userPassword"
-            placeholder="Enter password"
-            autocomplete="off"
-            required
-          >
-
-        </div>
-
-        <div class="form-group">
-
-          <label>Name</label>
-
-          <input
-            type="text"
-            id="userName"
-            placeholder="Enter name"
-            autocomplete="off"
-            required
-          >
-
-        </div>
-
-        <div class="form-group">
-
-          <label>Role</label>
-
-          <select id="userRole" required>
-
-            <option value="">Select Role</option>
-
-            <option value="admin">Admin</option>
-            <option value="support">Support</option>
-            <option value="call">Call</option>
-
-          </select>
-
-        </div>
-
-        <div class="form-group">
-
-          <label>Status</label>
-
-          <select id="userStatus" required>
-
-            <option value="">Select Status</option>
-            <option value="Active">Active</option>
-            <option value="Blocked">Blocked</option>
-            <option value="Inactive">Inactive</option>
-
-          </select>
-
-        </div>
-
-      </div>
-
-      <div class="form-footer">
-
-        <button
-          type="button"
-          class="btn btn-cancel"
-          onclick="closeUserFormModal()"
-        >
-          Cancel
-        </button>
-
-        <button
-          type="submit"
-          class="btn btn-primary"
-          id="userSubmitBtn"
-        >
-          Add User
-        </button>
-
-      </div>
-
-    </form>
+</form>
+```
 
   </div>
 
 </div>
 
-
 <div
   class="toast"
   id="toast"
 ></div>
-
 
 <script>
 
@@ -1260,6 +1324,7 @@ const AUTO_LOGOUT_TIME =
 
 let allData = [];
 let filteredData = [];
+
 let currentPage = 1;
 
 let editingRow = null;
@@ -1268,6 +1333,19 @@ let allUsers = [];
 let editingUser = null;
 
 let inactivityTimer = null;
+
+let currentDataType = "user";
+
+let dataCache = {
+  user: null,
+  deleted: null,
+  sell: null
+};
+
+
+/* ============================================================
+   LOGIN
+============================================================ */
 
 function getLoggedInUsername(){
 
@@ -1353,6 +1431,10 @@ function checkLogin(){
 }
 
 
+/* ============================================================
+   AUTO LOGOUT
+============================================================ */
+
 function resetAutoLogoutTimer(){
 
   clearTimeout(
@@ -1375,7 +1457,6 @@ function resetAutoLogoutTimer(){
 function setupActivityDetection(){
 
   const events = [
-
     "click",
     "mousemove",
     "mousedown",
@@ -1384,7 +1465,6 @@ function setupActivityDetection(){
     "touchstart",
     "touchmove",
     "input"
-
   ];
 
   events.forEach(
@@ -1417,9 +1497,7 @@ function autoLogout(){
       "dashboardTheme"
     );
 
-
   const loginKeys = [
-
     "username",
     "Username",
     "user",
@@ -1428,7 +1506,6 @@ function autoLogout(){
     "loggedUser",
     "currentUser",
     "userInfo"
-
   ];
 
   loginKeys.forEach(
@@ -1441,9 +1518,7 @@ function autoLogout(){
     }
   );
 
-
   sessionStorage.clear();
-
 
   if(savedTheme){
 
@@ -1453,7 +1528,6 @@ function autoLogout(){
     );
 
   }
-
 
   window.location.replace(
     LOGIN_PAGE
@@ -1474,7 +1548,6 @@ function logoutUser(){
     );
 
   const loginKeys = [
-
     "username",
     "Username",
     "user",
@@ -1483,7 +1556,6 @@ function logoutUser(){
     "loggedUser",
     "currentUser",
     "userInfo"
-
   ];
 
   loginKeys.forEach(
@@ -1496,9 +1568,7 @@ function logoutUser(){
     }
   );
 
-
   sessionStorage.clear();
-
 
   if(savedTheme){
 
@@ -1514,6 +1584,11 @@ function logoutUser(){
   );
 
 }
+
+
+/* ============================================================
+   THEME
+============================================================ */
 
 function loadTheme(){
 
@@ -1585,6 +1660,95 @@ function updateThemeButton(){
 }
 
 
+/* ============================================================
+   DATA TYPE
+============================================================ */
+
+function changeDataType(){
+
+  const select =
+    document.getElementById(
+      "dataType"
+    );
+
+  currentDataType =
+    select.value;
+
+  const title =
+    document.getElementById(
+      "pageTitle"
+    );
+
+  const subtitle =
+    document.getElementById(
+      "pageSubtitle"
+    );
+
+  const tableTitle =
+    document.getElementById(
+      "tableTitle"
+    );
+
+  select.classList.remove(
+    "user",
+    "deleted",
+    "sell"
+  );
+
+  select.classList.add(
+    currentDataType
+  );
+
+  if(currentDataType === "user"){
+
+    title.textContent =
+      "User Data";
+
+    subtitle.textContent =
+      "Manage your user entries";
+
+    tableTitle.textContent =
+      "👤 User Entries";
+
+  }
+
+  else if(currentDataType === "deleted"){
+
+    title.textContent =
+      "Deleted Data";
+
+    subtitle.textContent =
+      "View deleted entries";
+
+    tableTitle.textContent =
+      "🗑️ Deleted Entries";
+
+  }
+
+  else if(currentDataType === "sell"){
+
+    title.textContent =
+      "Sell Data";
+
+    subtitle.textContent =
+      "View sold entries";
+
+    tableTitle.textContent =
+      "💰 Sell Entries";
+
+  }
+
+  currentPage = 1;
+
+  loadData();
+
+}
+
+
+/* ============================================================
+   MAIN DATA LOADER
+============================================================ */
+
 async function loadData(){
 
   const btn =
@@ -1601,10 +1765,22 @@ async function loadData(){
 
   try{
 
+    let action = "getData";
+
+    if(currentDataType === "deleted"){
+      action = "getDeleted";
+    }
+
+    if(currentDataType === "sell"){
+      action = "getSell";
+    }
+
     const response =
       await fetch(
         API_URL +
-        "?action=getData&_=" +
+        "?action=" +
+        encodeURIComponent(action) +
+        "&_=" +
         Date.now(),
         {
           method:"GET",
@@ -1633,16 +1809,41 @@ async function loadData(){
 
     }
 
-    if(!Array.isArray(result.data)){
+    let data = [];
 
-      throw new Error(
-        "Invalid data received."
-      );
+    if(Array.isArray(result.data)){
+
+      data =
+        result.data;
+
+    }
+
+    else if(Array.isArray(result.rows)){
+
+      data =
+        result.rows;
+
+    }
+
+    else if(Array.isArray(result.deleted)){
+
+      data =
+        result.deleted;
+
+    }
+
+    else if(Array.isArray(result.sell)){
+
+      data =
+        result.sell;
 
     }
 
     allData =
-      result.data;
+      data;
+
+    dataCache[currentDataType] =
+      [...data];
 
     filteredData =
       [...allData];
@@ -1683,6 +1884,10 @@ async function loadData(){
 }
 
 
+/* ============================================================
+   TABLE
+============================================================ */
+
 function renderTable(){
 
   const tbody =
@@ -1698,7 +1903,14 @@ function renderTable(){
       <tr>
         <td colspan="5">
           <div class="empty">
-            No data found.
+            ${
+              currentDataType === "user"
+              ? "No user data found."
+              :
+              currentDataType === "deleted"
+              ? "No deleted data found."
+              : "No sell data found."
+            }
           </div>
         </td>
       </tr>
@@ -1726,32 +1938,47 @@ function renderTable(){
     function(row){
 
       const rowNumber =
-        Number(row._row);
+        Number(row._row || row.row || 0);
+
+      const username =
+        row.Username ||
+        row.username ||
+        "";
 
       html += `
         <tr>
 
           <td>
             ${escapeHTML(
-              row.Name || ""
+              row.Name ||
+              row.name ||
+              ""
             )}
           </td>
 
           <td>
             ${escapeHTML(
-              row.Ip || ""
+              row.Ip ||
+              row.IP ||
+              row.ip ||
+              ""
             )}
           </td>
 
           <td>
             ${escapeHTML(
-              row.Work || ""
+              row.Work ||
+              row.work ||
+              ""
             )}
           </td>
 
           <td class="date-cell">
             ${escapeHTML(
-              row.Date || ""
+              row.Date ||
+              row.date ||
+              row["Date & Time"] ||
+              ""
             )}
           </td>
 
@@ -1759,26 +1986,47 @@ function renderTable(){
 
             <div class="actions">
 
-              <button
-                class="btn-edit"
-                onclick="editEntryByRow(${rowNumber})"
-              >
-                ✏️ Edit
-              </button>
+              ${
+                currentDataType === "user"
+                ?
+                `
+                <button
+                  class="btn-edit"
+                  onclick="editEntryByRow(${rowNumber})"
+                >
+                  ✏️ Edit
+                </button>
 
-              <button
-                class="btn-delete"
-                onclick="deleteEntryByRow(${rowNumber})"
-              >
-                🗑️ Delete
-              </button>
+                <button
+                  class="btn-delete"
+                  onclick="deleteEntryByRow(${rowNumber})"
+                >
+                  🗑️ Delete
+                </button>
 
-              <button
-                class="btn-sell"
-                onclick="sellEntryByRow(${rowNumber})"
-              >
-                💰 Sell
-              </button>
+                <button
+                  class="btn-sell"
+                  onclick="sellEntryByRow(${rowNumber})"
+                >
+                  💰 Sell
+                </button>
+                `
+                :
+                `
+                <span
+                  style="
+                    color:var(--muted);
+                    font-size:12px;
+                  "
+                >
+                  ${escapeHTML(
+                    username
+                      ? "By: " + username
+                      : "History"
+                  )}
+                </span>
+                `
+              }
 
             </div>
 
@@ -1796,6 +2044,11 @@ function renderTable(){
   renderPagination();
 
 }
+
+
+/* ============================================================
+   FILTER
+============================================================ */
 
 function applyFilters(){
 
@@ -1827,19 +2080,34 @@ function applyFilters(){
           const text =
             (
               String(
-                row.Name || ""
+                row.Name ||
+                row.name ||
+                ""
               ) +
               " " +
               String(
-                row.Ip || ""
+                row.Ip ||
+                row.IP ||
+                row.ip ||
+                ""
               ) +
               " " +
               String(
-                row.Work || ""
+                row.Work ||
+                row.work ||
+                ""
               ) +
               " " +
               String(
-                row.Date || ""
+                row.Date ||
+                row.date ||
+                ""
+              ) +
+              " " +
+              String(
+                row.Username ||
+                row.username ||
+                ""
               )
             ).toLowerCase();
 
@@ -1860,7 +2128,8 @@ function applyFilters(){
 
           const rowDate =
             convertToFilterDate(
-              row.Date
+              row.Date ||
+              row.date
             );
 
           if(!rowDate){
@@ -1902,6 +2171,7 @@ function applyFilters(){
 
 }
 
+
 function clearFilters(){
 
   document.getElementById(
@@ -1926,6 +2196,7 @@ function clearFilters(){
   updateTotal();
 
 }
+
 
 function convertToFilterDate(value){
 
@@ -1979,6 +2250,11 @@ function convertToFilterDate(value){
   return "";
 
 }
+
+
+/* ============================================================
+   PAGINATION
+============================================================ */
 
 function renderPagination(){
 
@@ -2106,6 +2382,7 @@ function changePage(page){
 
 }
 
+
 function updateTotal(){
 
   document.getElementById(
@@ -2115,7 +2392,23 @@ function updateTotal(){
 
 }
 
+
+/* ============================================================
+   ENTRY
+============================================================ */
+
 function openEntryModal(){
+
+  if(currentDataType !== "user"){
+
+    showToast(
+      "New Entry is available only in User section.",
+      "error"
+    );
+
+    return;
+
+  }
 
   editingRow =
     null;
@@ -2161,12 +2454,17 @@ function closeEntryModal(){
 
 }
 
+
 function editEntryByRow(rowNumber){
 
   const row =
     allData.find(
       item =>
-        Number(item._row) ===
+        Number(
+          item._row ||
+          item.row ||
+          0
+        ) ===
         Number(rowNumber)
     );
 
@@ -2197,23 +2495,31 @@ function editEntryByRow(rowNumber){
   document.getElementById(
     "nameInput"
   ).value =
-    row.Name || "";
+    row.Name ||
+    row.name ||
+    "";
 
   document.getElementById(
     "ipInput"
   ).value =
-    row.Ip || "";
+    row.Ip ||
+    row.IP ||
+    row.ip ||
+    "";
 
   document.getElementById(
     "workInput"
   ).value =
-    row.Work || "";
+    row.Work ||
+    row.work ||
+    "";
 
   document.getElementById(
     "dateInput"
   ).value =
     convertToFilterDate(
-      row.Date
+      row.Date ||
+      row.date
     );
 
   document.getElementById(
@@ -2223,6 +2529,7 @@ function editEntryByRow(rowNumber){
   );
 
 }
+
 
 async function submitEntry(event){
 
@@ -2393,6 +2700,10 @@ async function submitEntry(event){
 }
 
 
+/* ============================================================
+   DELETE
+============================================================ */
+
 function requireUsername(){
 
   const username =
@@ -2410,12 +2721,17 @@ function requireUsername(){
 
 }
 
+
 async function deleteEntryByRow(rowNumber){
 
   const row =
     allData.find(
       item =>
-        Number(item._row) ===
+        Number(
+          item._row ||
+          item.row ||
+          0
+        ) ===
         Number(rowNumber)
     );
 
@@ -2529,12 +2845,21 @@ async function deleteEntryByRow(rowNumber){
 
 }
 
+
+/* ============================================================
+   SELL
+============================================================ */
+
 async function sellEntryByRow(rowNumber){
 
   const row =
     allData.find(
       item =>
-        Number(item._row) ===
+        Number(
+          item._row ||
+          item.row ||
+          0
+        ) ===
         Number(rowNumber)
     );
 
@@ -2650,6 +2975,11 @@ async function sellEntryByRow(rowNumber){
 
 }
 
+
+/* ============================================================
+   USER MANAGEMENT
+============================================================ */
+
 function openUserModal(){
 
   if(!checkLogin()){
@@ -2676,6 +3006,7 @@ function closeUserModal(){
   );
 
 }
+
 
 async function loadUsers(){
 
@@ -2795,6 +3126,7 @@ async function loadUsers(){
   }
 
 }
+
 
 function renderUsers(){
 
@@ -2989,6 +3321,7 @@ function renderUsers(){
 
 }
 
+
 function openAddUserModal(){
 
   if(!checkLogin()){
@@ -3024,6 +3357,7 @@ function openAddUserModal(){
   );
 
 }
+
 
 function editUser(
   rowNumber,
@@ -3135,6 +3469,7 @@ function editUser(
 
 }
 
+
 function closeUserFormModal(){
 
   document.getElementById(
@@ -3148,6 +3483,10 @@ function closeUserFormModal(){
 
 }
 
+
+/* ============================================================
+   USER SUBMIT
+============================================================ */
 
 async function submitUser(event){
 
@@ -3363,6 +3702,10 @@ async function submitUser(event){
 }
 
 
+/* ============================================================
+   USER BLOCK / UNBLOCK
+============================================================ */
+
 async function blockUser(
   rowNumber,
   encodedUsername
@@ -3418,6 +3761,7 @@ async function unblockUser(
   );
 
 }
+
 
 async function changeUserStatus(
   rowNumber,
@@ -3510,6 +3854,7 @@ async function changeUserStatus(
   }
 
 }
+
 
 async function deleteUser(
   rowNumber,
@@ -3611,6 +3956,11 @@ async function deleteUser(
 
 }
 
+
+/* ============================================================
+   HELPERS
+============================================================ */
+
 function getTodayInputDate(){
 
   const now =
@@ -3636,6 +3986,7 @@ function getTodayInputDate(){
 
 }
 
+
 function showLoading(){
 
   document.getElementById(
@@ -3651,6 +4002,7 @@ function showLoading(){
   `;
 
 }
+
 
 function showError(message){
 
@@ -3728,6 +4080,11 @@ function escapeHTML(value){
   );
 
 }
+
+
+/* ============================================================
+   MODAL EVENTS
+============================================================ */
 
 document
   .getElementById(
@@ -3809,11 +4166,13 @@ document.addEventListener(
 );
 
 
+/* ============================================================
+   START
+============================================================ */
+
 document.addEventListener(
   "DOMContentLoaded",
   function(){
-
-
 
     if(!checkLogin()){
 
@@ -3823,9 +4182,15 @@ document.addEventListener(
 
     loadTheme();
 
-
     setupActivityDetection();
 
+    currentDataType =
+      "user";
+
+    document.getElementById(
+      "dataType"
+    ).value =
+      "user";
 
     loadData();
 
