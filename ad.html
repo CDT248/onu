@@ -1,1058 +1,806 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Admin Data Dashboard</title>
+<title>Data Dashboard</title>
 
-<link rel="icon"
-      type="image/png"
-      href="https://cdn-icons-png.flaticon.com/128/17163/17163834.png">
+<link
+  rel="icon"
+  type="image/png"
+  sizes="128x128"
+  href="https://cdn-icons-png.flaticon.com/128/17163/17163834.png"
+>
 
 <style>
 
 *{
-    box-sizing:border-box;
-    margin:0;
-    padding:0;
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:Arial,Helvetica,sans-serif;
+}
+
+:root{
+  --bg:#f4f7f6;
+  --card:#ffffff;
+  --text:#1f2937;
+  --muted:#6b7280;
+  --border:#e5e7eb;
+  --input:#ffffff;
+  --thead:#f8fafc;
+  --hover:#fafafa;
+  --green:#087f5b;
+  --green-dark:#066b4d;
+  --blue:#2563eb;
+  --red:#dc2626;
+  --orange:#d97706;
+  --purple:#7c3aed;
+  --shadow:rgba(0,0,0,.20);
+}
+
+body.dark{
+  --bg:#111827;
+  --card:#1f2937;
+  --text:#f9fafb;
+  --muted:#9ca3af;
+  --border:#374151;
+  --input:#111827;
+  --thead:#172033;
+  --hover:#263244;
+  --shadow:rgba(0,0,0,.50);
 }
 
 body{
-    font-family:
-        Inter,
-        Arial,
-        Helvetica,
-        sans-serif;
-
-    background:
-        linear-gradient(
-            135deg,
-            #f4f7fb,
-            #eef2f7
-        );
-
-    color:#172033;
-    min-height:100vh;
+  background:var(--bg);
+  color:var(--text);
+  transition:.25s;
 }
 
+button{
+  border:none;
+  cursor:pointer;
+  transition:.2s;
+}
 
-/* =========================================================
-   HEADER
-========================================================= */
+button:disabled{
+  cursor:not-allowed;
+  opacity:.5;
+}
+
+/* ================= HEADER ================= */
 
 .header{
-    width:100%;
-    height:72px;
-
-    background:#ffffff;
-
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-
-    padding:0 25px;
-
-    border-bottom:1px solid #e6eaf0;
-
-    position:sticky;
-    top:0;
-    z-index:100;
-}
-
-.logoArea{
-    display:flex;
-    align-items:center;
-    gap:12px;
+  width:100%;
+  min-height:70px;
+  background:var(--card);
+  border-bottom:1px solid var(--border);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 25px;
+  position:sticky;
+  top:0;
+  z-index:100;
 }
 
 .logo{
-    width:42px;
-    height:42px;
-
-    border-radius:12px;
-
-    object-fit:cover;
-
-    box-shadow:
-        0 5px 15px rgba(0,0,0,.12);
+  font-size:22px;
+  font-weight:700;
+  color:var(--green);
 }
 
-.logoText{
-    font-size:19px;
-    font-weight:800;
-    color:#152238;
+.header-right{
+  display:flex;
+  align-items:center;
+  gap:10px;
 }
 
-.logoText span{
-    color:#0c8f52;
+.btn{
+  padding:11px 17px;
+  border-radius:8px;
+  font-size:14px;
+  font-weight:600;
 }
 
-
-/* =========================================================
-   HEADER RIGHT
-========================================================= */
-
-.headerRight{
-    display:flex;
-    align-items:center;
-    gap:10px;
+.btn-primary{
+  background:var(--green);
+  color:#fff;
 }
 
-.userBadge{
-    background:#f0fdf6;
-
-    color:#087443;
-
-    border:1px solid #ccefdc;
-
-    padding:9px 13px;
-
-    border-radius:10px;
-
-    font-size:13px;
-    font-weight:700;
+.btn-primary:hover{
+  background:var(--green-dark);
 }
 
-.logoutBtn{
-    border:none;
-
-    background:#172033;
-    color:#ffffff;
-
-    padding:10px 15px;
-
-    border-radius:10px;
-
-    cursor:pointer;
-
-    font-weight:700;
-
-    transition:.2s;
+.btn-refresh,
+.theme-btn,
+.btn-cancel{
+  background:var(--input);
+  color:var(--text);
+  border:1px solid var(--border);
 }
 
-.logoutBtn:hover{
-    background:#0b8f52;
+.btn-refresh:hover,
+.theme-btn:hover,
+.btn-cancel:hover{
+  background:var(--hover);
 }
 
-
-/* =========================================================
-   MAIN
-========================================================= */
-
-.main{
-    width:100%;
-    max-width:1500px;
-
-    margin:auto;
-
-    padding:24px;
+.theme-btn{
+  height:42px;
+  padding:0 14px;
+  border-radius:8px;
+  font-size:13px;
+  font-weight:600;
 }
 
-
-/* =========================================================
-   TITLE
-========================================================= */
-
-.pageTitle{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-
-    margin-bottom:20px;
+.btn-users{
+  background:#7c3aed;
+  color:#fff;
 }
 
-.pageTitle h1{
-    font-size:27px;
-    font-weight:850;
+.btn-users:hover{
+  background:#6d28d9;
 }
 
-.pageTitle p{
-    color:#758096;
-    margin-top:5px;
-    font-size:14px;
+.btn-logout{
+  background:#dc2626;
+  color:#fff;
+  padding:11px 17px;
+  border-radius:8px;
+  font-size:14px;
+  font-weight:600;
 }
 
-
-/* =========================================================
-   STATS
-========================================================= */
-
-.stats{
-    display:grid;
-
-    grid-template-columns:
-        repeat(4,1fr);
-
-    gap:15px;
-
-    margin-bottom:20px;
+.btn-logout:hover{
+  background:#b91c1c;
 }
 
-.statCard{
-    background:#ffffff;
+/* ================= CONTAINER ================= */
 
-    border:1px solid #e8ecf2;
-
-    border-radius:16px;
-
-    padding:18px;
-
-    box-shadow:
-        0 8px 25px rgba(25,35,55,.06);
-
-    position:relative;
-
-    overflow:hidden;
+.container{
+  width:100%;
+  max-width:1500px;
+  margin:auto;
+  padding:25px;
 }
 
-.statCard::after{
-    content:"";
-
-    position:absolute;
-
-    right:-30px;
-    bottom:-30px;
-
-    width:90px;
-    height:90px;
-
-    border-radius:50%;
-
-    background:#eef8f3;
+.top-section{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:15px;
+  margin-bottom:20px;
 }
 
-.statIcon{
-    width:38px;
-    height:38px;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    border-radius:10px;
-
-    background:#eef8f3;
-
-    color:#07894d;
-
-    font-size:18px;
-
-    margin-bottom:10px;
+.title h1{
+  font-size:27px;
+  margin-bottom:5px;
 }
 
-.statTitle{
-    font-size:13px;
-    color:#778195;
-    font-weight:600;
+.title p{
+  color:var(--muted);
+  font-size:14px;
 }
 
-.statNumber{
-    font-size:25px;
-    font-weight:850;
+/* ================= FILTER ================= */
 
-    margin-top:4px;
+.filter-box{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:14px;
+  padding:16px;
+  margin-bottom:20px;
+  box-shadow:0 3px 12px rgba(0,0,0,.03);
 }
 
-
-/* =========================================================
-   TOOLBAR
-========================================================= */
-
-.toolbar{
-    background:#ffffff;
-
-    border:1px solid #e7ebf1;
-
-    border-radius:16px;
-
-    padding:15px;
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:space-between;
-
-    gap:12px;
-
-    margin-bottom:18px;
-
-    box-shadow:
-        0 7px 25px rgba(25,35,55,.05);
+.filters{
+  display:grid;
+  grid-template-columns:minmax(260px,2fr) minmax(150px,1fr) minmax(150px,1fr) 150px 82px;
+  gap:10px;
+  align-items:end;
 }
 
-.tabs{
-    display:flex;
-    gap:7px;
-    flex-wrap:wrap;
+.field{
+  display:flex;
+  flex-direction:column;
+  gap:6px;
 }
 
-.tab{
-    border:none;
-
-    background:#f3f5f8;
-
-    color:#5d687c;
-
-    padding:10px 16px;
-
-    border-radius:10px;
-
-    font-weight:750;
-
-    cursor:pointer;
-
-    transition:.2s;
+.field label{
+  font-size:11px;
+  font-weight:700;
+  color:var(--muted);
+  padding-left:2px;
 }
 
-.tab:hover{
-    background:#e7ecef;
+.field input,
+.field select{
+  width:100%;
+  height:44px;
+  border:1px solid var(--border);
+  border-radius:9px;
+  padding:0 12px;
+  outline:none;
+  background:var(--input);
+  color:var(--text);
+  font-size:13px;
+  transition:.2s;
 }
 
-.tab.active{
-    background:#0b8f52;
-    color:#ffffff;
+.field input:hover,
+.field select:hover{
+  border-color:#cbd5e1;
 }
 
-
-.searchBox{
-    position:relative;
-
-    min-width:260px;
+.field input:focus,
+.field select:focus{
+  border-color:var(--green);
+  box-shadow:0 0 0 3px rgba(8,127,91,.08);
 }
 
-.searchBox input{
-    width:100%;
+/* সুন্দর Data selector */
 
-    padding:11px 14px 11px 40px;
-
-    border:1px solid #dfe4eb;
-
-    border-radius:10px;
-
-    outline:none;
-
-    font-size:14px;
-
-    transition:.2s;
+.data-selector{
+  position:relative;
 }
 
-.searchBox input:focus{
-    border-color:#0b8f52;
-
-    box-shadow:
-        0 0 0 3px rgba(11,143,82,.10);
+.data-selector select{
+  appearance:none;
+  -webkit-appearance:none;
+  padding-right:35px;
+  font-weight:600;
+  cursor:pointer;
 }
 
-.searchIcon{
-    position:absolute;
-
-    left:14px;
-    top:50%;
-
-    transform:translateY(-50%);
-
-    color:#8791a1;
+.data-selector::after{
+  content:"⌄";
+  position:absolute;
+  right:13px;
+  bottom:11px;
+  font-size:17px;
+  color:var(--muted);
+  pointer-events:none;
 }
 
-
-/* =========================================================
-   TABLE CARD
-========================================================= */
-
-.tableCard{
-    background:#ffffff;
-
-    border:1px solid #e7ebf1;
-
-    border-radius:17px;
-
-    overflow:hidden;
-
-    box-shadow:
-        0 8px 30px rgba(25,35,55,.06);
+.data-selector select:focus{
+  border-color:var(--green);
 }
 
-.tableTop{
-    padding:17px 19px;
-
-    display:flex;
-
-    align-items:center;
-    justify-content:space-between;
-
-    border-bottom:1px solid #edf0f4;
+.clear-filter-btn{
+  height:44px;
+  padding:0 13px;
+  border-radius:9px;
+  background:var(--input);
+  color:var(--text);
+  border:1px solid var(--border);
+  font-size:13px;
+  font-weight:700;
 }
 
-.tableTitle{
-    font-size:16px;
-    font-weight:800;
+.clear-filter-btn:hover{
+  background:var(--hover);
+  border-color:#cbd5e1;
 }
 
-.tableInfo{
-    font-size:12px;
-    color:#7b8596;
+/* ================= TABLE ================= */
+
+.table-box{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:12px;
+  overflow:hidden;
 }
 
+.table-header{
+  padding:16px 18px;
+  border-bottom:1px solid var(--border);
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
 
-/* =========================================================
-   TABLE
-========================================================= */
+.table-header h2{
+  font-size:17px;
+}
 
-.tableWrap{
-    width:100%;
-    overflow-x:auto;
+.total-count{
+  font-size:13px;
+  color:var(--muted);
+}
+
+.table-wrapper{
+  width:100%;
+  overflow-x:auto;
 }
 
 table{
-    width:100%;
-    border-collapse:collapse;
-
-    min-width:900px;
-}
-
-thead{
-    background:#f8fafc;
+  width:100%;
+  border-collapse:collapse;
+  min-width:900px;
 }
 
 th{
-    text-align:left;
-
-    padding:14px 16px;
-
-    font-size:12px;
-
-    color:#687388;
-
-    text-transform:uppercase;
-
-    letter-spacing:.4px;
-
-    font-weight:800;
-
-    border-bottom:1px solid #e8ecf1;
+  background:var(--thead);
+  padding:14px;
+  text-align:left;
+  font-size:12px;
+  color:var(--muted);
+  white-space:nowrap;
+  border-bottom:1px solid var(--border);
 }
 
 td{
-    padding:14px 16px;
-
-    border-bottom:1px solid #eef1f4;
-
-    font-size:14px;
-
-    color:#263248;
-
-    vertical-align:middle;
+  padding:14px;
+  border-bottom:1px solid var(--border);
+  font-size:13px;
+  white-space:nowrap;
 }
 
-tbody tr{
-    transition:.18s;
+tr:hover td{
+  background:var(--hover);
 }
 
-tbody tr:hover{
-    background:#fbfdfc;
+.date-cell{
+  color:var(--muted);
+  font-weight:500;
 }
-
-tbody tr:last-child td{
-    border-bottom:none;
-}
-
-
-/* =========================================================
-   IP
-========================================================= */
-
-.ipText{
-    font-family:
-        Consolas,
-        monospace;
-
-    font-size:13px;
-
-    background:#f3f6f9;
-
-    padding:5px 8px;
-
-    border-radius:7px;
-
-    display:inline-block;
-}
-
-
-/* =========================================================
-   WORK
-========================================================= */
-
-.workBadge{
-    display:inline-flex;
-
-    padding:6px 9px;
-
-    border-radius:8px;
-
-    background:#eef7ff;
-
-    color:#2770a7;
-
-    font-size:12px;
-
-    font-weight:700;
-}
-
-
-/* =========================================================
-   ACTIONS
-========================================================= */
 
 .actions{
-    display:flex;
-
-    align-items:center;
-
-    gap:7px;
-
-    flex-wrap:wrap;
+  display:flex;
+  gap:7px;
+  align-items:center;
 }
 
-.actionBtn{
-    border:none;
-
-    padding:8px 11px;
-
-    border-radius:8px;
-
-    cursor:pointer;
-
-    font-size:12px;
-
-    font-weight:800;
-
-    display:inline-flex;
-
-    align-items:center;
-
-    gap:5px;
-
-    transition:.2s;
+.btn-edit,
+.btn-delete,
+.btn-sell{
+  padding:7px 11px;
+  border-radius:6px;
+  font-size:13px;
+  font-weight:600;
 }
 
-.editBtn{
-    background:#eef5ff;
-    color:#1767c0;
+.btn-edit{
+  background:#e8f1ff;
+  color:#2563eb;
 }
 
-.editBtn:hover{
-    background:#dceaff;
+.btn-edit:hover{
+  background:#dbeafe;
 }
 
-.deleteBtn{
-    background:#fff0f0;
-    color:#d32f2f;
+.btn-delete{
+  background:#fee2e2;
+  color:#dc2626;
 }
 
-.deleteBtn:hover{
-    background:#ffe0e0;
+.btn-delete:hover{
+  background:#fecaca;
 }
 
-.sellBtn{
-    background:#fff8e8;
-    color:#bd7800;
+.btn-sell{
+  background:#fff7ed;
+  color:#d97706;
 }
 
-.sellBtn:hover{
-    background:#ffefc5;
+.btn-sell:hover{
+  background:#ffedd5;
 }
 
+/* ================= PAGINATION ================= */
 
-/* =========================================================
-   EMPTY
-========================================================= */
-
-.empty{
-    text-align:center;
-
-    padding:60px 20px;
-
-    color:#8892a3;
+.pagination-box{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:15px 18px;
+  border-top:1px solid var(--border);
 }
 
-.emptyIcon{
-    font-size:42px;
-    margin-bottom:10px;
+.page-info{
+  font-size:13px;
+  color:var(--muted);
 }
 
-.emptyTitle{
-    font-size:17px;
-    font-weight:800;
-    color:#566174;
+.pagination{
+  display:flex;
+  gap:5px;
+  flex-wrap:wrap;
 }
 
-.emptyText{
-    margin-top:5px;
-    font-size:13px;
+.page-btn{
+  min-width:35px;
+  height:35px;
+  border:1px solid var(--border);
+  background:var(--input);
+  color:var(--text);
+  border-radius:6px;
+  font-size:13px;
 }
 
-
-/* =========================================================
-   LOADER
-========================================================= */
-
-.loader{
-    display:flex;
-
-    justify-content:center;
-    align-items:center;
-
-    gap:10px;
-
-    padding:60px;
-
-    color:#6d7788;
+.page-btn:hover{
+  background:var(--hover);
 }
 
-.spinner{
-    width:22px;
-    height:22px;
-
-    border:3px solid #e4e9ef;
-
-    border-top-color:#0b8f52;
-
-    border-radius:50%;
-
-    animation:
-        spin .8s linear infinite;
+.page-btn.active{
+  background:var(--green);
+  color:#fff;
+  border-color:var(--green);
 }
 
-@keyframes spin{
-    to{
-        transform:rotate(360deg);
-    }
-}
-
-
-/* =========================================================
-   MODAL
-========================================================= */
-
-.modalOverlay{
-    position:fixed;
-
-    inset:0;
-
-    background:
-        rgba(12,20,33,.52);
-
-    backdrop-filter:
-        blur(5px);
-
-    display:none;
-
-    align-items:center;
-    justify-content:center;
-
-    z-index:500;
-
-    padding:20px;
-}
-
-.modalOverlay.show{
-    display:flex;
-}
+/* ================= MODAL ================= */
 
 .modal{
-    width:100%;
-    max-width:520px;
-
-    background:#ffffff;
-
-    border-radius:18px;
-
-    box-shadow:
-        0 30px 80px rgba(0,0,0,.25);
-
-    overflow:hidden;
-
-    animation:
-        modalIn .2s ease;
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.55);
+  display:none;
+  justify-content:center;
+  align-items:center;
+  padding:20px;
+  z-index:999;
 }
 
-@keyframes modalIn{
-    from{
-        opacity:0;
-        transform:translateY(15px) scale(.98);
-    }
-
-    to{
-        opacity:1;
-        transform:translateY(0) scale(1);
-    }
+.modal.show{
+  display:flex;
 }
 
-.modalHeader{
-    padding:19px 20px;
-
-    display:flex;
-
-    align-items:center;
-    justify-content:space-between;
-
-    border-bottom:1px solid #edf0f4;
+.modal-box{
+  width:100%;
+  max-width:700px;
+  max-height:95vh;
+  overflow-y:auto;
+  background:var(--card);
+  color:var(--text);
+  border-radius:16px;
+  box-shadow:0 20px 60px var(--shadow);
 }
 
-.modalHeader h3{
-    font-size:18px;
+.modal-header{
+  padding:20px 24px;
+  border-bottom:1px solid var(--border);
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  position:sticky;
+  top:0;
+  background:var(--card);
+  z-index:2;
 }
 
-.closeBtn{
-    width:34px;
-    height:34px;
-
-    border:none;
-
-    background:#f1f3f6;
-
-    border-radius:9px;
-
-    cursor:pointer;
-
-    font-size:18px;
-
-    color:#596476;
+.modal-header h2{
+  font-size:20px;
 }
 
-.closeBtn:hover{
-    background:#e7eaee;
+.close-btn{
+  width:36px;
+  height:36px;
+  border-radius:50%;
+  background:var(--input);
+  border:1px solid var(--border);
+  font-size:22px;
+  color:var(--text);
 }
 
-.modalBody{
-    padding:20px;
+.close-btn:hover{
+  background:var(--hover);
 }
 
-.formGrid{
-    display:grid;
-
-    grid-template-columns:
-        1fr 1fr;
-
-    gap:14px;
+.form{
+  padding:30px 25px;
 }
 
-.formGroup{
-    display:flex;
-    flex-direction:column;
-    gap:6px;
+.form-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:22px 18px;
 }
 
-.formGroup.full{
-    grid-column:1 / -1;
+.form-group{
+  display:flex;
+  flex-direction:column;
+  gap:9px;
 }
 
-.formGroup label{
-    font-size:12px;
-
-    font-weight:800;
-
-    color:#647085;
+.form-group.full{
+  grid-column:1 / -1;
 }
 
-.formGroup input{
-    width:100%;
-
-    border:1px solid #dfe4eb;
-
-    padding:11px 12px;
-
-    border-radius:9px;
-
-    outline:none;
-
-    font-size:14px;
+.form-group label{
+  font-size:13px;
+  font-weight:600;
 }
 
-.formGroup input:focus{
-    border-color:#0b8f52;
-
-    box-shadow:
-        0 0 0 3px rgba(11,143,82,.08);
+.form-group input,
+.form-group textarea,
+.form-group select{
+  width:100%;
+  border:1px solid var(--border);
+  border-radius:9px;
+  padding:13px 14px;
+  outline:none;
+  font-size:14px;
+  background:var(--input);
+  color:var(--text);
 }
 
-.modalFooter{
-    padding:15px 20px;
-
-    display:flex;
-
-    justify-content:flex-end;
-
-    gap:9px;
-
-    border-top:1px solid #edf0f4;
+.form-group input,
+.form-group select{
+  height:48px;
 }
 
-.cancelBtn,
-.saveBtn{
-    border:none;
-
-    padding:10px 17px;
-
-    border-radius:9px;
-
-    cursor:pointer;
-
-    font-weight:800;
+.form-group textarea{
+  min-height:150px;
+  resize:vertical;
 }
 
-.cancelBtn{
-    background:#f0f2f5;
-    color:#596476;
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus{
+  border-color:var(--green);
 }
 
-.saveBtn{
-    background:#0b8f52;
-    color:#ffffff;
+.form-footer{
+  display:flex;
+  justify-content:flex-end;
+  gap:10px;
+  padding-top:30px;
 }
 
-.saveBtn:hover{
-    background:#087743;
+/* ================= USER MODAL ================= */
+
+.user-modal-box{
+  max-width:1100px;
 }
 
-
-/* =========================================================
-   CONFIRM MODAL
-========================================================= */
-
-.confirmIcon{
-    width:55px;
-    height:55px;
-
-    margin:5px auto 15px;
-
-    border-radius:50%;
-
-    background:#fff0f0;
-
-    display:flex;
-
-    align-items:center;
-    justify-content:center;
-
-    color:#d83232;
-
-    font-size:24px;
+.user-toolbar{
+  padding:16px 24px;
+  border-bottom:1px solid var(--border);
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
 }
 
-.confirmText{
-    text-align:center;
-
-    color:#687388;
-
-    line-height:1.6;
-
-    font-size:14px;
+.user-total{
+  font-size:13px;
+  color:var(--muted);
 }
 
-.confirmText strong{
-    color:#202b3d;
+.user-table-wrapper{
+  width:100%;
+  overflow-x:auto;
+  padding:0 20px;
 }
 
-.confirmActions{
-    display:flex;
-
-    justify-content:center;
-
-    gap:10px;
-
-    margin-top:20px;
+.user-table{
+  min-width:800px;
 }
 
-.confirmDelete{
-    background:#d93636;
-
-    color:#ffffff;
-
-    border:none;
-
-    padding:10px 20px;
-
-    border-radius:9px;
-
-    font-weight:800;
-
-    cursor:pointer;
+.user-actions{
+  display:flex;
+  gap:6px;
 }
 
-.confirmDelete:hover{
-    background:#b92323;
+.user-action{
+  padding:7px 10px;
+  border-radius:6px;
+  font-size:12px;
+  font-weight:600;
 }
 
+.user-action.edit{
+  background:#e8f1ff;
+  color:#2563eb;
+}
 
-/* =========================================================
-   TOAST
-========================================================= */
+.user-action.block{
+  background:#fff7ed;
+  color:#d97706;
+}
+
+.user-action.unblock{
+  background:#dcfce7;
+  color:#15803d;
+}
+
+.user-action.delete{
+  background:#fee2e2;
+  color:#dc2626;
+}
+
+.status-badge,
+.role-badge{
+  display:inline-flex;
+  align-items:center;
+  padding:5px 9px;
+  border-radius:20px;
+  font-size:11px;
+  font-weight:700;
+}
+
+.status-active{
+  background:#dcfce7;
+  color:#15803d;
+}
+
+.status-blocked{
+  background:#fee2e2;
+  color:#dc2626;
+}
+
+.status-inactive{
+  background:#f3f4f6;
+  color:#6b7280;
+}
+
+.role-badge{
+  background:#ede9fe;
+  color:#6d28d9;
+}
+
+/* ================= STATUS ================= */
+
+.loading{
+  text-align:center;
+  padding:45px 20px;
+  color:var(--muted);
+}
+
+.empty{
+  text-align:center;
+  padding:55px 20px;
+  color:var(--muted);
+}
+
+/* ================= TOAST ================= */
 
 .toast{
-    position:fixed;
-
-    right:22px;
-    bottom:22px;
-
-    min-width:280px;
-
-    max-width:380px;
-
-    background:#172033;
-
-    color:#ffffff;
-
-    padding:14px 16px;
-
-    border-radius:12px;
-
-    box-shadow:
-        0 15px 35px rgba(0,0,0,.2);
-
-    display:flex;
-
-    align-items:center;
-
-    gap:10px;
-
-    opacity:0;
-
-    pointer-events:none;
-
-    transform:
-        translateY(15px);
-
-    transition:.25s;
-
-    z-index:1000;
-
-    font-size:13px;
-
-    font-weight:650;
+  position:fixed;
+  right:25px;
+  bottom:25px;
+  min-width:260px;
+  padding:14px 17px;
+  border-radius:9px;
+  color:#fff;
+  background:#111827;
+  box-shadow:0 10px 30px rgba(0,0,0,.2);
+  transform:translateY(100px);
+  opacity:0;
+  transition:.3s;
+  z-index:3000;
+  font-size:14px;
 }
 
 .toast.show{
-    opacity:1;
-
-    pointer-events:auto;
-
-    transform:
-        translateY(0);
+  transform:translateY(0);
+  opacity:1;
 }
 
 .toast.success{
-    background:#087b47;
+  background:#087f5b;
 }
 
 .toast.error{
-    background:#c62828;
+  background:#dc2626;
 }
 
+/* ================= RESPONSIVE ================= */
 
-/* =========================================================
-   RESPONSIVE
-========================================================= */
+@media(max-width:1050px){
 
-@media(max-width:1000px){
+  .filters{
+    grid-template-columns:2fr 1fr 1fr;
+  }
 
-    .stats{
-        grid-template-columns:
-            repeat(2,1fr);
-    }
+  .data-selector{
+    grid-column:1 / 2;
+  }
 
-}
-
-@media(max-width:700px){
-
-    .header{
-        height:auto;
-
-        min-height:70px;
-
-        padding:12px 15px;
-    }
-
-    .logoText{
-        font-size:16px;
-    }
-
-    .userBadge{
-        display:none;
-    }
-
-    .main{
-        padding:15px;
-    }
-
-    .pageTitle{
-        align-items:flex-start;
-    }
-
-    .pageTitle h1{
-        font-size:22px;
-    }
-
-    .toolbar{
-        flex-direction:column;
-        align-items:stretch;
-    }
-
-    .tabs{
-        width:100%;
-    }
-
-    .tab{
-        flex:1;
-    }
-
-    .searchBox{
-        width:100%;
-        min-width:0;
-    }
-
-    .stats{
-        grid-template-columns:
-            1fr 1fr;
-
-        gap:10px;
-    }
-
-    .statCard{
-        padding:14px;
-    }
-
-    .statNumber{
-        font-size:21px;
-    }
-
-    .formGrid{
-        grid-template-columns:1fr;
-    }
-
-    .formGroup.full{
-        grid-column:auto;
-    }
+  .clear-filter-btn{
+    grid-column:2 / 4;
+  }
 
 }
 
-@media(max-width:450px){
+@media(max-width:900px){
 
-    .stats{
-        grid-template-columns:1fr;
-    }
+  .top-section{
+    align-items:flex-start;
+    flex-direction:column;
+  }
 
-    .logoutBtn{
-        padding:9px 11px;
-    }
+}
 
-    .pageTitle{
-        flex-direction:column;
-        gap:5px;
-    }
+@media(max-width:600px){
+
+  .header{
+    min-height:70px;
+    padding:12px 15px;
+    gap:10px;
+    flex-wrap:wrap;
+  }
+
+  .logo{
+    font-size:18px;
+  }
+
+  .header-right{
+    gap:6px;
+    width:100%;
+    justify-content:flex-end;
+    flex-wrap:wrap;
+  }
+
+  .header-right .btn,
+  .theme-btn{
+    padding:9px 10px;
+    font-size:12px;
+    height:38px;
+  }
+
+  .btn-logout{
+    padding:9px 10px;
+    font-size:12px;
+  }
+
+  .container{
+    padding:15px;
+  }
+
+  .filter-box{
+    padding:13px;
+  }
+
+  .filters{
+    grid-template-columns:1fr;
+    gap:10px;
+  }
+
+  .data-selector{
+    grid-column:auto;
+  }
+
+  .clear-filter-btn{
+    grid-column:auto;
+    width:100%;
+  }
+
+  .form-grid{
+    grid-template-columns:1fr;
+  }
+
+  .form-group.full{
+    grid-column:auto;
+  }
+
+  .form{
+    padding:25px 18px;
+  }
+
+  .modal{
+    padding:10px;
+  }
+
+  .modal-box{
+    max-height:96vh;
+    border-radius:13px;
+  }
+
+  .pagination-box{
+    flex-direction:column;
+    gap:12px;
+  }
+
+  .toast{
+    left:15px;
+    right:15px;
+    min-width:auto;
+  }
 
 }
 
@@ -1060,2171 +808,3670 @@ tbody tr:last-child td{
 
 </head>
 
-
 <body>
-
-
-<!-- =======================================================
-     HEADER
-======================================================= -->
 
 <header class="header">
 
-    <div class="logoArea">
+  <div class="logo">
+    DATA DASHBOARD
+  </div>
 
-        <img
-            class="logo"
-            src="https://cdn-icons-png.flaticon.com/128/17163/17163834.png"
-            alt="Admin"
-        >
+  <div class="header-right">
 
-        <div class="logoText">
-            Data <span>Dashboard</span>
-        </div>
+    <button
+      class="theme-btn"
+      id="themeBtn"
+      onclick="toggleTheme()"
+    >
+      🌙 Dark
+    </button>
 
-    </div>
+    <button
+      class="btn btn-refresh"
+      id="refreshBtn"
+      onclick="loadData()"
+    >
+      🔄 Refresh
+    </button>
 
+    <button
+      class="btn btn-users"
+      onclick="openUserModal()"
+    >
+      👤 Users
+    </button>
 
-    <div class="headerRight">
+    <button
+      class="btn btn-primary"
+      onclick="openEntryModal()"
+    >
+      ➕ New Entry
+    </button>
 
-        <div
-            class="userBadge"
-            id="usernameBadge"
-        >
-            Admin
-        </div>
+    <button
+      class="btn btn-logout"
+      onclick="logoutUser()"
+    >
+      🚪 Logout
+    </button>
 
-        <button
-            class="logoutBtn"
-            onclick="logout()"
-        >
-            Logout
-        </button>
-
-    </div>
+  </div>
 
 </header>
 
 
+<main class="container">
 
-<!-- =======================================================
-     MAIN
-======================================================= -->
+  <div class="top-section">
 
-<main class="main">
+    <div class="title">
+
+      <h1 id="pageTitle">
+        Data Dashboard
+      </h1>
+
+      <p id="pageSubtitle">
+        Manage your entries
+      </p>
+
+    </div>
+
+  </div>
 
 
-    <div class="pageTitle">
+  <!-- ================= FILTER ================= -->
 
-        <div>
+  <section class="filter-box">
 
-            <h1>Admin Dashboard</h1>
+    <div class="filters">
 
-            <p>
-                Manage User, Deleted and Sell records
-            </p>
+      <div class="field search-field">
 
-        </div>
+        <label>🔍 Search</label>
+
+        <input
+          type="text"
+          id="searchInput"
+          placeholder="Search Name, IP or Work..."
+          oninput="applyFilters()"
+        >
+
+      </div>
+
+
+      <div class="field">
+
+        <label>📅 From Date</label>
+
+        <input
+          type="date"
+          id="fromDate"
+          onchange="applyFilters()"
+        >
+
+      </div>
+
+
+      <div class="field">
+
+        <label>📅 To Date</label>
+
+        <input
+          type="date"
+          id="toDate"
+          onchange="applyFilters()"
+        >
+
+      </div>
+
+
+      <!-- USER / DELETED / SELL -->
+
+      <div class="field data-selector">
+
+        <label>📂 Data</label>
+
+        <select
+          id="dataType"
+          onchange="changeDataType()"
+        >
+
+          <option value="User">
+            👤 User
+          </option>
+
+          <option value="Deleted">
+            🗑️ Deleted
+          </option>
+
+          <option value="Sell">
+            💰 Sell
+          </option>
+
+        </select>
+
+      </div>
+
+
+      <button
+        class="clear-filter-btn"
+        onclick="clearFilters()"
+      >
+        Clear
+      </button>
+
+    </div>
+
+  </section>
+
+
+  <!-- ================= TABLE ================= -->
+
+  <section class="table-box">
+
+    <div class="table-header">
+
+      <h2 id="tableTitle">
+        User Data
+      </h2>
+
+      <div class="total-count">
+
+        Total:
+        <strong id="totalCount">
+          0
+        </strong>
+
+      </div>
 
     </div>
 
 
+    <div class="table-wrapper">
 
-    <!-- ===================================================
-         STATS
-    =================================================== -->
+      <table>
 
-    <section class="stats">
+        <thead>
 
+          <tr>
 
-        <div class="statCard">
+            <th>Name</th>
+            <th>IP</th>
+            <th>Work</th>
+            <th>Date</th>
+            <th>Action</th>
 
-            <div class="statIcon">
-                👥
-            </div>
+          </tr>
 
-            <div class="statTitle">
-                Active Users
-            </div>
+        </thead>
 
-            <div
-                class="statNumber"
-                id="userCount"
-            >
-                0
-            </div>
 
-        </div>
+        <tbody id="tableBody">
 
+          <tr>
 
-        <div class="statCard">
+            <td colspan="5">
 
-            <div class="statIcon">
-                🗑️
-            </div>
+              <div class="loading">
+                Loading data...
+              </div>
 
-            <div class="statTitle">
-                Deleted Records
-            </div>
+            </td>
 
-            <div
-                class="statNumber"
-                id="deletedCount"
-            >
-                0
-            </div>
+          </tr>
 
-        </div>
+        </tbody>
 
+      </table>
 
-        <div class="statCard">
+    </div>
 
-            <div class="statIcon">
-                💰
-            </div>
 
-            <div class="statTitle">
-                Sold Records
-            </div>
+    <div class="pagination-box">
 
-            <div
-                class="statNumber"
-                id="sellCount"
-            >
-                0
-            </div>
+      <div
+        class="page-info"
+        id="pageInfo"
+      >
+        Page 1
+      </div>
 
-        </div>
+      <div
+        class="pagination"
+        id="pagination"
+      ></div>
 
+    </div>
 
-        <div class="statCard">
-
-            <div class="statIcon">
-                📊
-            </div>
-
-            <div class="statTitle">
-                Total Records
-            </div>
-
-            <div
-                class="statNumber"
-                id="totalCount"
-            >
-                0
-            </div>
-
-        </div>
-
-
-    </section>
-
-
-
-    <!-- ===================================================
-         TOOLBAR
-    =================================================== -->
-
-    <section class="toolbar">
-
-
-        <div class="tabs">
-
-            <button
-                class="tab active"
-                data-sheet="User"
-                onclick="changeSheet('User',this)"
-            >
-                👥 User
-            </button>
-
-
-            <button
-                class="tab"
-                data-sheet="Deleted"
-                onclick="changeSheet('Deleted',this)"
-            >
-                🗑️ Deleted
-            </button>
-
-
-            <button
-                class="tab"
-                data-sheet="Sell"
-                onclick="changeSheet('Sell',this)"
-            >
-                💰 Sell
-            </button>
-
-        </div>
-
-
-        <div class="searchBox">
-
-            <span class="searchIcon">
-                🔎
-            </span>
-
-            <input
-                type="text"
-                id="searchInput"
-                placeholder="Search name, IP or work..."
-                oninput="renderTable()"
-            >
-
-        </div>
-
-
-    </section>
-
-
-
-    <!-- ===================================================
-         TABLE
-    =================================================== -->
-
-    <section class="tableCard">
-
-
-        <div class="tableTop">
-
-            <div
-                class="tableTitle"
-                id="tableTitle"
-            >
-                User Records
-            </div>
-
-            <div
-                class="tableInfo"
-                id="tableInfo"
-            >
-                Loading...
-            </div>
-
-        </div>
-
-
-        <div
-            class="tableWrap"
-            id="tableContainer"
-        >
-
-            <div class="loader">
-
-                <div class="spinner"></div>
-
-                Loading records...
-
-            </div>
-
-        </div>
-
-
-    </section>
-
+  </section>
 
 </main>
 
 
-
-<!-- =======================================================
-     EDIT MODAL
-======================================================= -->
+<!-- ================= ENTRY MODAL ================= -->
 
 <div
-    class="modalOverlay"
-    id="editModal"
+  class="modal"
+  id="entryModal"
 >
 
-    <div class="modal">
+  <div class="modal-box">
 
+    <div class="modal-header">
 
-        <div class="modalHeader">
+      <h2 id="modalTitle">
+        New Entry
+      </h2>
 
-            <h3>
-                ✏️ Edit Record
-            </h3>
-
-            <button
-                class="closeBtn"
-                onclick="closeEditModal()"
-            >
-                ×
-            </button>
-
-        </div>
-
-
-        <div class="modalBody">
-
-            <div class="formGrid">
-
-
-                <div class="formGroup">
-
-                    <label>
-                        Name
-                    </label>
-
-                    <input
-                        type="text"
-                        id="editName"
-                    >
-
-                </div>
-
-
-                <div class="formGroup">
-
-                    <label>
-                        IP
-                    </label>
-
-                    <input
-                        type="text"
-                        id="editIp"
-                    >
-
-                </div>
-
-
-                <div class="formGroup full">
-
-                    <label>
-                        Work
-                    </label>
-
-                    <input
-                        type="text"
-                        id="editWork"
-                    >
-
-                </div>
-
-
-                <div class="formGroup full">
-
-                    <label>
-                        Date
-                    </label>
-
-                    <input
-                        type="text"
-                        id="editDate"
-                    >
-
-                </div>
-
-
-            </div>
-
-        </div>
-
-
-        <div class="modalFooter">
-
-            <button
-                class="cancelBtn"
-                onclick="closeEditModal()"
-            >
-                Cancel
-            </button>
-
-            <button
-                class="saveBtn"
-                onclick="saveEdit()"
-            >
-                Save Changes
-            </button>
-
-        </div>
-
+      <button
+        class="close-btn"
+        onclick="closeEntryModal()"
+      >
+        ×
+      </button>
 
     </div>
 
-</div>
 
+    <form
+      class="form"
+      id="entryForm"
+      onsubmit="submitEntry(event)"
+    >
 
+      <div class="form-grid">
 
-<!-- =======================================================
-     DELETE CONFIRM MODAL
-======================================================= -->
+        <div class="form-group">
 
-<div
-    class="modalOverlay"
-    id="deleteModal"
->
+          <label>Name</label>
 
-    <div class="modal">
-
-
-        <div class="modalBody">
-
-            <div class="confirmIcon">
-                🗑️
-            </div>
-
-
-            <div
-                class="confirmText"
-                id="deleteConfirmText"
-            >
-                Are you sure?
-            </div>
-
-
-            <div class="confirmActions">
-
-                <button
-                    class="cancelBtn"
-                    onclick="closeDeleteModal()"
-                >
-                    Cancel
-                </button>
-
-                <button
-                    class="confirmDelete"
-                    onclick="confirmDelete()"
-                >
-                    Delete
-                </button>
-
-            </div>
+          <input
+            type="text"
+            id="nameInput"
+            placeholder="Enter name"
+            autocomplete="off"
+            required
+          >
 
         </div>
 
 
-    </div>
+        <div class="form-group">
 
-</div>
+          <label>IP</label>
 
-
-
-<!-- =======================================================
-     SELL CONFIRM MODAL
-======================================================= -->
-
-<div
-    class="modalOverlay"
-    id="sellModal"
->
-
-    <div class="modal">
-
-
-        <div class="modalBody">
-
-            <div
-                class="confirmIcon"
-                style="
-                    background:#fff8e7;
-                    color:#bd7800;
-                "
-            >
-                💰
-            </div>
-
-
-            <div
-                class="confirmText"
-                id="sellConfirmText"
-            >
-                Are you sure you want to sell this record?
-            </div>
-
-
-            <div class="confirmActions">
-
-                <button
-                    class="cancelBtn"
-                    onclick="closeSellModal()"
-                >
-                    Cancel
-                </button>
-
-                <button
-                    class="confirmDelete"
-                    style="
-                        background:#c58a17;
-                    "
-                    onclick="confirmSell()"
-                >
-                    💰 Sell
-                </button>
-
-            </div>
+          <input
+            type="text"
+            id="ipInput"
+            placeholder="Enter IP"
+            autocomplete="off"
+            required
+          >
 
         </div>
 
 
-    </div>
+        <div class="form-group full">
+
+          <label>Work</label>
+
+          <textarea
+            id="workInput"
+            placeholder="Enter work"
+            required
+          ></textarea>
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label>Date</label>
+
+          <input
+            type="date"
+            id="dateInput"
+          >
+
+        </div>
+
+      </div>
+
+
+      <div class="form-footer">
+
+        <button
+          type="button"
+          class="btn btn-cancel"
+          onclick="closeEntryModal()"
+        >
+          Cancel
+        </button>
+
+        <button
+          type="submit"
+          class="btn btn-primary"
+          id="submitBtn"
+        >
+          Save Entry
+        </button>
+
+      </div>
+
+    </form>
+
+  </div>
 
 </div>
 
 
-
-<!-- =======================================================
-     TOAST
-======================================================= -->
+<!-- ================= USER MANAGEMENT ================= -->
 
 <div
-    class="toast"
-    id="toast"
+  class="modal"
+  id="userModal"
 >
-    <span id="toastIcon">✓</span>
 
-    <span id="toastMessage">
-        Done
-    </span>
+  <div class="modal-box user-modal-box">
+
+    <div class="modal-header">
+
+      <h2>👤 User Management</h2>
+
+      <button
+        class="close-btn"
+        onclick="closeUserModal()"
+      >
+        ×
+      </button>
+
+    </div>
+
+
+    <div class="user-toolbar">
+
+      <div class="user-total">
+
+        Total Users:
+        <strong id="userTotal">
+          0
+        </strong>
+
+      </div>
+
+
+      <div>
+
+        <button
+          class="btn btn-refresh"
+          onclick="loadUsers()"
+          id="userRefreshBtn"
+        >
+          🔄 Refresh
+        </button>
+
+        <button
+          class="btn btn-primary"
+          onclick="openAddUserModal()"
+        >
+          ➕ Add User
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <div class="user-table-wrapper">
+
+      <table class="user-table">
+
+        <thead>
+
+          <tr>
+
+            <th>Username</th>
+            <th>Password</th>
+            <th>Name</th>
+            <th>Role</th>
+            <th>Status</th>
+            <th>Action</th>
+
+          </tr>
+
+        </thead>
+
+
+        <tbody id="userTableBody">
+
+          <tr>
+
+            <td colspan="6">
+
+              <div class="loading">
+                Loading users...
+              </div>
+
+            </td>
+
+          </tr>
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+  </div>
+
 </div>
 
+
+<!-- ================= USER FORM ================= -->
+
+<div
+  class="modal"
+  id="userFormModal"
+>
+
+  <div class="modal-box">
+
+    <div class="modal-header">
+
+      <h2 id="userFormTitle">
+        Add User
+      </h2>
+
+      <button
+        class="close-btn"
+        onclick="closeUserFormModal()"
+      >
+        ×
+      </button>
+
+    </div>
+
+
+    <form
+      class="form"
+      id="userForm"
+      onsubmit="submitUser(event)"
+    >
+
+      <div class="form-grid">
+
+        <div class="form-group">
+
+          <label>Username</label>
+
+          <input
+            type="text"
+            id="userUsername"
+            placeholder="Enter username"
+            autocomplete="off"
+            required
+          >
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label>Password</label>
+
+          <input
+            type="text"
+            id="userPassword"
+            placeholder="Enter password"
+            autocomplete="off"
+            required
+          >
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label>Name</label>
+
+          <input
+            type="text"
+            id="userName"
+            placeholder="Enter name"
+            autocomplete="off"
+            required
+          >
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label>Role</label>
+
+          <select
+            id="userRole"
+            required
+          >
+
+            <option value="">
+              Select Role
+            </option>
+
+            <option value="admin">
+              Admin
+            </option>
+
+            <option value="support">
+              Support
+            </option>
+
+            <option value="call">
+              Call
+            </option>
+
+          </select>
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label>Status</label>
+
+          <select
+            id="userStatus"
+            required
+          >
+
+            <option value="">
+              Select Status
+            </option>
+
+            <option value="Active">
+              Active
+            </option>
+
+            <option value="Blocked">
+              Blocked
+            </option>
+
+            <option value="Inactive">
+              Inactive
+            </option>
+
+          </select>
+
+        </div>
+
+      </div>
+
+
+      <div class="form-footer">
+
+        <button
+          type="button"
+          class="btn btn-cancel"
+          onclick="closeUserFormModal()"
+        >
+          Cancel
+        </button>
+
+        <button
+          type="submit"
+          class="btn btn-primary"
+          id="userSubmitBtn"
+        >
+          Add User
+        </button>
+
+      </div>
+
+    </form>
+
+  </div>
+
+</div>
+
+
+<div
+  class="toast"
+  id="toast"
+></div>
 
 
 <script>
 
-
 /* =========================================================
-   CONFIG
+   API
 ========================================================= */
-
-/*
-   IMPORTANT:
-   এখানে তোমার Apps Script Web App URL বসাও।
-
-   Example:
-   https://script.google.com/macros/s/XXXXXXXX/exec
-*/
 
 const API_URL =
-    "PASTE_YOUR_APPS_SCRIPT_WEB_APP_URL_HERE";
+"https://script.google.com/macros/s/AKfycbx6fo2Nogf3ETCtS_B-o0HCFqEs3vYkJ9IT9uu_-3l1w8fNJw77mZipeyFm-zZcjUw-5Q/exec";
 
+const USER_API_URL =
+"https://script.google.com/macros/s/AKfycby1wEKzuThOiXdf9lVmoJVysfasR14ivssXFjGFfDnnc-d16uQRjNhel5LKNXDK4ZbxDw/exec";
 
+const LOGIN_PAGE =
+"index.html";
 
-/* =========================================================
-   STATE
-========================================================= */
+const ROWS_PER_PAGE =
+10;
 
-let currentSheet =
-    "User";
-
-
-let currentData =
-    [];
-
-
-let editRow =
-    null;
-
-
-let editData =
-    null;
-
-
-let deleteRow =
-    null;
-
-
-let deleteData =
-    null;
-
-
-let sellRow =
-    null;
-
-
-let sellData =
-    null;
-
+const AUTO_LOGOUT_TIME =
+5 * 60 * 1000;
 
 
 /* =========================================================
-   USERNAME
+   GLOBAL
 ========================================================= */
 
-function getUsername(){
+let allData = [];
 
-    return (
-        localStorage.getItem("username") ||
-        localStorage.getItem("Username") ||
-        sessionStorage.getItem("username") ||
-        sessionStorage.getItem("Username") ||
-        "Admin"
-    );
+let filteredData = [];
 
-}
+let currentPage = 1;
 
+let editingRow = null;
 
-document.getElementById(
-    "usernameBadge"
-).textContent =
-    getUsername();
+let allUsers = [];
 
+let editingUser = null;
+
+let inactivityTimer = null;
+
+let currentDataType = "User";
 
 
 /* =========================================================
-   PAGE LOAD
+   LOGIN
 ========================================================= */
 
-document.addEventListener(
-    "DOMContentLoaded",
-    function(){
+function getLoggedInUsername(){
 
-        loadAllCounts();
+  const keys = [
+    "username",
+    "Username",
+    "user",
+    "userData",
+    "loginData",
+    "loggedUser",
+    "currentUser",
+    "userInfo"
+  ];
 
-        loadData("User");
+  for(const key of keys){
+
+    const value =
+      localStorage.getItem(key);
+
+    if(!value){
+      continue;
+    }
+
+    try{
+
+      const parsed =
+        JSON.parse(value);
+
+      if(
+        parsed &&
+        typeof parsed === "object"
+      ){
+
+        const username =
+          parsed.username ||
+          parsed.Username ||
+          parsed.userName ||
+          parsed.name ||
+          parsed.user;
+
+        if(username){
+
+          return String(
+            username
+          ).trim();
+
+        }
+
+      }
+
+    }catch(error){
+
+      return String(
+        value
+      ).trim();
 
     }
-);
 
+  }
 
-
-/* =========================================================
-   CHANGE SHEET
-========================================================= */
-
-function changeSheet(
-    sheet,
-    button
-){
-
-    currentSheet =
-        sheet;
-
-
-    document
-        .querySelectorAll(".tab")
-        .forEach(
-            function(btn){
-
-                btn.classList.remove(
-                    "active"
-                );
-
-            }
-        );
-
-
-    button.classList.add(
-        "active"
-    );
-
-
-    const titles = {
-
-        User:
-            "User Records",
-
-        Deleted:
-            "Deleted Records",
-
-        Sell:
-            "Sold Records"
-
-    };
-
-
-    document.getElementById(
-        "tableTitle"
-    ).textContent =
-        titles[sheet] ||
-        sheet + " Records";
-
-
-    loadData(sheet);
+  return "";
 
 }
 
+
+function checkLogin(){
+
+  const username =
+    getLoggedInUsername();
+
+  if(!username){
+
+    window.location.replace(
+      LOGIN_PAGE
+    );
+
+    return false;
+
+  }
+
+  return true;
+
+}
+
+
+/* =========================================================
+   AUTO LOGOUT
+========================================================= */
+
+function resetAutoLogoutTimer(){
+
+  clearTimeout(
+    inactivityTimer
+  );
+
+  inactivityTimer =
+    setTimeout(
+      function(){
+
+        autoLogout();
+
+      },
+      AUTO_LOGOUT_TIME
+    );
+
+}
+
+
+function setupActivityDetection(){
+
+  const events = [
+
+    "click",
+    "mousemove",
+    "mousedown",
+    "keydown",
+    "scroll",
+    "touchstart",
+    "touchmove",
+    "input"
+
+  ];
+
+  events.forEach(
+    function(eventName){
+
+      document.addEventListener(
+        eventName,
+        resetAutoLogoutTimer,
+        {
+          passive:true
+        }
+      );
+
+    }
+  );
+
+  resetAutoLogoutTimer();
+
+}
+
+
+function autoLogout(){
+
+  clearTimeout(
+    inactivityTimer
+  );
+
+  const savedTheme =
+    localStorage.getItem(
+      "dashboardTheme"
+    );
+
+  const loginKeys = [
+
+    "username",
+    "Username",
+    "user",
+    "userData",
+    "loginData",
+    "loggedUser",
+    "currentUser",
+    "userInfo"
+
+  ];
+
+  loginKeys.forEach(
+    function(key){
+
+      localStorage.removeItem(
+        key
+      );
+
+    }
+  );
+
+  sessionStorage.clear();
+
+  if(savedTheme){
+
+    localStorage.setItem(
+      "dashboardTheme",
+      savedTheme
+    );
+
+  }
+
+  window.location.replace(
+    LOGIN_PAGE
+  );
+
+}
+
+
+function logoutUser(){
+
+  autoLogout();
+
+}
+
+
+/* =========================================================
+   THEME
+========================================================= */
+
+function loadTheme(){
+
+  const saved =
+    localStorage.getItem(
+      "dashboardTheme"
+    );
+
+  if(saved === "dark"){
+
+    document.body.classList.add(
+      "dark"
+    );
+
+  }else{
+
+    document.body.classList.remove(
+      "dark"
+    );
+
+  }
+
+  updateThemeButton();
+
+}
+
+
+function toggleTheme(){
+
+  document.body.classList.toggle(
+    "dark"
+  );
+
+  const dark =
+    document.body.classList.contains(
+      "dark"
+    );
+
+  localStorage.setItem(
+    "dashboardTheme",
+    dark
+      ? "dark"
+      : "light"
+  );
+
+  updateThemeButton();
+
+}
+
+
+function updateThemeButton(){
+
+  const btn =
+    document.getElementById(
+      "themeBtn"
+    );
+
+  if(!btn){
+    return;
+  }
+
+  btn.textContent =
+    document.body.classList.contains(
+      "dark"
+    )
+      ? "☀️ White"
+      : "🌙 Dark";
+
+}
+
+
+/* =========================================================
+   CHANGE DATA TYPE
+========================================================= */
+
+async function changeDataType(){
+
+  const selector =
+    document.getElementById(
+      "dataType"
+    );
+
+  currentDataType =
+    selector.value;
+
+  currentPage =
+    1;
+
+  updatePageLabels();
+
+  await loadData();
+
+}
+
+
+function updatePageLabels(){
+
+  const title =
+    document.getElementById(
+      "tableTitle"
+    );
+
+  const pageTitle =
+    document.getElementById(
+      "pageTitle"
+    );
+
+  const subtitle =
+    document.getElementById(
+      "pageSubtitle"
+    );
+
+  if(currentDataType === "Deleted"){
+
+    title.textContent =
+      "Deleted Data";
+
+    pageTitle.textContent =
+      "Deleted Data";
+
+    subtitle.textContent =
+      "View deleted entries";
+
+  }else if(currentDataType === "Sell"){
+
+    title.textContent =
+      "Sell Data";
+
+    pageTitle.textContent =
+      "Sell Data";
+
+    subtitle.textContent =
+      "View sold entries";
+
+  }else{
+
+    title.textContent =
+      "User Data";
+
+    pageTitle.textContent =
+      "Data Dashboard";
+
+    subtitle.textContent =
+      "Manage your entries";
+
+  }
+
+}
 
 
 /* =========================================================
    LOAD DATA
 ========================================================= */
 
-async function loadData(
-    sheet
-){
+async function loadData(){
 
-    currentData = [];
-
-
+  const btn =
     document.getElementById(
-        "tableContainer"
-    ).innerHTML = `
+      "refreshBtn"
+    );
 
-        <div class="loader">
+  btn.disabled =
+    true;
 
-            <div class="spinner"></div>
+  btn.textContent =
+    "⏳ Loading...";
 
-            Loading records...
+  showLoading();
 
-        </div>
+  try{
 
-    `;
+    /*
+      User:
+      ?action=getData
+
+      Deleted:
+      ?action=getData&sheet=Deleted
+
+      Sell:
+      ?action=getData&sheet=Sell
+    */
+
+    let url =
+      API_URL +
+      "?action=getData";
+
+    if(currentDataType !== "User"){
+
+      url +=
+        "&sheet=" +
+        encodeURIComponent(
+          currentDataType
+        );
+
+    }
+
+    url +=
+      "&_=" +
+      Date.now();
 
 
-    try{
-
-        const url =
-            API_URL +
-            "?action=getData&sheet=" +
-            encodeURIComponent(sheet) +
-            "&t=" +
-            Date.now();
-
-
-        const response =
-            await fetch(
-                url,
-                {
-                    method:"GET",
-                    cache:"no-store"
-                }
-            );
-
-
-        const result =
-            await response.json();
-
-
-        if(
-            !result.success
-        ){
-
-            throw new Error(
-                result.message ||
-                "Failed to load data."
-            );
-
+    const response =
+      await fetch(
+        url,
+        {
+          method:"GET",
+          cache:"no-store"
         }
+      );
 
 
-        currentData =
-            Array.isArray(
-                result.data
-            )
-                ? result.data
-                : [];
+    if(!response.ok){
 
-
-        renderTable();
-
-
-        document.getElementById(
-            "tableInfo"
-        ).textContent =
-            currentData.length +
-            " record" +
-            (
-                currentData.length === 1
-                    ? ""
-                    : "s"
-            );
-
-
-    }catch(error){
-
-        console.error(
-            error
-        );
-
-
-        document.getElementById(
-            "tableContainer"
-        ).innerHTML = `
-
-            <div class="empty">
-
-                <div class="emptyIcon">
-                    ⚠️
-                </div>
-
-                <div class="emptyTitle">
-                    Failed to load data
-                </div>
-
-                <div class="emptyText">
-                    ${escapeHtml(
-                        error.message
-                    )}
-                </div>
-
-            </div>
-
-        `;
-
-        showToast(
-            error.message,
-            "error"
-        );
+      throw new Error(
+        "Server error: " +
+        response.status
+      );
 
     }
+
+
+    const result =
+      await response.json();
+
+
+    if(result.success === false){
+
+      throw new Error(
+        result.message ||
+        "Failed to load data."
+      );
+
+    }
+
+
+    if(!Array.isArray(result.data)){
+
+      throw new Error(
+        "Invalid data received."
+      );
+
+    }
+
+
+    allData =
+      result.data;
+
+    filteredData =
+      [...allData];
+
+    currentPage =
+      1;
+
+    renderTable();
+
+    updateTotal();
+
+
+  }catch(error){
+
+    console.error(
+      "Load Error:",
+      error
+    );
+
+    showError(
+      error.message ||
+      "Failed to load data."
+    );
+
+    showToast(
+      error.message ||
+      "Data loading failed.",
+      "error"
+    );
+
+  }finally{
+
+    btn.disabled =
+      false;
+
+    btn.textContent =
+      "🔄 Refresh";
+
+  }
 
 }
 
 
-
 /* =========================================================
-   LOAD COUNTS
-========================================================= */
-
-async function loadAllCounts(){
-
-    try{
-
-        const sheets = [
-            "User",
-            "Deleted",
-            "Sell"
-        ];
-
-
-        const results =
-            await Promise.all(
-
-                sheets.map(
-                    function(sheet){
-
-                        return fetch(
-                            API_URL +
-                            "?action=getData&sheet=" +
-                            encodeURIComponent(sheet) +
-                            "&t=" +
-                            Date.now()
-                        )
-                        .then(
-                            response =>
-                                response.json()
-                        );
-
-                    }
-                )
-
-            );
-
-
-        const userData =
-            results[0].success
-                ? results[0].data || []
-                : [];
-
-
-        const deletedData =
-            results[1].success
-                ? results[1].data || []
-                : [];
-
-
-        const sellData =
-            results[2].success
-                ? results[2].data || []
-                : [];
-
-
-        document.getElementById(
-            "userCount"
-        ).textContent =
-            userData.length;
-
-
-        document.getElementById(
-            "deletedCount"
-        ).textContent =
-            deletedData.length;
-
-
-        document.getElementById(
-            "sellCount"
-        ).textContent =
-            sellData.length;
-
-
-        document.getElementById(
-            "totalCount"
-        ).textContent =
-            userData.length +
-            deletedData.length +
-            sellData.length;
-
-
-    }catch(error){
-
-        console.error(
-            "Count error:",
-            error
-        );
-
-    }
-
-}
-
-
-
-/* =========================================================
-   RENDER TABLE
+   TABLE
 ========================================================= */
 
 function renderTable(){
 
-    const container =
-        document.getElementById(
-            "tableContainer"
+  const tbody =
+    document.getElementById(
+      "tableBody"
+    );
+
+
+  if(
+    filteredData.length === 0
+  ){
+
+    tbody.innerHTML = `
+      <tr>
+        <td colspan="5">
+          <div class="empty">
+            No data found.
+          </div>
+        </td>
+      </tr>
+    `;
+
+    renderPagination();
+
+    return;
+
+  }
+
+
+  const start =
+    (currentPage - 1) *
+    ROWS_PER_PAGE;
+
+
+  const pageData =
+    filteredData.slice(
+      start,
+      start + ROWS_PER_PAGE
+    );
+
+
+  let html = "";
+
+
+  pageData.forEach(
+    function(row){
+
+      const rowNumber =
+        Number(
+          row._row || 0
         );
 
 
-    const search =
-        String(
-            document.getElementById(
-                "searchInput"
-            ).value ||
-            ""
-        )
-        .trim()
-        .toLowerCase();
+      /*
+        Deleted / Sell data may not have
+        exactly the same field casing.
+      */
+
+      const name =
+        row.Name ||
+        row.name ||
+        "";
+
+      const ip =
+        row.Ip ||
+        row.IP ||
+        row.ip ||
+        "";
+
+      const work =
+        row.Work ||
+        row.work ||
+        "";
+
+      const date =
+        row.Date ||
+        row.date ||
+        row["Date & Time"] ||
+        row.Timestamp ||
+        "";
 
 
-    let data =
-        currentData.filter(
-            function(row){
+      html += `
+        <tr>
 
-                if(!search){
+          <td>
+            ${escapeHTML(name)}
+          </td>
 
-                    return true;
+          <td>
+            ${escapeHTML(ip)}
+          </td>
 
-                }
+          <td>
+            ${escapeHTML(work)}
+          </td>
 
+          <td class="date-cell">
+            ${escapeHTML(date)}
+          </td>
 
-                const text =
-                    [
-                        row.Name,
-                        row.Ip,
-                        row.Work,
-                        row.Date,
-                        row.Username,
-                        row["Source Sheet"]
-                    ]
-                    .join(" ")
-                    .toLowerCase();
+          <td>
 
+            <div class="actions">
 
-                return text.includes(
-                    search
-                );
+              ${
+                currentDataType === "User"
+                ?
+                `
+                <button
+                  class="btn-edit"
+                  onclick="editEntryByRow(${rowNumber})"
+                >
+                  ✏️ Edit
+                </button>
 
-            }
-        );
+                <button
+                  class="btn-delete"
+                  onclick="deleteEntryByRow(${rowNumber})"
+                >
+                  🗑️ Delete
+                </button>
 
-
-    if(!data.length){
-
-        container.innerHTML = `
-
-            <div class="empty">
-
-                <div class="emptyIcon">
-                    📭
-                </div>
-
-                <div class="emptyTitle">
-                    No records found
-                </div>
-
-                <div class="emptyText">
-                    There are no records to display.
-                </div>
+                <button
+                  class="btn-sell"
+                  onclick="sellEntryByRow(${rowNumber})"
+                >
+                  💰 Sell
+                </button>
+                `
+                :
+                `
+                <span
+                  style="
+                    color:var(--muted);
+                    font-size:12px;
+                  "
+                >
+                  ${currentDataType} Record
+                </span>
+                `
+              }
 
             </div>
 
-        `;
+          </td>
 
-        return;
-
-    }
-
-
-
-    let html = `
-
-        <table>
-
-            <thead>
-
-                <tr>
-
-                    <th>#</th>
-
-                    <th>Name</th>
-
-                    <th>IP</th>
-
-                    <th>Work</th>
-
-                    <th>Date</th>
-    `;
-
-
-    if(
-        currentSheet ===
-        "Deleted" ||
-        currentSheet ===
-        "Sell"
-    ){
-
-        html += `
-
-                    <th>Username</th>
-
-        `;
+        </tr>
+      `;
 
     }
+  );
 
+
+  tbody.innerHTML =
+    html;
+
+
+  renderPagination();
+
+}
+
+
+/* =========================================================
+   FILTER
+========================================================= */
+
+function applyFilters(){
+
+  const search =
+    document
+      .getElementById(
+        "searchInput"
+      )
+      .value
+      .toLowerCase()
+      .trim();
+
+
+  const fromDate =
+    document.getElementById(
+      "fromDate"
+    ).value;
+
+
+  const toDate =
+    document.getElementById(
+      "toDate"
+    ).value;
+
+
+  filteredData =
+    allData.filter(
+      function(row){
+
+        const name =
+          row.Name ||
+          row.name ||
+          "";
+
+        const ip =
+          row.Ip ||
+          row.IP ||
+          row.ip ||
+          "";
+
+        const work =
+          row.Work ||
+          row.work ||
+          "";
+
+        const date =
+          row.Date ||
+          row.date ||
+          row["Date & Time"] ||
+          row.Timestamp ||
+          "";
+
+
+        if(search){
+
+          const text =
+            (
+              String(name) +
+              " " +
+              String(ip) +
+              " " +
+              String(work) +
+              " " +
+              String(date)
+            ).toLowerCase();
+
+
+          if(
+            !text.includes(search)
+          ){
+
+            return false;
+
+          }
+
+        }
+
+
+        if(
+          fromDate ||
+          toDate
+        ){
+
+          const rowDate =
+            convertToFilterDate(
+              date
+            );
+
+
+          if(!rowDate){
+
+            return false;
+
+          }
+
+
+          if(
+            fromDate &&
+            rowDate < fromDate
+          ){
+
+            return false;
+
+          }
+
+
+          if(
+            toDate &&
+            rowDate > toDate
+          ){
+
+            return false;
+
+          }
+
+        }
+
+
+        return true;
+
+      }
+    );
+
+
+  currentPage =
+    1;
+
+  renderTable();
+
+  updateTotal();
+
+}
+
+
+function clearFilters(){
+
+  document.getElementById(
+    "searchInput"
+  ).value = "";
+
+  document.getElementById(
+    "fromDate"
+  ).value = "";
+
+  document.getElementById(
+    "toDate"
+  ).value = "";
+
+  filteredData =
+    [...allData];
+
+  currentPage =
+    1;
+
+  renderTable();
+
+  updateTotal();
+
+}
+
+
+function convertToFilterDate(value){
+
+  if(!value){
+    return "";
+  }
+
+
+  const text =
+    String(value).trim();
+
+
+  const parsed =
+    new Date(text);
+
+
+  if(
+    !isNaN(
+      parsed.getTime()
+    )
+  ){
+
+    return (
+      parsed.getFullYear() +
+      "-" +
+      String(
+        parsed.getMonth() + 1
+      ).padStart(2,"0") +
+      "-" +
+      String(
+        parsed.getDate()
+      ).padStart(2,"0")
+    );
+
+  }
+
+
+  const match =
+    text.match(
+      /^(\d{2})-(\d{2})-(\d{4})$/
+    );
+
+
+  if(match){
+
+    return (
+      match[3] +
+      "-" +
+      match[2] +
+      "-" +
+      match[1]
+    );
+
+  }
+
+
+  return "";
+
+}
+
+
+/* =========================================================
+   PAGINATION
+========================================================= */
+
+function renderPagination(){
+
+  const pagination =
+    document.getElementById(
+      "pagination"
+    );
+
+
+  const pageInfo =
+    document.getElementById(
+      "pageInfo"
+    );
+
+
+  const totalPages =
+    Math.ceil(
+      filteredData.length /
+      ROWS_PER_PAGE
+    );
+
+
+  if(totalPages <= 1){
+
+    pagination.innerHTML =
+      "";
+
+    pageInfo.textContent =
+      filteredData.length
+        ? "Page 1"
+        : "Page 0";
+
+    return;
+
+  }
+
+
+  let html = `
+
+    <button
+      class="page-btn"
+      onclick="changePage(${currentPage - 1})"
+      ${currentPage === 1 ? "disabled" : ""}
+    >
+      ‹
+    </button>
+
+  `;
+
+
+  const start =
+    Math.max(
+      1,
+      currentPage - 2
+    );
+
+
+  const end =
+    Math.min(
+      totalPages,
+      currentPage + 2
+    );
+
+
+  for(
+    let i = start;
+    i <= end;
+    i++
+  ){
 
     html += `
-
-                    <th>Actions</th>
-
-                </tr>
-
-            </thead>
-
-            <tbody>
-
+      <button
+        class="page-btn ${
+          i === currentPage
+            ? "active"
+            : ""
+        }"
+        onclick="changePage(${i})"
+      >
+        ${i}
+      </button>
     `;
 
+  }
 
 
-    data.forEach(
-        function(row,index){
+  html += `
 
-            html += `
+    <button
+      class="page-btn"
+      onclick="changePage(${currentPage + 1})"
+      ${
+        currentPage === totalPages
+          ? "disabled"
+          : ""
+      }
+    >
+      ›
+    </button>
 
-                <tr>
-
-                    <td>
-                        ${index + 1}
-                    </td>
-
-                    <td>
-                        <strong>
-                            ${escapeHtml(
-                                row.Name || "-"
-                            )}
-                        </strong>
-                    </td>
-
-                    <td>
-
-                        <span class="ipText">
-                            ${escapeHtml(
-                                row.Ip || "-"
-                            )}
-                        </span>
-
-                    </td>
-
-                    <td>
-
-                        <span class="workBadge">
-                            ${escapeHtml(
-                                row.Work || "-"
-                            )}
-                        </span>
-
-                    </td>
-
-                    <td>
-                        ${escapeHtml(
-                            row.Date || "-"
-                        )}
-                    </td>
-            `;
+  `;
 
 
-            if(
-                currentSheet ===
-                "Deleted" ||
-                currentSheet ===
-                "Sell"
-            ){
-
-                html += `
-
-                    <td>
-                        ${escapeHtml(
-                            row.Username || "-"
-                        )}
-                    </td>
-
-                `;
-
-            }
+  pagination.innerHTML =
+    html;
 
 
-            html += `
-
-                    <td>
-
-                        <div class="actions">
-
-                            <button
-                                class="actionBtn editBtn"
-                                onclick="openEditModal(${index})"
-                            >
-                                ✏️ Edit
-                            </button>
-
-                            <button
-                                class="actionBtn deleteBtn"
-                                onclick="openDeleteModal(${index})"
-                            >
-                                🗑️ Delete
-                            </button>
-            `;
-
-
-            if(
-                currentSheet ===
-                "User"
-            ){
-
-                html += `
-
-                            <button
-                                class="actionBtn sellBtn"
-                                onclick="openSellModal(${index})"
-                            >
-                                💰 Sell
-                            </button>
-
-                `;
-
-            }
-
-
-            html += `
-
-                        </div>
-
-                    </td>
-
-                </tr>
-
-            `;
-
-        }
-    );
-
-
-    html += `
-
-            </tbody>
-
-        </table>
-
-    `;
-
-
-    container.innerHTML =
-        html;
+  pageInfo.textContent =
+    `Page ${currentPage} of ${totalPages}`;
 
 }
 
+
+function changePage(page){
+
+  const totalPages =
+    Math.ceil(
+      filteredData.length /
+      ROWS_PER_PAGE
+    );
+
+
+  if(
+    page < 1 ||
+    page > totalPages
+  ){
+
+    return;
+
+  }
+
+
+  currentPage =
+    page;
+
+
+  renderTable();
+
+}
+
+
+function updateTotal(){
+
+  document.getElementById(
+    "totalCount"
+  ).textContent =
+    filteredData.length;
+
+}
 
 
 /* =========================================================
-   EDIT MODAL
+   ENTRY MODAL
 ========================================================= */
 
-function openEditModal(
-    index
-){
+function openEntryModal(){
 
-    const row =
-        getFilteredRow(index);
+  if(currentDataType !== "User"){
 
-
-    if(!row){
-
-        return;
-
-    }
-
-
-    editRow =
-        row._row;
-
-
-    editData =
-        row;
-
-
-    document.getElementById(
-        "editName"
-    ).value =
-        row.Name || "";
-
-
-    document.getElementById(
-        "editIp"
-    ).value =
-        row.Ip || "";
-
-
-    document.getElementById(
-        "editWork"
-    ).value =
-        row.Work || "";
-
-
-    document.getElementById(
-        "editDate"
-    ).value =
-        row.Date || "";
-
-
-    document.getElementById(
-        "editModal"
-    ).classList.add(
-        "show"
+    showToast(
+      "New entries can only be added to User data.",
+      "error"
     );
+
+    return;
+
+  }
+
+
+  editingRow =
+    null;
+
+
+  document.getElementById(
+    "modalTitle"
+  ).textContent =
+    "New Entry";
+
+
+  document.getElementById(
+    "submitBtn"
+  ).textContent =
+    "Save Entry";
+
+
+  document.getElementById(
+    "entryForm"
+  ).reset();
+
+
+  document.getElementById(
+    "dateInput"
+  ).value =
+    getTodayInputDate();
+
+
+  document.getElementById(
+    "entryModal"
+  ).classList.add(
+    "show"
+  );
 
 }
 
 
-function closeEditModal(){
+function closeEntryModal(){
 
-    document.getElementById(
-        "editModal"
-    ).classList.remove(
-        "show"
-    );
+  document.getElementById(
+    "entryModal"
+  ).classList.remove(
+    "show"
+  );
 
-    editRow = null;
-    editData = null;
+  editingRow =
+    null;
 
 }
 
 
+function editEntryByRow(rowNumber){
 
-/* =========================================================
-   SAVE EDIT
-========================================================= */
+  if(currentDataType !== "User"){
 
-async function saveEdit(){
+    return;
 
-    if(
-        !editRow ||
-        !editData
-    ){
-
-        showToast(
-            "Record not selected.",
-            "error"
-        );
-
-        return;
-
-    }
+  }
 
 
-    const name =
-        document.getElementById(
-            "editName"
-        ).value.trim();
+  const row =
+    allData.find(
+      item =>
+        Number(item._row) ===
+        Number(rowNumber)
+    );
 
 
-    const ip =
-        document.getElementById(
-            "editIp"
-        ).value.trim();
+  if(!row){
+
+    showToast(
+      "Entry not found.",
+      "error"
+    );
+
+    return;
+
+  }
 
 
-    const work =
-        document.getElementById(
-            "editWork"
-        ).value.trim();
+  editingRow =
+    row;
 
 
-    const date =
-        document.getElementById(
-            "editDate"
-        ).value.trim();
+  document.getElementById(
+    "modalTitle"
+  ).textContent =
+    "Edit Entry";
 
 
-    if(!name){
-
-        showToast(
-            "Name is required.",
-            "error"
-        );
-
-        return;
-
-    }
+  document.getElementById(
+    "submitBtn"
+  ).textContent =
+    "Update Entry";
 
 
-    if(!ip){
-
-        showToast(
-            "IP is required.",
-            "error"
-        );
-
-        return;
-
-    }
+  document.getElementById(
+    "nameInput"
+  ).value =
+    row.Name || "";
 
 
-    if(!work){
+  document.getElementById(
+    "ipInput"
+  ).value =
+    row.Ip || "";
 
-        showToast(
-            "Work is required.",
-            "error"
-        );
 
-        return;
+  document.getElementById(
+    "workInput"
+  ).value =
+    row.Work || "";
 
-    }
 
+  document.getElementById(
+    "dateInput"
+  ).value =
+    convertToFilterDate(
+      row.Date
+    );
+
+
+  document.getElementById(
+    "entryModal"
+  ).classList.add(
+    "show"
+  );
+
+}
+
+
+async function submitEntry(event){
+
+  event.preventDefault();
+
+
+  if(currentDataType !== "User"){
+
+    showToast(
+      "Entries can only be saved in User data.",
+      "error"
+    );
+
+    return;
+
+  }
+
+
+  const btn =
+    document.getElementById(
+      "submitBtn"
+    );
+
+
+  const name =
+    document.getElementById(
+      "nameInput"
+    ).value.trim();
+
+
+  const ip =
+    document.getElementById(
+      "ipInput"
+    ).value.trim();
+
+
+  const work =
+    document.getElementById(
+      "workInput"
+    ).value.trim();
+
+
+  const date =
+    document.getElementById(
+      "dateInput"
+    ).value;
+
+
+  if(!name){
+
+    showToast(
+      "Please enter Name.",
+      "error"
+    );
+
+    return;
+
+  }
+
+
+  if(!ip){
+
+    showToast(
+      "Please enter IP.",
+      "error"
+    );
+
+    return;
+
+  }
+
+
+  if(!work){
+
+    showToast(
+      "Please enter Work.",
+      "error"
+    );
+
+    return;
+
+  }
+
+
+  const editing =
+    Boolean(
+      editingRow
+    );
+
+
+  btn.disabled =
+    true;
+
+
+  btn.textContent =
+    editing
+      ? "Updating..."
+      : "Saving...";
+
+
+  try{
 
     const payload = {
 
-        action:
-            "update",
+      action:
+        editing
+          ? "update"
+          : "create",
 
-        sheet:
-            currentSheet,
+      data:{
+        Name:name,
+        Ip:ip,
+        Work:work,
+        Date:date
+      },
 
-        row:
-            editRow,
-
-        data:{
-
-            Name:
-                name,
-
-            Ip:
-                ip,
-
-            Work:
-                work,
-
-            Date:
-                date
-
-        }
+      oldData:
+        editingRow || null
 
     };
 
-
-    try{
-
-        showToast(
-            "Updating record...",
-            "normal"
-        );
-
-
-        const result =
-            await postData(
-                payload
-            );
-
-
-        if(
-            !result.success
-        ){
-
-            throw new Error(
-                result.message ||
-                "Update failed."
-            );
-
-        }
-
-
-        closeEditModal();
-
-
-        showToast(
-            "Record updated successfully.",
-            "success"
-        );
-
-
-        await loadData(
-            currentSheet
-        );
-
-
-        await loadAllCounts();
-
-
-    }catch(error){
-
-        console.error(
-            error
-        );
-
-
-        showToast(
-            error.message,
-            "error"
-        );
-
-    }
-
-}
-
-
-
-/* =========================================================
-   DELETE MODAL
-========================================================= */
-
-function openDeleteModal(
-    index
-){
-
-    const row =
-        getFilteredRow(index);
-
-
-    if(!row){
-
-        return;
-
-    }
-
-
-    deleteRow =
-        row._row;
-
-
-    deleteData =
-        row;
-
-
-    let message = "";
-
-
-    if(
-        currentSheet ===
-        "User"
-    ){
-
-        message = `
-            Are you sure you want to delete
-            <strong>
-                ${escapeHtml(
-                    row.Name || "this record"
-                )}
-            </strong>?
-            <br>
-            This record will be moved to
-            <strong>Deleted</strong>.
-        `;
-
-    }else{
-
-        message = `
-            Are you sure you want to permanently
-            delete
-            <strong>
-                ${escapeHtml(
-                    row.Name || "this record"
-                )}
-            </strong>?
-            <br>
-            It will be moved to
-            <strong>Admin Deleted</strong>.
-        `;
-
-    }
-
-
-    document.getElementById(
-        "deleteConfirmText"
-    ).innerHTML =
-        message;
-
-
-    document.getElementById(
-        "deleteModal"
-    ).classList.add(
-        "show"
-    );
-
-}
-
-
-function closeDeleteModal(){
-
-    document.getElementById(
-        "deleteModal"
-    ).classList.remove(
-        "show"
-    );
-
-    deleteRow = null;
-    deleteData = null;
-
-}
-
-
-
-/* =========================================================
-   CONFIRM DELETE
-========================================================= */
-
-async function confirmDelete(){
-
-    if(
-        !deleteData
-    ){
-
-        showToast(
-            "Record not selected.",
-            "error"
-        );
-
-        return;
-
-    }
-
-
-    const payload = {
-
-        action:
-            "delete",
-
-        sheet:
-            currentSheet,
-
-        row:
-            deleteRow,
-
-        username:
-            getUsername(),
-
-        data:
-            deleteData
-
-    };
-
-
-    try{
-
-        closeDeleteModal();
-
-
-        showToast(
-            "Deleting record...",
-            "normal"
-        );
-
-
-        const result =
-            await postData(
-                payload
-            );
-
-
-        if(
-            !result.success
-        ){
-
-            throw new Error(
-                result.message ||
-                "Delete failed."
-            );
-
-        }
-
-
-        showToast(
-            result.message ||
-            "Record deleted successfully.",
-            "success"
-        );
-
-
-        await loadData(
-            currentSheet
-        );
-
-
-        await loadAllCounts();
-
-
-    }catch(error){
-
-        console.error(
-            error
-        );
-
-
-        showToast(
-            error.message,
-            "error"
-        );
-
-    }
-
-
-    deleteRow = null;
-    deleteData = null;
-
-}
-
-
-
-/* =========================================================
-   SELL MODAL
-========================================================= */
-
-function openSellModal(
-    index
-){
-
-    const row =
-        getFilteredRow(index);
-
-
-    if(!row){
-
-        return;
-
-    }
-
-
-    sellRow =
-        row._row;
-
-
-    sellData =
-        row;
-
-
-    document.getElementById(
-        "sellConfirmText"
-    ).innerHTML = `
-
-        Are you sure you want to sell
-        <strong>
-            ${escapeHtml(
-                row.Name || "this record"
-            )}
-        </strong>?
-
-        <br>
-
-        This record will be moved to
-        <strong>Sell</strong>.
-
-    `;
-
-
-    document.getElementById(
-        "sellModal"
-    ).classList.add(
-        "show"
-    );
-
-}
-
-
-function closeSellModal(){
-
-    document.getElementById(
-        "sellModal"
-    ).classList.remove(
-        "show"
-    );
-
-    sellRow = null;
-    sellData = null;
-
-}
-
-
-
-/* =========================================================
-   CONFIRM SELL
-========================================================= */
-
-async function confirmSell(){
-
-    if(
-        !sellData
-    ){
-
-        showToast(
-            "Record not selected.",
-            "error"
-        );
-
-        return;
-
-    }
-
-
-    const payload = {
-
-        action:
-            "sell",
-
-        sheet:
-            "User",
-
-        row:
-            sellRow,
-
-        username:
-            getUsername(),
-
-        data:
-            sellData
-
-    };
-
-
-    try{
-
-        closeSellModal();
-
-
-        showToast(
-            "Selling record...",
-            "normal"
-        );
-
-
-        const result =
-            await postData(
-                payload
-            );
-
-
-        if(
-            !result.success
-        ){
-
-            throw new Error(
-                result.message ||
-                "Sell failed."
-            );
-
-        }
-
-
-        showToast(
-            result.message ||
-            "Record sold successfully.",
-            "success"
-        );
-
-
-        await loadData(
-            currentSheet
-        );
-
-
-        await loadAllCounts();
-
-
-    }catch(error){
-
-        console.error(
-            error
-        );
-
-
-        showToast(
-            error.message,
-            "error"
-        );
-
-    }
-
-
-    sellRow = null;
-    sellData = null;
-
-}
-
-
-
-/* =========================================================
-   GET FILTERED ROW
-========================================================= */
-
-function getFilteredRow(
-    index
-){
-
-    const search =
-        String(
-            document.getElementById(
-                "searchInput"
-            ).value ||
-            ""
-        )
-        .trim()
-        .toLowerCase();
-
-
-    const filtered =
-        currentData.filter(
-            function(row){
-
-                if(!search){
-
-                    return true;
-
-                }
-
-
-                const text =
-                    [
-                        row.Name,
-                        row.Ip,
-                        row.Work,
-                        row.Date,
-                        row.Username,
-                        row["Source Sheet"]
-                    ]
-                    .join(" ")
-                    .toLowerCase();
-
-
-                return text.includes(
-                    search
-                );
-
-            }
-        );
-
-
-    return filtered[index];
-
-}
-
-
-
-/* =========================================================
-   POST DATA
-========================================================= */
-
-async function postData(
-    payload
-){
 
     const response =
-        await fetch(
-            API_URL,
-            {
-                method:
-                    "POST",
+      await fetch(
+        API_URL,
+        {
+          method:"POST",
 
-                headers:{
-                    "Content-Type":
-                        "text/plain;charset=utf-8"
-                },
+          headers:{
+            "Content-Type":
+              "text/plain;charset=utf-8"
+          },
 
-                body:
-                    JSON.stringify(
-                        payload
-                    )
-            }
-        );
-
-
-    const text =
-        await response.text();
+          body:
+            JSON.stringify(
+              payload
+            )
+        }
+      );
 
 
-    let result;
+    if(!response.ok){
 
-
-    try{
-
-        result =
-            JSON.parse(
-                text
-            );
-
-    }catch(error){
-
-        console.error(
-            "Server response:",
-            text
-        );
-
-        throw new Error(
-            "Server returned invalid response."
-        );
+      throw new Error(
+        "Server error: " +
+        response.status
+      );
 
     }
 
 
-    return result;
+    const result =
+      await response.json();
+
+
+    if(result.success === false){
+
+      throw new Error(
+        result.message ||
+        "Save failed."
+      );
+
+    }
+
+
+    closeEntryModal();
+
+
+    showToast(
+      editing
+        ? "Entry updated successfully."
+        : "Entry added successfully.",
+      "success"
+    );
+
+
+    await loadData();
+
+
+  }catch(error){
+
+    console.error(error);
+
+    showToast(
+      error.message ||
+      "Failed to save entry.",
+      "error"
+    );
+
+  }finally{
+
+    btn.disabled =
+      false;
+
+    btn.textContent =
+      editing
+        ? "Update Entry"
+        : "Save Entry";
+
+  }
 
 }
 
 
-
 /* =========================================================
-   LOGOUT
+   USERNAME
 ========================================================= */
 
-function logout(){
+function requireUsername(){
 
-    localStorage.removeItem(
-        "username"
-    );
-
-    localStorage.removeItem(
-        "Username"
-    );
-
-    localStorage.removeItem(
-        "user"
-    );
-
-    localStorage.removeItem(
-        "loggedIn"
-    );
-
-    sessionStorage.removeItem(
-        "username"
-    );
-
-    sessionStorage.removeItem(
-        "Username"
-    );
-
-    sessionStorage.removeItem(
-        "user"
-    );
-
-    sessionStorage.removeItem(
-        "loggedIn"
-    );
+  const username =
+    getLoggedInUsername();
 
 
-    window.location.href =
-        "index.html";
+  if(!username){
+
+    autoLogout();
+
+    return "";
+
+  }
+
+
+  return username;
 
 }
 
 
-
 /* =========================================================
-   TOAST
+   DELETE ENTRY
 ========================================================= */
 
-let toastTimer = null;
+async function deleteEntryByRow(rowNumber){
+
+  if(currentDataType !== "User"){
+    return;
+  }
+
+
+  const row =
+    allData.find(
+      item =>
+        Number(item._row) ===
+        Number(rowNumber)
+    );
+
+
+  if(!row){
+
+    showToast(
+      "Entry not found.",
+      "error"
+    );
+
+    return;
+
+  }
+
+
+  const username =
+    requireUsername();
+
+
+  if(!username){
+    return;
+  }
+
+
+  const confirmed =
+    confirm(
+      "Delete this entry?\n\n" +
+      "Name: " +
+      (row.Name || "") +
+      "\nIP: " +
+      (row.Ip || "") +
+      "\n\nDeleted by: " +
+      username +
+      "\n\nThis entry will move to Deleted sheet."
+    );
+
+
+  if(!confirmed){
+    return;
+  }
+
+
+  try{
+
+    const payload = {
+
+      action:"delete",
+
+      username:username,
+
+      data:{
+        ...row,
+        Username:username
+      }
+
+    };
+
+
+    const response =
+      await fetch(
+        API_URL,
+        {
+          method:"POST",
+
+          headers:{
+            "Content-Type":
+              "text/plain;charset=utf-8"
+          },
+
+          body:
+            JSON.stringify(
+              payload
+            )
+        }
+      );
+
+
+    if(!response.ok){
+
+      throw new Error(
+        "Server error: " +
+        response.status
+      );
+
+    }
+
+
+    const result =
+      await response.json();
+
+
+    if(result.success === false){
+
+      throw new Error(
+        result.message ||
+        "Delete failed."
+      );
+
+    }
+
+
+    showToast(
+      "Deleted successfully by " +
+      username,
+      "success"
+    );
+
+
+    await loadData();
+
+
+  }catch(error){
+
+    console.error(error);
+
+    showToast(
+      error.message ||
+      "Failed to delete entry.",
+      "error"
+    );
+
+  }
+
+}
+
+
+/* =========================================================
+   SELL ENTRY
+========================================================= */
+
+async function sellEntryByRow(rowNumber){
+
+  if(currentDataType !== "User"){
+    return;
+  }
+
+
+  const row =
+    allData.find(
+      item =>
+        Number(item._row) ===
+        Number(rowNumber)
+    );
+
+
+  if(!row){
+
+    showToast(
+      "Entry not found.",
+      "error"
+    );
+
+    return;
+
+  }
+
+
+  const username =
+    requireUsername();
+
+
+  if(!username){
+    return;
+  }
+
+
+  const confirmed =
+    confirm(
+      "Sell this entry?\n\n" +
+      "Name: " +
+      (row.Name || "") +
+      "\nIP: " +
+      (row.Ip || "") +
+      "\nWork: " +
+      (row.Work || "") +
+      "\n\nSold by: " +
+      username +
+      "\n\nThis entry will move to Sell sheet."
+    );
+
+
+  if(!confirmed){
+    return;
+  }
+
+
+  try{
+
+    const payload = {
+
+      action:"sell",
+
+      username:username,
+
+      data:{
+        ...row,
+        Username:username
+      }
+
+    };
+
+
+    const response =
+      await fetch(
+        API_URL,
+        {
+          method:"POST",
+
+          headers:{
+            "Content-Type":
+              "text/plain;charset=utf-8"
+          },
+
+          body:
+            JSON.stringify(
+              payload
+            )
+        }
+      );
+
+
+    if(!response.ok){
+
+      throw new Error(
+        "Server error: " +
+        response.status
+      );
+
+    }
+
+
+    const result =
+      await response.json();
+
+
+    if(result.success === false){
+
+      throw new Error(
+        result.message ||
+        "Sell failed."
+      );
+
+    }
+
+
+    showToast(
+      "Sold successfully by " +
+      username,
+      "success"
+    );
+
+
+    await loadData();
+
+
+  }catch(error){
+
+    console.error(error);
+
+    showToast(
+      error.message ||
+      "Failed to sell entry.",
+      "error"
+    );
+
+  }
+
+}
+
+
+/* =========================================================
+   USER MANAGEMENT
+========================================================= */
+
+function openUserModal(){
+
+  if(!checkLogin()){
+    return;
+  }
+
+
+  document.getElementById(
+    "userModal"
+  ).classList.add(
+    "show"
+  );
+
+
+  loadUsers();
+
+}
+
+
+function closeUserModal(){
+
+  document.getElementById(
+    "userModal"
+  ).classList.remove(
+    "show"
+  );
+
+}
+
+
+async function loadUsers(){
+
+  if(!checkLogin()){
+    return;
+  }
+
+
+  const body =
+    document.getElementById(
+      "userTableBody"
+    );
+
+
+  const btn =
+    document.getElementById(
+      "userRefreshBtn"
+    );
+
+
+  body.innerHTML = `
+    <tr>
+      <td colspan="6">
+        <div class="loading">
+          ⏳ Loading users...
+        </div>
+      </td>
+    </tr>
+  `;
+
+
+  btn.disabled =
+    true;
+
+
+  btn.textContent =
+    "⏳ Loading...";
+
+
+  try{
+
+    const response =
+      await fetch(
+        USER_API_URL +
+        "?action=getUsers&_=" +
+        Date.now(),
+        {
+          method:"GET",
+          cache:"no-store"
+        }
+      );
+
+
+    if(!response.ok){
+
+      throw new Error(
+        "User server error: " +
+        response.status
+      );
+
+    }
+
+
+    const result =
+      await response.json();
+
+
+    if(result.success === false){
+
+      throw new Error(
+        result.message ||
+        "Failed to load users."
+      );
+
+    }
+
+
+    allUsers =
+      Array.isArray(
+        result.users
+      )
+        ? result.users
+        : Array.isArray(
+            result.data
+          )
+          ? result.data
+          : [];
+
+
+    document.getElementById(
+      "userTotal"
+    ).textContent =
+      allUsers.length;
+
+
+    renderUsers();
+
+
+  }catch(error){
+
+    console.error(error);
+
+
+    body.innerHTML = `
+      <tr>
+        <td colspan="6">
+          <div class="empty">
+            ❌ ${escapeHTML(
+              error.message ||
+              "Failed to load users."
+            )}
+          </div>
+        </td>
+      </tr>
+    `;
+
+
+    showToast(
+      error.message ||
+      "Failed to load users.",
+      "error"
+    );
+
+
+  }finally{
+
+    btn.disabled =
+      false;
+
+    btn.textContent =
+      "🔄 Refresh";
+
+  }
+
+}
+
+
+/* =========================================================
+   RENDER USERS
+========================================================= */
+
+function renderUsers(){
+
+  const body =
+    document.getElementById(
+      "userTableBody"
+    );
+
+
+  if(!allUsers.length){
+
+    body.innerHTML = `
+      <tr>
+        <td colspan="6">
+          <div class="empty">
+            No users found.
+          </div>
+        </td>
+      </tr>
+    `;
+
+    return;
+
+  }
+
+
+  let html = "";
+
+
+  allUsers.forEach(
+    function(user){
+
+      const username =
+        user.username ||
+        user.Username ||
+        "";
+
+
+      const password =
+        user.password ||
+        user.Password ||
+        "";
+
+
+      const name =
+        user.name ||
+        user.Name ||
+        "";
+
+
+      const role =
+        user.role ||
+        user.Role ||
+        "";
+
+
+      const status =
+        user.status ||
+        user.Status ||
+        "Active";
+
+
+      const row =
+        Number(
+          user._row ||
+          user.row ||
+          0
+        );
+
+
+      let statusClass =
+        "status-inactive";
+
+
+      if(
+        String(
+          status
+        ).toLowerCase() ===
+        "active"
+      ){
+
+        statusClass =
+          "status-active";
+
+      }
+
+
+      if(
+        String(
+          status
+        ).toLowerCase() ===
+        "blocked"
+      ){
+
+        statusClass =
+          "status-blocked";
+
+      }
+
+
+      const safe =
+        encodeURIComponent(
+          username
+        );
+
+
+      html += `
+        <tr>
+
+          <td>
+            <strong>
+              ${escapeHTML(username)}
+            </strong>
+          </td>
+
+          <td>
+            ${escapeHTML(password)}
+          </td>
+
+          <td>
+            ${escapeHTML(name)}
+          </td>
+
+          <td>
+
+            <span class="role-badge">
+              ${escapeHTML(
+                role || "—"
+              )}
+            </span>
+
+          </td>
+
+          <td>
+
+            <span
+              class="status-badge ${statusClass}"
+            >
+              ${escapeHTML(status)}
+            </span>
+
+          </td>
+
+          <td>
+
+            <div class="user-actions">
+
+              <button
+                class="user-action edit"
+                onclick="editUser(${row},'${safe}')"
+              >
+                ✏️ Edit
+              </button>
+
+              ${
+                String(status).toLowerCase() ===
+                "blocked"
+                ?
+                `
+                <button
+                  class="user-action unblock"
+                  onclick="unblockUser(${row},'${safe}')"
+                >
+                  🔓 Unblock
+                </button>
+                `
+                :
+                `
+                <button
+                  class="user-action block"
+                  onclick="blockUser(${row},'${safe}')"
+                >
+                  🔒 Block
+                </button>
+                `
+              }
+
+              <button
+                class="user-action delete"
+                onclick="deleteUser(${row},'${safe}')"
+              >
+                🗑️ Delete
+              </button>
+
+            </div>
+
+          </td>
+
+        </tr>
+      `;
+
+    }
+  );
+
+
+  body.innerHTML =
+    html;
+
+}
+
+
+/* =========================================================
+   ADD USER
+========================================================= */
+
+function openAddUserModal(){
+
+  if(!checkLogin()){
+    return;
+  }
+
+
+  editingUser =
+    null;
+
+
+  document.getElementById(
+    "userFormTitle"
+  ).textContent =
+    "Add User";
+
+
+  document.getElementById(
+    "userSubmitBtn"
+  ).textContent =
+    "Add User";
+
+
+  document.getElementById(
+    "userForm"
+  ).reset();
+
+
+  document.getElementById(
+    "userStatus"
+  ).value =
+    "Active";
+
+
+  document.getElementById(
+    "userFormModal"
+  ).classList.add(
+    "show"
+  );
+
+}
+
+
+/* =========================================================
+   EDIT USER
+========================================================= */
+
+function editUser(
+  rowNumber,
+  encodedUsername
+){
+
+  if(!checkLogin()){
+    return;
+  }
+
+
+  const username =
+    decodeURIComponent(
+      encodedUsername
+    );
+
+
+  const user =
+    allUsers.find(
+      function(item){
+
+        const row =
+          Number(
+            item._row ||
+            item.row ||
+            0
+          );
+
+
+        const name =
+          String(
+            item.username ||
+            item.Username ||
+            ""
+          );
+
+
+        return (
+          row === Number(
+            rowNumber
+          ) ||
+          name.toLowerCase() ===
+          username.toLowerCase()
+        );
+
+      }
+    );
+
+
+  if(!user){
+
+    showToast(
+      "User not found.",
+      "error"
+    );
+
+    return;
+
+  }
+
+
+  editingUser =
+    user;
+
+
+  document.getElementById(
+    "userFormTitle"
+  ).textContent =
+    "Edit User";
+
+
+  document.getElementById(
+    "userSubmitBtn"
+  ).textContent =
+    "Update User";
+
+
+  document.getElementById(
+    "userUsername"
+  ).value =
+    user.username ||
+    user.Username ||
+    "";
+
+
+  document.getElementById(
+    "userPassword"
+  ).value =
+    user.password ||
+    user.Password ||
+    "";
+
+
+  document.getElementById(
+    "userName"
+  ).value =
+    user.name ||
+    user.Name ||
+    "";
+
+
+  document.getElementById(
+    "userRole"
+  ).value =
+    user.role ||
+    user.Role ||
+    "";
+
+
+  document.getElementById(
+    "userStatus"
+  ).value =
+    user.status ||
+    user.Status ||
+    "Active";
+
+
+  document.getElementById(
+    "userFormModal"
+  ).classList.add(
+    "show"
+  );
+
+}
+
+
+function closeUserFormModal(){
+
+  document.getElementById(
+    "userFormModal"
+  ).classList.remove(
+    "show"
+  );
+
+
+  editingUser =
+    null;
+
+}
+
+
+/* =========================================================
+   SUBMIT USER
+========================================================= */
+
+async function submitUser(event){
+
+  event.preventDefault();
+
+
+  if(!checkLogin()){
+    return;
+  }
+
+
+  const button =
+    document.getElementById(
+      "userSubmitBtn"
+    );
+
+
+  const username =
+    document.getElementById(
+      "userUsername"
+    ).value.trim();
+
+
+  const password =
+    document.getElementById(
+      "userPassword"
+    ).value.trim();
+
+
+  const name =
+    document.getElementById(
+      "userName"
+    ).value.trim();
+
+
+  const role =
+    document.getElementById(
+      "userRole"
+    ).value;
+
+
+  const status =
+    document.getElementById(
+      "userStatus"
+    ).value;
+
+
+  if(!username){
+
+    showToast(
+      "Username is required.",
+      "error"
+    );
+
+    return;
+
+  }
+
+
+  if(!password){
+
+    showToast(
+      "Password is required.",
+      "error"
+    );
+
+    return;
+
+  }
+
+
+  if(!name){
+
+    showToast(
+      "Name is required.",
+      "error"
+    );
+
+    return;
+
+  }
+
+
+  if(!role){
+
+    showToast(
+      "Please select Role.",
+      "error"
+    );
+
+    return;
+
+  }
+
+
+  if(!status){
+
+    showToast(
+      "Please select Status.",
+      "error"
+    );
+
+    return;
+
+  }
+
+
+  const editing =
+    Boolean(
+      editingUser
+    );
+
+
+  button.disabled =
+    true;
+
+
+  button.textContent =
+    editing
+      ? "Updating..."
+      : "Adding...";
+
+
+  try{
+
+    const payload = {
+
+      action:
+        editing
+          ? "updateUser"
+          : "addUser",
+
+      username,
+      password,
+      name,
+      role,
+      status
+
+    };
+
+
+    if(editing){
+
+      payload.row =
+        Number(
+          editingUser._row ||
+          editingUser.row ||
+          0
+        );
+
+
+      payload.oldUsername =
+        editingUser.username ||
+        editingUser.Username ||
+        "";
+
+    }
+
+
+    const response =
+      await fetch(
+        USER_API_URL,
+        {
+          method:"POST",
+
+          headers:{
+            "Content-Type":
+              "text/plain;charset=utf-8"
+          },
+
+          body:
+            JSON.stringify(
+              payload
+            )
+        }
+      );
+
+
+    if(!response.ok){
+
+      throw new Error(
+        "User server error: " +
+        response.status
+      );
+
+    }
+
+
+    const result =
+      await response.json();
+
+
+    if(result.success === false){
+
+      throw new Error(
+        result.message ||
+        "User operation failed."
+      );
+
+    }
+
+
+    closeUserFormModal();
+
+
+    showToast(
+      editing
+        ? "User updated successfully."
+        : "User added successfully.",
+      "success"
+    );
+
+
+    await loadUsers();
+
+
+  }catch(error){
+
+    console.error(error);
+
+
+    showToast(
+      error.message ||
+      "Failed to save user.",
+      "error"
+    );
+
+
+  }finally{
+
+    button.disabled =
+      false;
+
+
+    button.textContent =
+      editing
+        ? "Update User"
+        : "Add User";
+
+  }
+
+}
+
+
+/* =========================================================
+   BLOCK USER
+========================================================= */
+
+async function blockUser(
+  rowNumber,
+  encodedUsername
+){
+
+  if(!checkLogin()){
+    return;
+  }
+
+
+  const username =
+    decodeURIComponent(
+      encodedUsername
+    );
+
+
+  const ok =
+    confirm(
+      'Block user "' +
+      username +
+      '"?'
+    );
+
+
+  if(!ok){
+    return;
+  }
+
+
+  await changeUserStatus(
+    rowNumber,
+    username,
+    "Blocked"
+  );
+
+}
+
+
+async function unblockUser(
+  rowNumber,
+  encodedUsername
+){
+
+  if(!checkLogin()){
+    return;
+  }
+
+
+  const username =
+    decodeURIComponent(
+      encodedUsername
+    );
+
+
+  await changeUserStatus(
+    rowNumber,
+    username,
+    "Active"
+  );
+
+}
+
+
+async function changeUserStatus(
+  rowNumber,
+  username,
+  status
+){
+
+  if(!checkLogin()){
+    return;
+  }
+
+
+  try{
+
+    const payload = {
+
+      action:
+        status === "Blocked"
+          ? "blockUser"
+          : "unblockUser",
+
+      row:Number(
+        rowNumber
+      ),
+
+      username,
+
+      status
+
+    };
+
+
+    const response =
+      await fetch(
+        USER_API_URL,
+        {
+          method:"POST",
+
+          headers:{
+            "Content-Type":
+              "text/plain;charset=utf-8"
+          },
+
+          body:
+            JSON.stringify(
+              payload
+            )
+        }
+      );
+
+
+    if(!response.ok){
+
+      throw new Error(
+        "User server error: " +
+        response.status
+      );
+
+    }
+
+
+    const result =
+      await response.json();
+
+
+    if(result.success === false){
+
+      throw new Error(
+        result.message ||
+        "Status update failed."
+      );
+
+    }
+
+
+    showToast(
+      username +
+      " is now " +
+      status +
+      ".",
+      "success"
+    );
+
+
+    await loadUsers();
+
+
+  }catch(error){
+
+    console.error(error);
+
+
+    showToast(
+      error.message ||
+      "Failed to update status.",
+      "error"
+    );
+
+  }
+
+}
+
+
+/* =========================================================
+   DELETE USER
+========================================================= */
+
+async function deleteUser(
+  rowNumber,
+  encodedUsername
+){
+
+  if(!checkLogin()){
+    return;
+  }
+
+
+  const username =
+    decodeURIComponent(
+      encodedUsername
+    );
+
+
+  const ok =
+    confirm(
+      'Delete user "' +
+      username +
+      '"?\n\n' +
+      "This action cannot be undone."
+    );
+
+
+  if(!ok){
+    return;
+  }
+
+
+  try{
+
+    const payload = {
+
+      action:"deleteUser",
+
+      row:Number(
+        rowNumber
+      ),
+
+      username
+
+    };
+
+
+    const response =
+      await fetch(
+        USER_API_URL,
+        {
+          method:"POST",
+
+          headers:{
+            "Content-Type":
+              "text/plain;charset=utf-8"
+          },
+
+          body:
+            JSON.stringify(
+              payload
+            )
+        }
+      );
+
+
+    if(!response.ok){
+
+      throw new Error(
+        "User server error: " +
+        response.status
+      );
+
+    }
+
+
+    const result =
+      await response.json();
+
+
+    if(result.success === false){
+
+      throw new Error(
+        result.message ||
+        "Delete failed."
+      );
+
+    }
+
+
+    showToast(
+      "User deleted successfully.",
+      "success"
+    );
+
+
+    await loadUsers();
+
+
+  }catch(error){
+
+    console.error(error);
+
+
+    showToast(
+      error.message ||
+      "Failed to delete user.",
+      "error"
+    );
+
+  }
+
+}
+
+
+/* =========================================================
+   HELPERS
+========================================================= */
+
+function getTodayInputDate(){
+
+  const now =
+    new Date();
+
+
+  return (
+    now.getFullYear() +
+    "-" +
+    String(
+      now.getMonth() + 1
+    ).padStart(
+      2,
+      "0"
+    ) +
+    "-" +
+    String(
+      now.getDate()
+    ).padStart(
+      2,
+      "0"
+    )
+  );
+
+}
+
+
+function showLoading(){
+
+  document.getElementById(
+    "tableBody"
+  ).innerHTML = `
+    <tr>
+      <td colspan="5">
+        <div class="loading">
+          ⏳ Loading data...
+        </div>
+      </td>
+    </tr>
+  `;
+
+}
+
+
+function showError(message){
+
+  document.getElementById(
+    "tableBody"
+  ).innerHTML = `
+    <tr>
+      <td colspan="5">
+        <div class="empty">
+          ❌ ${escapeHTML(message)}
+        </div>
+      </td>
+    </tr>
+  `;
+
+}
 
 
 function showToast(
-    message,
-    type="normal"
+  message,
+  type
 ){
 
-    const toast =
-        document.getElementById(
-            "toast"
-        );
-
-
-    const icon =
-        document.getElementById(
-            "toastIcon"
-        );
-
-
-    const messageBox =
-        document.getElementById(
-            "toastMessage"
-        );
-
-
-    messageBox.textContent =
-        message;
-
-
-    toast.classList.remove(
-        "success",
-        "error",
-        "show"
+  const toast =
+    document.getElementById(
+      "toast"
     );
 
 
-    if(
-        type ===
-        "success"
-    ){
+  toast.textContent =
+    message;
 
-        toast.classList.add(
-            "success"
-        );
 
-        icon.textContent =
-            "✓";
+  toast.className =
+    "toast show " +
+    (type || "");
 
-    }else if(
-        type ===
-        "error"
-    ){
 
-        toast.classList.add(
-            "error"
-        );
+  setTimeout(
+    function(){
 
-        icon.textContent =
-            "✕";
+      toast.className =
+        "toast";
 
-    }else{
+    },
+    3000
+  );
 
-        icon.textContent =
-            "•";
+}
+
+
+function escapeHTML(value){
+
+  return String(
+    value ?? ""
+  )
+  .replace(
+    /&/g,
+    "&amp;"
+  )
+  .replace(
+    /</g,
+    "&lt;"
+  )
+  .replace(
+    />/g,
+    "&gt;"
+  )
+  .replace(
+    /"/g,
+    "&quot;"
+  )
+  .replace(
+    /'/g,
+    "&#039;"
+  );
+
+}
+
+
+/* =========================================================
+   MODAL EVENTS
+========================================================= */
+
+document
+  .getElementById(
+    "entryModal"
+  )
+  .addEventListener(
+    "click",
+    function(event){
+
+      if(
+        event.target === this
+      ){
+
+        closeEntryModal();
+
+      }
 
     }
-
-
-    void toast.offsetWidth;
-
-
-    toast.classList.add(
-        "show"
-    );
-
-
-    clearTimeout(
-        toastTimer
-    );
-
-
-    toastTimer =
-        setTimeout(
-            function(){
-
-                toast.classList.remove(
-                    "show"
-                );
-
-            },
-            3000
-        );
-
-}
-
-
-
-/* =========================================================
-   ESCAPE HTML
-========================================================= */
-
-function escapeHtml(
-    value
-){
-
-    return String(
-        value ??
-        ""
-    )
-    .replace(
-        /&/g,
-        "&amp;"
-    )
-    .replace(
-        /</g,
-        "&lt;"
-    )
-    .replace(
-        />/g,
-        "&gt;"
-    )
-    .replace(
-        /"/g,
-        "&quot;"
-    )
-    .replace(
-        /'/g,
-        "&#039;"
-    );
-
-}
-
-
-
-/* =========================================================
-   CLOSE MODALS ON OUTSIDE CLICK
-========================================================= */
-
-document
-    .getElementById(
-        "editModal"
-    )
-    .addEventListener(
-        "click",
-        function(event){
-
-            if(
-                event.target ===
-                this
-            ){
-
-                closeEditModal();
-
-            }
-
-        }
-    );
+  );
 
 
 document
-    .getElementById(
-        "deleteModal"
-    )
-    .addEventListener(
-        "click",
-        function(event){
+  .getElementById(
+    "userModal"
+  )
+  .addEventListener(
+    "click",
+    function(event){
 
-            if(
-                event.target ===
-                this
-            ){
+      if(
+        event.target === this
+      ){
 
-                closeDeleteModal();
+        closeUserModal();
 
-            }
+      }
 
-        }
-    );
+    }
+  );
 
 
 document
-    .getElementById(
-        "sellModal"
-    )
-    .addEventListener(
-        "click",
-        function(event){
+  .getElementById(
+    "userFormModal"
+  )
+  .addEventListener(
+    "click",
+    function(event){
 
-            if(
-                event.target ===
-                this
-            ){
+      if(
+        event.target === this
+      ){
 
-                closeSellModal();
+        closeUserFormModal();
 
-            }
+      }
 
-        }
-    );
-
+    }
+  );
 
 
 /* =========================================================
@@ -3232,26 +4479,50 @@ document
 ========================================================= */
 
 document.addEventListener(
-    "keydown",
-    function(event){
+  "keydown",
+  function(event){
 
-        if(
-            event.key ===
-            "Escape"
-        ){
+    if(
+      event.key === "Escape"
+    ){
 
-            closeEditModal();
+      closeEntryModal();
 
-            closeDeleteModal();
+      closeUserModal();
 
-            closeSellModal();
-
-        }
+      closeUserFormModal();
 
     }
+
+  }
+);
+
+
+/* =========================================================
+   START
+========================================================= */
+
+document.addEventListener(
+  "DOMContentLoaded",
+  function(){
+
+    if(!checkLogin()){
+      return;
+    }
+
+    loadTheme();
+
+    setupActivityDetection();
+
+    updatePageLabels();
+
+    loadData();
+
+  }
 );
 
 </script>
 
 </body>
+
 </html>
