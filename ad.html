@@ -242,8 +242,6 @@ button:disabled{
   box-shadow:0 0 0 3px rgba(8,127,91,.08);
 }
 
-/* সুন্দর Data selector */
-
 .data-selector{
   position:relative;
 }
@@ -266,10 +264,6 @@ button:disabled{
   pointer-events:none;
 }
 
-.data-selector select:focus{
-  border-color:var(--green);
-}
-
 .clear-filter-btn{
   height:44px;
   padding:0 13px;
@@ -283,7 +277,6 @@ button:disabled{
 
 .clear-filter-btn:hover{
   background:var(--hover);
-  border-color:#cbd5e1;
 }
 
 /* ================= TABLE ================= */
@@ -347,6 +340,11 @@ tr:hover td{
 .date-cell{
   color:var(--muted);
   font-weight:500;
+}
+
+.user-cell{
+  font-weight:600;
+  color:var(--purple);
 }
 
 .actions{
@@ -879,20 +877,20 @@ tr:hover td{
   </div>
 
 
-  <!-- ================= FILTER ================= -->
+  <!-- FILTER -->
 
   <section class="filter-box">
 
     <div class="filters">
 
-      <div class="field search-field">
+      <div class="field">
 
         <label>🔍 Search</label>
 
         <input
           type="text"
           id="searchInput"
-          placeholder="Search Name, IP or Work..."
+          placeholder="Search Name, IP, Work or User..."
           oninput="applyFilters()"
         >
 
@@ -924,8 +922,6 @@ tr:hover td{
 
       </div>
 
-
-      <!-- USER / DELETED / SELL -->
 
       <div class="field data-selector">
 
@@ -965,7 +961,7 @@ tr:hover td{
   </section>
 
 
-  <!-- ================= TABLE ================= -->
+  <!-- TABLE -->
 
   <section class="table-box">
 
@@ -976,12 +972,8 @@ tr:hover td{
       </h2>
 
       <div class="total-count">
-
         Total:
-        <strong id="totalCount">
-          0
-        </strong>
-
+        <strong id="totalCount">0</strong>
       </div>
 
     </div>
@@ -991,7 +983,7 @@ tr:hover td{
 
       <table>
 
-        <thead>
+        <thead id="tableHead">
 
           <tr>
 
@@ -1048,7 +1040,7 @@ tr:hover td{
 </main>
 
 
-<!-- ================= ENTRY MODAL ================= -->
+<!-- ENTRY MODAL -->
 
 <div
   class="modal"
@@ -1165,7 +1157,7 @@ tr:hover td{
 </div>
 
 
-<!-- ================= USER MANAGEMENT ================= -->
+<!-- USER MANAGEMENT -->
 
 <div
   class="modal"
@@ -1267,7 +1259,7 @@ tr:hover td{
 </div>
 
 
-<!-- ================= USER FORM ================= -->
+<!-- USER FORM -->
 
 <div
   class="modal"
@@ -1505,9 +1497,7 @@ function getLoggedInUsername(){
     const value =
       localStorage.getItem(key);
 
-    if(!value){
-      continue;
-    }
+    if(!value) continue;
 
     try{
 
@@ -1528,9 +1518,7 @@ function getLoggedInUsername(){
 
         if(username){
 
-          return String(
-            username
-          ).trim();
+          return String(username).trim();
 
         }
 
@@ -1538,9 +1526,7 @@ function getLoggedInUsername(){
 
     }catch(error){
 
-      return String(
-        value
-      ).trim();
+      return String(value).trim();
 
     }
 
@@ -1583,11 +1569,7 @@ function resetAutoLogoutTimer(){
 
   inactivityTimer =
     setTimeout(
-      function(){
-
-        autoLogout();
-
-      },
+      autoLogout,
       AUTO_LOGOUT_TIME
     );
 
@@ -1597,7 +1579,6 @@ function resetAutoLogoutTimer(){
 function setupActivityDetection(){
 
   const events = [
-
     "click",
     "mousemove",
     "mousedown",
@@ -1606,11 +1587,10 @@ function setupActivityDetection(){
     "touchstart",
     "touchmove",
     "input"
-
   ];
 
   events.forEach(
-    function(eventName){
+    eventName => {
 
       document.addEventListener(
         eventName,
@@ -1640,7 +1620,6 @@ function autoLogout(){
     );
 
   const loginKeys = [
-
     "username",
     "Username",
     "user",
@@ -1649,11 +1628,10 @@ function autoLogout(){
     "loggedUser",
     "currentUser",
     "userInfo"
-
   ];
 
   loginKeys.forEach(
-    function(key){
+    key => {
 
       localStorage.removeItem(
         key
@@ -1730,9 +1708,7 @@ function toggleTheme(){
 
   localStorage.setItem(
     "dashboardTheme",
-    dark
-      ? "dark"
-      : "light"
+    dark ? "dark" : "light"
   );
 
   updateThemeButton();
@@ -1747,9 +1723,7 @@ function updateThemeButton(){
       "themeBtn"
     );
 
-  if(!btn){
-    return;
-  }
+  if(!btn) return;
 
   btn.textContent =
     document.body.classList.contains(
@@ -1762,21 +1736,17 @@ function updateThemeButton(){
 
 
 /* =========================================================
-   CHANGE DATA TYPE
+   DATA TYPE
 ========================================================= */
 
 async function changeDataType(){
 
-  const selector =
+  currentDataType =
     document.getElementById(
       "dataType"
-    );
+    ).value;
 
-  currentDataType =
-    selector.value;
-
-  currentPage =
-    1;
+  currentPage = 1;
 
   updatePageLabels();
 
@@ -1802,18 +1772,13 @@ function updatePageLabels(){
       "pageSubtitle"
     );
 
-  if(currentDataType === "Deleted"){
+  const head =
+    document.getElementById(
+      "tableHead"
+    );
 
-    title.textContent =
-      "Deleted Data";
 
-    pageTitle.textContent =
-      "Deleted Data";
-
-    subtitle.textContent =
-      "View deleted entries";
-
-  }else if(currentDataType === "Sell"){
+  if(currentDataType === "Sell"){
 
     title.textContent =
       "Sell Data";
@@ -1824,7 +1789,42 @@ function updatePageLabels(){
     subtitle.textContent =
       "View sold entries";
 
-  }else{
+    head.innerHTML = `
+      <tr>
+        <th>Name</th>
+        <th>IP</th>
+        <th>Work</th>
+        <th>Date</th>
+        <th>Delete User</th>
+      </tr>
+    `;
+
+  }
+
+  else if(currentDataType === "Deleted"){
+
+    title.textContent =
+      "Deleted Data";
+
+    pageTitle.textContent =
+      "Deleted Data";
+
+    subtitle.textContent =
+      "View deleted entries";
+
+    head.innerHTML = `
+      <tr>
+        <th>Name</th>
+        <th>IP</th>
+        <th>Work</th>
+        <th>Date</th>
+        <th>Delete User</th>
+      </tr>
+    `;
+
+  }
+
+  else{
 
     title.textContent =
       "User Data";
@@ -1834,6 +1834,16 @@ function updatePageLabels(){
 
     subtitle.textContent =
       "Manage your entries";
+
+    head.innerHTML = `
+      <tr>
+        <th>Name</th>
+        <th>IP</th>
+        <th>Work</th>
+        <th>Date</th>
+        <th>Action</th>
+      </tr>
+    `;
 
   }
 
@@ -1851,26 +1861,12 @@ async function loadData(){
       "refreshBtn"
     );
 
-  btn.disabled =
-    true;
-
-  btn.textContent =
-    "⏳ Loading...";
+  btn.disabled = true;
+  btn.textContent = "⏳ Loading...";
 
   showLoading();
 
   try{
-
-    /*
-      User:
-      ?action=getData
-
-      Deleted:
-      ?action=getData&sheet=Deleted
-
-      Sell:
-      ?action=getData&sheet=Sell
-    */
 
     let url =
       API_URL +
@@ -1940,15 +1936,15 @@ async function loadData(){
     filteredData =
       [...allData];
 
-    currentPage =
-      1;
+    currentPage = 1;
 
     renderTable();
 
     updateTotal();
 
+  }
 
-  }catch(error){
+  catch(error){
 
     console.error(
       "Load Error:",
@@ -1966,15 +1962,181 @@ async function loadData(){
       "error"
     );
 
-  }finally{
+  }
 
-    btn.disabled =
-      false;
+  finally{
 
-    btn.textContent =
-      "🔄 Refresh";
+    btn.disabled = false;
+    btn.textContent = "🔄 Refresh";
 
   }
+
+}
+
+
+/* =========================================================
+   GET FIELD
+========================================================= */
+
+function getField(row, names){
+
+  for(const name of names){
+
+    if(
+      row[name] !== undefined &&
+      row[name] !== null &&
+      String(row[name]).trim() !== ""
+    ){
+
+      return row[name];
+
+    }
+
+  }
+
+  return "";
+
+}
+
+
+/* =========================================================
+   DATE FORMAT
+========================================================= */
+
+function formatDisplayDate(value){
+
+  if(!value){
+    return "";
+  }
+
+  const text =
+    String(value).trim();
+
+
+  /* Already desired format */
+
+  if(
+    /^\d{1,2}\s+[A-Za-z]+\s+\d{4}$/
+      .test(text)
+  ){
+
+    return text;
+
+  }
+
+
+  /* DD-MM-YYYY */
+
+  let match =
+    text.match(
+      /^(\d{1,2})-(\d{1,2})-(\d{4})$/
+    );
+
+  if(match){
+
+    const day =
+      Number(match[1]);
+
+    const month =
+      Number(match[2]);
+
+    const year =
+      Number(match[3]);
+
+    return monthName(
+      month,
+      day,
+      year
+    );
+
+  }
+
+
+  /* YYYY-MM-DD */
+
+  match =
+    text.match(
+      /^(\d{4})-(\d{1,2})-(\d{1,2})/
+    );
+
+  if(match){
+
+    const year =
+      Number(match[1]);
+
+    const month =
+      Number(match[2]);
+
+    const day =
+      Number(match[3]);
+
+    return monthName(
+      month,
+      day,
+      year
+    );
+
+  }
+
+
+  /* Google timestamp / normal date */
+
+  const parsed =
+    new Date(text);
+
+  if(!isNaN(parsed.getTime())){
+
+    return monthName(
+      parsed.getMonth() + 1,
+      parsed.getDate(),
+      parsed.getFullYear()
+    );
+
+  }
+
+
+  return text;
+
+}
+
+
+function monthName(
+  month,
+  day,
+  year
+){
+
+  const months = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December"
+  ];
+
+  if(
+    month < 1 ||
+    month > 12
+  ){
+
+    return "";
+
+  }
+
+  return (
+    day +
+    " " +
+    months[month - 1] +
+    " " +
+    year
+  );
 
 }
 
@@ -1991,13 +2153,16 @@ function renderTable(){
     );
 
 
-  if(
-    filteredData.length === 0
-  ){
+  if(!filteredData.length){
+
+    const colspan =
+      currentDataType === "User"
+        ? 5
+        : 5;
 
     tbody.innerHTML = `
       <tr>
-        <td colspan="5">
+        <td colspan="${colspan}">
           <div class="empty">
             No data found.
           </div>
@@ -2036,62 +2201,140 @@ function renderTable(){
         );
 
 
-      /*
-        Deleted / Sell data may not have
-        exactly the same field casing.
-      */
-
       const name =
-        row.Name ||
-        row.name ||
-        "";
+        getField(
+          row,
+          [
+            "Name",
+            "name"
+          ]
+        );
+
 
       const ip =
-        row.Ip ||
-        row.IP ||
-        row.ip ||
-        "";
+        getField(
+          row,
+          [
+            "Ip",
+            "IP",
+            "ip"
+          ]
+        );
+
 
       const work =
-        row.Work ||
-        row.work ||
-        "";
+        getField(
+          row,
+          [
+            "Work",
+            "work"
+          ]
+        );
+
 
       const date =
-        row.Date ||
-        row.date ||
-        row["Date & Time"] ||
-        row.Timestamp ||
-        "";
+        getField(
+          row,
+          [
+            "Date",
+            "date",
+            "Date & Time",
+            "Timestamp",
+            "DateTime"
+          ]
+        );
 
 
-      html += `
-        <tr>
+      const username =
+        getField(
+          row,
+          [
+            "Username",
+            "username",
+            "User Name",
+            "Delete User",
+            "Deleted By",
+            "DeletedBy",
+            "Sold By",
+            "SoldBy",
+            "Sell User",
+            "SellUser"
+          ]
+        );
 
-          <td>
-            ${escapeHTML(name)}
-          </td>
 
-          <td>
-            ${escapeHTML(ip)}
-          </td>
+      const formattedDate =
+        formatDisplayDate(
+          date
+        );
 
-          <td>
-            ${escapeHTML(work)}
-          </td>
 
-          <td class="date-cell">
-            ${escapeHTML(date)}
-          </td>
+      /* ================= SELL / DELETED ================= */
 
-          <td>
+      if(
+        currentDataType === "Sell" ||
+        currentDataType === "Deleted"
+      ){
 
-            <div class="actions">
+        html += `
+          <tr>
 
+            <td>
+              ${escapeHTML(name)}
+            </td>
+
+            <td>
+              ${escapeHTML(ip)}
+            </td>
+
+            <td>
+              ${escapeHTML(work)}
+            </td>
+
+            <td class="date-cell">
+              ${escapeHTML(formattedDate)}
+            </td>
+
+            <td class="user-cell">
               ${
-                currentDataType === "User"
-                ?
-                `
+                escapeHTML(
+                  username || "—"
+                )
+              }
+            </td>
+
+          </tr>
+        `;
+
+      }
+
+      /* ================= USER ================= */
+
+      else{
+
+        html += `
+          <tr>
+
+            <td>
+              ${escapeHTML(name)}
+            </td>
+
+            <td>
+              ${escapeHTML(ip)}
+            </td>
+
+            <td>
+              ${escapeHTML(work)}
+            </td>
+
+            <td class="date-cell">
+              ${escapeHTML(formattedDate)}
+            </td>
+
+            <td>
+
+              <div class="actions">
+
                 <button
                   class="btn-edit"
                   onclick="editEntryByRow(${rowNumber})"
@@ -2112,26 +2355,15 @@ function renderTable(){
                 >
                   💰 Sell
                 </button>
-                `
-                :
-                `
-                <span
-                  style="
-                    color:var(--muted);
-                    font-size:12px;
-                  "
-                >
-                  ${currentDataType} Record
-                </span>
-                `
-              }
 
-            </div>
+              </div>
 
-          </td>
+            </td>
 
-        </tr>
-      `;
+          </tr>
+        `;
+
+      }
 
     }
   );
@@ -2139,7 +2371,6 @@ function renderTable(){
 
   tbody.innerHTML =
     html;
-
 
   renderPagination();
 
@@ -2179,27 +2410,51 @@ function applyFilters(){
       function(row){
 
         const name =
-          row.Name ||
-          row.name ||
-          "";
+          getField(
+            row,
+            ["Name","name"]
+          );
+
 
         const ip =
-          row.Ip ||
-          row.IP ||
-          row.ip ||
-          "";
+          getField(
+            row,
+            ["Ip","IP","ip"]
+          );
+
 
         const work =
-          row.Work ||
-          row.work ||
-          "";
+          getField(
+            row,
+            ["Work","work"]
+          );
+
 
         const date =
-          row.Date ||
-          row.date ||
-          row["Date & Time"] ||
-          row.Timestamp ||
-          "";
+          getField(
+            row,
+            [
+              "Date",
+              "date",
+              "Date & Time",
+              "Timestamp"
+            ]
+          );
+
+
+        const username =
+          getField(
+            row,
+            [
+              "Username",
+              "username",
+              "User Name",
+              "Delete User",
+              "Deleted By",
+              "Sold By",
+              "Sell User"
+            ]
+          );
 
 
         if(search){
@@ -2212,8 +2467,11 @@ function applyFilters(){
               " " +
               String(work) +
               " " +
-              String(date)
-            ).toLowerCase();
+              String(date) +
+              " " +
+              String(username)
+            )
+            .toLowerCase();
 
 
           if(
@@ -2273,8 +2531,7 @@ function applyFilters(){
     );
 
 
-  currentPage =
-    1;
+  currentPage = 1;
 
   renderTable();
 
@@ -2300,8 +2557,7 @@ function clearFilters(){
   filteredData =
     [...allData];
 
-  currentPage =
-    1;
+  currentPage = 1;
 
   renderTable();
 
@@ -2310,26 +2566,69 @@ function clearFilters(){
 }
 
 
+/* =========================================================
+   FILTER DATE
+========================================================= */
+
 function convertToFilterDate(value){
 
   if(!value){
     return "";
   }
 
-
   const text =
     String(value).trim();
+
+
+  let match =
+    text.match(
+      /^(\d{1,2})-(\d{1,2})-(\d{4})$/
+    );
+
+  if(match){
+
+    return (
+      match[3] +
+      "-" +
+      String(
+        match[2]
+      ).padStart(2,"0") +
+      "-" +
+      String(
+        match[1]
+      ).padStart(2,"0")
+    );
+
+  }
+
+
+  match =
+    text.match(
+      /^(\d{4})-(\d{1,2})-(\d{1,2})/
+    );
+
+  if(match){
+
+    return (
+      match[1] +
+      "-" +
+      String(
+        match[2]
+      ).padStart(2,"0") +
+      "-" +
+      String(
+        match[3]
+      ).padStart(2,"0")
+    );
+
+  }
 
 
   const parsed =
     new Date(text);
 
 
-  if(
-    !isNaN(
-      parsed.getTime()
-    )
-  ){
+  if(!isNaN(parsed.getTime())){
 
     return (
       parsed.getFullYear() +
@@ -2341,25 +2640,6 @@ function convertToFilterDate(value){
       String(
         parsed.getDate()
       ).padStart(2,"0")
-    );
-
-  }
-
-
-  const match =
-    text.match(
-      /^(\d{2})-(\d{2})-(\d{4})$/
-    );
-
-
-  if(match){
-
-    return (
-      match[3] +
-      "-" +
-      match[2] +
-      "-" +
-      match[1]
     );
 
   }
@@ -2380,7 +2660,6 @@ function renderPagination(){
     document.getElementById(
       "pagination"
     );
-
 
   const pageInfo =
     document.getElementById(
@@ -2505,9 +2784,7 @@ function changePage(page){
   }
 
 
-  currentPage =
-    page;
-
+  currentPage = page;
 
   renderTable();
 
@@ -2542,9 +2819,7 @@ function openEntryModal(){
   }
 
 
-  editingRow =
-    null;
-
+  editingRow = null;
 
   document.getElementById(
     "modalTitle"
@@ -2586,18 +2861,19 @@ function closeEntryModal(){
     "show"
   );
 
-  editingRow =
-    null;
+  editingRow = null;
 
 }
 
 
+/* =========================================================
+   EDIT ENTRY
+========================================================= */
+
 function editEntryByRow(rowNumber){
 
   if(currentDataType !== "User"){
-
     return;
-
   }
 
 
@@ -2621,8 +2897,7 @@ function editEntryByRow(rowNumber){
   }
 
 
-  editingRow =
-    row;
+  editingRow = row;
 
 
   document.getElementById(
@@ -2646,7 +2921,7 @@ function editEntryByRow(rowNumber){
   document.getElementById(
     "ipInput"
   ).value =
-    row.Ip || "";
+    row.Ip || row.IP || "";
 
 
   document.getElementById(
@@ -2671,6 +2946,10 @@ function editEntryByRow(rowNumber){
 
 }
 
+
+/* =========================================================
+   SUBMIT ENTRY
+========================================================= */
 
 async function submitEntry(event){
 
@@ -2761,9 +3040,7 @@ async function submitEntry(event){
     );
 
 
-  btn.disabled =
-    true;
-
+  btn.disabled = true;
 
   btn.textContent =
     editing
@@ -2849,8 +3126,9 @@ async function submitEntry(event){
 
     await loadData();
 
+  }
 
-  }catch(error){
+  catch(error){
 
     console.error(error);
 
@@ -2860,10 +3138,11 @@ async function submitEntry(event){
       "error"
     );
 
-  }finally{
+  }
 
-    btn.disabled =
-      false;
+  finally{
+
+    btn.disabled = false;
 
     btn.textContent =
       editing
@@ -3025,8 +3304,9 @@ async function deleteEntryByRow(rowNumber){
 
     await loadData();
 
+  }
 
-  }catch(error){
+  catch(error){
 
     console.error(error);
 
@@ -3169,8 +3449,9 @@ async function sellEntryByRow(rowNumber){
 
     await loadData();
 
+  }
 
-  }catch(error){
+  catch(error){
 
     console.error(error);
 
@@ -3249,9 +3530,7 @@ async function loadUsers(){
   `;
 
 
-  btn.disabled =
-    true;
-
+  btn.disabled = true;
 
   btn.textContent =
     "⏳ Loading...";
@@ -3315,11 +3594,11 @@ async function loadUsers(){
 
     renderUsers();
 
+  }
 
-  }catch(error){
+  catch(error){
 
     console.error(error);
-
 
     body.innerHTML = `
       <tr>
@@ -3341,11 +3620,11 @@ async function loadUsers(){
       "error"
     );
 
+  }
 
-  }finally{
+  finally{
 
-    btn.disabled =
-      false;
+    btn.disabled = false;
 
     btn.textContent =
       "🔄 Refresh";
@@ -3433,9 +3712,7 @@ function renderUsers(){
 
 
       if(
-        String(
-          status
-        ).toLowerCase() ===
+        String(status).toLowerCase() ===
         "active"
       ){
 
@@ -3446,9 +3723,7 @@ function renderUsers(){
 
 
       if(
-        String(
-          status
-        ).toLowerCase() ===
+        String(status).toLowerCase() ===
         "blocked"
       ){
 
@@ -3570,8 +3845,7 @@ function openAddUserModal(){
   }
 
 
-  editingUser =
-    null;
+  editingUser = null;
 
 
   document.getElementById(
@@ -3647,9 +3921,7 @@ function editUser(
 
 
         return (
-          row === Number(
-            rowNumber
-          ) ||
+          row === Number(rowNumber) ||
           name.toLowerCase() ===
           username.toLowerCase()
         );
@@ -3670,8 +3942,7 @@ function editUser(
   }
 
 
-  editingUser =
-    user;
+  editingUser = user;
 
 
   document.getElementById(
@@ -3743,9 +4014,7 @@ function closeUserFormModal(){
     "show"
   );
 
-
-  editingUser =
-    null;
+  editingUser = null;
 
 }
 
@@ -3800,58 +4069,16 @@ async function submitUser(event){
     ).value;
 
 
-  if(!username){
+  if(
+    !username ||
+    !password ||
+    !name ||
+    !role ||
+    !status
+  ){
 
     showToast(
-      "Username is required.",
-      "error"
-    );
-
-    return;
-
-  }
-
-
-  if(!password){
-
-    showToast(
-      "Password is required.",
-      "error"
-    );
-
-    return;
-
-  }
-
-
-  if(!name){
-
-    showToast(
-      "Name is required.",
-      "error"
-    );
-
-    return;
-
-  }
-
-
-  if(!role){
-
-    showToast(
-      "Please select Role.",
-      "error"
-    );
-
-    return;
-
-  }
-
-
-  if(!status){
-
-    showToast(
-      "Please select Status.",
+      "Please fill all required fields.",
       "error"
     );
 
@@ -3866,9 +4093,7 @@ async function submitUser(event){
     );
 
 
-  button.disabled =
-    true;
-
+  button.disabled = true;
 
   button.textContent =
     editing
@@ -3968,11 +4193,11 @@ async function submitUser(event){
 
     await loadUsers();
 
+  }
 
-  }catch(error){
+  catch(error){
 
     console.error(error);
-
 
     showToast(
       error.message ||
@@ -3980,12 +4205,11 @@ async function submitUser(event){
       "error"
     );
 
+  }
 
-  }finally{
+  finally{
 
-    button.disabled =
-      false;
-
+    button.disabled = false;
 
     button.textContent =
       editing
@@ -3998,7 +4222,7 @@ async function submitUser(event){
 
 
 /* =========================================================
-   BLOCK USER
+   BLOCK / UNBLOCK
 ========================================================= */
 
 async function blockUser(
@@ -4084,9 +4308,7 @@ async function changeUserStatus(
           ? "blockUser"
           : "unblockUser",
 
-      row:Number(
-        rowNumber
-      ),
+      row:Number(rowNumber),
 
       username,
 
@@ -4114,16 +4336,6 @@ async function changeUserStatus(
       );
 
 
-    if(!response.ok){
-
-      throw new Error(
-        "User server error: " +
-        response.status
-      );
-
-    }
-
-
     const result =
       await response.json();
 
@@ -4149,11 +4361,11 @@ async function changeUserStatus(
 
     await loadUsers();
 
+  }
 
-  }catch(error){
+  catch(error){
 
     console.error(error);
-
 
     showToast(
       error.message ||
@@ -4206,9 +4418,7 @@ async function deleteUser(
 
       action:"deleteUser",
 
-      row:Number(
-        rowNumber
-      ),
+      row:Number(rowNumber),
 
       username
 
@@ -4234,16 +4444,6 @@ async function deleteUser(
       );
 
 
-    if(!response.ok){
-
-      throw new Error(
-        "User server error: " +
-        response.status
-      );
-
-    }
-
-
     const result =
       await response.json();
 
@@ -4266,11 +4466,11 @@ async function deleteUser(
 
     await loadUsers();
 
+  }
 
-  }catch(error){
+  catch(error){
 
     console.error(error);
-
 
     showToast(
       error.message ||
@@ -4298,17 +4498,11 @@ function getTodayInputDate(){
     "-" +
     String(
       now.getMonth() + 1
-    ).padStart(
-      2,
-      "0"
-    ) +
+    ).padStart(2,"0") +
     "-" +
     String(
       now.getDate()
-    ).padStart(
-      2,
-      "0"
-    )
+    ).padStart(2,"0")
   );
 
 }
@@ -4415,16 +4609,12 @@ function escapeHTML(value){
 ========================================================= */
 
 document
-  .getElementById(
-    "entryModal"
-  )
+  .getElementById("entryModal")
   .addEventListener(
     "click",
     function(event){
 
-      if(
-        event.target === this
-      ){
+      if(event.target === this){
 
         closeEntryModal();
 
@@ -4435,16 +4625,12 @@ document
 
 
 document
-  .getElementById(
-    "userModal"
-  )
+  .getElementById("userModal")
   .addEventListener(
     "click",
     function(event){
 
-      if(
-        event.target === this
-      ){
+      if(event.target === this){
 
         closeUserModal();
 
@@ -4455,16 +4641,12 @@ document
 
 
 document
-  .getElementById(
-    "userFormModal"
-  )
+  .getElementById("userFormModal")
   .addEventListener(
     "click",
     function(event){
 
-      if(
-        event.target === this
-      ){
+      if(event.target === this){
 
         closeUserFormModal();
 
@@ -4475,16 +4657,14 @@ document
 
 
 /* =========================================================
-   ESC KEY
+   ESC
 ========================================================= */
 
 document.addEventListener(
   "keydown",
   function(event){
 
-    if(
-      event.key === "Escape"
-    ){
+    if(event.key === "Escape"){
 
       closeEntryModal();
 
