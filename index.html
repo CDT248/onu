@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="en">
 
 <head>
@@ -6,8 +7,9 @@
 <meta charset="UTF-8">
 
 <meta
-  name="viewport"
-  content="width=device-width, initial-scale=1.0"
+name="viewport"
+content="width=device-width, initial-scale=1.0"
+
 >
 
 <title>User Login</title>
@@ -115,6 +117,8 @@ body::before{
 }
 
 
+/* CLOUD 1 */
+
 .cloud-1{
 
   width:230px;
@@ -166,6 +170,8 @@ body::before{
 }
 
 
+/* CLOUD 2 */
+
 .cloud-2{
 
   width:260px;
@@ -216,6 +222,8 @@ body::before{
 
 }
 
+
+/* CLOUD 3 */
 
 .cloud-3{
 
@@ -794,9 +802,7 @@ body::before{
 
 </head>
 
-
 <body>
-
 
 <!-- =====================================================
      CLOUDS
@@ -808,7 +814,6 @@ body::before{
 
 <div class="cloud cloud-3"></div>
 
-
 <!-- =====================================================
      LOGIN
 ===================================================== -->
@@ -817,110 +822,109 @@ body::before{
 
   <div class="login-card">
 
+```
+<!-- USER ICON -->
 
-    <!-- USER ICON -->
-
-    <div class="user-icon"></div>
-
-
-    <!-- TITLE -->
-
-    <h1 class="login-title">
-      User Login
-    </h1>
+<div class="user-icon"></div>
 
 
-    <!-- FORM -->
+<!-- TITLE -->
 
-    <form
-      class="login-form"
-      id="loginForm"
-      onsubmit="loginUser(event)"
-    >
+<h1 class="login-title">
+  User Login
+</h1>
 
 
-      <!-- USERNAME -->
+<!-- FORM -->
 
-      <input
-        class="input-box"
-        type="text"
-        id="username"
-        placeholder="Username"
-        autocomplete="username"
-        required
-      >
+<form
+  class="login-form"
+  id="loginForm"
+  onsubmit="loginUser(event)"
+>
 
 
-      <!-- PASSWORD -->
+  <!-- USERNAME -->
 
-      <input
-        class="input-box"
-        type="password"
-        id="password"
-        placeholder="Password"
-        autocomplete="current-password"
-        required
-      >
-
-
-      <!-- DEVICE -->
-
-      <div class="device-box">
-
-        💻 Device:
-        <span id="deviceName">
-          Detecting...
-        </span>
-
-      </div>
+  <input
+    class="input-box"
+    type="text"
+    id="username"
+    placeholder="Username"
+    autocomplete="username"
+    required
+  >
 
 
-      <!-- FORGOT -->
+  <!-- PASSWORD -->
 
-      <button
-        type="button"
-        class="forgot"
-        onclick="forgotPassword()"
-      >
-        Forgot Password?
-      </button>
-
-
-      <!-- LOGIN -->
-
-      <button
-        type="submit"
-        class="login-btn"
-        id="loginBtn"
-      >
-        Login
-      </button>
+  <input
+    class="input-box"
+    type="password"
+    id="password"
+    placeholder="Password"
+    autocomplete="current-password"
+    required
+  >
 
 
-      <!-- MESSAGE -->
+  <!-- DEVICE -->
 
-      <div
-        class="message"
-        id="message"
-      ></div>
+  <div class="device-box">
+
+    💻 Device:
+    <span id="deviceName">
+      Detecting...
+    </span>
+
+  </div>
 
 
-    </form>
+  <!-- FORGOT -->
+
+  <button
+    type="button"
+    class="forgot"
+    onclick="forgotPassword()"
+  >
+    Forgot Password?
+  </button>
 
 
-    <!-- FOOTER -->
+  <!-- LOGIN -->
 
-    <div class="login-footer">
+  <button
+    type="submit"
+    class="login-btn"
+    id="loginBtn"
+  >
+    Login
+  </button>
 
-      Secure User Login System
 
-    </div>
+  <!-- MESSAGE -->
 
+  <div
+    class="message"
+    id="message"
+  ></div>
+
+
+</form>
+
+
+<!-- FOOTER -->
+
+<div class="login-footer">
+
+  Secure User Login System
+
+</div>
+```
 
   </div>
 
 </div>
-
 
 <script>
 
@@ -1086,6 +1090,11 @@ async function loginUser(event){
     ).value.trim();
 
 
+  /*
+   * Password-এর trim করা হচ্ছে না।
+   * কারণ password-এ space থাকলেও সেটি valid হতে পারে।
+   */
+
   const password =
     document.getElementById(
       "password"
@@ -1122,7 +1131,8 @@ async function loginUser(event){
   }
 
 
-  // Prevent double click
+  /* Prevent double click */
+
   if(loginBtn.disabled){
 
     return;
@@ -1145,13 +1155,14 @@ async function loginUser(event){
 
   try{
 
-
     /*
      * IMPORTANT:
-     * আগের মতো getUsers করে পুরো User Sheet
-     * browser-এ download করা হচ্ছে না।
      *
-     * এখন সরাসরি login API call হচ্ছে।
+     * এখানে আর getUsers() call হচ্ছে না।
+     *
+     * পুরো User Sheet browser-এ download হবে না।
+     *
+     * সরাসরি login API call হবে।
      */
 
     const url =
@@ -1366,8 +1377,8 @@ async function loginUser(event){
 
 
     /*
-      আগের 500ms delay রাখা হয়েছে।
-      UI-তে success message দেখাবে।
+      শুধুমাত্র সফল login-এর পর
+      role অনুযায়ী dashboard open হবে।
     */
 
     setTimeout(
@@ -1469,6 +1480,8 @@ document.getElementById(
 
     if(event.key === "Enter"){
 
+      event.preventDefault();
+
       document.getElementById(
         "password"
       ).focus();
@@ -1480,108 +1493,36 @@ document.getElementById(
 
 
 /* =====================================================
-   IF ALREADY LOGGED IN
+   IMPORTANT
 ===================================================== */
 
-window.addEventListener(
-  "pageshow",
-  function(){
-
-    const auth =
-      localStorage.getItem(
-        "dashboardAuth"
-      );
-
-
-    const userData =
-      localStorage.getItem(
-        "userData"
-      );
-
-
-    if(
-      auth === "true" &&
-      userData
-    ){
-
-      try{
-
-        const user =
-          JSON.parse(
-            userData
-          );
-
-
-        const role =
-          String(
-            user.role ||
-            ""
-          )
-          .toLowerCase();
-
-
-        const target =
-          ROUTES[role];
-
-
-        if(target){
-
-          window.location.replace(
-            target
-          );
-
-        }
-
-      }
-
-      catch(error){
-
-        console.log(
-          "Session check error",
-          error
-        );
-
-      }
-
-    }
-
-  }
-);
+/*
+ * এখানে আর কোনো automatic redirect নেই।
+ *
+ * index.html খুললে সবসময় Login page দেখাবে।
+ *
+ * localStorage-এ আগের login থাকলেও
+ * index.html নিজে থেকে dashboard-এ যাবে না।
+ *
+ * শুধুমাত্র loginUser() সফল হলে
+ * ROUTES অনুযায়ী dashboard open হবে।
+ */
 
 
 /* =====================================================
-   PREVENT BACK AFTER LOGIN
+   CLEAR OLD REDIRECT STATE
 ===================================================== */
 
-history.pushState(
-  null,
-  "",
-  location.href
-);
-
-
-window.addEventListener(
-  "popstate",
-  function(){
-
-    const auth =
-      localStorage.getItem(
-        "dashboardAuth"
-      );
-
-
-    if(auth === "true"){
-
-      history.pushState(
-        null,
-        "",
-        location.href
-      );
-
-    }
-
-  }
-);
+/*
+ * এই অংশ localStorage-এর login information
+ * delete করছে না।
+ *
+ * শুধু index.html-এ automatic redirect
+ * করার কোনো code রাখা হয়নি।
+ *
+ * Dashboard-এর নিজের security system
+ * dashboardAuth / userData ব্যবহার করতে পারবে।
+ */
 
 </script>
 
