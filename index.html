@@ -11,13 +11,13 @@
 >
 
 <title>User Login</title>
-  
+
 <link
   rel="icon"
   type="image/png"
   href="https://cdn-icons-png.flaticon.com/128/2170/2170153.png"
 >
-  
+
 <style>
 
 /* =====================================================
@@ -115,8 +115,6 @@ body::before{
 }
 
 
-/* cloud 1 */
-
 .cloud-1{
 
   width:230px;
@@ -168,8 +166,6 @@ body::before{
 }
 
 
-/* cloud 2 */
-
 .cloud-2{
 
   width:260px;
@@ -220,8 +216,6 @@ body::before{
 
 }
 
-
-/* cloud 3 */
 
 .cloud-3{
 
@@ -357,8 +351,6 @@ body::before{
 }
 
 
-/* head */
-
 .user-icon::before{
 
   content:"";
@@ -380,8 +372,6 @@ body::before{
 
 }
 
-
-/* body */
 
 .user-icon::after{
 
@@ -976,10 +966,9 @@ function getDeviceName(){
     navigator.userAgent || "";
 
 
-  let device = "Unknown Device";
+  let device =
+    "Unknown Device";
 
-
-  /* Android */
 
   if(/Android/i.test(ua)){
 
@@ -988,15 +977,13 @@ function getDeviceName(){
         /Android[^;)]*(?:;\s*([^;)]+))?/i
       );
 
+
     device =
       match && match[1]
         ? match[1].trim()
         : "Android Device";
 
   }
-
-
-  /* iPhone */
 
   else if(/iPhone/i.test(ua)){
 
@@ -1005,18 +992,12 @@ function getDeviceName(){
 
   }
 
-
-  /* iPad */
-
   else if(/iPad/i.test(ua)){
 
     device =
       "iPad";
 
   }
-
-
-  /* Windows */
 
   else if(/Windows/i.test(ua)){
 
@@ -1025,18 +1006,12 @@ function getDeviceName(){
 
   }
 
-
-  /* Mac */
-
   else if(/Macintosh|Mac OS/i.test(ua)){
 
     device =
       "Mac";
 
   }
-
-
-  /* Linux */
 
   else if(/Linux/i.test(ua)){
 
@@ -1045,8 +1020,6 @@ function getDeviceName(){
 
   }
 
-
-  /* Browser */
 
   let browser =
     "Browser";
@@ -1116,18 +1089,12 @@ async function loginUser(event){
   const password =
     document.getElementById(
       "password"
-    ).value.trim();
+    ).value;
 
 
   const loginBtn =
     document.getElementById(
       "loginBtn"
-    );
-
-
-  const message =
-    document.getElementById(
-      "message"
     );
 
 
@@ -1155,6 +1122,14 @@ async function loginUser(event){
   }
 
 
+  // Prevent double click
+  if(loginBtn.disabled){
+
+    return;
+
+  }
+
+
   loginBtn.disabled = true;
 
 
@@ -1162,25 +1137,46 @@ async function loginUser(event){
     '<span class="loader"></span>Login...';
 
 
-  message.className =
-    "message";
-
-
-  message.textContent =
-    "";
+  showMessage(
+    "",
+    ""
+  );
 
 
   try{
 
 
+    /*
+     * IMPORTANT:
+     * আগের মতো getUsers করে পুরো User Sheet
+     * browser-এ download করা হচ্ছে না।
+     *
+     * এখন সরাসরি login API call হচ্ছে।
+     */
+
+    const url =
+      USER_API_URL +
+      "?action=login" +
+      "&username=" +
+      encodeURIComponent(username) +
+      "&password=" +
+      encodeURIComponent(password) +
+      "&_=" +
+      Date.now();
+
+
     const response =
       await fetch(
-        USER_API_URL +
-        "?action=getUsers&_=" +
-        Date.now(),
+        url,
         {
-          method:"GET",
-          cache:"no-store"
+          method:
+            "GET",
+
+          cache:
+            "no-store",
+
+          redirect:
+            "follow"
         }
       );
 
@@ -1199,108 +1195,34 @@ async function loginUser(event){
       await response.json();
 
 
-    if(result.success === false){
-
-      throw new Error(
-        result.message ||
-        "Unable to connect to server."
-      );
-
-    }
-
-
-    const users =
-      Array.isArray(result.users)
-        ? result.users
-        : Array.isArray(result.data)
-          ? result.data
-          : [];
-
-
-    const enteredUsername =
-      username.toLowerCase();
-
-
-    const user =
-      users.find(
-        function(item){
-
-          const u =
-            String(
-              item.username ||
-              item.Username ||
-              ""
-            )
-            .trim()
-            .toLowerCase();
-
-
-          const p =
-            String(
-              item.password ||
-              item.Password ||
-              ""
-            )
-            .trim();
-
-
-          return (
-            u === enteredUsername &&
-            p === password
-          );
-
-        }
-      );
-
-
     /* =================================================
-       USER NOT FOUND
+       LOGIN FAILED
     ================================================= */
 
-    if(!user){
+    if(
+      !result ||
+      result.success !== true
+    ){
 
       showMessage(
-        "❌ Invalid username or password.",
+        "❌ " +
+        (
+          result &&
+          result.message
+            ? result.message
+            : "Invalid username or password."
+        ),
         "error"
       );
 
-      loginBtn.disabled = false;
+
+      loginBtn.disabled =
+        false;
+
 
       loginBtn.textContent =
         "Login";
 
-      return;
-
-    }
-
-
-    /* =================================================
-       STATUS
-    ================================================= */
-
-    const status =
-      String(
-        user.status ||
-        user.Status ||
-        "Active"
-      )
-      .trim()
-      .toLowerCase();
-
-
-    if(status !== "active"){
-
-      showMessage(
-        "❌ Your account is " +
-        status +
-        ". Please contact administrator.",
-        "error"
-      );
-
-      loginBtn.disabled = false;
-
-      loginBtn.textContent =
-        "Login";
 
       return;
 
@@ -1313,8 +1235,7 @@ async function loginUser(event){
 
     const role =
       String(
-        user.role ||
-        user.Role ||
+        result.role ||
         ""
       )
       .trim()
@@ -1332,10 +1253,14 @@ async function loginUser(event){
         "error"
       );
 
-      loginBtn.disabled = false;
+
+      loginBtn.disabled =
+        false;
+
 
       loginBtn.textContent =
         "Login";
+
 
       return;
 
@@ -1349,13 +1274,11 @@ async function loginUser(event){
     const loggedUser = {
 
       username:
-        user.username ||
-        user.Username ||
+        result.username ||
         username,
 
       name:
-        user.name ||
-        user.Name ||
+        result.name ||
         "",
 
       role:
@@ -1443,8 +1366,8 @@ async function loginUser(event){
 
 
     /*
-      একটু delay যাতে success message
-      দেখা যায়।
+      আগের 500ms delay রাখা হয়েছে।
+      UI-তে success message দেখাবে।
     */
 
     setTimeout(
@@ -1459,7 +1382,9 @@ async function loginUser(event){
     );
 
 
-  }catch(error){
+  }
+
+  catch(error){
 
     console.error(
       "Login Error:",
@@ -1477,7 +1402,9 @@ async function loginUser(event){
     );
 
 
-    loginBtn.disabled = false;
+    loginBtn.disabled =
+      false;
+
 
     loginBtn.textContent =
       "Login";
@@ -1599,18 +1526,15 @@ window.addEventListener(
 
         if(target){
 
-          /*
-            Browser Back দিয়ে index এ
-            এলে আবার dashboard-এ পাঠাবে।
-          */
-
           window.location.replace(
             target
           );
 
         }
 
-      }catch(error){
+      }
+
+      catch(error){
 
         console.log(
           "Session check error",
