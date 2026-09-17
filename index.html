@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="en">
 
 <head>
@@ -7,9 +6,23 @@
 <meta charset="UTF-8">
 
 <meta
-name="viewport"
-content="width=device-width, initial-scale=1.0"
+  name="viewport"
+  content="width=device-width, initial-scale=1.0"
+>
 
+<meta
+  http-equiv="Cache-Control"
+  content="no-cache, no-store, must-revalidate"
+>
+
+<meta
+  http-equiv="Pragma"
+  content="no-cache"
+>
+
+<meta
+  http-equiv="Expires"
+  content="0"
 >
 
 <title>User Login</title>
@@ -22,10 +35,6 @@ content="width=device-width, initial-scale=1.0"
 
 <style>
 
-/* =====================================================
-   RESET
-===================================================== */
-
 *{
   margin:0;
   padding:0;
@@ -37,10 +46,6 @@ content="width=device-width, initial-scale=1.0"
     sans-serif;
 }
 
-
-/* =====================================================
-   BODY
-===================================================== */
 
 body{
 
@@ -67,10 +72,6 @@ body{
 }
 
 
-/* =====================================================
-   SKY GLOW
-===================================================== */
-
 body::before{
 
   content:"";
@@ -78,9 +79,11 @@ body::before{
   position:absolute;
 
   width:600px;
+
   height:600px;
 
   top:-250px;
+
   right:-180px;
 
   background:
@@ -95,10 +98,6 @@ body::before{
 }
 
 
-/* =====================================================
-   CLOUDS
-===================================================== */
-
 .cloud{
 
   position:absolute;
@@ -108,8 +107,6 @@ body::before{
 
   border-radius:100px;
 
-  filter:blur(.2px);
-
   opacity:.85;
 
   pointer-events:none;
@@ -117,14 +114,14 @@ body::before{
 }
 
 
-/* CLOUD 1 */
-
 .cloud-1{
 
   width:230px;
+
   height:75px;
 
   left:-70px;
+
   bottom:220px;
 
 }
@@ -137,9 +134,11 @@ body::before{
   position:absolute;
 
   width:105px;
+
   height:105px;
 
   left:35px;
+
   bottom:25px;
 
   background:
@@ -157,9 +156,11 @@ body::before{
   position:absolute;
 
   width:90px;
+
   height:90px;
 
   left:115px;
+
   bottom:20px;
 
   background:
@@ -170,14 +171,14 @@ body::before{
 }
 
 
-/* CLOUD 2 */
-
 .cloud-2{
 
   width:260px;
+
   height:82px;
 
   right:-85px;
+
   top:105px;
 
 }
@@ -190,9 +191,11 @@ body::before{
   position:absolute;
 
   width:110px;
+
   height:110px;
 
   left:50px;
+
   bottom:20px;
 
   background:
@@ -210,9 +213,11 @@ body::before{
   position:absolute;
 
   width:105px;
+
   height:105px;
 
   right:20px;
+
   bottom:15px;
 
   background:
@@ -223,14 +228,14 @@ body::before{
 }
 
 
-/* CLOUD 3 */
-
 .cloud-3{
 
   width:300px;
+
   height:90px;
 
   right:-90px;
+
   bottom:100px;
 
 }
@@ -243,9 +248,11 @@ body::before{
   position:absolute;
 
   width:120px;
+
   height:120px;
 
   left:50px;
+
   bottom:20px;
 
   background:
@@ -263,9 +270,11 @@ body::before{
   position:absolute;
 
   width:100px;
+
   height:100px;
 
   right:45px;
+
   bottom:15px;
 
   background:
@@ -275,10 +284,6 @@ body::before{
 
 }
 
-
-/* =====================================================
-   LOGIN WRAPPER
-===================================================== */
 
 .login-wrapper{
 
@@ -300,10 +305,6 @@ body::before{
 
 }
 
-
-/* =====================================================
-   LOGIN CARD
-===================================================== */
 
 .login-card{
 
@@ -343,13 +344,10 @@ body::before{
 }
 
 
-/* =====================================================
-   USER ICON
-===================================================== */
-
 .user-icon{
 
   width:58px;
+
   height:58px;
 
   position:relative;
@@ -366,6 +364,7 @@ body::before{
   position:absolute;
 
   width:23px;
+
   height:23px;
 
   background:#075284;
@@ -373,6 +372,7 @@ body::before{
   border-radius:50%;
 
   left:50%;
+
   top:0;
 
   transform:
@@ -388,6 +388,7 @@ body::before{
   position:absolute;
 
   width:42px;
+
   height:28px;
 
   background:#075284;
@@ -396,6 +397,7 @@ body::before{
     25px 25px 10px 10px;
 
   left:50%;
+
   bottom:2px;
 
   transform:
@@ -403,10 +405,6 @@ body::before{
 
 }
 
-
-/* =====================================================
-   TITLE
-===================================================== */
 
 .login-title{
 
@@ -423,10 +421,6 @@ body::before{
 }
 
 
-/* =====================================================
-   FORM
-===================================================== */
-
 .login-form{
 
   width:100%;
@@ -439,10 +433,6 @@ body::before{
 
 }
 
-
-/* =====================================================
-   INPUT
-===================================================== */
 
 .input-box{
 
@@ -497,10 +487,6 @@ body::before{
 }
 
 
-/* =====================================================
-   DEVICE
-===================================================== */
-
 .device-box{
 
   width:100%;
@@ -527,10 +513,6 @@ body::before{
 }
 
 
-/* =====================================================
-   FORGOT PASSWORD
-===================================================== */
-
 .forgot{
 
   border:none;
@@ -556,10 +538,6 @@ body::before{
 
 }
 
-
-/* =====================================================
-   LOGIN BUTTON
-===================================================== */
 
 .login-btn{
 
@@ -626,10 +604,6 @@ body::before{
 }
 
 
-/* =====================================================
-   MESSAGE
-===================================================== */
-
 .message{
 
   width:100%;
@@ -661,15 +635,12 @@ body::before{
 }
 
 
-/* =====================================================
-   LOADING
-===================================================== */
-
 .loader{
 
   display:inline-block;
 
   width:16px;
+
   height:16px;
 
   border:
@@ -699,10 +670,6 @@ body::before{
 }
 
 
-/* =====================================================
-   FOOTER
-===================================================== */
-
 .login-footer{
 
   margin-top:auto;
@@ -717,10 +684,6 @@ body::before{
 
 }
 
-
-/* =====================================================
-   MOBILE
-===================================================== */
 
 @media(max-width:500px){
 
@@ -802,11 +765,9 @@ body::before{
 
 </head>
 
+
 <body>
 
-<!-- =====================================================
-     CLOUDS
-===================================================== -->
 
 <div class="cloud cloud-1"></div>
 
@@ -814,122 +775,101 @@ body::before{
 
 <div class="cloud cloud-3"></div>
 
-<!-- =====================================================
-     LOGIN
-===================================================== -->
 
 <div class="login-wrapper">
 
   <div class="login-card">
 
-```
-<!-- USER ICON -->
 
-<div class="user-icon"></div>
+    <div class="user-icon"></div>
 
 
-<!-- TITLE -->
-
-<h1 class="login-title">
-  User Login
-</h1>
+    <h1 class="login-title">
+      User Login
+    </h1>
 
 
-<!-- FORM -->
-
-<form
-  class="login-form"
-  id="loginForm"
-  onsubmit="loginUser(event)"
->
+    <form
+      class="login-form"
+      id="loginForm"
+      onsubmit="loginUser(event)"
+    >
 
 
-  <!-- USERNAME -->
-
-  <input
-    class="input-box"
-    type="text"
-    id="username"
-    placeholder="Username"
-    autocomplete="username"
-    required
-  >
+      <input
+        class="input-box"
+        type="text"
+        id="username"
+        placeholder="Username"
+        autocomplete="username"
+        required
+      >
 
 
-  <!-- PASSWORD -->
-
-  <input
-    class="input-box"
-    type="password"
-    id="password"
-    placeholder="Password"
-    autocomplete="current-password"
-    required
-  >
+      <input
+        class="input-box"
+        type="password"
+        id="password"
+        placeholder="Password"
+        autocomplete="current-password"
+        required
+      >
 
 
-  <!-- DEVICE -->
+      <div class="device-box">
 
-  <div class="device-box">
+        💻 Device:
+        <span id="deviceName">
+          Detecting...
+        </span>
 
-    💻 Device:
-    <span id="deviceName">
-      Detecting...
-    </span>
-
-  </div>
+      </div>
 
 
-  <!-- FORGOT -->
-
-  <button
-    type="button"
-    class="forgot"
-    onclick="forgotPassword()"
-  >
-    Forgot Password?
-  </button>
+      <button
+        type="button"
+        class="forgot"
+        onclick="forgotPassword()"
+      >
+        Forgot Password?
+      </button>
 
 
-  <!-- LOGIN -->
-
-  <button
-    type="submit"
-    class="login-btn"
-    id="loginBtn"
-  >
-    Login
-  </button>
+      <button
+        type="submit"
+        class="login-btn"
+        id="loginBtn"
+      >
+        Login
+      </button>
 
 
-  <!-- MESSAGE -->
-
-  <div
-    class="message"
-    id="message"
-  ></div>
+      <div
+        class="message"
+        id="message"
+      ></div>
 
 
-</form>
+    </form>
 
 
-<!-- FOOTER -->
+    <div class="login-footer">
 
-<div class="login-footer">
+      Secure User Login System
 
-  Secure User Login System
+    </div>
 
-</div>
-```
 
   </div>
 
 </div>
+
 
 <script>
 
+
 /* =====================================================
-   USER API
+   API URL
 ===================================================== */
 
 const USER_API_URL =
@@ -937,7 +877,7 @@ const USER_API_URL =
 
 
 /* =====================================================
-   PAGE ROUTES
+   ROLE ROUTES
 ===================================================== */
 
 const ROUTES = {
@@ -961,7 +901,7 @@ const ROUTES = {
 
 
 /* =====================================================
-   GET DEVICE NAME
+   DEVICE
 ===================================================== */
 
 function getDeviceName(){
@@ -976,47 +916,34 @@ function getDeviceName(){
 
   if(/Android/i.test(ua)){
 
-    const match =
-      ua.match(
-        /Android[^;)]*(?:;\s*([^;)]+))?/i
-      );
-
-
     device =
-      match && match[1]
-        ? match[1].trim()
-        : "Android Device";
+      "Android Device";
 
   }
-
   else if(/iPhone/i.test(ua)){
 
     device =
       "iPhone";
 
   }
-
   else if(/iPad/i.test(ua)){
 
     device =
       "iPad";
 
   }
-
   else if(/Windows/i.test(ua)){
 
     device =
       "Windows PC";
 
   }
-
   else if(/Macintosh|Mac OS/i.test(ua)){
 
     device =
       "Mac";
 
   }
-
   else if(/Linux/i.test(ua)){
 
     device =
@@ -1035,21 +962,18 @@ function getDeviceName(){
       "Microsoft Edge";
 
   }
-
   else if(/Chrome/i.test(ua)){
 
     browser =
       "Google Chrome";
 
   }
-
   else if(/Firefox/i.test(ua)){
 
     browser =
       "Mozilla Firefox";
 
   }
-
   else if(/Safari/i.test(ua)){
 
     browser =
@@ -1064,10 +988,6 @@ function getDeviceName(){
 
 }
 
-
-/* =====================================================
-   SHOW DEVICE
-===================================================== */
 
 document.getElementById(
   "deviceName"
@@ -1085,20 +1005,20 @@ async function loginUser(event){
 
 
   const username =
-    document.getElementById(
-      "username"
-    ).value.trim();
+    document
+      .getElementById(
+        "username"
+      )
+      .value
+      .trim();
 
-
-  /*
-   * Password-এর trim করা হচ্ছে না।
-   * কারণ password-এ space থাকলেও সেটি valid হতে পারে।
-   */
 
   const password =
-    document.getElementById(
-      "password"
-    ).value;
+    document
+      .getElementById(
+        "password"
+      )
+      .value;
 
 
   const loginBtn =
@@ -1131,16 +1051,8 @@ async function loginUser(event){
   }
 
 
-  /* Prevent double click */
-
-  if(loginBtn.disabled){
-
-    return;
-
-  }
-
-
-  loginBtn.disabled = true;
+  loginBtn.disabled =
+    true;
 
 
   loginBtn.innerHTML =
@@ -1155,23 +1067,18 @@ async function loginUser(event){
 
   try{
 
-    /*
-     * IMPORTANT:
-     *
-     * এখানে আর getUsers() call হচ্ছে না।
-     *
-     * পুরো User Sheet browser-এ download হবে না।
-     *
-     * সরাসরি login API call হবে।
-     */
 
     const url =
       USER_API_URL +
       "?action=login" +
       "&username=" +
-      encodeURIComponent(username) +
+      encodeURIComponent(
+        username
+      ) +
       "&password=" +
-      encodeURIComponent(password) +
+      encodeURIComponent(
+        password
+      ) +
       "&_=" +
       Date.now();
 
@@ -1180,14 +1087,11 @@ async function loginUser(event){
       await fetch(
         url,
         {
-          method:
-            "GET",
+          method:"GET",
 
-          cache:
-            "no-store",
+          cache:"no-store",
 
-          redirect:
-            "follow"
+          redirect:"follow"
         }
       );
 
@@ -1205,10 +1109,6 @@ async function loginUser(event){
     const result =
       await response.json();
 
-
-    /* =================================================
-       LOGIN FAILED
-    ================================================= */
 
     if(
       !result ||
@@ -1239,10 +1139,6 @@ async function loginUser(event){
 
     }
 
-
-    /* =================================================
-       ROLE
-    ================================================= */
 
     const role =
       String(
@@ -1278,10 +1174,6 @@ async function loginUser(event){
     }
 
 
-    /* =================================================
-       SAVE LOGIN SESSION
-    ================================================= */
-
     const loggedUser = {
 
       username:
@@ -1296,21 +1188,27 @@ async function loginUser(event){
         role,
 
       status:
+        result.status ||
         "Active",
+
+      rowNumber:
+        result.rowNumber ||
+        "",
 
       device:
         getDeviceName(),
 
       loginTime:
-        new Date().toISOString()
+        new Date()
+          .toISOString()
 
     };
 
 
     /*
-      Dashboard-এর existing security
-      checkLogin() যেন কাজ করে।
-    */
+     * Login successful.
+     * এখন session save হবে।
+     */
 
     localStorage.setItem(
       "dashboardAuth",
@@ -1371,22 +1269,24 @@ async function loginUser(event){
 
 
     showMessage(
-      "✓ Login successful. Opening dashboard...",
+      "✓ Login successful...",
       "success"
     );
 
 
     /*
-      শুধুমাত্র সফল login-এর পর
-      role অনুযায়ী dashboard open হবে।
-    */
+     * IMPORTANT:
+     * Redirect ONLY HERE.
+     *
+     * index.html load হওয়ার সময়
+     * কোনো redirect নেই।
+     */
 
     setTimeout(
       function(){
 
-        window.location.replace(
-          targetPage
-        );
+        window.location.href =
+          targetPage;
 
       },
       500
@@ -1394,21 +1294,15 @@ async function loginUser(event){
 
 
   }
-
   catch(error){
 
     console.error(
-      "Login Error:",
       error
     );
 
 
     showMessage(
-      "❌ " +
-      (
-        error.message ||
-        "Login failed."
-      ),
+      "❌ Login failed. Please try again.",
       "error"
     );
 
@@ -1447,8 +1341,7 @@ function showMessage(
   message.className =
     "message " +
     (
-      type ||
-      ""
+      type || ""
     );
 
 }
@@ -1472,57 +1365,77 @@ function forgotPassword(){
    ENTER KEY
 ===================================================== */
 
-document.getElementById(
-  "username"
-).addEventListener(
-  "keydown",
-  function(event){
+document
+  .getElementById(
+    "username"
+  )
+  .addEventListener(
+    "keydown",
+    function(event){
 
-    if(event.key === "Enter"){
+      if(
+        event.key ===
+        "Enter"
+      ){
 
-      event.preventDefault();
+        event.preventDefault();
 
-      document.getElementById(
-        "password"
-      ).focus();
+        document
+          .getElementById(
+            "password"
+          )
+          .focus();
+
+      }
 
     }
+  );
+
+
+/* =====================================================
+   VERY IMPORTANT
+===================================================== */
+
+/*
+ * এখানে কোনো:
+ *
+ * localStorage check
+ * dashboardAuth check
+ * userData check
+ * pageshow redirect
+ * popstate redirect
+ * automatic redirect
+ *
+ * রাখা হয়নি।
+ *
+ * তাই index.html খুললে Login page-ই থাকবে।
+ *
+ * Dashboard-এ যাবে শুধুমাত্র
+ * successful login-এর পরে।
+ */
+
+
+/* =====================================================
+   STOP BACK-FORWARD CACHE RESTORE
+===================================================== */
+
+/*
+ * Browser যদি আগের page থেকে index.html-এ
+ * ফিরে আসে, তবুও redirect করা হবে না।
+ *
+ * Login page-ই থাকবে।
+ */
+
+window.addEventListener(
+  "pageshow",
+  function(){
+
+    /*
+     * এখানে কোনো redirect নেই।
+     */
 
   }
 );
-
-
-/* =====================================================
-   IMPORTANT
-===================================================== */
-
-/*
- * এখানে আর কোনো automatic redirect নেই।
- *
- * index.html খুললে সবসময় Login page দেখাবে।
- *
- * localStorage-এ আগের login থাকলেও
- * index.html নিজে থেকে dashboard-এ যাবে না।
- *
- * শুধুমাত্র loginUser() সফল হলে
- * ROUTES অনুযায়ী dashboard open হবে।
- */
-
-
-/* =====================================================
-   CLEAR OLD REDIRECT STATE
-===================================================== */
-
-/*
- * এই অংশ localStorage-এর login information
- * delete করছে না।
- *
- * শুধু index.html-এ automatic redirect
- * করার কোনো code রাখা হয়নি।
- *
- * Dashboard-এর নিজের security system
- * dashboardAuth / userData ব্যবহার করতে পারবে।
- */
 
 </script>
 
