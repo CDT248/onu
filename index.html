@@ -1,0 +1,1666 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0"
+>
+
+<title>User Login</title>
+  
+<link
+  rel="icon"
+  type="image/png"
+  href="https://cdn-icons-png.flaticon.com/128/2170/2170153.png"
+>
+  
+<style>
+
+/* =====================================================
+   RESET
+===================================================== */
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:
+    "Poppins",
+    Arial,
+    Helvetica,
+    sans-serif;
+}
+
+
+/* =====================================================
+   BODY
+===================================================== */
+
+body{
+
+  min-height:100vh;
+
+  overflow:hidden;
+
+  display:flex;
+
+  justify-content:center;
+
+  align-items:center;
+
+  background:
+    linear-gradient(
+      180deg,
+      #83cbe9 0%,
+      #65bce0 50%,
+      #32a9d8 100%
+    );
+
+  position:relative;
+
+}
+
+
+/* =====================================================
+   SKY GLOW
+===================================================== */
+
+body::before{
+
+  content:"";
+
+  position:absolute;
+
+  width:600px;
+  height:600px;
+
+  top:-250px;
+  right:-180px;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(255,255,255,.28),
+      transparent 68%
+    );
+
+  pointer-events:none;
+
+}
+
+
+/* =====================================================
+   CLOUDS
+===================================================== */
+
+.cloud{
+
+  position:absolute;
+
+  background:
+    rgba(255,255,255,.38);
+
+  border-radius:100px;
+
+  filter:blur(.2px);
+
+  opacity:.85;
+
+  pointer-events:none;
+
+}
+
+
+/* cloud 1 */
+
+.cloud-1{
+
+  width:230px;
+  height:75px;
+
+  left:-70px;
+  bottom:220px;
+
+}
+
+
+.cloud-1::before{
+
+  content:"";
+
+  position:absolute;
+
+  width:105px;
+  height:105px;
+
+  left:35px;
+  bottom:25px;
+
+  background:
+    rgba(255,255,255,.38);
+
+  border-radius:50%;
+
+}
+
+
+.cloud-1::after{
+
+  content:"";
+
+  position:absolute;
+
+  width:90px;
+  height:90px;
+
+  left:115px;
+  bottom:20px;
+
+  background:
+    rgba(255,255,255,.38);
+
+  border-radius:50%;
+
+}
+
+
+/* cloud 2 */
+
+.cloud-2{
+
+  width:260px;
+  height:82px;
+
+  right:-85px;
+  top:105px;
+
+}
+
+
+.cloud-2::before{
+
+  content:"";
+
+  position:absolute;
+
+  width:110px;
+  height:110px;
+
+  left:50px;
+  bottom:20px;
+
+  background:
+    rgba(255,255,255,.38);
+
+  border-radius:50%;
+
+}
+
+
+.cloud-2::after{
+
+  content:"";
+
+  position:absolute;
+
+  width:105px;
+  height:105px;
+
+  right:20px;
+  bottom:15px;
+
+  background:
+    rgba(255,255,255,.38);
+
+  border-radius:50%;
+
+}
+
+
+/* cloud 3 */
+
+.cloud-3{
+
+  width:300px;
+  height:90px;
+
+  right:-90px;
+  bottom:100px;
+
+}
+
+
+.cloud-3::before{
+
+  content:"";
+
+  position:absolute;
+
+  width:120px;
+  height:120px;
+
+  left:50px;
+  bottom:20px;
+
+  background:
+    rgba(255,255,255,.30);
+
+  border-radius:50%;
+
+}
+
+
+.cloud-3::after{
+
+  content:"";
+
+  position:absolute;
+
+  width:100px;
+  height:100px;
+
+  right:45px;
+  bottom:15px;
+
+  background:
+    rgba(255,255,255,.30);
+
+  border-radius:50%;
+
+}
+
+
+/* =====================================================
+   LOGIN WRAPPER
+===================================================== */
+
+.login-wrapper{
+
+  width:100%;
+
+  min-height:100vh;
+
+  display:flex;
+
+  justify-content:center;
+
+  align-items:center;
+
+  padding:25px;
+
+  position:relative;
+
+  z-index:5;
+
+}
+
+
+/* =====================================================
+   LOGIN CARD
+===================================================== */
+
+.login-card{
+
+  width:340px;
+
+  min-height:520px;
+
+  padding:42px 30px 35px;
+
+  border-radius:28px;
+
+  background:
+    rgba(255,255,255,.25);
+
+  border:
+    1px solid
+    rgba(255,255,255,.35);
+
+  box-shadow:
+    0 25px 60px
+    rgba(0,80,130,.18);
+
+  backdrop-filter:
+    blur(12px);
+
+  -webkit-backdrop-filter:
+    blur(12px);
+
+  display:flex;
+
+  flex-direction:column;
+
+  align-items:center;
+
+  position:relative;
+
+}
+
+
+/* =====================================================
+   USER ICON
+===================================================== */
+
+.user-icon{
+
+  width:58px;
+  height:58px;
+
+  position:relative;
+
+  margin-bottom:12px;
+
+}
+
+
+/* head */
+
+.user-icon::before{
+
+  content:"";
+
+  position:absolute;
+
+  width:23px;
+  height:23px;
+
+  background:#075284;
+
+  border-radius:50%;
+
+  left:50%;
+  top:0;
+
+  transform:
+    translateX(-50%);
+
+}
+
+
+/* body */
+
+.user-icon::after{
+
+  content:"";
+
+  position:absolute;
+
+  width:42px;
+  height:28px;
+
+  background:#075284;
+
+  border-radius:
+    25px 25px 10px 10px;
+
+  left:50%;
+  bottom:2px;
+
+  transform:
+    translateX(-50%);
+
+}
+
+
+/* =====================================================
+   TITLE
+===================================================== */
+
+.login-title{
+
+  font-size:25px;
+
+  font-weight:400;
+
+  color:#111827;
+
+  margin-bottom:30px;
+
+  letter-spacing:.2px;
+
+}
+
+
+/* =====================================================
+   FORM
+===================================================== */
+
+.login-form{
+
+  width:100%;
+
+  display:flex;
+
+  flex-direction:column;
+
+  align-items:center;
+
+}
+
+
+/* =====================================================
+   INPUT
+===================================================== */
+
+.input-box{
+
+  width:100%;
+
+  height:48px;
+
+  border:none;
+
+  outline:none;
+
+  border-radius:18px;
+
+  background:
+    rgba(255,255,255,.96);
+
+  color:#222;
+
+  font-size:15px;
+
+  padding:
+    0 17px;
+
+  margin-bottom:14px;
+
+  box-shadow:
+    0 5px 12px
+    rgba(0,0,0,.14);
+
+  transition:.2s;
+
+}
+
+
+.input-box::placeholder{
+
+  color:#999;
+
+}
+
+
+.input-box:focus{
+
+  background:#fff;
+
+  box-shadow:
+    0 0 0 2px
+    rgba(7,82,132,.20),
+    0 7px 15px
+    rgba(0,0,0,.15);
+
+}
+
+
+/* =====================================================
+   DEVICE
+===================================================== */
+
+.device-box{
+
+  width:100%;
+
+  margin-top:2px;
+
+  margin-bottom:17px;
+
+  text-align:center;
+
+  color:#173e57;
+
+  font-size:12px;
+
+  line-height:1.5;
+
+}
+
+
+.device-box span{
+
+  font-weight:600;
+
+}
+
+
+/* =====================================================
+   FORGOT PASSWORD
+===================================================== */
+
+.forgot{
+
+  border:none;
+
+  background:transparent;
+
+  color:#173e57;
+
+  font-size:15px;
+
+  cursor:pointer;
+
+  margin-top:0;
+
+  margin-bottom:30px;
+
+}
+
+
+.forgot:hover{
+
+  text-decoration:underline;
+
+}
+
+
+/* =====================================================
+   LOGIN BUTTON
+===================================================== */
+
+.login-btn{
+
+  width:170px;
+
+  height:52px;
+
+  border:none;
+
+  border-radius:18px;
+
+  background:#075284;
+
+  color:white;
+
+  font-size:21px;
+
+  font-weight:500;
+
+  cursor:pointer;
+
+  box-shadow:
+    0 7px 15px
+    rgba(0,55,90,.25);
+
+  transition:
+    transform .2s,
+    background .2s,
+    box-shadow .2s;
+
+}
+
+
+.login-btn:hover{
+
+  background:#06466f;
+
+  transform:
+    translateY(-2px);
+
+  box-shadow:
+    0 10px 20px
+    rgba(0,55,90,.28);
+
+}
+
+
+.login-btn:active{
+
+  transform:
+    translateY(0);
+
+}
+
+
+.login-btn:disabled{
+
+  cursor:not-allowed;
+
+  opacity:.7;
+
+  transform:none;
+
+}
+
+
+/* =====================================================
+   MESSAGE
+===================================================== */
+
+.message{
+
+  width:100%;
+
+  min-height:22px;
+
+  margin-top:18px;
+
+  text-align:center;
+
+  font-size:13px;
+
+  font-weight:500;
+
+}
+
+
+.message.error{
+
+  color:#b91c1c;
+
+}
+
+
+.message.success{
+
+  color:#047857;
+
+}
+
+
+/* =====================================================
+   LOADING
+===================================================== */
+
+.loader{
+
+  display:inline-block;
+
+  width:16px;
+  height:16px;
+
+  border:
+    2px solid
+    rgba(255,255,255,.45);
+
+  border-top-color:#fff;
+
+  border-radius:50%;
+
+  animation:
+    spin .7s linear infinite;
+
+  vertical-align:middle;
+
+  margin-right:7px;
+
+}
+
+
+@keyframes spin{
+
+  to{
+    transform:rotate(360deg);
+  }
+
+}
+
+
+/* =====================================================
+   FOOTER
+===================================================== */
+
+.login-footer{
+
+  margin-top:auto;
+
+  padding-top:25px;
+
+  color:#27516a;
+
+  font-size:11px;
+
+  text-align:center;
+
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media(max-width:500px){
+
+  .login-wrapper{
+
+    padding:18px;
+
+  }
+
+
+  .login-card{
+
+    width:320px;
+
+    min-height:500px;
+
+    padding:
+      38px 25px 30px;
+
+    border-radius:25px;
+
+  }
+
+
+  .login-title{
+
+    font-size:24px;
+
+  }
+
+
+  .input-box{
+
+    height:47px;
+
+  }
+
+
+  .login-btn{
+
+    width:165px;
+
+    height:50px;
+
+  }
+
+}
+
+
+@media(max-height:650px){
+
+  .login-card{
+
+    min-height:480px;
+
+    padding-top:30px;
+
+    padding-bottom:25px;
+
+  }
+
+
+  .login-title{
+
+    margin-bottom:22px;
+
+  }
+
+
+  .forgot{
+
+    margin-bottom:22px;
+
+  }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     CLOUDS
+===================================================== -->
+
+<div class="cloud cloud-1"></div>
+
+<div class="cloud cloud-2"></div>
+
+<div class="cloud cloud-3"></div>
+
+
+<!-- =====================================================
+     LOGIN
+===================================================== -->
+
+<div class="login-wrapper">
+
+  <div class="login-card">
+
+
+    <!-- USER ICON -->
+
+    <div class="user-icon"></div>
+
+
+    <!-- TITLE -->
+
+    <h1 class="login-title">
+      User Login
+    </h1>
+
+
+    <!-- FORM -->
+
+    <form
+      class="login-form"
+      id="loginForm"
+      onsubmit="loginUser(event)"
+    >
+
+
+      <!-- USERNAME -->
+
+      <input
+        class="input-box"
+        type="text"
+        id="username"
+        placeholder="Username"
+        autocomplete="username"
+        required
+      >
+
+
+      <!-- PASSWORD -->
+
+      <input
+        class="input-box"
+        type="password"
+        id="password"
+        placeholder="Password"
+        autocomplete="current-password"
+        required
+      >
+
+
+      <!-- DEVICE -->
+
+      <div class="device-box">
+
+        💻 Device:
+        <span id="deviceName">
+          Detecting...
+        </span>
+
+      </div>
+
+
+      <!-- FORGOT -->
+
+      <button
+        type="button"
+        class="forgot"
+        onclick="forgotPassword()"
+      >
+        Forgot Password?
+      </button>
+
+
+      <!-- LOGIN -->
+
+      <button
+        type="submit"
+        class="login-btn"
+        id="loginBtn"
+      >
+        Login
+      </button>
+
+
+      <!-- MESSAGE -->
+
+      <div
+        class="message"
+        id="message"
+      ></div>
+
+
+    </form>
+
+
+    <!-- FOOTER -->
+
+    <div class="login-footer">
+
+      Secure User Login System
+
+    </div>
+
+
+  </div>
+
+</div>
+
+
+<script>
+
+/* =====================================================
+   USER API
+===================================================== */
+
+const USER_API_URL =
+"https://script.google.com/macros/s/AKfycbw00GHHheuvtdQtgPURjs4PtsM48-4yaFx-_ms0ZBV5FHhnmcdbJ5DHr3Aix8JPF0kQzA/exec";
+
+
+/* =====================================================
+   PAGE ROUTES
+===================================================== */
+
+const ROUTES = {
+
+  admin:
+    "ad.html",
+
+  support:
+    "2S.html",
+
+  call:
+    "2S.html",
+
+  manager:
+    "ad.html",
+
+  guest:
+    "2S.html"
+
+};
+
+
+/* =====================================================
+   GET DEVICE NAME
+===================================================== */
+
+function getDeviceName(){
+
+  const ua =
+    navigator.userAgent || "";
+
+
+  let device = "Unknown Device";
+
+
+  /* Android */
+
+  if(/Android/i.test(ua)){
+
+    const match =
+      ua.match(
+        /Android[^;)]*(?:;\s*([^;)]+))?/i
+      );
+
+    device =
+      match && match[1]
+        ? match[1].trim()
+        : "Android Device";
+
+  }
+
+
+  /* iPhone */
+
+  else if(/iPhone/i.test(ua)){
+
+    device =
+      "iPhone";
+
+  }
+
+
+  /* iPad */
+
+  else if(/iPad/i.test(ua)){
+
+    device =
+      "iPad";
+
+  }
+
+
+  /* Windows */
+
+  else if(/Windows/i.test(ua)){
+
+    device =
+      "Windows PC";
+
+  }
+
+
+  /* Mac */
+
+  else if(/Macintosh|Mac OS/i.test(ua)){
+
+    device =
+      "Mac";
+
+  }
+
+
+  /* Linux */
+
+  else if(/Linux/i.test(ua)){
+
+    device =
+      "Linux PC";
+
+  }
+
+
+  /* Browser */
+
+  let browser =
+    "Browser";
+
+
+  if(/Edg/i.test(ua)){
+
+    browser =
+      "Microsoft Edge";
+
+  }
+
+  else if(/Chrome/i.test(ua)){
+
+    browser =
+      "Google Chrome";
+
+  }
+
+  else if(/Firefox/i.test(ua)){
+
+    browser =
+      "Mozilla Firefox";
+
+  }
+
+  else if(/Safari/i.test(ua)){
+
+    browser =
+      "Safari";
+
+  }
+
+
+  return device +
+    " • " +
+    browser;
+
+}
+
+
+/* =====================================================
+   SHOW DEVICE
+===================================================== */
+
+document.getElementById(
+  "deviceName"
+).textContent =
+  getDeviceName();
+
+
+/* =====================================================
+   LOGIN
+===================================================== */
+
+async function loginUser(event){
+
+  event.preventDefault();
+
+
+  const username =
+    document.getElementById(
+      "username"
+    ).value.trim();
+
+
+  const password =
+    document.getElementById(
+      "password"
+    ).value.trim();
+
+
+  const loginBtn =
+    document.getElementById(
+      "loginBtn"
+    );
+
+
+  const message =
+    document.getElementById(
+      "message"
+    );
+
+
+  if(!username){
+
+    showMessage(
+      "Please enter username.",
+      "error"
+    );
+
+    return;
+
+  }
+
+
+  if(!password){
+
+    showMessage(
+      "Please enter password.",
+      "error"
+    );
+
+    return;
+
+  }
+
+
+  loginBtn.disabled = true;
+
+
+  loginBtn.innerHTML =
+    '<span class="loader"></span>Login...';
+
+
+  message.className =
+    "message";
+
+
+  message.textContent =
+    "";
+
+
+  try{
+
+
+    const response =
+      await fetch(
+        USER_API_URL +
+        "?action=getUsers&_=" +
+        Date.now(),
+        {
+          method:"GET",
+          cache:"no-store"
+        }
+      );
+
+
+    if(!response.ok){
+
+      throw new Error(
+        "Server error: " +
+        response.status
+      );
+
+    }
+
+
+    const result =
+      await response.json();
+
+
+    if(result.success === false){
+
+      throw new Error(
+        result.message ||
+        "Unable to connect to server."
+      );
+
+    }
+
+
+    const users =
+      Array.isArray(result.users)
+        ? result.users
+        : Array.isArray(result.data)
+          ? result.data
+          : [];
+
+
+    const enteredUsername =
+      username.toLowerCase();
+
+
+    const user =
+      users.find(
+        function(item){
+
+          const u =
+            String(
+              item.username ||
+              item.Username ||
+              ""
+            )
+            .trim()
+            .toLowerCase();
+
+
+          const p =
+            String(
+              item.password ||
+              item.Password ||
+              ""
+            )
+            .trim();
+
+
+          return (
+            u === enteredUsername &&
+            p === password
+          );
+
+        }
+      );
+
+
+    /* =================================================
+       USER NOT FOUND
+    ================================================= */
+
+    if(!user){
+
+      showMessage(
+        "❌ Invalid username or password.",
+        "error"
+      );
+
+      loginBtn.disabled = false;
+
+      loginBtn.textContent =
+        "Login";
+
+      return;
+
+    }
+
+
+    /* =================================================
+       STATUS
+    ================================================= */
+
+    const status =
+      String(
+        user.status ||
+        user.Status ||
+        "Active"
+      )
+      .trim()
+      .toLowerCase();
+
+
+    if(status !== "active"){
+
+      showMessage(
+        "❌ Your account is " +
+        status +
+        ". Please contact administrator.",
+        "error"
+      );
+
+      loginBtn.disabled = false;
+
+      loginBtn.textContent =
+        "Login";
+
+      return;
+
+    }
+
+
+    /* =================================================
+       ROLE
+    ================================================= */
+
+    const role =
+      String(
+        user.role ||
+        user.Role ||
+        ""
+      )
+      .trim()
+      .toLowerCase();
+
+
+    const targetPage =
+      ROUTES[role];
+
+
+    if(!targetPage){
+
+      showMessage(
+        "❌ Your account role is not configured.",
+        "error"
+      );
+
+      loginBtn.disabled = false;
+
+      loginBtn.textContent =
+        "Login";
+
+      return;
+
+    }
+
+
+    /* =================================================
+       SAVE LOGIN SESSION
+    ================================================= */
+
+    const loggedUser = {
+
+      username:
+        user.username ||
+        user.Username ||
+        username,
+
+      name:
+        user.name ||
+        user.Name ||
+        "",
+
+      role:
+        role,
+
+      status:
+        "Active",
+
+      device:
+        getDeviceName(),
+
+      loginTime:
+        new Date().toISOString()
+
+    };
+
+
+    /*
+      Dashboard-এর existing security
+      checkLogin() যেন কাজ করে।
+    */
+
+    localStorage.setItem(
+      "dashboardAuth",
+      "true"
+    );
+
+
+    localStorage.setItem(
+      "username",
+      loggedUser.username
+    );
+
+
+    localStorage.setItem(
+      "userData",
+      JSON.stringify(
+        loggedUser
+      )
+    );
+
+
+    localStorage.setItem(
+      "loginData",
+      JSON.stringify(
+        loggedUser
+      )
+    );
+
+
+    localStorage.setItem(
+      "loggedUser",
+      JSON.stringify(
+        loggedUser
+      )
+    );
+
+
+    localStorage.setItem(
+      "currentUser",
+      JSON.stringify(
+        loggedUser
+      )
+    );
+
+
+    localStorage.setItem(
+      "userInfo",
+      JSON.stringify(
+        loggedUser
+      )
+    );
+
+
+    sessionStorage.setItem(
+      "dashboardAuth",
+      "true"
+    );
+
+
+    showMessage(
+      "✓ Login successful. Opening dashboard...",
+      "success"
+    );
+
+
+    /*
+      একটু delay যাতে success message
+      দেখা যায়।
+    */
+
+    setTimeout(
+      function(){
+
+        window.location.replace(
+          targetPage
+        );
+
+      },
+      500
+    );
+
+
+  }catch(error){
+
+    console.error(
+      "Login Error:",
+      error
+    );
+
+
+    showMessage(
+      "❌ " +
+      (
+        error.message ||
+        "Login failed."
+      ),
+      "error"
+    );
+
+
+    loginBtn.disabled = false;
+
+    loginBtn.textContent =
+      "Login";
+
+  }
+
+}
+
+
+/* =====================================================
+   MESSAGE
+===================================================== */
+
+function showMessage(
+  text,
+  type
+){
+
+  const message =
+    document.getElementById(
+      "message"
+    );
+
+
+  message.textContent =
+    text;
+
+
+  message.className =
+    "message " +
+    (
+      type ||
+      ""
+    );
+
+}
+
+
+/* =====================================================
+   FORGOT PASSWORD
+===================================================== */
+
+function forgotPassword(){
+
+  showMessage(
+    "Please contact your administrator to reset your password.",
+    "error"
+  );
+
+}
+
+
+/* =====================================================
+   ENTER KEY
+===================================================== */
+
+document.getElementById(
+  "username"
+).addEventListener(
+  "keydown",
+  function(event){
+
+    if(event.key === "Enter"){
+
+      document.getElementById(
+        "password"
+      ).focus();
+
+    }
+
+  }
+);
+
+
+/* =====================================================
+   IF ALREADY LOGGED IN
+===================================================== */
+
+window.addEventListener(
+  "pageshow",
+  function(){
+
+    const auth =
+      localStorage.getItem(
+        "dashboardAuth"
+      );
+
+
+    const userData =
+      localStorage.getItem(
+        "userData"
+      );
+
+
+    if(
+      auth === "true" &&
+      userData
+    ){
+
+      try{
+
+        const user =
+          JSON.parse(
+            userData
+          );
+
+
+        const role =
+          String(
+            user.role ||
+            ""
+          )
+          .toLowerCase();
+
+
+        const target =
+          ROUTES[role];
+
+
+        if(target){
+
+          /*
+            Browser Back দিয়ে index এ
+            এলে আবার dashboard-এ পাঠাবে।
+          */
+
+          window.location.replace(
+            target
+          );
+
+        }
+
+      }catch(error){
+
+        console.log(
+          "Session check error",
+          error
+        );
+
+      }
+
+    }
+
+  }
+);
+
+
+/* =====================================================
+   PREVENT BACK AFTER LOGIN
+===================================================== */
+
+history.pushState(
+  null,
+  "",
+  location.href
+);
+
+
+window.addEventListener(
+  "popstate",
+  function(){
+
+    const auth =
+      localStorage.getItem(
+        "dashboardAuth"
+      );
+
+
+    if(auth === "true"){
+
+      history.pushState(
+        null,
+        "",
+        location.href
+      );
+
+    }
+
+  }
+);
+
+</script>
+
+</body>
+
+</html>
