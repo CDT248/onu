@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>S5 - System Waiting</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #0f172a, #1e293b);
+      color: white;
+      padding: 20px;
+    }
+
+    .box {
+      width: 100%;
+      max-width: 500px;
+      padding: 40px 25px;
+      text-align: center;
+      border-radius: 20px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.15);
+      box-shadow: 0 20px 50px rgba(0,0,0,0.35);
+      backdrop-filter: blur(10px);
+    }
+
+    .loader {
+      width: 55px;
+      height: 55px;
+      margin: 0 auto 25px;
+      border: 5px solid rgba(255,255,255,0.2);
+      border-top-color: #38bdf8;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+
+    h1 {
+      font-size: 27px;
+      margin-bottom: 15px;
+      color: #38bdf8;
+    }
+
+    p {
+      font-size: 17px;
+      line-height: 1.7;
+      color: #e2e8f0;
+    }
+
+    .dots::after {
+      content: "";
+      animation: dots 1.5s infinite;
+    }
+
+    .status {
+      margin-top: 25px;
+      font-size: 14px;
+      color: #94a3b8;
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    @keyframes dots {
+      0%   { content: ""; }
+      33%  { content: "."; }
+      66%  { content: ".."; }
+      100% { content: "..."; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="box">
+    <div class="loader"></div>
+
+    <h1>Hello Dear Supporter</h1>
+
+    <p>
+      This system is not working right now.
+      <br>
+      Please wait<span class="dots"></span>
+    </p>
+
+    <div class="status" id="status">
+      System is currently checking...
+    </div>
+  </div>
+
+  <script>
+    const messages = [
+      "System is currently checking...",
+      "Please wait while we fix the issue...",
+      "Support team is working on it...",
+      "System will be available soon..."
+    ];
+
+    let index = 0;
+
+    setInterval(() => {
+      index = (index + 1) % messages.length;
+      document.getElementById("status").textContent = messages[index];
+    }, 3000);
+  </script>
+
+</body>
+</html>
