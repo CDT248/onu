@@ -1,121 +1,1882 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>S5 - System Waiting</title>
 
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+<meta charset="UTF-8">
 
-    body {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: Arial, sans-serif;
-      background: linear-gradient(135deg, #0f172a, #1e293b);
-      color: white;
-      padding: 20px;
-    }
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0"
+>
 
-    .box {
-      width: 100%;
-      max-width: 500px;
-      padding: 40px 25px;
-      text-align: center;
-      border-radius: 20px;
-      background: rgba(255,255,255,0.08);
-      border: 1px solid rgba(255,255,255,0.15);
-      box-shadow: 0 20px 50px rgba(0,0,0,0.35);
-      backdrop-filter: blur(10px);
-    }
+<title>Data Dashboard</title>
 
-    .loader {
-      width: 55px;
-      height: 55px;
-      margin: 0 auto 25px;
-      border: 5px solid rgba(255,255,255,0.2);
-      border-top-color: #38bdf8;
-      border-radius: 50%;
-      animation: spin 1s linear infinite;
-    }
+<link
+  rel="icon"
+  type="image/png"
+  href="https://cdn-icons-png.flaticon.com/128/10552/10552177.png"
+>
 
-    h1 {
-      font-size: 27px;
-      margin-bottom: 15px;
-      color: #38bdf8;
-    }
+<style>
 
-    p {
-      font-size: 17px;
-      line-height: 1.7;
-      color: #e2e8f0;
-    }
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:Arial,Helvetica,sans-serif;
+}
 
-    .dots::after {
-      content: "";
-      animation: dots 1.5s infinite;
-    }
+:root{
+  --bg:#f4f7f6;
+  --card:#ffffff;
+  --text:#1f2937;
+  --muted:#6b7280;
+  --border:#e5e7eb;
+  --input:#ffffff;
+  --thead:#f8fafc;
+  --hover:#fafafa;
 
-    .status {
-      margin-top: 25px;
-      font-size: 14px;
-      color: #94a3b8;
-    }
+  --green:#087f5b;
+  --green-dark:#066b4d;
 
-    @keyframes spin {
-      to {
-        transform: rotate(360deg);
-      }
-    }
+  --blue:#2563eb;
+  --red:#dc2626;
+  --orange:#d97706;
+  --purple:#7c3aed;
 
-    @keyframes dots {
-      0%   { content: ""; }
-      33%  { content: "."; }
-      66%  { content: ".."; }
-      100% { content: "..."; }
-    }
-  </style>
+  --shadow:rgba(0,0,0,.20);
+}
+
+body.dark{
+  --bg:#111827;
+  --card:#1f2937;
+  --text:#f9fafb;
+  --muted:#9ca3af;
+  --border:#374151;
+  --input:#111827;
+  --thead:#172033;
+  --hover:#263244;
+  --shadow:rgba(0,0,0,.50);
+}
+
+body{
+  background:var(--bg);
+  color:var(--text);
+  transition:
+    background .25s,
+    color .25s;
+}
+
+button{
+  border:none;
+  cursor:pointer;
+  transition:.2s;
+}
+
+button:disabled{
+  cursor:not-allowed;
+  opacity:.5;
+}
+
+.header{
+  width:100%;
+  min-height:70px;
+  background:var(--card);
+  border-bottom:1px solid var(--border);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 25px;
+  position:sticky;
+  top:0;
+  z-index:100;
+}
+
+.logo{
+  font-size:22px;
+  font-weight:700;
+  color:var(--green);
+}
+
+.header-right{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.header-user{
+  height:42px;
+  padding:0 14px;
+  border-radius:8px;
+  background:var(--input);
+  border:1px solid var(--border);
+  color:var(--text);
+  display:flex;
+  align-items:center;
+  gap:7px;
+  font-size:13px;
+  font-weight:600;
+  white-space:nowrap;
+}
+
+.header-user .user-icon{
+  font-size:16px;
+}
+
+.header-user span{
+  color:var(--green);
+  max-width:180px;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+
+.btn{
+  padding:11px 17px;
+  border-radius:8px;
+  font-size:14px;
+  font-weight:600;
+}
+
+.btn-primary{
+  background:var(--green);
+  color:#fff;
+}
+
+.btn-primary:hover{
+  background:var(--green-dark);
+}
+
+.btn-refresh,
+.theme-btn,
+.btn-cancel{
+  background:var(--input);
+  color:var(--text);
+  border:1px solid var(--border);
+}
+
+.btn-refresh:hover,
+.theme-btn:hover,
+.btn-cancel:hover{
+  background:var(--hover);
+}
+
+.theme-btn{
+  height:42px;
+  padding:0 14px;
+  border-radius:8px;
+  font-size:13px;
+  font-weight:600;
+}
+
+.btn-logout{
+  background:#dc2626;
+  color:#fff;
+  padding:11px 17px;
+  border-radius:8px;
+  font-size:14px;
+  font-weight:600;
+}
+
+.btn-logout:hover{
+  background:#b91c1c;
+}
+
+/* =========================
+   PROFILE MENU
+========================= */
+
+.profile-wrap{
+  position:relative;
+}
+
+.profile-btn{
+  height:42px;
+  padding:0 13px;
+  border-radius:8px;
+  background:var(--input);
+  color:var(--text);
+  border:1px solid var(--border);
+  display:flex;
+  align-items:center;
+  gap:8px;
+  font-size:13px;
+  font-weight:600;
+}
+
+.profile-btn:hover{
+  background:var(--hover);
+}
+
+.profile-avatar{
+  width:27px;
+  height:27px;
+  border-radius:50%;
+  background:var(--green);
+  color:#fff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:14px;
+}
+
+.profile-arrow{
+  font-size:11px;
+  color:var(--muted);
+}
+
+.profile-menu{
+  position:absolute;
+  right:0;
+  top:50px;
+  width:220px;
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:12px;
+  box-shadow:0 15px 40px var(--shadow);
+  padding:7px;
+  display:none;
+  z-index:1000;
+}
+
+.profile-menu.show{
+  display:block;
+}
+
+.profile-info{
+  padding:12px;
+  border-bottom:1px solid var(--border);
+  margin-bottom:5px;
+}
+
+.profile-info-name{
+  font-size:14px;
+  font-weight:700;
+  color:var(--text);
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+
+.profile-info-label{
+  margin-top:3px;
+  font-size:11px;
+  color:var(--muted);
+}
+
+.profile-menu-item{
+  width:100%;
+  padding:11px 12px;
+  border-radius:8px;
+  background:transparent;
+  color:var(--text);
+  display:flex;
+  align-items:center;
+  gap:10px;
+  text-align:left;
+  font-size:13px;
+  font-weight:600;
+}
+
+.profile-menu-item:hover{
+  background:var(--hover);
+}
+
+.profile-menu-item.logout-item{
+  color:#dc2626;
+}
+
+.profile-menu-item.logout-item:hover{
+  background:#fef2f2;
+}
+
+body.dark .profile-menu-item.logout-item:hover{
+  background:#3a2020;
+}
+
+/* =========================
+   MAIN
+========================= */
+
+.container{
+  width:100%;
+  max-width:1500px;
+  margin:auto;
+  padding:25px;
+}
+
+.top-section{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:15px;
+  margin-bottom:20px;
+}
+
+.title h1{
+  font-size:27px;
+  margin-bottom:5px;
+}
+
+.title p{
+  color:var(--muted);
+  font-size:14px;
+}
+
+.filter-box{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:12px;
+  padding:18px;
+  margin-bottom:20px;
+}
+
+.filters{
+  display:grid;
+  grid-template-columns:1fr auto;
+  gap:12px;
+  align-items:end;
+}
+
+.field{
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+}
+
+.field label{
+  font-size:12px;
+  font-weight:600;
+  color:var(--muted);
+}
+
+.field input,
+.field select{
+  width:100%;
+  height:42px;
+  border:1px solid var(--border);
+  border-radius:8px;
+  padding:0 12px;
+  outline:none;
+  background:var(--input);
+  color:var(--text);
+  font-size:14px;
+}
+
+.field input:focus,
+.field select:focus{
+  border-color:var(--green);
+}
+
+.table-box{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:12px;
+  overflow:hidden;
+}
+
+.table-header{
+  padding:16px 18px;
+  border-bottom:1px solid var(--border);
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.table-header h2{
+  font-size:17px;
+}
+
+.total-count{
+  font-size:13px;
+  color:var(--muted);
+}
+
+.table-wrapper{
+  width:100%;
+  overflow-x:auto;
+}
+
+table{
+  width:100%;
+  border-collapse:collapse;
+  min-width:700px;
+}
+
+th{
+  background:var(--thead);
+  padding:14px;
+  text-align:left;
+  font-size:12px;
+  color:var(--muted);
+  white-space:nowrap;
+  border-bottom:1px solid var(--border);
+}
+
+td{
+  padding:14px;
+  border-bottom:1px solid var(--border);
+  font-size:13px;
+  white-space:nowrap;
+}
+
+tr:hover td{
+  background:var(--hover);
+}
+
+.date-cell{
+  color:var(--muted);
+  font-weight:500;
+}
+
+.actions{
+  display:flex;
+  gap:7px;
+  align-items:center;
+}
+
+.btn-sell{
+  padding:7px 11px;
+  border-radius:6px;
+  font-size:13px;
+  font-weight:600;
+  background:#fff7ed;
+  color:#d97706;
+}
+
+.btn-sell:hover{
+  background:#ffedd5;
+}
+
+.pagination-box{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:15px 18px;
+  border-top:1px solid var(--border);
+}
+
+.page-info{
+  font-size:13px;
+  color:var(--muted);
+}
+
+.pagination{
+  display:flex;
+  gap:5px;
+  flex-wrap:wrap;
+}
+
+.page-btn{
+  min-width:35px;
+  height:35px;
+  border:1px solid var(--border);
+  background:var(--input);
+  color:var(--text);
+  border-radius:6px;
+  font-size:13px;
+}
+
+.page-btn:hover{
+  background:var(--hover);
+}
+
+.page-btn.active{
+  background:var(--green);
+  color:#fff;
+  border-color:var(--green);
+}
+
+/* =========================
+   MODAL
+========================= */
+
+.modal{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.55);
+  display:none;
+  justify-content:center;
+  align-items:center;
+  padding:20px;
+  z-index:999;
+}
+
+.modal.show{
+  display:flex;
+}
+
+.modal-box{
+  width:100%;
+  max-width:700px;
+  max-height:95vh;
+  overflow-y:auto;
+  background:var(--card);
+  color:var(--text);
+  border-radius:16px;
+  box-shadow:0 20px 60px var(--shadow);
+}
+
+.modal-header{
+  padding:20px 24px;
+  border-bottom:1px solid var(--border);
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  position:sticky;
+  top:0;
+  background:var(--card);
+  z-index:2;
+}
+
+.modal-header h2{
+  font-size:20px;
+}
+
+.close-btn{
+  width:36px;
+  height:36px;
+  border-radius:50%;
+  background:var(--input);
+  border:1px solid var(--border);
+  font-size:22px;
+  color:var(--text);
+}
+
+.close-btn:hover{
+  background:var(--hover);
+}
+
+.form{
+  padding:30px 25px;
+}
+
+.form-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:22px 18px;
+}
+
+.form-group{
+  display:flex;
+  flex-direction:column;
+  gap:9px;
+}
+
+.form-group.full{
+  grid-column:1 / -1;
+}
+
+.form-group label{
+  font-size:13px;
+  font-weight:600;
+}
+
+.form-group input,
+.form-group textarea{
+  width:100%;
+  border:1px solid var(--border);
+  border-radius:9px;
+  padding:13px 14px;
+  outline:none;
+  font-size:14px;
+  background:var(--input);
+  color:var(--text);
+}
+
+.form-group input{
+  height:48px;
+}
+
+.form-group textarea{
+  min-height:150px;
+  resize:vertical;
+}
+
+.form-group input:focus,
+.form-group textarea:focus{
+  border-color:var(--green);
+}
+
+.form-group input[readonly]{
+  background:var(--thead);
+  color:var(--muted);
+  cursor:not-allowed;
+}
+
+.form-footer{
+  display:flex;
+  justify-content:flex-end;
+  gap:10px;
+  padding-top:30px;
+}
+
+/* Change Password */
+
+.password-modal-box{
+  max-width:460px;
+}
+
+.password-form{
+  padding:25px;
+}
+
+.password-note{
+  background:var(--thead);
+  border:1px solid var(--border);
+  border-radius:9px;
+  padding:12px;
+  margin-bottom:18px;
+  color:var(--muted);
+  font-size:12px;
+  line-height:1.5;
+}
+
+.password-field{
+  margin-bottom:17px;
+}
+
+.password-field label{
+  display:block;
+  font-size:13px;
+  font-weight:600;
+  margin-bottom:8px;
+}
+
+.password-field input{
+  width:100%;
+  height:46px;
+  border:1px solid var(--border);
+  border-radius:8px;
+  padding:0 13px;
+  outline:none;
+  background:var(--input);
+  color:var(--text);
+  font-size:14px;
+}
+
+.password-field input:focus{
+  border-color:var(--green);
+}
+
+.loading{
+  text-align:center;
+  padding:45px 20px;
+  color:var(--muted);
+}
+
+.empty{
+  text-align:center;
+  padding:55px 20px;
+  color:var(--muted);
+}
+
+.toast{
+  position:fixed;
+  right:25px;
+  bottom:25px;
+  min-width:260px;
+  padding:14px 17px;
+  border-radius:9px;
+  color:#fff;
+  background:#111827;
+  box-shadow:0 10px 30px rgba(0,0,0,.2);
+  transform:translateY(100px);
+  opacity:0;
+  transition:.3s;
+  z-index:3000;
+  font-size:14px;
+}
+
+.toast.show{
+  transform:translateY(0);
+  opacity:1;
+}
+
+.toast.success{
+  background:#087f5b;
+}
+
+.toast.error{
+  background:#dc2626;
+}
+
+@media(max-width:900px){
+
+  .top-section{
+    align-items:flex-start;
+    flex-direction:column;
+  }
+
+}
+
+@media(max-width:600px){
+
+  .header{
+    min-height:70px;
+    padding:12px 15px;
+    gap:10px;
+    flex-wrap:wrap;
+  }
+
+  .logo{
+    font-size:18px;
+  }
+
+  .header-right{
+    gap:6px;
+    width:100%;
+    justify-content:flex-end;
+    flex-wrap:wrap;
+  }
+
+  .header-user{
+    height:38px;
+    padding:0 10px;
+    font-size:12px;
+  }
+
+  .header-user span{
+    max-width:100px;
+  }
+
+  .header-right .btn,
+  .theme-btn{
+    padding:9px 10px;
+    font-size:12px;
+    height:38px;
+  }
+
+  .btn-logout{
+    padding:9px 10px;
+    font-size:12px;
+  }
+
+  .profile-btn{
+    height:38px;
+    padding:0 9px;
+    font-size:12px;
+  }
+
+  .profile-menu{
+    top:45px;
+    right:0;
+    width:205px;
+  }
+
+  .container{
+    padding:15px;
+  }
+
+  .filters{
+    grid-template-columns:1fr;
+  }
+
+  .form-grid{
+    grid-template-columns:1fr;
+  }
+
+  .form-group.full{
+    grid-column:auto;
+  }
+
+  .form{
+    padding:25px 18px;
+  }
+
+  .modal{
+    padding:10px;
+  }
+
+  .modal-box{
+    max-height:96vh;
+    border-radius:13px;
+  }
+
+  .pagination-box{
+    flex-direction:column;
+    gap:12px;
+  }
+
+  .toast{
+    left:15px;
+    right:15px;
+    min-width:auto;
+  }
+
+}
+
+</style>
+
 </head>
 
 <body>
 
-  <div class="box">
-    <div class="loader"></div>
+<header class="header">
 
-    <h1>Hello Dear Supporter</h1>
-
-    <p>
-      This system is not working right now.
-      <br>
-      Please wait<span class="dots"></span>
-    </p>
-
-    <div class="status" id="status">
-      System is currently checking...
-    </div>
+  <div class="logo">
+    Data DASHBOARD
   </div>
 
-  <script>
-    const messages = [
-      "System is currently checking...",
-      "Please wait while we fix the issue...",
-      "Support team is working on it...",
-      "System will be available soon..."
-    ];
+  <div class="header-right">
 
-    let index = 0;
+    <!-- USERNAME -->
+    <div
+      class="header-user"
+      id="headerUser"
+      title="Logged in user"
+    >
 
-    setInterval(() => {
-      index = (index + 1) % messages.length;
-      document.getElementById("status").textContent = messages[index];
-    }, 3000);
-  </script>
+      <span class="user-icon">
+        👤
+      </span>
 
-</body>
-</html>
+      <span id="usernameDisplay">
+        User
+      </span>
+
+    </div>
+
+    <button
+      class="theme-btn"
+      id="themeBtn"
+      onclick="toggleTheme()"
+    >
+      🌙 Dark
+    </button>
+
+    <button
+      class="btn btn-refresh"
+      id="refreshBtn"
+      onclick="loadData()"
+    >
+      🔄 Refresh
+    </button>
+
+    <button
+      class="btn btn-primary"
+      onclick="openEntryModal()"
+    >
+      ➕ New Entry
+    </button>
+
+    <!-- PROFILE -->
+    <div class="profile-wrap">
+
+      <button
+        class="profile-btn"
+        id="profileBtn"
+        onclick="toggleProfileMenu(event)"
+      >
+
+        <span class="profile-avatar">
+          👤
+        </span>
+
+        <span>
+          Profile
+        </span>
+
+        <span class="profile-arrow">
+          ▼
+        </span>
+
+      </button>
+
+      <div
+        class="profile-menu"
+        id="profileMenu"
+      >
+
+        <div class="profile-info">
+
+          <div
+            class="profile-info-name"
+            id="profileUsername"
+          >
+            User
+          </div>
+
+          <div class="profile-info-label">
+            Logged in account
+          </div>
+
+        </div>
+
+        <button
+          class="profile-menu-item"
+          onclick="openPasswordModal()"
+        >
+          🔑
+          <span>
+            Change Password
+          </span>
+        </button>
+
+        <button
+          class="profile-menu-item logout-item"
+          onclick="logoutUser()"
+        >
+          🚪
+          <span>
+            Logout
+          </span>
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</header>
+
+<main class="container">
+
+  <div class="top-section">
+
+    <div class="title">
+
+      <h1>
+        Data Dashboard
+      </h1>
+
+      <p>
+        Manage your Data entries
+      </p>
+
+    </div>
+
+  </div>
+
+  <section class="filter-box">
+
+    <div class="filters">
+
+      <div class="field search-field">
+
+        <label>
+          🔍 Search
+        </label>
+
+        <input
+          type="text"
+          id="searchInput"
+          placeholder="Search Name, IP or Work..."
+          oninput="applyFilters()"
+        >
+
+      </div>
+
+      <button
+        class="btn btn-refresh"
+        onclick="clearFilters()"
+      >
+        Clear
+      </button>
+
+    </div>
+
+  </section>
+
+  <section class="table-box">
+
+    <div class="table-header">
+
+      <h2>
+        All Entries
+      </h2>
+
+      <div class="total-count">
+
+        Total:
+        <strong id="totalCount">
+          0
+        </strong>
+
+      </div>
+
+    </div>
+
+    <div class="table-wrapper">
+
+      <table>
+
+        <thead>
+
+          <tr>
+
+            <th>
+              Name
+            </th>
+
+            <th>
+              IP
+            </th>
+
+            <th>
+              Work
+            </th>
+
+            <th>
+              Date
+            </th>
+
+            <th>
+              Action
+            </th>
+
+          </tr>
+
+        </thead>
+
+        <tbody id="tableBody">
+
+          <tr>
+
+            <td colspan="5">
+
+              <div class="loading">
+                Loading data...
+              </div>
+
+            </td>
+
+          </tr>
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+    <div class="pagination-box">
+
+      <div
+        class="page-info"
+        id="pageInfo"
+      >
+        Page 1
+      </div>
+
+      <div
+        class="pagination"
+        id="pagination"
+      ></div>
+
+    </div>
+
+  </section>
+
+</main>
+
+<!-- NEW ENTRY MODAL -->
+
+<div
+  class="modal"
+  id="entryModal"
+>
+
+  <div class="modal-box">
+
+    <div class="modal-header">
+
+      <h2>
+        New Entry
+      </h2>
+
+      <button
+        class="close-btn"
+        onclick="closeEntryModal()"
+      >
+        ×
+      </button>
+
+    </div>
+
+    <form
+      class="form"
+      id="entryForm"
+      onsubmit="submitEntry(event)"
+    >
+
+      <div class="form-grid">
+
+        <div class="form-group">
+
+          <label>
+            Username
+          </label>
+
+          <input
+            type="text"
+            id="nameInput"
+            readonly
+          >
+
+        </div>
+
+        <div class="form-group">
+
+          <label>
+            IP
+          </label>
+
+          <input
+            type="text"
+            id="ipInput"
+            placeholder="Enter IP"
+            autocomplete="off"
+            required
+          >
+
+        </div>
+
+        <div class="form-group full">
+
+          <label>
+            Work
+          </label>
+
+          <textarea
+            id="workInput"
+            placeholder="Enter work"
+            required
+          ></textarea>
+
+        </div>
+
+        <div class="form-group">
+
+          <label>
+            Date
+          </label>
+
+          <input
+            type="text"
+            id="dateInput"
+            readonly
+          >
+
+        </div>
+
+      </div>
+
+      <div class="form-footer">
+
+        <button
+          type="button"
+          class="btn btn-cancel"
+          onclick="closeEntryModal()"
+        >
+          Cancel
+        </button>
+
+        <button
+          type="submit"
+          class="btn btn-primary"
+          id="submitBtn"
+        >
+          Save Entry
+        </button>
+
+      </div>
+
+    </form>
+
+  </div>
+
+</div>
+
+<!-- CHANGE PASSWORD MODAL -->
+
+<div
+  class="modal"
+  id="passwordModal"
+>
+
+  <div class="modal-box password-modal-box">
+
+    <div class="modal-header">
+
+      <h2>
+        Change Password
+      </h2>
+
+      <button
+        class="close-btn"
+        onclick="closePasswordModal()"
+      >
+        ×
+      </button>
+
+    </div>
+
+    <form
+      class="password-form"
+      id="passwordForm"
+      onsubmit="changePassword(event)"
+    >
+
+      <div class="password-note">
+
+        Change the password for your current account.
+        Make sure your new password is secure.
+
+      </div>
+
+      <div class="password-field">
+
+        <label>
+          Username
+        </label>
+
+        <input
+          type="text"
+          id="passwordUsername"
+          readonly
+        >
+
+      </div>
+
+      <div class="password-field">
+
+        <label>
+          Current Password
+        </label>
+
+        <input
+          type="password"
+          id="currentPassword"
+          placeholder="Enter current password"
+          autocomplete="current-password"
+          required
+        >
+
+      </div>
+
+      <div class="password-field">
+
+        <label>
+          New Password
+        </label>
+
+        <input
+          type="password"
+          id="newPassword"
+          placeholder="Enter new password"
+          autocomplete="new-password"
+          minlength="4"
+          required
+        >
+
+      </div>
+
+      <div class="password-field">
+
+        <label>
+          Confirm New Password
+        </label>
+
+        <input
+          type="password"
+          id="confirmPassword"
+          placeholder="Confirm new password"
+          autocomplete="new-password"
+          minlength="4"
+          required
+        >
+
+      </div>
+
+      <div class="form-footer">
+
+        <button
+          type="button"
+          class="btn btn-cancel"
+          onclick="closePasswordModal()"
+        >
+          Cancel
+        </button>
+
+        <button
+          type="submit"
+          class="btn btn-primary"
+          id="changePasswordBtn"
+        >
+          Change Password
+        </button>
+
+      </div>
+
+    </form>
+
+  </div>
+
+</div>
+
+<div
+  class="toast"
+  id="toast"
+></div>
+
+<script>
+
+const API_URL =
+"https://script.google.com/macros/s/AKfycbx6fo2Nogf3ETCtS_B-o0HCFqEs3vYkJ9IT9uu_-3l1w8fNJw77mZipeyFm-zZcjUw-5Q/exec";
+
+const LOGIN_PAGE =
+"index.html";
+
+const ROWS_PER_PAGE =
+10;
+
+const SESSION_TIMEOUT =
+5 * 60 * 1000;
+
+let inactivityTimer =
+null;
+
+let allData = [];
+
+let filteredData = [];
+
+let currentPage = 1;
+
+/* =========================
+   USER
+========================= */
+
+function getLoggedInUsername(){
+
+  const keys = [
+    "username",
+    "Username",
+    "user",
+    "userData",
+    "loginData",
+    "loggedUser",
+    "currentUser",
+    "userInfo"
+  ];
+
+  for(
+    const key of keys
+  ){
+
+    const value =
+      localStorage.getItem(key);
+
+    if(!value){
+      continue;
+    }
+
+    try{
+
+      const parsed =
+        JSON.parse(value);
+
+      if(
+        parsed &&
+        typeof parsed === "object"
+      ){
+
+        const username =
+          parsed.username ||
+          parsed.Username ||
+          parsed.userName ||
+          parsed.name ||
+          parsed.user;
+
+        if(username){
+
+          return String(
+            username
+          ).trim();
+
+        }
+
+      }
+
+    }catch(error){
+
+      return String(
+        value
+      ).trim();
+
+    }
+
+  }
+
+  return "";
+
+}
+
+function showLoggedInUsername(){
+
+  const username =
+    getLoggedInUsername();
+
+  const display =
+    document.getElementById(
+      "usernameDisplay"
+    );
+
+  const profileUsername =
+    document.getElementById(
+      "profileUsername"
+    );
+
+  if(display){
+
+    display.textContent =
+      username || "User";
+
+  }
+
+  if(profileUsername){
+
+    profileUsername.textContent =
+      username || "User";
+
+  }
+
+}
+
+function checkLogin(){
+
+  const username =
+    getLoggedInUsername();
+
+  if(!username){
+
+    window.location.replace(
+      LOGIN_PAGE
+    );
+
+    return false;
+
+  }
+
+  showLoggedInUsername();
+
+  return true;
+
+}
+
+/* =========================
+   PROFILE MENU
+========================= */
+
+function toggleProfileMenu(event){
+
+  if(event){
+
+    event.stopPropagation();
+
+  }
+
+  const menu =
+    document.getElementById(
+      "profileMenu"
+    );
+
+  if(!menu){
+
+    return;
+
+  }
+
+  menu.classList.toggle(
+    "show"
+  );
+
+}
+
+function closeProfileMenu(){
+
+  const menu =
+    document.getElementById(
+      "profileMenu"
+    );
+
+  if(menu){
+
+    menu.classList.remove(
+      "show"
+    );
+
+  }
+
+}
+
+/* Close profile menu when clicking outside */
+
+document.addEventListener(
+  "click",
+  function(event){
+
+    const profileWrap =
+      document.querySelector(
+        ".profile-wrap"
+      );
+
+    if(
+      profileWrap &&
+      !profileWrap.contains(event.target)
+    ){
+
+      closeProfileMenu();
+
+    }
+
+  }
+);
+
+/* =========================
+   LOGOUT
+========================= */
+
+function logoutUser(){
+
+  try{
+
+    const savedTheme =
+      localStorage.getItem(
+        "dashboardTheme"
+      );
+
+    localStorage.clear();
+
+    if(savedTheme){
+
+      localStorage.setItem(
+        "dashboardTheme",
+        savedTheme
+      );
+
+    }
+
+    sessionStorage.clear();
+
+    clearTimeout(
+      inactivityTimer
+    );
+
+    window.location.replace(
+      LOGIN_PAGE
+    );
+
+  }catch(error){
+
+    console.error(
+      "Logout Error:",
+      error
+    );
+
+    window.location.href =
+      LOGIN_PAGE;
+
+  }
+
+}
+
+/* =========================
+   SESSION
+========================= */
+
+function resetInactivityTimer(){
+
+  clearTimeout(
+    inactivityTimer
+  );
+
+  inactivityTimer =
+    setTimeout(
+      function(){
+
+        showToast(
+          "Session expired. Please login again.",
+          "error"
+        );
+
+        setTimeout(
+          function(){
+
+            logoutUser();
+
+          },
+          500
+        );
+
+      },
+      SESSION_TIMEOUT
+    );
+
+}
+
+function startActivityMonitor(){
+
+  const events = [
+    "click",
+    "mousemove",
+    "mousedown",
+    "keydown",
+    "scroll",
+    "touchstart",
+    "input"
+  ];
+
+  events.forEach(
+    function(eventName){
+
+      document.addEventListener(
+        eventName,
+        resetInactivityTimer,
+        {
+          passive:true
+        }
+      );
+
+    }
+  );
+
+  resetInactivityTimer();
+
+}
+
+/* =========================
+   THEME
+========================= */
+
+function loadTheme(){
+
+  const saved =
+    localStorage.getItem(
+      "dashboardTheme"
+    );
+
+  if(saved === "dark"){
+
+    document.body.classList.add(
+      "dark"
+    );
+
+  }else{
+
+    document.body.classList.remove(
+      "dark"
+    );
+
+  }
+
+  updateThemeButton();
+
+}
+
+function toggleTheme(){
+
+  document.body.classList.toggle(
+    "dark"
+  );
+
+  const dark =
+    document.body.classList.contains(
+      "dark"
+    );
+
+  localStorage.setItem(
+    "dashboardTheme",
+    dark
+      ? "dark"
+      : "light"
+  );
+
+  updateThemeButton();
+
+}
+
+function updateThemeButton(){
+
+  const btn =
+    document.getElementById(
+      "themeBtn"
+    );
+
+  if(!btn){
+    return;
+  }
+
+  if(
+    document.body.classList.contains(
+      "dark"
+    )
+  ){
+
+    btn.textContent =
+      "☀️ White";
+
+  }else{
+
+    btn.textContent =
+      "🌙 Dark";
+
+  }
+
+}
+
+/* =========================
+   LOAD DATA
+========================= */
+
+async function loadData(){
+
+  if(!checkLogin()){
+    return;
+  }
+
+  const btn =
+    document.getElementById(
+      "refreshBtn"
+    );
+
+  btn.disabled =
+    true;
+
+  btn.textContent =
+    "⏳ Loading...";
+
+  showLoading();
+
+  try{
+
+    const response =
+      await fetch(
+
+        API_URL +
+        "?action=getData&_=" +
+        Date.now(),
+
+        {
+          method:"GET",
+          cache:"no-store"
+        }
+
+      );
+
+    if(!response.ok){
+
+      throw new Error(
+        "Server error: " +
+        response.status
+      );
+
+    }
+
+    const result =
+      await response.json();
+
+    if(
+      result.success === false
+    ){
+
+      throw new Error(
+        result.message ||
+        "Failed to load data."
+      );
+
+    }
+
+    if(
+      !Array.isArray(
+        result.data
+      )
+    ){
+
+      throw new Error(
+        "Invalid data received."
+      );
+
+    }
+
+    allData =
+      result.data;
+
+    filteredData =
+      [...allData];
+
+    currentPage =
+      1;
+
+    renderTable();
+
+    updateTotal();
+
+  }catch(error){
+
+    console.error(
+      "Load Error:",
+      error
+    );
+
+    showError(
+      error.message ||
+      "Failed to load data."
+    );
+
+    showToast(
+      error.message ||
+      "Data loading failed.",
+      "error"
+    );
+
+  }finally{
+
+    btn.disabled =
+      false;
+
+    btn.textContent =
+      "🔄 Refresh";
+
+  }
+
+}
+
+/* =========================
+   TABLE
+========================= */
+
+function renderTable(){
+
+  const tbody =
+    document.getElementById(
+      "tableBody"
+    );
+
+  if(
+    filteredData.length === 0
+  ){
+
+    tbody.innerHTML = `
+
+      <tr>
+
+        <td colspan="5">
+
+          <div class="empty">
+            No data found.
+          </div>
+
+        </td>
+
+      </tr>
+
+    `;
+
+    renderPagination();
+
+    return;
+
+  }
+
+  const
