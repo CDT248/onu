@@ -721,7 +721,9 @@ body::before{
 
 </head>
 
+
 <body>
+
 
 <div class="cloud cloud-1"></div>
 
@@ -729,21 +731,25 @@ body::before{
 
 <div class="cloud cloud-3"></div>
 
+
 <div class="login-wrapper">
 
   <div class="login-card">
 
+
     <div class="user-icon"></div>
+
 
     <h1 class="login-title">
       User Login
     </h1>
 
+
     <form
       class="login-form"
       id="loginForm"
-      onsubmit="loginUser(event)"
     >
+
 
       <input
         class="input-box"
@@ -754,6 +760,7 @@ body::before{
         required
       >
 
+
       <input
         class="input-box"
         type="password"
@@ -762,6 +769,7 @@ body::before{
         autocomplete="current-password"
         required
       >
+
 
       <div class="device-box">
 
@@ -772,13 +780,15 @@ body::before{
 
       </div>
 
+
       <button
         type="button"
         class="forgot"
-        onclick="forgotPassword()"
+        id="forgotBtn"
       >
         Forgot Password?
       </button>
+
 
       <button
         type="submit"
@@ -788,29 +798,38 @@ body::before{
         Login
       </button>
 
+
       <div
         class="message"
         id="message"
       ></div>
 
+
     </form>
+
 
     <div class="login-footer">
       Secure User Login System
     </div>
 
+
   </div>
 
 </div>
 
+
 <script>
 
 /* =====================================================
-   GOOGLE APPS SCRIPT API
+   API URL
+   =====================================================
+
+   Apps Script Web App-এর URL automatically পাওয়া যাবে.
+   তাই আলাদা করে URL বসাতে হবে না.
 ===================================================== */
 
 const USER_API_URL =
-"https://script.google.com/macros/s/AKfycbw00GHHheuvtdQtgPURjs4PtsM48-4yaFx-_ms0ZBV5FHhnmcdbJ5DHr3Aix8JPF0kQzA/exec";
+  window.location.href.split("?")[0];
 
 
 /* =====================================================
@@ -819,11 +838,14 @@ const USER_API_URL =
 
 const ROUTES = {
 
-  admin: "ad.html",
+  admin:
+    "ad.html",
 
-  support: "2S.html",
+  support:
+    "2S.html",
 
-  call: "2S.html"
+  call:
+    "2S.html"
 
 };
 
@@ -840,82 +862,148 @@ function getDeviceName(){
   let device =
     "Unknown Device";
 
-  if(/Android/i.test(ua)){
+
+  if (/Android/i.test(ua)) {
 
     device =
       "Android Device";
 
   }
-  else if(/iPhone/i.test(ua)){
+
+  else if (/iPhone/i.test(ua)) {
 
     device =
       "iPhone";
 
   }
-  else if(/iPad/i.test(ua)){
+
+  else if (/iPad/i.test(ua)) {
 
     device =
       "iPad";
 
   }
-  else if(/Windows/i.test(ua)){
+
+  else if (/Windows/i.test(ua)) {
 
     device =
       "Windows PC";
 
   }
-  else if(/Macintosh|Mac OS/i.test(ua)){
+
+  else if (
+    /Macintosh|Mac OS/i.test(ua)
+  ) {
 
     device =
       "Mac";
 
   }
-  else if(/Linux/i.test(ua)){
+
+  else if (/Linux/i.test(ua)) {
 
     device =
       "Linux PC";
 
   }
 
+
   let browser =
     "Browser";
 
-  if(/Edg/i.test(ua)){
+
+  if (/Edg/i.test(ua)) {
 
     browser =
       "Microsoft Edge";
 
   }
-  else if(/Chrome/i.test(ua)){
+
+  else if (/Chrome/i.test(ua)) {
 
     browser =
       "Google Chrome";
 
   }
-  else if(/Firefox/i.test(ua)){
+
+  else if (/Firefox/i.test(ua)) {
 
     browser =
       "Mozilla Firefox";
 
   }
-  else if(/Safari/i.test(ua)){
+
+  else if (/Safari/i.test(ua)) {
 
     browser =
       "Safari";
 
   }
 
-  return device +
+
+  return (
+    device +
     " • " +
-    browser;
+    browser
+  );
 
 }
 
 
-document.getElementById(
-  "deviceName"
-).textContent =
+document
+  .getElementById("deviceName")
+  .textContent =
   getDeviceName();
+
+
+/* =====================================================
+   SHOW MESSAGE
+===================================================== */
+
+function showMessage(
+  text,
+  type
+){
+
+  const message =
+    document.getElementById(
+      "message"
+    );
+
+
+  message.textContent =
+    text;
+
+
+  message.className =
+    "message " +
+    (
+      type || ""
+    );
+
+}
+
+
+/* =====================================================
+   RESET BUTTON
+===================================================== */
+
+function resetLoginButton(){
+
+  const loginBtn =
+    document.getElementById(
+      "loginBtn"
+    );
+
+
+  loginBtn.disabled =
+    false;
+
+
+  loginBtn.innerHTML =
+    "Login";
+
+}
 
 
 /* =====================================================
@@ -926,22 +1014,27 @@ async function loginUser(event){
 
   event.preventDefault();
 
+
   const username =
     document
       .getElementById("username")
       .value
       .trim();
 
+
   const password =
     document
       .getElementById("password")
       .value;
 
+
   const loginBtn =
-    document.getElementById("loginBtn");
+    document.getElementById(
+      "loginBtn"
+    );
 
 
-  if(!username){
+  if (!username) {
 
     showMessage(
       "Please enter username.",
@@ -953,7 +1046,7 @@ async function loginUser(event){
   }
 
 
-  if(!password){
+  if (!password) {
 
     showMessage(
       "Please enter password.",
@@ -968,13 +1061,23 @@ async function loginUser(event){
   loginBtn.disabled =
     true;
 
+
   loginBtn.innerHTML =
     '<span class="loader"></span>Login...';
 
-  showMessage("", "");
+
+  showMessage(
+    "",
+    ""
+  );
 
 
-  try{
+  try {
+
+
+    /* ================================================
+       CREATE LOGIN API URL
+    ================================================ */
 
     const url =
       USER_API_URL +
@@ -987,18 +1090,22 @@ async function loginUser(event){
       Date.now();
 
 
+    /* ================================================
+       API REQUEST
+    ================================================ */
+
     const response =
       await fetch(
         url,
         {
           method: "GET",
-          cache: "no-store",
-          redirect: "follow"
+          redirect: "follow",
+          cache: "no-store"
         }
       );
 
 
-    if(!response.ok){
+    if (!response.ok) {
 
       throw new Error(
         "Server error: " +
@@ -1008,14 +1115,28 @@ async function loginUser(event){
     }
 
 
+    /* ================================================
+       JSON
+    ================================================ */
+
     const result =
       await response.json();
 
 
-    if(
+    console.log(
+      "Login response:",
+      result
+    );
+
+
+    /* ================================================
+       LOGIN FAILED
+    ================================================ */
+
+    if (
       !result ||
       result.success !== true
-    ){
+    ) {
 
       showMessage(
         "❌ " +
@@ -1028,12 +1149,17 @@ async function loginUser(event){
         "error"
       );
 
+
       resetLoginButton();
 
       return;
 
     }
 
+
+    /* ================================================
+       ROLE
+    ================================================ */
 
     const role =
       String(
@@ -1047,12 +1173,13 @@ async function loginUser(event){
       ROUTES[role];
 
 
-    if(!targetPage){
+    if (!targetPage) {
 
       showMessage(
         "❌ Your account role is not configured.",
         "error"
       );
+
 
       resetLoginButton();
 
@@ -1060,6 +1187,10 @@ async function loginUser(event){
 
     }
 
+
+    /* ================================================
+       USER DATA
+    ================================================ */
 
     const loggedUser = {
 
@@ -1076,7 +1207,7 @@ async function loginUser(event){
 
       status:
         result.status ||
-        "Active",
+        "active",
 
       picture:
         result.picture ||
@@ -1095,44 +1226,61 @@ async function loginUser(event){
     };
 
 
-    /*
-     * SAVE LOGIN SESSION
-     */
+    /* ================================================
+       SAVE SESSION
+    ================================================ */
 
     localStorage.setItem(
       "dashboardAuth",
       "true"
     );
 
+
     localStorage.setItem(
       "username",
       loggedUser.username
     );
 
+
     localStorage.setItem(
       "userData",
-      JSON.stringify(loggedUser)
+      JSON.stringify(
+        loggedUser
+      )
     );
+
 
     localStorage.setItem(
       "loginData",
-      JSON.stringify(loggedUser)
+      JSON.stringify(
+        loggedUser
+      )
     );
+
 
     localStorage.setItem(
       "loggedUser",
-      JSON.stringify(loggedUser)
+      JSON.stringify(
+        loggedUser
+      )
     );
+
 
     localStorage.setItem(
       "currentUser",
-      JSON.stringify(loggedUser)
+      JSON.stringify(
+        loggedUser
+      )
     );
+
 
     localStorage.setItem(
       "userInfo",
-      JSON.stringify(loggedUser)
+      JSON.stringify(
+        loggedUser
+      )
     );
+
 
     sessionStorage.setItem(
       "dashboardAuth",
@@ -1140,33 +1288,46 @@ async function loginUser(event){
     );
 
 
+    /* ================================================
+       SUCCESS
+    ================================================ */
+
     showMessage(
       "✓ Login successful...",
       "success"
     );
 
 
-    /*
-     * ROLE অনুযায়ী redirect
-     */
+    /* ================================================
+       REDIRECT
+    ================================================ */
 
-    setTimeout(function(){
+    setTimeout(
+      function(){
 
-      window.location.href =
-        targetPage;
+        window.location.href =
+          targetPage;
 
-    }, 500);
+      },
+      500
+    );
 
 
   }
+
   catch(error){
 
-    console.error(error);
+    console.error(
+      "Login error:",
+      error
+    );
+
 
     showMessage(
       "❌ Login failed. Please try again.",
       "error"
     );
+
 
     resetLoginButton();
 
@@ -1176,63 +1337,38 @@ async function loginUser(event){
 
 
 /* =====================================================
-   RESET LOGIN BUTTON
+   FORM SUBMIT
 ===================================================== */
 
-function resetLoginButton(){
-
-  const loginBtn =
-    document.getElementById(
-      "loginBtn"
-    );
-
-  loginBtn.disabled =
-    false;
-
-  loginBtn.textContent =
-    "Login";
-
-}
-
-
-/* =====================================================
-   MESSAGE
-===================================================== */
-
-function showMessage(
-  text,
-  type
-){
-
-  const message =
-    document.getElementById(
-      "message"
-    );
-
-  message.textContent =
-    text;
-
-  message.className =
-    "message " +
-    (
-      type || ""
-    );
-
-}
+document
+  .getElementById(
+    "loginForm"
+  )
+  .addEventListener(
+    "submit",
+    loginUser
+  );
 
 
 /* =====================================================
    FORGOT PASSWORD
 ===================================================== */
 
-function forgotPassword(){
+document
+  .getElementById(
+    "forgotBtn"
+  )
+  .addEventListener(
+    "click",
+    function(){
 
-  showMessage(
-    "Please contact your administrator to reset your password.",
-    "error"
+      showMessage(
+        "Please contact your administrator to reset your password.",
+        "error"
+      );
+
+    }
   );
-
-}
 
 
 /* =====================================================
@@ -1240,17 +1376,23 @@ function forgotPassword(){
 ===================================================== */
 
 document
-  .getElementById("username")
+  .getElementById(
+    "username"
+  )
   .addEventListener(
     "keydown",
     function(event){
 
-      if(event.key === "Enter"){
+      if (
+        event.key === "Enter"
+      ){
 
         event.preventDefault();
 
         document
-          .getElementById("password")
+          .getElementById(
+            "password"
+          )
           .focus();
 
       }
@@ -1268,9 +1410,9 @@ window.addEventListener(
   function(){
 
     /*
-     * এখানে কোনো automatic redirect নেই।
-     * index.html খুললে Login page-ই থাকবে।
-     */
+      Login page automatically
+      অন্য page-এ যাবে না।
+    */
 
   }
 );
