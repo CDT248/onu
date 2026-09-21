@@ -1,27 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
 
   <title>User Login</title>
 
-  <link rel="icon"
-        href="https://cdn-icons-png.flaticon.com/512/2170/2170153.png">
+  <link
+    rel="icon"
+    href="https://cdn-icons-png.flaticon.com/512/2170/2170153.png"
+  >
+
 
   <style>
+
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
     }
 
+
     body {
+
       min-height: 100vh;
+
       display: flex;
+
       justify-content: center;
+
       align-items: center;
+
       font-family: Arial, sans-serif;
+
       overflow: hidden;
 
       background:
@@ -31,168 +48,291 @@
           #65bce0 45%,
           #32a9d8 100%
         );
+
       position: relative;
     }
 
-    /* Clouds */
+
+    /* ========================================================
+       CLOUDS
+       ======================================================== */
+
     .cloud {
+
       position: absolute;
-      background: rgba(255,255,255,0.30);
+
+      background:
+        rgba(255,255,255,0.30);
+
       border-radius: 100px;
+
       filter: blur(1px);
     }
 
+
     .cloud::before,
     .cloud::after {
+
       content: "";
+
       position: absolute;
+
       background: inherit;
+
       border-radius: 50%;
     }
 
+
     .cloud1 {
+
       width: 230px;
       height: 70px;
+
       top: 12%;
       left: -40px;
     }
 
+
     .cloud1::before {
+
       width: 90px;
       height: 90px;
+
       top: -40px;
       left: 40px;
     }
 
+
     .cloud1::after {
+
       width: 110px;
       height: 110px;
+
       top: -55px;
       right: 30px;
     }
 
+
     .cloud2 {
+
       width: 260px;
       height: 75px;
+
       bottom: 12%;
       right: -50px;
     }
 
+
     .cloud2::before {
+
       width: 100px;
       height: 100px;
+
       top: -45px;
       left: 50px;
     }
 
+
     .cloud2::after {
+
       width: 120px;
       height: 120px;
+
       top: -65px;
       right: 35px;
     }
 
-    /* Login Box */
+
+    /* ========================================================
+       LOGIN CARD
+       ======================================================== */
+
     .login-card {
+
       width: 350px;
-      max-width: calc(100% - 30px);
 
-      padding: 35px 28px 28px;
+      max-width:
+        calc(100% - 30px);
 
-      background: rgba(255,255,255,0.18);
-      border: 1px solid rgba(255,255,255,0.35);
+      padding:
+        35px 28px 28px;
+
+      background:
+        rgba(255,255,255,0.18);
+
+      border:
+        1px solid
+        rgba(255,255,255,0.35);
 
       border-radius: 25px;
 
-      backdrop-filter: blur(18px);
-      -webkit-backdrop-filter: blur(18px);
+      backdrop-filter:
+        blur(18px);
+
+      -webkit-backdrop-filter:
+        blur(18px);
 
       box-shadow:
-        0 20px 50px rgba(0,0,0,0.15),
-        inset 0 1px 1px rgba(255,255,255,0.30);
+
+        0 20px 50px
+        rgba(0,0,0,0.15),
+
+        inset 0 1px 1px
+        rgba(255,255,255,0.30);
 
       text-align: center;
+
       position: relative;
+
       z-index: 5;
     }
 
+
+    /* ========================================================
+       USER ICON
+       ======================================================== */
+
     .user-icon {
+
       width: 78px;
       height: 78px;
-      margin: 0 auto 15px;
+
+      margin:
+        0 auto 15px;
 
       display: flex;
+
       justify-content: center;
+
       align-items: center;
 
       border-radius: 50%;
 
-      background: rgba(255,255,255,0.35);
-      border: 3px solid rgba(255,255,255,0.55);
+      background:
+        rgba(255,255,255,0.35);
 
-      box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+      border:
+        3px solid
+        rgba(255,255,255,0.55);
+
+      box-shadow:
+        0 8px 20px
+        rgba(0,0,0,0.12);
 
       font-size: 38px;
     }
 
+
     h1 {
+
       color: #fff;
+
       font-size: 28px;
+
       margin-bottom: 7px;
-      text-shadow: 0 2px 8px rgba(0,0,0,0.12);
+
+      text-shadow:
+        0 2px 8px
+        rgba(0,0,0,0.12);
     }
 
+
     .subtitle {
-      color: rgba(255,255,255,0.90);
+
+      color:
+        rgba(255,255,255,0.90);
+
       font-size: 13px;
+
       margin-bottom: 25px;
     }
 
+
+    /* ========================================================
+       INPUT
+       ======================================================== */
+
     .input-box {
+
       margin-bottom: 15px;
+
       text-align: left;
     }
 
+
     .input-box input {
+
       width: 100%;
+
       height: 50px;
 
-      padding: 0 16px;
+      padding:
+        0 16px;
 
       border: none;
+
       outline: none;
 
       border-radius: 13px;
 
-      background: rgba(255,255,255,0.92);
+      background:
+        rgba(255,255,255,0.92);
 
       color: #333;
+
       font-size: 15px;
 
       box-shadow:
-        0 5px 15px rgba(0,0,0,0.08);
+        0 5px 15px
+        rgba(0,0,0,0.08);
 
-      transition: 0.2s;
+      transition:
+        0.2s;
     }
+
 
     .input-box input:focus {
+
       background: #fff;
+
       box-shadow:
-        0 0 0 3px rgba(255,255,255,0.35),
-        0 7px 18px rgba(0,0,0,0.10);
+
+        0 0 0 3px
+        rgba(255,255,255,0.35),
+
+        0 7px 18px
+        rgba(0,0,0,0.10);
     }
+
+
+    /* ========================================================
+       DEVICE
+       ======================================================== */
 
     .device {
-      color: rgba(255,255,255,0.92);
+
+      color:
+        rgba(255,255,255,0.92);
+
       font-size: 12px;
-      margin: 4px 0 18px;
+
+      margin:
+        4px 0 18px;
     }
 
+
+    /* ========================================================
+       FORGOT PASSWORD
+       ======================================================== */
+
     .forgot {
+
       border: none;
+
       background: transparent;
 
       color: #fff;
+
       font-size: 13px;
 
       cursor: pointer;
@@ -200,127 +340,216 @@
       margin-bottom: 20px;
 
       text-decoration: underline;
+
       text-underline-offset: 3px;
     }
 
+
     .forgot:hover {
+
       opacity: 0.8;
     }
 
+
+    /* ========================================================
+       LOGIN BUTTON
+       ======================================================== */
+
     .login-btn {
+
       width: 170px;
+
       height: 52px;
 
       border: none;
+
       border-radius: 30px;
 
       background: #fff;
+
       color: #1597c5;
 
       font-size: 16px;
+
       font-weight: bold;
 
       cursor: pointer;
 
       box-shadow:
-        0 10px 25px rgba(0,0,0,0.15);
+        0 10px 25px
+        rgba(0,0,0,0.15);
 
-      transition: all 0.2s ease;
+      transition:
+        all 0.2s ease;
     }
+
 
     .login-btn:hover {
-      transform: translateY(-2px);
+
+      transform:
+        translateY(-2px);
+
       box-shadow:
-        0 13px 28px rgba(0,0,0,0.20);
+        0 13px 28px
+        rgba(0,0,0,0.20);
     }
+
 
     .login-btn:active {
-      transform: scale(0.97);
+
+      transform:
+        scale(0.97);
     }
 
+
     .login-btn:disabled {
+
       opacity: 0.65;
-      cursor: not-allowed;
+
+      cursor:
+        not-allowed;
+
       transform: none;
     }
 
+
+    /* ========================================================
+       LOADER
+       ======================================================== */
+
     .loader {
+
       display: none;
-      margin: 15px auto 0;
+
+      margin:
+        15px auto 0;
 
       width: 25px;
       height: 25px;
 
-      border: 3px solid rgba(255,255,255,0.35);
-      border-top-color: #fff;
+      border:
+        3px solid
+        rgba(255,255,255,0.35);
+
+      border-top-color:
+        #fff;
 
       border-radius: 50%;
 
-      animation: spin 0.8s linear infinite;
+      animation:
+        spin 0.8s linear infinite;
     }
 
+
     @keyframes spin {
+
       to {
-        transform: rotate(360deg);
+
+        transform:
+          rotate(360deg);
       }
     }
 
+
+    /* ========================================================
+       MESSAGE
+       ======================================================== */
+
     .message {
+
       min-height: 20px;
+
       margin-top: 15px;
 
       color: #fff;
+
       font-size: 13px;
+
       line-height: 1.5;
     }
 
+
+    /* ========================================================
+       FOOTER
+       ======================================================== */
+
     .footer {
+
       margin-top: 22px;
 
-      color: rgba(255,255,255,0.75);
+      color:
+        rgba(255,255,255,0.75);
+
       font-size: 11px;
     }
 
-    /* Mobile */
+
+    /* ========================================================
+       MOBILE
+       ======================================================== */
+
     @media (max-width: 450px) {
 
       .login-card {
-        padding: 30px 22px 25px;
+
+        padding:
+          30px 22px 25px;
       }
 
+
       h1 {
+
         font-size: 25px;
       }
 
+
       .user-icon {
+
         width: 70px;
         height: 70px;
+
         font-size: 34px;
       }
     }
+
   </style>
+
 </head>
+
 
 <body>
 
+
   <div class="cloud cloud1"></div>
+
   <div class="cloud cloud2"></div>
 
+
   <div class="login-card">
+
 
     <div class="user-icon">
       👤
     </div>
 
-    <h1>User Login</h1>
+
+    <h1>
+      User Login
+    </h1>
+
 
     <div class="subtitle">
       Sign in to continue
     </div>
 
-    <form onsubmit="loginUser(event)">
+
+    <form
+      onsubmit="loginUser(event)"
+    >
+
 
       <div class="input-box">
+
         <input
           type="text"
           id="username"
@@ -328,9 +557,12 @@
           autocomplete="username"
           required
         >
+
       </div>
 
+
       <div class="input-box">
+
         <input
           type="password"
           id="password"
@@ -338,12 +570,20 @@
           autocomplete="current-password"
           required
         >
+
       </div>
 
+
       <div class="device">
+
         💻 Device:
-        <span id="deviceName">Detecting...</span>
+
+        <span id="deviceName">
+          Detecting...
+        </span>
+
       </div>
+
 
       <button
         type="button"
@@ -353,7 +593,9 @@
         Forgot Password?
       </button>
 
+
       <br>
+
 
       <button
         type="submit"
@@ -363,26 +605,32 @@
         Login
       </button>
 
+
       <div
         class="loader"
         id="loader"
       ></div>
+
 
       <div
         class="message"
         id="message"
       ></div>
 
+
     </form>
+
 
     <div class="footer">
       Secure User Login System
     </div>
 
+
   </div>
 
 
 <script>
+
 
   /* ==========================================================
      APPS SCRIPT WEB APP URL
@@ -397,11 +645,22 @@
      ========================================================== */
 
   const ROUTES = {
-    admin: "ad.html",
-    support: "2S.html",
-    call: "2S.html",
-    manager: "ad.html",
-    guest: "2S.html"
+
+    admin:
+      "ad.html",
+
+    support:
+      "2S.html",
+
+    call:
+      "2S.html",
+
+    manager:
+      "ad.html",
+
+    guest:
+      "2S.html"
+
   };
 
 
@@ -411,71 +670,140 @@
 
   function getDeviceName() {
 
-    const ua = navigator.userAgent;
+    const ua =
+      navigator.userAgent;
 
-    let device = "Computer";
+    let device =
+      "Computer";
+
 
     if (/Android/i.test(ua)) {
-      device = "Android";
-    }
-    else if (/iPhone/i.test(ua)) {
-      device = "iPhone";
-    }
-    else if (/iPad/i.test(ua)) {
-      device = "iPad";
-    }
-    else if (/Windows/i.test(ua)) {
-      device = "Windows PC";
-    }
-    else if (/Macintosh/i.test(ua)) {
-      device = "Mac";
-    }
-    else if (/Linux/i.test(ua)) {
-      device = "Linux";
+
+      device =
+        "Android";
+
     }
 
-    let browser = "Browser";
+    else if (/iPhone/i.test(ua)) {
+
+      device =
+        "iPhone";
+
+    }
+
+    else if (/iPad/i.test(ua)) {
+
+      device =
+        "iPad";
+
+    }
+
+    else if (/Windows/i.test(ua)) {
+
+      device =
+        "Windows PC";
+
+    }
+
+    else if (/Macintosh/i.test(ua)) {
+
+      device =
+        "Mac";
+
+    }
+
+    else if (/Linux/i.test(ua)) {
+
+      device =
+        "Linux";
+
+    }
+
+
+    let browser =
+      "Browser";
+
 
     if (/Edg/i.test(ua)) {
-      browser = "Edge";
-    }
-    else if (/Chrome/i.test(ua)) {
-      browser = "Chrome";
-    }
-    else if (/Firefox/i.test(ua)) {
-      browser = "Firefox";
-    }
-    else if (/Safari/i.test(ua)) {
-      browser = "Safari";
+
+      browser =
+        "Edge";
+
     }
 
-    return device + " / " + browser;
+    else if (/Chrome/i.test(ua)) {
+
+      browser =
+        "Chrome";
+
+    }
+
+    else if (/Firefox/i.test(ua)) {
+
+      browser =
+        "Firefox";
+
+    }
+
+    else if (/Safari/i.test(ua)) {
+
+      browser =
+        "Safari";
+
+    }
+
+
+    return (
+      device +
+      " / " +
+      browser
+    );
   }
 
 
-  document.getElementById("deviceName").textContent =
-    getDeviceName();
+  document
+    .getElementById("deviceName")
+    .textContent =
+      getDeviceName();
 
 
   /* ==========================================================
      MESSAGE
      ========================================================== */
 
-  function showMessage(text, type = "") {
+  function showMessage(
+    text,
+    type = ""
+  ) {
 
     const message =
-      document.getElementById("message");
+      document.getElementById(
+        "message"
+      );
 
-    message.textContent = text;
+
+    message.textContent =
+      text;
+
 
     if (type === "error") {
-      message.style.color = "#ffe0e0";
+
+      message.style.color =
+        "#ffe0e0";
+
     }
+
     else if (type === "success") {
-      message.style.color = "#eaffea";
+
+      message.style.color =
+        "#eaffea";
+
     }
+
     else {
-      message.style.color = "#ffffff";
+
+      message.style.color =
+        "#ffffff";
     }
   }
 
@@ -500,20 +828,31 @@
 
     event.preventDefault();
 
+
     const username =
-      document.getElementById("username")
+      document
+        .getElementById("username")
         .value
         .trim();
 
+
     const password =
-      document.getElementById("password")
+      document
+        .getElementById("password")
         .value;
 
+
     const loginBtn =
-      document.getElementById("loginBtn");
+      document.getElementById(
+        "loginBtn"
+      );
+
 
     const loader =
-      document.getElementById("loader");
+      document.getElementById(
+        "loader"
+      );
+
 
     if (!username || !password) {
 
@@ -526,35 +865,58 @@
     }
 
 
-    /* Disable button */
+    /* ========================================================
+       DISABLE LOGIN
+       ======================================================== */
 
-    loginBtn.disabled = true;
-    loginBtn.textContent = "Login...";
+    loginBtn.disabled =
+      true;
 
-    loader.style.display = "block";
+    loginBtn.textContent =
+      "Login...";
 
-    showMessage("Checking login...");
+    loader.style.display =
+      "block";
+
+
+    showMessage(
+      "Checking login..."
+    );
 
 
     try {
+
+
+      /* ======================================================
+         SERVER-SIDE LOGIN
+         ====================================================== */
 
       const url =
         USER_API_URL +
         "?action=login" +
         "&username=" +
-        encodeURIComponent(username) +
+        encodeURIComponent(
+          username
+        ) +
         "&password=" +
-        encodeURIComponent(password) +
+        encodeURIComponent(
+          password
+        ) +
         "&_=" +
         Date.now();
 
 
       const response =
-        await fetch(url, {
-          method: "GET",
-          redirect: "follow",
-          cache: "no-store"
-        });
+        await fetch(
+          url,
+          {
+            method: "GET",
+
+            redirect: "follow",
+
+            cache: "no-store"
+          }
+        );
 
 
       if (!response.ok) {
@@ -570,7 +932,10 @@
         await response.json();
 
 
-      console.log("Login response:", result);
+      console.log(
+        "Login response:",
+        result
+      );
 
 
       /* ======================================================
@@ -578,70 +943,113 @@
          ====================================================== */
 
       if (
-        result.success === true ||
-        result.status === "success"
+        result.success === true
       ) {
 
+
         const user =
-          result.user ||
-          result.data ||
-          result;
+          result.user || {};
+
+
+        /*
+         * ONLY THESE THREE USER VALUES
+         * ARE SAVED:
+         *
+         * username
+         * role
+         * status
+         *
+         * Password is NOT saved.
+         * Name is NOT saved.
+         */
+
+
+        const loggedUsername =
+          String(
+            user.username ||
+            username
+          ).trim();
 
 
         const role =
           String(
-            user.role ||
-            result.role ||
-            ""
+            user.role || ""
           )
-          .trim()
-          .toLowerCase();
+            .trim()
+            .toLowerCase();
 
 
-        const loggedUsername =
-          user.username ||
-          result.username ||
-          username;
+        const status =
+          String(
+            user.status || ""
+          ).trim();
 
 
-        /* ================================================
+        /* ==================================================
            SAVE LOGIN SESSION
-           ================================================ */
+           ================================================== */
+
+        const loginUserData = {
+
+          username:
+            loggedUsername,
+
+          role:
+            role,
+
+          status:
+            status
+
+        };
+
 
         localStorage.setItem(
           "dashboardAuth",
           "true"
         );
 
+
         localStorage.setItem(
           "username",
           loggedUsername
         );
 
+
         localStorage.setItem(
           "userData",
-          JSON.stringify(user)
+          JSON.stringify(
+            loginUserData
+          )
         );
+
 
         localStorage.setItem(
           "loginData",
-          JSON.stringify(user)
+          JSON.stringify(
+            loginUserData
+          )
         );
+
 
         localStorage.setItem(
           "loggedUser",
           loggedUsername
         );
 
+
         localStorage.setItem(
           "currentUser",
           loggedUsername
         );
 
+
         localStorage.setItem(
           "userInfo",
-          JSON.stringify(user)
+          JSON.stringify(
+            loginUserData
+          )
         );
+
 
         sessionStorage.setItem(
           "dashboardAuth",
@@ -655,9 +1063,9 @@
         );
 
 
-        /* ================================================
+        /* ==================================================
            ROLE ROUTING
-           ================================================ */
+           ================================================== */
 
         const target =
           ROUTES[role];
@@ -665,24 +1073,41 @@
 
         if (target) {
 
-          setTimeout(function () {
 
-            window.location.replace(target);
+          setTimeout(
+            function() {
 
-          }, 300);
+              window.location.replace(
+                target
+              );
+
+            },
+            300
+          );
+
 
         }
+
         else {
 
+
           showMessage(
+
             "Login successful, but no page is assigned to role: " +
             role,
+
             "error"
           );
 
-          loginBtn.disabled = false;
-          loginBtn.textContent = "Login";
-          loader.style.display = "none";
+
+          loginBtn.disabled =
+            false;
+
+          loginBtn.textContent =
+            "Login";
+
+          loader.style.display =
+            "none";
         }
 
 
@@ -699,18 +1124,24 @@
         result.error ||
         "Invalid username or password.";
 
+
       showMessage(
         errorMessage,
         "error"
       );
 
+
     }
+
+
     catch (error) {
+
 
       console.error(
         "Login Error:",
         error
       );
+
 
       showMessage(
         "Login connection failed. Please try again.",
@@ -719,77 +1150,96 @@
     }
 
 
-    /* ======================================================
+    /* ========================================================
        RESET BUTTON
-       ====================================================== */
+       ======================================================== */
 
-    loginBtn.disabled = false;
-    loginBtn.textContent = "Login";
+    loginBtn.disabled =
+      false;
 
-    loader.style.display = "none";
+    loginBtn.textContent =
+      "Login";
+
+    loader.style.display =
+      "none";
   }
 
 
   /* ==========================================================
-     PREVENT BACK TO LOGIN AFTER ALREADY LOGGED IN
+     PREVENT AUTOMATIC REDIRECT
      ========================================================== */
 
   window.addEventListener(
     "pageshow",
-    function () {
-
-      const isLogged =
-        localStorage.getItem("dashboardAuth") === "true";
-
-      if (!isLogged) {
-        return;
-      }
+    function() {
 
       /*
-       * এখানে auto redirect রাখা হয়নি।
-       * কারণ login page manually open করলেও
-       * user যেন সমস্যা ছাড়া login করতে পারে।
+       * Login page always remains available.
+       *
+       * No automatic redirect is performed
+       * from localStorage/sessionStorage.
        */
+
     }
   );
 
 
   /* ==========================================================
-     ENTER KEY SUPPORT
+     ENTER KEY - USERNAME
      ========================================================== */
 
   document
     .getElementById("username")
-    .addEventListener("keydown", function(event) {
+    .addEventListener(
+      "keydown",
+      function(event) {
 
-      if (event.key === "Enter") {
+        if (
+          event.key === "Enter"
+        ) {
 
-        event.preventDefault();
+          event.preventDefault();
 
-        document
-          .getElementById("password")
-          .focus();
+
+          document
+            .getElementById(
+              "password"
+            )
+            .focus();
+        }
+
       }
+    );
 
-    });
 
+  /* ==========================================================
+     ENTER KEY - PASSWORD
+     ========================================================== */
 
   document
     .getElementById("password")
-    .addEventListener("keydown", function(event) {
+    .addEventListener(
+      "keydown",
+      function(event) {
 
-      if (event.key === "Enter") {
+        if (
+          event.key === "Enter"
+        ) {
 
-        event.preventDefault();
+          event.preventDefault();
 
-        document
-          .querySelector("form")
-          .requestSubmit();
+
+          document
+            .querySelector("form")
+            .requestSubmit();
+        }
+
       }
-
-    });
+    );
 
 </script>
 
+
 </body>
+
 </html>
