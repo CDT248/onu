@@ -1,526 +1,359 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<meta charset="UTF-8">
+  <title>User Login</title>
 
-<meta
-  name="viewport"
-  content="width=device-width, initial-scale=1.0"
->
+  <link rel="icon"
+        href="https://cdn-icons-png.flaticon.com/512/2170/2170153.png">
 
-<meta
-  http-equiv="Cache-Control"
-  content="no-cache, no-store, must-revalidate"
->
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-<meta
-  http-equiv="Pragma"
-  content="no-cache"
->
+    body {
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: Arial, sans-serif;
+      overflow: hidden;
 
-<meta
-  http-equiv="Expires"
-  content="0"
->
+      background:
+        linear-gradient(
+          135deg,
+          #83cbe9 0%,
+          #65bce0 45%,
+          #32a9d8 100%
+        );
+      position: relative;
+    }
 
-<title>User Login</title>
+    /* Clouds */
+    .cloud {
+      position: absolute;
+      background: rgba(255,255,255,0.30);
+      border-radius: 100px;
+      filter: blur(1px);
+    }
 
-<link
-  rel="icon"
-  type="image/png"
-  href="https://cdn-icons-png.flaticon.com/128/2170/2170153.png"
->
+    .cloud::before,
+    .cloud::after {
+      content: "";
+      position: absolute;
+      background: inherit;
+      border-radius: 50%;
+    }
 
-<style>
+    .cloud1 {
+      width: 230px;
+      height: 70px;
+      top: 12%;
+      left: -40px;
+    }
 
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  font-family:
-    "Poppins",
-    Arial,
-    Helvetica,
-    sans-serif;
-}
+    .cloud1::before {
+      width: 90px;
+      height: 90px;
+      top: -40px;
+      left: 40px;
+    }
 
-body{
-  min-height:100vh;
-  overflow:hidden;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  background:
-    linear-gradient(
-      180deg,
-      #83cbe9 0%,
-      #65bce0 50%,
-      #32a9d8 100%
-    );
-  position:relative;
-}
+    .cloud1::after {
+      width: 110px;
+      height: 110px;
+      top: -55px;
+      right: 30px;
+    }
 
-body::before{
-  content:"";
-  position:absolute;
-  width:600px;
-  height:600px;
-  top:-250px;
-  right:-180px;
-  background:
-    radial-gradient(
-      circle,
-      rgba(255,255,255,.28),
-      transparent 68%
-    );
-  pointer-events:none;
-}
+    .cloud2 {
+      width: 260px;
+      height: 75px;
+      bottom: 12%;
+      right: -50px;
+    }
 
-.cloud{
-  position:absolute;
-  background:
-    rgba(255,255,255,.38);
-  border-radius:100px;
-  opacity:.85;
-  pointer-events:none;
-}
+    .cloud2::before {
+      width: 100px;
+      height: 100px;
+      top: -45px;
+      left: 50px;
+    }
 
-.cloud-1{
-  width:230px;
-  height:75px;
-  left:-70px;
-  bottom:220px;
-}
+    .cloud2::after {
+      width: 120px;
+      height: 120px;
+      top: -65px;
+      right: 35px;
+    }
 
-.cloud-1::before{
-  content:"";
-  position:absolute;
-  width:105px;
-  height:105px;
-  left:35px;
-  bottom:25px;
-  background:
-    rgba(255,255,255,.38);
-  border-radius:50%;
-}
+    /* Login Box */
+    .login-card {
+      width: 350px;
+      max-width: calc(100% - 30px);
 
-.cloud-1::after{
-  content:"";
-  position:absolute;
-  width:90px;
-  height:90px;
-  left:115px;
-  bottom:20px;
-  background:
-    rgba(255,255,255,.38);
-  border-radius:50%;
-}
+      padding: 35px 28px 28px;
 
-.cloud-2{
-  width:260px;
-  height:82px;
-  right:-85px;
-  top:105px;
-}
+      background: rgba(255,255,255,0.18);
+      border: 1px solid rgba(255,255,255,0.35);
 
-.cloud-2::before{
-  content:"";
-  position:absolute;
-  width:110px;
-  height:110px;
-  left:50px;
-  bottom:20px;
-  background:
-    rgba(255,255,255,.38);
-  border-radius:50%;
-}
+      border-radius: 25px;
 
-.cloud-2::after{
-  content:"";
-  position:absolute;
-  width:105px;
-  height:105px;
-  right:20px;
-  bottom:15px;
-  background:
-    rgba(255,255,255,.38);
-  border-radius:50%;
-}
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
 
-.cloud-3{
-  width:300px;
-  height:90px;
-  right:-90px;
-  bottom:100px;
-}
+      box-shadow:
+        0 20px 50px rgba(0,0,0,0.15),
+        inset 0 1px 1px rgba(255,255,255,0.30);
 
-.cloud-3::before{
-  content:"";
-  position:absolute;
-  width:120px;
-  height:120px;
-  left:50px;
-  bottom:20px;
-  background:
-    rgba(255,255,255,.30);
-  border-radius:50%;
-}
+      text-align: center;
+      position: relative;
+      z-index: 5;
+    }
 
-.cloud-3::after{
-  content:"";
-  position:absolute;
-  width:100px;
-  height:100px;
-  right:45px;
-  bottom:15px;
-  background:
-    rgba(255,255,255,.30);
-  border-radius:50%;
-}
+    .user-icon {
+      width: 78px;
+      height: 78px;
+      margin: 0 auto 15px;
 
-.login-wrapper{
-  width:100%;
-  min-height:100vh;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  padding:25px;
-  position:relative;
-  z-index:5;
-}
+      display: flex;
+      justify-content: center;
+      align-items: center;
 
-.login-card{
-  width:340px;
-  min-height:520px;
-  padding:42px 30px 35px;
-  border-radius:28px;
-  background:
-    rgba(255,255,255,.25);
-  border:
-    1px solid
-    rgba(255,255,255,.35);
-  box-shadow:
-    0 25px 60px
-    rgba(0,80,130,.18);
-  backdrop-filter:
-    blur(12px);
-  -webkit-backdrop-filter:
-    blur(12px);
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  position:relative;
-}
+      border-radius: 50%;
 
-.user-icon{
-  width:58px;
-  height:58px;
-  position:relative;
-  margin-bottom:12px;
-}
+      background: rgba(255,255,255,0.35);
+      border: 3px solid rgba(255,255,255,0.55);
 
-.user-icon::before{
-  content:"";
-  position:absolute;
-  width:23px;
-  height:23px;
-  background:#075284;
-  border-radius:50%;
-  left:50%;
-  top:0;
-  transform:
-    translateX(-50%);
-}
+      box-shadow: 0 8px 20px rgba(0,0,0,0.12);
 
-.user-icon::after{
-  content:"";
-  position:absolute;
-  width:42px;
-  height:28px;
-  background:#075284;
-  border-radius:
-    25px 25px 10px 10px;
-  left:50%;
-  bottom:2px;
-  transform:
-    translateX(-50%);
-}
+      font-size: 38px;
+    }
 
-.login-title{
-  font-size:25px;
-  font-weight:400;
-  color:#111827;
-  margin-bottom:30px;
-  letter-spacing:.2px;
-}
+    h1 {
+      color: #fff;
+      font-size: 28px;
+      margin-bottom: 7px;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.12);
+    }
 
-.login-form{
-  width:100%;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-}
+    .subtitle {
+      color: rgba(255,255,255,0.90);
+      font-size: 13px;
+      margin-bottom: 25px;
+    }
 
-.input-box{
-  width:100%;
-  height:48px;
-  border:none;
-  outline:none;
-  border-radius:18px;
-  background:
-    rgba(255,255,255,.96);
-  color:#222;
-  font-size:15px;
-  padding:
-    0 17px;
-  margin-bottom:14px;
-  box-shadow:
-    0 5px 12px
-    rgba(0,0,0,.14);
-  transition:.2s;
-}
+    .input-box {
+      margin-bottom: 15px;
+      text-align: left;
+    }
 
-.input-box::placeholder{
-  color:#999;
-}
+    .input-box input {
+      width: 100%;
+      height: 50px;
 
-.input-box:focus{
-  background:#fff;
-  box-shadow:
-    0 0 0 2px
-    rgba(7,82,132,.20),
-    0 7px 15px
-    rgba(0,0,0,.15);
-}
+      padding: 0 16px;
 
-.device-box{
-  width:100%;
-  margin-top:2px;
-  margin-bottom:17px;
-  text-align:center;
-  color:#173e57;
-  font-size:12px;
-  line-height:1.5;
-}
+      border: none;
+      outline: none;
 
-.device-box span{
-  font-weight:600;
-}
+      border-radius: 13px;
 
-.forgot{
-  border:none;
-  background:transparent;
-  color:#173e57;
-  font-size:15px;
-  cursor:pointer;
-  margin-top:0;
-  margin-bottom:30px;
-}
+      background: rgba(255,255,255,0.92);
 
-.forgot:hover{
-  text-decoration:underline;
-}
+      color: #333;
+      font-size: 15px;
 
-.login-btn{
-  width:170px;
-  height:52px;
-  border:none;
-  border-radius:18px;
-  background:#075284;
-  color:white;
-  font-size:21px;
-  font-weight:500;
-  cursor:pointer;
-  box-shadow:
-    0 7px 15px
-    rgba(0,55,90,.25);
-  transition:
-    transform .2s,
-    background .2s,
-    box-shadow .2s;
-}
+      box-shadow:
+        0 5px 15px rgba(0,0,0,0.08);
 
-.login-btn:hover{
-  background:#06466f;
-  transform:
-    translateY(-2px);
-  box-shadow:
-    0 10px 20px
-    rgba(0,55,90,.28);
-}
+      transition: 0.2s;
+    }
 
-.login-btn:active{
-  transform:
-    translateY(0);
-}
+    .input-box input:focus {
+      background: #fff;
+      box-shadow:
+        0 0 0 3px rgba(255,255,255,0.35),
+        0 7px 18px rgba(0,0,0,0.10);
+    }
 
-.login-btn:disabled{
-  cursor:not-allowed;
-  opacity:.7;
-  transform:none;
-}
+    .device {
+      color: rgba(255,255,255,0.92);
+      font-size: 12px;
+      margin: 4px 0 18px;
+    }
 
-.message{
-  width:100%;
-  min-height:22px;
-  margin-top:18px;
-  text-align:center;
-  font-size:13px;
-  font-weight:500;
-}
+    .forgot {
+      border: none;
+      background: transparent;
 
-.message.error{
-  color:#b91c1c;
-}
+      color: #fff;
+      font-size: 13px;
 
-.message.success{
-  color:#047857;
-}
+      cursor: pointer;
 
-.loader{
-  display:inline-block;
-  width:16px;
-  height:16px;
-  border:
-    2px solid
-    rgba(255,255,255,.45);
-  border-top-color:#fff;
-  border-radius:50%;
-  animation:
-    spin .7s linear infinite;
-  vertical-align:middle;
-  margin-right:7px;
-}
+      margin-bottom: 20px;
 
-@keyframes spin{
-  to{
-    transform:rotate(360deg);
-  }
-}
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
 
-.login-footer{
-  margin-top:auto;
-  padding-top:25px;
-  color:#27516a;
-  font-size:11px;
-  text-align:center;
-}
+    .forgot:hover {
+      opacity: 0.8;
+    }
 
-@media(max-width:500px){
+    .login-btn {
+      width: 170px;
+      height: 52px;
 
-  .login-wrapper{
-    padding:18px;
-  }
+      border: none;
+      border-radius: 30px;
 
-  .login-card{
-    width:320px;
-    min-height:500px;
-    padding:
-      38px 25px 30px;
-    border-radius:25px;
-  }
+      background: #fff;
+      color: #1597c5;
 
-  .login-title{
-    font-size:24px;
-  }
+      font-size: 16px;
+      font-weight: bold;
 
-  .input-box{
-    height:47px;
-  }
+      cursor: pointer;
 
-  .login-btn{
-    width:165px;
-    height:50px;
-  }
+      box-shadow:
+        0 10px 25px rgba(0,0,0,0.15);
 
-}
+      transition: all 0.2s ease;
+    }
 
-@media(max-height:650px){
+    .login-btn:hover {
+      transform: translateY(-2px);
+      box-shadow:
+        0 13px 28px rgba(0,0,0,0.20);
+    }
 
-  .login-card{
-    min-height:480px;
-    padding-top:30px;
-    padding-bottom:25px;
-  }
+    .login-btn:active {
+      transform: scale(0.97);
+    }
 
-  .login-title{
-    margin-bottom:22px;
-  }
+    .login-btn:disabled {
+      opacity: 0.65;
+      cursor: not-allowed;
+      transform: none;
+    }
 
-  .forgot{
-    margin-bottom:22px;
-  }
+    .loader {
+      display: none;
+      margin: 15px auto 0;
 
-}
+      width: 25px;
+      height: 25px;
 
-</style>
+      border: 3px solid rgba(255,255,255,0.35);
+      border-top-color: #fff;
 
+      border-radius: 50%;
+
+      animation: spin 0.8s linear infinite;
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    .message {
+      min-height: 20px;
+      margin-top: 15px;
+
+      color: #fff;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .footer {
+      margin-top: 22px;
+
+      color: rgba(255,255,255,0.75);
+      font-size: 11px;
+    }
+
+    /* Mobile */
+    @media (max-width: 450px) {
+
+      .login-card {
+        padding: 30px 22px 25px;
+      }
+
+      h1 {
+        font-size: 25px;
+      }
+
+      .user-icon {
+        width: 70px;
+        height: 70px;
+        font-size: 34px;
+      }
+    }
+  </style>
 </head>
-
 
 <body>
 
-<div class="cloud cloud-1"></div>
-<div class="cloud cloud-2"></div>
-<div class="cloud cloud-3"></div>
-
-
-<div class="login-wrapper">
+  <div class="cloud cloud1"></div>
+  <div class="cloud cloud2"></div>
 
   <div class="login-card">
 
-    <div class="user-icon"></div>
+    <div class="user-icon">
+      👤
+    </div>
 
-    <h1 class="login-title">
-      User Login
-    </h1>
+    <h1>User Login</h1>
 
+    <div class="subtitle">
+      Sign in to continue
+    </div>
 
-    <form
-      class="login-form"
-      id="loginForm"
-    >
+    <form onsubmit="loginUser(event)">
 
-      <input
-        class="input-box"
-        type="text"
-        id="username"
-        placeholder="Username"
-        autocomplete="username"
-        required
-      >
-
-
-      <input
-        class="input-box"
-        type="password"
-        id="password"
-        placeholder="Password"
-        autocomplete="current-password"
-        required
-      >
-
-
-      <div class="device-box">
-
-        💻 Device:
-        <span id="deviceName">
-          Detecting...
-        </span>
-
+      <div class="input-box">
+        <input
+          type="text"
+          id="username"
+          placeholder="Username"
+          autocomplete="username"
+          required
+        >
       </div>
 
+      <div class="input-box">
+        <input
+          type="password"
+          id="password"
+          placeholder="Password"
+          autocomplete="current-password"
+          required
+        >
+      </div>
+
+      <div class="device">
+        💻 Device:
+        <span id="deviceName">Detecting...</span>
+      </div>
 
       <button
         type="button"
         class="forgot"
-        id="forgotBtn"
+        onclick="forgotPassword()"
       >
         Forgot Password?
       </button>
 
+      <br>
 
       <button
         type="submit"
@@ -530,6 +363,10 @@ body::before{
         Login
       </button>
 
+      <div
+        class="loader"
+        id="loader"
+      ></div>
 
       <div
         class="message"
@@ -538,621 +375,421 @@ body::before{
 
     </form>
 
-
-    <div class="login-footer">
+    <div class="footer">
       Secure User Login System
     </div>
 
   </div>
 
-</div>
-
 
 <script>
 
-/* ============================================================
-   ROLE ROUTES
-============================================================ */
-
-const ROUTES = {
-
-  admin:
-    "ad.html",
-
-  support:
-    "2S.html",
-
-  call:
-    "2S.html",
-
-  manager:
-    "ad.html",
-
-  guest:
-    "2S.html"
-
-};
-
-
-/* ============================================================
-   DEVICE
-============================================================ */
-
-function getDeviceName(){
-
-  const ua =
-    navigator.userAgent || "";
-
-  let device =
-    "Unknown Device";
-
-
-  if (/Android/i.test(ua)) {
-
-    device =
-      "Android Device";
-
-  }
-
-  else if (/iPhone/i.test(ua)) {
-
-    device =
-      "iPhone";
-
-  }
-
-  else if (/iPad/i.test(ua)) {
-
-    device =
-      "iPad";
-
-  }
-
-  else if (/Windows/i.test(ua)) {
-
-    device =
-      "Windows PC";
-
-  }
-
-  else if (
-    /Macintosh|Mac OS/i.test(ua)
-  ) {
-
-    device =
-      "Mac";
-
-  }
-
-  else if (/Linux/i.test(ua)) {
-
-    device =
-      "Linux PC";
-
-  }
-
-
-  let browser =
-    "Browser";
-
-
-  if (/Edg/i.test(ua)) {
-
-    browser =
-      "Microsoft Edge";
-
-  }
-
-  else if (/Chrome/i.test(ua)) {
-
-    browser =
-      "Google Chrome";
-
-  }
-
-  else if (/Firefox/i.test(ua)) {
-
-    browser =
-      "Mozilla Firefox";
-
-  }
-
-  else if (/Safari/i.test(ua)) {
-
-    browser =
-      "Safari";
-
-  }
-
-
-  return (
-    device +
-    " • " +
-    browser
-  );
-
-}
-
-
-document
-  .getElementById("deviceName")
-  .textContent =
-  getDeviceName();
-
-
-/* ============================================================
-   MESSAGE
-============================================================ */
-
-function showMessage(
-  text,
-  type
-){
-
-  const message =
-    document.getElementById(
-      "message"
-    );
-
-
-  message.textContent =
-    text;
-
-
-  message.className =
-    "message " +
-    (
-      type || ""
-    );
-
-}
-
-
-/* ============================================================
-   RESET BUTTON
-============================================================ */
-
-function resetLoginButton(){
-
-  const loginBtn =
-    document.getElementById(
-      "loginBtn"
-    );
-
-
-  loginBtn.disabled =
-    false;
-
-
-  loginBtn.innerHTML =
-    "Login";
-
-}
-
-
-/* ============================================================
-   SAVE USER SESSION
-============================================================ */
-
-function saveUserSession(
-  result,
-  typedUsername
-){
-
-  const role =
-    String(
-      result.role || ""
-    )
-    .trim()
-    .toLowerCase();
-
-
-  const loggedUser = {
-
-    username:
-      result.username ||
-      typedUsername,
-
-    name:
-      result.name ||
-      "",
-
-    role:
-      role,
-
-    status:
-      result.status ||
-      "active",
-
-    picture:
-      result.picture ||
-      "",
-
-    rowNumber:
-      result.rowNumber ||
-      "",
-
-    device:
-      getDeviceName(),
-
-    loginTime:
-      new Date().toISOString()
-
+  /* ==========================================================
+     APPS SCRIPT WEB APP URL
+     ========================================================== */
+
+  const USER_API_URL =
+    "https://script.google.com/macros/s/AKfycbw00GHHheuvtdQtgPURjs4PtsM48-4yaFx-_ms0ZBV5FHhnmcdbJ5DHr3Aix8JPF0kQzA/exec";
+
+
+  /* ==========================================================
+     ROLE ROUTES
+     ========================================================== */
+
+  const ROUTES = {
+    admin: "ad.html",
+    support: "2S.html",
+    call: "2S.html",
+    manager: "ad.html",
+    guest: "2S.html"
   };
 
 
-  localStorage.setItem(
-    "dashboardAuth",
-    "true"
-  );
+  /* ==========================================================
+     DEVICE DETECTION
+     ========================================================== */
 
+  function getDeviceName() {
 
-  localStorage.setItem(
-    "username",
-    loggedUser.username
-  );
+    const ua = navigator.userAgent;
 
+    let device = "Computer";
 
-  localStorage.setItem(
-    "userData",
-    JSON.stringify(
-      loggedUser
-    )
-  );
+    if (/Android/i.test(ua)) {
+      device = "Android";
+    }
+    else if (/iPhone/i.test(ua)) {
+      device = "iPhone";
+    }
+    else if (/iPad/i.test(ua)) {
+      device = "iPad";
+    }
+    else if (/Windows/i.test(ua)) {
+      device = "Windows PC";
+    }
+    else if (/Macintosh/i.test(ua)) {
+      device = "Mac";
+    }
+    else if (/Linux/i.test(ua)) {
+      device = "Linux";
+    }
 
+    let browser = "Browser";
 
-  localStorage.setItem(
-    "loginData",
-    JSON.stringify(
-      loggedUser
-    )
-  );
+    if (/Edg/i.test(ua)) {
+      browser = "Edge";
+    }
+    else if (/Chrome/i.test(ua)) {
+      browser = "Chrome";
+    }
+    else if (/Firefox/i.test(ua)) {
+      browser = "Firefox";
+    }
+    else if (/Safari/i.test(ua)) {
+      browser = "Safari";
+    }
 
-
-  localStorage.setItem(
-    "loggedUser",
-    JSON.stringify(
-      loggedUser
-    )
-  );
-
-
-  localStorage.setItem(
-    "currentUser",
-    JSON.stringify(
-      loggedUser
-    )
-  );
-
-
-  localStorage.setItem(
-    "userInfo",
-    JSON.stringify(
-      loggedUser
-    )
-  );
-
-
-  sessionStorage.setItem(
-    "dashboardAuth",
-    "true"
-  );
-
-
-  return loggedUser;
-
-}
-
-
-/* ============================================================
-   LOGIN
-============================================================ */
-
-function loginUser(event){
-
-  event.preventDefault();
-
-
-  const username =
-    document
-      .getElementById("username")
-      .value
-      .trim();
-
-
-  const password =
-    document
-      .getElementById("password")
-      .value;
-
-
-  const loginBtn =
-    document.getElementById(
-      "loginBtn"
-    );
-
-
-  // ----------------------------------------------------------
-  // EMPTY CHECK
-  // ----------------------------------------------------------
-
-  if (!username) {
-
-    showMessage(
-      "Please enter username.",
-      "error"
-    );
-
-    return;
-
+    return device + " / " + browser;
   }
 
 
-  if (!password) {
+  document.getElementById("deviceName").textContent =
+    getDeviceName();
 
-    showMessage(
-      "Please enter password.",
-      "error"
-    );
 
-    return;
+  /* ==========================================================
+     MESSAGE
+     ========================================================== */
 
+  function showMessage(text, type = "") {
+
+    const message =
+      document.getElementById("message");
+
+    message.textContent = text;
+
+    if (type === "error") {
+      message.style.color = "#ffe0e0";
+    }
+    else if (type === "success") {
+      message.style.color = "#eaffea";
+    }
+    else {
+      message.style.color = "#ffffff";
+    }
   }
 
 
-  // ----------------------------------------------------------
-  // LOADING
-  // ----------------------------------------------------------
+  /* ==========================================================
+     FORGOT PASSWORD
+     ========================================================== */
 
-  loginBtn.disabled =
-    true;
-
-
-  loginBtn.innerHTML =
-    '<span class="loader"></span>Login...';
-
-
-  showMessage(
-    "",
-    ""
-  );
-
-
-  // ----------------------------------------------------------
-  // CHECK google.script.run
-  // ----------------------------------------------------------
-
-  if (
-    typeof google === "undefined" ||
-    !google.script ||
-    !google.script.run
-  ) {
+  function forgotPassword() {
 
     showMessage(
-      "❌ Apps Script connection পাওয়া যায়নি।",
-      "error"
+      "Please contact your administrator to reset your password."
     );
-
-    resetLoginButton();
-
-    return;
-
   }
 
 
-  // ----------------------------------------------------------
-  // DIRECT APPS SCRIPT LOGIN
-  // ----------------------------------------------------------
+  /* ==========================================================
+     LOGIN
+     ========================================================== */
 
-  google
-    .script
-    .run
+  async function loginUser(event) {
 
-    .withSuccessHandler(
-      function(result){
+    event.preventDefault();
 
-        console.log(
-          "Login response:",
-          result
+    const username =
+      document.getElementById("username")
+        .value
+        .trim();
+
+    const password =
+      document.getElementById("password")
+        .value;
+
+    const loginBtn =
+      document.getElementById("loginBtn");
+
+    const loader =
+      document.getElementById("loader");
+
+    if (!username || !password) {
+
+      showMessage(
+        "Please enter username and password.",
+        "error"
+      );
+
+      return;
+    }
+
+
+    /* Disable button */
+
+    loginBtn.disabled = true;
+    loginBtn.textContent = "Login...";
+
+    loader.style.display = "block";
+
+    showMessage("Checking login...");
+
+
+    try {
+
+      const url =
+        USER_API_URL +
+        "?action=login" +
+        "&username=" +
+        encodeURIComponent(username) +
+        "&password=" +
+        encodeURIComponent(password) +
+        "&_=" +
+        Date.now();
+
+
+      const response =
+        await fetch(url, {
+          method: "GET",
+          redirect: "follow",
+          cache: "no-store"
+        });
+
+
+      if (!response.ok) {
+
+        throw new Error(
+          "Server response: " +
+          response.status
         );
+      }
 
 
-        // ----------------------------------------------------
-        // LOGIN FAILED
-        // ----------------------------------------------------
-
-        if (
-          !result ||
-          result.success !== true
-        ) {
-
-          showMessage(
-            "❌ " +
-            (
-              result &&
-              result.message
-                ? result.message
-                : "Invalid username or password."
-            ),
-            "error"
-          );
+      const result =
+        await response.json();
 
 
-          resetLoginButton();
-
-          return;
-
-        }
+      console.log("Login response:", result);
 
 
-        // ----------------------------------------------------
-        // ROLE
-        // ----------------------------------------------------
+      /* ======================================================
+         LOGIN SUCCESS
+         ====================================================== */
+
+      if (
+        result.success === true ||
+        result.status === "success"
+      ) {
+
+        const user =
+          result.user ||
+          result.data ||
+          result;
+
 
         const role =
           String(
-            result.role || ""
+            user.role ||
+            result.role ||
+            ""
           )
           .trim()
           .toLowerCase();
 
 
-        const targetPage =
-          ROUTES[role];
+        const loggedUsername =
+          user.username ||
+          result.username ||
+          username;
 
 
-        if (!targetPage) {
+        /* ================================================
+           SAVE LOGIN SESSION
+           ================================================ */
 
-          showMessage(
-            "❌ Your account role is not configured.",
-            "error"
-          );
+        localStorage.setItem(
+          "dashboardAuth",
+          "true"
+        );
 
+        localStorage.setItem(
+          "username",
+          loggedUsername
+        );
 
-          resetLoginButton();
+        localStorage.setItem(
+          "userData",
+          JSON.stringify(user)
+        );
 
-          return;
+        localStorage.setItem(
+          "loginData",
+          JSON.stringify(user)
+        );
 
-        }
+        localStorage.setItem(
+          "loggedUser",
+          loggedUsername
+        );
 
+        localStorage.setItem(
+          "currentUser",
+          loggedUsername
+        );
 
-        // ----------------------------------------------------
-        // SAVE SESSION
-        // ----------------------------------------------------
+        localStorage.setItem(
+          "userInfo",
+          JSON.stringify(user)
+        );
 
-        saveUserSession(
-          result,
-          username
+        sessionStorage.setItem(
+          "dashboardAuth",
+          "true"
         );
 
 
-        // ----------------------------------------------------
-        // SUCCESS
-        // ----------------------------------------------------
-
         showMessage(
-          "✓ Login successful...",
+          "Login successful. Opening dashboard...",
           "success"
         );
 
 
-        // ----------------------------------------------------
-        // REDIRECT
-        // ----------------------------------------------------
+        /* ================================================
+           ROLE ROUTING
+           ================================================ */
 
-        setTimeout(
-          function(){
+        const target =
+          ROUTES[role];
 
-            window.location.href =
-              targetPage;
 
-          },
-          350
-        );
+        if (target) {
 
+          setTimeout(function () {
+
+            window.location.replace(target);
+
+          }, 300);
+
+        }
+        else {
+
+          showMessage(
+            "Login successful, but no page is assigned to role: " +
+            role,
+            "error"
+          );
+
+          loginBtn.disabled = false;
+          loginBtn.textContent = "Login";
+          loader.style.display = "none";
+        }
+
+
+        return;
       }
-    )
-
-    .withFailureHandler(
-      function(error){
-
-        console.error(
-          "Login error:",
-          error
-        );
 
 
-        showMessage(
-          "❌ Login failed. Please try again.",
-          "error"
-        );
+      /* ======================================================
+         LOGIN FAILED
+         ====================================================== */
 
-
-        resetLoginButton();
-
-      }
-    )
-
-    .loginUser(
-      username,
-      password
-    );
-
-}
-
-
-/* ============================================================
-   FORM SUBMIT
-============================================================ */
-
-document
-  .getElementById("loginForm")
-  .addEventListener(
-    "submit",
-    loginUser
-  );
-
-
-/* ============================================================
-   FORGOT PASSWORD
-============================================================ */
-
-document
-  .getElementById("forgotBtn")
-  .addEventListener(
-    "click",
-    function(){
+      const errorMessage =
+        result.message ||
+        result.error ||
+        "Invalid username or password.";
 
       showMessage(
-        "Please contact your administrator to reset your password.",
+        errorMessage,
         "error"
       );
 
     }
+    catch (error) {
+
+      console.error(
+        "Login Error:",
+        error
+      );
+
+      showMessage(
+        "Login connection failed. Please try again.",
+        "error"
+      );
+    }
+
+
+    /* ======================================================
+       RESET BUTTON
+       ====================================================== */
+
+    loginBtn.disabled = false;
+    loginBtn.textContent = "Login";
+
+    loader.style.display = "none";
+  }
+
+
+  /* ==========================================================
+     PREVENT BACK TO LOGIN AFTER ALREADY LOGGED IN
+     ========================================================== */
+
+  window.addEventListener(
+    "pageshow",
+    function () {
+
+      const isLogged =
+        localStorage.getItem("dashboardAuth") === "true";
+
+      if (!isLogged) {
+        return;
+      }
+
+      /*
+       * এখানে auto redirect রাখা হয়নি।
+       * কারণ login page manually open করলেও
+       * user যেন সমস্যা ছাড়া login করতে পারে।
+       */
+    }
   );
 
 
-/* ============================================================
-   ENTER KEY
-============================================================ */
+  /* ==========================================================
+     ENTER KEY SUPPORT
+     ========================================================== */
 
-document
-  .getElementById("username")
-  .addEventListener(
-    "keydown",
-    function(event){
+  document
+    .getElementById("username")
+    .addEventListener("keydown", function(event) {
 
-      if (
-        event.key === "Enter"
-      ){
+      if (event.key === "Enter") {
 
         event.preventDefault();
 
         document
           .getElementById("password")
           .focus();
-
       }
 
-    }
-  );
+    });
 
 
-/* ============================================================
-   NO AUTO REDIRECT
-============================================================ */
+  document
+    .getElementById("password")
+    .addEventListener("keydown", function(event) {
 
-window.addEventListener(
-  "pageshow",
-  function(){
+      if (event.key === "Enter") {
 
-    // Login page automatically redirect করবে না.
+        event.preventDefault();
 
-  }
-);
+        document
+          .querySelector("form")
+          .requestSubmit();
+      }
+
+    });
 
 </script>
 
 </body>
-
 </html>
