@@ -46,7 +46,6 @@
     sans-serif;
 }
 
-
 body{
 
   min-height:100vh;
@@ -70,7 +69,6 @@ body{
   position:relative;
 
 }
-
 
 body::before{
 
@@ -97,7 +95,6 @@ body::before{
 
 }
 
-
 .cloud{
 
   position:absolute;
@@ -113,7 +110,6 @@ body::before{
 
 }
 
-
 .cloud-1{
 
   width:230px;
@@ -125,7 +121,6 @@ body::before{
   bottom:220px;
 
 }
-
 
 .cloud-1::before{
 
@@ -148,7 +143,6 @@ body::before{
 
 }
 
-
 .cloud-1::after{
 
   content:"";
@@ -170,7 +164,6 @@ body::before{
 
 }
 
-
 .cloud-2{
 
   width:260px;
@@ -182,7 +175,6 @@ body::before{
   top:105px;
 
 }
-
 
 .cloud-2::before{
 
@@ -205,7 +197,6 @@ body::before{
 
 }
 
-
 .cloud-2::after{
 
   content:"";
@@ -227,7 +218,6 @@ body::before{
 
 }
 
-
 .cloud-3{
 
   width:300px;
@@ -239,7 +229,6 @@ body::before{
   bottom:100px;
 
 }
-
 
 .cloud-3::before{
 
@@ -262,7 +251,6 @@ body::before{
 
 }
 
-
 .cloud-3::after{
 
   content:"";
@@ -284,7 +272,6 @@ body::before{
 
 }
 
-
 .login-wrapper{
 
   width:100%;
@@ -304,7 +291,6 @@ body::before{
   z-index:5;
 
 }
-
 
 .login-card{
 
@@ -343,7 +329,6 @@ body::before{
 
 }
 
-
 .user-icon{
 
   width:58px;
@@ -355,7 +340,6 @@ body::before{
   margin-bottom:12px;
 
 }
-
 
 .user-icon::before{
 
@@ -379,7 +363,6 @@ body::before{
     translateX(-50%);
 
 }
-
 
 .user-icon::after{
 
@@ -405,7 +388,6 @@ body::before{
 
 }
 
-
 .login-title{
 
   font-size:25px;
@@ -420,7 +402,6 @@ body::before{
 
 }
 
-
 .login-form{
 
   width:100%;
@@ -432,7 +413,6 @@ body::before{
   align-items:center;
 
 }
-
 
 .input-box{
 
@@ -466,13 +446,11 @@ body::before{
 
 }
 
-
 .input-box::placeholder{
 
   color:#999;
 
 }
-
 
 .input-box:focus{
 
@@ -485,7 +463,6 @@ body::before{
     rgba(0,0,0,.15);
 
 }
-
 
 .device-box{
 
@@ -505,13 +482,11 @@ body::before{
 
 }
 
-
 .device-box span{
 
   font-weight:600;
 
 }
-
 
 .forgot{
 
@@ -531,13 +506,11 @@ body::before{
 
 }
 
-
 .forgot:hover{
 
   text-decoration:underline;
 
 }
-
 
 .login-btn{
 
@@ -570,7 +543,6 @@ body::before{
 
 }
 
-
 .login-btn:hover{
 
   background:#06466f;
@@ -584,14 +556,12 @@ body::before{
 
 }
 
-
 .login-btn:active{
 
   transform:
     translateY(0);
 
 }
-
 
 .login-btn:disabled{
 
@@ -602,7 +572,6 @@ body::before{
   transform:none;
 
 }
-
 
 .message{
 
@@ -620,20 +589,17 @@ body::before{
 
 }
 
-
 .message.error{
 
   color:#b91c1c;
 
 }
 
-
 .message.success{
 
   color:#047857;
 
 }
-
 
 .loader{
 
@@ -660,7 +626,6 @@ body::before{
 
 }
 
-
 @keyframes spin{
 
   to{
@@ -668,7 +633,6 @@ body::before{
   }
 
 }
-
 
 .login-footer{
 
@@ -684,7 +648,6 @@ body::before{
 
 }
 
-
 @media(max-width:500px){
 
   .login-wrapper{
@@ -692,7 +655,6 @@ body::before{
     padding:18px;
 
   }
-
 
   .login-card{
 
@@ -707,20 +669,17 @@ body::before{
 
   }
 
-
   .login-title{
 
     font-size:24px;
 
   }
 
-
   .input-box{
 
     height:47px;
 
   }
-
 
   .login-btn{
 
@@ -731,7 +690,6 @@ body::before{
   }
 
 }
-
 
 @media(max-height:650px){
 
@@ -745,13 +703,11 @@ body::before{
 
   }
 
-
   .login-title{
 
     margin-bottom:22px;
 
   }
-
 
   .forgot{
 
@@ -765,9 +721,7 @@ body::before{
 
 </head>
 
-
 <body>
-
 
 <div class="cloud cloud-1"></div>
 
@@ -775,26 +729,21 @@ body::before{
 
 <div class="cloud cloud-3"></div>
 
-
 <div class="login-wrapper">
 
   <div class="login-card">
 
-
     <div class="user-icon"></div>
-
 
     <h1 class="login-title">
       User Login
     </h1>
-
 
     <form
       class="login-form"
       id="loginForm"
       onsubmit="loginUser(event)"
     >
-
 
       <input
         class="input-box"
@@ -805,7 +754,6 @@ body::before{
         required
       >
 
-
       <input
         class="input-box"
         type="password"
@@ -814,7 +762,6 @@ body::before{
         autocomplete="current-password"
         required
       >
-
 
       <div class="device-box">
 
@@ -825,7 +772,6 @@ body::before{
 
       </div>
 
-
       <button
         type="button"
         class="forgot"
@@ -833,7 +779,6 @@ body::before{
       >
         Forgot Password?
       </button>
-
 
       <button
         type="submit"
@@ -843,33 +788,25 @@ body::before{
         Login
       </button>
 
-
       <div
         class="message"
         id="message"
       ></div>
 
-
     </form>
 
-
     <div class="login-footer">
-
       Secure User Login System
-
     </div>
-
 
   </div>
 
 </div>
 
-
 <script>
 
-
 /* =====================================================
-   API URL
+   GOOGLE APPS SCRIPT API
 ===================================================== */
 
 const USER_API_URL =
@@ -882,20 +819,11 @@ const USER_API_URL =
 
 const ROUTES = {
 
-  admin:
-    "ad.html",
+  admin: "ad.html",
 
-  support:
-    "2S.html",
+  support: "2S.html",
 
-  call:
-    "2S.html",
-
-  manager:
-    "ad.html",
-
-  guest:
-    "2S.html"
+  call: "2S.html"
 
 };
 
@@ -909,10 +837,8 @@ function getDeviceName(){
   const ua =
     navigator.userAgent || "";
 
-
   let device =
     "Unknown Device";
-
 
   if(/Android/i.test(ua)){
 
@@ -951,10 +877,8 @@ function getDeviceName(){
 
   }
 
-
   let browser =
     "Browser";
-
 
   if(/Edg/i.test(ua)){
 
@@ -981,7 +905,6 @@ function getDeviceName(){
 
   }
 
-
   return device +
     " • " +
     browser;
@@ -1003,28 +926,19 @@ async function loginUser(event){
 
   event.preventDefault();
 
-
   const username =
     document
-      .getElementById(
-        "username"
-      )
+      .getElementById("username")
       .value
       .trim();
 
-
   const password =
     document
-      .getElementById(
-        "password"
-      )
+      .getElementById("password")
       .value;
 
-
   const loginBtn =
-    document.getElementById(
-      "loginBtn"
-    );
+    document.getElementById("loginBtn");
 
 
   if(!username){
@@ -1054,31 +968,21 @@ async function loginUser(event){
   loginBtn.disabled =
     true;
 
-
   loginBtn.innerHTML =
     '<span class="loader"></span>Login...';
 
-
-  showMessage(
-    "",
-    ""
-  );
+  showMessage("", "");
 
 
   try{
-
 
     const url =
       USER_API_URL +
       "?action=login" +
       "&username=" +
-      encodeURIComponent(
-        username
-      ) +
+      encodeURIComponent(username) +
       "&password=" +
-      encodeURIComponent(
-        password
-      ) +
+      encodeURIComponent(password) +
       "&_=" +
       Date.now();
 
@@ -1087,11 +991,9 @@ async function loginUser(event){
       await fetch(
         url,
         {
-          method:"GET",
-
-          cache:"no-store",
-
-          redirect:"follow"
+          method: "GET",
+          cache: "no-store",
+          redirect: "follow"
         }
       );
 
@@ -1126,14 +1028,7 @@ async function loginUser(event){
         "error"
       );
 
-
-      loginBtn.disabled =
-        false;
-
-
-      loginBtn.textContent =
-        "Login";
-
+      resetLoginButton();
 
       return;
 
@@ -1142,8 +1037,7 @@ async function loginUser(event){
 
     const role =
       String(
-        result.role ||
-        ""
+        result.role || ""
       )
       .trim()
       .toLowerCase();
@@ -1160,14 +1054,7 @@ async function loginUser(event){
         "error"
       );
 
-
-      loginBtn.disabled =
-        false;
-
-
-      loginBtn.textContent =
-        "Login";
-
+      resetLoginButton();
 
       return;
 
@@ -1191,6 +1078,10 @@ async function loginUser(event){
         result.status ||
         "Active",
 
+      picture:
+        result.picture ||
+        "",
+
       rowNumber:
         result.rowNumber ||
         "",
@@ -1199,15 +1090,13 @@ async function loginUser(event){
         getDeviceName(),
 
       loginTime:
-        new Date()
-          .toISOString()
+        new Date().toISOString()
 
     };
 
 
     /*
-     * Login successful.
-     * এখন session save হবে।
+     * SAVE LOGIN SESSION
      */
 
     localStorage.setItem(
@@ -1215,52 +1104,35 @@ async function loginUser(event){
       "true"
     );
 
-
     localStorage.setItem(
       "username",
       loggedUser.username
     );
 
-
     localStorage.setItem(
       "userData",
-      JSON.stringify(
-        loggedUser
-      )
+      JSON.stringify(loggedUser)
     );
-
 
     localStorage.setItem(
       "loginData",
-      JSON.stringify(
-        loggedUser
-      )
+      JSON.stringify(loggedUser)
     );
-
 
     localStorage.setItem(
       "loggedUser",
-      JSON.stringify(
-        loggedUser
-      )
+      JSON.stringify(loggedUser)
     );
-
 
     localStorage.setItem(
       "currentUser",
-      JSON.stringify(
-        loggedUser
-      )
+      JSON.stringify(loggedUser)
     );
-
 
     localStorage.setItem(
       "userInfo",
-      JSON.stringify(
-        loggedUser
-      )
+      JSON.stringify(loggedUser)
     );
-
 
     sessionStorage.setItem(
       "dashboardAuth",
@@ -1275,46 +1147,50 @@ async function loginUser(event){
 
 
     /*
-     * IMPORTANT:
-     * Redirect ONLY HERE.
-     *
-     * index.html load হওয়ার সময়
-     * কোনো redirect নেই।
+     * ROLE অনুযায়ী redirect
      */
 
-    setTimeout(
-      function(){
+    setTimeout(function(){
 
-        window.location.href =
-          targetPage;
+      window.location.href =
+        targetPage;
 
-      },
-      500
-    );
+    }, 500);
 
 
   }
   catch(error){
 
-    console.error(
-      error
-    );
-
+    console.error(error);
 
     showMessage(
       "❌ Login failed. Please try again.",
       "error"
     );
 
-
-    loginBtn.disabled =
-      false;
-
-
-    loginBtn.textContent =
-      "Login";
+    resetLoginButton();
 
   }
+
+}
+
+
+/* =====================================================
+   RESET LOGIN BUTTON
+===================================================== */
+
+function resetLoginButton(){
+
+  const loginBtn =
+    document.getElementById(
+      "loginBtn"
+    );
+
+  loginBtn.disabled =
+    false;
+
+  loginBtn.textContent =
+    "Login";
 
 }
 
@@ -1333,10 +1209,8 @@ function showMessage(
       "message"
     );
 
-
   message.textContent =
     text;
-
 
   message.className =
     "message " +
@@ -1366,24 +1240,17 @@ function forgotPassword(){
 ===================================================== */
 
 document
-  .getElementById(
-    "username"
-  )
+  .getElementById("username")
   .addEventListener(
     "keydown",
     function(event){
 
-      if(
-        event.key ===
-        "Enter"
-      ){
+      if(event.key === "Enter"){
 
         event.preventDefault();
 
         document
-          .getElementById(
-            "password"
-          )
+          .getElementById("password")
           .focus();
 
       }
@@ -1393,45 +1260,16 @@ document
 
 
 /* =====================================================
-   VERY IMPORTANT
+   NO AUTO REDIRECT
 ===================================================== */
-
-/*
- * এখানে কোনো:
- *
- * localStorage check
- * dashboardAuth check
- * userData check
- * pageshow redirect
- * popstate redirect
- * automatic redirect
- *
- * রাখা হয়নি।
- *
- * তাই index.html খুললে Login page-ই থাকবে।
- *
- * Dashboard-এ যাবে শুধুমাত্র
- * successful login-এর পরে।
- */
-
-
-/* =====================================================
-   STOP BACK-FORWARD CACHE RESTORE
-===================================================== */
-
-/*
- * Browser যদি আগের page থেকে index.html-এ
- * ফিরে আসে, তবুও redirect করা হবে না।
- *
- * Login page-ই থাকবে।
- */
 
 window.addEventListener(
   "pageshow",
   function(){
 
     /*
-     * এখানে কোনো redirect নেই।
+     * এখানে কোনো automatic redirect নেই।
+     * index.html খুললে Login page-ই থাকবে।
      */
 
   }
