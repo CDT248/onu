@@ -1,350 +1,5178 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Hello Animal</title>
+<title>Data Dashboard</title>
+
+<link
+  rel="icon"
+  type="image/png"
+  sizes="128x128"
+  href="https://cdn-icons-png.flaticon.com/128/17163/17163834.png"
+>
 
 <style>
+
 *{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:Arial,Helvetica,sans-serif;
+}
+
+:root{
+  --bg:#f4f7f6;
+  --card:#ffffff;
+  --text:#1f2937;
+  --muted:#6b7280;
+  --border:#e5e7eb;
+  --input:#ffffff;
+  --thead:#f8fafc;
+  --hover:#fafafa;
+  --green:#087f5b;
+  --green-dark:#066b4d;
+  --blue:#2563eb;
+  --red:#dc2626;
+  --orange:#d97706;
+  --purple:#7c3aed;
+  --shadow:rgba(0,0,0,.20);
+}
+
+body.dark{
+  --bg:#111827;
+  --card:#1f2937;
+  --text:#f9fafb;
+  --muted:#9ca3af;
+  --border:#374151;
+  --input:#111827;
+  --thead:#172033;
+  --hover:#263244;
+  --shadow:rgba(0,0,0,.50);
 }
 
 body{
-    width:100%;
-    height:100vh;
-    overflow:hidden;
-    font-family:Arial, sans-serif;
-    background:
-        radial-gradient(circle at 20% 20%, #ffffff55, transparent 30%),
-        linear-gradient(135deg,#5b2cff,#00bfff,#00e5a8);
-    display:flex;
-    justify-content:center;
-    align-items:center;
+  background:var(--bg);
+  color:var(--text);
+  transition:.25s;
 }
 
-/* Background bubbles */
-.bubble{
-    position:absolute;
-    border-radius:50%;
-    background:#ffffff18;
-    animation:float 8s infinite ease-in-out;
+button{
+  border:none;
+  cursor:pointer;
+  transition:.2s;
 }
 
-.b1{
-    width:180px;
-    height:180px;
-    top:8%;
-    left:5%;
+button:disabled{
+  cursor:not-allowed;
+  opacity:.5;
 }
 
-.b2{
-    width:250px;
-    height:250px;
-    bottom:-80px;
-    right:5%;
-    animation-delay:2s;
+/* ================= HEADER ================= */
+
+.header{
+  width:100%;
+  min-height:70px;
+  background:var(--card);
+  border-bottom:1px solid var(--border);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 25px;
+  position:sticky;
+  top:0;
+  z-index:100;
 }
 
-.b3{
-    width:100px;
-    height:100px;
-    top:45%;
-    right:15%;
-    animation-delay:4s;
+.logo{
+  font-size:22px;
+  font-weight:700;
+  color:var(--green);
 }
 
-@keyframes float{
-    0%,100%{
-        transform:translateY(0);
-    }
-    50%{
-        transform:translateY(-30px);
-    }
+.header-right{
+  display:flex;
+  align-items:center;
+  gap:10px;
 }
 
-/* Main Card */
+.btn{
+  padding:11px 17px;
+  border-radius:8px;
+  font-size:14px;
+  font-weight:600;
+}
+
+.btn-primary{
+  background:var(--green);
+  color:#fff;
+}
+
+.btn-primary:hover{
+  background:var(--green-dark);
+}
+
+.btn-refresh,
+.theme-btn,
+.btn-cancel{
+  background:var(--input);
+  color:var(--text);
+  border:1px solid var(--border);
+}
+
+.btn-refresh:hover,
+.theme-btn:hover,
+.btn-cancel:hover{
+  background:var(--hover);
+}
+
+.theme-btn{
+  height:42px;
+  padding:0 14px;
+  border-radius:8px;
+  font-size:13px;
+  font-weight:600;
+}
+
+.btn-users{
+  background:#7c3aed;
+  color:#fff;
+}
+
+.btn-users:hover{
+  background:#6d28d9;
+}
+
+.btn-logout{
+  background:#dc2626;
+  color:#fff;
+  padding:11px 17px;
+  border-radius:8px;
+  font-size:14px;
+  font-weight:600;
+}
+
+.btn-logout:hover{
+  background:#b91c1c;
+}
+
+/* ================= CONTAINER ================= */
+
 .container{
-    position:relative;
-    z-index:5;
-    width:90%;
-    max-width:550px;
-    padding:45px 25px 40px;
-    text-align:center;
-
-    background:rgba(255,255,255,0.16);
-    backdrop-filter:blur(18px);
-    -webkit-backdrop-filter:blur(18px);
-
-    border:1px solid rgba(255,255,255,0.3);
-    border-radius:35px;
-
-    box-shadow:
-        0 25px 60px rgba(0,0,0,0.25);
+  width:100%;
+  max-width:1500px;
+  margin:auto;
+  padding:25px;
 }
 
-/* Animal */
-.animal{
-    font-size:115px;
-    display:inline-block;
-    animation:
-        animalMove 2s infinite ease-in-out,
-        animalBounce 4s infinite;
-    filter:drop-shadow(0 12px 10px rgba(0,0,0,.2));
-    cursor:pointer;
-    user-select:none;
+.top-section{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:15px;
+  margin-bottom:20px;
 }
 
-@keyframes animalMove{
-    0%,100%{
-        transform:translateY(0) rotate(-4deg);
-    }
-    50%{
-        transform:translateY(-18px) rotate(4deg);
-    }
+.title h1{
+  font-size:27px;
+  margin-bottom:5px;
 }
 
-@keyframes animalBounce{
-    0%,90%,100%{
-        scale:1;
-    }
-    94%{
-        scale:1.12;
-    }
+.title p{
+  color:var(--muted);
+  font-size:14px;
 }
 
-/* Hello text */
-.hello{
-    margin-top:10px;
-    color:white;
-    font-size:clamp(55px,12vw,100px);
-    font-weight:900;
-    letter-spacing:5px;
+/* ================= FILTER ================= */
 
-    text-shadow:
-        0 8px 20px rgba(0,0,0,.25);
-
-    animation:
-        helloIn 1.5s ease,
-        helloGlow 2.5s infinite alternate;
+.filter-box{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:14px;
+  padding:16px;
+  margin-bottom:20px;
+  box-shadow:0 3px 12px rgba(0,0,0,.03);
 }
 
-@keyframes helloIn{
-    from{
-        opacity:0;
-        transform:scale(.5) translateY(30px);
-    }
-    to{
-        opacity:1;
-        transform:scale(1) translateY(0);
-    }
+.filters{
+  display:grid;
+  grid-template-columns:minmax(260px,2fr) minmax(150px,1fr) minmax(150px,1fr) 150px 82px;
+  gap:10px;
+  align-items:end;
 }
 
-@keyframes helloGlow{
-    from{
-        text-shadow:
-            0 8px 20px rgba(0,0,0,.25);
-    }
-    to{
-        text-shadow:
-            0 8px 30px rgba(255,255,255,.45);
-    }
+.field{
+  display:flex;
+  flex-direction:column;
+  gap:6px;
 }
 
-.subtitle{
-    color:#ffffffdd;
+.field label{
+  font-size:11px;
+  font-weight:700;
+  color:var(--muted);
+  padding-left:2px;
+}
+
+.field input,
+.field select{
+  width:100%;
+  height:44px;
+  border:1px solid var(--border);
+  border-radius:9px;
+  padding:0 12px;
+  outline:none;
+  background:var(--input);
+  color:var(--text);
+  font-size:13px;
+  transition:.2s;
+}
+
+.field input:hover,
+.field select:hover{
+  border-color:#cbd5e1;
+}
+
+.field input:focus,
+.field select:focus{
+  border-color:var(--green);
+  box-shadow:0 0 0 3px rgba(8,127,91,.08);
+}
+
+.data-selector{
+  position:relative;
+}
+
+.data-selector select{
+  appearance:none;
+  -webkit-appearance:none;
+  padding-right:35px;
+  font-weight:600;
+  cursor:pointer;
+}
+
+.data-selector::after{
+  content:"⌄";
+  position:absolute;
+  right:13px;
+  bottom:11px;
+  font-size:17px;
+  color:var(--muted);
+  pointer-events:none;
+}
+
+.clear-filter-btn{
+  height:44px;
+  padding:0 13px;
+  border-radius:9px;
+  background:var(--input);
+  color:var(--text);
+  border:1px solid var(--border);
+  font-size:13px;
+  font-weight:700;
+}
+
+.clear-filter-btn:hover{
+  background:var(--hover);
+}
+
+/* ================= TABLE ================= */
+
+.table-box{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:12px;
+  overflow:hidden;
+}
+
+.table-header{
+  padding:16px 18px;
+  border-bottom:1px solid var(--border);
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.table-header h2{
+  font-size:17px;
+}
+
+.total-count{
+  font-size:13px;
+  color:var(--muted);
+}
+
+.table-wrapper{
+  width:100%;
+  overflow-x:auto;
+}
+
+table{
+  width:100%;
+  border-collapse:collapse;
+  min-width:900px;
+}
+
+th{
+  background:var(--thead);
+  padding:14px;
+  text-align:left;
+  font-size:12px;
+  color:var(--muted);
+  white-space:nowrap;
+  border-bottom:1px solid var(--border);
+}
+
+td{
+  padding:14px;
+  border-bottom:1px solid var(--border);
+  font-size:13px;
+  white-space:nowrap;
+}
+
+tr:hover td{
+  background:var(--hover);
+}
+
+.date-cell{
+  color:var(--muted);
+  font-weight:500;
+}
+
+.user-cell{
+  font-weight:600;
+  color:var(--purple);
+}
+
+.actions{
+  display:flex;
+  gap:7px;
+  align-items:center;
+}
+
+.btn-edit,
+.btn-delete,
+.btn-sell{
+  padding:7px 11px;
+  border-radius:6px;
+  font-size:13px;
+  font-weight:600;
+}
+
+.btn-edit{
+  background:#e8f1ff;
+  color:#2563eb;
+}
+
+.btn-edit:hover{
+  background:#dbeafe;
+}
+
+.btn-delete{
+  background:#fee2e2;
+  color:#dc2626;
+}
+
+.btn-delete:hover{
+  background:#fecaca;
+}
+
+.btn-sell{
+  background:#fff7ed;
+  color:#d97706;
+}
+
+.btn-sell:hover{
+  background:#ffedd5;
+}
+
+/* ================= PAGINATION ================= */
+
+.pagination-box{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:15px 18px;
+  border-top:1px solid var(--border);
+}
+
+.page-info{
+  font-size:13px;
+  color:var(--muted);
+}
+
+.pagination{
+  display:flex;
+  gap:5px;
+  flex-wrap:wrap;
+}
+
+.page-btn{
+  min-width:35px;
+  height:35px;
+  border:1px solid var(--border);
+  background:var(--input);
+  color:var(--text);
+  border-radius:6px;
+  font-size:13px;
+}
+
+.page-btn:hover{
+  background:var(--hover);
+}
+
+.page-btn.active{
+  background:var(--green);
+  color:#fff;
+  border-color:var(--green);
+}
+
+/* ================= MODAL ================= */
+
+.modal{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.55);
+  display:none;
+  justify-content:center;
+  align-items:center;
+  padding:20px;
+  z-index:999;
+}
+
+.modal.show{
+  display:flex;
+}
+
+.modal-box{
+  width:100%;
+  max-width:700px;
+  max-height:95vh;
+  overflow-y:auto;
+  background:var(--card);
+  color:var(--text);
+  border-radius:16px;
+  box-shadow:0 20px 60px var(--shadow);
+}
+
+.modal-header{
+  padding:20px 24px;
+  border-bottom:1px solid var(--border);
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  position:sticky;
+  top:0;
+  background:var(--card);
+  z-index:2;
+}
+
+.modal-header h2{
+  font-size:20px;
+}
+
+.close-btn{
+  width:36px;
+  height:36px;
+  border-radius:50%;
+  background:var(--input);
+  border:1px solid var(--border);
+  font-size:22px;
+  color:var(--text);
+}
+
+.close-btn:hover{
+  background:var(--hover);
+}
+
+.form{
+  padding:30px 25px;
+}
+
+.form-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:22px 18px;
+}
+
+.form-group{
+  display:flex;
+  flex-direction:column;
+  gap:9px;
+}
+
+.form-group.full{
+  grid-column:1 / -1;
+}
+
+.form-group label{
+  font-size:13px;
+  font-weight:600;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select{
+  width:100%;
+  border:1px solid var(--border);
+  border-radius:9px;
+  padding:13px 14px;
+  outline:none;
+  font-size:14px;
+  background:var(--input);
+  color:var(--text);
+}
+
+.form-group input,
+.form-group select{
+  height:48px;
+}
+
+.form-group textarea{
+  min-height:150px;
+  resize:vertical;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus{
+  border-color:var(--green);
+}
+
+.form-footer{
+  display:flex;
+  justify-content:flex-end;
+  gap:10px;
+  padding-top:30px;
+}
+
+/* ================= USER MODAL ================= */
+
+.user-modal-box{
+  max-width:1100px;
+}
+
+.user-toolbar{
+  padding:16px 24px;
+  border-bottom:1px solid var(--border);
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
+}
+
+.user-total{
+  font-size:13px;
+  color:var(--muted);
+}
+
+.user-table-wrapper{
+  width:100%;
+  overflow-x:auto;
+  padding:0 20px;
+}
+
+.user-table{
+  min-width:800px;
+}
+
+.user-actions{
+  display:flex;
+  gap:6px;
+}
+
+.user-action{
+  padding:7px 10px;
+  border-radius:6px;
+  font-size:12px;
+  font-weight:600;
+}
+
+.user-action.edit{
+  background:#e8f1ff;
+  color:#2563eb;
+}
+
+.user-action.block{
+  background:#fff7ed;
+  color:#d97706;
+}
+
+.user-action.unblock{
+  background:#dcfce7;
+  color:#15803d;
+}
+
+.user-action.delete{
+  background:#fee2e2;
+  color:#dc2626;
+}
+
+.status-badge,
+.role-badge{
+  display:inline-flex;
+  align-items:center;
+  padding:5px 9px;
+  border-radius:20px;
+  font-size:11px;
+  font-weight:700;
+}
+
+.status-active{
+  background:#dcfce7;
+  color:#15803d;
+}
+
+.status-blocked{
+  background:#fee2e2;
+  color:#dc2626;
+}
+
+.status-inactive{
+  background:#f3f4f6;
+  color:#6b7280;
+}
+
+.role-badge{
+  background:#ede9fe;
+  color:#6d28d9;
+}
+
+/* ================= STATUS ================= */
+
+.loading{
+  text-align:center;
+  padding:45px 20px;
+  color:var(--muted);
+}
+
+.empty{
+  text-align:center;
+  padding:55px 20px;
+  color:var(--muted);
+}
+
+/* ================= TOAST ================= */
+
+.toast{
+  position:fixed;
+  right:25px;
+  bottom:25px;
+  min-width:260px;
+  padding:14px 17px;
+  border-radius:9px;
+  color:#fff;
+  background:#111827;
+  box-shadow:0 10px 30px rgba(0,0,0,.2);
+  transform:translateY(100px);
+  opacity:0;
+  transition:.3s;
+  z-index:3000;
+  font-size:14px;
+}
+
+.toast.show{
+  transform:translateY(0);
+  opacity:1;
+}
+
+.toast.success{
+  background:#087f5b;
+}
+
+.toast.error{
+  background:#dc2626;
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media(max-width:1050px){
+
+  .filters{
+    grid-template-columns:2fr 1fr 1fr;
+  }
+
+  .data-selector{
+    grid-column:1 / 2;
+  }
+
+  .clear-filter-btn{
+    grid-column:2 / 4;
+  }
+
+}
+
+@media(max-width:900px){
+
+  .top-section{
+    align-items:flex-start;
+    flex-direction:column;
+  }
+
+}
+
+@media(max-width:600px){
+
+  .header{
+    min-height:70px;
+    padding:12px 15px;
+    gap:10px;
+    flex-wrap:wrap;
+  }
+
+  .logo{
     font-size:18px;
-    margin-top:5px;
-    letter-spacing:1px;
-}
+  }
 
-/* Button */
-.helloBtn{
-    margin-top:30px;
-    border:none;
-    outline:none;
+  .header-right{
+    gap:6px;
+    width:100%;
+    justify-content:flex-end;
+    flex-wrap:wrap;
+  }
 
-    padding:15px 45px;
-    border-radius:50px;
+  .header-right .btn,
+  .theme-btn{
+    padding:9px 10px;
+    font-size:12px;
+    height:38px;
+  }
 
-    font-size:18px;
-    font-weight:bold;
-    color:#4b20c9;
+  .btn-logout{
+    padding:9px 10px;
+    font-size:12px;
+  }
 
-    background:white;
+  .container{
+    padding:15px;
+  }
 
-    cursor:pointer;
+  .filter-box{
+    padding:13px;
+  }
 
-    box-shadow:
-        0 10px 25px rgba(0,0,0,.2);
+  .filters{
+    grid-template-columns:1fr;
+    gap:10px;
+  }
 
-    transition:.25s;
-}
+  .data-selector{
+    grid-column:auto;
+  }
 
-.helloBtn:hover{
-    transform:translateY(-5px) scale(1.04);
-    box-shadow:
-        0 15px 35px rgba(0,0,0,.28);
-}
+  .clear-filter-btn{
+    grid-column:auto;
+    width:100%;
+  }
 
-.helloBtn:active{
-    transform:scale(.95);
-}
+  .form-grid{
+    grid-template-columns:1fr;
+  }
 
-/* Animal speech */
-.message{
-    position:absolute;
-    top:-25px;
+  .form-group.full{
+    grid-column:auto;
+  }
+
+  .form{
+    padding:25px 18px;
+  }
+
+  .modal{
+    padding:10px;
+  }
+
+  .modal-box{
+    max-height:96vh;
+    border-radius:13px;
+  }
+
+  .pagination-box{
+    flex-direction:column;
+    gap:12px;
+  }
+
+  .toast{
+    left:15px;
     right:15px;
+    min-width:auto;
+  }
 
-    background:white;
-    color:#333;
-
-    padding:10px 18px;
-    border-radius:20px;
-
-    font-size:14px;
-    font-weight:bold;
-
-    opacity:0;
-    transform:scale(.7);
-
-    transition:.3s;
-
-    box-shadow:0 8px 20px #0003;
 }
 
-.message.show{
-    opacity:1;
-    transform:scale(1);
+
+/* ================= PROFILE ================= */
+.profile-wrap{
+  position:relative;
+}
+.profile-btn{
+  width:42px;
+  height:42px;
+  border-radius:50%;
+  padding:0;
+  overflow:hidden;
+  border:2px solid var(--border);
+  background:var(--input);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+}
+.profile-btn img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+}
+.profile-placeholder{
+  font-size:19px;
+}
+.profile-menu{
+  position:absolute;
+  right:0;
+  top:52px;
+  width:230px;
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:12px;
+  box-shadow:0 14px 35px var(--shadow);
+  padding:8px;
+  display:none;
+  z-index:500;
+}
+.profile-menu.show{display:block;}
+.profile-head{
+  padding:10px 11px;
+  border-bottom:1px solid var(--border);
+  margin-bottom:6px;
+}
+.profile-head strong{
+  display:block;
+  color:var(--text);
+  font-size:14px;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+.profile-head span{
+  display:block;
+  color:var(--muted);
+  font-size:12px;
+  margin-top:3px;
+}
+.profile-menu button{
+  width:100%;
+  text-align:left;
+  background:transparent;
+  color:var(--text);
+  padding:11px 12px;
+  border-radius:8px;
+  font-size:13px;
+  font-weight:600;
+}
+.profile-menu button:hover{background:var(--hover);}
+.profile-menu .profile-logout{color:#dc2626;}
+
+.profile-modal-box{
+  width:min(460px,96vw);
+}
+.profile-preview{
+  width:110px;
+  height:110px;
+  border-radius:50%;
+  object-fit:cover;
+  display:block;
+  margin:5px auto 15px;
+  border:3px solid var(--border);
+  background:var(--input);
+}
+.profile-file{
+  width:100%;
+  padding:10px;
+  border:1px solid var(--border);
+  border-radius:8px;
+  background:var(--input);
+  color:var(--text);
+}
+.profile-actions{
+  display:flex;
+  gap:10px;
+  justify-content:flex-end;
+  margin-top:18px;
+}
+.profile-actions button{
+  padding:10px 15px;
+  border-radius:8px;
+  font-weight:600;
+}
+.profile-danger{
+  color:#dc2626 !important;
 }
 
-/* Mobile */
-@media(max-width:500px){
-
-    .container{
-        padding:35px 18px;
-        border-radius:28px;
-    }
-
-    .animal{
-        font-size:90px;
-    }
-
-    .hello{
-        font-size:60px;
-        letter-spacing:3px;
-    }
-
-    .subtitle{
-        font-size:15px;
-    }
-
-    .helloBtn{
-        padding:13px 35px;
-    }
-}
 </style>
+
 </head>
 
 <body>
 
-<div class="bubble b1"></div>
-<div class="bubble b2"></div>
-<div class="bubble b3"></div>
+<header class="header">
 
-<div class="container">
+  <div class="logo">
+    DATA DASHBOARD
+  </div>
 
-    <div class="message" id="message">
-        Hello! 🐾
-    </div>
+  <div class="header-right">
 
-    <!-- Live Animal -->
-    <div class="animal" id="animal">
-        🐼
-    </div>
-
-    <!-- Hello -->
-    <div class="hello">
-        HELLO
-    </div>
-
-    <div class="subtitle">
-        Welcome to your dashboard ✨
-    </div>
-
-    <button class="helloBtn" onclick="sayHello()">
-        SAY HELLO 👋
+    <button
+      class="theme-btn"
+      id="themeBtn"
+      onclick="toggleTheme()"
+    >
+      🌙 Dark
     </button>
+
+    <button
+      class="btn btn-refresh"
+      id="refreshBtn"
+      onclick="loadData()"
+    >
+      🔄 Refresh
+    </button>
+
+    <button
+      class="btn btn-users"
+      onclick="openUserModal()"
+    >
+      👤 Users
+    </button>
+
+    <button
+      class="btn btn-primary"
+      onclick="openEntryModal()"
+    >
+      ➕ New Entry
+    </button>
+
+    <div class="profile-wrap" id="profileWrap">
+      <button
+        class="profile-btn"
+        id="profileBtn"
+        type="button"
+        onclick="toggleProfileMenu(event)"
+        title="Profile"
+      >
+        <span class="profile-placeholder" id="profilePlaceholder">👤</span>
+        <img id="profileImage" alt="Profile" style="display:none;">
+      </button>
+
+      <div class="profile-menu" id="profileMenu">
+        <div class="profile-head">
+          <strong id="profileName">User</strong>
+          <span id="profileUsername">Username</span>
+        </div>
+
+        <button type="button" onclick="openChangePasswordModal()">
+          🔑 Change Password
+        </button>
+
+        <button type="button" onclick="openChangePictureModal()">
+          🖼️ Change Picture
+        </button>
+
+        <button
+          type="button"
+          class="profile-logout"
+          onclick="logoutUser()"
+        >
+          🚪 Logout
+        </button>
+      </div>
+    </div>
+
+  </div>
+
+</header>
+
+
+<main class="container">
+
+  <div class="top-section">
+
+    <div class="title">
+
+      <h1 id="pageTitle">
+        Data Dashboard
+      </h1>
+
+      <p id="pageSubtitle">
+        Manage your entries
+      </p>
+
+    </div>
+
+  </div>
+
+
+  <!-- FILTER -->
+
+  <section class="filter-box">
+
+    <div class="filters">
+
+      <div class="field">
+
+        <label>🔍 Search</label>
+
+        <input
+          type="text"
+          id="searchInput"
+          placeholder="Search Name, IP, Work or User..."
+          oninput="applyFilters()"
+        >
+
+      </div>
+
+
+      <div class="field">
+
+        <label>📅 From Date</label>
+
+        <input
+          type="date"
+          id="fromDate"
+          onchange="applyFilters()"
+        >
+
+      </div>
+
+
+      <div class="field">
+
+        <label>📅 To Date</label>
+
+        <input
+          type="date"
+          id="toDate"
+          onchange="applyFilters()"
+        >
+
+      </div>
+
+
+      <div class="field data-selector">
+
+        <label>📂 Data</label>
+
+        <select
+          id="dataType"
+          onchange="changeDataType()"
+        >
+
+          <option value="User">
+            👤 User
+          </option>
+
+          <option value="Deleted">
+            🗑️ Deleted
+          </option>
+
+          <option value="Sell">
+            💰 Sell
+          </option>
+
+        </select>
+
+      </div>
+
+
+      <button
+        class="clear-filter-btn"
+        onclick="clearFilters()"
+      >
+        Clear
+      </button>
+
+    </div>
+
+  </section>
+
+
+  <!-- TABLE -->
+
+  <section class="table-box">
+
+    <div class="table-header">
+
+      <h2 id="tableTitle">
+        User Data
+      </h2>
+
+      <div class="total-count">
+        Total:
+        <strong id="totalCount">0</strong>
+      </div>
+
+    </div>
+
+
+    <div class="table-wrapper">
+
+      <table>
+
+        <thead id="tableHead">
+
+          <tr>
+
+            <th>Name</th>
+            <th>IP</th>
+            <th>Work</th>
+            <th>Date</th>
+            <th>Action</th>
+
+          </tr>
+
+        </thead>
+
+
+        <tbody id="tableBody">
+
+          <tr>
+
+            <td colspan="5">
+
+              <div class="loading">
+                Loading data...
+              </div>
+
+            </td>
+
+          </tr>
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+
+    <div class="pagination-box">
+
+      <div
+        class="page-info"
+        id="pageInfo"
+      >
+        Page 1
+      </div>
+
+      <div
+        class="pagination"
+        id="pagination"
+      ></div>
+
+    </div>
+
+  </section>
+
+</main>
+
+
+<!-- ENTRY MODAL -->
+
+<div
+  class="modal"
+  id="entryModal"
+>
+
+  <div class="modal-box">
+
+    <div class="modal-header">
+
+      <h2 id="modalTitle">
+        New Entry
+      </h2>
+
+      <button
+        class="close-btn"
+        onclick="closeEntryModal()"
+      >
+        ×
+      </button>
+
+    </div>
+
+
+    <form
+      class="form"
+      id="entryForm"
+      onsubmit="submitEntry(event)"
+    >
+
+      <div class="form-grid">
+
+        <div class="form-group">
+
+          <label>Name</label>
+
+          <input
+            type="text"
+            id="nameInput"
+            placeholder="Enter name"
+            autocomplete="off"
+            required
+          >
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label>IP</label>
+
+          <input
+            type="text"
+            id="ipInput"
+            placeholder="Enter IP"
+            autocomplete="off"
+            required
+          >
+
+        </div>
+
+
+        <div class="form-group full">
+
+          <label>Work</label>
+
+          <textarea
+            id="workInput"
+            placeholder="Enter work"
+            required
+          ></textarea>
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label>Date</label>
+
+          <input
+            type="date"
+            id="dateInput"
+          >
+
+        </div>
+
+      </div>
+
+
+      <div class="form-footer">
+
+        <button
+          type="button"
+          class="btn btn-cancel"
+          onclick="closeEntryModal()"
+        >
+          Cancel
+        </button>
+
+        <button
+          type="submit"
+          class="btn btn-primary"
+          id="submitBtn"
+        >
+          Save Entry
+        </button>
+
+      </div>
+
+    </form>
+
+  </div>
 
 </div>
 
+
+<!-- USER MANAGEMENT -->
+
+<div
+  class="modal"
+  id="userModal"
+>
+
+  <div class="modal-box user-modal-box">
+
+    <div class="modal-header">
+
+      <h2>👤 User Management</h2>
+
+      <button
+        class="close-btn"
+        onclick="closeUserModal()"
+      >
+        ×
+      </button>
+
+    </div>
+
+
+    <div class="user-toolbar">
+
+      <div class="user-total">
+
+        Total Users:
+        <strong id="userTotal">
+          0
+        </strong>
+
+      </div>
+
+
+      <div>
+
+        <button
+          class="btn btn-refresh"
+          onclick="loadUsers()"
+          id="userRefreshBtn"
+        >
+          🔄 Refresh
+        </button>
+
+        <button
+          class="btn btn-primary"
+          onclick="openAddUserModal()"
+        >
+          ➕ Add User
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <div class="user-table-wrapper">
+
+      <table class="user-table">
+
+        <thead>
+
+          <tr>
+
+            <th>Username</th>
+            <th>Password</th>
+            <th>Name</th>
+            <th>Role</th>
+            <th>Status</th>
+            <th>Action</th>
+
+          </tr>
+
+        </thead>
+
+
+        <tbody id="userTableBody">
+
+          <tr>
+
+            <td colspan="6">
+
+              <div class="loading">
+                Loading users...
+              </div>
+
+            </td>
+
+          </tr>
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- USER FORM -->
+
+<div
+  class="modal"
+  id="userFormModal"
+>
+
+  <div class="modal-box">
+
+    <div class="modal-header">
+
+      <h2 id="userFormTitle">
+        Add User
+      </h2>
+
+      <button
+        class="close-btn"
+        onclick="closeUserFormModal()"
+      >
+        ×
+      </button>
+
+    </div>
+
+
+    <form
+      class="form"
+      id="userForm"
+      onsubmit="submitUser(event)"
+    >
+
+      <div class="form-grid">
+
+        <div class="form-group">
+
+          <label>Username</label>
+
+          <input
+            type="text"
+            id="userUsername"
+            placeholder="Enter username"
+            autocomplete="off"
+            required
+          >
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label>Password</label>
+
+          <input
+            type="text"
+            id="userPassword"
+            placeholder="Enter password"
+            autocomplete="off"
+            required
+          >
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label>Name</label>
+
+          <input
+            type="text"
+            id="userName"
+            placeholder="Enter name"
+            autocomplete="off"
+            required
+          >
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label>Role</label>
+
+          <select
+            id="userRole"
+            required
+          >
+
+            <option value="">
+              Select Role
+            </option>
+
+            <option value="admin">
+              Admin
+            </option>
+
+            <option value="support">
+              Support
+            </option>
+
+            <option value="call">
+              Call
+            </option>
+
+          </select>
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label>Status</label>
+
+          <select
+            id="userStatus"
+            required
+          >
+
+            <option value="">
+              Select Status
+            </option>
+
+            <option value="Active">
+              Active
+            </option>
+
+            <option value="Blocked">
+              Blocked
+            </option>
+
+            <option value="Inactive">
+              Inactive
+            </option>
+
+          </select>
+
+        </div>
+
+      </div>
+
+
+      <div class="form-footer">
+
+        <button
+          type="button"
+          class="btn btn-cancel"
+          onclick="closeUserFormModal()"
+        >
+          Cancel
+        </button>
+
+        <button
+          type="submit"
+          class="btn btn-primary"
+          id="userSubmitBtn"
+        >
+          Add User
+        </button>
+
+      </div>
+
+    </form>
+
+  </div>
+
+</div>
+
+
+<div
+  class="toast"
+  id="toast"
+></div>
+
+
 <script>
 
-/* Different animals automatically change */
-const animals = [
-    "🐼",
-    "🐨",
-    "🐯",
-    "🦁",
-    "🐰",
-    "🐱",
-    "🐶",
-    "🦊"
-];
+/* =========================================================
+   API
+========================================================= */
 
-let index = 0;
+const API_URL =
+"https://script.google.com/macros/s/AKfycbx6fo2Nogf3ETCtS_B-o0HCFqEs3vYkJ9IT9uu_-3l1w8fNJw77mZipeyFm-zZcjUw-5Q/exec";
 
-setInterval(() => {
+const USER_API_URL =
+"https://script.google.com/macros/s/AKfycby1wEKzuThOiXdf9lVmoJVysfasR14ivssXFjGFfDnnc-d16uQRjNhel5LKNXDK4ZbxDw/exec";
 
-    index++;
+const LOGIN_PAGE =
+"index.html";
 
-    if(index >= animals.length){
-        index = 0;
+const ROWS_PER_PAGE =
+10;
+
+const AUTO_LOGOUT_TIME =
+5 * 60 * 1000;
+
+
+/* =========================================================
+   GLOBAL
+========================================================= */
+
+let allData = [];
+
+let filteredData = [];
+
+let currentPage = 1;
+
+let editingRow = null;
+
+let allUsers = [];
+
+let editingUser = null;
+
+let inactivityTimer = null;
+
+let currentDataType = "User";
+
+
+/* =========================================================
+   LOGIN
+========================================================= */
+
+function getLoggedInUsername(){
+
+  const keys = [
+    "username",
+    "Username",
+    "user",
+    "userData",
+    "loginData",
+    "loggedUser",
+    "currentUser",
+    "userInfo"
+  ];
+
+  for(const key of keys){
+
+    const value =
+      localStorage.getItem(key);
+
+    if(!value) continue;
+
+    try{
+
+      const parsed =
+        JSON.parse(value);
+
+      if(
+        parsed &&
+        typeof parsed === "object"
+      ){
+
+        const username =
+          parsed.username ||
+          parsed.Username ||
+          parsed.userName ||
+          parsed.name ||
+          parsed.user;
+
+        if(username){
+
+          return String(username).trim();
+
+        }
+
+      }
+
+    }catch(error){
+
+      return String(value).trim();
+
     }
 
-    const animal = document.getElementById("animal");
+  }
 
-    animal.style.transform = "scale(0)";
+  return "";
 
-    setTimeout(() => {
-        animal.innerHTML = animals[index];
-        animal.style.transform = "";
-    },300);
-
-},3000);
-
-
-/* Button */
-function sayHello(){
-
-    const message = document.getElementById("message");
-
-    message.classList.add("show");
-
-    setTimeout(() => {
-        message.classList.remove("show");
-    },2000);
 }
 
 
-/* Click animal */
-document.getElementById("animal").addEventListener("click",function(){
+function checkLogin(){
 
-    this.style.animation = "none";
+  const username =
+    getLoggedInUsername();
 
-    setTimeout(() => {
-        this.style.animation =
-            "animalMove 2s infinite ease-in-out, animalBounce 4s infinite";
-    },50);
+  if(!username){
 
-    sayHello();
+    window.location.replace(
+      LOGIN_PAGE
+    );
+
+    return false;
+
+  }
+
+  return true;
+
+}
+
+
+/* =========================================================
+   AUTO LOGOUT
+========================================================= */
+
+function resetAutoLogoutTimer(){
+
+  clearTimeout(
+    inactivityTimer
+  );
+
+  inactivityTimer =
+    setTimeout(
+      autoLogout,
+      AUTO_LOGOUT_TIME
+    );
+
+}
+
+
+function setupActivityDetection(){
+
+  const events = [
+    "click",
+    "mousemove",
+    "mousedown",
+    "keydown",
+    "scroll",
+    "touchstart",
+    "touchmove",
+    "input"
+  ];
+
+  events.forEach(
+    eventName => {
+
+      document.addEventListener(
+        eventName,
+        resetAutoLogoutTimer,
+        {
+          passive:true
+        }
+      );
+
+    }
+  );
+
+  resetAutoLogoutTimer();
+
+}
+
+
+function autoLogout(){
+
+  clearTimeout(
+    inactivityTimer
+  );
+
+  const savedTheme =
+    localStorage.getItem(
+      "dashboardTheme"
+    );
+
+  const loginKeys = [
+    "username",
+    "Username",
+    "user",
+    "userData",
+    "loginData",
+    "loggedUser",
+    "currentUser",
+    "userInfo"
+  ];
+
+  loginKeys.forEach(
+    key => {
+
+      localStorage.removeItem(
+        key
+      );
+
+    }
+  );
+
+  sessionStorage.clear();
+
+  if(savedTheme){
+
+    localStorage.setItem(
+      "dashboardTheme",
+      savedTheme
+    );
+
+  }
+
+  window.location.replace(
+    LOGIN_PAGE
+  );
+
+}
+
+
+function logoutUser(){
+
+  autoLogout();
+
+}
+
+
+/* =========================================================
+   THEME
+========================================================= */
+
+function loadTheme(){
+
+  const saved =
+    localStorage.getItem(
+      "dashboardTheme"
+    );
+
+  if(saved === "dark"){
+
+    document.body.classList.add(
+      "dark"
+    );
+
+  }else{
+
+    document.body.classList.remove(
+      "dark"
+    );
+
+  }
+
+  updateThemeButton();
+
+}
+
+
+function toggleTheme(){
+
+  document.body.classList.toggle(
+    "dark"
+  );
+
+  const dark =
+    document.body.classList.contains(
+      "dark"
+    );
+
+  localStorage.setItem(
+    "dashboardTheme",
+    dark ? "dark" : "light"
+  );
+
+  updateThemeButton();
+
+}
+
+
+function updateThemeButton(){
+
+  const btn =
+    document.getElementById(
+      "themeBtn"
+    );
+
+  if(!btn) return;
+
+  btn.textContent =
+    document.body.classList.contains(
+      "dark"
+    )
+      ? "☀️ White"
+      : "🌙 Dark";
+
+}
+
+
+/* =========================================================
+   DATA TYPE
+========================================================= */
+
+async function changeDataType(){
+
+  currentDataType =
+    document.getElementById(
+      "dataType"
+    ).value;
+
+  currentPage = 1;
+
+  updatePageLabels();
+
+  await loadData();
+
+}
+
+
+function updatePageLabels(){
+
+  const title =
+    document.getElementById(
+      "tableTitle"
+    );
+
+  const pageTitle =
+    document.getElementById(
+      "pageTitle"
+    );
+
+  const subtitle =
+    document.getElementById(
+      "pageSubtitle"
+    );
+
+  const head =
+    document.getElementById(
+      "tableHead"
+    );
+
+
+  if(currentDataType === "Sell"){
+
+    title.textContent =
+      "Sell Data";
+
+    pageTitle.textContent =
+      "Sell Data";
+
+    subtitle.textContent =
+      "View sold entries";
+
+    head.innerHTML = `
+      <tr>
+        <th>Name</th>
+        <th>IP</th>
+        <th>Work</th>
+        <th>Date</th>
+        <th>Delete User</th>
+      </tr>
+    `;
+
+  }
+
+  else if(currentDataType === "Deleted"){
+
+    title.textContent =
+      "Deleted Data";
+
+    pageTitle.textContent =
+      "Deleted Data";
+
+    subtitle.textContent =
+      "View deleted entries";
+
+    head.innerHTML = `
+      <tr>
+        <th>Name</th>
+        <th>IP</th>
+        <th>Work</th>
+        <th>Date</th>
+        <th>Delete User</th>
+      </tr>
+    `;
+
+  }
+
+  else{
+
+    title.textContent =
+      "User Data";
+
+    pageTitle.textContent =
+      "Data Dashboard";
+
+    subtitle.textContent =
+      "Manage your entries";
+
+    head.innerHTML = `
+      <tr>
+        <th>Name</th>
+        <th>IP</th>
+        <th>Work</th>
+        <th>Date</th>
+        <th>Action</th>
+      </tr>
+    `;
+
+  }
+
+}
+
+
+/* =========================================================
+   LOAD DATA
+========================================================= */
+
+async function loadData(){
+
+  const btn =
+    document.getElementById(
+      "refreshBtn"
+    );
+
+  btn.disabled = true;
+  btn.textContent = "⏳ Loading...";
+
+  showLoading();
+
+  try{
+
+    let url =
+      API_URL +
+      "?action=getData";
+
+    if(currentDataType !== "User"){
+
+      url +=
+        "&sheet=" +
+        encodeURIComponent(
+          currentDataType
+        );
+
+    }
+
+    url +=
+      "&_=" +
+      Date.now();
+
+
+    const response =
+      await fetch(
+        url,
+        {
+          method:"GET",
+          cache:"no-store"
+        }
+      );
+
+
+    if(!response.ok){
+
+      throw new Error(
+        "Server error: " +
+        response.status
+      );
+
+    }
+
+
+    const result =
+      await response.json();
+
+
+    if(result.success === false){
+
+      throw new Error(
+        result.message ||
+        "Failed to load data."
+      );
+
+    }
+
+
+    if(!Array.isArray(result.data)){
+
+      throw new Error(
+        "Invalid data received."
+      );
+
+    }
+
+
+    allData =
+      result.data;
+
+    filteredData =
+      [...allData];
+
+    currentPage = 1;
+
+    renderTable();
+
+    updateTotal();
+
+  }
+
+  catch(error){
+
+    console.error(
+      "Load Error:",
+      error
+    );
+
+    showError(
+      error.message ||
+      "Failed to load data."
+    );
+
+    showToast(
+      error.message ||
+      "Data loading failed.",
+      "error"
+    );
+
+  }
+
+  finally{
+
+    btn.disabled = false;
+    btn.textContent = "🔄 Refresh";
+
+  }
+
+}
+
+
+/* =========================================================
+   GET FIELD
+========================================================= */
+
+function getField(row, names){
+
+  for(const name of names){
+
+    if(
+      row[name] !== undefined &&
+      row[name] !== null &&
+      String(row[name]).trim() !== ""
+    ){
+
+      return row[name];
+
+    }
+
+  }
+
+  return "";
+
+}
+
+
+/* =========================================================
+   DATE FORMAT
+========================================================= */
+
+function formatDisplayDate(value){
+
+  if(!value){
+    return "";
+  }
+
+  const text =
+    String(value).trim();
+
+
+  /* Already desired format */
+
+  if(
+    /^\d{1,2}\s+[A-Za-z]+\s+\d{4}$/
+      .test(text)
+  ){
+
+    return text;
+
+  }
+
+
+  /* DD-MM-YYYY */
+
+  let match =
+    text.match(
+      /^(\d{1,2})-(\d{1,2})-(\d{4})$/
+    );
+
+  if(match){
+
+    const day =
+      Number(match[1]);
+
+    const month =
+      Number(match[2]);
+
+    const year =
+      Number(match[3]);
+
+    return monthName(
+      month,
+      day,
+      year
+    );
+
+  }
+
+
+  /* YYYY-MM-DD */
+
+  match =
+    text.match(
+      /^(\d{4})-(\d{1,2})-(\d{1,2})/
+    );
+
+  if(match){
+
+    const year =
+      Number(match[1]);
+
+    const month =
+      Number(match[2]);
+
+    const day =
+      Number(match[3]);
+
+    return monthName(
+      month,
+      day,
+      year
+    );
+
+  }
+
+
+  /* Google timestamp / normal date */
+
+  const parsed =
+    new Date(text);
+
+  if(!isNaN(parsed.getTime())){
+
+    return monthName(
+      parsed.getMonth() + 1,
+      parsed.getDate(),
+      parsed.getFullYear()
+    );
+
+  }
+
+
+  return text;
+
+}
+
+
+function monthName(
+  month,
+  day,
+  year
+){
+
+  const months = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December"
+  ];
+
+  if(
+    month < 1 ||
+    month > 12
+  ){
+
+    return "";
+
+  }
+
+  return (
+    day +
+    " " +
+    months[month - 1] +
+    " " +
+    year
+  );
+
+}
+
+
+/* =========================================================
+   TABLE
+========================================================= */
+
+function renderTable(){
+
+  const tbody =
+    document.getElementById(
+      "tableBody"
+    );
+
+
+  if(!filteredData.length){
+
+    const colspan =
+      currentDataType === "User"
+        ? 5
+        : 5;
+
+    tbody.innerHTML = `
+      <tr>
+        <td colspan="${colspan}">
+          <div class="empty">
+            No data found.
+          </div>
+        </td>
+      </tr>
+    `;
+
+    renderPagination();
+
+    return;
+
+  }
+
+
+  const start =
+    (currentPage - 1) *
+    ROWS_PER_PAGE;
+
+
+  const pageData =
+    filteredData.slice(
+      start,
+      start + ROWS_PER_PAGE
+    );
+
+
+  let html = "";
+
+
+  pageData.forEach(
+    function(row){
+
+      const rowNumber =
+        Number(
+          row._row || 0
+        );
+
+
+      const name =
+        getField(
+          row,
+          [
+            "Name",
+            "name"
+          ]
+        );
+
+
+      const ip =
+        getField(
+          row,
+          [
+            "Ip",
+            "IP",
+            "ip"
+          ]
+        );
+
+
+      const work =
+        getField(
+          row,
+          [
+            "Work",
+            "work"
+          ]
+        );
+
+
+      const date =
+        getField(
+          row,
+          [
+            "Date",
+            "date",
+            "Date & Time",
+            "Timestamp",
+            "DateTime"
+          ]
+        );
+
+
+      const username =
+        getField(
+          row,
+          [
+            "Username",
+            "username",
+            "User Name",
+            "Delete User",
+            "Deleted By",
+            "DeletedBy",
+            "Sold By",
+            "SoldBy",
+            "Sell User",
+            "SellUser"
+          ]
+        );
+
+
+      const formattedDate =
+        formatDisplayDate(
+          date
+        );
+
+
+      /* ================= SELL / DELETED ================= */
+
+      if(
+        currentDataType === "Sell" ||
+        currentDataType === "Deleted"
+      ){
+
+        html += `
+          <tr>
+
+            <td>
+              ${escapeHTML(name)}
+            </td>
+
+            <td>
+              ${escapeHTML(ip)}
+            </td>
+
+            <td>
+              ${escapeHTML(work)}
+            </td>
+
+            <td class="date-cell">
+              ${escapeHTML(formattedDate)}
+            </td>
+
+            <td class="user-cell">
+              ${
+                escapeHTML(
+                  username || "—"
+                )
+              }
+            </td>
+
+          </tr>
+        `;
+
+      }
+
+      /* ================= USER ================= */
+
+      else{
+
+        html += `
+          <tr>
+
+            <td>
+              ${escapeHTML(name)}
+            </td>
+
+            <td>
+              ${escapeHTML(ip)}
+            </td>
+
+            <td>
+              ${escapeHTML(work)}
+            </td>
+
+            <td class="date-cell">
+              ${escapeHTML(formattedDate)}
+            </td>
+
+            <td>
+
+              <div class="actions">
+
+                <button
+                  class="btn-edit"
+                  onclick="editEntryByRow(${rowNumber})"
+                >
+                  ✏️ Edit
+                </button>
+
+                <button
+                  class="btn-delete"
+                  onclick="deleteEntryByRow(${rowNumber})"
+                >
+                  🗑️ Delete
+                </button>
+
+                <button
+                  class="btn-sell"
+                  onclick="sellEntryByRow(${rowNumber})"
+                >
+                  💰 Sell
+                </button>
+
+              </div>
+
+            </td>
+
+          </tr>
+        `;
+
+      }
+
+    }
+  );
+
+
+  tbody.innerHTML =
+    html;
+
+  renderPagination();
+
+}
+
+
+/* =========================================================
+   FILTER
+========================================================= */
+
+function applyFilters(){
+
+  const search =
+    document
+      .getElementById(
+        "searchInput"
+      )
+      .value
+      .toLowerCase()
+      .trim();
+
+
+  const fromDate =
+    document.getElementById(
+      "fromDate"
+    ).value;
+
+
+  const toDate =
+    document.getElementById(
+      "toDate"
+    ).value;
+
+
+  filteredData =
+    allData.filter(
+      function(row){
+
+        const name =
+          getField(
+            row,
+            ["Name","name"]
+          );
+
+
+        const ip =
+          getField(
+            row,
+            ["Ip","IP","ip"]
+          );
+
+
+        const work =
+          getField(
+            row,
+            ["Work","work"]
+          );
+
+
+        const date =
+          getField(
+            row,
+            [
+              "Date",
+              "date",
+              "Date & Time",
+              "Timestamp"
+            ]
+          );
+
+
+        const username =
+          getField(
+            row,
+            [
+              "Username",
+              "username",
+              "User Name",
+              "Delete User",
+              "Deleted By",
+              "Sold By",
+              "Sell User"
+            ]
+          );
+
+
+        if(search){
+
+          const text =
+            (
+              String(name) +
+              " " +
+              String(ip) +
+              " " +
+              String(work) +
+              " " +
+              String(date) +
+              " " +
+              String(username)
+            )
+            .toLowerCase();
+
+
+          if(
+            !text.includes(search)
+          ){
+
+            return false;
+
+          }
+
+        }
+
+
+        if(
+          fromDate ||
+          toDate
+        ){
+
+          const rowDate =
+            convertToFilterDate(
+              date
+            );
+
+
+          if(!rowDate){
+
+            return false;
+
+          }
+
+
+          if(
+            fromDate &&
+            rowDate < fromDate
+          ){
+
+            return false;
+
+          }
+
+
+          if(
+            toDate &&
+            rowDate > toDate
+          ){
+
+            return false;
+
+          }
+
+        }
+
+
+        return true;
+
+      }
+    );
+
+
+  currentPage = 1;
+
+  renderTable();
+
+  updateTotal();
+
+}
+
+
+function clearFilters(){
+
+  document.getElementById(
+    "searchInput"
+  ).value = "";
+
+  document.getElementById(
+    "fromDate"
+  ).value = "";
+
+  document.getElementById(
+    "toDate"
+  ).value = "";
+
+  filteredData =
+    [...allData];
+
+  currentPage = 1;
+
+  renderTable();
+
+  updateTotal();
+
+}
+
+
+/* =========================================================
+   FILTER DATE
+========================================================= */
+
+function convertToFilterDate(value){
+
+  if(!value){
+    return "";
+  }
+
+  const text =
+    String(value).trim();
+
+
+  let match =
+    text.match(
+      /^(\d{1,2})-(\d{1,2})-(\d{4})$/
+    );
+
+  if(match){
+
+    return (
+      match[3] +
+      "-" +
+      String(
+        match[2]
+      ).padStart(2,"0") +
+      "-" +
+      String(
+        match[1]
+      ).padStart(2,"0")
+    );
+
+  }
+
+
+  match =
+    text.match(
+      /^(\d{4})-(\d{1,2})-(\d{1,2})/
+    );
+
+  if(match){
+
+    return (
+      match[1] +
+      "-" +
+      String(
+        match[2]
+      ).padStart(2,"0") +
+      "-" +
+      String(
+        match[3]
+      ).padStart(2,"0")
+    );
+
+  }
+
+
+  const parsed =
+    new Date(text);
+
+
+  if(!isNaN(parsed.getTime())){
+
+    return (
+      parsed.getFullYear() +
+      "-" +
+      String(
+        parsed.getMonth() + 1
+      ).padStart(2,"0") +
+      "-" +
+      String(
+        parsed.getDate()
+      ).padStart(2,"0")
+    );
+
+  }
+
+
+  return "";
+
+}
+
+
+/* =========================================================
+   PAGINATION
+========================================================= */
+
+function renderPagination(){
+
+  const pagination =
+    document.getElementById(
+      "pagination"
+    );
+
+  const pageInfo =
+    document.getElementById(
+      "pageInfo"
+    );
+
+
+  const totalPages =
+    Math.ceil(
+      filteredData.length /
+      ROWS_PER_PAGE
+    );
+
+
+  if(totalPages <= 1){
+
+    pagination.innerHTML =
+      "";
+
+    pageInfo.textContent =
+      filteredData.length
+        ? "Page 1"
+        : "Page 0";
+
+    return;
+
+  }
+
+
+  let html = `
+
+    <button
+      class="page-btn"
+      onclick="changePage(${currentPage - 1})"
+      ${currentPage === 1 ? "disabled" : ""}
+    >
+      ‹
+    </button>
+
+  `;
+
+
+  const start =
+    Math.max(
+      1,
+      currentPage - 2
+    );
+
+
+  const end =
+    Math.min(
+      totalPages,
+      currentPage + 2
+    );
+
+
+  for(
+    let i = start;
+    i <= end;
+    i++
+  ){
+
+    html += `
+      <button
+        class="page-btn ${
+          i === currentPage
+            ? "active"
+            : ""
+        }"
+        onclick="changePage(${i})"
+      >
+        ${i}
+      </button>
+    `;
+
+  }
+
+
+  html += `
+
+    <button
+      class="page-btn"
+      onclick="changePage(${currentPage + 1})"
+      ${
+        currentPage === totalPages
+          ? "disabled"
+          : ""
+      }
+    >
+      ›
+    </button>
+
+  `;
+
+
+  pagination.innerHTML =
+    html;
+
+
+  pageInfo.textContent =
+    `Page ${currentPage} of ${totalPages}`;
+
+}
+
+
+function changePage(page){
+
+  const totalPages =
+    Math.ceil(
+      filteredData.length /
+      ROWS_PER_PAGE
+    );
+
+
+  if(
+    page < 1 ||
+    page > totalPages
+  ){
+
+    return;
+
+  }
+
+
+  currentPage = page;
+
+  renderTable();
+
+}
+
+
+function updateTotal(){
+
+  document.getElementById(
+    "totalCount"
+  ).textContent =
+    filteredData.length;
+
+}
+
+
+/* =========================================================
+   ENTRY MODAL
+========================================================= */
+
+function openEntryModal(){
+
+  if(currentDataType !== "User"){
+
+    showToast(
+      "New entries can only be added to User data.",
+      "error"
+    );
+
+    return;
+
+  }
+
+
+  editingRow = null;
+
+  document.getElementById(
+    "modalTitle"
+  ).textContent =
+    "New Entry";
+
+
+  document.getElementById(
+    "submitBtn"
+  ).textContent =
+    "Save Entry";
+
+
+  document.getElementById(
+    "entryForm"
+  ).reset();
+
+
+  document.getElementById(
+    "dateInput"
+  ).value =
+    getTodayInputDate();
+
+
+  document.getElementById(
+    "entryModal"
+  ).classList.add(
+    "show"
+  );
+
+}
+
+
+function closeEntryModal(){
+
+  document.getElementById(
+    "entryModal"
+  ).classList.remove(
+    "show"
+  );
+
+  editingRow = null;
+
+}
+
+
+/* =========================================================
+   EDIT ENTRY
+========================================================= */
+
+function editEntryByRow(rowNumber){
+
+  if(currentDataType !== "User"){
+    return;
+  }
+
+
+  const row =
+    allData.find(
+      item =>
+        Number(item._row) ===
+        Number(rowNumber)
+    );
+
+
+  if(!row){
+
+    showToast(
+      "Entry not found.",
+      "error"
+    );
+
+    return;
+
+  }
+
+
+  editingRow = row;
+
+
+  document.getElementById(
+    "modalTitle"
+  ).textContent =
+    "Edit Entry";
+
+
+  document.getElementById(
+    "submitBtn"
+  ).textContent =
+    "Update Entry";
+
+
+  document.getElementById(
+    "nameInput"
+  ).value =
+    row.Name || "";
+
+
+  document.getElementById(
+    "ipInput"
+  ).value =
+    row.Ip || row.IP || "";
+
+
+  document.getElementById(
+    "workInput"
+  ).value =
+    row.Work || "";
+
+
+  document.getElementById(
+    "dateInput"
+  ).value =
+    convertToFilterDate(
+      row.Date
+    );
+
+
+  document.getElementById(
+    "entryModal"
+  ).classList.add(
+    "show"
+  );
+
+}
+
+
+/* =========================================================
+   SUBMIT ENTRY
+========================================================= */
+
+async function submitEntry(event){
+
+  event.preventDefault();
+
+
+  if(currentDataType !== "User"){
+
+    showToast(
+      "Entries can only be saved in User data.",
+      "error"
+    );
+
+    return;
+
+  }
+
+
+  const btn =
+    document.getElementById(
+      "submitBtn"
+    );
+
+
+  const name =
+    document.getElementById(
+      "nameInput"
+    ).value.trim();
+
+
+  const ip =
+    document.getElementById(
+      "ipInput"
+    ).value.trim();
+
+
+  const work =
+    document.getElementById(
+      "workInput"
+    ).value.trim();
+
+
+  const date =
+    document.getElementById(
+      "dateInput"
+    ).value;
+
+
+  if(!name){
+
+    showToast(
+      "Please enter Name.",
+      "error"
+    );
+
+    return;
+
+  }
+
+
+  if(!ip){
+
+    showToast(
+      "Please enter IP.",
+      "error"
+    );
+
+    return;
+
+  }
+
+
+  if(!work){
+
+    showToast(
+      "Please enter Work.",
+      "error"
+    );
+
+    return;
+
+  }
+
+
+  const editing =
+    Boolean(
+      editingRow
+    );
+
+
+  btn.disabled = true;
+
+  btn.textContent =
+    editing
+      ? "Updating..."
+      : "Saving...";
+
+
+  try{
+
+    const payload = {
+
+      action:
+        editing
+          ? "update"
+          : "create",
+
+      data:{
+        Name:name,
+        Ip:ip,
+        Work:work,
+        Date:date
+      },
+
+      oldData:
+        editingRow || null
+
+    };
+
+
+    const response =
+      await fetch(
+        API_URL,
+        {
+          method:"POST",
+
+          headers:{
+            "Content-Type":
+              "text/plain;charset=utf-8"
+          },
+
+          body:
+            JSON.stringify(
+              payload
+            )
+        }
+      );
+
+
+    if(!response.ok){
+
+      throw new Error(
+        "Server error: " +
+        response.status
+      );
+
+    }
+
+
+    const result =
+      await response.json();
+
+
+    if(result.success === false){
+
+      throw new Error(
+        result.message ||
+        "Save failed."
+      );
+
+    }
+
+
+    closeEntryModal();
+
+
+    showToast(
+      editing
+        ? "Entry updated successfully."
+        : "Entry added successfully.",
+      "success"
+    );
+
+
+    await loadData();
+
+  }
+
+  catch(error){
+
+    console.error(error);
+
+    showToast(
+      error.message ||
+      "Failed to save entry.",
+      "error"
+    );
+
+  }
+
+  finally{
+
+    btn.disabled = false;
+
+    btn.textContent =
+      editing
+        ? "Update Entry"
+        : "Save Entry";
+
+  }
+
+}
+
+
+/* =========================================================
+   USERNAME
+========================================================= */
+
+function requireUsername(){
+
+  const username =
+    getLoggedInUsername();
+
+
+  if(!username){
+
+    autoLogout();
+
+    return "";
+
+  }
+
+
+  return username;
+
+}
+
+
+/* =========================================================
+   DELETE ENTRY
+========================================================= */
+
+async function deleteEntryByRow(rowNumber){
+
+  if(currentDataType !== "User"){
+    return;
+  }
+
+
+  const row =
+    allData.find(
+      item =>
+        Number(item._row) ===
+        Number(rowNumber)
+    );
+
+
+  if(!row){
+
+    showToast(
+      "Entry not found.",
+      "error"
+    );
+
+    return;
+
+  }
+
+
+  const username =
+    requireUsername();
+
+
+  if(!username){
+    return;
+  }
+
+
+  const confirmed =
+    confirm(
+      "Delete this entry?\n\n" +
+      "Name: " +
+      (row.Name || "") +
+      "\nIP: " +
+      (row.Ip || "") +
+      "\n\nDeleted by: " +
+      username +
+      "\n\nThis entry will move to Deleted sheet."
+    );
+
+
+  if(!confirmed){
+    return;
+  }
+
+
+  try{
+
+    const payload = {
+
+      action:"delete",
+
+      username:username,
+
+      data:{
+        ...row,
+        Username:username
+      }
+
+    };
+
+
+    const response =
+      await fetch(
+        API_URL,
+        {
+          method:"POST",
+
+          headers:{
+            "Content-Type":
+              "text/plain;charset=utf-8"
+          },
+
+          body:
+            JSON.stringify(
+              payload
+            )
+        }
+      );
+
+
+    if(!response.ok){
+
+      throw new Error(
+        "Server error: " +
+        response.status
+      );
+
+    }
+
+
+    const result =
+      await response.json();
+
+
+    if(result.success === false){
+
+      throw new Error(
+        result.message ||
+        "Delete failed."
+      );
+
+    }
+
+
+    showToast(
+      "Deleted successfully by " +
+      username,
+      "success"
+    );
+
+
+    await loadData();
+
+  }
+
+  catch(error){
+
+    console.error(error);
+
+    showToast(
+      error.message ||
+      "Failed to delete entry.",
+      "error"
+    );
+
+  }
+
+}
+
+
+/* =========================================================
+   SELL ENTRY
+========================================================= */
+
+async function sellEntryByRow(rowNumber){
+
+  if(currentDataType !== "User"){
+    return;
+  }
+
+
+  const row =
+    allData.find(
+      item =>
+        Number(item._row) ===
+        Number(rowNumber)
+    );
+
+
+  if(!row){
+
+    showToast(
+      "Entry not found.",
+      "error"
+    );
+
+    return;
+
+  }
+
+
+  const username =
+    requireUsername();
+
+
+  if(!username){
+    return;
+  }
+
+
+  const confirmed =
+    confirm(
+      "Sell this entry?\n\n" +
+      "Name: " +
+      (row.Name || "") +
+      "\nIP: " +
+      (row.Ip || "") +
+      "\nWork: " +
+      (row.Work || "") +
+      "\n\nSold by: " +
+      username +
+      "\n\nThis entry will move to Sell sheet."
+    );
+
+
+  if(!confirmed){
+    return;
+  }
+
+
+  try{
+
+    const payload = {
+
+      action:"sell",
+
+      username:username,
+
+      data:{
+        ...row,
+        Username:username
+      }
+
+    };
+
+
+    const response =
+      await fetch(
+        API_URL,
+        {
+          method:"POST",
+
+          headers:{
+            "Content-Type":
+              "text/plain;charset=utf-8"
+          },
+
+          body:
+            JSON.stringify(
+              payload
+            )
+        }
+      );
+
+
+    if(!response.ok){
+
+      throw new Error(
+        "Server error: " +
+        response.status
+      );
+
+    }
+
+
+    const result =
+      await response.json();
+
+
+    if(result.success === false){
+
+      throw new Error(
+        result.message ||
+        "Sell failed."
+      );
+
+    }
+
+
+    showToast(
+      "Sold successfully by " +
+      username,
+      "success"
+    );
+
+
+    await loadData();
+
+  }
+
+  catch(error){
+
+    console.error(error);
+
+    showToast(
+      error.message ||
+      "Failed to sell entry.",
+      "error"
+    );
+
+  }
+
+}
+
+
+/* =========================================================
+   USER MANAGEMENT
+========================================================= */
+
+function openUserModal(){
+
+  if(!checkLogin()){
+    return;
+  }
+
+
+  document.getElementById(
+    "userModal"
+  ).classList.add(
+    "show"
+  );
+
+
+  loadUsers();
+
+}
+
+
+function closeUserModal(){
+
+  document.getElementById(
+    "userModal"
+  ).classList.remove(
+    "show"
+  );
+
+}
+
+
+async function loadUsers(){
+
+  if(!checkLogin()){
+    return;
+  }
+
+
+  const body =
+    document.getElementById(
+      "userTableBody"
+    );
+
+
+  const btn =
+    document.getElementById(
+      "userRefreshBtn"
+    );
+
+
+  body.innerHTML = `
+    <tr>
+      <td colspan="6">
+        <div class="loading">
+          ⏳ Loading users...
+        </div>
+      </td>
+    </tr>
+  `;
+
+
+  btn.disabled = true;
+
+  btn.textContent =
+    "⏳ Loading...";
+
+
+  try{
+
+    const response =
+      await fetch(
+        USER_API_URL +
+        "?action=getUsers&_=" +
+        Date.now(),
+        {
+          method:"GET",
+          cache:"no-store"
+        }
+      );
+
+
+    if(!response.ok){
+
+      throw new Error(
+        "User server error: " +
+        response.status
+      );
+
+    }
+
+
+    const result =
+      await response.json();
+
+
+    if(result.success === false){
+
+      throw new Error(
+        result.message ||
+        "Failed to load users."
+      );
+
+    }
+
+
+    allUsers =
+      Array.isArray(
+        result.users
+      )
+        ? result.users
+        : Array.isArray(
+            result.data
+          )
+          ? result.data
+          : [];
+
+
+    document.getElementById(
+      "userTotal"
+    ).textContent =
+      allUsers.length;
+
+
+    renderUsers();
+
+  }
+
+  catch(error){
+
+    console.error(error);
+
+    body.innerHTML = `
+      <tr>
+        <td colspan="6">
+          <div class="empty">
+            ❌ ${escapeHTML(
+              error.message ||
+              "Failed to load users."
+            )}
+          </div>
+        </td>
+      </tr>
+    `;
+
+
+    showToast(
+      error.message ||
+      "Failed to load users.",
+      "error"
+    );
+
+  }
+
+  finally{
+
+    btn.disabled = false;
+
+    btn.textContent =
+      "🔄 Refresh";
+
+  }
+
+}
+
+
+/* =========================================================
+   RENDER USERS
+========================================================= */
+
+function renderUsers(){
+
+  const body =
+    document.getElementById(
+      "userTableBody"
+    );
+
+
+  if(!allUsers.length){
+
+    body.innerHTML = `
+      <tr>
+        <td colspan="6">
+          <div class="empty">
+            No users found.
+          </div>
+        </td>
+      </tr>
+    `;
+
+    return;
+
+  }
+
+
+  let html = "";
+
+
+  allUsers.forEach(
+    function(user){
+
+      const username =
+        user.username ||
+        user.Username ||
+        "";
+
+
+      const password =
+        user.password ||
+        user.Password ||
+        "";
+
+
+      const name =
+        user.name ||
+        user.Name ||
+        "";
+
+
+      const role =
+        user.role ||
+        user.Role ||
+        "";
+
+
+      const status =
+        user.status ||
+        user.Status ||
+        "Active";
+
+
+      const row =
+        Number(
+          user._row ||
+          user.row ||
+          0
+        );
+
+
+      let statusClass =
+        "status-inactive";
+
+
+      if(
+        String(status).toLowerCase() ===
+        "active"
+      ){
+
+        statusClass =
+          "status-active";
+
+      }
+
+
+      if(
+        String(status).toLowerCase() ===
+        "blocked"
+      ){
+
+        statusClass =
+          "status-blocked";
+
+      }
+
+
+      const safe =
+        encodeURIComponent(
+          username
+        );
+
+
+      html += `
+        <tr>
+
+          <td>
+            <strong>
+              ${escapeHTML(username)}
+            </strong>
+          </td>
+
+          <td>
+            ${escapeHTML(password)}
+          </td>
+
+          <td>
+            ${escapeHTML(name)}
+          </td>
+
+          <td>
+
+            <span class="role-badge">
+              ${escapeHTML(
+                role || "—"
+              )}
+            </span>
+
+          </td>
+
+          <td>
+
+            <span
+              class="status-badge ${statusClass}"
+            >
+              ${escapeHTML(status)}
+            </span>
+
+          </td>
+
+          <td>
+
+            <div class="user-actions">
+
+              <button
+                class="user-action edit"
+                onclick="editUser(${row},'${safe}')"
+              >
+                ✏️ Edit
+              </button>
+
+              ${
+                String(status).toLowerCase() ===
+                "blocked"
+                ?
+                `
+                <button
+                  class="user-action unblock"
+                  onclick="unblockUser(${row},'${safe}')"
+                >
+                  🔓 Unblock
+                </button>
+                `
+                :
+                `
+                <button
+                  class="user-action block"
+                  onclick="blockUser(${row},'${safe}')"
+                >
+                  🔒 Block
+                </button>
+                `
+              }
+
+              <button
+                class="user-action delete"
+                onclick="deleteUser(${row},'${safe}')"
+              >
+                🗑️ Delete
+              </button>
+
+            </div>
+
+          </td>
+
+        </tr>
+      `;
+
+    }
+  );
+
+
+  body.innerHTML =
+    html;
+
+}
+
+
+/* =========================================================
+   ADD USER
+========================================================= */
+
+function openAddUserModal(){
+
+  if(!checkLogin()){
+    return;
+  }
+
+
+  editingUser = null;
+
+
+  document.getElementById(
+    "userFormTitle"
+  ).textContent =
+    "Add User";
+
+
+  document.getElementById(
+    "userSubmitBtn"
+  ).textContent =
+    "Add User";
+
+
+  document.getElementById(
+    "userForm"
+  ).reset();
+
+
+  document.getElementById(
+    "userStatus"
+  ).value =
+    "Active";
+
+
+  document.getElementById(
+    "userFormModal"
+  ).classList.add(
+    "show"
+  );
+
+}
+
+
+/* =========================================================
+   EDIT USER
+========================================================= */
+
+function editUser(
+  rowNumber,
+  encodedUsername
+){
+
+  if(!checkLogin()){
+    return;
+  }
+
+
+  const username =
+    decodeURIComponent(
+      encodedUsername
+    );
+
+
+  const user =
+    allUsers.find(
+      function(item){
+
+        const row =
+          Number(
+            item._row ||
+            item.row ||
+            0
+          );
+
+
+        const name =
+          String(
+            item.username ||
+            item.Username ||
+            ""
+          );
+
+
+        return (
+          row === Number(rowNumber) ||
+          name.toLowerCase() ===
+          username.toLowerCase()
+        );
+
+      }
+    );
+
+
+  if(!user){
+
+    showToast(
+      "User not found.",
+      "error"
+    );
+
+    return;
+
+  }
+
+
+  editingUser = user;
+
+
+  document.getElementById(
+    "userFormTitle"
+  ).textContent =
+    "Edit User";
+
+
+  document.getElementById(
+    "userSubmitBtn"
+  ).textContent =
+    "Update User";
+
+
+  document.getElementById(
+    "userUsername"
+  ).value =
+    user.username ||
+    user.Username ||
+    "";
+
+
+  document.getElementById(
+    "userPassword"
+  ).value =
+    user.password ||
+    user.Password ||
+    "";
+
+
+  document.getElementById(
+    "userName"
+  ).value =
+    user.name ||
+    user.Name ||
+    "";
+
+
+  document.getElementById(
+    "userRole"
+  ).value =
+    user.role ||
+    user.Role ||
+    "";
+
+
+  document.getElementById(
+    "userStatus"
+  ).value =
+    user.status ||
+    user.Status ||
+    "Active";
+
+
+  document.getElementById(
+    "userFormModal"
+  ).classList.add(
+    "show"
+  );
+
+}
+
+
+function closeUserFormModal(){
+
+  document.getElementById(
+    "userFormModal"
+  ).classList.remove(
+    "show"
+  );
+
+  editingUser = null;
+
+}
+
+
+/* =========================================================
+   SUBMIT USER
+========================================================= */
+
+async function submitUser(event){
+
+  event.preventDefault();
+
+
+  if(!checkLogin()){
+    return;
+  }
+
+
+  const button =
+    document.getElementById(
+      "userSubmitBtn"
+    );
+
+
+  const username =
+    document.getElementById(
+      "userUsername"
+    ).value.trim();
+
+
+  const password =
+    document.getElementById(
+      "userPassword"
+    ).value.trim();
+
+
+  const name =
+    document.getElementById(
+      "userName"
+    ).value.trim();
+
+
+  const role =
+    document.getElementById(
+      "userRole"
+    ).value;
+
+
+  const status =
+    document.getElementById(
+      "userStatus"
+    ).value;
+
+
+  if(
+    !username ||
+    !password ||
+    !name ||
+    !role ||
+    !status
+  ){
+
+    showToast(
+      "Please fill all required fields.",
+      "error"
+    );
+
+    return;
+
+  }
+
+
+  const editing =
+    Boolean(
+      editingUser
+    );
+
+
+  button.disabled = true;
+
+  button.textContent =
+    editing
+      ? "Updating..."
+      : "Adding...";
+
+
+  try{
+
+    const payload = {
+
+      action:
+        editing
+          ? "updateUser"
+          : "addUser",
+
+      username,
+      password,
+      name,
+      role,
+      status
+
+    };
+
+
+    if(editing){
+
+      payload.row =
+        Number(
+          editingUser._row ||
+          editingUser.row ||
+          0
+        );
+
+
+      payload.oldUsername =
+        editingUser.username ||
+        editingUser.Username ||
+        "";
+
+    }
+
+
+    const response =
+      await fetch(
+        USER_API_URL,
+        {
+          method:"POST",
+
+          headers:{
+            "Content-Type":
+              "text/plain;charset=utf-8"
+          },
+
+          body:
+            JSON.stringify(
+              payload
+            )
+        }
+      );
+
+
+    if(!response.ok){
+
+      throw new Error(
+        "User server error: " +
+        response.status
+      );
+
+    }
+
+
+    const result =
+      await response.json();
+
+
+    if(result.success === false){
+
+      throw new Error(
+        result.message ||
+        "User operation failed."
+      );
+
+    }
+
+
+    closeUserFormModal();
+
+
+    showToast(
+      editing
+        ? "User updated successfully."
+        : "User added successfully.",
+      "success"
+    );
+
+
+    await loadUsers();
+
+  }
+
+  catch(error){
+
+    console.error(error);
+
+    showToast(
+      error.message ||
+      "Failed to save user.",
+      "error"
+    );
+
+  }
+
+  finally{
+
+    button.disabled = false;
+
+    button.textContent =
+      editing
+        ? "Update User"
+        : "Add User";
+
+  }
+
+}
+
+
+/* =========================================================
+   BLOCK / UNBLOCK
+========================================================= */
+
+async function blockUser(
+  rowNumber,
+  encodedUsername
+){
+
+  if(!checkLogin()){
+    return;
+  }
+
+
+  const username =
+    decodeURIComponent(
+      encodedUsername
+    );
+
+
+  const ok =
+    confirm(
+      'Block user "' +
+      username +
+      '"?'
+    );
+
+
+  if(!ok){
+    return;
+  }
+
+
+  await changeUserStatus(
+    rowNumber,
+    username,
+    "Blocked"
+  );
+
+}
+
+
+async function unblockUser(
+  rowNumber,
+  encodedUsername
+){
+
+  if(!checkLogin()){
+    return;
+  }
+
+
+  const username =
+    decodeURIComponent(
+      encodedUsername
+    );
+
+
+  await changeUserStatus(
+    rowNumber,
+    username,
+    "Active"
+  );
+
+}
+
+
+async function changeUserStatus(
+  rowNumber,
+  username,
+  status
+){
+
+  if(!checkLogin()){
+    return;
+  }
+
+
+  try{
+
+    const payload = {
+
+      action:
+        status === "Blocked"
+          ? "blockUser"
+          : "unblockUser",
+
+      row:Number(rowNumber),
+
+      username,
+
+      status
+
+    };
+
+
+    const response =
+      await fetch(
+        USER_API_URL,
+        {
+          method:"POST",
+
+          headers:{
+            "Content-Type":
+              "text/plain;charset=utf-8"
+          },
+
+          body:
+            JSON.stringify(
+              payload
+            )
+        }
+      );
+
+
+    const result =
+      await response.json();
+
+
+    if(result.success === false){
+
+      throw new Error(
+        result.message ||
+        "Status update failed."
+      );
+
+    }
+
+
+    showToast(
+      username +
+      " is now " +
+      status +
+      ".",
+      "success"
+    );
+
+
+    await loadUsers();
+
+  }
+
+  catch(error){
+
+    console.error(error);
+
+    showToast(
+      error.message ||
+      "Failed to update status.",
+      "error"
+    );
+
+  }
+
+}
+
+
+/* =========================================================
+   DELETE USER
+========================================================= */
+
+async function deleteUser(
+  rowNumber,
+  encodedUsername
+){
+
+  if(!checkLogin()){
+    return;
+  }
+
+
+  const username =
+    decodeURIComponent(
+      encodedUsername
+    );
+
+
+  const ok =
+    confirm(
+      'Delete user "' +
+      username +
+      '"?\n\n' +
+      "This action cannot be undone."
+    );
+
+
+  if(!ok){
+    return;
+  }
+
+
+  try{
+
+    const payload = {
+
+      action:"deleteUser",
+
+      row:Number(rowNumber),
+
+      username
+
+    };
+
+
+    const response =
+      await fetch(
+        USER_API_URL,
+        {
+          method:"POST",
+
+          headers:{
+            "Content-Type":
+              "text/plain;charset=utf-8"
+          },
+
+          body:
+            JSON.stringify(
+              payload
+            )
+        }
+      );
+
+
+    const result =
+      await response.json();
+
+
+    if(result.success === false){
+
+      throw new Error(
+        result.message ||
+        "Delete failed."
+      );
+
+    }
+
+
+    showToast(
+      "User deleted successfully.",
+      "success"
+    );
+
+
+    await loadUsers();
+
+  }
+
+  catch(error){
+
+    console.error(error);
+
+    showToast(
+      error.message ||
+      "Failed to delete user.",
+      "error"
+    );
+
+  }
+
+}
+
+
+
+/* =========================================================
+   PROFILE
+========================================================= */
+let selectedProfilePicture = "";
+
+function getCurrentUserRecord(){
+  const username = getLoggedInUsername();
+  if(!username) return null;
+
+  const sources = [
+    localStorage.getItem("userData"),
+    localStorage.getItem("loginData"),
+    localStorage.getItem("loggedUser"),
+    localStorage.getItem("currentUser"),
+    localStorage.getItem("userInfo")
+  ];
+
+  for(const raw of sources){
+    if(!raw) continue;
+    try{
+      const obj = JSON.parse(raw);
+      if(obj && typeof obj === "object"){
+        const u = String(
+          obj.username || obj.Username || obj.userName || obj.user || ""
+        ).trim();
+        if(u && u.toLowerCase() === username.toLowerCase()){
+          return obj;
+        }
+      }
+    }catch(e){}
+  }
+  return null;
+}
+
+function toggleProfileMenu(event){
+  if(event) event.stopPropagation();
+  const menu = document.getElementById("profileMenu");
+  if(menu) menu.classList.toggle("show");
+}
+
+function closeProfileMenu(){
+  const menu = document.getElementById("profileMenu");
+  if(menu) menu.classList.remove("show");
+}
+
+async function loadMyProfile(){
+  const username = getLoggedInUsername();
+  if(!username) return;
+
+  try{
+    const response = await fetch(
+      USER_API_URL +
+      "?action=getProfile&username=" +
+      encodeURIComponent(username) +
+      "&_=" + Date.now(),
+      {method:"GET", cache:"no-store"}
+    );
+
+    if(!response.ok) throw new Error("Profile server error.");
+
+    const result = await response.json();
+
+    if(result.success === false) throw new Error(result.message || "Profile failed.");
+
+    const user = result.user || result.data || {};
+    applyProfileUI(user);
+  }catch(error){
+    console.warn("Profile load:", error);
+    applyProfileUI(getCurrentUserRecord() || {});
+  }
+}
+
+function applyProfileUI(user){
+  const username =
+    user.username || user.Username || getLoggedInUsername() || "";
+  const name =
+    user.name || user.Name || username || "User";
+  const role =
+    user.role || user.Role || "";
+  const picture =
+    user.picture || user.Picture || "";
+
+  const nameEl = document.getElementById("profileName");
+  const usernameEl = document.getElementById("profileUsername");
+  const img = document.getElementById("profileImage");
+  const placeholder = document.getElementById("profilePlaceholder");
+
+  if(nameEl) nameEl.textContent = name;
+  if(usernameEl) usernameEl.textContent =
+    role ? username + " • " + role : username;
+
+  if(img && picture){
+    img.src = picture;
+    img.style.display = "block";
+    if(placeholder) placeholder.style.display = "none";
+  }else{
+    if(img) img.style.display = "none";
+    if(placeholder) placeholder.style.display = "block";
+  }
+
+  // Keep the current user information updated locally.
+  const keys = ["userData","loginData","loggedUser","currentUser","userInfo"];
+  keys.forEach(function(key){
+    const raw = localStorage.getItem(key);
+    if(!raw) return;
+    try{
+      const obj = JSON.parse(raw);
+      if(obj && typeof obj === "object"){
+        const u = obj.username || obj.Username || obj.userName || obj.user;
+        if(u && String(u).toLowerCase() === String(username).toLowerCase()){
+          obj.picture = picture;
+          obj.Picture = picture;
+          obj.name = name;
+          obj.Name = name;
+          localStorage.setItem(key, JSON.stringify(obj));
+        }
+      }
+    }catch(e){}
+  });
+}
+
+function openChangePasswordModal(){
+  closeProfileMenu();
+  document.getElementById("changePasswordModal").classList.add("show");
+  document.getElementById("currentPassword").value = "";
+  document.getElementById("newPassword").value = "";
+  document.getElementById("confirmPassword").value = "";
+  setTimeout(() => document.getElementById("currentPassword").focus(), 50);
+}
+
+function openChangePictureModal(){
+  closeProfileMenu();
+  selectedProfilePicture = "";
+  const file = document.getElementById("pictureFile");
+  if(file) file.value = "";
+
+  const current = document.getElementById("profileImage");
+  const preview = document.getElementById("picturePreview");
+
+  if(current && current.style.display !== "none" && current.src){
+    preview.src = current.src;
+  }else{
+    preview.src = "";
+    preview.style.display = "none";
+  }
+
+  document.getElementById("changePictureModal").classList.add("show");
+}
+
+function closeProfileModals(){
+  ["changePasswordModal","changePictureModal"].forEach(function(id){
+    const el = document.getElementById(id);
+    if(el) el.classList.remove("show");
+  });
+}
+
+function previewProfilePicture(event){
+  const file = event.target.files && event.target.files[0];
+  if(!file) return;
+
+  if(!file.type.startsWith("image/")){
+    showToast("Please select an image file.", "error");
+    event.target.value = "";
+    return;
+  }
+
+  const reader = new FileReader();
+
+  reader.onload = function(e){
+    const img = new Image();
+
+    img.onload = function(){
+      const maxSize = 320;
+      let width = img.width;
+      let height = img.height;
+
+      if(width > height){
+        if(width > maxSize){
+          height = Math.round(height * maxSize / width);
+          width = maxSize;
+        }
+      }else{
+        if(height > maxSize){
+          width = Math.round(width * maxSize / height);
+          height = maxSize;
+        }
+      }
+
+      const canvas = document.createElement("canvas");
+      canvas.width = width;
+      canvas.height = height;
+
+      const ctx = canvas.getContext("2d");
+      ctx.drawImage(img, 0, 0, width, height);
+
+      // Keep the stored value small enough for a Google Sheets cell.
+      selectedProfilePicture = canvas.toDataURL("image/jpeg", 0.72);
+
+      const preview = document.getElementById("picturePreview");
+      preview.src = selectedProfilePicture;
+      preview.style.display = "block";
+
+      if(selectedProfilePicture.length > 45000){
+        showToast("Image is too large. Please choose a smaller picture.", "error");
+        selectedProfilePicture = "";
+      }
+    };
+
+    img.src = e.target.result;
+  };
+
+  reader.readAsDataURL(file);
+}
+
+async function saveMyPicture(){
+  if(!checkLogin()) return;
+
+  if(!selectedProfilePicture){
+    showToast("Please select a picture first.", "error");
+    return;
+  }
+
+  const btn = document.getElementById("savePictureBtn");
+  btn.disabled = true;
+  btn.textContent = "Saving...";
+
+  try{
+    const response = await fetch(USER_API_URL,{
+      method:"POST",
+      headers:{"Content-Type":"text/plain;charset=utf-8"},
+      body:JSON.stringify({
+        action:"changePicture",
+        username:getLoggedInUsername(),
+        picture:selectedProfilePicture
+      })
+    });
+
+    const result = await response.json();
+
+    if(result.success === false){
+      throw new Error(result.message || "Picture update failed.");
+    }
+
+    applyProfileUI({
+      username:getLoggedInUsername(),
+      name:result.name || (getCurrentUserRecord() || {}).name || getLoggedInUsername(),
+      role:result.role || (getCurrentUserRecord() || {}).role || "",
+      picture:selectedProfilePicture
+    });
+
+    closeProfileModals();
+    showToast("Profile picture updated successfully.", "success");
+  }catch(error){
+    console.error(error);
+    showToast(error.message || "Failed to change picture.", "error");
+  }finally{
+    btn.disabled = false;
+    btn.textContent = "Save Picture";
+  }
+}
+
+async function changeMyPassword(event){
+  event.preventDefault();
+  if(!checkLogin()) return;
+
+  const currentPassword =
+    document.getElementById("currentPassword").value;
+  const newPassword =
+    document.getElementById("newPassword").value;
+  const confirmPassword =
+    document.getElementById("confirmPassword").value;
+
+  if(newPassword.length < 4){
+    showToast("New password must be at least 4 characters.", "error");
+    return;
+  }
+
+  if(newPassword !== confirmPassword){
+    showToast("New password and confirm password do not match.", "error");
+    return;
+  }
+
+  const btn = document.getElementById("changePasswordBtn");
+  btn.disabled = true;
+  btn.textContent = "Changing...";
+
+  try{
+    const response = await fetch(USER_API_URL,{
+      method:"POST",
+      headers:{"Content-Type":"text/plain;charset=utf-8"},
+      body:JSON.stringify({
+        action:"changePassword",
+        username:getLoggedInUsername(),
+        currentPassword,
+        newPassword
+      })
+    });
+
+    const result = await response.json();
+
+    if(result.success === false){
+      throw new Error(result.message || "Password change failed.");
+    }
+
+    closeProfileModals();
+    showToast("Password changed successfully.", "success");
+  }catch(error){
+    console.error(error);
+    showToast(error.message || "Failed to change password.", "error");
+  }finally{
+    btn.disabled = false;
+    btn.textContent = "Change Password";
+  }
+}
+
+document.addEventListener("click", function(event){
+  const wrap = document.getElementById("profileWrap");
+  if(wrap && !wrap.contains(event.target)){
+    closeProfileMenu();
+  }
+
+  if(event.target.id === "changePasswordModal" ||
+     event.target.id === "changePictureModal"){
+    closeProfileModals();
+  }
 });
+
+
+/* =========================================================
+   HELPERS
+========================================================= */
+
+function getTodayInputDate(){
+
+  const now =
+    new Date();
+
+
+  return (
+    now.getFullYear() +
+    "-" +
+    String(
+      now.getMonth() + 1
+    ).padStart(2,"0") +
+    "-" +
+    String(
+      now.getDate()
+    ).padStart(2,"0")
+  );
+
+}
+
+
+function showLoading(){
+
+  document.getElementById(
+    "tableBody"
+  ).innerHTML = `
+    <tr>
+      <td colspan="5">
+        <div class="loading">
+          ⏳ Loading data...
+        </div>
+      </td>
+    </tr>
+  `;
+
+}
+
+
+function showError(message){
+
+  document.getElementById(
+    "tableBody"
+  ).innerHTML = `
+    <tr>
+      <td colspan="5">
+        <div class="empty">
+          ❌ ${escapeHTML(message)}
+        </div>
+      </td>
+    </tr>
+  `;
+
+}
+
+
+function showToast(
+  message,
+  type
+){
+
+  const toast =
+    document.getElementById(
+      "toast"
+    );
+
+
+  toast.textContent =
+    message;
+
+
+  toast.className =
+    "toast show " +
+    (type || "");
+
+
+  setTimeout(
+    function(){
+
+      toast.className =
+        "toast";
+
+    },
+    3000
+  );
+
+}
+
+
+function escapeHTML(value){
+
+  return String(
+    value ?? ""
+  )
+  .replace(
+    /&/g,
+    "&amp;"
+  )
+  .replace(
+    /</g,
+    "&lt;"
+  )
+  .replace(
+    />/g,
+    "&gt;"
+  )
+  .replace(
+    /"/g,
+    "&quot;"
+  )
+  .replace(
+    /'/g,
+    "&#039;"
+  );
+
+}
+
+
+/* =========================================================
+   MODAL EVENTS
+========================================================= */
+
+document
+  .getElementById("entryModal")
+  .addEventListener(
+    "click",
+    function(event){
+
+      if(event.target === this){
+
+        closeEntryModal();
+
+      }
+
+    }
+  );
+
+
+document
+  .getElementById("userModal")
+  .addEventListener(
+    "click",
+    function(event){
+
+      if(event.target === this){
+
+        closeUserModal();
+
+      }
+
+    }
+  );
+
+
+document
+  .getElementById("userFormModal")
+  .addEventListener(
+    "click",
+    function(event){
+
+      if(event.target === this){
+
+        closeUserFormModal();
+
+      }
+
+    }
+  );
+
+
+/* =========================================================
+   ESC
+========================================================= */
+
+document.addEventListener(
+  "keydown",
+  function(event){
+
+    if(event.key === "Escape"){
+
+      closeEntryModal();
+
+      closeUserModal();
+
+      closeUserFormModal();
+      closeProfileModals();
+      closeProfileMenu();
+
+    }
+
+  }
+);
+
+
+/* =========================================================
+   START
+========================================================= */
+
+document.addEventListener(
+  "DOMContentLoaded",
+  function(){
+
+    if(!checkLogin()){
+      return;
+    }
+
+    loadTheme();
+
+    setupActivityDetection();
+
+    updatePageLabels();
+
+    loadData();
+    loadMyProfile();
+
+  }
+);
 
 </script>
 
 </body>
+
 </html>
