@@ -1,0 +1,2212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>User Profile</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,Helvetica,sans-serif;
+}
+
+body{
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+
+    background:
+        radial-gradient(circle at top left,#164e78 0%,transparent 35%),
+        radial-gradient(circle at bottom right,#123d68 0%,transparent 40%),
+        linear-gradient(135deg,#061321,#0b2035);
+
+    color:#fff;
+}
+
+
+/* =========================================================
+   PROFILE CARD
+========================================================= */
+
+.profile-card{
+
+    width:100%;
+    max-width:440px;
+
+    padding:30px;
+
+    border-radius:28px;
+
+    background:rgba(255,255,255,.10);
+
+    border:1px solid rgba(255,255,255,.18);
+
+    backdrop-filter:blur(20px);
+    -webkit-backdrop-filter:blur(20px);
+
+    box-shadow:
+        0 25px 70px rgba(0,0,0,.45);
+
+    text-align:center;
+
+    animation:cardIn .5s ease;
+
+}
+
+@keyframes cardIn{
+
+    from{
+        opacity:0;
+        transform:translateY(20px) scale(.97);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0) scale(1);
+    }
+
+}
+
+
+/* =========================================================
+   TITLE
+========================================================= */
+
+.profile-title{
+
+    font-size:27px;
+    font-weight:700;
+
+    margin-bottom:25px;
+
+}
+
+
+/* =========================================================
+   PROFILE PICTURE
+========================================================= */
+
+.profile-picture-box{
+
+    width:140px;
+    height:140px;
+
+    margin:0 auto 18px;
+
+    position:relative;
+
+}
+
+.profile-picture{
+
+    width:140px;
+    height:140px;
+
+    object-fit:cover;
+
+    border-radius:50%;
+
+    background:#e9eef2;
+
+    border:4px solid rgba(255,255,255,.85);
+
+    box-shadow:
+        0 10px 30px rgba(0,0,0,.35);
+
+}
+
+
+/* Camera Button */
+
+.camera-btn{
+
+    position:absolute;
+
+    right:0;
+    bottom:2px;
+
+    width:42px;
+    height:42px;
+
+    border:none;
+
+    border-radius:50%;
+
+    background:
+        linear-gradient(135deg,#00c6ff,#0072ff);
+
+    color:#fff;
+
+    font-size:18px;
+
+    cursor:pointer;
+
+    box-shadow:
+        0 5px 15px rgba(0,0,0,.35);
+
+    transition:.2s;
+
+}
+
+.camera-btn:hover{
+
+    transform:scale(1.08);
+
+}
+
+.camera-btn:active{
+
+    transform:scale(.95);
+
+}
+
+#pictureInput{
+
+    display:none;
+
+}
+
+
+/* =========================================================
+   USER NAME
+========================================================= */
+
+.user-name{
+
+    font-size:25px;
+    font-weight:700;
+
+    margin-top:8px;
+
+}
+
+.user-username{
+
+    font-size:14px;
+
+    opacity:.75;
+
+    margin-top:5px;
+
+}
+
+
+/* =========================================================
+   ROLE BADGE
+========================================================= */
+
+.role-badge{
+
+    display:inline-block;
+
+    margin-top:12px;
+
+    padding:7px 16px;
+
+    border-radius:50px;
+
+    background:rgba(0,198,255,.18);
+
+    border:1px solid rgba(0,198,255,.35);
+
+    font-size:13px;
+
+}
+
+
+/* =========================================================
+   USER INFORMATION
+========================================================= */
+
+.info-box{
+
+    margin-top:25px;
+
+    padding:5px 16px;
+
+    border-radius:17px;
+
+    background:rgba(0,0,0,.15);
+
+    border:1px solid rgba(255,255,255,.08);
+
+    text-align:left;
+
+}
+
+.info-row{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    gap:15px;
+
+    padding:13px 0;
+
+    border-bottom:
+        1px solid rgba(255,255,255,.08);
+
+}
+
+.info-row:last-child{
+
+    border-bottom:none;
+
+}
+
+.info-label{
+
+    color:rgba(255,255,255,.65);
+
+    font-size:13px;
+
+}
+
+.info-value{
+
+    font-size:14px;
+
+    font-weight:600;
+
+    text-align:right;
+
+    word-break:break-word;
+
+}
+
+
+/* =========================================================
+   BUTTONS
+========================================================= */
+
+.action-buttons{
+
+    margin-top:20px;
+
+}
+
+.action-btn{
+
+    width:100%;
+
+    padding:13px;
+
+    margin-top:10px;
+
+    border:none;
+
+    border-radius:12px;
+
+    color:#fff;
+
+    font-size:15px;
+
+    font-weight:700;
+
+    cursor:pointer;
+
+    transition:.2s;
+
+}
+
+.action-btn:hover{
+
+    transform:translateY(-1px);
+
+    filter:brightness(1.08);
+
+}
+
+.action-btn:active{
+
+    transform:scale(.98);
+
+}
+
+.password-btn{
+
+    background:
+        linear-gradient(135deg,#008cff,#0062ff);
+
+}
+
+.picture-btn{
+
+    background:
+        linear-gradient(135deg,#00b894,#00966f);
+
+}
+
+.logout-btn{
+
+    background:
+        linear-gradient(135deg,#ff416c,#ff4b2b);
+
+}
+
+
+/* =========================================================
+   MODAL
+========================================================= */
+
+.modal{
+
+    display:none;
+
+    position:fixed;
+
+    inset:0;
+
+    z-index:1000;
+
+    align-items:center;
+    justify-content:center;
+
+    padding:20px;
+
+    background:rgba(0,0,0,.72);
+
+    backdrop-filter:blur(5px);
+
+}
+
+.modal.show{
+
+    display:flex;
+
+}
+
+.modal-box{
+
+    width:100%;
+
+    max-width:390px;
+
+    padding:25px;
+
+    border-radius:20px;
+
+    background:#10243a;
+
+    border:1px solid rgba(255,255,255,.12);
+
+    box-shadow:
+        0 25px 70px rgba(0,0,0,.55);
+
+    animation:modalIn .25s ease;
+
+}
+
+@keyframes modalIn{
+
+    from{
+        opacity:0;
+        transform:scale(.94) translateY(10px);
+    }
+
+    to{
+        opacity:1;
+        transform:scale(1) translateY(0);
+    }
+
+}
+
+.modal-title{
+
+    font-size:21px;
+
+    font-weight:700;
+
+    margin-bottom:20px;
+
+}
+
+.input-group{
+
+    margin-bottom:13px;
+
+}
+
+.input-group input{
+
+    width:100%;
+
+    padding:13px 14px;
+
+    border-radius:11px;
+
+    border:1px solid rgba(255,255,255,.14);
+
+    outline:none;
+
+    background:#081827;
+
+    color:#fff;
+
+    font-size:14px;
+
+}
+
+.input-group input::placeholder{
+
+    color:rgba(255,255,255,.45);
+
+}
+
+.input-group input:focus{
+
+    border-color:#00a8ff;
+
+    box-shadow:
+        0 0 0 2px rgba(0,168,255,.12);
+
+}
+
+.modal-buttons{
+
+    display:flex;
+
+    gap:10px;
+
+    margin-top:15px;
+
+}
+
+.modal-btn{
+
+    flex:1;
+
+    padding:12px;
+
+    border:none;
+
+    border-radius:10px;
+
+    cursor:pointer;
+
+    font-weight:700;
+
+    color:#fff;
+
+}
+
+.save-btn{
+
+    background:#00a884;
+
+}
+
+.cancel-btn{
+
+    background:#555;
+
+}
+
+
+/* =========================================================
+   LOADING
+========================================================= */
+
+.loading{
+
+    pointer-events:none;
+
+    opacity:.65;
+
+}
+
+.spinner{
+
+    display:none;
+
+    width:18px;
+    height:18px;
+
+    margin-right:7px;
+
+    border:2px solid rgba(255,255,255,.35);
+
+    border-top-color:#fff;
+
+    border-radius:50%;
+
+    vertical-align:middle;
+
+    animation:spin .7s linear infinite;
+
+}
+
+@keyframes spin{
+
+    to{
+        transform:rotate(360deg);
+    }
+
+}
+
+
+/* =========================================================
+   TOAST
+========================================================= */
+
+.toast{
+
+    position:fixed;
+
+    top:20px;
+    right:20px;
+
+    z-index:2000;
+
+    min-width:250px;
+
+    max-width:calc(100% - 40px);
+
+    padding:14px 18px;
+
+    border-radius:12px;
+
+    background:#111;
+
+    color:#fff;
+
+    box-shadow:
+        0 10px 30px rgba(0,0,0,.35);
+
+    display:none;
+
+    font-size:14px;
+
+    animation:toastIn .25s ease;
+
+}
+
+.toast.show{
+
+    display:block;
+
+}
+
+.toast.success{
+
+    background:#009f7f;
+
+}
+
+.toast.error{
+
+    background:#dc3545;
+
+}
+
+@keyframes toastIn{
+
+    from{
+        opacity:0;
+        transform:translateX(20px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateX(0);
+    }
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media(max-width:480px){
+
+    body{
+        padding:12px;
+    }
+
+    .profile-card{
+        padding:24px 18px;
+        border-radius:22px;
+    }
+
+    .profile-title{
+        font-size:24px;
+    }
+
+    .profile-picture-box,
+    .profile-picture{
+        width:120px;
+        height:120px;
+    }
+
+    .user-name{
+        font-size:22px;
+    }
+
+    .info-box{
+        padding:5px 13px;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- ========================================================
+     PROFILE
+========================================================= -->
+
+<div class="profile-card" id="profileCard">
+
+    <div class="profile-title">
+        My Profile
+    </div>
+
+
+    <!-- PROFILE PICTURE -->
+
+    <div class="profile-picture-box">
+
+        <img
+            id="profilePicture"
+            class="profile-picture"
+            alt="Profile Picture"
+        >
+
+        <button
+            type="button"
+            class="camera-btn"
+            onclick="openPicturePicker()">
+
+            📷
+
+        </button>
+
+        <input
+            type="file"
+            id="pictureInput"
+            accept="image/*"
+            onchange="handlePicture(event)"
+        >
+
+    </div>
+
+
+    <!-- NAME -->
+
+    <div
+        class="user-name"
+        id="userName">
+
+        Loading...
+
+    </div>
+
+
+    <!-- USERNAME -->
+
+    <div
+        class="user-username"
+        id="userUsername">
+
+        @username
+
+    </div>
+
+
+    <!-- ROLE -->
+
+    <div
+        class="role-badge"
+        id="userRole">
+
+        User
+
+    </div>
+
+
+    <!-- INFORMATION -->
+
+    <div class="info-box">
+
+        <div class="info-row">
+
+            <span class="info-label">
+                Username
+            </span>
+
+            <span
+                class="info-value"
+                id="infoUsername">
+
+                -
+
+            </span>
+
+        </div>
+
+
+        <div class="info-row">
+
+            <span class="info-label">
+                Name
+            </span>
+
+            <span
+                class="info-value"
+                id="infoName">
+
+                -
+
+            </span>
+
+        </div>
+
+
+        <div class="info-row">
+
+            <span class="info-label">
+                Role
+            </span>
+
+            <span
+                class="info-value"
+                id="infoRole">
+
+                -
+
+            </span>
+
+        </div>
+
+
+        <div class="info-row">
+
+            <span class="info-label">
+                Status
+            </span>
+
+            <span
+                class="info-value"
+                id="infoStatus">
+
+                -
+
+            </span>
+
+        </div>
+
+    </div>
+
+
+    <!-- BUTTONS -->
+
+    <div class="action-buttons">
+
+        <button
+            type="button"
+            class="action-btn password-btn"
+            onclick="openPasswordModal()">
+
+            🔑 Change Password
+
+        </button>
+
+
+        <button
+            type="button"
+            class="action-btn picture-btn"
+            onclick="openPicturePicker()">
+
+            🖼️ Change Picture
+
+        </button>
+
+
+        <button
+            type="button"
+            class="action-btn logout-btn"
+            onclick="logout()">
+
+            🚪 Logout
+
+        </button>
+
+    </div>
+
+</div>
+
+
+
+<!-- ========================================================
+     CHANGE PASSWORD MODAL
+========================================================= -->
+
+<div
+    class="modal"
+    id="passwordModal">
+
+    <div class="modal-box">
+
+        <div class="modal-title">
+            🔑 Change Password
+        </div>
+
+
+        <div class="input-group">
+
+            <input
+                type="password"
+                id="oldPassword"
+                placeholder="Current Password"
+                autocomplete="current-password"
+            >
+
+        </div>
+
+
+        <div class="input-group">
+
+            <input
+                type="password"
+                id="newPassword"
+                placeholder="New Password"
+                autocomplete="new-password"
+            >
+
+        </div>
+
+
+        <div class="input-group">
+
+            <input
+                type="password"
+                id="confirmPassword"
+                placeholder="Confirm New Password"
+                autocomplete="new-password"
+            >
+
+        </div>
+
+
+        <div class="modal-buttons">
+
+            <button
+                type="button"
+                class="modal-btn save-btn"
+                id="savePasswordBtn"
+                onclick="changePassword()">
+
+                <span
+                    class="spinner"
+                    id="passwordSpinner">
+                </span>
+
+                Save
+
+            </button>
+
+
+            <button
+                type="button"
+                class="modal-btn cancel-btn"
+                onclick="closePasswordModal()">
+
+                Cancel
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- ========================================================
+     TOAST
+========================================================= -->
+
+<div
+    class="toast"
+    id="toast">
+</div>
+
+
+
+<script>
+
+
+// ==========================================================
+// APPS SCRIPT WEB APP URL
+// ==========================================================
+
+const API_URL =
+"https://script.google.com/macros/s/AKfycbw00GHHheuvtdQtgPURjs4PtsM48-4yaFx-_ms0ZBV5FHhnmcdbJ5DHr3Aix8JPF0kQzA/exec";
+
+
+// ==========================================================
+// DEFAULT PROFILE PICTURE
+// ==========================================================
+
+const DEFAULT_PICTURE =
+"data:image/svg+xml;charset=UTF-8," +
+encodeURIComponent(`
+
+<svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="400"
+    height="400"
+    viewBox="0 0 400 400">
+
+    <rect
+        width="400"
+        height="400"
+        fill="#dfe6e9"/>
+
+    <circle
+        cx="200"
+        cy="145"
+        r="80"
+        fill="#95a5a6"/>
+
+    <path
+        d="
+        M70 380
+        C70 275 130 225 200 225
+        C270 225 330 275 330 380
+        Z"
+        fill="#95a5a6"/>
+
+</svg>
+
+`);
+
+
+// ==========================================================
+// GET CURRENT USER FROM LOCAL STORAGE
+// ==========================================================
+
+function getCurrentUser(){
+
+    const possibleKeys = [
+
+        "userData",
+        "loginData",
+        "loggedUser",
+        "currentUser",
+        "userInfo"
+
+    ];
+
+
+    // First try JSON user objects
+
+    for(
+        let i = 0;
+        i < possibleKeys.length;
+        i++
+    ){
+
+        const key =
+            possibleKeys[i];
+
+        try{
+
+            const raw =
+                localStorage.getItem(key);
+
+            if(!raw){
+                continue;
+            }
+
+
+            const data =
+                JSON.parse(raw);
+
+
+            if(
+                data &&
+                (
+                    data.username ||
+                    data.Username ||
+                    data.name ||
+                    data.Name
+                )
+            ){
+
+                return normalizeUser(data);
+
+            }
+
+        }
+
+        catch(error){
+
+            // Ignore invalid JSON
+
+        }
+
+    }
+
+
+    // Try simple username
+
+    const username =
+        localStorage.getItem("username");
+
+
+    if(username){
+
+        return {
+
+            username:
+                username,
+
+            password:"",
+            name:"",
+            role:"",
+            status:"",
+            picture:""
+
+        };
+
+    }
+
+
+    return null;
+
+}
+
+
+// ==========================================================
+// NORMALIZE USER
+// ==========================================================
+
+function normalizeUser(user){
+
+    if(!user){
+        return null;
+    }
+
+
+    return {
+
+        username:
+            user.username ||
+            user.Username ||
+            "",
+
+        password:
+            user.password ||
+            user.Password ||
+            "",
+
+        name:
+            user.name ||
+            user.Name ||
+            "",
+
+        role:
+            user.role ||
+            user.Role ||
+            "",
+
+        status:
+            user.status ||
+            user.Status ||
+            "",
+
+        picture:
+            user.picture ||
+            user.Picture ||
+            ""
+
+    };
+
+}
+
+
+// ==========================================================
+// LOAD PROFILE
+// ==========================================================
+
+async function loadProfile(){
+
+    const user =
+        getCurrentUser();
+
+
+    if(!user || !user.username){
+
+        showToast(
+            "Login information not found",
+            "error"
+        );
+
+
+        setTimeout(function(){
+
+            window.location.href =
+                "index.html";
+
+        },1200);
+
+
+        return;
+
+    }
+
+
+    // Show current local information first
+
+    showUser(user);
+
+
+    /*
+     * Then fetch latest user information
+     * from Google Sheet.
+     *
+     * This makes picture/password/profile
+     * changes appear immediately.
+     */
+
+    try{
+
+        const response =
+            await fetch(
+                API_URL +
+                "?action=getUsers&_=" +
+                Date.now()
+            );
+
+
+        const result =
+            await response.json();
+
+
+        if(
+            result &&
+            result.success &&
+            Array.isArray(result.users)
+        ){
+
+            const target =
+                user.username
+                    .trim()
+                    .toLowerCase();
+
+
+            const latestUser =
+                result.users.find(function(item){
+
+                    return String(
+                        item.username || ""
+                    )
+                    .trim()
+                    .toLowerCase()
+                    === target;
+
+                });
+
+
+            if(latestUser){
+
+                const updatedUser =
+                    normalizeUser(
+                        latestUser
+                    );
+
+
+                showUser(
+                    updatedUser
+                );
+
+
+                updateLocalUser(
+                    updatedUser
+                );
+
+            }
+
+        }
+
+    }
+
+    catch(error){
+
+        console.log(
+            "Could not refresh profile:",
+            error
+        );
+
+    }
+
+}
+
+
+// ==========================================================
+// SHOW USER
+// ==========================================================
+
+function showUser(user){
+
+    if(!user){
+        return;
+    }
+
+
+    document.getElementById(
+        "userName"
+    ).textContent =
+        user.name ||
+        user.username ||
+        "User";
+
+
+    document.getElementById(
+        "userUsername"
+    ).textContent =
+        user.username
+            ? "@" + user.username
+            : "";
+
+
+    document.getElementById(
+        "userRole"
+    ).textContent =
+        user.role ||
+        "User";
+
+
+    document.getElementById(
+        "infoUsername"
+    ).textContent =
+        user.username ||
+        "-";
+
+
+    document.getElementById(
+        "infoName"
+    ).textContent =
+        user.name ||
+        "-";
+
+
+    document.getElementById(
+        "infoRole"
+    ).textContent =
+        user.role ||
+        "-";
+
+
+    document.getElementById(
+        "infoStatus"
+    ).textContent =
+        user.status ||
+        "-";
+
+
+    const image =
+        document.getElementById(
+            "profilePicture"
+        );
+
+
+    image.src =
+        user.picture ||
+        DEFAULT_PICTURE;
+
+}
+
+
+// ==========================================================
+// OPEN PICTURE PICKER
+// ==========================================================
+
+function openPicturePicker(){
+
+    document.getElementById(
+        "pictureInput"
+    ).click();
+
+}
+
+
+// ==========================================================
+// HANDLE PICTURE
+// ==========================================================
+
+function handlePicture(event){
+
+    const file =
+        event.target.files[0];
+
+
+    if(!file){
+        return;
+    }
+
+
+    // Check image
+
+    if(
+        !file.type ||
+        !file.type.startsWith("image/")
+    ){
+
+        showToast(
+            "Please select an image file",
+            "error"
+        );
+
+        event.target.value = "";
+
+        return;
+
+    }
+
+
+    /*
+     * Limit image size.
+     *
+     * We use 1.5 MB because the image is
+     * converted to Base64 before saving.
+     */
+
+    if(
+        file.size >
+        1.5 * 1024 * 1024
+    ){
+
+        showToast(
+            "Picture must be smaller than 1.5 MB",
+            "error"
+        );
+
+        event.target.value = "";
+
+        return;
+
+    }
+
+
+    const reader =
+        new FileReader();
+
+
+    reader.onload =
+        function(){
+
+            const base64 =
+                reader.result;
+
+
+            // Preview immediately
+
+            document.getElementById(
+                "profilePicture"
+            ).src =
+                base64;
+
+
+            savePicture(
+                base64
+            );
+
+        };
+
+
+    reader.onerror =
+        function(){
+
+            showToast(
+                "Could not read picture",
+                "error"
+            );
+
+        };
+
+
+    reader.readAsDataURL(file);
+
+}
+
+
+// ==========================================================
+// SAVE PICTURE TO GOOGLE SHEET
+// ==========================================================
+
+async function savePicture(base64){
+
+    const user =
+        getCurrentUser();
+
+
+    if(
+        !user ||
+        !user.username
+    ){
+
+        showToast(
+            "User not found",
+            "error"
+        );
+
+        return;
+
+    }
+
+
+    setLoading(true);
+
+
+    try{
+
+        const url =
+            API_URL +
+            "?action=updatePicture" +
+            "&username=" +
+            encodeURIComponent(
+                user.username
+            ) +
+            "&picture=" +
+            encodeURIComponent(
+                base64
+            );
+
+
+        const response =
+            await fetch(
+                url
+            );
+
+
+        const result =
+            await response.json();
+
+
+        if(
+            result &&
+            result.success
+        ){
+
+            // Update local profile
+
+            updateLocalUser({
+
+                picture:
+                    base64
+
+            });
+
+
+            showToast(
+                "Profile picture updated successfully",
+                "success"
+            );
+
+        }
+
+        else{
+
+            showToast(
+                result.message ||
+                "Picture update failed",
+                "error"
+            );
+
+        }
+
+    }
+
+    catch(error){
+
+        console.error(error);
+
+
+        showToast(
+            "Server connection failed",
+            "error"
+        );
+
+    }
+
+
+    setLoading(false);
+
+
+    // Clear file input
+
+    document.getElementById(
+        "pictureInput"
+    ).value = "";
+
+}
+
+
+// ==========================================================
+// OPEN PASSWORD MODAL
+// ==========================================================
+
+function openPasswordModal(){
+
+    document.getElementById(
+        "passwordModal"
+    ).classList.add(
+        "show"
+    );
+
+
+    document.getElementById(
+        "oldPassword"
+    ).focus();
+
+}
+
+
+// ==========================================================
+// CLOSE PASSWORD MODAL
+// ==========================================================
+
+function closePasswordModal(){
+
+    document.getElementById(
+        "passwordModal"
+    ).classList.remove(
+        "show"
+    );
+
+
+    document.getElementById(
+        "oldPassword"
+    ).value = "";
+
+
+    document.getElementById(
+        "newPassword"
+    ).value = "";
+
+
+    document.getElementById(
+        "confirmPassword"
+    ).value = "";
+
+}
+
+
+// ==========================================================
+// CHANGE PASSWORD
+// ==========================================================
+
+async function changePassword(){
+
+    const oldPassword =
+        document.getElementById(
+            "oldPassword"
+        ).value;
+
+
+    const newPassword =
+        document.getElementById(
+            "newPassword"
+        ).value;
+
+
+    const confirmPassword =
+        document.getElementById(
+            "confirmPassword"
+        ).value;
+
+
+    // Validate current password
+
+    if(!oldPassword){
+
+        showToast(
+            "Enter your current password",
+            "error"
+        );
+
+        return;
+
+    }
+
+
+    // Validate new password
+
+    if(!newPassword){
+
+        showToast(
+            "Enter your new password",
+            "error"
+        );
+
+        return;
+
+    }
+
+
+    if(newPassword.length < 4){
+
+        showToast(
+            "New password must be at least 4 characters",
+            "error"
+        );
+
+        return;
+
+    }
+
+
+    // Confirm password
+
+    if(
+        newPassword !==
+        confirmPassword
+    ){
+
+        showToast(
+            "New passwords do not match",
+            "error"
+        );
+
+        return;
+
+    }
+
+
+    // Don't allow same password
+
+    if(
+        oldPassword ===
+        newPassword
+    ){
+
+        showToast(
+            "New password must be different",
+            "error"
+        );
+
+        return;
+
+    }
+
+
+    const user =
+        getCurrentUser();
+
+
+    if(
+        !user ||
+        !user.username
+    ){
+
+        showToast(
+            "User not found",
+            "error"
+        );
+
+        return;
+
+    }
+
+
+    setPasswordLoading(true);
+
+
+    try{
+
+        const url =
+            API_URL +
+            "?action=changePassword" +
+            "&username=" +
+            encodeURIComponent(
+                user.username
+            ) +
+            "&oldPassword=" +
+            encodeURIComponent(
+                oldPassword
+            ) +
+            "&newPassword=" +
+            encodeURIComponent(
+                newPassword
+            );
+
+
+        const response =
+            await fetch(
+                url
+            );
+
+
+        const result =
+            await response.json();
+
+
+        if(
+            result &&
+            result.success
+        ){
+
+            /*
+             * Update local storage.
+             */
+
+            updateLocalUser({
+
+                password:
+                    newPassword
+
+            });
+
+
+            closePasswordModal();
+
+
+            showToast(
+                "Password changed successfully",
+                "success"
+            );
+
+        }
+
+        else{
+
+            showToast(
+                result.message ||
+                "Password change failed",
+                "error"
+            );
+
+        }
+
+    }
+
+    catch(error){
+
+        console.error(error);
+
+
+        showToast(
+            "Server connection failed",
+            "error"
+        );
+
+    }
+
+
+    setPasswordLoading(false);
+
+}
+
+
+// ==========================================================
+// UPDATE LOCAL USER DATA
+// ==========================================================
+
+function updateLocalUser(changes){
+
+    if(!changes){
+        return;
+    }
+
+
+    const keys = [
+
+        "userData",
+        "loginData",
+        "loggedUser",
+        "currentUser",
+        "userInfo"
+
+    ];
+
+
+    keys.forEach(function(key){
+
+        try{
+
+            const raw =
+                localStorage.getItem(
+                    key
+                );
+
+
+            if(!raw){
+                return;
+            }
+
+
+            const user =
+                JSON.parse(
+                    raw
+                );
+
+
+            if(!user){
+                return;
+            }
+
+
+            if(
+                changes.username !==
+                undefined
+            ){
+
+                user.username =
+                    changes.username;
+
+                user.Username =
+                    changes.username;
+
+            }
+
+
+            if(
+                changes.password !==
+                undefined
+            ){
+
+                user.password =
+                    changes.password;
+
+                user.Password =
+                    changes.password;
+
+            }
+
+
+            if(
+                changes.name !==
+                undefined
+            ){
+
+                user.name =
+                    changes.name;
+
+                user.Name =
+                    changes.name;
+
+            }
+
+
+            if(
+                changes.role !==
+                undefined
+            ){
+
+                user.role =
+                    changes.role;
+
+                user.Role =
+                    changes.role;
+
+            }
+
+
+            if(
+                changes.status !==
+                undefined
+            ){
+
+                user.status =
+                    changes.status;
+
+                user.Status =
+                    changes.status;
+
+            }
+
+
+            if(
+                changes.picture !==
+                undefined
+            ){
+
+                user.picture =
+                    changes.picture;
+
+                user.Picture =
+                    changes.picture;
+
+            }
+
+
+            localStorage.setItem(
+                key,
+                JSON.stringify(user)
+            );
+
+        }
+
+        catch(error){
+
+            console.log(
+                "Local storage update error:",
+                error
+            );
+
+        }
+
+    });
+
+
+    /*
+     * Also update simple username storage
+     * if username exists.
+     */
+
+    if(changes.username){
+
+        localStorage.setItem(
+            "username",
+            changes.username
+        );
+
+    }
+
+}
+
+
+// ==========================================================
+// PASSWORD BUTTON LOADING
+// ==========================================================
+
+function setPasswordLoading(
+    loading
+){
+
+    const button =
+        document.getElementById(
+            "savePasswordBtn"
+        );
+
+
+    const spinner =
+        document.getElementById(
+            "passwordSpinner"
+        );
+
+
+    if(loading){
+
+        button.disabled = true;
+
+        spinner.style.display =
+            "inline-block";
+
+    }
+
+    else{
+
+        button.disabled = false;
+
+        spinner.style.display =
+            "none";
+
+    }
+
+}
+
+
+// ==========================================================
+// GENERAL LOADING
+// ==========================================================
+
+function setLoading(
+    loading
+){
+
+    const card =
+        document.getElementById(
+            "profileCard"
+        );
+
+
+    if(loading){
+
+        card.classList.add(
+            "loading"
+        );
+
+    }
+
+    else{
+
+        card.classList.remove(
+            "loading"
+        );
+
+    }
+
+}
+
+
+// ==========================================================
+// LOGOUT
+// ==========================================================
+
+function logout(){
+
+    const keys = [
+
+        "dashboardAuth",
+        "username",
+        "userData",
+        "loginData",
+        "loggedUser",
+        "currentUser",
+        "userInfo"
+
+    ];
+
+
+    keys.forEach(function(key){
+
+        localStorage.removeItem(
+            key
+        );
+
+    });
+
+
+    sessionStorage.removeItem(
+        "dashboardAuth"
+    );
+
+
+    window.location.href =
+        "index.html";
+
+}
+
+
+// ==========================================================
+// TOAST
+// ==========================================================
+
+let toastTimer = null;
+
+
+function showToast(
+    message,
+    type
+){
+
+    const toast =
+        document.getElementById(
+            "toast"
+        );
+
+
+    toast.textContent =
+        message;
+
+
+    toast.className =
+        "toast show " +
+        (
+            type ||
+            ""
+        );
+
+
+    clearTimeout(
+        toastTimer
+    );
+
+
+    toastTimer =
+        setTimeout(
+            function(){
+
+                toast.classList.remove(
+                    "show"
+                );
+
+            },
+            3000
+        );
+
+}
+
+
+// ==========================================================
+// CLOSE MODAL WHEN CLICKING OUTSIDE
+// ==========================================================
+
+document
+    .getElementById("passwordModal")
+    .addEventListener(
+        "click",
+        function(event){
+
+            if(
+                event.target ===
+                this
+            ){
+
+                closePasswordModal();
+
+            }
+
+        }
+    );
+
+
+// ==========================================================
+// ESC KEY CLOSE MODAL
+// ==========================================================
+
+document.addEventListener(
+    "keydown",
+    function(event){
+
+        if(
+            event.key ===
+            "Escape"
+        ){
+
+            closePasswordModal();
+
+        }
+
+    }
+);
+
+
+// ==========================================================
+// PAGE LOAD
+// ==========================================================
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function(){
+
+        loadProfile();
+
+    }
+);
+
+</script>
+
+</body>
+</html>
