@@ -1,325 +1,269 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Support Dashboard</title>
 
-<link rel="icon"
-      type="image/png"
-      href="https://cdn-icons-png.flaticon.com/128/17163/17163834.png">
+<link
+  rel="icon"
+  type="image/png"
+  href="https://cdn-icons-png.flaticon.com/128/17163/17163834.png"
+>
 
 <style>
+
 *{
+  box-sizing:border-box;
   margin:0;
   padding:0;
-  box-sizing:border-box;
-  font-family:Arial,Helvetica,sans-serif;
-}
-
-:root{
-  --bg:#f4f7f6;
-  --card:#ffffff;
-  --text:#17221f;
-  --muted:#71807a;
-  --border:#e2e8e5;
-  --green:#16a36b;
-  --green-dark:#108255;
-  --input:#f8faf9;
-  --shadow:0 10px 30px rgba(0,0,0,.07);
-}
-
-body.dark{
-  --bg:#101513;
-  --card:#18201d;
-  --text:#f1f5f3;
-  --muted:#9aa9a3;
-  --border:#2a3531;
-  --green:#20c982;
-  --green-dark:#16a96b;
-  --input:#111916;
-  --shadow:0 12px 35px rgba(0,0,0,.35);
 }
 
 body{
-  background:var(--bg);
-  color:var(--text);
+  font-family:Arial,Helvetica,sans-serif;
+  background:#f4f7fb;
+  color:#172033;
   min-height:100vh;
   transition:.25s;
 }
 
+body.dark{
+  background:#111827;
+  color:#f3f4f6;
+}
+
 button,
 input{
-  font:inherit;
+  font-family:inherit;
 }
 
 button{
   cursor:pointer;
-  border:none;
 }
 
-/* ================= HEADER ================= */
+
+/* =========================================================
+   HEADER
+========================================================= */
 
 .header{
-  width:100%;
-  background:var(--card);
-  border-bottom:1px solid var(--border);
-  box-shadow:var(--shadow);
+  height:70px;
+  background:#ffffff;
+  border-bottom:1px solid #e5e7eb;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 28px;
   position:sticky;
   top:0;
   z-index:100;
 }
 
-.header-inner{
-  max-width:1400px;
-  margin:auto;
-  min-height:72px;
-  padding:12px 22px;
-  display:flex;
-  align-items:center;
-  gap:12px;
-}
-
-.logo-area{
-  display:flex;
-  align-items:center;
-  gap:10px;
-  margin-right:auto;
+body.dark .header{
+  background:#182131;
+  border-color:#273449;
 }
 
 .logo{
-  width:40px;
-  height:40px;
-  border-radius:12px;
   display:flex;
   align-items:center;
-  justify-content:center;
-  background:linear-gradient(135deg,#16a36b,#0d7e51);
-  color:#fff;
+  gap:10px;
   font-size:20px;
-  font-weight:bold;
-}
-
-.logo-text{
-  font-size:19px;
   font-weight:700;
+  color:#16a34a;
 }
 
-.header-btn{
-  height:42px;
-  padding:0 15px;
-  border-radius:10px;
+.logo-icon{
+  width:38px;
+  height:38px;
+  border-radius:11px;
+  background:#16a34a;
+  color:white;
   display:flex;
   align-items:center;
   justify-content:center;
-  gap:7px;
+  font-size:20px;
+}
+
+.header-right{
+  display:flex;
+  align-items:center;
+  gap:9px;
+}
+
+
+/* =========================================================
+   BUTTONS
+========================================================= */
+
+.btn{
+  border:0;
+  border-radius:9px;
+  padding:10px 15px;
+  font-size:14px;
   font-weight:600;
   transition:.2s;
 }
 
-.reload-btn{
-  background:var(--input);
-  color:var(--text);
-  border:1px solid var(--border);
-}
-
-.reload-btn:hover{
+.btn:hover{
   transform:translateY(-1px);
 }
 
-.new-btn{
-  background:var(--green);
-  color:#fff;
-  box-shadow:0 5px 15px rgba(22,163,107,.25);
+.btn-green{
+  background:#16a34a;
+  color:white;
 }
 
-.new-btn:hover{
-  background:var(--green-dark);
-  transform:translateY(-1px);
+.btn-green:hover{
+  background:#15803d;
 }
 
-.theme-btn{
-  background:var(--input);
-  color:var(--text);
-  border:1px solid var(--border);
+.btn-light{
+  background:#f1f5f9;
+  color:#334155;
 }
 
-.profile-btn{
-  width:42px;
-  padding:0;
-  border-radius:50%;
-  background:var(--input);
-  color:var(--text);
-  border:1px solid var(--border);
-  font-size:18px;
+.btn-light:hover{
+  background:#e2e8f0;
 }
 
-/* ================= PROFILE MENU ================= */
-
-.profile-wrap{
-  position:relative;
+.btn-danger{
+  background:#ef4444;
+  color:white;
 }
 
-.profile-menu{
-  position:absolute;
-  top:52px;
-  right:0;
-  width:230px;
-  background:var(--card);
-  border:1px solid var(--border);
-  border-radius:15px;
-  padding:10px;
-  box-shadow:var(--shadow);
-  display:none;
+body.dark .btn-light{
+  background:#273449;
+  color:#e5e7eb;
 }
 
-.profile-menu.show{
-  display:block;
+body.dark .btn-light:hover{
+  background:#334155;
 }
 
-.profile-user{
-  padding:12px;
-  border-bottom:1px solid var(--border);
-  margin-bottom:7px;
-}
 
-.profile-user strong{
-  display:block;
-  font-size:15px;
-}
-
-.profile-user span{
-  display:block;
-  color:var(--muted);
-  font-size:12px;
-  margin-top:3px;
-}
-
-.menu-item{
-  width:100%;
-  padding:11px 12px;
-  background:transparent;
-  color:var(--text);
-  border-radius:9px;
-  text-align:left;
-}
-
-.menu-item:hover{
-  background:var(--input);
-}
-
-.menu-item.logout{
-  color:#e05252;
-}
-
-/* ================= MAIN ================= */
+/* =========================================================
+   MAIN
+========================================================= */
 
 .main{
   max-width:1400px;
   margin:auto;
-  padding:22px;
+  padding:28px;
 }
 
-/* ================= FILTER ================= */
 
-.filter-card{
-  background:var(--card);
-  border:1px solid var(--border);
+/* =========================================================
+   FILTER AREA
+========================================================= */
+
+.filter-box{
+  background:#ffffff;
+  border:1px solid #e5e7eb;
   border-radius:15px;
-  padding:15px;
-  box-shadow:var(--shadow);
+  padding:18px;
+  margin-bottom:22px;
+}
+
+body.dark .filter-box{
+  background:#182131;
+  border-color:#273449;
+}
+
+.filter-row{
+  display:grid;
+  grid-template-columns:2fr 1fr 1fr auto auto;
+  gap:10px;
+  align-items:end;
+}
+
+.field{
   display:flex;
-  align-items:center;
-  gap:12px;
-  margin-bottom:18px;
+  flex-direction:column;
+  gap:6px;
 }
 
-.search-box{
-  flex:1;
-  position:relative;
+.field label{
+  font-size:12px;
+  font-weight:600;
+  color:#64748b;
 }
 
-.search-box span{
-  position:absolute;
-  left:13px;
-  top:50%;
-  transform:translateY(-50%);
-  color:var(--muted);
+body.dark .field label{
+  color:#94a3b8;
 }
 
-.search-box input{
+.field input{
   width:100%;
   height:42px;
-  padding:0 13px 0 39px;
-  background:var(--input);
-  color:var(--text);
-  border:1px solid var(--border);
-  border-radius:10px;
+  border:1px solid #dbe2ea;
+  border-radius:8px;
+  padding:0 12px;
   outline:none;
+  background:#fff;
+  color:#172033;
 }
 
-.date-group{
+.field input:focus{
+  border-color:#16a34a;
+  box-shadow:0 0 0 3px rgba(22,163,74,.10);
+}
+
+body.dark .field input{
+  background:#111827;
+  border-color:#334155;
+  color:#f3f4f6;
+}
+
+.filter-buttons{
   display:flex;
-  align-items:center;
-  gap:7px;
+  gap:8px;
 }
 
-.date-group input{
-  height:42px;
-  width:145px;
-  padding:0 10px;
-  background:var(--input);
-  color:var(--text);
-  border:1px solid var(--border);
-  border-radius:10px;
-  outline:none;
-}
 
-.filter-btn{
-  height:42px;
-  padding:0 15px;
-  border-radius:10px;
-  background:var(--green);
-  color:#fff;
-  font-weight:600;
-}
-
-.clear-btn{
-  height:42px;
-  padding:0 15px;
-  border-radius:10px;
-  background:var(--input);
-  color:var(--text);
-  border:1px solid var(--border);
-  font-weight:600;
-}
-
-/* ================= TABLE ================= */
+/* =========================================================
+   TABLE CARD
+========================================================= */
 
 .table-card{
-  background:var(--card);
-  border:1px solid var(--border);
+  background:#ffffff;
+  border:1px solid #e5e7eb;
   border-radius:15px;
-  box-shadow:var(--shadow);
   overflow:hidden;
 }
 
-.table-title{
-  padding:17px 18px;
-  border-bottom:1px solid var(--border);
+body.dark .table-card{
+  background:#182131;
+  border-color:#273449;
+}
+
+.table-header{
   display:flex;
   align-items:center;
   justify-content:space-between;
+  padding:18px 20px;
+  border-bottom:1px solid #e5e7eb;
 }
 
-.table-title h2{
+body.dark .table-header{
+  border-color:#273449;
+}
+
+.table-title{
   font-size:17px;
+  font-weight:700;
 }
 
-.table-title span{
-  font-size:12px;
-  color:var(--muted);
+.table-count{
+  font-size:13px;
+  color:#64748b;
+}
+
+body.dark .table-count{
+  color:#94a3b8;
 }
 
 .table-wrap{
@@ -334,43 +278,167 @@ table{
 }
 
 thead{
-  background:var(--input);
+  background:#f8fafc;
 }
 
-th,
-td{
-  padding:14px 16px;
-  text-align:left;
-  border-bottom:1px solid var(--border);
+body.dark thead{
+  background:#111827;
 }
 
 th{
+  text-align:left;
+  padding:14px 20px;
   font-size:12px;
   text-transform:uppercase;
   letter-spacing:.4px;
-  color:var(--muted);
+  color:#64748b;
+  white-space:nowrap;
+}
+
+body.dark th{
+  color:#94a3b8;
 }
 
 td{
+  padding:15px 20px;
+  border-top:1px solid #edf0f3;
   font-size:14px;
+  vertical-align:middle;
+}
+
+body.dark td{
+  border-color:#273449;
 }
 
 tbody tr:hover{
-  background:var(--input);
+  background:#f8fafc;
+}
+
+body.dark tbody tr:hover{
+  background:#202c3d;
 }
 
 .empty{
   text-align:center;
-  padding:40px 20px;
-  color:var(--muted);
+  padding:45px 20px;
+  color:#64748b;
 }
 
-/* ================= MODAL ================= */
+body.dark .empty{
+  color:#94a3b8;
+}
 
-.overlay{
+
+/* =========================================================
+   PROFILE
+========================================================= */
+
+.profile-wrap{
+  position:relative;
+}
+
+.profile-btn{
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+
+.profile-icon{
+  width:28px;
+  height:28px;
+  border-radius:50%;
+  background:#dcfce7;
+  color:#15803d;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:700;
+}
+
+.profile-menu{
+  position:absolute;
+  top:48px;
+  right:0;
+  width:220px;
+  background:#fff;
+  border:1px solid #e5e7eb;
+  border-radius:12px;
+  box-shadow:0 15px 40px rgba(0,0,0,.12);
+  padding:8px;
+  display:none;
+  z-index:300;
+}
+
+.profile-menu.show{
+  display:block;
+}
+
+body.dark .profile-menu{
+  background:#182131;
+  border-color:#334155;
+}
+
+.profile-user{
+  padding:12px;
+  border-bottom:1px solid #e5e7eb;
+  margin-bottom:5px;
+}
+
+body.dark .profile-user{
+  border-color:#334155;
+}
+
+.profile-name{
+  font-weight:700;
+  font-size:14px;
+}
+
+.profile-username{
+  font-size:12px;
+  color:#64748b;
+  margin-top:3px;
+}
+
+body.dark .profile-username{
+  color:#94a3b8;
+}
+
+.profile-item{
+  width:100%;
+  background:transparent;
+  border:0;
+  text-align:left;
+  padding:11px 12px;
+  border-radius:8px;
+  font-size:14px;
+  color:#334155;
+}
+
+.profile-item:hover{
+  background:#f1f5f9;
+}
+
+body.dark .profile-item{
+  color:#e5e7eb;
+}
+
+body.dark .profile-item:hover{
+  background:#273449;
+}
+
+.profile-item.logout{
+  color:#dc2626;
+}
+
+
+/* =========================================================
+   MODAL
+========================================================= */
+
+.modal-bg{
   position:fixed;
   inset:0;
-  background:rgba(0,0,0,.55);
+  background:rgba(15,23,42,.55);
   display:none;
   align-items:center;
   justify-content:center;
@@ -378,129 +446,112 @@ tbody tr:hover{
   z-index:500;
 }
 
-.overlay.show{
+.modal-bg.show{
   display:flex;
 }
 
 .modal{
   width:100%;
-  max-width:470px;
-  background:var(--card);
-  border:1px solid var(--border);
-  border-radius:18px;
-  box-shadow:0 25px 70px rgba(0,0,0,.3);
-  overflow:hidden;
-  animation:modalIn .2s ease;
+  max-width:460px;
+  background:#fff;
+  border-radius:16px;
+  padding:24px;
+  box-shadow:0 25px 60px rgba(0,0,0,.2);
 }
 
-@keyframes modalIn{
-  from{
-    opacity:0;
-    transform:translateY(12px) scale(.98);
-  }
-  to{
-    opacity:1;
-    transform:none;
-  }
+body.dark .modal{
+  background:#182131;
 }
 
 .modal-head{
-  padding:18px 20px;
-  border-bottom:1px solid var(--border);
   display:flex;
   align-items:center;
   justify-content:space-between;
+  margin-bottom:20px;
 }
 
-.modal-head h3{
-  font-size:18px;
+.modal-title{
+  font-size:19px;
+  font-weight:700;
 }
 
-.close-btn{
+.close{
   width:34px;
   height:34px;
-  border-radius:9px;
-  background:var(--input);
-  color:var(--text);
-  font-size:19px;
+  border:0;
+  border-radius:8px;
+  background:#f1f5f9;
+  font-size:20px;
+  color:#475569;
 }
 
-.modal-body{
-  padding:20px;
+body.dark .close{
+  background:#273449;
+  color:#e5e7eb;
 }
 
-.form-group{
+.modal-field{
   margin-bottom:15px;
 }
 
-.form-group label{
+.modal-field label{
   display:block;
-  margin-bottom:7px;
   font-size:13px;
   font-weight:600;
+  margin-bottom:7px;
+  color:#475569;
 }
 
-.form-group input{
+body.dark .modal-field label{
+  color:#cbd5e1;
+}
+
+.modal-field input{
   width:100%;
   height:44px;
+  border:1px solid #dbe2ea;
+  border-radius:9px;
   padding:0 12px;
-  background:var(--input);
-  color:var(--text);
-  border:1px solid var(--border);
-  border-radius:10px;
   outline:none;
 }
 
-.form-group input:focus{
-  border-color:var(--green);
+.modal-field input:focus{
+  border-color:#16a34a;
 }
 
-.form-group input[readonly]{
-  opacity:.75;
+body.dark .modal-field input{
+  background:#111827;
+  border-color:#334155;
+  color:#fff;
 }
 
 .modal-actions{
   display:flex;
   justify-content:flex-end;
-  gap:10px;
+  gap:9px;
   margin-top:20px;
 }
 
-.cancel-btn{
-  height:42px;
-  padding:0 16px;
-  border-radius:10px;
-  background:var(--input);
-  color:var(--text);
-  border:1px solid var(--border);
-}
 
-.save-btn{
-  height:42px;
-  padding:0 18px;
-  border-radius:10px;
-  background:var(--green);
-  color:#fff;
-  font-weight:600;
-}
-
-/* ================= TOAST ================= */
+/* =========================================================
+   TOAST
+========================================================= */
 
 .toast{
   position:fixed;
-  right:20px;
-  bottom:20px;
+  right:22px;
+  bottom:22px;
   min-width:250px;
-  max-width:350px;
-  padding:13px 16px;
-  background:#17211d;
+  max-width:380px;
+  background:#172033;
   color:#fff;
-  border-radius:11px;
-  box-shadow:0 10px 30px rgba(0,0,0,.25);
-  transform:translateY(80px);
+  padding:13px 16px;
+  border-radius:10px;
+  box-shadow:0 15px 35px rgba(0,0,0,.2);
+  transform:translateY(100px);
   opacity:0;
   pointer-events:none;
-  transition:.3s;
+  transition:.25s;
   z-index:1000;
   font-size:14px;
 }
@@ -511,239 +562,347 @@ tbody tr:hover{
 }
 
 .toast.success{
-  border-left:4px solid #20c982;
+  background:#15803d;
 }
 
 .toast.error{
-  border-left:4px solid #ef5b5b;
+  background:#dc2626;
 }
 
-/* ================= LOADER ================= */
 
-.loader{
+/* =========================================================
+   LOADER
+========================================================= */
+
+.loader-bg{
   position:fixed;
   inset:0;
-  background:rgba(0,0,0,.4);
+  background:rgba(255,255,255,.65);
   display:none;
   align-items:center;
   justify-content:center;
   z-index:900;
 }
 
-.loader.show{
+.loader-bg.show{
   display:flex;
 }
 
-.loader-box{
-  background:var(--card);
-  color:var(--text);
-  padding:22px 28px;
-  border-radius:15px;
-  box-shadow:var(--shadow);
-  font-weight:600;
+body.dark .loader-bg{
+  background:rgba(15,23,42,.65);
 }
 
-/* ================= MOBILE ================= */
+.loader{
+  width:44px;
+  height:44px;
+  border:4px solid #d1fae5;
+  border-top-color:#16a34a;
+  border-radius:50%;
+  animation:spin .7s linear infinite;
+}
 
-@media(max-width:850px){
+@keyframes spin{
+  to{
+    transform:rotate(360deg);
+  }
+}
 
-  .header-inner{
-    padding:10px 12px;
-    gap:7px;
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media(max-width:900px){
+
+  .header{
+    padding:0 15px;
   }
 
-  .logo-text{
-    font-size:16px;
+  .logo span{
+    display:none;
   }
 
-  .logo{
-    width:36px;
-    height:36px;
+  .header-right{
+    gap:6px;
   }
 
-  .header-btn{
-    height:38px;
-    padding:0 10px;
-    font-size:12px;
-  }
-
-  .theme-btn{
-    width:38px;
-    padding:0;
-    font-size:16px;
-  }
-
-  .profile-btn{
-    width:38px;
-    height:38px;
+  .btn{
+    padding:9px 11px;
   }
 
   .main{
-    padding:13px;
+    padding:18px 12px;
   }
 
-  .filter-card{
-    flex-wrap:wrap;
+  .filter-row{
+    grid-template-columns:1fr 1fr;
   }
 
-  .search-box{
-    flex-basis:100%;
+  .filter-row .search-field{
+    grid-column:1 / -1;
   }
 
-  .date-group{
+}
+
+@media(max-width:600px){
+
+  .header{
+    height:auto;
+    min-height:65px;
+    padding:10px 12px;
+  }
+
+  .header-right .theme-text,
+  .header-right .reload-text,
+  .header-right .new-text{
+    display:none;
+  }
+
+  .filter-row{
+    grid-template-columns:1fr;
+  }
+
+  .filter-row .search-field{
+    grid-column:auto;
+  }
+
+  .filter-buttons{
     width:100%;
   }
 
-  .date-group input{
-    flex:1;
-    width:auto;
-  }
-
-  .filter-btn,
-  .clear-btn{
+  .filter-buttons .btn{
     flex:1;
   }
+
+  .modal{
+    padding:19px;
+  }
+
 }
 
-@media(max-width:520px){
-
-  .logo-area{
-    min-width:0;
-  }
-
-  .logo-text{
-    display:none;
-  }
-
-  .new-btn{
-    padding:0 9px;
-  }
-
-  .new-btn span{
-    display:none;
-  }
-
-  .reload-btn span{
-    display:none;
-  }
-
-  .header-btn{
-    width:38px;
-    padding:0;
-  }
-
-  .profile-menu{
-    right:-5px;
-  }
-
-  .date-group{
-    flex-wrap:wrap;
-  }
-
-  .date-group input{
-    width:calc(50% - 4px);
-    flex:none;
-  }
-}
 </style>
+
 </head>
+
 
 <body>
 
-<!-- ================= HEADER ================= -->
+
+<!-- =========================================================
+     HEADER
+========================================================= -->
 
 <header class="header">
-  <div class="header-inner">
 
-    <div class="logo-area">
-      <div class="logo">S</div>
-      <div class="logo-text">Support Dashboard</div>
+  <div class="logo">
+
+    <div class="logo-icon">
+      ✓
     </div>
 
-    <button class="header-btn reload-btn" onclick="loadData()">
-      ↻ <span>Reload</span>
+    <span>
+      Support Dashboard
+    </span>
+
+  </div>
+
+
+  <div class="header-right">
+
+
+    <!-- Reload -->
+
+    <button
+      class="btn btn-light"
+      onclick="loadData()"
+    >
+      ↻
+      <span class="reload-text">
+        Reload
+      </span>
     </button>
 
-    <button class="header-btn new-btn" onclick="openEntryModal()">
-      ＋ <span>New Entry</span>
+
+    <!-- New Entry -->
+
+    <button
+      class="btn btn-green"
+      onclick="openEntryModal()"
+    >
+      +
+      <span class="new-text">
+        New Entry
+      </span>
     </button>
 
-    <button class="header-btn theme-btn"
-            id="themeBtn"
-            onclick="toggleTheme()"
-            title="Dark Mode">
+
+    <!-- Dark Mode -->
+
+    <button
+      class="btn btn-light"
+      onclick="toggleTheme()"
+      id="themeBtn"
+    >
       ☾
+      <span class="theme-text">
+        Dark
+      </span>
     </button>
+
+
+    <!-- Profile -->
 
     <div class="profile-wrap">
 
-      <button class="header-btn profile-btn"
-              onclick="toggleProfile()">
-        👤
+      <button
+        class="btn btn-light profile-btn"
+        onclick="toggleProfile()"
+      >
+
+        <span class="profile-icon">
+          <span id="profileLetter">
+            U
+          </span>
+        </span>
+
+        <span id="profileButtonName">
+          Profile
+        </span>
+
       </button>
 
-      <div class="profile-menu" id="profileMenu">
+
+      <div
+        class="profile-menu"
+        id="profileMenu"
+      >
 
         <div class="profile-user">
-          <strong id="profileName">User</strong>
-          <span id="profileUsername">@username</span>
+
+          <div
+            class="profile-name"
+            id="menuName"
+          >
+            User
+          </div>
+
+          <div
+            class="profile-username"
+            id="menuUsername"
+          >
+            @username
+          </div>
+
         </div>
 
-        <button class="menu-item"
-                onclick="openPasswordModal()">
+
+        <button
+          class="profile-item"
+          onclick="openPasswordModal()"
+        >
           🔑 Change Password
         </button>
 
-        <button class="menu-item logout"
-                onclick="logoutUser()">
-          🚪 Logout
+
+        <button
+          class="profile-item logout"
+          onclick="logout()"
+        >
+          ↪ Logout
         </button>
 
       </div>
+
     </div>
 
   </div>
+
 </header>
 
 
-<!-- ================= MAIN ================= -->
+<!-- =========================================================
+     MAIN
+========================================================= -->
 
 <main class="main">
 
+
   <!-- FILTER -->
 
-  <section class="filter-card">
+  <section class="filter-box">
 
-    <div class="search-box">
-      <span>🔍</span>
-      <input
-        type="text"
-        id="searchInput"
-        placeholder="Search Name, IP or Work..."
-        oninput="applyFilters()">
-    </div>
+    <div class="filter-row">
 
-    <div class="date-group">
 
-      <input
-        type="date"
-        id="fromDate">
+      <div class="field search-field">
 
-      <input
-        type="date"
-        id="toDate">
+        <label>
+          Search
+        </label>
 
-      <button
-        class="filter-btn"
-        onclick="applyFilters()">
-        Filter
-      </button>
+        <input
+          type="text"
+          id="searchInput"
+          placeholder="Search name, IP or work..."
+          oninput="applyFilters()"
+        >
 
-      <button
-        class="clear-btn"
-        onclick="clearFilters()">
-        Clear
-      </button>
+      </div>
+
+
+      <div class="field">
+
+        <label>
+          From Date
+        </label>
+
+        <input
+          type="date"
+          id="fromDate"
+          onchange="applyFilters()"
+        >
+
+      </div>
+
+
+      <div class="field">
+
+        <label>
+          To Date
+        </label>
+
+        <input
+          type="date"
+          id="toDate"
+          onchange="applyFilters()"
+        >
+
+      </div>
+
+
+      <div class="filter-buttons">
+
+        <button
+          class="btn btn-green"
+          onclick="applyFilters()"
+        >
+          Filter
+        </button>
+
+      </div>
+
+
+      <div class="filter-buttons">
+
+        <button
+          class="btn btn-light"
+          onclick="clearFilters()"
+        >
+          Clear
+        </button>
+
+      </div>
+
 
     </div>
 
@@ -754,30 +913,63 @@ tbody tr:hover{
 
   <section class="table-card">
 
-    <div class="table-title">
-      <h2>Recent Entries</h2>
-      <span id="entryCount">0 Entries</span>
+
+    <div class="table-header">
+
+      <div class="table-title">
+        Recent Entries
+      </div>
+
+      <div
+        class="table-count"
+        id="entryCount"
+      >
+        0 Entries
+      </div>
+
     </div>
+
 
     <div class="table-wrap">
 
       <table>
 
         <thead>
+
           <tr>
-            <th>Name</th>
-            <th>IP</th>
-            <th>Work</th>
-            <th>Date</th>
+
+            <th>
+              Name
+            </th>
+
+            <th>
+              IP
+            </th>
+
+            <th>
+              Work
+            </th>
+
+            <th>
+              Date
+            </th>
+
           </tr>
+
         </thead>
 
-        <tbody id="tableBody">
+
+        <tbody id="dataBody">
 
           <tr>
-            <td colspan="4" class="empty">
+
+            <td
+              colspan="4"
+              class="empty"
+            >
               Loading...
             </td>
+
           </tr>
 
         </tbody>
@@ -788,137 +980,112 @@ tbody tr:hover{
 
   </section>
 
+
 </main>
 
 
-<!-- ================= NEW ENTRY MODAL ================= -->
+<!-- =========================================================
+     NEW ENTRY MODAL
+========================================================= -->
 
-<div class="overlay" id="entryOverlay">
-
-  <div class="modal">
-
-    <div class="modal-head">
-      <h3>New Entry</h3>
-
-      <button class="close-btn"
-              onclick="closeEntryModal()">
-        ×
-      </button>
-    </div>
-
-    <div class="modal-body">
-
-      <div class="form-group">
-        <label>Name</label>
-        <input
-          type="text"
-          id="entryName"
-          readonly>
-      </div>
-
-      <div class="form-group">
-        <label>Date</label>
-        <input
-          type="text"
-          id="entryDate"
-          readonly>
-      </div>
-
-      <div class="form-group">
-        <label>IP Address</label>
-        <input
-          type="text"
-          id="entryIP"
-          placeholder="Enter IP address">
-      </div>
-
-      <div class="form-group">
-        <label>Work</label>
-        <input
-          type="text"
-          id="entryWork"
-          placeholder="Enter work">
-      </div>
-
-      <div class="modal-actions">
-
-        <button
-          class="cancel-btn"
-          onclick="closeEntryModal()">
-          Cancel
-        </button>
-
-        <button
-          class="save-btn"
-          onclick="saveEntry()">
-          Entry
-        </button>
-
-      </div>
-
-    </div>
-
-  </div>
-
-</div>
-
-
-<!-- ================= CHANGE PASSWORD MODAL ================= -->
-
-<div class="overlay" id="passwordOverlay">
+<div
+  class="modal-bg"
+  id="entryModal"
+>
 
   <div class="modal">
 
     <div class="modal-head">
-      <h3>Change Password</h3>
 
-      <button class="close-btn"
-              onclick="closePasswordModal()">
+      <div class="modal-title">
+        New Entry
+      </div>
+
+      <button
+        class="close"
+        onclick="closeEntryModal()"
+      >
         ×
       </button>
+
     </div>
 
-    <div class="modal-body">
 
-      <div class="form-group">
-        <label>Current Password</label>
-        <input
-          type="password"
-          id="currentPassword"
-          placeholder="Enter current password">
-      </div>
+    <div class="modal-field">
 
-      <div class="form-group">
-        <label>New Password</label>
-        <input
-          type="password"
-          id="newPassword"
-          placeholder="Enter new password">
-      </div>
+      <label>
+        Name
+      </label>
 
-      <div class="form-group">
-        <label>Confirm New Password</label>
-        <input
-          type="password"
-          id="confirmPassword"
-          placeholder="Confirm new password">
-      </div>
+      <input
+        type="text"
+        id="entryName"
+        readonly
+      >
 
-      <div class="modal-actions">
+    </div>
 
-        <button
-          class="cancel-btn"
-          onclick="closePasswordModal()">
-          Cancel
-        </button>
 
-        <button
-          class="save-btn"
-          onclick="changePassword()">
-          Save Password
-        </button>
+    <div class="modal-field">
 
-      </div>
+      <label>
+        Date
+      </label>
+
+      <input
+        type="text"
+        id="entryDate"
+        readonly
+      >
+
+    </div>
+
+
+    <div class="modal-field">
+
+      <label>
+        IP Address
+      </label>
+
+      <input
+        type="text"
+        id="entryIP"
+        placeholder="Enter IP address"
+      >
+
+    </div>
+
+
+    <div class="modal-field">
+
+      <label>
+        Work
+      </label>
+
+      <input
+        type="text"
+        id="entryWork"
+        placeholder="Enter work"
+      >
+
+    </div>
+
+
+    <div class="modal-actions">
+
+      <button
+        class="btn btn-light"
+        onclick="closeEntryModal()"
+      >
+        Cancel
+      </button>
+
+      <button
+        class="btn btn-green"
+        onclick="saveEntry()"
+      >
+        Entry
+      </button>
 
     </div>
 
@@ -927,218 +1094,590 @@ tbody tr:hover{
 </div>
 
 
-<!-- ================= LOADER ================= -->
+<!-- =========================================================
+     CHANGE PASSWORD MODAL
+========================================================= -->
 
-<div class="loader" id="loader">
-  <div class="loader-box">
-    Please wait...
+<div
+  class="modal-bg"
+  id="passwordModal"
+>
+
+  <div class="modal">
+
+    <div class="modal-head">
+
+      <div class="modal-title">
+        Change Password
+      </div>
+
+      <button
+        class="close"
+        onclick="closePasswordModal()"
+      >
+        ×
+      </button>
+
+    </div>
+
+
+    <div class="modal-field">
+
+      <label>
+        Current Password
+      </label>
+
+      <input
+        type="password"
+        id="currentPassword"
+        placeholder="Enter current password"
+      >
+
+    </div>
+
+
+    <div class="modal-field">
+
+      <label>
+        New Password
+      </label>
+
+      <input
+        type="password"
+        id="newPassword"
+        placeholder="Enter new password"
+      >
+
+    </div>
+
+
+    <div class="modal-field">
+
+      <label>
+        Confirm New Password
+      </label>
+
+      <input
+        type="password"
+        id="confirmPassword"
+        placeholder="Confirm new password"
+      >
+
+    </div>
+
+
+    <div class="modal-actions">
+
+      <button
+        class="btn btn-light"
+        onclick="closePasswordModal()"
+      >
+        Cancel
+      </button>
+
+      <button
+        class="btn btn-green"
+        onclick="changePassword()"
+      >
+        Change Password
+      </button>
+
+    </div>
+
   </div>
+
 </div>
 
 
-<!-- ================= TOAST ================= -->
+<!-- =========================================================
+     LOADER
+========================================================= -->
 
-<div class="toast" id="toast"></div>
+<div
+  class="loader-bg"
+  id="loader"
+>
+
+  <div class="loader"></div>
+
+</div>
+
+
+<!-- =========================================================
+     TOAST
+========================================================= -->
+
+<div
+  class="toast"
+  id="toast"
+>
+</div>
 
 
 <script>
 
-/* =========================================================
-   API
-========================================================= */
 
-const API_URL =
-"https://script.google.com/macros/s/AKfycbz59T-4CKQDbHJB_ql6OYZf18eN7XUmttp0d2FaOM5pm27yCBOWrEilqA_zMOnFq_rz/exec";
+// ============================================================
+// API URLS
+// ============================================================
 
 
-/* =========================================================
-   GLOBAL DATA
-========================================================= */
+// USER SPREADSHEET API
+// Login / Get User / Change Password
+
+const USER_API_URL =
+  "https://script.google.com/macros/s/AKfycbw00GHHheuvtdQtgPURjs4PtsM48-4yaFx-_ms0ZBV5FHhnmcdbJ5DHr3Aix8JPF0kQzA/exec";
+
+
+// DATA / LOADING SPREADSHEET API
+// Dashboard Data / New Entry
+
+const DATA_API_URL =
+  "https://script.google.com/macros/s/AKfycbz59T-4CKQDbHJB_ql6OYZf18eN7XUmttp0d2FaOM5pm27yCBOWrEilqA_zMOnFq_rz/exec";
+
+
+// ============================================================
+// GLOBAL VARIABLES
+// ============================================================
+
+let currentUser = null;
 
 let allData = [];
 
-let currentUser = {
-  username:"",
-  name:"",
-  role:"",
-  status:""
-};
+let toastTimer = null;
 
 
-/* =========================================================
-   START
-========================================================= */
+// ============================================================
+// PAGE LOAD
+// ============================================================
 
-document.addEventListener("DOMContentLoaded", function(){
+document.addEventListener(
+  "DOMContentLoaded",
+  function(){
 
-  loadTheme();
-  loadUser();
-  loadData();
+    checkLogin();
 
-});
+    loadTheme();
+
+  }
+);
 
 
-/* =========================================================
-   USER
-========================================================= */
+// ============================================================
+// CHECK LOGIN
+// ============================================================
 
-function loadUser(){
+function checkLogin(){
 
-  let saved = null;
+  const auth =
+    localStorage.getItem(
+      "dashboardAuth"
+    );
 
-  try{
-    saved =
-      JSON.parse(localStorage.getItem("userData") || "null")
-      || JSON.parse(localStorage.getItem("loginData") || "null");
-  }catch(e){}
 
-  currentUser.username =
-    localStorage.getItem("username")
-    || (saved && saved.username)
-    || "";
+  const sessionAuth =
+    sessionStorage.getItem(
+      "dashboardAuth"
+    );
 
-  currentUser.name =
-    localStorage.getItem("name")
-    || (saved && saved.name)
-    || currentUser.username;
 
-  currentUser.role =
-    localStorage.getItem("role")
-    || (saved && saved.role)
-    || "";
+  if (
+    auth !== "true" &&
+    sessionAuth !== "true"
+  ){
 
-  currentUser.status =
-    localStorage.getItem("status")
-    || (saved && saved.status)
-    || "";
+    window.location.href =
+      "index.html";
 
-  if(!currentUser.username){
-
-    window.location.href = "index.html";
     return;
+
   }
 
-  document.getElementById("profileName").textContent =
-    currentUser.name || currentUser.username;
 
-  document.getElementById("profileUsername").textContent =
-    "@" + currentUser.username;
-
-  fetchUserInfo();
+  loadUser();
 
 }
 
 
-/* =========================================================
-   GET USER FROM SHEET
-========================================================= */
+// ============================================================
+// LOAD USER
+// ============================================================
 
-async function fetchUserInfo(){
+async function loadUser(){
 
   try{
 
-    const response = await fetch(
-      API_URL +
-      "?action=getUser&username=" +
-      encodeURIComponent(currentUser.username) +
-      "&_=" + Date.now()
-    );
+    let savedUser = null;
 
-    const result = await response.json();
 
-    if(result.success && result.user){
+    // --------------------------------------------------------
+    // Try userData
+    // --------------------------------------------------------
 
-      currentUser.username = result.user.username;
-      currentUser.name = result.user.name;
-      currentUser.role = result.user.role;
-      currentUser.status = result.user.status;
-
-      localStorage.setItem(
-        "username",
-        currentUser.username
+    const userData =
+      localStorage.getItem(
+        "userData"
       );
 
-      localStorage.setItem(
-        "name",
-        currentUser.name
-      );
 
-      localStorage.setItem(
-        "role",
-        currentUser.role
-      );
+    if(userData){
 
-      localStorage.setItem(
-        "status",
-        currentUser.status
-      );
+      try{
 
-      document.getElementById("profileName").textContent =
-        currentUser.name || currentUser.username;
+        savedUser =
+          JSON.parse(userData);
 
-      document.getElementById("profileUsername").textContent =
-        "@" + currentUser.username;
+      }catch(e){}
+
     }
 
-  }catch(error){
 
-    console.log("User info error:",error);
+    // --------------------------------------------------------
+    // Try loginData
+    // --------------------------------------------------------
 
-  }
+    if(!savedUser){
 
-}
+      const loginData =
+        localStorage.getItem(
+          "loginData"
+        );
 
 
-/* =========================================================
-   LOAD DATA
-========================================================= */
+      if(loginData){
 
-async function loadData(){
+        try{
 
-  showLoader();
+          const parsed =
+            JSON.parse(loginData);
 
-  try{
+          savedUser =
+            parsed.user ||
+            parsed;
 
-    const response = await fetch(
-      API_URL +
-      "?action=getData&_=" + Date.now(),
-      {
-        method:"GET",
-        cache:"no-store"
+        }catch(e){}
+
       }
-    );
 
-    const result = await response.json();
+    }
 
-    if(result.success){
 
-      allData = Array.isArray(result.data)
-        ? result.data
-        : [];
+    // --------------------------------------------------------
+    // Try currentUser
+    // --------------------------------------------------------
 
-      applyFilters();
+    if(!savedUser){
+
+      const current =
+        localStorage.getItem(
+          "currentUser"
+        );
+
+
+      if(current){
+
+        try{
+
+          savedUser =
+            JSON.parse(current);
+
+        }catch(e){}
+
+      }
+
+    }
+
+
+    // --------------------------------------------------------
+    // Username fallback
+    // --------------------------------------------------------
+
+    let username =
+      localStorage.getItem(
+        "username"
+      );
+
+
+    if(
+      !username &&
+      savedUser
+    ){
+
+      username =
+        savedUser.username ||
+        "";
+
+    }
+
+
+    if(!username){
+
+      logout();
+
+      return;
+
+    }
+
+
+    // --------------------------------------------------------
+    // Fetch current user from USER API
+    // --------------------------------------------------------
+
+    const url =
+      USER_API_URL +
+      "?action=getUser&username=" +
+      encodeURIComponent(
+        username
+      );
+
+
+    const response =
+      await fetch(
+        url,
+        {
+          method:"GET",
+          cache:"no-store"
+        }
+      );
+
+
+    const result =
+      await response.json();
+
+
+    if(
+      result &&
+      result.success &&
+      result.user
+    ){
+
+      currentUser =
+        result.user;
+
+    }else if(savedUser){
+
+      currentUser =
+        savedUser;
 
     }else{
 
-      showToast(
-        result.message || "Failed to load data.",
-        "error"
-      );
+      logout();
 
-      renderTable([]);
+      return;
 
     }
+
+
+    updateProfileUI();
+
+    loadData();
+
 
   }catch(error){
 
     console.error(error);
 
+
+    // Use saved local data if API temporarily fails
+
+    const saved =
+      localStorage.getItem(
+        "userData"
+      );
+
+
+    if(saved){
+
+      try{
+
+        currentUser =
+          JSON.parse(saved);
+
+        updateProfileUI();
+        loadData();
+
+        return;
+
+      }catch(e){}
+
+    }
+
+
     showToast(
-      "Could not connect to server.",
+      "Could not load user information.",
       "error"
     );
 
-    renderTable([]);
+  }
+
+}
+
+
+// ============================================================
+// UPDATE PROFILE UI
+// ============================================================
+
+function updateProfileUI(){
+
+  if(!currentUser){
+    return;
+  }
+
+
+  const name =
+    currentUser.name ||
+    currentUser.username ||
+    "User";
+
+
+  const username =
+    currentUser.username ||
+    "";
+
+
+  document.getElementById(
+    "profileButtonName"
+  ).textContent =
+    name;
+
+
+  document.getElementById(
+    "menuName"
+  ).textContent =
+    name;
+
+
+  document.getElementById(
+    "menuUsername"
+  ).textContent =
+    "@" + username;
+
+
+  document.getElementById(
+    "profileLetter"
+  ).textContent =
+    name
+      .charAt(0)
+      .toUpperCase();
+
+
+  // Keep local information updated
+
+  localStorage.setItem(
+    "username",
+    username
+  );
+
+  localStorage.setItem(
+    "name",
+    name
+  );
+
+  localStorage.setItem(
+    "role",
+    currentUser.role || ""
+  );
+
+  localStorage.setItem(
+    "status",
+    currentUser.status || ""
+  );
+
+  localStorage.setItem(
+    "userData",
+    JSON.stringify(
+      currentUser
+    )
+  );
+
+}
+
+
+// ============================================================
+// LOAD DATA
+// ============================================================
+
+async function loadData(){
+
+  showLoader();
+
+
+  try{
+
+    const response =
+      await fetch(
+        DATA_API_URL +
+        "?action=getData&_=" +
+        Date.now(),
+        {
+          method:"GET",
+          cache:"no-store"
+        }
+      );
+
+
+    const result =
+      await response.json();
+
+
+    if(
+      !result ||
+      !result.success
+    ){
+
+      throw new Error(
+        result &&
+        result.message
+          ? result.message
+          : "Could not load data."
+      );
+
+    }
+
+
+    allData =
+      Array.isArray(
+        result.data
+      )
+        ? result.data
+        : [];
+
+
+    applyFilters();
+
+
+  }catch(error){
+
+    console.error(error);
+
+
+    document.getElementById(
+      "dataBody"
+    ).innerHTML = `
+
+      <tr>
+        <td
+          colspan="4"
+          class="empty"
+        >
+          Could not load data.
+        </td>
+      </tr>
+
+    `;
+
+
+    document.getElementById(
+      "entryCount"
+    ).textContent =
+      "0 Entries";
+
+
+    showToast(
+      "Could not load dashboard data.",
+      "error"
+    );
+
 
   }finally{
 
@@ -1149,112 +1688,202 @@ async function loadData(){
 }
 
 
-/* =========================================================
-   FILTER
-========================================================= */
+// ============================================================
+// APPLY FILTERS
+// ============================================================
 
 function applyFilters(){
 
   const search =
-    document.getElementById("searchInput")
-      .value
+    document.getElementById(
+      "searchInput"
+    ).value
       .trim()
       .toLowerCase();
 
-  const from =
-    document.getElementById("fromDate").value;
 
-  const to =
-    document.getElementById("toDate").value;
+  const fromDate =
+    document.getElementById(
+      "fromDate"
+    ).value;
 
-  let filtered = allData.filter(function(item){
 
-    const text =
-      (
-        (item.name || "") + " " +
-        (item.ip || "") + " " +
-        (item.work || "")
-      ).toLowerCase();
+  const toDate =
+    document.getElementById(
+      "toDate"
+    ).value;
 
-    if(search && !text.includes(search)){
-      return false;
-    }
 
-    if(from || to){
+  const filtered =
+    allData.filter(
+      function(item){
 
-      const date = parseDate(item.date);
+        const name =
+          String(
+            item.name || ""
+          ).toLowerCase();
 
-      if(!date){
-        return false;
+
+        const ip =
+          String(
+            item.ip || ""
+          ).toLowerCase();
+
+
+        const work =
+          String(
+            item.work || ""
+          ).toLowerCase();
+
+
+        const dateText =
+          String(
+            item.date || ""
+          );
+
+
+        // Search
+
+        if(
+          search &&
+          !(
+            name.includes(search) ||
+            ip.includes(search) ||
+            work.includes(search) ||
+            dateText
+              .toLowerCase()
+              .includes(search)
+          )
+        ){
+
+          return false;
+
+        }
+
+
+        // Date
+
+        if(
+          fromDate ||
+          toDate
+        ){
+
+          const itemDate =
+            parseDateForFilter(
+              dateText
+            );
+
+
+          if(itemDate){
+
+            const itemDay =
+              itemDate
+                .toISOString()
+                .slice(0,10);
+
+
+            if(
+              fromDate &&
+              itemDay < fromDate
+            ){
+
+              return false;
+
+            }
+
+
+            if(
+              toDate &&
+              itemDay > toDate
+            ){
+
+              return false;
+
+            }
+
+          }
+
+        }
+
+
+        return true;
+
       }
+    );
 
-      const dateOnly =
-        formatDateInput(date);
 
-      if(from && dateOnly < from){
-        return false;
-      }
-
-      if(to && dateOnly > to){
-        return false;
-      }
-
-    }
-
-    return true;
-
-  });
-
-  renderTable(filtered);
+  renderData(
+    filtered
+  );
 
 }
 
 
-/* =========================================================
-   DATE PARSER
-========================================================= */
+// ============================================================
+// PARSE DATE
+// ============================================================
 
-function parseDate(value){
+function parseDateForFilter(
+  value
+){
 
   if(!value){
     return null;
   }
 
-  const direct =
+
+  let date =
     new Date(value);
 
-  if(!isNaN(direct.getTime())){
-    return direct;
+
+  if(
+    !isNaN(
+      date.getTime()
+    )
+  ){
+
+    return date;
+
   }
 
+
+  // dd MMMM yyyy
+
   const match =
-    String(value).match(
+    value.match(
       /^(\d{1,2})\s+([A-Za-z]+)\s+(\d{4})/
     );
 
+
   if(match){
 
-    const months = [
-      "january",
-      "february",
-      "march",
-      "april",
-      "may",
-      "june",
-      "july",
-      "august",
-      "september",
-      "october",
-      "november",
-      "december"
-    ];
+    const months = {
+
+      january:0,
+      february:1,
+      march:2,
+      april:3,
+      may:4,
+      june:5,
+      july:6,
+      august:7,
+      september:8,
+      october:9,
+      november:10,
+      december:11
+
+    };
+
 
     const month =
-      months.indexOf(
+      months[
         match[2].toLowerCase()
-      );
+      ];
 
-    if(month >= 0){
+
+    if(
+      month !== undefined
+    ){
 
       return new Date(
         Number(match[3]),
@@ -1266,152 +1895,279 @@ function parseDate(value){
 
   }
 
+
   return null;
 
 }
 
 
-function formatDateInput(date){
+// ============================================================
+// RENDER DATA
+// ============================================================
 
-  const y =
-    date.getFullYear();
-
-  const m =
-    String(date.getMonth()+1).padStart(2,"0");
-
-  const d =
-    String(date.getDate()).padStart(2,"0");
-
-  return y + "-" + m + "-" + d;
-
-}
-
-
-/* =========================================================
-   RENDER TABLE
-========================================================= */
-
-function renderTable(data){
+function renderData(
+  data
+){
 
   const body =
-    document.getElementById("tableBody");
+    document.getElementById(
+      "dataBody"
+    );
 
-  document.getElementById("entryCount").textContent =
-    data.length + (data.length === 1 ? " Entry" : " Entries");
+
+  document.getElementById(
+    "entryCount"
+  ).textContent =
+    data.length +
+    (
+      data.length === 1
+        ? " Entry"
+        : " Entries"
+    );
+
 
   if(!data.length){
 
     body.innerHTML = `
+
       <tr>
-        <td colspan="4" class="empty">
+
+        <td
+          colspan="4"
+          class="empty"
+        >
           No entries found.
         </td>
+
       </tr>
+
     `;
 
     return;
+
   }
 
+
   body.innerHTML =
-    data.map(function(item){
+    data
+      .map(
+        function(item){
 
-      return `
-        <tr>
-          <td>${escapeHTML(item.name || "")}</td>
-          <td>${escapeHTML(item.ip || "")}</td>
-          <td>${escapeHTML(item.work || "")}</td>
-          <td>${escapeHTML(item.date || "")}</td>
-        </tr>
-      `;
+          return `
 
-    }).join("");
+            <tr>
+
+              <td>
+                ${escapeHtml(
+                  item.name || ""
+                )}
+              </td>
+
+              <td>
+                ${escapeHtml(
+                  item.ip || ""
+                )}
+              </td>
+
+              <td>
+                ${escapeHtml(
+                  item.work || ""
+                )}
+              </td>
+
+              <td>
+                ${escapeHtml(
+                  item.date || ""
+                )}
+              </td>
+
+            </tr>
+
+          `;
+
+        }
+      )
+      .join("");
 
 }
 
 
-/* =========================================================
-   HTML ESCAPE
-========================================================= */
+// ============================================================
+// ESCAPE HTML
+// ============================================================
 
-function escapeHTML(value){
+function escapeHtml(
+  value
+){
 
-  return String(value)
-    .replace(/&/g,"&amp;")
-    .replace(/</g,"&lt;")
-    .replace(/>/g,"&gt;")
-    .replace(/"/g,"&quot;")
-    .replace(/'/g,"&#039;");
+  return String(
+    value || ""
+  )
+  .replace(
+    /&/g,
+    "&amp;"
+  )
+  .replace(
+    /</g,
+    "&lt;"
+  )
+  .replace(
+    />/g,
+    "&gt;"
+  )
+  .replace(
+    /"/g,
+    "&quot;"
+  )
+  .replace(
+    /'/g,
+    "&#039;"
+  );
 
 }
 
 
-/* =========================================================
-   CLEAR FILTER
-========================================================= */
+// ============================================================
+// CLEAR FILTERS
+// ============================================================
 
 function clearFilters(){
 
-  document.getElementById("searchInput").value = "";
-  document.getElementById("fromDate").value = "";
-  document.getElementById("toDate").value = "";
+  document.getElementById(
+    "searchInput"
+  ).value = "";
 
-  applyFilters();
+
+  document.getElementById(
+    "fromDate"
+  ).value = "";
+
+
+  document.getElementById(
+    "toDate"
+  ).value = "";
+
+
+  renderData(
+    allData
+  );
 
 }
 
 
-/* =========================================================
-   NEW ENTRY
-========================================================= */
+// ============================================================
+// OPEN ENTRY MODAL
+// ============================================================
 
 function openEntryModal(){
 
-  document.getElementById("entryName").value =
-    currentUser.name || currentUser.username;
+  if(!currentUser){
 
-  const now = new Date();
+    showToast(
+      "User information not available.",
+      "error"
+    );
 
-  document.getElementById("entryDate").value =
-    formatDisplayDate(now);
+    return;
 
-  document.getElementById("entryIP").value = "";
-  document.getElementById("entryWork").value = "";
+  }
 
-  document.getElementById("entryOverlay")
-    .classList.add("show");
 
-  setTimeout(function(){
+  document.getElementById(
+    "entryName"
+  ).value =
+    currentUser.name ||
+    currentUser.username ||
+    "";
 
-    document.getElementById("entryIP").focus();
 
-  },100);
+  const now =
+    new Date();
+
+
+  document.getElementById(
+    "entryDate"
+  ).value =
+    formatDateTime(
+      now
+    );
+
+
+  document.getElementById(
+    "entryIP"
+  ).value = "";
+
+
+  document.getElementById(
+    "entryWork"
+  ).value = "";
+
+
+  document.getElementById(
+    "entryModal"
+  ).classList.add(
+    "show"
+  );
+
+
+  setTimeout(
+    function(){
+
+      document.getElementById(
+        "entryIP"
+      ).focus();
+
+    },
+    100
+  );
 
 }
 
+
+// ============================================================
+// CLOSE ENTRY MODAL
+// ============================================================
 
 function closeEntryModal(){
 
-  document.getElementById("entryOverlay")
-    .classList.remove("show");
+  document.getElementById(
+    "entryModal"
+  ).classList.remove(
+    "show"
+  );
 
 }
 
 
-/* =========================================================
-   SAVE ENTRY
-========================================================= */
+// ============================================================
+// SAVE ENTRY
+// ============================================================
 
 async function saveEntry(){
 
+  if(!currentUser){
+
+    showToast(
+      "User information not available.",
+      "error"
+    );
+
+    return;
+
+  }
+
+
   const ip =
-    document.getElementById("entryIP")
-      .value
-      .trim();
+    document.getElementById(
+      "entryIP"
+    ).value.trim();
+
 
   const work =
-    document.getElementById("entryWork")
-      .value
-      .trim();
+    document.getElementById(
+      "entryWork"
+    ).value.trim();
+
 
   if(!ip){
 
@@ -1421,7 +2177,9 @@ async function saveEntry(){
     );
 
     return;
+
   }
+
 
   if(!work){
 
@@ -1431,60 +2189,87 @@ async function saveEntry(){
     );
 
     return;
+
   }
+
 
   showLoader();
 
+
   try{
 
-    const response = await fetch(
-      API_URL,
-      {
-        method:"POST",
-        headers:{
-          "Content-Type":
-            "text/plain;charset=utf-8"
-        },
-        body:JSON.stringify({
-          action:"addEntry",
-          username:currentUser.username,
-          ip:ip,
-          work:work
-        })
-      }
-    );
+    const response =
+      await fetch(
+        DATA_API_URL,
+        {
+          method:"POST",
+
+          headers:{
+            "Content-Type":
+              "text/plain;charset=utf-8"
+          },
+
+          body:JSON.stringify({
+
+            action:"addEntry",
+
+            username:
+              currentUser.username,
+
+            ip:ip,
+
+            work:work
+
+          })
+
+        }
+      );
+
 
     const result =
       await response.json();
 
-    if(result.success){
+
+    if(
+      result &&
+      result.success
+    ){
 
       closeEntryModal();
+
 
       showToast(
         "New entry added successfully.",
         "success"
       );
 
+
       await loadData();
+
 
     }else{
 
       showToast(
-        result.message || "Failed to add entry.",
+        result &&
+        result.message
+          ? result.message
+          : "Entry failed.",
         "error"
       );
 
     }
 
+
   }catch(error){
 
     console.error(error);
+
 
     showToast(
       "Could not connect to server.",
       "error"
     );
+
 
   }finally{
 
@@ -1495,89 +2280,175 @@ async function saveEntry(){
 }
 
 
-/* =========================================================
-   FORMAT DISPLAY DATE
-========================================================= */
+// ============================================================
+// FORMAT DATE TIME
+// ============================================================
 
-function formatDisplayDate(date){
-
-  const months = [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December"
-  ];
+function formatDateTime(
+  date
+){
 
   const day =
-    String(date.getDate()).padStart(2,"0");
+    String(
+      date.getDate()
+    ).padStart(
+      2,
+      "0"
+    );
+
 
   const month =
-    months[date.getMonth()];
+    String(
+      date.getMonth() + 1
+    ).padStart(
+      2,
+      "0"
+    );
+
 
   const year =
     date.getFullYear();
 
+
   const hours =
-    String(date.getHours()).padStart(2,"0");
+    String(
+      date.getHours()
+    ).padStart(
+      2,
+      "0"
+    );
+
 
   const minutes =
-    String(date.getMinutes()).padStart(2,"0");
+    String(
+      date.getMinutes()
+    ).padStart(
+      2,
+      "0"
+    );
+
 
   const seconds =
-    String(date.getSeconds()).padStart(2,"0");
+    String(
+      date.getSeconds()
+    ).padStart(
+      2,
+      "0"
+    );
 
-  return `${day} ${month} ${year} ${hours}:${minutes}:${seconds}`;
+
+  return (
+    day +
+    "/" +
+    month +
+    "/" +
+    year +
+    " " +
+    hours +
+    ":" +
+    minutes +
+    ":" +
+    seconds
+  );
 
 }
 
 
-/* =========================================================
-   CHANGE PASSWORD
-========================================================= */
+// ============================================================
+// OPEN PASSWORD MODAL
+// ============================================================
 
 function openPasswordModal(){
 
   closeProfile();
 
-  document.getElementById("currentPassword").value = "";
-  document.getElementById("newPassword").value = "";
-  document.getElementById("confirmPassword").value = "";
 
-  document.getElementById("passwordOverlay")
-    .classList.add("show");
+  document.getElementById(
+    "currentPassword"
+  ).value = "";
+
+
+  document.getElementById(
+    "newPassword"
+  ).value = "";
+
+
+  document.getElementById(
+    "confirmPassword"
+  ).value = "";
+
+
+  document.getElementById(
+    "passwordModal"
+  ).classList.add(
+    "show"
+  );
+
+
+  setTimeout(
+    function(){
+
+      document.getElementById(
+        "currentPassword"
+      ).focus();
+
+    },
+    100
+  );
 
 }
 
+
+// ============================================================
+// CLOSE PASSWORD MODAL
+// ============================================================
 
 function closePasswordModal(){
 
-  document.getElementById("passwordOverlay")
-    .classList.remove("show");
+  document.getElementById(
+    "passwordModal"
+  ).classList.remove(
+    "show"
+  );
 
 }
 
 
+// ============================================================
+// CHANGE PASSWORD
+// ============================================================
+
 async function changePassword(){
 
+  if(!currentUser){
+
+    showToast(
+      "User information not available.",
+      "error"
+    );
+
+    return;
+
+  }
+
+
   const currentPassword =
-    document.getElementById("currentPassword")
-      .value;
+    document.getElementById(
+      "currentPassword"
+    ).value;
+
 
   const newPassword =
-    document.getElementById("newPassword")
-      .value;
+    document.getElementById(
+      "newPassword"
+    ).value;
+
 
   const confirmPassword =
-    document.getElementById("confirmPassword")
-      .value;
+    document.getElementById(
+      "confirmPassword"
+    ).value;
+
 
   if(!currentPassword){
 
@@ -1587,7 +2458,9 @@ async function changePassword(){
     );
 
     return;
+
   }
+
 
   if(!newPassword){
 
@@ -1597,9 +2470,13 @@ async function changePassword(){
     );
 
     return;
+
   }
 
-  if(newPassword.length < 4){
+
+  if(
+    newPassword.length < 4
+  ){
 
     showToast(
       "New password must be at least 4 characters.",
@@ -1607,9 +2484,14 @@ async function changePassword(){
     );
 
     return;
+
   }
 
-  if(newPassword !== confirmPassword){
+
+  if(
+    newPassword !==
+    confirmPassword
+  ){
 
     showToast(
       "New passwords do not match.",
@@ -1617,58 +2499,121 @@ async function changePassword(){
     );
 
     return;
+
   }
+
+
+  if(
+    currentPassword ===
+    newPassword
+  ){
+
+    showToast(
+      "New password must be different.",
+      "error"
+    );
+
+    return;
+
+  }
+
 
   showLoader();
 
+
   try{
 
-    const response = await fetch(
-      API_URL,
-      {
-        method:"POST",
-        headers:{
-          "Content-Type":
-            "text/plain;charset=utf-8"
-        },
-        body:JSON.stringify({
-          action:"changePassword",
-          username:currentUser.username,
-          currentPassword:currentPassword,
-          newPassword:newPassword
-        })
-      }
-    );
+    // IMPORTANT:
+    // Change Password goes to USER API,
+    // NOT Data API.
+
+    const response =
+      await fetch(
+        USER_API_URL,
+        {
+          method:"POST",
+
+          headers:{
+            "Content-Type":
+              "text/plain;charset=utf-8"
+          },
+
+          body:JSON.stringify({
+
+            action:
+              "changePassword",
+
+            username:
+              currentUser.username,
+
+            currentPassword:
+              currentPassword,
+
+            newPassword:
+              newPassword
+
+          })
+
+        }
+      );
+
 
     const result =
       await response.json();
 
-    if(result.success){
+
+    if(
+      result &&
+      result.success
+    ){
 
       closePasswordModal();
+
 
       showToast(
         "Password changed successfully.",
         "success"
       );
 
+
+      document.getElementById(
+        "currentPassword"
+      ).value = "";
+
+
+      document.getElementById(
+        "newPassword"
+      ).value = "";
+
+
+      document.getElementById(
+        "confirmPassword"
+      ).value = "";
+
+
     }else{
 
       showToast(
-        result.message || "Password change failed.",
+        result &&
+        result.message
+          ? result.message
+          : "Password change failed.",
         "error"
       );
 
     }
 
+
   }catch(error){
 
     console.error(error);
 
+
     showToast(
-      "Could not connect to server.",
+      "Could not connect to User server.",
       "error"
     );
+
 
   }finally{
 
@@ -1679,210 +2624,367 @@ async function changePassword(){
 }
 
 
-/* =========================================================
-   PROFILE
-========================================================= */
+// ============================================================
+// PROFILE MENU
+// ============================================================
 
 function toggleProfile(){
 
-  document.getElementById("profileMenu")
-    .classList.toggle("show");
+  document.getElementById(
+    "profileMenu"
+  ).classList.toggle(
+    "show"
+  );
 
 }
 
 
 function closeProfile(){
 
-  document.getElementById("profileMenu")
-    .classList.remove("show");
+  document.getElementById(
+    "profileMenu"
+  ).classList.remove(
+    "show"
+  );
 
 }
 
 
-document.addEventListener("click",function(event){
+document.addEventListener(
+  "click",
+  function(event){
 
-  const wrap =
-    document.querySelector(".profile-wrap");
+    const menu =
+      document.getElementById(
+        "profileMenu"
+      );
 
-  if(!wrap.contains(event.target)){
 
-    closeProfile();
+    const button =
+      document.querySelector(
+        ".profile-btn"
+      );
+
+
+    if(
+      menu &&
+      button &&
+      !menu.contains(event.target) &&
+      !button.contains(event.target)
+    ){
+
+      menu.classList.remove(
+        "show"
+      );
+
+    }
 
   }
+);
 
-});
+
+// ============================================================
+// LOGOUT
+// ============================================================
+
+function logout(){
+
+  const keys = [
+
+    "dashboardAuth",
+    "username",
+    "name",
+    "role",
+    "status",
+    "userData",
+    "loginData",
+    "loggedUser",
+    "currentUser",
+    "userInfo"
+
+  ];
 
 
-/* =========================================================
-   LOGOUT
-========================================================= */
+  keys.forEach(
+    function(key){
 
-function logoutUser(){
+      localStorage.removeItem(
+        key
+      );
 
-  localStorage.removeItem("dashboardAuth");
-  localStorage.removeItem("username");
-  localStorage.removeItem("name");
-  localStorage.removeItem("role");
-  localStorage.removeItem("status");
-  localStorage.removeItem("userData");
-  localStorage.removeItem("loginData");
-  localStorage.removeItem("loggedUser");
-  localStorage.removeItem("currentUser");
-  localStorage.removeItem("userInfo");
+    }
+  );
 
-  sessionStorage.removeItem("dashboardAuth");
 
-  window.location.href = "index.html";
+  sessionStorage.removeItem(
+    "dashboardAuth"
+  );
+
+
+  window.location.replace(
+    "index.html"
+  );
 
 }
 
 
-/* =========================================================
-   DARK MODE
-========================================================= */
+// ============================================================
+// DARK MODE
+// ============================================================
 
 function loadTheme(){
 
-  const savedTheme =
-    localStorage.getItem("dashboardTheme");
+  const theme =
+    localStorage.getItem(
+      "dashboardTheme"
+    );
 
-  if(savedTheme === "dark"){
 
-    document.body.classList.add("dark");
+  if(
+    theme === "dark"
+  ){
+
+    document.body.classList.add(
+      "dark"
+    );
+
+    updateThemeButton(
+      true
+    );
+
+  }else{
+
+    updateThemeButton(
+      false
+    );
 
   }
-
-  updateThemeButton();
 
 }
 
 
 function toggleTheme(){
 
-  document.body.classList.toggle("dark");
+  const dark =
+    document.body.classList.toggle(
+      "dark"
+    );
 
-  const isDark =
-    document.body.classList.contains("dark");
 
   localStorage.setItem(
     "dashboardTheme",
-    isDark ? "dark" : "light"
+    dark
+      ? "dark"
+      : "light"
   );
 
-  updateThemeButton();
+
+  updateThemeButton(
+    dark
+  );
 
 }
 
 
-function updateThemeButton(){
+function updateThemeButton(
+  dark
+){
 
-  const btn =
-    document.getElementById("themeBtn");
+  const button =
+    document.getElementById(
+      "themeBtn"
+    );
 
-  if(document.body.classList.contains("dark")){
 
-    btn.textContent = "☀";
-    btn.title = "Light Mode";
+  if(!button){
+    return;
+  }
+
+
+  if(dark){
+
+    button.innerHTML =
+      "☀ <span class='theme-text'>Light</span>";
 
   }else{
 
-    btn.textContent = "☾";
-    btn.title = "Dark Mode";
+    button.innerHTML =
+      "☾ <span class='theme-text'>Dark</span>";
 
   }
 
 }
 
 
-/* =========================================================
-   TOAST
-========================================================= */
+// ============================================================
+// TOAST
+// ============================================================
 
-let toastTimer;
-
-function showToast(message,type="success"){
+function showToast(
+  message,
+  type
+){
 
   const toast =
-    document.getElementById("toast");
+    document.getElementById(
+      "toast"
+    );
 
-  toast.textContent = message;
+
+  toast.textContent =
+    message;
+
 
   toast.className =
-    "toast show " + type;
+    "toast";
 
-  clearTimeout(toastTimer);
+
+  if(type){
+
+    toast.classList.add(
+      type
+    );
+
+  }
+
+
+  clearTimeout(
+    toastTimer
+  );
+
+
+  setTimeout(
+    function(){
+
+      toast.classList.add(
+        "show"
+      );
+
+    },
+    10
+  );
+
 
   toastTimer =
-    setTimeout(function(){
+    setTimeout(
+      function(){
 
-      toast.classList.remove("show");
+        toast.classList.remove(
+          "show"
+        );
 
-    },3000);
+      },
+      3200
+    );
 
 }
 
 
-/* =========================================================
-   LOADER
-========================================================= */
+// ============================================================
+// LOADER
+// ============================================================
 
 function showLoader(){
 
-  document.getElementById("loader")
-    .classList.add("show");
+  document.getElementById(
+    "loader"
+  ).classList.add(
+    "show"
+  );
 
 }
 
 
 function hideLoader(){
 
-  document.getElementById("loader")
-    .classList.remove("show");
+  document.getElementById(
+    "loader"
+  ).classList.remove(
+    "show"
+  );
 
 }
 
 
-/* =========================================================
-   CLOSE MODAL WHEN CLICKING OUTSIDE
-========================================================= */
+// ============================================================
+// CLOSE MODALS WHEN CLICK OUTSIDE
+// ============================================================
 
-document.getElementById("entryOverlay")
-  .addEventListener("click",function(e){
+document
+  .getElementById("entryModal")
+  .addEventListener(
+    "click",
+    function(event){
 
-    if(e.target === this){
-      closeEntryModal();
+      if(
+        event.target ===
+        this
+      ){
+
+        closeEntryModal();
+
+      }
+
     }
+  );
 
-  });
 
+document
+  .getElementById("passwordModal")
+  .addEventListener(
+    "click",
+    function(event){
 
-document.getElementById("passwordOverlay")
-  .addEventListener("click",function(e){
+      if(
+        event.target ===
+        this
+      ){
 
-    if(e.target === this){
-      closePasswordModal();
+        closePasswordModal();
+
+      }
+
     }
+  );
 
-  });
+
+// ============================================================
+// PREVENT BACK AFTER LOGIN
+// ============================================================
+
+window.addEventListener(
+  "pageshow",
+  function(){
+
+    const auth =
+      localStorage.getItem(
+        "dashboardAuth"
+      );
 
 
-/* =========================================================
-   ESC KEY
-========================================================= */
+    const sessionAuth =
+      sessionStorage.getItem(
+        "dashboardAuth"
+      );
 
-document.addEventListener("keydown",function(e){
 
-  if(e.key === "Escape"){
+    if(
+      auth !== "true" &&
+      sessionAuth !== "true"
+    ){
 
-    closeEntryModal();
-    closePasswordModal();
-    closeProfile();
+      window.location.replace(
+        "index.html"
+      );
+
+    }
 
   }
+);
 
-});
 
 </script>
 
 </body>
+
 </html>
