@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="en">
 
 <head>
@@ -7,9 +6,8 @@
 <meta charset="UTF-8">
 
 <meta
-name="viewport"
-content="width=device-width, initial-scale=1.0"
-
+  name="viewport"
+  content="width=device-width, initial-scale=1.0"
 >
 
 <title>Support Dashboard</title>
@@ -581,7 +579,7 @@ td{
   opacity:0;
   pointer-events:none;
   transition:.3s;
-  z-index:1000;
+  z-index:3000;
   font-size:13px;
 }
 
@@ -692,7 +690,9 @@ td{
 
 </head>
 
+
 <body>
+
 
 <!-- =======================================================
      HEADER
@@ -702,110 +702,109 @@ td{
 
   <div class="logo-area">
 
-```
-<div class="logo">
-  S
-</div>
+    <div class="logo">
+      S
+    </div>
 
-<div class="logo-text">
+    <div class="logo-text">
 
-  <h2>Support Dashboard</h2>
+      <h2>Support Dashboard</h2>
 
-  <p>Admin Management System</p>
+      <p>Admin Management System</p>
 
-</div>
-```
+    </div>
 
   </div>
+
 
   <div class="header-actions">
 
-```
-<button
-  class="icon-btn"
-  onclick="loadData()"
-  title="Reload"
->
-  ↻
-</button>
-
-
-<button
-  class="btn btn-primary"
-  onclick="openUsersModal()"
->
-  Users
-</button>
-
-
-<button
-  class="btn btn-success"
-  onclick="openEntryModal()"
->
-  + New Entry
-</button>
-
-
-<button
-  class="icon-btn"
-  onclick="toggleTheme()"
-  id="themeBtn"
-  title="Theme"
->
-  🌙
-</button>
-
-
-<div class="profile">
-
-  <button
-    class="profile-btn"
-    onclick="toggleProfileMenu()"
-  >
-
-    <div
-      class="profile-avatar"
-      id="profileAvatar"
+    <button
+      class="icon-btn"
+      onclick="loadData()"
+      title="Reload"
     >
-      U
-    </div>
-
-    <div class="profile-name">
-
-      <strong id="profileName">
-        User
-      </strong>
-
-      <span id="profileRole">
-        User
-      </span>
-
-    </div>
-
-  </button>
-
-
-  <div
-    class="profile-menu"
-    id="profileMenu"
-  >
-
-    <button onclick="openPasswordModal()">
-      🔑 Change Password
+      ↻
     </button>
 
-    <button onclick="logout()">
-      🚪 Logout
+
+    <button
+      class="btn btn-primary"
+      onclick="openUsersModal()"
+    >
+      Users
     </button>
 
-  </div>
 
-</div>
-```
+    <button
+      class="btn btn-success"
+      onclick="openEntryModal()"
+    >
+      + New Entry
+    </button>
+
+
+    <button
+      class="icon-btn"
+      onclick="toggleTheme()"
+      id="themeBtn"
+      title="Theme"
+    >
+      🌙
+    </button>
+
+
+    <div class="profile">
+
+      <button
+        class="profile-btn"
+        onclick="toggleProfileMenu()"
+      >
+
+        <div
+          class="profile-avatar"
+          id="profileAvatar"
+        >
+          U
+        </div>
+
+        <div class="profile-name">
+
+          <strong id="profileName">
+            User
+          </strong>
+
+          <span id="profileRole">
+            User
+          </span>
+
+        </div>
+
+      </button>
+
+
+      <div
+        class="profile-menu"
+        id="profileMenu"
+      >
+
+        <button onclick="openPasswordModal()">
+          🔑 Change Password
+        </button>
+
+        <button onclick="logout()">
+          🚪 Logout
+        </button>
+
+      </div>
+
+    </div>
 
   </div>
 
 </header>
+
+
 
 <!-- =======================================================
      MAIN
@@ -813,33 +812,34 @@ td{
 
 <main class="container">
 
+
   <div class="top-bar">
 
-```
-<div class="page-title">
+    <div class="page-title">
 
-  <h1>Dashboard</h1>
+      <h1>Dashboard</h1>
 
-  <p>
-    Manage support data and users
-  </p>
+      <p>
+        Manage support data and users
+      </p>
 
-</div>
+    </div>
 
 
-<div class="actions">
+    <div class="actions">
 
-  <button
-    class="btn btn-primary"
-    onclick="loadData()"
-  >
-    Refresh Data
-  </button>
+      <button
+        class="btn btn-primary"
+        onclick="loadData()"
+      >
+        Refresh Data
+      </button>
 
-</div>
-```
+    </div>
 
   </div>
+
+
 
   <!-- =====================================================
        FILTER
@@ -847,68 +847,66 @@ td{
 
   <div class="filter-card">
 
-```
-<div class="filters">
+    <div class="filters">
 
-  <input
-    type="text"
-    class="input"
-    id="searchInput"
-    placeholder="Search..."
-    oninput="applyFilters()"
-  >
-
-
-  <input
-    type="date"
-    class="input"
-    id="fromDate"
-    onchange="applyFilters()"
-  >
+      <input
+        type="text"
+        class="input"
+        id="searchInput"
+        placeholder="Search..."
+        oninput="applyFilters()"
+      >
 
 
-  <input
-    type="date"
-    class="input"
-    id="toDate"
-    onchange="applyFilters()"
-  >
+      <input
+        type="date"
+        class="input"
+        id="fromDate"
+        onchange="applyFilters()"
+      >
 
 
-  <!-- NEW DATA TYPE SELECTOR -->
-
-  <select
-    class="select"
-    id="dataType"
-    onchange="changeDataType()"
-  >
-
-    <option value="data">
-      Data
-    </option>
-
-    <option value="sell">
-      Sell
-    </option>
-
-    <option value="delete">
-      Delete
-    </option>
-
-  </select>
+      <input
+        type="date"
+        class="input"
+        id="toDate"
+        onchange="applyFilters()"
+      >
 
 
-  <button
-    class="btn btn-secondary"
-    onclick="clearFilters()"
-  >
-    Clear
-  </button>
+      <select
+        class="select"
+        id="dataType"
+        onchange="changeDataType()"
+      >
 
-</div>
-```
+        <option value="data">
+          Data
+        </option>
+
+        <option value="sell">
+          Sell
+        </option>
+
+        <option value="delete">
+          Delete
+        </option>
+
+      </select>
+
+
+      <button
+        class="btn btn-secondary"
+        onclick="clearFilters()"
+      >
+        Clear
+      </button>
+
+    </div>
 
   </div>
+
+
 
   <!-- =====================================================
        DATA TABLE
@@ -916,51 +914,51 @@ td{
 
   <div class="table-card">
 
-```
-<div class="table-wrap">
+    <div class="table-wrap">
 
-  <table>
+      <table>
 
-    <thead id="tableHead">
+        <thead id="tableHead">
 
-      <tr>
+          <tr>
 
-        <th>Name</th>
+            <th>Name</th>
 
-        <th>IP</th>
+            <th>IP</th>
 
-        <th>Work</th>
+            <th>Work</th>
 
-        <th>Date</th>
+            <th>Date</th>
 
-      </tr>
+          </tr>
 
-    </thead>
+        </thead>
 
 
-    <tbody id="dataBody">
+        <tbody id="dataBody">
 
-      <tr>
+          <tr>
 
-        <td
-          colspan="4"
-          class="empty"
-        >
-          Loading data...
-        </td>
+            <td
+              colspan="4"
+              class="empty"
+            >
+              Loading data...
+            </td>
 
-      </tr>
+          </tr>
 
-    </tbody>
+        </tbody>
 
-  </table>
+      </table>
 
-</div>
-```
+    </div>
 
   </div>
 
 </main>
+
+
 
 <!-- =======================================================
      NEW ENTRY MODAL
@@ -973,99 +971,99 @@ td{
 
   <div class="modal">
 
-```
-<div class="modal-head">
+    <div class="modal-head">
 
-  <h3>New Entry</h3>
+      <h3>New Entry</h3>
 
-  <button
-    class="close"
-    onclick="closeModal('entryModal')"
-  >
-    ×
-  </button>
+      <button
+        class="close"
+        onclick="closeModal('entryModal')"
+      >
+        ×
+      </button>
 
-</div>
-
-
-<div class="form-grid">
-
-  <div class="form-group">
-
-    <label>Name</label>
-
-    <input
-      class="input"
-      id="entryName"
-      type="text"
-    >
-
-  </div>
+    </div>
 
 
-  <div class="form-group">
+    <div class="form-grid">
 
-    <label>IP</label>
+      <div class="form-group">
 
-    <input
-      class="input"
-      id="entryIp"
-      type="text"
-    >
+        <label>Name</label>
 
-  </div>
+        <input
+          class="input"
+          id="entryName"
+          type="text"
+        >
 
-
-  <div class="form-group full">
-
-    <label>Work</label>
-
-    <input
-      class="input"
-      id="entryWork"
-      type="text"
-    >
-
-  </div>
+      </div>
 
 
-  <div class="form-group full">
+      <div class="form-group">
 
-    <label>Date</label>
+        <label>IP</label>
 
-    <input
-      class="input"
-      id="entryDate"
-      type="date"
-    >
+        <input
+          class="input"
+          id="entryIp"
+          type="text"
+        >
 
-  </div>
-
-</div>
+      </div>
 
 
-<div class="modal-footer">
+      <div class="form-group full">
 
-  <button
-    class="btn btn-secondary"
-    onclick="closeModal('entryModal')"
-  >
-    Cancel
-  </button>
+        <label>Work</label>
 
-  <button
-    class="btn btn-primary"
-    onclick="saveEntry()"
-  >
-    Save
-  </button>
+        <input
+          class="input"
+          id="entryWork"
+          type="text"
+        >
 
-</div>
-```
+      </div>
+
+
+      <div class="form-group full">
+
+        <label>Date</label>
+
+        <input
+          class="input"
+          id="entryDate"
+          type="date"
+        >
+
+      </div>
+
+    </div>
+
+
+    <div class="modal-footer">
+
+      <button
+        class="btn btn-secondary"
+        onclick="closeModal('entryModal')"
+      >
+        Cancel
+      </button>
+
+      <button
+        class="btn btn-primary"
+        onclick="saveEntry()"
+      >
+        Save
+      </button>
+
+    </div>
 
   </div>
 
 </div>
+
+
 
 <!-- =======================================================
      USERS MODAL
@@ -1078,79 +1076,79 @@ td{
 
   <div class="modal large">
 
-```
-<div class="modal-head">
+    <div class="modal-head">
 
-  <h3>User Management</h3>
+      <h3>User Management</h3>
 
-  <button
-    class="close"
-    onclick="closeModal('usersModal')"
-  >
-    ×
-  </button>
+      <button
+        class="close"
+        onclick="closeModal('usersModal')"
+      >
+        ×
+      </button>
 
-</div>
-
-
-<div style="margin-bottom:15px;">
-
-  <button
-    class="btn btn-success"
-    onclick="openAddUserModal()"
-  >
-    + Add User
-  </button>
-
-</div>
+    </div>
 
 
-<div class="user-table-wrap">
+    <div style="margin-bottom:15px;">
 
-  <table class="user-table">
+      <button
+        class="btn btn-success"
+        onclick="openAddUserModal()"
+      >
+        + Add User
+      </button>
 
-    <thead>
-
-      <tr>
-
-        <th>Username</th>
-
-        <th>Name</th>
-
-        <th>Role</th>
-
-        <th>Status</th>
-
-        <th>Action</th>
-
-      </tr>
-
-    </thead>
+    </div>
 
 
-    <tbody id="usersBody">
+    <div class="user-table-wrap">
 
-      <tr>
+      <table class="user-table">
 
-        <td
-          colspan="5"
-          class="empty"
-        >
-          Loading users...
-        </td>
+        <thead>
 
-      </tr>
+          <tr>
 
-    </tbody>
+            <th>Username</th>
 
-  </table>
+            <th>Name</th>
 
-</div>
-```
+            <th>Role</th>
+
+            <th>Status</th>
+
+            <th>Action</th>
+
+          </tr>
+
+        </thead>
+
+
+        <tbody id="usersBody">
+
+          <tr>
+
+            <td
+              colspan="5"
+              class="empty"
+            >
+              Loading users...
+            </td>
+
+          </tr>
+
+        </tbody>
+
+      </table>
+
+    </div>
 
   </div>
 
 </div>
+
+
 
 <!-- =======================================================
      ADD / EDIT USER MODAL
@@ -1163,152 +1161,152 @@ td{
 
   <div class="modal">
 
-```
-<div class="modal-head">
+    <div class="modal-head">
 
-  <h3 id="userFormTitle">
-    Add User
-  </h3>
+      <h3 id="userFormTitle">
+        Add User
+      </h3>
 
-  <button
-    class="close"
-    onclick="closeModal('userFormModal')"
-  >
-    ×
-  </button>
+      <button
+        class="close"
+        onclick="closeModal('userFormModal')"
+      >
+        ×
+      </button>
 
-</div>
+    </div>
 
-
-<input
-  type="hidden"
-  id="originalUsername"
->
-
-
-<div class="form-grid">
-
-
-  <div class="form-group">
-
-    <label>Username</label>
 
     <input
-      class="input"
-      id="userUsername"
-      type="text"
+      type="hidden"
+      id="originalUsername"
     >
 
-  </div>
+
+    <div class="form-grid">
 
 
-  <div class="form-group">
+      <div class="form-group">
 
-    <label>Name</label>
+        <label>Username</label>
 
-    <input
-      class="input"
-      id="userName"
-      type="text"
-    >
+        <input
+          class="input"
+          id="userUsername"
+          type="text"
+        >
 
-  </div>
-
-
-  <div class="form-group">
-
-    <label>Password</label>
-
-    <input
-      class="input"
-      id="userPassword"
-      type="password"
-      placeholder="Password"
-    >
-
-  </div>
+      </div>
 
 
-  <div class="form-group">
+      <div class="form-group">
 
-    <label>Role</label>
+        <label>Name</label>
 
-    <select
-      class="select"
-      id="userRole"
-    >
+        <input
+          class="input"
+          id="userName"
+          type="text"
+        >
 
-      <option value="admin">
-        Admin
-      </option>
-
-      <option value="manager">
-        Manager
-      </option>
-
-      <option value="support">
-        Support
-      </option>
-
-      <option value="call">
-        Call
-      </option>
-
-      <option value="guest">
-        Guest
-      </option>
-
-    </select>
-
-  </div>
+      </div>
 
 
-  <div class="form-group full">
+      <div class="form-group">
 
-    <label>Status</label>
+        <label>Password</label>
 
-    <select
-      class="select"
-      id="userStatus"
-    >
+        <input
+          class="input"
+          id="userPassword"
+          type="password"
+          placeholder="Password"
+        >
 
-      <option value="Active">
-        Active
-      </option>
+      </div>
 
-      <option value="Block">
-        Block
-      </option>
 
-    </select>
+      <div class="form-group">
+
+        <label>Role</label>
+
+        <select
+          class="select"
+          id="userRole"
+        >
+
+          <option value="admin">
+            Admin
+          </option>
+
+          <option value="manager">
+            Manager
+          </option>
+
+          <option value="support">
+            Support
+          </option>
+
+          <option value="call">
+            Call
+          </option>
+
+          <option value="guest">
+            Guest
+          </option>
+
+        </select>
+
+      </div>
+
+
+      <div class="form-group full">
+
+        <label>Status</label>
+
+        <select
+          class="select"
+          id="userStatus"
+        >
+
+          <option value="Active">
+            Active
+          </option>
+
+          <option value="Block">
+            Block
+          </option>
+
+        </select>
+
+      </div>
+
+    </div>
+
+
+    <div class="modal-footer">
+
+      <button
+        class="btn btn-secondary"
+        onclick="closeModal('userFormModal')"
+      >
+        Cancel
+      </button>
+
+      <button
+        class="btn btn-primary"
+        onclick="saveUser()"
+      >
+        Save User
+      </button>
+
+    </div>
 
   </div>
 
 </div>
 
 
-<div class="modal-footer">
-
-  <button
-    class="btn btn-secondary"
-    onclick="closeModal('userFormModal')"
-  >
-    Cancel
-  </button>
-
-  <button
-    class="btn btn-primary"
-    onclick="saveUser()"
-  >
-    Save User
-  </button>
-
-</div>
-```
-
-  </div>
-
-</div>
 
 <!-- =======================================================
      CHANGE PASSWORD MODAL
@@ -1321,69 +1319,69 @@ td{
 
   <div class="modal">
 
-```
-<div class="modal-head">
+    <div class="modal-head">
 
-  <h3>Change Password</h3>
+      <h3>Change Password</h3>
 
-  <button
-    class="close"
-    onclick="closeModal('passwordModal')"
-  >
-    ×
-  </button>
+      <button
+        class="close"
+        onclick="closeModal('passwordModal')"
+      >
+        ×
+      </button>
 
-</div>
-
-
-<div class="form-group">
-
-  <label>Current Password</label>
-
-  <input
-    class="input"
-    id="currentPassword"
-    type="password"
-  >
-
-</div>
+    </div>
 
 
-<div class="form-group">
+    <div class="form-group">
 
-  <label>New Password</label>
+      <label>Current Password</label>
 
-  <input
-    class="input"
-    id="newPassword"
-    type="password"
-  >
+      <input
+        class="input"
+        id="currentPassword"
+        type="password"
+      >
 
-</div>
+    </div>
 
 
-<div class="modal-footer">
+    <div class="form-group">
 
-  <button
-    class="btn btn-secondary"
-    onclick="closeModal('passwordModal')"
-  >
-    Cancel
-  </button>
+      <label>New Password</label>
 
-  <button
-    class="btn btn-primary"
-    onclick="changePassword()"
-  >
-    Change Password
-  </button>
+      <input
+        class="input"
+        id="newPassword"
+        type="password"
+      >
 
-</div>
-```
+    </div>
+
+
+    <div class="modal-footer">
+
+      <button
+        class="btn btn-secondary"
+        onclick="closeModal('passwordModal')"
+      >
+        Cancel
+      </button>
+
+      <button
+        class="btn btn-primary"
+        onclick="changePassword()"
+      >
+        Change Password
+      </button>
+
+    </div>
 
   </div>
 
 </div>
+
+
 
 <!-- =======================================================
      LOADER
@@ -1396,17 +1394,17 @@ td{
 
   <div class="loader-box">
 
-```
-<div class="spinner"></div>
+    <div class="spinner"></div>
 
-<div id="loaderText">
-  Loading...
-</div>
-```
+    <div id="loaderText">
+      Loading...
+    </div>
 
   </div>
 
 </div>
+
+
 
 <!-- =======================================================
      TOAST
@@ -1417,11 +1415,13 @@ td{
   id="toast"
 ></div>
 
+
+
 <script>
 
 
 // ============================================================
-// 4 API URLS
+// API URLS
 // ============================================================
 
 const USER_API_URL =
@@ -1468,6 +1468,10 @@ document.addEventListener(
 
     loadTheme();
 
+    if(!checkLogin()){
+      return;
+    }
+
     loadUser();
 
     loadData();
@@ -1494,8 +1498,9 @@ function checkLogin(){
 
   if(auth !== "true"){
 
-    window.location.href =
-      "index.html";
+    window.location.replace(
+      "index.html"
+    );
 
     return false;
   }
@@ -1527,7 +1532,8 @@ async function loadUser(){
 
     const url =
       USER_API_URL +
-      "?action=getUser&username=" +
+      "?action=getUser" +
+      "&username=" +
       encodeURIComponent(
         currentUsername
       ) +
@@ -1539,9 +1545,18 @@ async function loadUser(){
       await fetch(
         url,
         {
+          method:"GET",
           cache:"no-store"
         }
       );
+
+
+    if(!response.ok){
+
+      throw new Error(
+        "User API connection failed."
+      );
+    }
 
 
     const result =
@@ -1550,43 +1565,42 @@ async function loadUser(){
 
     if(!result.success){
 
-      showToast(
+      throw new Error(
         result.message ||
-        "Unable to load user.",
-        "error"
+        "Unable to load user."
       );
-
-      return;
     }
 
 
     const user =
-      result.user;
+      result.user || {};
+
+
+    const displayName =
+      user.name ||
+      user.username ||
+      currentUsername;
 
 
     document.getElementById(
       "profileName"
     ).textContent =
-      user.name ||
-      user.username;
+      displayName;
 
 
     document.getElementById(
       "profileRole"
     ).textContent =
-      user.role;
+      user.role ||
+      "User";
 
 
     document.getElementById(
       "profileAvatar"
     ).textContent =
-      (
-        user.name ||
-        user.username ||
-        "U"
-      )
-      .charAt(0)
-      .toUpperCase();
+      displayName
+        .charAt(0)
+        .toUpperCase();
 
 
     localStorage.setItem(
@@ -1594,10 +1608,12 @@ async function loadUser(){
       user.name || ""
     );
 
+
     localStorage.setItem(
       "role",
       user.role || ""
     );
+
 
     localStorage.setItem(
       "status",
@@ -1606,8 +1622,11 @@ async function loadUser(){
 
 
     if(
-      String(user.status)
-        .toLowerCase() ===
+      String(
+        user.status || ""
+      )
+      .trim()
+      .toLowerCase() ===
       "block"
     ){
 
@@ -1619,13 +1638,20 @@ async function loadUser(){
 
   }catch(error){
 
-    console.error(error);
+    console.error(
+      "loadUser:",
+      error
+    );
+
 
     showToast(
+      error.message ||
       "Unable to connect to User API.",
       "error"
     );
+
   }
+
 }
 
 
@@ -1636,19 +1662,25 @@ async function loadUser(){
 
 function changeDataType(){
 
-  currentDataType =
+  const select =
     document.getElementById(
       "dataType"
-    ).value;
+    );
+
+
+  currentDataType =
+    select
+      ? select.value
+      : "data";
 
 
   allData = [];
 
 
-  updateTableHeader();
-
-
   clearOnlyFilters();
+
+
+  updateTableHeader();
 
 
   loadData();
@@ -1668,6 +1700,23 @@ function updateTableHeader(){
     );
 
 
+  if(currentDataType === "sell"){
+
+    head.innerHTML = `
+      <tr>
+        <th>Name</th>
+        <th>IP</th>
+        <th>Work</th>
+        <th>Date</th>
+        <th>Sell Date</th>
+        <th>User</th>
+      </tr>
+    `;
+
+    return;
+  }
+
+
   if(currentDataType === "delete"){
 
     head.innerHTML = `
@@ -1678,22 +1727,6 @@ function updateTableHeader(){
         <th>Date</th>
         <th>Dellet Time</th>
         <th>User</th>
-      </tr>
-    `;
-
-    return;
-  }
-
-
-  if(currentDataType === "sell"){
-
-    head.innerHTML = `
-      <tr>
-        <th>Name</th>
-        <th>IP</th>
-        <th>Work</th>
-        <th>Date</th>
-        <th>Sell Date</th>
       </tr>
     `;
 
@@ -1715,7 +1748,7 @@ function updateTableHeader(){
 
 // ============================================================
 // LOAD DATA
-// ONLY SELECTED API WILL LOAD
+// ONLY SELECTED API LOADS
 // ============================================================
 
 async function loadData(){
@@ -1729,50 +1762,75 @@ async function loadData(){
     );
 
 
-  const colspan =
-    currentDataType === "delete"
-      ? 6
-      : currentDataType === "sell"
-        ? 5
-        : 4;
+  if(!body) return;
+
+
+  let colspan = 4;
+
+  if(currentDataType === "sell"){
+    colspan = 6;
+  }
+
+  if(currentDataType === "delete"){
+    colspan = 6;
+  }
 
 
   body.innerHTML = `
     <tr>
-      <td colspan="${colspan}" class="empty">
-        Loading ${escapeHtml(currentDataType)} data...
+      <td
+        colspan="${colspan}"
+        class="empty"
+      >
+        Loading ${escapeHtml(
+          currentDataType
+        )} data...
       </td>
     </tr>
   `;
 
 
   let apiUrl = "";
+
   let action = "";
 
 
-  if(currentDataType === "data"){
+  switch(currentDataType){
 
-    apiUrl =
-      DATA_API_URL;
+    case "sell":
 
-    action =
-      "getData";
+      apiUrl =
+        SELL_API_URL;
 
-  }else if(currentDataType === "sell"){
+      action =
+        "getSellData";
 
-    apiUrl =
-      SELL_API_URL;
+      break;
 
-    action =
-      "getSellData";
 
-  }else if(currentDataType === "delete"){
+    case "delete":
 
-    apiUrl =
-      DELETE_API_URL;
+      apiUrl =
+        DELETE_API_URL;
 
-    action =
-      "getDeletedData";
+      action =
+        "getDeletedData";
+
+      break;
+
+
+    case "data":
+
+    default:
+
+      apiUrl =
+        DATA_API_URL;
+
+      action =
+        "getData";
+
+      break;
+
   }
 
 
@@ -1781,7 +1839,9 @@ async function loadData(){
     const url =
       apiUrl +
       "?action=" +
-      encodeURIComponent(action) +
+      encodeURIComponent(
+        action
+      ) +
       "&_=" +
       Date.now();
 
@@ -1790,9 +1850,19 @@ async function loadData(){
       await fetch(
         url,
         {
+          method:"GET",
           cache:"no-store"
         }
       );
+
+
+    if(!response.ok){
+
+      throw new Error(
+        "API connection failed. HTTP " +
+        response.status
+      );
+    }
 
 
     const result =
@@ -1800,20 +1870,31 @@ async function loadData(){
 
 
     if(
+      !result ||
       result.success === false
     ){
 
       throw new Error(
-        result.message ||
-        "Unable to load data."
+        result &&
+        result.message
+          ? result.message
+          : "Unable to load data."
       );
     }
 
 
     allData =
-      result.data ||
-      result.users ||
-      [];
+      Array.isArray(
+        result.data
+      )
+        ? result.data
+        : (
+            Array.isArray(
+              result.users
+            )
+              ? result.users
+              : []
+          );
 
 
     renderData(
@@ -1823,7 +1904,10 @@ async function loadData(){
 
   }catch(error){
 
-    console.error(error);
+    console.error(
+      "loadData:",
+      error
+    );
 
 
     body.innerHTML = `
@@ -1832,7 +1916,10 @@ async function loadData(){
           colspan="${colspan}"
           class="empty"
         >
-          Unable to load data.
+          ${escapeHtml(
+            error.message ||
+            "Unable to load data."
+          )}
         </td>
       </tr>
     `;
@@ -1843,7 +1930,9 @@ async function loadData(){
       "Data loading failed.",
       "error"
     );
+
   }
+
 }
 
 
@@ -1860,22 +1949,32 @@ function renderData(data){
     );
 
 
-  let colspan =
-    currentDataType === "delete"
-      ? 6
-      : currentDataType === "sell"
-        ? 5
-        : 4;
+  if(!body) return;
+
+
+  let colspan = 4;
 
 
   if(
-    !data ||
-    !data.length
+    currentDataType === "sell" ||
+    currentDataType === "delete"
+  ){
+
+    colspan = 6;
+  }
+
+
+  if(
+    !Array.isArray(data) ||
+    data.length === 0
   ){
 
     body.innerHTML = `
       <tr>
-        <td colspan="${colspan}" class="empty">
+        <td
+          colspan="${colspan}"
+          class="empty"
+        >
           No data found.
         </td>
       </tr>
@@ -1886,46 +1985,158 @@ function renderData(data){
 
 
   body.innerHTML =
-    data.map(
-      function(row){
+    data
+      .map(
+        function(row){
 
-        const name =
-          row.Name ??
-          row.name ??
-          row[0] ??
-          "";
+          row =
+            row || {};
 
 
-        const ip =
-          row.Ip ??
-          row.IP ??
-          row.ip ??
-          row[1] ??
-          "";
-
-
-        const work =
-          row.Work ??
-          row.work ??
-          row[2] ??
-          "";
-
-
-        const date =
-          row.Date ??
-          row.date ??
-          row[3] ??
-          "";
-
-
-        if(currentDataType === "sell"){
-
-          const sellDate =
-            row.SellDate ??
-            row.sellDate ??
-            row["Sell Date"] ??
-            row[4] ??
+          const name =
+            row.Name ??
+            row.name ??
+            row[0] ??
             "";
+
+
+          const ip =
+            row.Ip ??
+            row.IP ??
+            row.ip ??
+            row[1] ??
+            "";
+
+
+          const work =
+            row.Work ??
+            row.work ??
+            row[2] ??
+            "";
+
+
+          const date =
+            row.Date ??
+            row.date ??
+            row[3] ??
+            "";
+
+
+          if(
+            currentDataType === "sell"
+          ){
+
+            const sellDate =
+              row.SellDate ??
+              row.sellDate ??
+              row["Sell Date"] ??
+              row.Sell_Date ??
+              row[4] ??
+              "";
+
+
+            const user =
+              row.User ??
+              row.user ??
+              row.Username ??
+              row.username ??
+              row[5] ??
+              "";
+
+
+            return `
+              <tr>
+
+                <td>
+                  ${escapeHtml(name)}
+                </td>
+
+                <td>
+                  ${escapeHtml(ip)}
+                </td>
+
+                <td>
+                  ${escapeHtml(work)}
+                </td>
+
+                <td>
+                  ${escapeHtml(
+                    formatDate(date)
+                  )}
+                </td>
+
+                <td>
+                  ${escapeHtml(
+                    formatDate(sellDate)
+                  )}
+                </td>
+
+                <td>
+                  ${escapeHtml(user)}
+                </td>
+
+              </tr>
+            `;
+          }
+
+
+          if(
+            currentDataType === "delete"
+          ){
+
+            const deleteTime =
+              row.DelletTime ??
+              row.DeleteTime ??
+              row.Dellet ??
+              row["Dellet time"] ??
+              row["Delete Time"] ??
+              row[4] ??
+              "";
+
+
+            const user =
+              row.User ??
+              row.user ??
+              row.Username ??
+              row.username ??
+              row[5] ??
+              "";
+
+
+            return `
+              <tr>
+
+                <td>
+                  ${escapeHtml(name)}
+                </td>
+
+                <td>
+                  ${escapeHtml(ip)}
+                </td>
+
+                <td>
+                  ${escapeHtml(work)}
+                </td>
+
+                <td>
+                  ${escapeHtml(
+                    formatDate(date)
+                  )}
+                </td>
+
+                <td>
+                  ${escapeHtml(
+                    formatDate(deleteTime)
+                  )}
+                </td>
+
+                <td>
+                  ${escapeHtml(user)}
+                </td>
+
+              </tr>
+            `;
+          }
 
 
           return `
@@ -1944,93 +2155,17 @@ function renderData(data){
               </td>
 
               <td>
-                ${escapeHtml(formatDate(date))}
-              </td>
-
-              <td>
-                ${escapeHtml(formatDate(sellDate))}
-              </td>
-
-            </tr>
-          `;
-        }
-
-
-        if(currentDataType === "delete"){
-
-          const deleteTime =
-            row.DelletTime ??
-            row.DeleteTime ??
-            row.Dellet ??
-            row["Dellet time"] ??
-            row[4] ??
-            "";
-
-
-          const user =
-            row.User ??
-            row.user ??
-            row[5] ??
-            "";
-
-
-          return `
-            <tr>
-
-              <td>
-                ${escapeHtml(name)}
-              </td>
-
-              <td>
-                ${escapeHtml(ip)}
-              </td>
-
-              <td>
-                ${escapeHtml(work)}
-              </td>
-
-              <td>
-                ${escapeHtml(formatDate(date))}
-              </td>
-
-              <td>
-                ${escapeHtml(formatDate(deleteTime))}
-              </td>
-
-              <td>
-                ${escapeHtml(user)}
+                ${escapeHtml(
+                  formatDate(date)
+                )}
               </td>
 
             </tr>
           `;
+
         }
-
-
-        return `
-          <tr>
-
-            <td>
-              ${escapeHtml(name)}
-            </td>
-
-            <td>
-              ${escapeHtml(ip)}
-            </td>
-
-            <td>
-              ${escapeHtml(work)}
-            </td>
-
-            <td>
-              ${escapeHtml(formatDate(date))}
-            </td>
-
-          </tr>
-        `;
-
-      }
-    )
-    .join("");
+      )
+      .join("");
 }
 
 
@@ -2067,10 +2202,15 @@ function applyFilters(){
     allData.filter(
       function(row){
 
+        row =
+          row || {};
+
+
         const text =
           JSON.stringify(
             row
-          ).toLowerCase();
+          )
+          .toLowerCase();
 
 
         if(
@@ -2122,10 +2262,12 @@ function applyFilters(){
 
             return false;
           }
+
         }
 
 
         return true;
+
       }
     );
 
@@ -2154,19 +2296,38 @@ function clearFilters(){
 
 function clearOnlyFilters(){
 
-  document.getElementById(
-    "searchInput"
-  ).value = "";
+  const search =
+    document.getElementById(
+      "searchInput"
+    );
 
 
-  document.getElementById(
-    "fromDate"
-  ).value = "";
+  const from =
+    document.getElementById(
+      "fromDate"
+    );
 
 
-  document.getElementById(
-    "toDate"
-  ).value = "";
+  const to =
+    document.getElementById(
+      "toDate"
+    );
+
+
+  if(search){
+    search.value = "";
+  }
+
+
+  if(from){
+    from.value = "";
+  }
+
+
+  if(to){
+    to.value = "";
+  }
+
 }
 
 
@@ -2203,13 +2364,21 @@ function openEntryModal(){
   const month =
     String(
       today.getMonth() + 1
-    ).padStart(2,"0");
+    )
+    .padStart(
+      2,
+      "0"
+    );
 
 
   const day =
     String(
       today.getDate()
-    ).padStart(2,"0");
+    )
+    .padStart(
+      2,
+      "0"
+    );
 
 
   document.getElementById(
@@ -2231,7 +2400,6 @@ function openEntryModal(){
 
 // ============================================================
 // SAVE ENTRY
-// NEW ENTRY API ONLY
 // ============================================================
 
 async function saveEntry(){
@@ -2260,10 +2428,21 @@ async function saveEntry(){
     ).value;
 
 
-  if(!name || !work){
+  if(!name){
 
     showToast(
-      "Name and Work are required.",
+      "Name is required.",
+      "error"
+    );
+
+    return;
+  }
+
+
+  if(!work){
+
+    showToast(
+      "Work is required.",
       "error"
     );
 
@@ -2315,15 +2494,28 @@ async function saveEntry(){
       );
 
 
+    if(!response.ok){
+
+      throw new Error(
+        "Data API connection failed."
+      );
+    }
+
+
     const result =
       await response.json();
 
 
-    if(!result.success){
+    if(
+      !result ||
+      !result.success
+    ){
 
       throw new Error(
-        result.message ||
-        "Unable to save entry."
+        result &&
+        result.message
+          ? result.message
+          : "Unable to save entry."
       );
     }
 
@@ -2339,16 +2531,17 @@ async function saveEntry(){
     );
 
 
-    if(currentDataType !== "data"){
+    document.getElementById(
+      "dataType"
+    ).value =
+      "data";
 
-      document.getElementById(
-        "dataType"
-      ).value = "data";
 
-      currentDataType = "data";
+    currentDataType =
+      "data";
 
-      updateTableHeader();
-    }
+
+    updateTableHeader();
 
 
     loadData();
@@ -2356,7 +2549,11 @@ async function saveEntry(){
 
   }catch(error){
 
-    console.error(error);
+    console.error(
+      "saveEntry:",
+      error
+    );
+
 
     showToast(
       error.message ||
@@ -2370,6 +2567,7 @@ async function saveEntry(){
     hideLoader();
 
   }
+
 }
 
 
@@ -2402,9 +2600,15 @@ async function loadUsers(){
     );
 
 
+  if(!body) return;
+
+
   body.innerHTML = `
     <tr>
-      <td colspan="5" class="empty">
+      <td
+        colspan="5"
+        class="empty"
+      >
         Loading users...
       </td>
     </tr>
@@ -2415,7 +2619,8 @@ async function loadUsers(){
 
     const url =
       USER_API_URL +
-      "?action=getUsers&requester=" +
+      "?action=getUsers" +
+      "&requester=" +
       encodeURIComponent(
         currentUsername
       ) +
@@ -2427,36 +2632,61 @@ async function loadUsers(){
       await fetch(
         url,
         {
+          method:"GET",
           cache:"no-store"
         }
       );
+
+
+    if(!response.ok){
+
+      throw new Error(
+        "User API connection failed."
+      );
+    }
 
 
     const result =
       await response.json();
 
 
-    if(!result.success){
+    if(
+      !result ||
+      !result.success
+    ){
 
       throw new Error(
-        result.message ||
-        "Unable to load users."
+        result &&
+        result.message
+          ? result.message
+          : "Unable to load users."
       );
     }
 
 
     renderUsers(
-      result.users || []
+      Array.isArray(
+        result.users
+      )
+        ? result.users
+        : []
     );
 
 
   }catch(error){
 
-    console.error(error);
+    console.error(
+      "loadUsers:",
+      error
+    );
+
 
     body.innerHTML = `
       <tr>
-        <td colspan="5" class="empty">
+        <td
+          colspan="5"
+          class="empty"
+        >
           ${escapeHtml(
             error.message ||
             "Unable to load users."
@@ -2465,12 +2695,15 @@ async function loadUsers(){
       </tr>
     `;
 
+
     showToast(
       error.message ||
       "Unable to load users.",
       "error"
     );
+
   }
+
 }
 
 
@@ -2488,13 +2721,16 @@ function renderUsers(users){
 
 
   if(
-    !users ||
-    !users.length
+    !Array.isArray(users) ||
+    users.length === 0
   ){
 
     body.innerHTML = `
       <tr>
-        <td colspan="5" class="empty">
+        <td
+          colspan="5"
+          class="empty"
+        >
           No users found.
         </td>
       </tr>
@@ -2505,53 +2741,77 @@ function renderUsers(users){
 
 
   body.innerHTML =
-    users.map(
-      function(user){
+    users
+      .map(
+        function(user){
 
-        const username =
-          user.username || "";
-
-
-        const name =
-          user.name || "";
+          user =
+            user || {};
 
 
-        const role =
-          user.role || "guest";
+          const username =
+            String(
+              user.username || ""
+            );
 
 
-        const status =
-          String(
-            user.status || "Active"
-          );
+          const name =
+            String(
+              user.name || ""
+            );
 
 
-        const isBlock =
-          status.toLowerCase() ===
-          "block";
+          const role =
+            String(
+              user.role || "guest"
+            );
 
 
-        const statusHtml =
-          isBlock
-
-            ? `
-              <span class="status status-block">
-                Block
-              </span>
-            `
-
-            : `
-              <span class="status status-active">
-                Active
-              </span>
-            `;
+          const status =
+            String(
+              user.status || "Active"
+            );
 
 
-        const actionHtml =
-          username.toLowerCase() ===
-          currentUsername.toLowerCase()
+          const isBlock =
+            status
+              .toLowerCase() ===
+            "block";
 
-            ? `
+
+          const statusHtml =
+            isBlock
+
+              ? `
+                <span
+                  class="status status-block"
+                >
+                  Block
+                </span>
+              `
+
+              : `
+                <span
+                  class="status status-active"
+                >
+                  Active
+                </span>
+              `;
+
+
+          const isCurrentUser =
+            username
+              .toLowerCase() ===
+            currentUsername
+              .toLowerCase();
+
+
+          let actionHtml = "";
+
+
+          if(isCurrentUser){
+
+            actionHtml = `
               <span
                 style="
                   color:#8a93a5;
@@ -2560,83 +2820,86 @@ function renderUsers(users){
               >
                 Current User
               </span>
-            `
+            `;
 
-            : isBlock
+          }else if(isBlock){
 
-              ? `
-                <button
-                  class="small-btn small-unblock"
-                  onclick='changeUserStatus(
-                    ${JSON.stringify(username)},
-                    "Active"
-                  )'
-                >
-                  Unblock
-                </button>
-              `
+            actionHtml = `
+              <button
+                class="small-btn small-unblock"
+                onclick='changeUserStatus(
+                  ${JSON.stringify(username)},
+                  "Active"
+                )'
+              >
+                Unblock
+              </button>
+            `;
 
-              : `
-                <button
-                  class="small-btn small-block"
-                  onclick='changeUserStatus(
-                    ${JSON.stringify(username)},
-                    "Block"
-                  )'
-                >
-                  Block
-                </button>
-              `;
+          }else{
+
+            actionHtml = `
+              <button
+                class="small-btn small-block"
+                onclick='changeUserStatus(
+                  ${JSON.stringify(username)},
+                  "Block"
+                )'
+              >
+                Block
+              </button>
+            `;
+          }
 
 
-        return `
-          <tr>
+          return `
+            <tr>
 
-            <td>
-              <strong>
-                ${escapeHtml(username)}
-              </strong>
-            </td>
+              <td>
+                <strong>
+                  ${escapeHtml(username)}
+                </strong>
+              </td>
 
-            <td>
-              ${escapeHtml(name)}
-            </td>
+              <td>
+                ${escapeHtml(name)}
+              </td>
 
-            <td>
-              <span class="role">
-                ${escapeHtml(role)}
-              </span>
-            </td>
+              <td>
+                <span class="role">
+                  ${escapeHtml(role)}
+                </span>
+              </td>
 
-            <td>
-              ${statusHtml}
-            </td>
+              <td>
+                ${statusHtml}
+              </td>
 
-            <td>
+              <td>
 
-              <div class="user-actions">
+                <div class="user-actions">
 
-                <button
-                  class="small-btn small-edit"
-                  onclick='editUser(
-                    ${JSON.stringify(user)}
-                  )'
-                >
-                  Edit
-                </button>
+                  <button
+                    class="small-btn small-edit"
+                    onclick='editUser(
+                      ${JSON.stringify(user)}
+                    )'
+                  >
+                    Edit
+                  </button>
 
-                ${actionHtml}
+                  ${actionHtml}
 
-              </div>
+                </div>
 
-            </td>
+              </td>
 
-          </tr>
-        `;
+            </tr>
+          `;
 
-      }
-    )
-    .join("");
+        }
+      )
+      .join("");
 }
 
 
@@ -2678,12 +2941,14 @@ function openAddUserModal(){
 
   document.getElementById(
     "userRole"
-  ).value = "guest";
+  ).value =
+    "guest";
 
 
   document.getElementById(
     "userStatus"
-  ).value = "Active";
+  ).value =
+    "Active";
 
 
   openModal(
@@ -2698,6 +2963,10 @@ function openAddUserModal(){
 // ============================================================
 
 function editUser(user){
+
+  user =
+    user || {};
+
 
   editingUser = true;
 
@@ -2742,7 +3011,8 @@ function editUser(user){
   ).value =
     String(
       user.status || "Active"
-    ).toLowerCase() ===
+    )
+    .toLowerCase() ===
     "block"
       ? "Block"
       : "Active";
@@ -2899,15 +3169,28 @@ async function saveUser(){
       );
 
 
+    if(!response.ok){
+
+      throw new Error(
+        "User API connection failed."
+      );
+    }
+
+
     const result =
       await response.json();
 
 
-    if(!result.success){
+    if(
+      !result ||
+      !result.success
+    ){
 
       throw new Error(
-        result.message ||
-        "Operation failed."
+        result &&
+        result.message
+          ? result.message
+          : "Operation failed."
       );
     }
 
@@ -2929,8 +3212,11 @@ async function saveUser(){
 
     if(
       editingUser &&
-      originalUsername.toLowerCase() ===
-      currentUsername.toLowerCase()
+      originalUsername &&
+      originalUsername
+        .toLowerCase() ===
+      currentUsername
+        .toLowerCase()
     ){
 
       loadUser();
@@ -2939,7 +3225,11 @@ async function saveUser(){
 
   }catch(error){
 
-    console.error(error);
+    console.error(
+      "saveUser:",
+      error
+    );
+
 
     showToast(
       error.message ||
@@ -2953,6 +3243,7 @@ async function saveUser(){
     hideLoader();
 
   }
+
 }
 
 
@@ -2996,7 +3287,7 @@ async function changeUserStatus(
 
 
   if(
-    !confirm(
+    !window.confirm(
       "Are you sure you want to " +
       actionText +
       " this user?"
@@ -3041,15 +3332,28 @@ async function changeUserStatus(
       );
 
 
+    if(!response.ok){
+
+      throw new Error(
+        "User API connection failed."
+      );
+    }
+
+
     const result =
       await response.json();
 
 
-    if(!result.success){
+    if(
+      !result ||
+      !result.success
+    ){
 
       throw new Error(
-        result.message ||
-        "Status change failed."
+        result &&
+        result.message
+          ? result.message
+          : "Status change failed."
       );
     }
 
@@ -3066,7 +3370,11 @@ async function changeUserStatus(
 
   }catch(error){
 
-    console.error(error);
+    console.error(
+      "changeUserStatus:",
+      error
+    );
+
 
     showToast(
       error.message ||
@@ -3080,6 +3388,7 @@ async function changeUserStatus(
     hideLoader();
 
   }
+
 }
 
 
@@ -3198,15 +3507,28 @@ async function changePassword(){
       );
 
 
+    if(!response.ok){
+
+      throw new Error(
+        "User API connection failed."
+      );
+    }
+
+
     const result =
       await response.json();
 
 
-    if(!result.success){
+    if(
+      !result ||
+      !result.success
+    ){
 
       throw new Error(
-        result.message ||
-        "Password change failed."
+        result &&
+        result.message
+          ? result.message
+          : "Password change failed."
       );
     }
 
@@ -3224,7 +3546,11 @@ async function changePassword(){
 
   }catch(error){
 
-    console.error(error);
+    console.error(
+      "changePassword:",
+      error
+    );
+
 
     showToast(
       error.message ||
@@ -3238,6 +3564,7 @@ async function changePassword(){
     hideLoader();
 
   }
+
 }
 
 
@@ -3254,24 +3581,40 @@ function loadTheme(){
     );
 
 
+  const themeBtn =
+    document.getElementById(
+      "themeBtn"
+    );
+
+
   if(theme === "dark"){
 
     document.body.classList.add(
       "dark"
     );
 
-    document.getElementById(
-      "themeBtn"
-    ).textContent =
-      "☀️";
+
+    if(themeBtn){
+
+      themeBtn.textContent =
+        "☀️";
+    }
 
   }else{
 
-    document.getElementById(
-      "themeBtn"
-    ).textContent =
-      "🌙";
+    document.body.classList.remove(
+      "dark"
+    );
+
+
+    if(themeBtn){
+
+      themeBtn.textContent =
+        "🌙";
+    }
+
   }
+
 }
 
 
@@ -3297,12 +3640,20 @@ function toggleTheme(){
   );
 
 
-  document.getElementById(
-    "themeBtn"
-  ).textContent =
-    dark
-      ? "☀️"
-      : "🌙";
+  const themeBtn =
+    document.getElementById(
+      "themeBtn"
+    );
+
+
+  if(themeBtn){
+
+    themeBtn.textContent =
+      dark
+        ? "☀️"
+        : "🌙";
+  }
+
 }
 
 
@@ -3313,22 +3664,38 @@ function toggleTheme(){
 
 function toggleProfileMenu(){
 
-  document.getElementById(
-    "profileMenu"
-  ).classList.toggle(
-    "show"
-  );
+  const menu =
+    document.getElementById(
+      "profileMenu"
+    );
+
+
+  if(menu){
+
+    menu.classList.toggle(
+      "show"
+    );
+  }
+
 }
 
 
 
 function closeProfileMenu(){
 
-  document.getElementById(
-    "profileMenu"
-  ).classList.remove(
-    "show"
-  );
+  const menu =
+    document.getElementById(
+      "profileMenu"
+    );
+
+
+  if(menu){
+
+    menu.classList.remove(
+      "show"
+    );
+  }
+
 }
 
 
@@ -3364,22 +3731,38 @@ document.addEventListener(
 
 function openModal(id){
 
-  document
-    .getElementById(id)
-    .classList.add(
+  const modal =
+    document.getElementById(
+      id
+    );
+
+
+  if(modal){
+
+    modal.classList.add(
       "show"
     );
+  }
+
 }
 
 
 
 function closeModal(id){
 
-  document
-    .getElementById(id)
-    .classList.remove(
+  const modal =
+    document.getElementById(
+      id
+    );
+
+
+  if(modal){
+
+    modal.classList.remove(
       "show"
     );
+  }
+
 }
 
 
@@ -3390,28 +3773,52 @@ function closeModal(id){
 
 function showLoader(text){
 
-  document.getElementById(
-    "loaderText"
-  ).textContent =
-    text || "Loading...";
+  const loaderText =
+    document.getElementById(
+      "loaderText"
+    );
 
 
-  document.getElementById(
-    "loader"
-  ).classList.add(
-    "show"
-  );
+  const loader =
+    document.getElementById(
+      "loader"
+    );
+
+
+  if(loaderText){
+
+    loaderText.textContent =
+      text ||
+      "Loading...";
+  }
+
+
+  if(loader){
+
+    loader.classList.add(
+      "show"
+    );
+  }
+
 }
 
 
 
 function hideLoader(){
 
-  document.getElementById(
-    "loader"
-  ).classList.remove(
-    "show"
-  );
+  const loader =
+    document.getElementById(
+      "loader"
+    );
+
+
+  if(loader){
+
+    loader.classList.remove(
+      "show"
+    );
+  }
+
 }
 
 
@@ -3434,8 +3841,12 @@ function showToast(
     );
 
 
+  if(!toast) return;
+
+
   toast.textContent =
-    message;
+    message ||
+    "";
 
 
   toast.className =
@@ -3459,6 +3870,7 @@ function showToast(
       },
       3000
     );
+
 }
 
 
@@ -3469,14 +3881,71 @@ function showToast(
 
 function formatDate(value){
 
-  if(!value){
+  if(
+    value === null ||
+    value === undefined ||
+    value === ""
+  ){
 
     return "";
   }
 
 
+  /*
+   * yyyy-mm-dd হলে সরাসরি local date হিসেবে নেওয়া হবে।
+   * এতে timezone-এর কারণে একদিন পিছিয়ে যাওয়ার সমস্যা হবে না।
+   */
+
+  const text =
+    String(
+      value
+    ).trim();
+
+
+  const dateOnlyMatch =
+    text.match(
+      /^(\d{4})-(\d{2})-(\d{2})$/
+    );
+
+
+  if(dateOnlyMatch){
+
+    const date =
+      new Date(
+        Number(
+          dateOnlyMatch[1]
+        ),
+        Number(
+          dateOnlyMatch[2]
+        ) - 1,
+        Number(
+          dateOnlyMatch[3]
+        )
+      );
+
+
+    if(
+      !isNaN(
+        date.getTime()
+      )
+    ){
+
+      return date.toLocaleDateString(
+        "en-GB",
+        {
+          day:"2-digit",
+          month:"short",
+          year:"numeric"
+        }
+      );
+    }
+  }
+
+
   const date =
-    new Date(value);
+    new Date(
+      value
+    );
 
 
   if(
@@ -3485,7 +3954,7 @@ function formatDate(value){
     )
   ){
 
-    return String(value);
+    return text;
   }
 
 
@@ -3503,16 +3972,50 @@ function formatDate(value){
 
 
 
+// ============================================================
+// NORMALIZE DATE
+// ============================================================
+
 function normalizeDate(value){
 
-  if(!value){
+  if(
+    value === null ||
+    value === undefined ||
+    value === ""
+  ){
 
     return "";
   }
 
 
+  const text =
+    String(
+      value
+    ).trim();
+
+
+  const dateOnlyMatch =
+    text.match(
+      /^(\d{4})-(\d{2})-(\d{2})$/
+    );
+
+
+  if(dateOnlyMatch){
+
+    return (
+      dateOnlyMatch[1] +
+      "-" +
+      dateOnlyMatch[2] +
+      "-" +
+      dateOnlyMatch[3]
+    );
+  }
+
+
   const date =
-    new Date(value);
+    new Date(
+      value
+    );
 
 
   if(
@@ -3532,13 +4035,19 @@ function normalizeDate(value){
   const m =
     String(
       date.getMonth() + 1
-    ).padStart(2,"0");
+    ).padStart(
+      2,
+      "0"
+    );
 
 
   const d =
     String(
       date.getDate()
-    ).padStart(2,"0");
+    ).padStart(
+      2,
+      "0"
+    );
 
 
   return (
@@ -3581,6 +4090,7 @@ function escapeHtml(value){
     /'/g,
     "&#039;"
   );
+
 }
 
 
@@ -3614,6 +4124,7 @@ function logout(){
         key
       );
 
+
       sessionStorage.removeItem(
         key
       );
@@ -3628,6 +4139,7 @@ function logout(){
   window.location.replace(
     "index.html"
   );
+
 }
 
 
@@ -3659,7 +4171,7 @@ window.addEventListener(
 
 
 // ============================================================
-// PREVENT CACHE
+// PREVENT CACHE / LOGIN CHECK
 // ============================================================
 
 window.addEventListener(
