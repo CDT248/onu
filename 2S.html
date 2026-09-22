@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
 
 <title>Support Dashboard</title>
 
@@ -19,16 +19,16 @@ href="https://cdn-icons-png.flaticon.com/128/17163/17163834.png">
 }
 
 :root{
-    --bg:#f4f7fb;
-    --card:#ffffff;
+    --bg:#f3f6fb;
+    --card:#fff;
     --text:#172033;
     --muted:#6b7280;
-    --border:#e5e7eb;
+    --border:#e3e8f0;
     --primary:#2563eb;
     --primary2:#1d4ed8;
-    --danger:#ef4444;
+    --danger:#dc2626;
     --success:#16a34a;
-    --shadow:0 12px 35px rgba(15,23,42,.08);
+    --shadow:0 10px 30px rgba(15,23,42,.08);
 }
 
 body.dark{
@@ -37,14 +37,13 @@ body.dark{
     --text:#f8fafc;
     --muted:#94a3b8;
     --border:#263244;
-    --shadow:0 12px 35px rgba(0,0,0,.35);
+    --shadow:0 10px 30px rgba(0,0,0,.3);
 }
 
 body{
     background:var(--bg);
     color:var(--text);
     min-height:100vh;
-    transition:.25s;
 }
 
 /* HEADER */
@@ -56,7 +55,7 @@ body{
     display:flex;
     align-items:center;
     justify-content:space-between;
-    padding:0 24px;
+    padding:0 22px;
     position:sticky;
     top:0;
     z-index:100;
@@ -65,52 +64,51 @@ body{
 .logo-area{
     display:flex;
     align-items:center;
-    gap:12px;
+    gap:10px;
 }
 
 .logo{
     width:42px;
     height:42px;
     border-radius:12px;
-    background:linear-gradient(135deg,#2563eb,#7c3aed);
     display:flex;
     align-items:center;
     justify-content:center;
     color:#fff;
     font-size:20px;
     font-weight:bold;
-    box-shadow:0 7px 18px rgba(37,99,235,.25);
+    background:linear-gradient(135deg,#2563eb,#7c3aed);
 }
 
 .logo-text h2{
     font-size:18px;
 }
 
-.logo-text span{
-    font-size:11px;
+.logo-text small{
     color:var(--muted);
+    font-size:11px;
 }
 
 .header-right{
     display:flex;
     align-items:center;
-    gap:9px;
+    gap:8px;
 }
 
-.icon-btn,
-.header-btn{
+.header-btn,
+.icon-btn{
+    height:40px;
     border:1px solid var(--border);
     background:var(--card);
     color:var(--text);
-    height:40px;
-    padding:0 13px;
     border-radius:10px;
+    padding:0 13px;
     cursor:pointer;
-    transition:.2s;
+    font-weight:bold;
 }
 
-.icon-btn:hover,
-.header-btn:hover{
+.header-btn:hover,
+.icon-btn:hover{
     border-color:var(--primary);
     color:var(--primary);
 }
@@ -133,35 +131,27 @@ body{
 
 .profile-btn{
     height:42px;
-    padding:0 12px;
     border:1px solid var(--border);
     background:var(--card);
-    border-radius:12px;
-    cursor:pointer;
+    color:var(--text);
+    border-radius:11px;
+    padding:0 10px;
     display:flex;
     align-items:center;
-    gap:9px;
-    color:var(--text);
+    gap:8px;
+    cursor:pointer;
 }
 
-.profile-avatar{
+.avatar{
     width:30px;
     height:30px;
     border-radius:50%;
-    background:linear-gradient(135deg,#2563eb,#9333ea);
     color:#fff;
+    background:linear-gradient(135deg,#2563eb,#9333ea);
     display:flex;
     align-items:center;
     justify-content:center;
-    font-size:13px;
     font-weight:bold;
-}
-
-.profile-name{
-    max-width:110px;
-    overflow:hidden;
-    white-space:nowrap;
-    text-overflow:ellipsis;
 }
 
 .profile-menu{
@@ -175,7 +165,7 @@ body{
     border-radius:14px;
     box-shadow:var(--shadow);
     overflow:hidden;
-    z-index:200;
+    z-index:500;
 }
 
 .profile-menu.show{
@@ -189,7 +179,7 @@ body{
 
 .profile-info strong{
     display:block;
-    margin-bottom:4px;
+    margin-bottom:5px;
 }
 
 .profile-info small{
@@ -204,7 +194,6 @@ body{
     text-align:left;
     padding:13px 15px;
     cursor:pointer;
-    font-size:14px;
 }
 
 .menu-item:hover{
@@ -218,20 +207,21 @@ body{
 /* MAIN */
 
 .container{
-    width:min(1400px,94%);
+    width:94%;
+    max-width:1400px;
     margin:25px auto;
 }
 
-.top-title{
-    margin-bottom:20px;
+.page-title{
+    margin-bottom:18px;
 }
 
-.top-title h1{
+.page-title h1{
     font-size:25px;
     margin-bottom:5px;
 }
 
-.top-title p{
+.page-title p{
     color:var(--muted);
     font-size:14px;
 }
@@ -242,7 +232,7 @@ body{
     background:var(--card);
     border:1px solid var(--border);
     border-radius:16px;
-    padding:17px;
+    padding:16px;
     box-shadow:var(--shadow);
     margin-bottom:18px;
 }
@@ -251,7 +241,6 @@ body{
     display:grid;
     grid-template-columns:1.5fr 1fr 1fr auto auto;
     gap:10px;
-    align-items:end;
 }
 
 .field{
@@ -261,25 +250,24 @@ body{
 }
 
 .field label{
-    font-size:12px;
     color:var(--muted);
+    font-size:12px;
     font-weight:bold;
 }
 
-.field input,
-.field select{
-    width:100%;
+input,
+select{
     height:42px;
     border:1px solid var(--border);
     border-radius:10px;
-    padding:0 12px;
-    outline:none;
     background:var(--card);
     color:var(--text);
+    padding:0 12px;
+    outline:none;
 }
 
-.field input:focus,
-.field select:focus{
+input:focus,
+select:focus{
     border-color:var(--primary);
 }
 
@@ -311,7 +299,7 @@ body.dark .btn-secondary{
     color:#e2e8f0;
 }
 
-/* TABLE CARD */
+/* TABLE */
 
 .table-card{
     background:var(--card);
@@ -322,42 +310,38 @@ body.dark .btn-secondary{
 }
 
 .table-head{
-    padding:17px 18px;
-    border-bottom:1px solid var(--border);
+    padding:16px 18px;
     display:flex;
     justify-content:space-between;
     align-items:center;
+    border-bottom:1px solid var(--border);
 }
 
 .table-head h3{
     font-size:17px;
 }
 
-.table-count{
-    font-size:12px;
+.count{
     color:var(--muted);
+    font-size:12px;
 }
 
 .table-wrap{
-    width:100%;
-    overflow-x:auto;
+    overflow:auto;
 }
 
 table{
     width:100%;
-    border-collapse:collapse;
     min-width:650px;
+    border-collapse:collapse;
 }
 
 th{
-    text-align:left;
-    padding:13px 16px;
     background:rgba(100,116,139,.06);
     color:var(--muted);
+    padding:13px 16px;
+    text-align:left;
     font-size:12px;
-    text-transform:uppercase;
-    letter-spacing:.4px;
-    white-space:nowrap;
 }
 
 td{
@@ -367,18 +351,138 @@ td{
 }
 
 tbody tr:hover{
-    background:rgba(37,99,235,.035);
+    background:rgba(37,99,235,.04);
 }
 
 .empty{
-    text-align:center;
     padding:45px 20px;
+    text-align:center;
     color:var(--muted);
 }
 
-.status{
-    display:inline-flex;
+/* MODAL */
+
+.modal{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(15,23,42,.6);
+    backdrop-filter:blur(4px);
+    z-index:1000;
     align-items:center;
+    justify-content:center;
+    padding:15px;
+}
+
+.modal.show{
+    display:flex;
+}
+
+.modal-box{
+    width:min(600px,100%);
+    max-height:92vh;
+    overflow:auto;
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:18px;
+    box-shadow:0 25px 70px rgba(0,0,0,.25);
+}
+
+.modal-box.large{
+    width:min(950px,100%);
+}
+
+.modal-head{
+    padding:17px 20px;
+    border-bottom:1px solid var(--border);
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.modal-head h3{
+    font-size:18px;
+}
+
+.close{
+    width:34px;
+    height:34px;
+    border:0;
+    border-radius:9px;
+    background:rgba(100,116,139,.1);
+    color:var(--text);
+    cursor:pointer;
+    font-size:20px;
+}
+
+.modal-body{
+    padding:20px;
+}
+
+.modal-foot{
+    padding:14px 20px;
+    border-top:1px solid var(--border);
+    display:flex;
+    justify-content:flex-end;
+    gap:8px;
+}
+
+.form-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:14px;
+}
+
+.form-group{
+    display:flex;
+    flex-direction:column;
+    gap:6px;
+}
+
+.form-group.full{
+    grid-column:1/-1;
+}
+
+.form-group label{
+    color:var(--muted);
+    font-size:12px;
+    font-weight:bold;
+}
+
+/* USERS */
+
+.users-toolbar{
+    display:flex;
+    gap:10px;
+    margin-bottom:15px;
+}
+
+.users-toolbar input{
+    flex:1;
+}
+
+.users-table{
+    overflow:auto;
+    max-height:55vh;
+}
+
+.edit-btn{
+    border:1px solid var(--border);
+    background:var(--card);
+    color:var(--primary);
+    border-radius:8px;
+    padding:7px 12px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.edit-btn:hover{
+    background:var(--primary);
+    color:#fff;
+}
+
+.status{
+    display:inline-block;
     padding:5px 9px;
     border-radius:20px;
     font-size:11px;
@@ -400,180 +504,22 @@ tbody tr:hover{
     background:#fef3c7;
 }
 
-/* MODAL */
-
-.modal{
-    display:none;
-    position:fixed;
-    inset:0;
-    background:rgba(15,23,42,.58);
-    backdrop-filter:blur(4px);
-    z-index:500;
-    align-items:center;
-    justify-content:center;
-    padding:15px;
-}
-
-.modal.show{
-    display:flex;
-}
-
-.modal-box{
-    width:min(620px,100%);
-    max-height:92vh;
-    overflow:auto;
-    background:var(--card);
-    border:1px solid var(--border);
-    border-radius:18px;
-    box-shadow:0 25px 70px rgba(0,0,0,.25);
-    animation:modalIn .18s ease;
-}
-
-.modal-box.large{
-    width:min(900px,100%);
-}
-
-@keyframes modalIn{
-    from{
-        opacity:0;
-        transform:translateY(15px) scale(.98);
-    }
-    to{
-        opacity:1;
-        transform:none;
-    }
-}
-
-.modal-head{
-    padding:18px 20px;
-    border-bottom:1px solid var(--border);
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-}
-
-.modal-head h3{
-    font-size:18px;
-}
-
-.close{
-    width:34px;
-    height:34px;
-    border:0;
-    border-radius:9px;
-    background:rgba(100,116,139,.1);
-    color:var(--text);
-    cursor:pointer;
-    font-size:19px;
-}
-
-.modal-body{
-    padding:20px;
-}
-
-.form-grid{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:14px;
-}
-
-.form-group{
-    display:flex;
-    flex-direction:column;
-    gap:7px;
-}
-
-.form-group.full{
-    grid-column:1/-1;
-}
-
-.form-group label{
-    font-size:12px;
-    color:var(--muted);
-    font-weight:bold;
-}
-
-.form-group input,
-.form-group select{
-    height:44px;
-    border:1px solid var(--border);
-    border-radius:10px;
-    background:var(--card);
-    color:var(--text);
-    padding:0 12px;
-    outline:none;
-}
-
-.form-group input:focus,
-.form-group select:focus{
-    border-color:var(--primary);
-}
-
-.modal-foot{
-    padding:15px 20px;
-    border-top:1px solid var(--border);
-    display:flex;
-    justify-content:flex-end;
-    gap:9px;
-}
-
-/* USER MANAGEMENT */
-
-.users-toolbar{
-    display:flex;
-    gap:10px;
-    margin-bottom:15px;
-}
-
-.users-toolbar input{
-    flex:1;
-    height:42px;
-    border:1px solid var(--border);
-    border-radius:10px;
-    padding:0 12px;
-    background:var(--card);
-    color:var(--text);
-    outline:none;
-}
-
-.users-table{
-    max-height:55vh;
-    overflow:auto;
-}
-
-.edit-btn{
-    border:1px solid var(--border);
-    background:var(--card);
-    color:var(--primary);
-    border-radius:8px;
-    padding:7px 11px;
-    cursor:pointer;
-    font-size:12px;
-    font-weight:bold;
-}
-
-.edit-btn:hover{
-    background:var(--primary);
-    color:#fff;
-}
-
 /* TOAST */
 
 .toast{
     position:fixed;
     right:20px;
     bottom:20px;
-    min-width:260px;
-    max-width:380px;
-    padding:13px 16px;
-    border-radius:12px;
+    padding:13px 17px;
+    border-radius:11px;
     color:#fff;
-    box-shadow:0 15px 35px rgba(0,0,0,.22);
-    transform:translateY(25px);
+    min-width:240px;
+    max-width:380px;
     opacity:0;
+    transform:translateY(20px);
     pointer-events:none;
     transition:.25s;
-    z-index:1000;
+    z-index:3000;
     font-size:14px;
 }
 
@@ -600,9 +546,9 @@ tbody tr:hover{
     display:none;
     position:fixed;
     inset:0;
-    background:rgba(15,23,42,.48);
+    background:rgba(15,23,42,.5);
     backdrop-filter:blur(3px);
-    z-index:2000;
+    z-index:4000;
     align-items:center;
     justify-content:center;
 }
@@ -613,18 +559,16 @@ tbody tr:hover{
 
 .loader-box{
     background:var(--card);
-    border:1px solid var(--border);
-    border-radius:15px;
+    color:var(--text);
     padding:22px 28px;
-    min-width:180px;
+    border-radius:15px;
     text-align:center;
-    box-shadow:var(--shadow);
 }
 
 .spinner{
     width:34px;
     height:34px;
-    border:4px solid rgba(37,99,235,.18);
+    border:4px solid rgba(37,99,235,.2);
     border-top-color:var(--primary);
     border-radius:50%;
     animation:spin .8s linear infinite;
@@ -632,14 +576,13 @@ tbody tr:hover{
 }
 
 @keyframes spin{
-    to{
-        transform:rotate(360deg);
-    }
+    to{transform:rotate(360deg)}
 }
 
 /* MOBILE */
 
 @media(max-width:900px){
+
     .filter-grid{
         grid-template-columns:1fr 1fr;
     }
@@ -652,34 +595,20 @@ tbody tr:hover{
 @media(max-width:650px){
 
     .header{
-        padding:0 12px;
-        height:64px;
+        padding:0 10px;
     }
 
     .logo-text{
         display:none;
     }
 
-    .header-right{
-        gap:5px;
-    }
-
     .header-btn{
-        padding:0 10px;
+        padding:0 9px;
         font-size:12px;
     }
 
     .profile-name{
         display:none;
-    }
-
-    .container{
-        width:94%;
-        margin:18px auto;
-    }
-
-    .top-title h1{
-        font-size:21px;
     }
 
     .filter-grid{
@@ -698,18 +627,6 @@ tbody tr:hover{
         grid-column:auto;
     }
 
-    .modal-body{
-        padding:15px;
-    }
-
-    .modal-head{
-        padding:15px;
-    }
-
-    .modal-foot{
-        padding:12px 15px;
-    }
-
     .users-toolbar{
         flex-direction:column;
     }
@@ -726,27 +643,32 @@ tbody tr:hover{
 
 ```
 <div class="logo-area">
-    <div class="logo">S</div>
+
+    <div class="logo">
+        S
+    </div>
 
     <div class="logo-text">
         <h2>Support Dashboard</h2>
-        <span>Management System</span>
+        <small>Management System</small>
     </div>
+
 </div>
+
 
 <div class="header-right">
 
     <button class="icon-btn"
-            onclick="loadAllData()"
+            onclick="loadData()"
             title="Reload">
         ↻
     </button>
 
-    <button id="usersBtn"
-            class="header-btn primary"
-            onclick="openUsersModal()"
-            style="display:none;">
-        Users
+    <!-- USERS BUTTON -->
+    <button class="header-btn primary"
+            id="usersButton"
+            onclick="openUsersModal()">
+        👥 Users
     </button>
 
     <button class="header-btn primary"
@@ -755,19 +677,19 @@ tbody tr:hover{
     </button>
 
     <button class="icon-btn"
-            onclick="toggleTheme()"
-            id="themeBtn"
-            title="Theme">
+            id="themeButton"
+            onclick="toggleTheme()">
         ☾
     </button>
+
 
     <div class="profile">
 
         <button class="profile-btn"
-                onclick="toggleProfileMenu()">
+                onclick="toggleProfile()">
 
-            <div class="profile-avatar"
-                 id="profileAvatar">
+            <div class="avatar"
+                 id="avatar">
                 U
             </div>
 
@@ -779,6 +701,7 @@ tbody tr:hover{
             <span>⌄</span>
 
         </button>
+
 
         <div class="profile-menu"
              id="profileMenu">
@@ -796,7 +719,7 @@ tbody tr:hover{
                 <br>
 
                 <small id="menuRole">
-                    Role
+                    Role: user
                 </small>
 
             </div>
@@ -807,7 +730,7 @@ tbody tr:hover{
             </button>
 
             <button class="menu-item"
-                    onclick="loadAllData()">
+                    onclick="loadData()">
                 🔄 Reload Data
             </button>
 
@@ -830,7 +753,7 @@ tbody tr:hover{
 <main class="container">
 
 ```
-<div class="top-title">
+<div class="page-title">
 
     <h1>Recent Entries</h1>
 
@@ -852,37 +775,41 @@ tbody tr:hover{
             <label>Search</label>
 
             <input
-                type="text"
                 id="searchInput"
+                type="text"
                 placeholder="Search name, IP or work..."
-                oninput="filterData()">
+                oninput="applyFilter()">
 
         </div>
+
 
         <div class="field">
 
             <label>From Date</label>
 
             <input
-                type="date"
-                id="fromDate">
+                id="fromDate"
+                type="date">
 
         </div>
+
 
         <div class="field">
 
             <label>To Date</label>
 
             <input
-                type="date"
-                id="toDate">
+                id="toDate"
+                type="date">
 
         </div>
 
+
         <button class="btn btn-primary"
-                onclick="filterData()">
+                onclick="applyFilter()">
             Filter
         </button>
+
 
         <button class="btn btn-secondary"
                 onclick="clearFilter()">
@@ -894,7 +821,7 @@ tbody tr:hover{
 </div>
 
 
-<!-- TABLE -->
+<!-- DATA TABLE -->
 
 <div class="table-card">
 
@@ -902,12 +829,13 @@ tbody tr:hover{
 
         <h3>Recent Entries</h3>
 
-        <span class="table-count"
-              id="tableCount">
+        <span class="count"
+              id="dataCount">
             0 entries
         </span>
 
     </div>
+
 
     <div class="table-wrap">
 
@@ -925,15 +853,15 @@ tbody tr:hover{
             </thead>
 
             <tbody id="dataBody">
-
             </tbody>
 
         </table>
 
     </div>
 
+
     <div class="empty"
-         id="emptyState"
+         id="emptyData"
          style="display:none;">
         No data found.
     </div>
@@ -962,6 +890,7 @@ tbody tr:hover{
 
     </div>
 
+
     <div class="modal-body">
 
         <div class="form-grid">
@@ -971,41 +900,44 @@ tbody tr:hover{
                 <label>Name</label>
 
                 <input
-                    type="text"
                     id="entryName"
+                    type="text"
                     readonly>
 
             </div>
+
 
             <div class="form-group">
 
                 <label>Date & Time</label>
 
                 <input
-                    type="text"
                     id="entryDate"
+                    type="text"
                     readonly>
 
             </div>
+
 
             <div class="form-group">
 
                 <label>IP Address</label>
 
                 <input
+                    id="entryIP"
                     type="text"
-                    id="entryIp"
                     placeholder="Enter IP address">
 
             </div>
+
 
             <div class="form-group">
 
                 <label>Work</label>
 
                 <input
-                    type="text"
                     id="entryWork"
+                    type="text"
                     placeholder="Enter work">
 
             </div>
@@ -1013,6 +945,7 @@ tbody tr:hover{
         </div>
 
     </div>
+
 
     <div class="modal-foot">
 
@@ -1043,7 +976,7 @@ tbody tr:hover{
 
     <div class="modal-head">
 
-        <h3>User Management</h3>
+        <h3>👥 User Management</h3>
 
         <button class="close"
                 onclick="closeModal('usersModal')">
@@ -1052,22 +985,24 @@ tbody tr:hover{
 
     </div>
 
+
     <div class="modal-body">
 
         <div class="users-toolbar">
 
             <input
-                type="text"
                 id="userSearch"
-                placeholder="Search username, name, role..."
+                type="text"
+                placeholder="Search users..."
                 oninput="renderUsers()">
 
             <button class="btn btn-primary"
-                    onclick="openAddUserModal()">
+                    onclick="openAddUser()">
                 + Add User
             </button>
 
         </div>
+
 
         <div class="users-table">
 
@@ -1086,15 +1021,15 @@ tbody tr:hover{
                 </thead>
 
                 <tbody id="usersBody">
-
                 </tbody>
 
             </table>
 
         </div>
 
+
         <div class="empty"
-             id="usersEmpty"
+             id="emptyUsers"
              style="display:none;">
             No users found.
         </div>
@@ -1106,7 +1041,7 @@ tbody tr:hover{
 
 </div>
 
-<!-- ADD / EDIT USER MODAL -->
+<!-- USER FORM -->
 
 <div class="modal"
      id="userFormModal">
@@ -1127,6 +1062,7 @@ tbody tr:hover{
 
     </div>
 
+
     <div class="modal-body">
 
         <div class="form-grid">
@@ -1136,33 +1072,36 @@ tbody tr:hover{
                 <label>Username</label>
 
                 <input
-                    type="text"
                     id="formUsername"
+                    type="text"
                     placeholder="Username">
 
             </div>
+
 
             <div class="form-group">
 
                 <label>Password</label>
 
                 <input
-                    type="password"
                     id="formPassword"
+                    type="password"
                     placeholder="Password">
 
             </div>
+
 
             <div class="form-group">
 
                 <label>Name</label>
 
                 <input
-                    type="text"
                     id="formName"
+                    type="text"
                     placeholder="Full name">
 
             </div>
+
 
             <div class="form-group">
 
@@ -1194,6 +1133,7 @@ tbody tr:hover{
 
             </div>
 
+
             <div class="form-group">
 
                 <label>Status</label>
@@ -1218,11 +1158,12 @@ tbody tr:hover{
 
         </div>
 
-        <input
-            type="hidden"
-            id="originalUsername">
+
+        <input type="hidden"
+               id="originalUsername">
 
     </div>
+
 
     <div class="modal-foot">
 
@@ -1243,7 +1184,7 @@ tbody tr:hover{
 
 </div>
 
-<!-- CHANGE PASSWORD MODAL -->
+<!-- PASSWORD MODAL -->
 
 <div class="modal"
      id="passwordModal">
@@ -1262,6 +1203,7 @@ tbody tr:hover{
 
     </div>
 
+
     <div class="modal-body">
 
         <div class="form-grid">
@@ -1271,37 +1213,40 @@ tbody tr:hover{
                 <label>Current Password</label>
 
                 <input
-                    type="password"
                     id="currentPassword"
+                    type="password"
                     placeholder="Current password">
 
             </div>
+
 
             <div class="form-group full">
 
                 <label>New Password</label>
 
                 <input
-                    type="password"
                     id="newPassword"
+                    type="password"
                     placeholder="New password">
 
             </div>
 
+
             <div class="form-group full">
 
-                <label>Confirm New Password</label>
+                <label>Confirm Password</label>
 
                 <input
-                    type="password"
                     id="confirmPassword"
-                    placeholder="Confirm new password">
+                    type="password"
+                    placeholder="Confirm password">
 
             </div>
 
         </div>
 
     </div>
+
 
     <div class="modal-foot">
 
@@ -1350,37 +1295,33 @@ tbody tr:hover{
 <script>
 
 /* ============================================================
-   API URLS
+   API
    ============================================================ */
 
-/*
-   USER API
-   User Spreadsheet / User.gs
-*/
+/* USER SPREADSHEET API */
 const USER_API_URL =
 "https://script.google.com/macros/s/AKfycbw00GHHheuvtdQtgPURjs4PtsM48-4yaFx-_ms0ZBV5FHhnmcdbJ5DHr3Aix8JPF0kQzA/exec";
 
 
-/*
-   DATA API
-   Separate Data Spreadsheet / Data.gs
-*/
+/* DATA SPREADSHEET API */
 const DATA_API_URL =
 "https://script.google.com/macros/s/AKfycbz59T-4CKQDbHJB_ql6OYZf18eN7XUmttp0d2FaOM5pm27yCBOWrEilqA_zMOnFq_rz/exec";
 
 
 /* ============================================================
-   GLOBAL VARIABLES
+   VARIABLES
    ============================================================ */
 
 let allData = [];
 let filteredData = [];
+
 let allUsers = [];
+
 let editingUser = false;
 
 
 /* ============================================================
-   SESSION
+   CURRENT USER
    ============================================================ */
 
 let currentUsername =
@@ -1402,10 +1343,10 @@ localStorage.getItem("status") ||
 
 
 /* ============================================================
-   PAGE LOAD
+   START
    ============================================================ */
 
-document.addEventListener("DOMContentLoaded", function(){
+document.addEventListener("DOMContentLoaded",function(){
 
     checkLogin();
 
@@ -1413,7 +1354,9 @@ document.addEventListener("DOMContentLoaded", function(){
 
     updateProfile();
 
-    loadAllData();
+    loadUser();
+
+    loadData();
 
 });
 
@@ -1424,51 +1367,98 @@ document.addEventListener("DOMContentLoaded", function(){
 
 function checkLogin(){
 
-    const logged =
-        localStorage.getItem("dashboardAuth") ||
-        sessionStorage.getItem("dashboardAuth");
+    const auth =
+    localStorage.getItem("dashboardAuth") ||
+    sessionStorage.getItem("dashboardAuth");
 
-    if(logged !== "true"){
+    if(auth !== "true"){
 
-        window.location.href = "index.html";
+        window.location.replace("index.html");
 
         return;
+
     }
 
     if(!currentUsername){
 
-        window.location.href = "index.html";
+        window.location.replace("index.html");
 
         return;
-    }
 
-    showUsersButton();
+    }
 
 }
 
 
 /* ============================================================
-   USER ROLE
+   USER
    ============================================================ */
 
-function showUsersButton(){
+async function loadUser(){
 
-    const role =
-    String(currentRole || "").toLowerCase();
+    try{
 
-    const btn =
-    document.getElementById("usersBtn");
+        const url =
+        USER_API_URL +
+        "?action=getUser&username=" +
+        encodeURIComponent(currentUsername) +
+        "&_=" +
+        Date.now();
 
-    if(
-        role === "admin" ||
-        role === "manager"
-    ){
+        const response =
+        await fetch(url,{
+            cache:"no-store"
+        });
 
-        btn.style.display = "block";
+        const result =
+        await response.json();
 
-    }else{
+        if(result.success && result.user){
 
-        btn.style.display = "none";
+            currentUsername =
+            result.user.username || currentUsername;
+
+            currentName =
+            result.user.name || currentName;
+
+            currentRole =
+            result.user.role || currentRole;
+
+            currentStatus =
+            result.user.status || currentStatus;
+
+            localStorage.setItem(
+                "username",
+                currentUsername
+            );
+
+            localStorage.setItem(
+                "name",
+                currentName
+            );
+
+            localStorage.setItem(
+                "role",
+                currentRole
+            );
+
+            localStorage.setItem(
+                "status",
+                currentStatus
+            );
+
+            localStorage.setItem(
+                "userData",
+                JSON.stringify(result.user)
+            );
+
+            updateProfile();
+
+        }
+
+    }catch(error){
+
+        console.error(error);
 
     }
 
@@ -1486,14 +1476,8 @@ function updateProfile(){
     currentUsername ||
     "User";
 
-    const first =
-    name.charAt(0).toUpperCase();
-
     document.getElementById("profileName").textContent =
     name;
-
-    document.getElementById("profileAvatar").textContent =
-    first;
 
     document.getElementById("menuName").textContent =
     name;
@@ -1504,14 +1488,13 @@ function updateProfile(){
     document.getElementById("menuRole").textContent =
     "Role: " + (currentRole || "User");
 
+    document.getElementById("avatar").textContent =
+    name.charAt(0).toUpperCase();
+
 }
 
 
-/* ============================================================
-   PROFILE MENU
-   ============================================================ */
-
-function toggleProfileMenu(){
+function toggleProfile(){
 
     document
     .getElementById("profileMenu")
@@ -1540,108 +1523,7 @@ document.addEventListener("click",function(e){
 
 
 /* ============================================================
-   LOAD ALL DATA
-   ============================================================ */
-
-async function loadAllData(){
-
-    await loadUser();
-
-    await loadData();
-
-}
-
-
-/* ============================================================
-   LOAD CURRENT USER
-   ============================================================ */
-
-async function loadUser(){
-
-    try{
-
-        const url =
-        USER_API_URL +
-        "?action=getUser&username=" +
-        encodeURIComponent(currentUsername) +
-        "&_=" +
-        Date.now();
-
-        const response =
-        await fetch(url,{
-            method:"GET",
-            cache:"no-store"
-        });
-
-        const result =
-        await response.json();
-
-        if(
-            result &&
-            result.success &&
-            result.user
-        ){
-
-            const user =
-            result.user;
-
-            currentUsername =
-            user.username || currentUsername;
-
-            currentName =
-            user.name || currentName;
-
-            currentRole =
-            user.role || currentRole;
-
-            currentStatus =
-            user.status || currentStatus;
-
-            localStorage.setItem(
-                "username",
-                currentUsername
-            );
-
-            localStorage.setItem(
-                "name",
-                currentName
-            );
-
-            localStorage.setItem(
-                "role",
-                currentRole
-            );
-
-            localStorage.setItem(
-                "status",
-                currentStatus
-            );
-
-            localStorage.setItem(
-                "userData",
-                JSON.stringify(user)
-            );
-
-            updateProfile();
-
-            showUsersButton();
-
-        }
-
-    }catch(error){
-
-        console.error(
-            "User load error:",
-            error
-        );
-
-    }
-
-}
-
-
-/* ============================================================
-   LOAD DATA
+   DATA
    ============================================================ */
 
 async function loadData(){
@@ -1657,17 +1539,13 @@ async function loadData(){
 
         const response =
         await fetch(url,{
-            method:"GET",
             cache:"no-store"
         });
 
         const result =
         await response.json();
 
-        if(
-            result &&
-            result.success
-        ){
+        if(result.success){
 
             allData =
             Array.isArray(result.data)
@@ -1681,15 +1559,9 @@ async function loadData(){
 
         }else{
 
-            allData = [];
-
-            filteredData = [];
-
-            renderData();
-
             showToast(
                 result.message ||
-                "Data load failed.",
+                "Could not load data.",
                 "error"
             );
 
@@ -1700,7 +1572,7 @@ async function loadData(){
         console.error(error);
 
         showToast(
-            "Data load failed.",
+            "Could not connect to Data Spreadsheet.",
             "error"
         );
 
@@ -1713,28 +1585,21 @@ async function loadData(){
 }
 
 
-/* ============================================================
-   RENDER DATA
-   ============================================================ */
-
 function renderData(){
 
     const body =
     document.getElementById("dataBody");
 
     const empty =
-    document.getElementById("emptyState");
-
-    const count =
-    document.getElementById("tableCount");
+    document.getElementById("emptyData");
 
     body.innerHTML = "";
 
-    count.textContent =
+    document.getElementById("dataCount").textContent =
     filteredData.length +
     (filteredData.length === 1
-        ? " entry"
-        : " entries");
+    ? " entry"
+    : " entries");
 
     if(!filteredData.length){
 
@@ -1752,10 +1617,15 @@ function renderData(){
         document.createElement("tr");
 
         tr.innerHTML = `
+
             <td>${escapeHtml(item.name || "")}</td>
+
             <td>${escapeHtml(item.ip || "")}</td>
+
             <td>${escapeHtml(item.work || "")}</td>
+
             <td>${escapeHtml(formatDate(item.date || ""))}</td>
+
         `;
 
         body.appendChild(tr);
@@ -1766,14 +1636,13 @@ function renderData(){
 
 
 /* ============================================================
-   FILTER DATA
+   FILTER
    ============================================================ */
 
-function filterData(){
+function applyFilter(){
 
     const search =
-    document
-    .getElementById("searchInput")
+    document.getElementById("searchInput")
     .value
     .trim()
     .toLowerCase();
@@ -1808,7 +1677,7 @@ function filterData(){
         if(from || to){
 
             const d =
-            parseDateValue(item.date);
+            parseDate(item.date);
 
             if(!d){
 
@@ -1816,22 +1685,16 @@ function filterData(){
 
             }
 
-            const day =
-            getLocalDateString(d);
+            const date =
+            getDateString(d);
 
-            if(
-                from &&
-                day < from
-            ){
+            if(from && date < from){
 
                 return false;
 
             }
 
-            if(
-                to &&
-                day > to
-            ){
+            if(to && date > to){
 
                 return false;
 
@@ -1847,10 +1710,6 @@ function filterData(){
 
 }
 
-
-/* ============================================================
-   CLEAR FILTER
-   ============================================================ */
 
 function clearFilter(){
 
@@ -1869,7 +1728,7 @@ function clearFilter(){
 
 
 /* ============================================================
-   NEW ENTRY MODAL
+   NEW ENTRY
    ============================================================ */
 
 function openEntryModal(){
@@ -1878,9 +1737,9 @@ function openEntryModal(){
     currentName || currentUsername;
 
     document.getElementById("entryDate").value =
-    getNowDateTime();
+    nowDateTime();
 
-    document.getElementById("entryIp").value = "";
+    document.getElementById("entryIP").value = "";
 
     document.getElementById("entryWork").value = "";
 
@@ -1891,17 +1750,13 @@ function openEntryModal(){
 }
 
 
-/* ============================================================
-   SAVE ENTRY
-   ============================================================ */
-
 async function saveEntry(){
 
     const name =
     document.getElementById("entryName").value.trim();
 
     const ip =
-    document.getElementById("entryIp").value.trim();
+    document.getElementById("entryIP").value.trim();
 
     const work =
     document.getElementById("entryWork").value.trim();
@@ -1957,10 +1812,7 @@ async function saveEntry(){
         const result =
         await response.json();
 
-        if(
-            result &&
-            result.success
-        ){
+        if(result.success){
 
             closeModal("entryModal");
 
@@ -1975,7 +1827,7 @@ async function saveEntry(){
 
             showToast(
                 result.message ||
-                "Failed to save entry.",
+                "Could not save entry.",
                 "error"
             );
 
@@ -1986,7 +1838,7 @@ async function saveEntry(){
         console.error(error);
 
         showToast(
-            "Failed to save entry.",
+            "Could not save entry.",
             "error"
         );
 
@@ -2000,40 +1852,21 @@ async function saveEntry(){
 
 
 /* ============================================================
-   USERS MODAL
+   USERS
    ============================================================ */
 
 function openUsersModal(){
-
-    const role =
-    String(currentRole || "").toLowerCase();
-
-    if(
-        role !== "admin" &&
-        role !== "manager"
-    ){
-
-        showToast(
-            "You do not have permission.",
-            "error"
-        );
-
-        return;
-
-    }
 
     document
     .getElementById("usersModal")
     .classList.add("show");
 
+    document.getElementById("userSearch").value = "";
+
     loadUsers();
 
 }
 
-
-/* ============================================================
-   LOAD USERS
-   ============================================================ */
 
 async function loadUsers(){
 
@@ -2051,17 +1884,13 @@ async function loadUsers(){
 
         const response =
         await fetch(url,{
-            method:"GET",
             cache:"no-store"
         });
 
         const result =
         await response.json();
 
-        if(
-            result &&
-            result.success
-        ){
+        if(result.success){
 
             allUsers =
             Array.isArray(result.users)
@@ -2102,21 +1931,16 @@ async function loadUsers(){
 }
 
 
-/* ============================================================
-   RENDER USERS
-   ============================================================ */
-
 function renderUsers(){
 
     const body =
     document.getElementById("usersBody");
 
     const empty =
-    document.getElementById("usersEmpty");
+    document.getElementById("emptyUsers");
 
     const search =
-    document
-    .getElementById("userSearch")
+    document.getElementById("userSearch")
     .value
     .trim()
     .toLowerCase();
@@ -2134,13 +1958,13 @@ function renderUsers(){
 
         const text =
         (
-            String(user.username || "") +
+            user.username || "" +
             " " +
-            String(user.name || "") +
+            (user.name || "") +
             " " +
-            String(user.role || "") +
+            (user.role || "") +
             " " +
-            String(user.status || "")
+            (user.status || "")
         ).toLowerCase();
 
         return text.includes(search);
@@ -2162,12 +1986,12 @@ function renderUsers(){
         const tr =
         document.createElement("tr");
 
+        let statusClass =
+        "inactive";
+
         const status =
         String(user.status || "")
         .toLowerCase();
-
-        let statusClass =
-        "inactive";
 
         if(status === "active"){
             statusClass = "active";
@@ -2177,10 +2001,13 @@ function renderUsers(){
             statusClass = "blocked";
         }
 
+        const username =
+        String(user.username || "");
+
         tr.innerHTML = `
 
             <td>
-                ${escapeHtml(user.username || "")}
+                ${escapeHtml(username)}
             </td>
 
             <td>
@@ -2198,8 +2025,9 @@ function renderUsers(){
             </td>
 
             <td>
-                <button class="edit-btn"
-                        onclick="openEditUserModal('${escapeAttribute(user.username || "")}')">
+                <button
+                    class="edit-btn"
+                    onclick="editUserByIndex(${allUsers.indexOf(user)})">
                     Edit
                 </button>
             </td>
@@ -2217,7 +2045,7 @@ function renderUsers(){
    ADD USER
    ============================================================ */
 
-function openAddUserModal(){
+function openAddUser(){
 
     editingUser = false;
 
@@ -2250,17 +2078,10 @@ function openAddUserModal(){
    EDIT USER
    ============================================================ */
 
-function openEditUserModal(username){
+function editUserByIndex(index){
 
     const user =
-    allUsers.find(function(item){
-
-        return String(item.username || "")
-        .toLowerCase() ===
-        String(username || "")
-        .toLowerCase();
-
-    });
+    allUsers[index];
 
     if(!user){
 
@@ -2350,7 +2171,6 @@ async function saveUser(){
 
     }
 
-
     if(!editingUser && !password){
 
         showToast(
@@ -2361,7 +2181,6 @@ async function saveUser(){
         return;
 
     }
-
 
     if(password && password.length < 4){
 
@@ -2384,7 +2203,7 @@ async function saveUser(){
 
     try{
 
-        const body = {
+        const data = {
 
             action:
             editingUser
@@ -2414,7 +2233,7 @@ async function saveUser(){
 
         if(editingUser){
 
-            body.originalUsername =
+            data.originalUsername =
             originalUsername;
 
         }
@@ -2427,7 +2246,7 @@ async function saveUser(){
                 "Content-Type":
                 "text/plain;charset=utf-8"
             },
-            body:JSON.stringify(body)
+            body:JSON.stringify(data)
         });
 
 
@@ -2435,10 +2254,7 @@ async function saveUser(){
         await response.json();
 
 
-        if(
-            result &&
-            result.success
-        ){
+        if(result.success){
 
             closeModal("userFormModal");
 
@@ -2451,30 +2267,15 @@ async function saveUser(){
 
             await loadUsers();
 
-            if(
-                String(originalUsername || "")
-                .toLowerCase() ===
-                currentUsername.toLowerCase()
-                ||
-                String(username || "")
-                .toLowerCase() ===
-                currentUsername.toLowerCase()
-            ){
-
-                await loadUser();
-
-            }
-
         }else{
 
             showToast(
                 result.message ||
-                "Operation failed.",
+                "User operation failed.",
                 "error"
             );
 
         }
-
 
     }catch(error){
 
@@ -2495,7 +2296,7 @@ async function saveUser(){
 
 
 /* ============================================================
-   CHANGE PASSWORD MODAL
+   CHANGE PASSWORD
    ============================================================ */
 
 function openPasswordModal(){
@@ -2504,14 +2305,11 @@ function openPasswordModal(){
     .getElementById("profileMenu")
     .classList.remove("show");
 
-    document.getElementById("currentPassword").value =
-    "";
+    document.getElementById("currentPassword").value = "";
 
-    document.getElementById("newPassword").value =
-    "";
+    document.getElementById("newPassword").value = "";
 
-    document.getElementById("confirmPassword").value =
-    "";
+    document.getElementById("confirmPassword").value = "";
 
     document
     .getElementById("passwordModal")
@@ -2519,10 +2317,6 @@ function openPasswordModal(){
 
 }
 
-
-/* ============================================================
-   CHANGE PASSWORD
-   ============================================================ */
 
 async function changePassword(){
 
@@ -2547,19 +2341,6 @@ async function changePassword(){
 
     }
 
-
-    if(!newPassword){
-
-        showToast(
-            "Enter new password.",
-            "error"
-        );
-
-        return;
-
-    }
-
-
     if(newPassword.length < 4){
 
         showToast(
@@ -2571,11 +2352,10 @@ async function changePassword(){
 
     }
 
-
     if(newPassword !== confirmPassword){
 
         showToast(
-            "New passwords do not match.",
+            "Passwords do not match.",
             "error"
         );
 
@@ -2617,10 +2397,7 @@ async function changePassword(){
         await response.json();
 
 
-        if(
-            result &&
-            result.success
-        ){
+        if(result.success){
 
             closeModal("passwordModal");
 
@@ -2628,15 +2405,6 @@ async function changePassword(){
                 "Password changed successfully.",
                 "success"
             );
-
-            document.getElementById("currentPassword").value =
-            "";
-
-            document.getElementById("newPassword").value =
-            "";
-
-            document.getElementById("confirmPassword").value =
-            "";
 
         }else{
 
@@ -2647,7 +2415,6 @@ async function changePassword(){
             );
 
         }
-
 
     }catch(error){
 
@@ -2692,7 +2459,7 @@ function logout(){
 
 
 /* ============================================================
-   MODAL CLOSE
+   MODAL
    ============================================================ */
 
 function closeModal(id){
@@ -2745,14 +2512,14 @@ function loadTheme(){
 
         document.body.classList.add("dark");
 
-        document.getElementById("themeBtn").textContent =
+        document.getElementById("themeButton").textContent =
         "☀";
 
     }else{
 
         document.body.classList.remove("dark");
 
-        document.getElementById("themeBtn").textContent =
+        document.getElementById("themeButton").textContent =
         "☾";
 
     }
@@ -2772,7 +2539,7 @@ function toggleTheme(){
         dark ? "dark" : "light"
     );
 
-    document.getElementById("themeBtn").textContent =
+    document.getElementById("themeButton").textContent =
     dark ? "☀" : "☾";
 
 }
@@ -2809,14 +2576,13 @@ function hideLoader(){
 
 let toastTimer;
 
-
 function showToast(message,type){
 
     const toast =
     document.getElementById("toast");
 
     toast.textContent =
-    message || "";
+    message;
 
     toast.className =
     "toast show " +
@@ -2835,35 +2601,35 @@ function showToast(message,type){
 
 
 /* ============================================================
-   DATE / TIME
+   DATE
    ============================================================ */
 
-function getNowDateTime(){
+function nowDateTime(){
 
     const d =
     new Date();
 
-    const pad =
+    const p =
     n => String(n).padStart(2,"0");
 
     return (
         d.getFullYear() +
         "-" +
-        pad(d.getMonth()+1) +
+        p(d.getMonth()+1) +
         "-" +
-        pad(d.getDate()) +
+        p(d.getDate()) +
         " " +
-        pad(d.getHours()) +
+        p(d.getHours()) +
         ":" +
-        pad(d.getMinutes()) +
+        p(d.getMinutes()) +
         ":" +
-        pad(d.getSeconds())
+        p(d.getSeconds())
     );
 
 }
 
 
-function parseDateValue(value){
+function parseDate(value){
 
     if(!value){
 
@@ -2871,25 +2637,8 @@ function parseDateValue(value){
 
     }
 
-    if(value instanceof Date){
-
-        return isNaN(value.getTime())
-        ? null
-        : value;
-
-    }
-
-    const text =
-    String(value).trim();
-
-    if(!text){
-
-        return null;
-
-    }
-
-    let d =
-    new Date(text);
+    const d =
+    new Date(value);
 
     if(!isNaN(d.getTime())){
 
@@ -2898,43 +2647,22 @@ function parseDateValue(value){
     }
 
     const m =
-    text.match(
-        /^(\d{1,2})[\/\-](\d{1,2})[\/\-](\d{4})(?:\s+(\d{1,2}):(\d{2})(?::(\d{2}))?)?$/
+    String(value).match(
+        /^(\d{1,2})[\/\-](\d{1,2})[\/\-](\d{4})/
     );
 
     if(m){
 
-        const day =
-        Number(m[1]);
-
-        const month =
-        Number(m[2]) - 1;
-
-        const year =
-        Number(m[3]);
-
-        const hour =
-        Number(m[4] || 0);
-
-        const minute =
-        Number(m[5] || 0);
-
-        const second =
-        Number(m[6] || 0);
-
-        d =
+        const d2 =
         new Date(
-            year,
-            month,
-            day,
-            hour,
-            minute,
-            second
+            Number(m[3]),
+            Number(m[2])-1,
+            Number(m[1])
         );
 
-        if(!isNaN(d.getTime())){
+        if(!isNaN(d2.getTime())){
 
-            return d;
+            return d2;
 
         }
 
@@ -2945,17 +2673,17 @@ function parseDateValue(value){
 }
 
 
-function getLocalDateString(date){
+function getDateString(d){
 
-    const pad =
+    const p =
     n => String(n).padStart(2,"0");
 
     return (
-        date.getFullYear() +
+        d.getFullYear() +
         "-" +
-        pad(date.getMonth()+1) +
+        p(d.getMonth()+1) +
         "-" +
-        pad(date.getDate())
+        p(d.getDate())
     );
 
 }
@@ -2964,7 +2692,7 @@ function getLocalDateString(date){
 function formatDate(value){
 
     const d =
-    parseDateValue(value);
+    parseDate(value);
 
     if(!d){
 
@@ -2972,56 +2700,44 @@ function formatDate(value){
 
     }
 
-    const pad =
+    const p =
     n => String(n).padStart(2,"0");
 
     return (
         d.getFullYear() +
         "-" +
-        pad(d.getMonth()+1) +
+        p(d.getMonth()+1) +
         "-" +
-        pad(d.getDate()) +
+        p(d.getDate()) +
         " " +
-        pad(d.getHours()) +
+        p(d.getHours()) +
         ":" +
-        pad(d.getMinutes()) +
+        p(d.getMinutes()) +
         ":" +
-        pad(d.getSeconds())
+        p(d.getSeconds())
     );
 
 }
 
 
 /* ============================================================
-   HTML SECURITY
+   SECURITY
    ============================================================ */
 
 function escapeHtml(value){
 
     return String(value ?? "")
-    .replace(/&/g,"&amp;")
-    .replace(/</g,"&lt;")
-    .replace(/>/g,"&gt;")
-    .replace(/"/g,"&quot;")
-    .replace(/'/g,"&#039;");
-
-}
-
-
-function escapeAttribute(value){
-
-    return String(value ?? "")
-    .replace(/\\/g,"\\\\")
-    .replace(/'/g,"\\'")
-    .replace(/"/g,"&quot;")
-    .replace(/</g,"&lt;")
-    .replace(/>/g,"&gt;");
+        .replace(/&/g,"&amp;")
+        .replace(/</g,"&lt;")
+        .replace(/>/g,"&gt;")
+        .replace(/"/g,"&quot;")
+        .replace(/'/g,"&#039;");
 
 }
 
 
 /* ============================================================
-   PREVENT BACK BUTTON AFTER LOGIN
+   BACK BUTTON PROTECTION
    ============================================================ */
 
 history.pushState(
