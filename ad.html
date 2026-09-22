@@ -4,17 +4,14 @@
 <head>
 
 <meta charset="UTF-8">
-
-<meta
-  name="viewport"
-  content="width=device-width, initial-scale=1.0"
->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Support Dashboard</title>
 
 <link
   rel="icon"
   type="image/png"
+  sizes="128x128"
   href="https://cdn-icons-png.flaticon.com/128/17163/17163834.png"
 >
 
@@ -29,225 +26,78 @@
 body{
   font-family:Arial,Helvetica,sans-serif;
   background:#f4f7fb;
-  color:#172033;
+  color:#1f2937;
   min-height:100vh;
   transition:.3s;
 }
 
 body.dark{
-  background:#101522;
-  color:#f5f7fb;
+  background:#111827;
+  color:#f3f4f6;
 }
 
+button,
+input,
+select{
+  font-family:inherit;
+}
 
-/* =========================================================
-   HEADER
-========================================================= */
+button{
+  cursor:pointer;
+  border:none;
+}
 
 .header{
-  height:70px;
-  background:#ffffff;
+  height:72px;
+  background:linear-gradient(135deg,#2563eb,#4f46e5);
+  color:white;
   display:flex;
   align-items:center;
   justify-content:space-between;
-  padding:0 22px;
-  box-shadow:0 3px 15px rgba(0,0,0,.08);
-  position:sticky;
-  top:0;
-  z-index:100;
+  padding:0 25px;
+  box-shadow:0 4px 15px rgba(0,0,0,.12);
 }
 
-.dark .header{
-  background:#171d2b;
-  box-shadow:0 3px 15px rgba(0,0,0,.25);
-}
-
-.logo-area{
+.header-left{
   display:flex;
   align-items:center;
-  gap:12px;
+  gap:13px;
 }
 
 .logo{
-  width:42px;
-  height:42px;
+  width:43px;
+  height:43px;
   border-radius:12px;
+  background:rgba(255,255,255,.2);
   display:flex;
   align-items:center;
   justify-content:center;
-  background:linear-gradient(135deg,#2563eb,#7c3aed);
-  color:white;
   font-size:22px;
   font-weight:bold;
 }
 
-.logo-text h2{
-  font-size:19px;
-}
-
-.logo-text p{
-  font-size:12px;
-  color:#7b8496;
-  margin-top:3px;
-}
-
-.header-actions{
-  display:flex;
-  align-items:center;
-  gap:8px;
-}
-
-.icon-btn{
-  width:40px;
-  height:40px;
-  border:none;
-  border-radius:10px;
-  cursor:pointer;
-  background:#f0f3f8;
-  font-size:18px;
-  transition:.2s;
-}
-
-.icon-btn:hover{
-  transform:translateY(-1px);
-  background:#e4e9f2;
-}
-
-.dark .icon-btn{
-  background:#252d3d;
-  color:white;
-}
-
-
-/* =========================================================
-   PROFILE
-========================================================= */
-
-.profile{
-  position:relative;
-}
-
-.profile-btn{
-  border:none;
-  background:transparent;
-  display:flex;
-  align-items:center;
-  gap:8px;
-  cursor:pointer;
-  padding:4px;
-}
-
-.profile-avatar{
-  width:40px;
-  height:40px;
-  border-radius:50%;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  background:linear-gradient(135deg,#2563eb,#7c3aed);
-  color:white;
+.header-title{
+  font-size:20px;
   font-weight:bold;
 }
 
-.profile-name{
-  text-align:left;
-}
-
-.profile-name strong{
-  display:block;
-  font-size:13px;
-}
-
-.profile-name span{
-  display:block;
-  color:#8a93a5;
-  font-size:11px;
+.header-subtitle{
+  font-size:12px;
+  opacity:.8;
   margin-top:2px;
 }
 
-.profile-menu{
-  position:absolute;
-  right:0;
-  top:52px;
-  width:190px;
-  background:white;
-  border-radius:12px;
-  box-shadow:0 12px 35px rgba(0,0,0,.15);
-  padding:7px;
-  display:none;
-}
-
-.profile-menu.show{
-  display:block;
-}
-
-.dark .profile-menu{
-  background:#1d2534;
-}
-
-.profile-menu button{
-  width:100%;
-  border:none;
-  background:transparent;
-  text-align:left;
-  padding:11px 12px;
-  border-radius:8px;
-  cursor:pointer;
-  font-size:13px;
-  color:inherit;
-}
-
-.profile-menu button:hover{
-  background:#f1f4f9;
-}
-
-.dark .profile-menu button:hover{
-  background:#293244;
-}
-
-
-/* =========================================================
-   MAIN
-========================================================= */
-
-.container{
-  max-width:1450px;
-  margin:auto;
-  padding:25px;
-}
-
-.top-bar{
+.header-right{
   display:flex;
-  justify-content:space-between;
   align-items:center;
-  gap:15px;
-  margin-bottom:20px;
-  flex-wrap:wrap;
-}
-
-.page-title h1{
-  font-size:25px;
-}
-
-.page-title p{
-  color:#7b8496;
-  margin-top:5px;
-  font-size:13px;
-}
-
-.actions{
-  display:flex;
   gap:9px;
-  flex-wrap:wrap;
 }
 
 .btn{
-  border:none;
-  border-radius:10px;
-  padding:11px 16px;
-  cursor:pointer;
-  font-weight:600;
+  padding:10px 15px;
+  border-radius:9px;
   font-size:13px;
+  font-weight:bold;
   transition:.2s;
 }
 
@@ -256,27 +106,17 @@ body.dark{
 }
 
 .btn-primary{
-  background:#2563eb;
-  color:white;
-}
-
-.btn-secondary{
-  background:#eef2f7;
-  color:#253047;
-}
-
-.dark .btn-secondary{
-  background:#252d3d;
-  color:white;
+  background:white;
+  color:#2563eb;
 }
 
 .btn-success{
-  background:#16a34a;
+  background:#10b981;
   color:white;
 }
 
 .btn-danger{
-  background:#dc2626;
+  background:#ef4444;
   color:white;
 }
 
@@ -285,225 +125,332 @@ body.dark{
   color:white;
 }
 
-
-/* =========================================================
-   FILTER CARD
-========================================================= */
-
-.filter-card{
-  background:white;
-  border-radius:15px;
-  padding:17px;
-  box-shadow:0 4px 20px rgba(0,0,0,.06);
-  margin-bottom:18px;
-}
-
-.dark .filter-card{
-  background:#171d2b;
-}
-
-.filters{
-  display:grid;
-  grid-template-columns:2fr 1fr 1fr auto;
-  gap:10px;
-}
-
-.input,
-.select{
-  width:100%;
-  border:1px solid #dce2eb;
-  background:#fff;
-  color:#172033;
-  border-radius:9px;
-  padding:11px 12px;
-  outline:none;
-  font-size:13px;
-}
-
-.input:focus,
-.select:focus{
-  border-color:#2563eb;
-}
-
-.dark .input,
-.dark .select{
-  background:#202838;
+.btn-secondary{
+  background:#6b7280;
   color:white;
-  border-color:#343e51;
 }
 
-
-/* =========================================================
-   TABLE
-========================================================= */
-
-.table-card{
-  background:white;
-  border-radius:15px;
-  box-shadow:0 4px 20px rgba(0,0,0,.06);
-  overflow:hidden;
+.icon-btn{
+  width:39px;
+  height:39px;
+  border-radius:9px;
+  background:rgba(255,255,255,.15);
+  color:white;
+  font-size:17px;
 }
 
-.dark .table-card{
-  background:#171d2b;
+.profile{
+  position:relative;
 }
 
-.table-wrap{
-  overflow:auto;
-}
-
-table{
-  width:100%;
-  border-collapse:collapse;
-  min-width:800px;
-}
-
-thead{
-  background:#f7f9fc;
-}
-
-.dark thead{
-  background:#202838;
-}
-
-th{
-  text-align:left;
-  padding:14px;
-  font-size:12px;
-  color:#687286;
-  white-space:nowrap;
-}
-
-td{
-  padding:14px;
-  border-top:1px solid #edf0f5;
-  font-size:13px;
-  white-space:nowrap;
-}
-
-.dark td{
-  border-color:#293243;
-}
-
-.dark th{
-  color:#aeb6c6;
-}
-
-.empty{
-  text-align:center;
-  padding:45px;
-  color:#8a93a5;
-}
-
-
-/* =========================================================
-   MODAL
-========================================================= */
-
-.modal-bg{
-  position:fixed;
-  inset:0;
-  background:rgba(10,16,28,.62);
-  display:none;
-  align-items:center;
-  justify-content:center;
-  z-index:500;
-  padding:20px;
-}
-
-.modal-bg.show{
+.profile-btn{
   display:flex;
+  align-items:center;
+  gap:8px;
+  background:rgba(255,255,255,.15);
+  color:white;
+  padding:5px 10px 5px 5px;
+  border-radius:25px;
 }
 
-.modal{
-  width:100%;
-  max-width:560px;
-  max-height:90vh;
-  overflow:auto;
+.profile-img{
+  width:34px;
+  height:34px;
+  border-radius:50%;
+  object-fit:cover;
   background:white;
-  border-radius:17px;
-  box-shadow:0 20px 70px rgba(0,0,0,.25);
-  padding:22px;
 }
 
-.dark .modal{
-  background:#171d2b;
+.profile-menu{
+  display:none;
+  position:absolute;
+  right:0;
+  top:48px;
+  width:180px;
+  background:white;
+  border-radius:12px;
+  box-shadow:0 10px 30px rgba(0,0,0,.18);
+  padding:8px;
+  z-index:1000;
 }
 
-.modal.large{
-  max-width:900px;
+body.dark .profile-menu{
+  background:#1f2937;
 }
 
-.modal-head{
+.profile-menu.show{
+  display:block;
+}
+
+.profile-menu button{
+  width:100%;
+  padding:11px;
+  text-align:left;
+  background:transparent;
+  border-radius:8px;
+  color:#374151;
+}
+
+body.dark .profile-menu button{
+  color:#f3f4f6;
+}
+
+.profile-menu button:hover{
+  background:#f1f5f9;
+}
+
+body.dark .profile-menu button:hover{
+  background:#374151;
+}
+
+.container{
+  max-width:1400px;
+  margin:auto;
+  padding:25px;
+}
+
+.page-header{
   display:flex;
   justify-content:space-between;
   align-items:center;
   margin-bottom:20px;
 }
 
-.modal-head h3{
+.page-title{
+  font-size:25px;
+  font-weight:bold;
+}
+
+.page-subtitle{
+  color:#6b7280;
+  font-size:13px;
+  margin-top:5px;
+}
+
+body.dark .page-subtitle{
+  color:#9ca3af;
+}
+
+.card{
+  background:white;
+  border-radius:15px;
+  padding:20px;
+  box-shadow:0 5px 20px rgba(0,0,0,.06);
+  margin-bottom:20px;
+}
+
+body.dark .card{
+  background:#1f2937;
+  box-shadow:0 5px 20px rgba(0,0,0,.2);
+}
+
+.filter-grid{
+  display:grid;
+  grid-template-columns:2fr 1fr 1fr auto;
+  gap:12px;
+  align-items:end;
+}
+
+.form-group{
+  display:flex;
+  flex-direction:column;
+  gap:7px;
+}
+
+.form-group label{
+  font-size:12px;
+  font-weight:bold;
+  color:#6b7280;
+}
+
+body.dark .form-group label{
+  color:#d1d5db;
+}
+
+input,
+select{
+  width:100%;
+  padding:11px 12px;
+  border:1px solid #dbe2ea;
+  border-radius:9px;
+  outline:none;
+  background:white;
+  color:#1f2937;
+}
+
+input:focus,
+select:focus{
+  border-color:#2563eb;
+  box-shadow:0 0 0 3px rgba(37,99,235,.1);
+}
+
+body.dark input,
+body.dark select{
+  background:#111827;
+  color:white;
+  border-color:#374151;
+}
+
+.table-wrap{
+  overflow-x:auto;
+}
+
+table{
+  width:100%;
+  border-collapse:collapse;
+  min-width:950px;
+}
+
+th{
+  background:#f8fafc;
+  color:#475569;
+  font-size:12px;
+  padding:13px;
+  text-align:left;
+  white-space:nowrap;
+}
+
+body.dark th{
+  background:#111827;
+  color:#cbd5e1;
+}
+
+td{
+  padding:13px;
+  border-bottom:1px solid #edf0f4;
+  font-size:13px;
+  vertical-align:middle;
+}
+
+body.dark td{
+  border-color:#374151;
+}
+
+tbody tr:hover{
+  background:#f8fafc;
+}
+
+body.dark tbody tr:hover{
+  background:#273449;
+}
+
+.empty{
+  text-align:center;
+  padding:35px;
+  color:#9ca3af;
+}
+
+.row-actions{
+  display:flex;
+  gap:6px;
+  flex-wrap:nowrap;
+}
+
+.action-btn{
+  padding:7px 10px;
+  border-radius:7px;
+  font-size:11px;
+  font-weight:bold;
+  color:white;
+  white-space:nowrap;
+  transition:.2s;
+}
+
+.action-btn:hover{
+  transform:translateY(-1px);
+}
+
+.action-edit{
+  background:#2563eb;
+}
+
+.action-sell{
+  background:#10b981;
+}
+
+.action-delete{
+  background:#ef4444;
+}
+
+/* MODAL */
+
+.modal{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.55);
+  z-index:2000;
+  align-items:center;
+  justify-content:center;
+  padding:15px;
+}
+
+.modal.show{
+  display:flex;
+}
+
+.modal-box{
+  width:100%;
+  max-width:500px;
+  background:white;
+  border-radius:16px;
+  padding:22px;
+  max-height:90vh;
+  overflow-y:auto;
+}
+
+body.dark .modal-box{
+  background:#1f2937;
+}
+
+.modal-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:18px;
+}
+
+.modal-title{
   font-size:19px;
+  font-weight:bold;
 }
 
 .close{
   width:34px;
   height:34px;
-  border:none;
-  border-radius:9px;
-  background:#eef1f6;
-  cursor:pointer;
-  font-size:18px;
+  border-radius:8px;
+  background:#f1f5f9;
+  color:#374151;
+  font-size:20px;
 }
 
-.dark .close{
-  background:#273041;
+body.dark .close{
+  background:#374151;
   color:white;
 }
 
-.form-grid{
+.modal-form{
   display:grid;
-  grid-template-columns:1fr 1fr;
   gap:13px;
 }
 
-.form-group{
-  margin-bottom:13px;
-}
-
-.form-group.full{
-  grid-column:1/-1;
-}
-
-.form-group label{
-  display:block;
-  font-size:12px;
-  font-weight:600;
-  margin-bottom:6px;
-}
-
-.modal-footer{
+.modal-actions{
   display:flex;
   justify-content:flex-end;
   gap:9px;
   margin-top:18px;
 }
 
-
-/* =========================================================
-   USER TABLE
-========================================================= */
-
-.user-table-wrap{
-  overflow:auto;
+.users-table{
+  overflow-x:auto;
 }
 
-.user-table{
-  width:100%;
-  min-width:700px;
+.users-table table{
+  min-width:650px;
 }
 
 .status{
-  display:inline-flex;
+  display:inline-block;
   padding:5px 9px;
   border-radius:20px;
   font-size:11px;
@@ -517,130 +464,49 @@ td{
 
 .status-block{
   background:#fee2e2;
-  color:#b91c1c;
+  color:#dc2626;
 }
 
-.role{
-  display:inline-flex;
-  padding:5px 9px;
-  border-radius:20px;
-  background:#e0e7ff;
-  color:#4338ca;
-  font-size:11px;
-  font-weight:bold;
-}
+/* LOADER */
 
-.user-actions{
-  display:flex;
-  gap:6px;
-}
-
-.small-btn{
-  border:none;
-  padding:7px 10px;
-  border-radius:7px;
-  cursor:pointer;
-  font-size:11px;
-  font-weight:bold;
-}
-
-.small-edit{
-  background:#dbeafe;
-  color:#1d4ed8;
-}
-
-.small-block{
-  background:#fee2e2;
-  color:#b91c1c;
-}
-
-.small-unblock{
-  background:#dcfce7;
-  color:#15803d;
-}
-
-
-/* =========================================================
-   TOAST
-========================================================= */
-
-.toast{
-  position:fixed;
-  right:20px;
-  bottom:20px;
-  min-width:260px;
-  max-width:400px;
-  padding:13px 16px;
-  border-radius:11px;
-  background:#172033;
-  color:white;
-  box-shadow:0 10px 35px rgba(0,0,0,.2);
-  transform:translateY(100px);
-  opacity:0;
-  pointer-events:none;
-  transition:.3s;
-  z-index:1000;
-  font-size:13px;
-}
-
-.toast.show{
-  transform:translateY(0);
-  opacity:1;
-}
-
-.toast.success{
-  background:#15803d;
-}
-
-.toast.error{
-  background:#b91c1c;
-}
-
-
-/* =========================================================
-   LOADER
-========================================================= */
-
-.loader-bg{
+.loader{
+  display:none;
   position:fixed;
   inset:0;
   background:rgba(255,255,255,.7);
-  display:none;
+  z-index:5000;
   align-items:center;
   justify-content:center;
-  z-index:2000;
-  backdrop-filter:blur(3px);
 }
 
-.dark .loader-bg{
-  background:rgba(10,15,25,.72);
+body.dark .loader{
+  background:rgba(0,0,0,.65);
 }
 
-.loader-bg.show{
+.loader.show{
   display:flex;
 }
 
 .loader-box{
   background:white;
-  padding:25px 30px;
+  padding:25px 35px;
   border-radius:15px;
+  box-shadow:0 10px 30px rgba(0,0,0,.2);
   text-align:center;
-  box-shadow:0 10px 40px rgba(0,0,0,.18);
 }
 
-.dark .loader-box{
-  background:#1b2331;
-  color:white;
+body.dark .loader-box{
+  background:#1f2937;
 }
 
 .spinner{
   width:35px;
   height:35px;
-  border:4px solid #e3e8f0;
+  border:4px solid #e5e7eb;
   border-top-color:#2563eb;
   border-radius:50%;
   animation:spin .8s linear infinite;
-  margin:0 auto 12px;
+  margin:auto auto 12px;
 }
 
 @keyframes spin{
@@ -649,39 +515,96 @@ td{
   }
 }
 
+/* TOAST */
 
-/* =========================================================
-   MOBILE
-========================================================= */
+.toast{
+  position:fixed;
+  right:20px;
+  bottom:20px;
+  background:#111827;
+  color:white;
+  padding:13px 17px;
+  border-radius:10px;
+  box-shadow:0 10px 25px rgba(0,0,0,.2);
+  transform:translateY(100px);
+  opacity:0;
+  transition:.3s;
+  z-index:6000;
+  font-size:13px;
+}
 
-@media(max-width:800px){
+.toast.show{
+  transform:translateY(0);
+  opacity:1;
+}
+
+/* MOBILE */
+
+@media(max-width:850px){
 
   .header{
-    padding:0 13px;
+    padding:0 12px;
   }
 
-  .profile-name{
+  .header-subtitle{
     display:none;
+  }
+
+  .header-title{
+    font-size:16px;
+  }
+
+  .header-right .btn{
+    padding:8px 10px;
+    font-size:11px;
   }
 
   .container{
     padding:15px;
   }
 
-  .filters{
+  .page-header{
+    align-items:flex-start;
+    gap:10px;
+  }
+
+  .page-title{
+    font-size:20px;
+  }
+
+  .filter-grid{
     grid-template-columns:1fr;
   }
 
-  .form-grid{
-    grid-template-columns:1fr;
+}
+
+@media(max-width:550px){
+
+  .header{
+    height:auto;
+    min-height:65px;
+    gap:8px;
   }
 
-  .form-group.full{
-    grid-column:auto;
+  .logo{
+    width:36px;
+    height:36px;
   }
 
-  .page-title h1{
-    font-size:21px;
+  .header-right .btn-primary{
+    display:none;
+  }
+
+  .profile-btn span{
+    display:none;
+  }
+
+  .page-header{
+    flex-direction:column;
+  }
+
+  .page-header > .btn{
+    width:100%;
   }
 
 }
@@ -690,43 +613,30 @@ td{
 
 </head>
 
-
 <body>
 
-
-<!-- =======================================================
-     HEADER
-======================================================= -->
+<!-- HEADER -->
 
 <header class="header">
 
-  <div class="logo-area">
+  <div class="header-left">
 
-    <div class="logo">
-      S
-    </div>
+    <div class="logo">S</div>
 
-    <div class="logo-text">
-
-      <h2>Support Dashboard</h2>
-
-      <p>Admin Management System</p>
-
+    <div>
+      <div class="header-title">Support Dashboard</div>
+      <div class="header-subtitle">Admin Management System</div>
     </div>
 
   </div>
 
+  <div class="header-right">
 
-  <div class="header-actions">
-
-    <button
-      class="icon-btn"
-      onclick="loadData()"
-      title="Reload"
-    >
+    <button class="icon-btn" onclick="loadData()" title="Reload">
       ↻
     </button>
 
+    <!-- USERS BUTTON - আগের মতোই রাখা হয়েছে -->
 
     <button
       class="btn btn-primary"
@@ -735,7 +645,6 @@ td{
       Users
     </button>
 
-
     <button
       class="btn btn-success"
       onclick="openEntryModal()"
@@ -743,16 +652,13 @@ td{
       + New Entry
     </button>
 
-
     <button
       class="icon-btn"
       onclick="toggleTheme()"
-      id="themeBtn"
       title="Theme"
     >
-      🌙
+      ☀
     </button>
-
 
     <div class="profile">
 
@@ -761,34 +667,23 @@ td{
         onclick="toggleProfileMenu()"
       >
 
-        <div
-          class="profile-avatar"
-          id="profileAvatar"
+        <img
+          id="profileImage"
+          class="profile-img"
+          src="https://cdn-icons-png.flaticon.com/128/149/149071.png"
         >
-          U
-        </div>
 
-        <div class="profile-name">
-
-          <strong id="profileName">
-            User
-          </strong>
-
-          <span id="profileRole">
-            User
-          </span>
-
-        </div>
+        <span id="profileName">User</span>
+        ▾
 
       </button>
-
 
       <div
         class="profile-menu"
         id="profileMenu"
       >
 
-        <button onclick="openPasswordModal()">
+        <button onclick="openChangePasswordModal()">
           🔑 Change Password
         </button>
 
@@ -805,73 +700,76 @@ td{
 </header>
 
 
-
-<!-- =======================================================
-     MAIN
-======================================================= -->
+<!-- MAIN -->
 
 <main class="container">
 
+  <div class="page-header">
 
-  <div class="top-bar">
+    <div>
+      <div class="page-title">
+        Support Data
+      </div>
 
-    <div class="page-title">
-
-      <h1>Dashboard</h1>
-
-      <p>
-        Manage support data and users
-      </p>
-
+      <div class="page-subtitle">
+        Manage support entries
+      </div>
     </div>
 
-
-    <div class="actions">
-
-      <button
-        class="btn btn-primary"
-        onclick="loadData()"
-      >
-        Refresh Data
-      </button>
-
-    </div>
+    <button
+      class="btn btn-primary"
+      onclick="loadData()"
+    >
+      Refresh Data
+    </button>
 
   </div>
 
 
+  <!-- FILTER -->
 
-  <!-- =====================================================
-       FILTER
-  ====================================================== -->
+  <div class="card">
 
-  <div class="filter-card">
+    <div class="filter-grid">
 
-    <div class="filters">
+      <div class="form-group">
 
-      <input
-        type="text"
-        class="input"
-        id="searchInput"
-        placeholder="Search..."
-        oninput="applyFilters()"
-      >
+        <label>Search</label>
 
+        <input
+          type="text"
+          id="searchInput"
+          placeholder="Search name, IP, work..."
+          oninput="applyFilters()"
+        >
 
-      <input
-        type="date"
-        class="input"
-        id="fromDate"
-        onchange="applyFilters()"
-      >
+      </div>
 
 
-      <input
-        type="date"
-        class="input"
-        id="toDate"
-        onchange="applyFilters()"
-      >
+      <div class="form-group">
+
+        <label>From Date</label>
+
+        <input
+          type="date"
+          id="fromDate"
+          onchange="applyFilters()"
+        >
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label>To Date</label>
+
+        <input
+          type="date"
+          id="toDate"
+          onchange="applyFilters()"
+        >
+
+      </div>
 
 
       <button
@@ -886,12 +784,9 @@ td{
   </div>
 
 
+  <!-- DATA TABLE -->
 
-  <!-- =====================================================
-       DATA TABLE
-  ====================================================== -->
-
-  <div class="table-card">
+  <div class="card">
 
     <div class="table-wrap">
 
@@ -902,29 +797,21 @@ td{
           <tr>
 
             <th>Name</th>
-
             <th>IP</th>
-
             <th>Work</th>
-
             <th>Date</th>
+            <th>Action</th>
 
           </tr>
 
         </thead>
 
-
         <tbody id="dataBody">
 
           <tr>
-
-            <td
-              colspan="4"
-              class="empty"
-            >
-              Loading data...
+            <td colspan="5" class="empty">
+              Loading...
             </td>
-
           </tr>
 
         </tbody>
@@ -938,21 +825,20 @@ td{
 </main>
 
 
-
-<!-- =======================================================
-     NEW ENTRY MODAL
-======================================================= -->
+<!-- NEW ENTRY MODAL -->
 
 <div
-  class="modal-bg"
+  class="modal"
   id="entryModal"
 >
 
-  <div class="modal">
+  <div class="modal-box">
 
-    <div class="modal-head">
+    <div class="modal-header">
 
-      <h3>New Entry</h3>
+      <div class="modal-title">
+        New Entry
+      </div>
 
       <button
         class="close"
@@ -964,16 +850,16 @@ td{
     </div>
 
 
-    <div class="form-grid">
+    <div class="modal-form">
 
       <div class="form-group">
 
         <label>Name</label>
 
         <input
-          class="input"
-          id="entryName"
           type="text"
+          id="entryName"
+          placeholder="Enter name"
         >
 
       </div>
@@ -984,37 +870,34 @@ td{
         <label>IP</label>
 
         <input
-          class="input"
-          id="entryIp"
           type="text"
+          id="entryIp"
+          placeholder="Enter IP"
         >
 
       </div>
 
 
-      <div class="form-group full">
+      <div class="form-group">
 
         <label>Work</label>
 
         <input
-          class="input"
-          id="entryWork"
           type="text"
+          id="entryWork"
+          placeholder="Enter work"
         >
 
       </div>
 
 
-      <!-- NEW DATE FIELD -->
-
-      <div class="form-group full">
+      <div class="form-group">
 
         <label>Date</label>
 
         <input
-          class="input"
-          id="entryDate"
           type="date"
+          id="entryDate"
         >
 
       </div>
@@ -1022,7 +905,7 @@ td{
     </div>
 
 
-    <div class="modal-footer">
+    <div class="modal-actions">
 
       <button
         class="btn btn-secondary"
@@ -1032,10 +915,10 @@ td{
       </button>
 
       <button
-        class="btn btn-primary"
+        class="btn btn-success"
         onclick="saveEntry()"
       >
-        Save
+        Save Entry
       </button>
 
     </div>
@@ -1045,21 +928,126 @@ td{
 </div>
 
 
-
-<!-- =======================================================
-     USERS MODAL
-======================================================= -->
+<!-- EDIT ENTRY MODAL -->
 
 <div
-  class="modal-bg"
+  class="modal"
+  id="editEntryModal"
+>
+
+  <div class="modal-box">
+
+    <div class="modal-header">
+
+      <div class="modal-title">
+        Edit Entry
+      </div>
+
+      <button
+        class="close"
+        onclick="closeModal('editEntryModal')"
+      >
+        ×
+      </button>
+
+    </div>
+
+
+    <div class="modal-form">
+
+      <div class="form-group">
+
+        <label>Name</label>
+
+        <input
+          type="text"
+          id="editName"
+          placeholder="Enter name"
+        >
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label>IP</label>
+
+        <input
+          type="text"
+          id="editIp"
+          placeholder="Enter IP"
+        >
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label>Work</label>
+
+        <input
+          type="text"
+          id="editWork"
+          placeholder="Enter work"
+        >
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label>Date</label>
+
+        <input
+          type="date"
+          id="editDate"
+        >
+
+      </div>
+
+    </div>
+
+
+    <div class="modal-actions">
+
+      <button
+        class="btn btn-secondary"
+        onclick="closeModal('editEntryModal')"
+      >
+        Cancel
+      </button>
+
+      <button
+        class="btn btn-primary"
+        onclick="saveEdit()"
+      >
+        Update
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- USERS MODAL -->
+
+<div
+  class="modal"
   id="usersModal"
 >
 
-  <div class="modal large">
+  <div
+    class="modal-box"
+    style="max-width:850px;"
+  >
 
-    <div class="modal-head">
+    <div class="modal-header">
 
-      <h3>User Management</h3>
+      <div class="modal-title">
+        User Management
+      </div>
 
       <button
         class="close"
@@ -1083,40 +1071,30 @@ td{
     </div>
 
 
-    <div class="user-table-wrap">
+    <div class="users-table">
 
-      <table class="user-table">
+      <table>
 
         <thead>
 
           <tr>
 
             <th>Username</th>
-
             <th>Name</th>
-
             <th>Role</th>
-
             <th>Status</th>
-
             <th>Action</th>
 
           </tr>
 
         </thead>
 
-
         <tbody id="usersBody">
 
           <tr>
-
-            <td
-              colspan="5"
-              class="empty"
-            >
-              Loading users...
+            <td colspan="5" class="empty">
+              Loading...
             </td>
-
           </tr>
 
         </tbody>
@@ -1130,27 +1108,27 @@ td{
 </div>
 
 
-
-<!-- =======================================================
-     ADD / EDIT USER MODAL
-======================================================= -->
+<!-- ADD / EDIT USER MODAL -->
 
 <div
-  class="modal-bg"
-  id="userFormModal"
+  class="modal"
+  id="userModal"
 >
 
-  <div class="modal">
+  <div class="modal-box">
 
-    <div class="modal-head">
+    <div class="modal-header">
 
-      <h3 id="userFormTitle">
+      <div
+        class="modal-title"
+        id="userModalTitle"
+      >
         Add User
-      </h3>
+      </div>
 
       <button
         class="close"
-        onclick="closeModal('userFormModal')"
+        onclick="closeModal('userModal')"
       >
         ×
       </button>
@@ -1164,17 +1142,16 @@ td{
     >
 
 
-    <div class="form-grid">
-
+    <div class="modal-form">
 
       <div class="form-group">
 
         <label>Username</label>
 
         <input
-          class="input"
-          id="userUsername"
           type="text"
+          id="userUsername"
+          placeholder="Username"
         >
 
       </div>
@@ -1185,9 +1162,9 @@ td{
         <label>Name</label>
 
         <input
-          class="input"
-          id="userName"
           type="text"
+          id="userName"
+          placeholder="Name"
         >
 
       </div>
@@ -1198,9 +1175,8 @@ td{
         <label>Password</label>
 
         <input
-          class="input"
-          id="userPassword"
           type="password"
+          id="userPassword"
           placeholder="Password"
         >
 
@@ -1211,52 +1187,27 @@ td{
 
         <label>Role</label>
 
-        <select
-          class="select"
-          id="userRole"
-        >
+        <select id="userRole">
 
-          <option value="admin">
-            Admin
-          </option>
-
-          <option value="manager">
-            Manager
-          </option>
-
-          <option value="support">
-            Support
-          </option>
-
-          <option value="call">
-            Call
-          </option>
-
-          <option value="guest">
-            Guest
-          </option>
+          <option value="admin">Admin</option>
+          <option value="manager">Manager</option>
+          <option value="support">Support</option>
+          <option value="call">Call</option>
+          <option value="guest">Guest</option>
 
         </select>
 
       </div>
 
 
-      <div class="form-group full">
+      <div class="form-group">
 
         <label>Status</label>
 
-        <select
-          class="select"
-          id="userStatus"
-        >
+        <select id="userStatus">
 
-          <option value="Active">
-            Active
-          </option>
-
-          <option value="Block">
-            Block
-          </option>
+          <option value="Active">Active</option>
+          <option value="Block">Block</option>
 
         </select>
 
@@ -1265,17 +1216,17 @@ td{
     </div>
 
 
-    <div class="modal-footer">
+    <div class="modal-actions">
 
       <button
         class="btn btn-secondary"
-        onclick="closeModal('userFormModal')"
+        onclick="closeModal('userModal')"
       >
         Cancel
       </button>
 
       <button
-        class="btn btn-primary"
+        class="btn btn-success"
         onclick="saveUser()"
       >
         Save User
@@ -1288,21 +1239,20 @@ td{
 </div>
 
 
-
-<!-- =======================================================
-     CHANGE PASSWORD MODAL
-======================================================= -->
+<!-- CHANGE PASSWORD -->
 
 <div
-  class="modal-bg"
+  class="modal"
   id="passwordModal"
 >
 
-  <div class="modal">
+  <div class="modal-box">
 
-    <div class="modal-head">
+    <div class="modal-header">
 
-      <h3>Change Password</h3>
+      <div class="modal-title">
+        Change Password
+      </div>
 
       <button
         class="close"
@@ -1314,33 +1264,47 @@ td{
     </div>
 
 
-    <div class="form-group">
+    <div class="modal-form">
 
-      <label>Current Password</label>
+      <div class="form-group">
 
-      <input
-        class="input"
-        id="currentPassword"
-        type="password"
-      >
+        <label>Current Password</label>
+
+        <input
+          type="password"
+          id="currentPassword"
+        >
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label>New Password</label>
+
+        <input
+          type="password"
+          id="newPassword"
+        >
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label>Confirm New Password</label>
+
+        <input
+          type="password"
+          id="confirmPassword"
+        >
+
+      </div>
 
     </div>
 
 
-    <div class="form-group">
-
-      <label>New Password</label>
-
-      <input
-        class="input"
-        id="newPassword"
-        type="password"
-      >
-
-    </div>
-
-
-    <div class="modal-footer">
+    <div class="modal-actions">
 
       <button
         class="btn btn-secondary"
@@ -1363,13 +1327,10 @@ td{
 </div>
 
 
-
-<!-- =======================================================
-     LOADER
-======================================================= -->
+<!-- LOADER -->
 
 <div
-  class="loader-bg"
+  class="loader"
   id="loader"
 >
 
@@ -1386,10 +1347,7 @@ td{
 </div>
 
 
-
-<!-- =======================================================
-     TOAST
-======================================================= -->
+<!-- TOAST -->
 
 <div
   class="toast"
@@ -1397,13 +1355,11 @@ td{
 ></div>
 
 
-
 <script>
 
-
-// ============================================================
-// API URLS
-// ============================================================
+/* =========================================================
+   API URL
+========================================================= */
 
 const USER_API_URL =
   "https://script.google.com/macros/s/AKfycbw00GHHheuvtdQtgPURjs4PtsM48-4yaFx-_ms0ZBV5FHhnmcdbJ5DHr3Aix8JPF0kQzA/exec";
@@ -1413,14 +1369,15 @@ const DATA_API_URL =
   "https://script.google.com/macros/s/AKfycbz59T-4CKQDbHJB_ql6OYZf18eN7XUmttp0d2FaOM5pm27yCBOWrEilqA_zMOnFq_rz/exec";
 
 
-
-// ============================================================
-// GLOBAL VARIABLES
-// ============================================================
+/* =========================================================
+   GLOBAL
+========================================================= */
 
 let allData = [];
 
 let editingUser = false;
+
+let editingRow = null;
 
 let currentUsername =
   localStorage.getItem("username") ||
@@ -1428,14 +1385,15 @@ let currentUsername =
   "";
 
 
-
-// ============================================================
-// PAGE LOAD
-// ============================================================
+/* =========================================================
+   PAGE LOAD
+========================================================= */
 
 document.addEventListener(
   "DOMContentLoaded",
   function(){
+
+    checkLogin();
 
     loadTheme();
 
@@ -1447,117 +1405,61 @@ document.addEventListener(
 );
 
 
-
-// ============================================================
-// CHECK LOGIN
-// ============================================================
+/* =========================================================
+   LOGIN CHECK
+========================================================= */
 
 function checkLogin(){
 
-  const auth =
-    localStorage.getItem(
-      "dashboardAuth"
-    ) ||
-    sessionStorage.getItem(
-      "dashboardAuth"
-    );
+  const logged =
+    localStorage.getItem("dashboardAuth") === "true" ||
+    sessionStorage.getItem("dashboardAuth") === "true";
 
+  if(!logged){
 
-  if(auth !== "true"){
+    window.location.href = "index.html";
 
-    window.location.href =
-      "index.html";
-
-    return false;
   }
 
-
-  return true;
 }
 
 
-
-// ============================================================
-// LOAD USER
-// ============================================================
+/* =========================================================
+   USER PROFILE
+========================================================= */
 
 async function loadUser(){
 
-  if(!checkLogin()) return;
-
-
-  if(!currentUsername){
-
-    logout();
-
-    return;
-  }
-
+  if(!currentUsername) return;
 
   try{
 
-    const url =
+    const response = await fetch(
       USER_API_URL +
       "?action=getUser&username=" +
-      encodeURIComponent(
-        currentUsername
-      ) +
-      "&_=" +
-      Date.now();
+      encodeURIComponent(currentUsername)
+    );
 
+    const result = await response.json();
 
-    const response =
-      await fetch(
-        url,
-        {
-          cache:"no-store"
-        }
-      );
-
-
-    const result =
-      await response.json();
-
-
-    if(!result.success){
-
-      showToast(
-        result.message ||
-        "Unable to load user.",
-        "error"
-      );
+    if(!result.success || !result.user){
 
       return;
+
     }
 
+    const user = result.user;
 
-    const user =
-      result.user;
-
-
-    document.getElementById(
-      "profileName"
-    ).textContent =
-      user.name ||
-      user.username;
+    document.getElementById("profileName").textContent =
+      user.name || user.username || "User";
 
 
-    document.getElementById(
-      "profileRole"
-    ).textContent =
-      user.role;
+    if(user.picture){
 
+      document.getElementById("profileImage").src =
+        user.picture;
 
-    document.getElementById(
-      "profileAvatar"
-    ).textContent =
-      (
-        user.name ||
-        user.username ||
-        "U"
-      )
-      .charAt(0)
-      .toUpperCase();
+    }
 
 
     localStorage.setItem(
@@ -1577,484 +1479,309 @@ async function loadUser(){
 
 
     if(
-      String(user.status)
-        .toLowerCase() ===
-      "block"
+      String(user.status || "").toLowerCase() === "block"
     ){
 
       logout();
 
-      return;
     }
-
 
   }catch(error){
 
     console.error(error);
 
-    showToast(
-      "Unable to connect to User API.",
-      "error"
-    );
   }
+
 }
 
 
-
-// ============================================================
-// LOAD DATA
-// ============================================================
+/* =========================================================
+   LOAD DATA
+========================================================= */
 
 async function loadData(){
 
-  if(!checkLogin()) return;
-
-
-  showLoader(
-    "Loading data..."
-  );
-
+  showLoader("Loading data...");
 
   try{
 
-    const url =
+    const response = await fetch(
       DATA_API_URL +
       "?action=getData&_=" +
-      Date.now();
+      Date.now()
+    );
 
+    const result = await response.json();
 
-    const response =
-      await fetch(
-        url,
-        {
-          cache:"no-store"
-        }
-      );
-
-
-    const result =
-      await response.json();
-
-
-    if(
-      result.success === false
-    ){
+    if(!result.success){
 
       throw new Error(
-        result.message ||
-        "Unable to load data."
+        result.message || "Failed to load data"
       );
-    }
 
+    }
 
     allData =
       result.data ||
       result.users ||
       [];
 
-
-    renderData(
-      allData
-    );
-
+    renderData(allData);
 
   }catch(error){
 
     console.error(error);
 
-    document.getElementById(
-      "dataBody"
-    ).innerHTML = `
+    document.getElementById("dataBody").innerHTML = `
       <tr>
-        <td colspan="4" class="empty">
-          Unable to load data.
+        <td colspan="5" class="empty">
+          Failed to load data
         </td>
       </tr>
     `;
 
-
-    showToast(
-      error.message ||
-      "Data loading failed.",
-      "error"
-    );
-
+    showToast("Failed to load data");
 
   }finally{
 
     hideLoader();
 
   }
+
 }
 
 
-
-// ============================================================
-// RENDER DATA
-// ============================================================
+/* =========================================================
+   RENDER DATA
+========================================================= */
 
 function renderData(data){
 
   const body =
-    document.getElementById(
-      "dataBody"
-    );
+    document.getElementById("dataBody");
 
 
-  if(
-    !data ||
-    !data.length
-  ){
+  if(!data || !data.length){
 
     body.innerHTML = `
       <tr>
-        <td colspan="4" class="empty">
-          No data found.
+        <td colspan="5" class="empty">
+          No data found
         </td>
       </tr>
     `;
 
     return;
+
   }
 
 
-  body.innerHTML =
-    data.map(
-      function(row){
+  body.innerHTML = data.map(function(row){
 
-        const name =
-          row.Name ??
-          row.name ??
-          row[0] ??
-          "";
-
-
-        const ip =
-          row.Ip ??
-          row.IP ??
-          row.ip ??
-          row[1] ??
-          "";
+    const rowNumber =
+      Number(
+        row.row ||
+        row._row ||
+        row.rowNumber ||
+        0
+      );
 
 
-        const work =
-          row.Work ??
-          row.work ??
-          row[2] ??
-          "";
+    const name =
+      row.Name ??
+      row.name ??
+      row[0] ??
+      "";
 
 
-        const date =
-          row.Date ??
-          row.date ??
-          row[3] ??
-          "";
+    const ip =
+      row.Ip ??
+      row.IP ??
+      row.ip ??
+      row[1] ??
+      "";
 
 
-        return `
-          <tr>
+    const work =
+      row.Work ??
+      row.work ??
+      row[2] ??
+      "";
 
-            <td>
-              ${escapeHtml(name)}
-            </td>
 
-            <td>
-              ${escapeHtml(ip)}
-            </td>
+    const date =
+      row.Date ??
+      row.date ??
+      row[3] ??
+      "";
 
-            <td>
-              ${escapeHtml(work)}
-            </td>
 
-            <td>
-              ${escapeHtml(formatDate(date))}
-            </td>
+    const safeRow =
+      JSON.stringify({
+        row:rowNumber,
+        Name:name,
+        Ip:ip,
+        Work:work,
+        Date:date
+      })
+      .replace(/'/g,"&#39;");
 
-          </tr>
-        `;
 
-      }
-    )
-    .join("");
+    return `
+
+      <tr>
+
+        <td>${escapeHtml(name)}</td>
+
+        <td>${escapeHtml(ip)}</td>
+
+        <td>${escapeHtml(work)}</td>
+
+        <td>${formatDate(date)}</td>
+
+        <td>
+
+          <div class="row-actions">
+
+            <button
+              class="action-btn action-edit"
+              onclick='openEditModal(${safeRow})'
+            >
+              Edit
+            </button>
+
+            <button
+              class="action-btn action-sell"
+              onclick="sellEntry(${rowNumber})"
+            >
+              Sell
+            </button>
+
+            <button
+              class="action-btn action-delete"
+              onclick="deleteEntry(${rowNumber})"
+            >
+              Delete
+            </button>
+
+          </div>
+
+        </td>
+
+      </tr>
+
+    `;
+
+  }).join("");
+
 }
 
 
-
-// ============================================================
-// FILTER
-// ============================================================
-
-function applyFilters(){
-
-  const search =
-    document
-      .getElementById(
-        "searchInput"
-      )
-      .value
-      .trim()
-      .toLowerCase();
-
-
-  const from =
-    document.getElementById(
-      "fromDate"
-    ).value;
-
-
-  const to =
-    document.getElementById(
-      "toDate"
-    ).value;
-
-
-  const filtered =
-    allData.filter(
-      function(row){
-
-        const text =
-          JSON.stringify(
-            row
-          ).toLowerCase();
-
-
-        if(
-          search &&
-          !text.includes(search)
-        ){
-
-          return false;
-        }
-
-
-        const rawDate =
-          row.Date ??
-          row.date ??
-          row[3] ??
-          "";
-
-
-        if(
-          from ||
-          to
-        ){
-
-          const date =
-            normalizeDate(
-              rawDate
-            );
-
-
-          if(!date){
-
-            return true;
-          }
-
-
-          if(
-            from &&
-            date < from
-          ){
-
-            return false;
-          }
-
-
-          if(
-            to &&
-            date > to
-          ){
-
-            return false;
-          }
-        }
-
-
-        return true;
-      }
-    );
-
-
-  renderData(
-    filtered
-  );
-}
-
-
-
-// ============================================================
-// CLEAR FILTERS
-// ============================================================
-
-function clearFilters(){
-
-  document.getElementById(
-    "searchInput"
-  ).value = "";
-
-
-  document.getElementById(
-    "fromDate"
-  ).value = "";
-
-
-  document.getElementById(
-    "toDate"
-  ).value = "";
-
-
-  renderData(
-    allData
-  );
-}
-
-
-
-// ============================================================
-// OPEN ENTRY MODAL
-// ============================================================
+/* =========================================================
+   NEW ENTRY
+========================================================= */
 
 function openEntryModal(){
 
-  document.getElementById(
-    "entryName"
-  ).value = "";
+  document.getElementById("entryName").value = "";
 
+  document.getElementById("entryIp").value = "";
 
-  document.getElementById(
-    "entryIp"
-  ).value = "";
+  document.getElementById("entryWork").value = "";
 
+  document.getElementById("entryDate").value =
+    getTodayDate();
 
-  document.getElementById(
-    "entryWork"
-  ).value = "";
+  document
+    .getElementById("entryModal")
+    .classList.add("show");
 
-
-  // ========================================================
-  // AUTOMATIC TODAY DATE
-  // ========================================================
-
-  const today =
-    new Date();
-
-
-  const year =
-    today.getFullYear();
-
-
-  const month =
-    String(
-      today.getMonth() + 1
-    ).padStart(2,"0");
-
-
-  const day =
-    String(
-      today.getDate()
-    ).padStart(2,"0");
-
-
-  document.getElementById(
-    "entryDate"
-  ).value =
-    year +
-    "-" +
-    month +
-    "-" +
-    day;
-
-
-  openModal(
-    "entryModal"
-  );
 }
 
-
-
-// ============================================================
-// SAVE ENTRY
-// ============================================================
 
 async function saveEntry(){
 
   const name =
-    document.getElementById(
-      "entryName"
-    ).value.trim();
-
+    document.getElementById("entryName")
+    .value.trim();
 
   const ip =
-    document.getElementById(
-      "entryIp"
-    ).value.trim();
-
+    document.getElementById("entryIp")
+    .value.trim();
 
   const work =
-    document.getElementById(
-      "entryWork"
-    ).value.trim();
-
+    document.getElementById("entryWork")
+    .value.trim();
 
   const date =
-    document.getElementById(
-      "entryDate"
-    ).value;
+    document.getElementById("entryDate")
+    .value;
 
 
-  if(!name || !work){
+  if(!name){
 
-    showToast(
-      "Name and Work are required.",
-      "error"
-    );
+    showToast("Name is required");
 
     return;
+
+  }
+
+
+  if(!ip){
+
+    showToast("IP is required");
+
+    return;
+
+  }
+
+
+  if(!work){
+
+    showToast("Work is required");
+
+    return;
+
   }
 
 
   if(!date){
 
-    showToast(
-      "Date is required.",
-      "error"
-    );
+    showToast("Date is required");
 
     return;
+
   }
 
 
-  showLoader(
-    "Saving entry..."
-  );
+  showLoader("Saving entry...");
 
 
   try{
 
-    const response =
-      await fetch(
-        DATA_API_URL,
-        {
-          method:"POST",
+    const response = await fetch(
+      DATA_API_URL,
+      {
+        method:"POST",
 
-          body:JSON.stringify({
+        body:JSON.stringify({
 
-            action:"addData",
+          action:"addData",
 
-            name:name,
+          name:name,
 
-            ip:ip,
+          ip:ip,
 
-            work:work,
+          work:work,
 
-            date:date,
+          date:date,
 
-            username:
-              currentUsername
+          username:currentUsername
 
-          })
-        }
-      );
+        })
+
+      }
+    );
 
 
     const result =
@@ -2065,23 +1792,17 @@ async function saveEntry(){
 
       throw new Error(
         result.message ||
-        "Unable to save entry."
+        "Failed to save"
       );
+
     }
 
 
-    closeModal(
-      "entryModal"
-    );
+    closeModal("entryModal");
 
+    showToast("Entry saved successfully");
 
-    showToast(
-      "Entry saved successfully.",
-      "success"
-    );
-
-
-    loadData();
+    await loadData();
 
 
   }catch(error){
@@ -2090,46 +1811,475 @@ async function saveEntry(){
 
     showToast(
       error.message ||
-      "Save failed.",
-      "error"
+      "Failed to save entry"
     );
-
 
   }finally{
 
     hideLoader();
 
   }
+
 }
 
 
+/* =========================================================
+   EDIT ENTRY
+========================================================= */
 
-// ============================================================
-// OPEN USERS MODAL
-// ============================================================
+function openEditModal(row){
+
+  editingRow =
+    Number(row.row || 0);
+
+
+  if(!editingRow){
+
+    showToast("Invalid row");
+
+    return;
+
+  }
+
+
+  document.getElementById("editName").value =
+    row.Name || "";
+
+
+  document.getElementById("editIp").value =
+    row.Ip || "";
+
+
+  document.getElementById("editWork").value =
+    row.Work || "";
+
+
+  document.getElementById("editDate").value =
+    normalizeDate(row.Date);
+
+
+  document
+    .getElementById("editEntryModal")
+    .classList.add("show");
+
+}
+
+
+async function saveEdit(){
+
+  if(!editingRow){
+
+    showToast("Invalid row");
+
+    return;
+
+  }
+
+
+  const name =
+    document.getElementById("editName")
+    .value.trim();
+
+  const ip =
+    document.getElementById("editIp")
+    .value.trim();
+
+  const work =
+    document.getElementById("editWork")
+    .value.trim();
+
+  const date =
+    document.getElementById("editDate")
+    .value;
+
+
+  if(!name){
+
+    showToast("Name is required");
+
+    return;
+
+  }
+
+
+  if(!ip){
+
+    showToast("IP is required");
+
+    return;
+
+  }
+
+
+  if(!work){
+
+    showToast("Work is required");
+
+    return;
+
+  }
+
+
+  if(!date){
+
+    showToast("Date is required");
+
+    return;
+
+  }
+
+
+  showLoader("Updating entry...");
+
+
+  try{
+
+    const response = await fetch(
+      DATA_API_URL,
+      {
+        method:"POST",
+
+        body:JSON.stringify({
+
+          action:"editData",
+
+          row:editingRow,
+
+          name:name,
+
+          ip:ip,
+
+          work:work,
+
+          date:date
+
+        })
+
+      }
+    );
+
+
+    const result =
+      await response.json();
+
+
+    if(!result.success){
+
+      throw new Error(
+        result.message ||
+        "Failed to update"
+      );
+
+    }
+
+
+    closeModal("editEntryModal");
+
+    editingRow = null;
+
+    showToast("Entry updated successfully");
+
+    await loadData();
+
+
+  }catch(error){
+
+    console.error(error);
+
+    showToast(
+      error.message ||
+      "Failed to update"
+    );
+
+  }finally{
+
+    hideLoader();
+
+  }
+
+}
+
+
+/* =========================================================
+   SELL
+========================================================= */
+
+async function sellEntry(row){
+
+  if(!row){
+
+    showToast("Invalid row");
+
+    return;
+
+  }
+
+
+  if(
+    !confirm(
+      "Are you sure you want to sell this entry?"
+    )
+  ){
+
+    return;
+
+  }
+
+
+  showLoader("Selling entry...");
+
+
+  try{
+
+    const response = await fetch(
+      DATA_API_URL,
+      {
+        method:"POST",
+
+        body:JSON.stringify({
+
+          action:"sellData",
+
+          row:Number(row),
+
+          username:currentUsername
+
+        })
+
+      }
+    );
+
+
+    const result =
+      await response.json();
+
+
+    if(!result.success){
+
+      throw new Error(
+        result.message ||
+        "Failed to sell"
+      );
+
+    }
+
+
+    showToast("Entry sold successfully");
+
+    await loadData();
+
+
+  }catch(error){
+
+    console.error(error);
+
+    showToast(
+      error.message ||
+      "Failed to sell"
+    );
+
+  }finally{
+
+    hideLoader();
+
+  }
+
+}
+
+
+/* =========================================================
+   DELETE
+========================================================= */
+
+async function deleteEntry(row){
+
+  if(!row){
+
+    showToast("Invalid row");
+
+    return;
+
+  }
+
+
+  if(
+    !confirm(
+      "Are you sure you want to delete this entry?"
+    )
+  ){
+
+    return;
+
+  }
+
+
+  showLoader("Deleting entry...");
+
+
+  try{
+
+    const response = await fetch(
+      DATA_API_URL,
+      {
+        method:"POST",
+
+        body:JSON.stringify({
+
+          action:"deleteData",
+
+          row:Number(row),
+
+          username:currentUsername
+
+        })
+
+      }
+    );
+
+
+    const result =
+      await response.json();
+
+
+    if(!result.success){
+
+      throw new Error(
+        result.message ||
+        "Failed to delete"
+      );
+
+    }
+
+
+    showToast("Entry deleted successfully");
+
+    await loadData();
+
+
+  }catch(error){
+
+    console.error(error);
+
+    showToast(
+      error.message ||
+      "Failed to delete"
+    );
+
+  }finally{
+
+    hideLoader();
+
+  }
+
+}
+
+
+/* =========================================================
+   FILTER
+========================================================= */
+
+function applyFilters(){
+
+  const search =
+    document.getElementById("searchInput")
+    .value
+    .trim()
+    .toLowerCase();
+
+
+  const from =
+    document.getElementById("fromDate")
+    .value;
+
+
+  const to =
+    document.getElementById("toDate")
+    .value;
+
+
+  const filtered =
+    allData.filter(function(row){
+
+      const text =
+        JSON.stringify(row)
+        .toLowerCase();
+
+
+      if(
+        search &&
+        !text.includes(search)
+      ){
+
+        return false;
+
+      }
+
+
+      const date =
+        normalizeDate(
+          row.Date ??
+          row.date ??
+          row[3] ??
+          ""
+        );
+
+
+      if(from && date < from){
+
+        return false;
+
+      }
+
+
+      if(to && date > to){
+
+        return false;
+
+      }
+
+
+      return true;
+
+    });
+
+
+  renderData(filtered);
+
+}
+
+
+function clearFilters(){
+
+  document.getElementById("searchInput").value = "";
+
+  document.getElementById("fromDate").value = "";
+
+  document.getElementById("toDate").value = "";
+
+  renderData(allData);
+
+}
+
+
+/* =========================================================
+   USERS
+========================================================= */
 
 function openUsersModal(){
 
-  openModal(
-    "usersModal"
-  );
-
+  document
+    .getElementById("usersModal")
+    .classList.add("show");
 
   loadUsers();
+
 }
 
-
-
-// ============================================================
-// LOAD USERS
-// ============================================================
 
 async function loadUsers(){
 
   const body =
-    document.getElementById(
-      "usersBody"
-    );
+    document.getElementById("usersBody");
 
 
   body.innerHTML = `
@@ -2143,23 +2293,13 @@ async function loadUsers(){
 
   try{
 
-    const url =
+    const response = await fetch(
       USER_API_URL +
       "?action=getUsers&requester=" +
-      encodeURIComponent(
-        currentUsername
-      ) +
+      encodeURIComponent(currentUsername) +
       "&_=" +
-      Date.now();
-
-
-    const response =
-      await fetch(
-        url,
-        {
-          cache:"no-store"
-        }
-      );
+      Date.now()
+    );
 
 
     const result =
@@ -2170,13 +2310,16 @@ async function loadUsers(){
 
       throw new Error(
         result.message ||
-        "Unable to load users."
+        "Failed to load users"
       );
+
     }
 
 
     renderUsers(
-      result.users || []
+      result.users ||
+      result.data ||
+      []
     );
 
 
@@ -2187,386 +2330,308 @@ async function loadUsers(){
     body.innerHTML = `
       <tr>
         <td colspan="5" class="empty">
-          ${escapeHtml(
-            error.message ||
-            "Unable to load users."
-          )}
+          Failed to load users
         </td>
       </tr>
     `;
 
-    showToast(
-      error.message ||
-      "Unable to load users.",
-      "error"
-    );
   }
+
 }
 
-
-
-// ============================================================
-// RENDER USERS
-// ============================================================
 
 function renderUsers(users){
 
   const body =
-    document.getElementById(
-      "usersBody"
-    );
+    document.getElementById("usersBody");
 
 
-  if(
-    !users ||
-    !users.length
-  ){
+  if(!users.length){
 
     body.innerHTML = `
       <tr>
         <td colspan="5" class="empty">
-          No users found.
+          No users found
         </td>
       </tr>
     `;
 
     return;
+
   }
 
 
   body.innerHTML =
-    users.map(
-      function(user){
+    users.map(function(user){
 
-        const username =
-          user.username || "";
-
-
-        const name =
-          user.name || "";
+      const username =
+        user.username ||
+        user.Username ||
+        "";
 
 
-        const role =
-          user.role || "guest";
+      const name =
+        user.name ||
+        user.Name ||
+        "";
 
 
-        const status =
-          String(
-            user.status || "Active"
-          );
+      const role =
+        user.role ||
+        user.Role ||
+        "";
 
 
-        const isBlock =
-          status.toLowerCase() ===
-          "block";
+      const status =
+        user.status ||
+        user.Status ||
+        "";
 
 
-        const statusHtml =
-          isBlock
-
-            ? `
-              <span class="status status-block">
-                Block
-              </span>
-            `
-
-            : `
-              <span class="status status-active">
-                Active
-              </span>
-            `;
+      const isCurrent =
+        username.toLowerCase() ===
+        currentUsername.toLowerCase();
 
 
-        const actionHtml =
-          username.toLowerCase() ===
-          currentUsername.toLowerCase()
+      const statusClass =
+        String(status).toLowerCase() === "active"
+          ? "status-active"
+          : "status-block";
 
-            ? `
-              <span
-                style="
-                  color:#8a93a5;
-                  font-size:11px;
-                "
+
+      return `
+
+        <tr>
+
+          <td>
+            ${escapeHtml(username)}
+          </td>
+
+          <td>
+            ${escapeHtml(name)}
+          </td>
+
+          <td>
+            ${escapeHtml(role)}
+          </td>
+
+          <td>
+
+            <span class="status ${statusClass}">
+              ${escapeHtml(status)}
+            </span>
+
+          </td>
+
+          <td>
+
+            <div class="row-actions">
+
+              <button
+                class="action-btn action-edit"
+                onclick='editUser(${JSON.stringify(user)})'
               >
-                Current User
-              </span>
-            `
+                Edit
+              </button>
 
-            : isBlock
+              ${
+                !isCurrent
+                ? `
+                  <button
+                    class="action-btn ${
+                      String(status).toLowerCase() === "active"
+                      ? "action-delete"
+                      : "action-sell"
+                    }"
+                    onclick="changeUserStatus(
+                      '${escapeJs(username)}',
+                      '${String(status).toLowerCase() === "active" ? "Block" : "Active"}'
+                    )"
+                  >
+                    ${
+                      String(status).toLowerCase() === "active"
+                      ? "Block"
+                      : "Unblock"
+                    }
+                  </button>
+                `
+                : ""
+              }
 
-              ? `
-                <button
-                  class="small-btn small-unblock"
-                  onclick='changeUserStatus(
-                    ${JSON.stringify(username)},
-                    "Active"
-                  )'
-                >
-                  Unblock
-                </button>
-              `
+            </div>
 
-              : `
-                <button
-                  class="small-btn small-block"
-                  onclick='changeUserStatus(
-                    ${JSON.stringify(username)},
-                    "Block"
-                  )'
-                >
-                  Block
-                </button>
-              `;
+          </td>
 
+        </tr>
 
-        return `
-          <tr>
+      `;
 
-            <td>
-              <strong>
-                ${escapeHtml(username)}
-              </strong>
-            </td>
+    }).join("");
 
-            <td>
-              ${escapeHtml(name)}
-            </td>
-
-            <td>
-              <span class="role">
-                ${escapeHtml(role)}
-              </span>
-            </td>
-
-            <td>
-              ${statusHtml}
-            </td>
-
-            <td>
-
-              <div class="user-actions">
-
-                <button
-                  class="small-btn small-edit"
-                  onclick='editUser(
-                    ${JSON.stringify(user)}
-                  )'
-                >
-                  Edit
-                </button>
-
-                ${actionHtml}
-
-              </div>
-
-            </td>
-
-          </tr>
-        `;
-
-      }
-    )
-    .join("");
 }
 
 
-
-// ============================================================
-// OPEN ADD USER
-// ============================================================
+/* =========================================================
+   ADD USER
+========================================================= */
 
 function openAddUserModal(){
 
   editingUser = false;
 
+  document.getElementById("userModalTitle")
+    .textContent = "Add User";
 
-  document.getElementById(
-    "userFormTitle"
-  ).textContent =
-    "Add User";
+  document.getElementById("originalUsername")
+    .value = "";
 
+  document.getElementById("userUsername")
+    .value = "";
 
-  document.getElementById(
-    "originalUsername"
-  ).value = "";
+  document.getElementById("userName")
+    .value = "";
 
+  document.getElementById("userPassword")
+    .value = "";
 
-  document.getElementById(
-    "userUsername"
-  ).value = "";
+  document.getElementById("userRole")
+    .value = "guest";
 
+  document.getElementById("userStatus")
+    .value = "Active";
 
-  document.getElementById(
-    "userName"
-  ).value = "";
+  document
+    .getElementById("userModal")
+    .classList.add("show");
 
-
-  document.getElementById(
-    "userPassword"
-  ).value = "";
-
-
-  document.getElementById(
-    "userRole"
-  ).value = "guest";
-
-
-  document.getElementById(
-    "userStatus"
-  ).value = "Active";
-
-
-  openModal(
-    "userFormModal"
-  );
 }
 
 
-
-// ============================================================
-// EDIT USER
-// ============================================================
+/* =========================================================
+   EDIT USER
+========================================================= */
 
 function editUser(user){
 
   editingUser = true;
 
-
-  document.getElementById(
-    "userFormTitle"
-  ).textContent =
-    "Edit User";
+  document.getElementById("userModalTitle")
+    .textContent = "Edit User";
 
 
-  document.getElementById(
-    "originalUsername"
-  ).value =
-    user.username || "";
+  const username =
+    user.username ||
+    user.Username ||
+    "";
 
 
-  document.getElementById(
-    "userUsername"
-  ).value =
-    user.username || "";
+  document.getElementById("originalUsername")
+    .value = username;
 
 
-  document.getElementById(
-    "userName"
-  ).value =
-    user.name || "";
+  document.getElementById("userUsername")
+    .value = username;
 
 
-  document.getElementById(
-    "userPassword"
-  ).value = "";
+  document.getElementById("userName")
+    .value =
+      user.name ||
+      user.Name ||
+      "";
 
 
-  document.getElementById(
-    "userRole"
-  ).value =
-    user.role || "guest";
+  document.getElementById("userPassword")
+    .value = "";
 
 
-  document.getElementById(
-    "userStatus"
-  ).value =
-    String(
-      user.status || "Active"
-    ).toLowerCase() ===
-    "block"
-      ? "Block"
-      : "Active";
+  document.getElementById("userRole")
+    .value =
+      user.role ||
+      user.Role ||
+      "guest";
 
 
-  openModal(
-    "userFormModal"
-  );
+  document.getElementById("userStatus")
+    .value =
+      user.status ||
+      user.Status ||
+      "Active";
+
+
+  document
+    .getElementById("userModal")
+    .classList.add("show");
+
 }
 
 
-
-// ============================================================
-// SAVE USER
-// ============================================================
+/* =========================================================
+   SAVE USER
+========================================================= */
 
 async function saveUser(){
 
   const username =
-    document.getElementById(
-      "userUsername"
-    ).value.trim();
+    document.getElementById("userUsername")
+    .value.trim();
 
 
   const name =
-    document.getElementById(
-      "userName"
-    ).value.trim();
+    document.getElementById("userName")
+    .value.trim();
 
 
   const password =
-    document.getElementById(
-      "userPassword"
-    ).value;
+    document.getElementById("userPassword")
+    .value;
 
 
   const role =
-    document.getElementById(
-      "userRole"
-    ).value;
+    document.getElementById("userRole")
+    .value;
 
 
   const status =
-    document.getElementById(
-      "userStatus"
-    ).value;
+    document.getElementById("userStatus")
+    .value;
 
 
   const originalUsername =
-    document.getElementById(
-      "originalUsername"
-    ).value;
+    document.getElementById("originalUsername")
+    .value;
 
 
   if(!username){
 
-    showToast(
-      "Username is required.",
-      "error"
-    );
+    showToast("Username is required");
 
     return;
+
   }
 
 
   if(!name){
 
-    showToast(
-      "Name is required.",
-      "error"
-    );
+    showToast("Name is required");
 
     return;
+
   }
 
 
-  if(
-    !editingUser &&
-    !password
-  ){
+  if(!editingUser && !password){
 
-    showToast(
-      "Password is required.",
-      "error"
-    );
+    showToast("Password is required");
 
     return;
+
   }
 
 
   showLoader(
     editingUser
       ? "Updating user..."
-      : "Adding user..."
+      : "Creating user..."
   );
 
 
@@ -2579,54 +2644,32 @@ async function saveUser(){
           ? "editUser"
           : "addUser",
 
+      username:username,
+
+      name:name,
+
+      password:password,
+
+      role:role,
+
+      status:status,
+
+      originalUsername:
+        originalUsername,
+
       requester:
-        currentUsername,
-
-      username:
-        username,
-
-      name:
-        name,
-
-      role:
-        role,
-
-      status:
-        status
+        currentUsername
 
     };
 
 
-    if(editingUser){
-
-      payload.originalUsername =
-        originalUsername;
-
-
-      if(password){
-
-        payload.password =
-          password;
+    const response = await fetch(
+      USER_API_URL,
+      {
+        method:"POST",
+        body:JSON.stringify(payload)
       }
-
-    }else{
-
-      payload.password =
-        password;
-    }
-
-
-    const response =
-      await fetch(
-        USER_API_URL,
-        {
-          method:"POST",
-
-          body:JSON.stringify(
-            payload
-          )
-        }
-      );
+    );
 
 
     const result =
@@ -2637,34 +2680,24 @@ async function saveUser(){
 
       throw new Error(
         result.message ||
-        "Operation failed."
+        "Failed"
       );
+
     }
 
 
-    closeModal(
-      "userFormModal"
-    );
-
+    closeModal("userModal");
 
     showToast(
-      result.message ||
-      "User saved successfully.",
-      "success"
+      editingUser
+        ? "User updated successfully"
+        : "User created successfully"
     );
 
 
     loadUsers();
 
-
-    if(
-      editingUser &&
-      originalUsername.toLowerCase() ===
-      currentUsername.toLowerCase()
-    ){
-
-      loadUser();
-    }
+    loadUser();
 
 
   }catch(error){
@@ -2673,23 +2706,21 @@ async function saveUser(){
 
     showToast(
       error.message ||
-      "Unable to save user.",
-      "error"
+      "Operation failed"
     );
-
 
   }finally{
 
     hideLoader();
 
   }
+
 }
 
 
-
-// ============================================================
-// BLOCK / UNBLOCK USER
-// ============================================================
+/* =========================================================
+   CHANGE USER STATUS
+========================================================= */
 
 async function changeUserStatus(
   username,
@@ -2697,78 +2728,58 @@ async function changeUserStatus(
 ){
 
   if(
-    !username ||
-    !status
-  ){
-
-    return;
-  }
-
-
-  if(
     username.toLowerCase() ===
     currentUsername.toLowerCase()
   ){
 
     showToast(
-      "You cannot change your own account status.",
-      "error"
+      "You cannot change your own status"
     );
 
     return;
+
   }
-
-
-  const actionText =
-    status === "Block"
-      ? "block"
-      : "unblock";
 
 
   if(
     !confirm(
-      "Are you sure you want to " +
-      actionText +
-      " this user?"
+      "Change " +
+      username +
+      " status to " +
+      status +
+      "?"
     )
   ){
 
     return;
+
   }
 
 
-  showLoader(
-    status === "Block"
-      ? "Blocking user..."
-      : "Unblocking user..."
-  );
+  showLoader("Updating status...");
 
 
   try{
 
-    const response =
-      await fetch(
-        USER_API_URL,
-        {
-          method:"POST",
+    const response = await fetch(
+      USER_API_URL,
+      {
+        method:"POST",
 
-          body:JSON.stringify({
+        body:JSON.stringify({
 
-            action:
-              "toggleUserStatus",
+          action:"toggleUserStatus",
 
-            requester:
-              currentUsername,
+          username:username,
 
-            username:
-              username,
+          status:status,
 
-            status:
-              status
+          requester:currentUsername
 
-          })
-        }
-      );
+        })
+
+      }
+    );
 
 
     const result =
@@ -2779,15 +2790,14 @@ async function changeUserStatus(
 
       throw new Error(
         result.message ||
-        "Status change failed."
+        "Failed"
       );
+
     }
 
 
     showToast(
-      result.message ||
-      "Status changed successfully.",
-      "success"
+      "User status updated"
     );
 
 
@@ -2800,132 +2810,105 @@ async function changeUserStatus(
 
     showToast(
       error.message ||
-      "Unable to change user status.",
-      "error"
+      "Failed to update status"
     );
-
 
   }finally{
 
     hideLoader();
 
   }
+
 }
 
 
+/* =========================================================
+   CHANGE PASSWORD
+========================================================= */
 
-// ============================================================
-// CHANGE PASSWORD MODAL
-// ============================================================
+function openChangePasswordModal(){
 
-function openPasswordModal(){
+  document.getElementById("currentPassword").value = "";
 
-  closeProfileMenu();
+  document.getElementById("newPassword").value = "";
 
+  document.getElementById("confirmPassword").value = "";
 
-  document.getElementById(
-    "currentPassword"
-  ).value = "";
+  document
+    .getElementById("passwordModal")
+    .classList.add("show");
 
-
-  document.getElementById(
-    "newPassword"
-  ).value = "";
-
-
-  openModal(
-    "passwordModal"
-  );
 }
 
-
-
-// ============================================================
-// CHANGE PASSWORD
-// ============================================================
 
 async function changePassword(){
 
   const currentPassword =
-    document.getElementById(
-      "currentPassword"
-    ).value;
+    document.getElementById("currentPassword")
+    .value;
 
 
   const newPassword =
-    document.getElementById(
-      "newPassword"
-    ).value;
+    document.getElementById("newPassword")
+    .value;
+
+
+  const confirmPassword =
+    document.getElementById("confirmPassword")
+    .value;
 
 
   if(!currentPassword){
 
-    showToast(
-      "Current password is required.",
-      "error"
-    );
+    showToast("Enter current password");
 
     return;
+
   }
 
 
   if(!newPassword){
 
-    showToast(
-      "New password is required.",
-      "error"
-    );
+    showToast("Enter new password");
 
     return;
+
   }
 
 
-  if(
-    newPassword.length < 4
-  ){
+  if(newPassword !== confirmPassword){
 
-    showToast(
-      "New password must be at least 4 characters.",
-      "error"
-    );
+    showToast("Passwords do not match");
 
     return;
+
   }
 
 
-  showLoader(
-    "Changing password..."
-  );
+  showLoader("Changing password...");
 
 
   try{
 
-    const response =
-      await fetch(
-        USER_API_URL,
-        {
-          method:"POST",
+    const response = await fetch(
+      USER_API_URL,
+      {
+        method:"POST",
 
-          body:JSON.stringify({
+        body:JSON.stringify({
 
-            action:
-              "changePassword",
+          action:"changePassword",
 
-            requester:
-              currentUsername,
+          username:currentUsername,
 
-            username:
-              currentUsername,
+          currentPassword:currentPassword,
 
-            currentPassword:
-              currentPassword,
+          newPassword:newPassword
 
-            newPassword:
-              newPassword
+        })
 
-          })
-        }
-      );
+      }
+    );
 
 
     const result =
@@ -2936,19 +2919,16 @@ async function changePassword(){
 
       throw new Error(
         result.message ||
-        "Password change failed."
+        "Failed"
       );
+
     }
 
 
-    closeModal(
-      "passwordModal"
-    );
-
+    closeModal("passwordModal");
 
     showToast(
-      "Password changed successfully.",
-      "success"
+      "Password changed successfully"
     );
 
 
@@ -2958,417 +2938,338 @@ async function changePassword(){
 
     showToast(
       error.message ||
-      "Unable to change password.",
-      "error"
+      "Failed to change password"
     );
-
 
   }finally{
 
     hideLoader();
 
   }
+
 }
 
 
+/* =========================================================
+   MODAL
+========================================================= */
 
-// ============================================================
-// THEME
-// ============================================================
+function closeModal(id){
 
-function loadTheme(){
+  document
+    .getElementById(id)
+    .classList.remove("show");
 
-  const theme =
-    localStorage.getItem(
-      "dashboardTheme"
-    );
-
-
-  if(theme === "dark"){
-
-    document.body.classList.add(
-      "dark"
-    );
-
-    document.getElementById(
-      "themeBtn"
-    ).textContent =
-      "☀️";
-
-  }else{
-
-    document.getElementById(
-      "themeBtn"
-    ).textContent =
-      "🌙";
-  }
 }
 
 
-
-function toggleTheme(){
-
-  document.body.classList.toggle(
-    "dark"
-  );
-
-
-  const dark =
-    document.body.classList.contains(
-      "dark"
-    );
-
-
-  localStorage.setItem(
-    "dashboardTheme",
-    dark
-      ? "dark"
-      : "light"
-  );
-
-
-  document.getElementById(
-    "themeBtn"
-  ).textContent =
-    dark
-      ? "☀️"
-      : "🌙";
-}
-
-
-
-// ============================================================
-// PROFILE MENU
-// ============================================================
-
-function toggleProfileMenu(){
-
-  document.getElementById(
-    "profileMenu"
-  ).classList.toggle(
-    "show"
-  );
-}
-
-
-
-function closeProfileMenu(){
-
-  document.getElementById(
-    "profileMenu"
-  ).classList.remove(
-    "show"
-  );
-}
-
-
+/* Close modal by clicking outside */
 
 document.addEventListener(
   "click",
-  function(event){
+  function(e){
 
-    const profile =
-      document.querySelector(
-        ".profile"
-      );
+    if(e.target.classList.contains("modal")){
 
+      e.target.classList.remove("show");
 
-    if(
-      profile &&
-      !profile.contains(
-        event.target
-      )
-    ){
-
-      closeProfileMenu();
     }
 
   }
 );
 
 
+/* =========================================================
+   PROFILE MENU
+========================================================= */
 
-// ============================================================
-// MODAL
-// ============================================================
-
-function openModal(id){
+function toggleProfileMenu(){
 
   document
-    .getElementById(id)
-    .classList.add(
-      "show"
-    );
+    .getElementById("profileMenu")
+    .classList.toggle("show");
+
 }
 
 
+document.addEventListener(
+  "click",
+  function(e){
 
-function closeModal(id){
+    const profile =
+      document.querySelector(".profile");
 
-  document
-    .getElementById(id)
-    .classList.remove(
-      "show"
-    );
+
+    if(
+      profile &&
+      !profile.contains(e.target)
+    ){
+
+      document
+        .getElementById("profileMenu")
+        .classList.remove("show");
+
+    }
+
+  }
+);
+
+
+/* =========================================================
+   THEME
+========================================================= */
+
+function toggleTheme(){
+
+  document.body.classList.toggle("dark");
+
+  const dark =
+    document.body.classList.contains("dark");
+
+  localStorage.setItem(
+    "theme",
+    dark ? "dark" : "light"
+  );
+
 }
 
 
+function loadTheme(){
 
-// ============================================================
-// LOADER
-// ============================================================
+  if(
+    localStorage.getItem("theme") === "dark"
+  ){
+
+    document.body.classList.add("dark");
+
+  }
+
+}
+
+
+/* =========================================================
+   LOADER
+========================================================= */
 
 function showLoader(text){
 
-  document.getElementById(
-    "loaderText"
-  ).textContent =
-    text || "Loading...";
+  document.getElementById("loaderText")
+    .textContent =
+      text || "Loading...";
 
 
-  document.getElementById(
-    "loader"
-  ).classList.add(
-    "show"
-  );
+  document
+    .getElementById("loader")
+    .classList.add("show");
+
 }
-
 
 
 function hideLoader(){
 
-  document.getElementById(
-    "loader"
-  ).classList.remove(
-    "show"
-  );
+  document
+    .getElementById("loader")
+    .classList.remove("show");
+
 }
 
 
-
-// ============================================================
-// TOAST
-// ============================================================
+/* =========================================================
+   TOAST
+========================================================= */
 
 let toastTimer;
 
 
-function showToast(
-  message,
-  type="success"
-){
+function showToast(message){
 
   const toast =
-    document.getElementById(
-      "toast"
-    );
+    document.getElementById("toast");
 
 
-  toast.textContent =
-    message;
+  toast.textContent = message;
+
+  toast.classList.add("show");
 
 
-  toast.className =
-    "toast show " +
-    type;
-
-
-  clearTimeout(
-    toastTimer
-  );
+  clearTimeout(toastTimer);
 
 
   toastTimer =
     setTimeout(
       function(){
 
-        toast.classList.remove(
-          "show"
-        );
+        toast.classList.remove("show");
 
       },
       3000
     );
+
 }
 
 
+/* =========================================================
+   DATE
+========================================================= */
 
-// ============================================================
-// DATE FORMAT
-// ============================================================
+function getTodayDate(){
 
-function formatDate(value){
+  const d = new Date();
 
-  if(!value){
-
-    return "";
-  }
-
-
-  const date =
-    new Date(value);
+  const year =
+    d.getFullYear();
 
 
-  if(
-    isNaN(
-      date.getTime()
-    )
-  ){
-
-    return String(value);
-  }
+  const month =
+    String(
+      d.getMonth() + 1
+    ).padStart(2,"0");
 
 
-  return date.toLocaleString(
-    "en-GB",
-    {
-      day:"2-digit",
-      month:"short",
-      year:"numeric",
-      hour:"2-digit",
-      minute:"2-digit"
-    }
-  );
+  const day =
+    String(
+      d.getDate()
+    ).padStart(2,"0");
+
+
+  return `${year}-${month}-${day}`;
+
 }
-
 
 
 function normalizeDate(value){
 
-  if(!value){
-
-    return "";
-  }
-
-
-  const date =
-    new Date(value);
+  if(!value) return "";
 
 
   if(
-    isNaN(
-      date.getTime()
-    )
+    typeof value === "string" &&
+    /^\d{4}-\d{2}-\d{2}$/.test(value)
   ){
 
-    return "";
+    return value;
+
   }
 
 
-  const y =
-    date.getFullYear();
-
-
-  const m =
-    String(
-      date.getMonth() + 1
-    ).padStart(2,"0");
-
-
   const d =
+    new Date(value);
+
+
+  if(isNaN(d.getTime())){
+
+    return "";
+
+  }
+
+
+  return [
+    d.getFullYear(),
+
     String(
-      date.getDate()
-    ).padStart(2,"0");
+      d.getMonth() + 1
+    ).padStart(2,"0"),
+
+    String(
+      d.getDate()
+    ).padStart(2,"0")
+
+  ].join("-");
+
+}
+
+
+function formatDate(value){
+
+  if(!value) return "";
+
+
+  const normalized =
+    normalizeDate(value);
+
+
+  if(!normalized){
+
+    return escapeHtml(value);
+
+  }
+
+
+  const parts =
+    normalized.split("-");
 
 
   return (
-    y +
-    "-" +
-    m +
-    "-" +
-    d
+    parts[2] +
+    "/" +
+    parts[1] +
+    "/" +
+    parts[0]
   );
+
 }
 
 
-
-// ============================================================
-// ESCAPE HTML
-// ============================================================
+/* =========================================================
+   ESCAPE HTML
+========================================================= */
 
 function escapeHtml(value){
 
-  return String(
-    value ?? ""
-  )
-  .replace(
-    /&/g,
-    "&amp;"
-  )
-  .replace(
-    /</g,
-    "&lt;"
-  )
-  .replace(
-    />/g,
-    "&gt;"
-  )
-  .replace(
-    /"/g,
-    "&quot;"
-  )
-  .replace(
-    /'/g,
-    "&#039;"
-  );
+  return String(value ?? "")
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
+
 }
 
 
+function escapeJs(value){
 
-// ============================================================
-// LOGOUT
-// ============================================================
+  return String(value ?? "")
+    .replace(/\\/g,"\\\\")
+    .replace(/'/g,"\\'")
+    .replace(/"/g,'\\"')
+    .replace(/\n/g,"\\n")
+    .replace(/\r/g,"\\r");
+
+}
+
+
+/* =========================================================
+   LOGOUT
+========================================================= */
 
 function logout(){
 
-  const keys = [
+  localStorage.removeItem("dashboardAuth");
+  localStorage.removeItem("username");
+  localStorage.removeItem("name");
+  localStorage.removeItem("role");
+  localStorage.removeItem("status");
+  localStorage.removeItem("userData");
+  localStorage.removeItem("loginData");
+  localStorage.removeItem("loggedUser");
+  localStorage.removeItem("currentUser");
+  localStorage.removeItem("userInfo");
 
-    "dashboardAuth",
-    "username",
-    "name",
-    "role",
-    "status",
-    "userData",
-    "loginData",
-    "loggedUser",
-    "currentUser",
-    "userInfo"
+  sessionStorage.removeItem("dashboardAuth");
 
-  ];
+  window.location.href =
+    "index.html";
 
-
-  keys.forEach(
-    function(key){
-
-      localStorage.removeItem(
-        key
-      );
-
-      sessionStorage.removeItem(
-        key
-      );
-
-    }
-  );
-
-
-  sessionStorage.clear();
-
-
-  window.location.replace(
-    "index.html"
-  );
 }
 
 
-
-// ============================================================
-// BACK BUTTON PROTECTION
-// ============================================================
+/* =========================================================
+   BACK BUTTON PROTECTION
+========================================================= */
 
 history.pushState(
   null,
-  "",
+  null,
   location.href
 );
 
@@ -3379,18 +3280,13 @@ window.addEventListener(
 
     history.pushState(
       null,
-      "",
+      null,
       location.href
     );
 
   }
 );
 
-
-
-// ============================================================
-// PREVENT CACHE
-// ============================================================
 
 window.addEventListener(
   "pageshow",
@@ -3401,9 +3297,7 @@ window.addEventListener(
   }
 );
 
-
 </script>
 
 </body>
-
 </html>
