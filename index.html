@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -272,11 +273,11 @@ button:hover{
       placeholder="Enter your password"
     >
 
-    <span class="forgot">
+    <span class="forgot" onclick="forgotPassword()">
       Forgot Password?
     </span>
 
-    <button onclick="login()">
+    <button id="loginButton" onclick="login()">
       Login to Dashboard
     </button>
 
@@ -296,23 +297,213 @@ button:hover{
 
 <script>
 
-function login(){
+/* YOUR APPS SCRIPT URL */
 
-  let username =
-    document.getElementById("username").value;
+const API_URL =
+"https://script.google.com/macros/s/AKfycbw00GHHheuvtdQtgPURjs4PtsM48-4yaFx-_ms0ZBV5FHhnmcdbJ5DHr3Aix8JPF0kQzA/exec";
 
-  let password =
+
+/* LOGIN */
+
+async function login(){
+
+  const username =
+    document.getElementById("username").value.trim();
+
+  const password =
     document.getElementById("password").value;
 
-  if(username=="admin" && password=="1234"){
+  const button =
+    document.getElementById("loginButton");
 
-    window.location.href="ad.html";
 
-  }else{
+  if(!username){
+    alert("Please enter your username.");
+    return;
+  }
 
-    alert("Wrong username or password");
+  if(!password){
+    alert("Please enter your password.");
+    return;
+  }
+
+
+  button.disabled = true;
+  button.innerText = "Checking...";
+
+
+  try{
+
+    const url =
+      API_URL +
+      "?action=login" +
+      "&username=" +
+      encodeURIComponent(username) +
+      "&password=" +
+      encodeURIComponent(password);
+
+
+    const response =
+      await fetch(url, {
+        method:"GET",
+        cache:"no-store"
+      });
+
+
+    const result =
+      await response.json();
+
+
+    if(result.success){
+
+      /* Save login information */
+
+      localStorage.setItem(
+        "dashboardAuth",
+        "true"
+      );
+
+      sessionStorage.setItem(
+        "dashboardAuth",
+        "true"
+      );
+
+      localStorage.setItem(
+        "username",
+        result.user.username
+      );
+
+      localStorage.setItem(
+        "userData",
+        JSON.stringify(result.user)
+      );
+
+      localStorage.setItem(
+        "loginData",
+        JSON.stringify(result.user)
+      );
+
+      localStorage.setItem(
+        "loggedUser",
+        result.user.username
+      );
+
+      localStorage.setItem(
+        "currentUser",
+        result.user.username
+      );
+
+      localStorage.setItem(
+        "userInfo",
+        JSON.stringify(result.user)
+      );
+
+
+      /* Role based page */
+
+      const role =
+        String(result.user.role || "")
+        .trim()
+        .toLowerCase();
+
+
+      let page = "2S.html";
+
+
+      if(role === "admin"){
+        page = "ad.html";
+      }
+
+      else if(role === "manager"){
+        page = "ad.html";
+      }
+
+      else if(role === "support"){
+        page = "2S.html";
+      }
+
+      else if(role === "call"){
+        page = "2S.html";
+      }
+
+      else if(role === "guest"){
+        page = "2S.html";
+      }
+
+
+      button.innerText = "Login Successful";
+
+
+      setTimeout(function(){
+
+        window.location.replace(page);
+
+      },500);
+
+
+    }
+
+    else{
+
+      alert(
+        result.message ||
+        "Wrong username or password."
+      );
+
+      button.disabled = false;
+      button.innerText = "Login to Dashboard";
+
+    }
 
   }
+
+  catch(error){
+
+    console.error(error);
+
+    alert(
+      "Unable to connect to the server. Please try again."
+    );
+
+    button.disabled = false;
+    button.innerText = "Login to Dashboard";
+
+  }
+
+}
+
+
+/* ENTER KEY */
+
+document
+.getElementById("password")
+.addEventListener("keydown",function(e){
+
+  if(e.key === "Enter"){
+    login();
+  }
+
+});
+
+
+document
+.getElementById("username")
+.addEventListener("keydown",function(e){
+
+  if(e.key === "Enter"){
+    login();
+  }
+
+});
+
+
+/* FORGOT PASSWORD */
+
+function forgotPassword(){
+
+  alert(
+    "Please contact your administrator to reset your password."
+  );
 
 }
 
