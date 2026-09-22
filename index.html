@@ -1,95 +1,870 @@
 <!DOCTYPE html>
-<html lang="bn">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login Page</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <style>
-        * {
-            box-sizing: border-box;
-        }
+<title>Login</title>
 
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
+<link
+  rel="icon"
+  type="image/png"
+  href="https://cdn-icons-png.flaticon.com/128/17163/17163834.png"
+>
 
-        .login-box {
-            width: 350px;
-            background: white;
-            padding: 35px;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-        }
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, Helvetica, sans-serif;
+}
 
-        h2 {
-            text-align: center;
-            margin-bottom: 25px;
-            color: #333;
-        }
+body{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    overflow:hidden;
 
-        input {
-            width: 100%;
-            padding: 12px;
-            margin: 10px 0;
-            border: 1px solid #ccc;
-            border-radius: 8px;
-            font-size: 15px;
-        }
+    background:
+        radial-gradient(circle at 15% 20%, rgba(255,255,255,.18), transparent 25%),
+        radial-gradient(circle at 85% 80%, rgba(255,255,255,.12), transparent 25%),
+        linear-gradient(135deg,#0f172a,#1d4ed8,#2563eb);
+}
 
-        button {
-            width: 100%;
-            padding: 12px;
-            margin-top: 15px;
-            border: none;
-            border-radius: 8px;
-            background: #667eea;
-            color: white;
-            font-size: 16px;
-            cursor: pointer;
-        }
+/* Background circles */
 
-        button:hover {
-            background: #5568d9;
-        }
+.circle{
+    position:absolute;
+    border-radius:50%;
+    background:rgba(255,255,255,.08);
+    backdrop-filter:blur(5px);
+}
 
-        .signup {
-            text-align: center;
-            margin-top: 20px;
-            font-size: 14px;
-        }
+.circle.one{
+    width:280px;
+    height:280px;
+    top:-100px;
+    left:-80px;
+}
 
-        .signup a {
-            color: #667eea;
-            text-decoration: none;
-        }
-    </style>
+.circle.two{
+    width:350px;
+    height:350px;
+    right:-130px;
+    bottom:-140px;
+}
+
+.circle.three{
+    width:120px;
+    height:120px;
+    right:20%;
+    top:12%;
+}
+
+/* Login Box */
+
+.login-container{
+    position:relative;
+    width:410px;
+    max-width:92%;
+    padding:38px 34px;
+
+    background:rgba(255,255,255,.13);
+    border:1px solid rgba(255,255,255,.25);
+    border-radius:24px;
+
+    backdrop-filter:blur(22px);
+    -webkit-backdrop-filter:blur(22px);
+
+    box-shadow:
+        0 25px 70px rgba(0,0,0,.35);
+
+    color:white;
+}
+
+/* Logo */
+
+.logo{
+    width:78px;
+    height:78px;
+    margin:0 auto 18px;
+
+    border-radius:22px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    background:rgba(255,255,255,.18);
+    border:1px solid rgba(255,255,255,.3);
+
+    font-size:38px;
+
+    box-shadow:
+        0 10px 30px rgba(0,0,0,.18);
+}
+
+h1{
+    text-align:center;
+    font-size:30px;
+    margin-bottom:8px;
+}
+
+.subtitle{
+    text-align:center;
+    color:rgba(255,255,255,.75);
+    font-size:14px;
+    margin-bottom:28px;
+}
+
+/* Input */
+
+.input-group{
+    margin-bottom:18px;
+}
+
+.input-group label{
+    display:block;
+    font-size:13px;
+    margin-bottom:8px;
+    color:rgba(255,255,255,.85);
+}
+
+.input-box{
+    position:relative;
+}
+
+.input-box input{
+    width:100%;
+    height:52px;
+
+    padding:0 48px 0 45px;
+
+    border:none;
+    outline:none;
+
+    border-radius:14px;
+
+    background:rgba(255,255,255,.13);
+    border:1px solid rgba(255,255,255,.18);
+
+    color:white;
+    font-size:15px;
+
+    transition:.25s;
+}
+
+.input-box input::placeholder{
+    color:rgba(255,255,255,.48);
+}
+
+.input-box input:focus{
+    background:rgba(255,255,255,.18);
+    border-color:rgba(255,255,255,.55);
+
+    box-shadow:
+        0 0 0 3px rgba(255,255,255,.08);
+}
+
+/* Input Icon */
+
+.input-icon{
+    position:absolute;
+    left:15px;
+    top:50%;
+    transform:translateY(-50%);
+
+    font-size:18px;
+    opacity:.8;
+}
+
+/* Password Eye */
+
+.password-eye{
+    position:absolute;
+    right:15px;
+    top:50%;
+    transform:translateY(-50%);
+
+    cursor:pointer;
+    font-size:18px;
+
+    opacity:.7;
+}
+
+.password-eye:hover{
+    opacity:1;
+}
+
+/* Options */
+
+.options{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    margin:4px 0 22px;
+
+    font-size:13px;
+}
+
+.remember{
+    display:flex;
+    align-items:center;
+    gap:7px;
+    color:rgba(255,255,255,.78);
+}
+
+.remember input{
+    width:15px;
+    height:15px;
+    accent-color:#60a5fa;
+}
+
+.forgot{
+    color:white;
+    cursor:pointer;
+    text-decoration:none;
+}
+
+.forgot:hover{
+    text-decoration:underline;
+}
+
+/* Login Button */
+
+.login-btn{
+    width:100%;
+    height:53px;
+
+    border:none;
+    border-radius:14px;
+
+    background:white;
+    color:#1d4ed8;
+
+    font-size:16px;
+    font-weight:bold;
+
+    cursor:pointer;
+
+    transition:.25s;
+
+    box-shadow:
+        0 10px 25px rgba(0,0,0,.18);
+}
+
+.login-btn:hover{
+    transform:translateY(-2px);
+
+    box-shadow:
+        0 15px 30px rgba(0,0,0,.25);
+}
+
+.login-btn:active{
+    transform:scale(.98);
+}
+
+.login-btn:disabled{
+    opacity:.7;
+    cursor:not-allowed;
+    transform:none;
+}
+
+/* Loader */
+
+.loader{
+    display:none;
+    width:19px;
+    height:19px;
+
+    border:3px solid rgba(29,78,216,.25);
+    border-top-color:#1d4ed8;
+
+    border-radius:50%;
+
+    animation:spin .7s linear infinite;
+
+    margin:auto;
+}
+
+@keyframes spin{
+    to{
+        transform:rotate(360deg);
+    }
+}
+
+/* Message */
+
+.message{
+    min-height:20px;
+    margin-top:16px;
+
+    text-align:center;
+
+    font-size:13px;
+    color:#fecaca;
+}
+
+/* Footer */
+
+.footer{
+    text-align:center;
+
+    margin-top:25px;
+
+    color:rgba(255,255,255,.5);
+
+    font-size:12px;
+}
+
+/* Mobile */
+
+@media(max-width:480px){
+
+    .login-container{
+        padding:32px 23px;
+        border-radius:20px;
+    }
+
+    h1{
+        font-size:27px;
+    }
+
+    .logo{
+        width:70px;
+        height:70px;
+        font-size:33px;
+    }
+
+    .circle.one{
+        width:200px;
+        height:200px;
+    }
+
+    .circle.two{
+        width:240px;
+        height:240px;
+    }
+}
+</style>
 </head>
 
 <body>
 
-    <div class="login-box">
-        <h2>Login</h2>
+<div class="circle one"></div>
+<div class="circle two"></div>
+<div class="circle three"></div>
 
-        <form>
-            <input type="email" placeholder="Email" required>
+<div class="login-container">
 
-            <input type="password" placeholder="Password" required>
-
-            <button type="submit">Login</button>
-        </form>
-
-        <div class="signup">
-            Don't have an account?
-            <a href="#">Sign Up</a>
-        </div>
+    <div class="logo">
+        🔐
     </div>
+
+    <h1>Welcome Back</h1>
+
+    <div class="subtitle">
+        Sign in to continue to your dashboard
+    </div>
+
+    <form id="loginForm">
+
+        <!-- Username -->
+
+        <div class="input-group">
+
+            <label>Username</label>
+
+            <div class="input-box">
+
+                <span class="input-icon">👤</span>
+
+                <input
+                    type="text"
+                    id="username"
+                    placeholder="Enter username"
+                    autocomplete="username"
+                    required
+                >
+
+            </div>
+
+        </div>
+
+
+        <!-- Password -->
+
+        <div class="input-group">
+
+            <label>Password</label>
+
+            <div class="input-box">
+
+                <span class="input-icon">🔒</span>
+
+                <input
+                    type="password"
+                    id="password"
+                    placeholder="Enter password"
+                    autocomplete="current-password"
+                    required
+                >
+
+                <span
+                    class="password-eye"
+                    id="togglePassword"
+                    onclick="togglePassword()"
+                >👁️</span>
+
+            </div>
+
+        </div>
+
+
+        <!-- Options -->
+
+        <div class="options">
+
+            <label class="remember">
+
+                <input
+                    type="checkbox"
+                    id="rememberMe"
+                >
+
+                Remember me
+
+            </label>
+
+            <a
+                class="forgot"
+                href="javascript:void(0)"
+                onclick="forgotPassword()"
+            >
+                Forgot Password?
+            </a>
+
+        </div>
+
+
+        <!-- Login Button -->
+
+        <button
+            type="submit"
+            class="login-btn"
+            id="loginBtn"
+        >
+
+            <span id="loginText">
+                Login
+            </span>
+
+            <span
+                class="loader"
+                id="loader"
+            ></span>
+
+        </button>
+
+        <div
+            class="message"
+            id="message"
+        ></div>
+
+    </form>
+
+    <div class="footer">
+        © 2026 Your Dashboard
+    </div>
+
+</div>
+
+
+<script>
+
+/* =========================================================
+   GOOGLE APPS SCRIPT API
+   ========================================================= */
+
+const API_URL =
+"https://script.google.com/macros/s/YOUR_API_URL/exec";
+
+
+/* =========================================================
+   SHOW / HIDE PASSWORD
+   ========================================================= */
+
+function togglePassword(){
+
+    const password =
+        document.getElementById("password");
+
+    const eye =
+        document.getElementById("togglePassword");
+
+    if(password.type === "password"){
+
+        password.type = "text";
+        eye.textContent = "🙈";
+
+    }else{
+
+        password.type = "password";
+        eye.textContent = "👁️";
+
+    }
+
+}
+
+
+/* =========================================================
+   FORGOT PASSWORD
+   ========================================================= */
+
+function forgotPassword(){
+
+    showMessage(
+        "Please contact your administrator to reset your password.",
+        false
+    );
+
+}
+
+
+/* =========================================================
+   MESSAGE
+   ========================================================= */
+
+function showMessage(text, success = false){
+
+    const message =
+        document.getElementById("message");
+
+    message.textContent = text;
+
+    message.style.color =
+        success
+        ? "#bbf7d0"
+        : "#fecaca";
+
+}
+
+
+/* =========================================================
+   LOGIN
+   ========================================================= */
+
+document
+.getElementById("loginForm")
+.addEventListener("submit", async function(e){
+
+    e.preventDefault();
+
+    const username =
+        document
+        .getElementById("username")
+        .value
+        .trim();
+
+    const password =
+        document
+        .getElementById("password")
+        .value;
+
+    const rememberMe =
+        document
+        .getElementById("rememberMe")
+        .checked;
+
+    const loginBtn =
+        document.getElementById("loginBtn");
+
+    const loginText =
+        document.getElementById("loginText");
+
+    const loader =
+        document.getElementById("loader");
+
+
+    if(!username || !password){
+
+        showMessage(
+            "Please enter username and password."
+        );
+
+        return;
+    }
+
+
+    /* Loading */
+
+    loginBtn.disabled = true;
+
+    loginText.style.display = "none";
+
+    loader.style.display = "block";
+
+    showMessage("");
+
+
+    try{
+
+        /*
+         * Your Apps Script should return:
+         *
+         * {
+         *   success:true,
+         *   user:{
+         *      username:"",
+         *      password:"",
+         *      name:"",
+         *      role:"",
+         *      status:"Active"
+         *   }
+         * }
+         */
+
+        const response =
+            await fetch(
+                API_URL +
+                "?action=login" +
+                "&username=" +
+                encodeURIComponent(username) +
+                "&password=" +
+                encodeURIComponent(password) +
+                "&_=" +
+                Date.now()
+            );
+
+        const result =
+            await response.json();
+
+
+        if(result.success === true){
+
+            const user =
+                result.user || result.data || {};
+
+
+            /* Check account status */
+
+            if(
+                user.status &&
+                String(user.status)
+                .toLowerCase() !== "active"
+            ){
+
+                showMessage(
+                    "Your account is " +
+                    user.status +
+                    ". Please contact administrator."
+                );
+
+                return;
+            }
+
+
+            /* Save Login Session */
+
+            const userData = {
+
+                username:
+                    user.username || username,
+
+                password:
+                    user.password || password,
+
+                name:
+                    user.name || "",
+
+                role:
+                    user.role || "guest",
+
+                status:
+                    user.status || "Active"
+
+            };
+
+
+            localStorage.setItem(
+                "dashboardAuth",
+                "true"
+            );
+
+            localStorage.setItem(
+                "userData",
+                JSON.stringify(userData)
+            );
+
+            localStorage.setItem(
+                "username",
+                userData.username
+            );
+
+            localStorage.setItem(
+                "loggedUser",
+                userData.username
+            );
+
+            sessionStorage.setItem(
+                "dashboardAuth",
+                "true"
+            );
+
+
+            /* Remember Me */
+
+            if(rememberMe){
+
+                localStorage.setItem(
+                    "rememberLogin",
+                    "true"
+                );
+
+            }else{
+
+                localStorage.removeItem(
+                    "rememberLogin"
+                );
+
+            }
+
+
+            showMessage(
+                "Login successful. Redirecting...",
+                true
+            );
+
+
+            /* Role Routing */
+
+            const role =
+                String(userData.role)
+                .toLowerCase()
+                .trim();
+
+
+            let page = "dashboard.html";
+
+
+            if(role === "admin"){
+
+                page = "ad.html";
+
+            }
+            else if(role === "manager"){
+
+                page = "ad.html";
+
+            }
+            else if(role === "support"){
+
+                page = "2S.html";
+
+            }
+            else if(role === "call"){
+
+                page = "2S.html";
+
+            }
+            else if(role === "guest"){
+
+                page = "2S.html";
+
+            }
+
+
+            setTimeout(function(){
+
+                window.location.href = page;
+
+            }, 700);
+
+
+        }else{
+
+            showMessage(
+                result.message ||
+                "Invalid username or password."
+            );
+
+        }
+
+
+    }catch(error){
+
+        console.error(error);
+
+        showMessage(
+            "Unable to connect to server. Please try again."
+        );
+
+    }finally{
+
+        loginBtn.disabled = false;
+
+        loginText.style.display = "inline";
+
+        loader.style.display = "none";
+
+    }
+
+});
+
+
+/* =========================================================
+   REMEMBER LOGIN
+   ========================================================= */
+
+window.addEventListener("DOMContentLoaded", function(){
+
+    const savedUsername =
+        localStorage.getItem("username");
+
+    const remembered =
+        localStorage.getItem("rememberLogin");
+
+
+    if(
+        savedUsername &&
+        remembered === "true"
+    ){
+
+        document
+        .getElementById("username")
+        .value = savedUsername;
+
+        document
+        .getElementById("rememberMe")
+        .checked = true;
+
+    }
+
+});
+
+
+/* =========================================================
+   ENTER KEY
+   ========================================================= */
+
+document
+.getElementById("password")
+.addEventListener("keydown", function(e){
+
+    if(e.key === "Enter"){
+
+        document
+        .getElementById("loginForm")
+        .requestSubmit();
+
+    }
+
+});
+
+</script>
 
 </body>
 </html>
