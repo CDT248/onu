@@ -293,6 +293,7 @@ body.dark select{
 
 .table-wrap{
   overflow-x:auto;
+  position:relative;
 }
 
 table{
@@ -338,6 +339,28 @@ body.dark tbody tr:hover{
   text-align:center;
   padding:35px;
   color:#9ca3af;
+}
+
+.table-loading{
+  text-align:center;
+  padding:30px !important;
+  color:#64748b;
+}
+
+body.dark .table-loading{
+  color:#cbd5e1;
+}
+
+.small-spinner{
+  display:inline-block;
+  width:20px;
+  height:20px;
+  border:3px solid #dbeafe;
+  border-top-color:#2563eb;
+  border-radius:50%;
+  animation:spin .7s linear infinite;
+  vertical-align:middle;
+  margin-right:8px;
 }
 
 .row-actions{
@@ -467,54 +490,6 @@ body.dark .close{
   color:#dc2626;
 }
 
-/* LOADER */
-
-.loader{
-  display:none;
-  position:fixed;
-  inset:0;
-  background:rgba(255,255,255,.7);
-  z-index:5000;
-  align-items:center;
-  justify-content:center;
-}
-
-body.dark .loader{
-  background:rgba(0,0,0,.65);
-}
-
-.loader.show{
-  display:flex;
-}
-
-.loader-box{
-  background:white;
-  padding:25px 35px;
-  border-radius:15px;
-  box-shadow:0 10px 30px rgba(0,0,0,.2);
-  text-align:center;
-}
-
-body.dark .loader-box{
-  background:#1f2937;
-}
-
-.spinner{
-  width:35px;
-  height:35px;
-  border:4px solid #e5e7eb;
-  border-top-color:#2563eb;
-  border-radius:50%;
-  animation:spin .8s linear infinite;
-  margin:auto auto 12px;
-}
-
-@keyframes spin{
-  to{
-    transform:rotate(360deg);
-  }
-}
-
 /* TOAST */
 
 .toast{
@@ -536,6 +511,12 @@ body.dark .loader-box{
 .toast.show{
   transform:translateY(0);
   opacity:1;
+}
+
+@keyframes spin{
+  to{
+    transform:rotate(360deg);
+  }
 }
 
 /* MOBILE */
@@ -625,18 +606,26 @@ body.dark .loader-box{
 
     <div>
       <div class="header-title">Support Dashboard</div>
-      <div class="header-subtitle">Admin Management System</div>
+      <div class="header-subtitle">
+        Admin Management System
+      </div>
     </div>
 
   </div>
 
+
   <div class="header-right">
 
-    <button class="icon-btn" onclick="loadData()" title="Reload">
+    <button
+      class="icon-btn"
+      onclick="loadData()"
+      title="Reload"
+    >
       ↻
     </button>
 
-    <!-- USERS BUTTON - আগের মতোই রাখা হয়েছে -->
+
+    <!-- USERS - আগের মতো রাখা হয়েছে -->
 
     <button
       class="btn btn-primary"
@@ -645,12 +634,14 @@ body.dark .loader-box{
       Users
     </button>
 
+
     <button
       class="btn btn-success"
       onclick="openEntryModal()"
     >
       + New Entry
     </button>
+
 
     <button
       class="icon-btn"
@@ -659,6 +650,7 @@ body.dark .loader-box{
     >
       ☀
     </button>
+
 
     <div class="profile">
 
@@ -674,16 +666,20 @@ body.dark .loader-box{
         >
 
         <span id="profileName">User</span>
+
         ▾
 
       </button>
+
 
       <div
         class="profile-menu"
         id="profileMenu"
       >
 
-        <button onclick="openChangePasswordModal()">
+        <button
+          onclick="openChangePasswordModal()"
+        >
           🔑 Change Password
         </button>
 
@@ -704,9 +700,11 @@ body.dark .loader-box{
 
 <main class="container">
 
+
   <div class="page-header">
 
     <div>
+
       <div class="page-title">
         Support Data
       </div>
@@ -714,7 +712,9 @@ body.dark .loader-box{
       <div class="page-subtitle">
         Manage support entries
       </div>
+
     </div>
+
 
     <button
       class="btn btn-primary"
@@ -784,7 +784,7 @@ body.dark .loader-box{
   </div>
 
 
-  <!-- DATA TABLE -->
+  <!-- DATA -->
 
   <div class="card">
 
@@ -806,12 +806,22 @@ body.dark .loader-box{
 
         </thead>
 
+
         <tbody id="dataBody">
 
           <tr>
-            <td colspan="5" class="empty">
-              Loading...
+
+            <td
+              colspan="5"
+              class="table-loading"
+            >
+
+              <span class="small-spinner"></span>
+
+              Loading data...
+
             </td>
+
           </tr>
 
         </tbody>
@@ -825,7 +835,7 @@ body.dark .loader-box{
 </main>
 
 
-<!-- NEW ENTRY MODAL -->
+<!-- NEW ENTRY -->
 
 <div
   class="modal"
@@ -928,7 +938,7 @@ body.dark .loader-box{
 </div>
 
 
-<!-- EDIT ENTRY MODAL -->
+<!-- EDIT -->
 
 <div
   class="modal"
@@ -962,7 +972,6 @@ body.dark .loader-box{
         <input
           type="text"
           id="editName"
-          placeholder="Enter name"
         >
 
       </div>
@@ -975,7 +984,6 @@ body.dark .loader-box{
         <input
           type="text"
           id="editIp"
-          placeholder="Enter IP"
         >
 
       </div>
@@ -988,7 +996,6 @@ body.dark .loader-box{
         <input
           type="text"
           id="editWork"
-          placeholder="Enter work"
         >
 
       </div>
@@ -1031,7 +1038,7 @@ body.dark .loader-box{
 </div>
 
 
-<!-- USERS MODAL -->
+<!-- USERS -->
 
 <div
   class="modal"
@@ -1089,12 +1096,18 @@ body.dark .loader-box{
 
         </thead>
 
+
         <tbody id="usersBody">
 
           <tr>
-            <td colspan="5" class="empty">
-              Loading...
+
+            <td
+              colspan="5"
+              class="empty"
+            >
+              Loading users...
             </td>
+
           </tr>
 
         </tbody>
@@ -1108,7 +1121,7 @@ body.dark .loader-box{
 </div>
 
 
-<!-- ADD / EDIT USER MODAL -->
+<!-- USER ADD / EDIT -->
 
 <div
   class="modal"
@@ -1151,7 +1164,6 @@ body.dark .loader-box{
         <input
           type="text"
           id="userUsername"
-          placeholder="Username"
         >
 
       </div>
@@ -1164,7 +1176,6 @@ body.dark .loader-box{
         <input
           type="text"
           id="userName"
-          placeholder="Name"
         >
 
       </div>
@@ -1177,7 +1188,6 @@ body.dark .loader-box{
         <input
           type="password"
           id="userPassword"
-          placeholder="Password"
         >
 
       </div>
@@ -1327,26 +1337,6 @@ body.dark .loader-box{
 </div>
 
 
-<!-- LOADER -->
-
-<div
-  class="loader"
-  id="loader"
->
-
-  <div class="loader-box">
-
-    <div class="spinner"></div>
-
-    <div id="loaderText">
-      Loading...
-    </div>
-
-  </div>
-
-</div>
-
-
 <!-- TOAST -->
 
 <div
@@ -1358,20 +1348,16 @@ body.dark .loader-box{
 <script>
 
 /* =========================================================
-   API URL
+   API
 ========================================================= */
 
 const USER_API_URL =
-  "https://script.google.com/macros/s/AKfycbw00GHHheuvtdQtgPURjs4PtsM48-4yaFx-_ms0ZBV5FHhnmcdbJ5DHr3Aix8JPF0kQzA/exec";
+"https://script.google.com/macros/s/AKfycbw00GHHheuvtdQtgPURjs4PtsM48-4yaFx-_ms0ZBV5FHhnmcdbJ5DHr3Aix8JPF0kQzA/exec";
 
 
 const DATA_API_URL =
-  "https://script.google.com/macros/s/AKfycbz59T-4CKQDbHJB_ql6OYZf18eN7XUmttp0d2FaOM5pm27yCBOWrEilqA_zMOnFq_rz/exec";
+"https://script.google.com/macros/s/AKfycbz59T-4CKQDbHJB_ql6OYZf18eN7XUmttp0d2FaOM5pm27yCBOWrEilqA_zMOnFq_rz/exec";
 
-
-/* =========================================================
-   GLOBAL
-========================================================= */
 
 let allData = [];
 
@@ -1380,33 +1366,37 @@ let editingUser = false;
 let editingRow = null;
 
 let currentUsername =
-  localStorage.getItem("username") ||
-  localStorage.getItem("loggedUser") ||
-  "";
+localStorage.getItem("username") ||
+localStorage.getItem("loggedUser") ||
+"";
 
 
 /* =========================================================
-   PAGE LOAD
+   START
 ========================================================= */
 
 document.addEventListener(
-  "DOMContentLoaded",
-  function(){
+"DOMContentLoaded",
+function(){
 
-    checkLogin();
+  checkLogin();
 
-    loadTheme();
+  loadTheme();
 
-    loadUser();
+  /*
+     দুইটা request একসাথে শুরু হবে।
+     একটার জন্য আরেকটা অপেক্ষা করবে না।
+  */
 
-    loadData();
+  loadUser();
 
-  }
-);
+  loadData();
+
+});
 
 
 /* =========================================================
-   LOGIN CHECK
+   LOGIN
 ========================================================= */
 
 function checkLogin(){
@@ -1417,7 +1407,7 @@ function checkLogin(){
 
   if(!logged){
 
-    window.location.href = "index.html";
+    window.location.href="index.html";
 
   }
 
@@ -1425,7 +1415,7 @@ function checkLogin(){
 
 
 /* =========================================================
-   USER PROFILE
+   USER
 ========================================================= */
 
 async function loadUser(){
@@ -1434,30 +1424,47 @@ async function loadUser(){
 
   try{
 
-    const response = await fetch(
+    const response =
+    await fetch(
       USER_API_URL +
       "?action=getUser&username=" +
-      encodeURIComponent(currentUsername)
+      encodeURIComponent(currentUsername) +
+      "&_=" +
+      Date.now()
     );
 
-    const result = await response.json();
+    const result =
+    await response.json();
 
-    if(!result.success || !result.user){
+
+    if(
+      !result.success ||
+      !result.user
+    ){
 
       return;
 
     }
 
-    const user = result.user;
 
-    document.getElementById("profileName").textContent =
-      user.name || user.username || "User";
+    const user =
+    result.user;
+
+
+    document.getElementById(
+      "profileName"
+    ).textContent =
+    user.name ||
+    user.username ||
+    "User";
 
 
     if(user.picture){
 
-      document.getElementById("profileImage").src =
-        user.picture;
+      document.getElementById(
+        "profileImage"
+      ).src =
+      user.picture;
 
     }
 
@@ -1467,10 +1474,12 @@ async function loadUser(){
       user.name || ""
     );
 
+
     localStorage.setItem(
       "role",
       user.role || ""
     );
+
 
     localStorage.setItem(
       "status",
@@ -1479,7 +1488,8 @@ async function loadUser(){
 
 
     if(
-      String(user.status || "").toLowerCase() === "block"
+      String(user.status || "")
+      .toLowerCase() === "block"
     ){
 
       logout();
@@ -1488,7 +1498,10 @@ async function loadUser(){
 
   }catch(error){
 
-    console.error(error);
+    console.error(
+      "User load error:",
+      error
+    );
 
   }
 
@@ -1496,55 +1509,92 @@ async function loadUser(){
 
 
 /* =========================================================
-   LOAD DATA
+   FAST DATA LOAD
 ========================================================= */
 
 async function loadData(){
 
-  showLoader("Loading data...");
+  /*
+     শুধু table-এর ভিতরে loading।
+     পুরো page আর block হবে না।
+  */
+
+  const body =
+  document.getElementById("dataBody");
+
+
+  body.innerHTML = `
+    <tr>
+      <td
+        colspan="5"
+        class="table-loading"
+      >
+        <span class="small-spinner"></span>
+        Loading data...
+      </td>
+    </tr>
+  `;
+
 
   try{
 
-    const response = await fetch(
+    const response =
+    await fetch(
       DATA_API_URL +
       "?action=getData&_=" +
-      Date.now()
+      Date.now(),
+      {
+        method:"GET",
+        cache:"no-store"
+      }
     );
 
-    const result = await response.json();
+
+    const result =
+    await response.json();
+
 
     if(!result.success){
 
       throw new Error(
-        result.message || "Failed to load data"
+        result.message ||
+        "Failed to load data"
       );
 
     }
 
+
     allData =
-      result.data ||
-      result.users ||
-      [];
+    result.data ||
+    result.users ||
+    [];
+
 
     renderData(allData);
 
+
   }catch(error){
 
-    console.error(error);
+    console.error(
+      "Data load error:",
+      error
+    );
 
-    document.getElementById("dataBody").innerHTML = `
+
+    body.innerHTML = `
       <tr>
-        <td colspan="5" class="empty">
+        <td
+          colspan="5"
+          class="empty"
+        >
           Failed to load data
         </td>
       </tr>
     `;
 
-    showToast("Failed to load data");
-
-  }finally{
-
-    hideLoader();
+    showToast(
+      "Data load failed"
+    );
 
   }
 
@@ -1552,20 +1602,26 @@ async function loadData(){
 
 
 /* =========================================================
-   RENDER DATA
+   RENDER
 ========================================================= */
 
 function renderData(data){
 
   const body =
-    document.getElementById("dataBody");
+  document.getElementById("dataBody");
 
 
-  if(!data || !data.length){
+  if(
+    !data ||
+    !data.length
+  ){
 
     body.innerHTML = `
       <tr>
-        <td colspan="5" class="empty">
+        <td
+          colspan="5"
+          class="empty"
+        >
           No data found
         </td>
       </tr>
@@ -1576,68 +1632,77 @@ function renderData(data){
   }
 
 
-  body.innerHTML = data.map(function(row){
+  body.innerHTML =
+  data.map(function(row){
 
     const rowNumber =
-      Number(
-        row.row ||
-        row._row ||
-        row.rowNumber ||
-        0
-      );
+    Number(
+      row.row ||
+      row._row ||
+      row.rowNumber ||
+      0
+    );
 
 
     const name =
-      row.Name ??
-      row.name ??
-      row[0] ??
-      "";
+    row.Name ??
+    row.name ??
+    row[0] ??
+    "";
 
 
     const ip =
-      row.Ip ??
-      row.IP ??
-      row.ip ??
-      row[1] ??
-      "";
+    row.Ip ??
+    row.IP ??
+    row.ip ??
+    row[1] ??
+    "";
 
 
     const work =
-      row.Work ??
-      row.work ??
-      row[2] ??
-      "";
+    row.Work ??
+    row.work ??
+    row[2] ??
+    "";
 
 
     const date =
-      row.Date ??
-      row.date ??
-      row[3] ??
-      "";
+    row.Date ??
+    row.date ??
+    row[3] ??
+    "";
 
 
     const safeRow =
-      JSON.stringify({
-        row:rowNumber,
-        Name:name,
-        Ip:ip,
-        Work:work,
-        Date:date
-      })
-      .replace(/'/g,"&#39;");
+    JSON.stringify({
+      row:rowNumber,
+      Name:name,
+      Ip:ip,
+      Work:work,
+      Date:date
+    })
+    .replace(/'/g,"&#39;");
 
 
     return `
 
       <tr>
 
-        <td>${escapeHtml(name)}</td>
+        <td>
+          ${escapeHtml(name)}
+        </td>
 
-        <td>${escapeHtml(ip)}</td>
+        <td>
+          ${escapeHtml(ip)}
+        </td>
 
-        <td>${escapeHtml(work)}</td>
+        <td>
+          ${escapeHtml(work)}
+        </td>
 
-        <td>${formatDate(date)}</td>
+        <td>
+          ${formatDate(date)}
+        </td>
 
         <td>
 
@@ -1683,18 +1748,30 @@ function renderData(data){
 
 function openEntryModal(){
 
-  document.getElementById("entryName").value = "";
+  document.getElementById(
+    "entryName"
+  ).value="";
 
-  document.getElementById("entryIp").value = "";
 
-  document.getElementById("entryWork").value = "";
+  document.getElementById(
+    "entryIp"
+  ).value="";
 
-  document.getElementById("entryDate").value =
-    getTodayDate();
 
-  document
-    .getElementById("entryModal")
-    .classList.add("show");
+  document.getElementById(
+    "entryWork"
+  ).value="";
+
+
+  document.getElementById(
+    "entryDate"
+  ).value=
+  getTodayDate();
+
+
+  document.getElementById(
+    "entryModal"
+  ).classList.add("show");
 
 }
 
@@ -1702,26 +1779,32 @@ function openEntryModal(){
 async function saveEntry(){
 
   const name =
-    document.getElementById("entryName")
-    .value.trim();
+  document.getElementById(
+    "entryName"
+  ).value.trim();
+
 
   const ip =
-    document.getElementById("entryIp")
-    .value.trim();
+  document.getElementById(
+    "entryIp"
+  ).value.trim();
+
 
   const work =
-    document.getElementById("entryWork")
-    .value.trim();
+  document.getElementById(
+    "entryWork"
+  ).value.trim();
+
 
   const date =
-    document.getElementById("entryDate")
-    .value;
+  document.getElementById(
+    "entryDate"
+  ).value;
 
 
   if(!name){
 
     showToast("Name is required");
-
     return;
 
   }
@@ -1730,7 +1813,6 @@ async function saveEntry(){
   if(!ip){
 
     showToast("IP is required");
-
     return;
 
   }
@@ -1739,7 +1821,6 @@ async function saveEntry(){
   if(!work){
 
     showToast("Work is required");
-
     return;
 
   }
@@ -1748,18 +1829,15 @@ async function saveEntry(){
   if(!date){
 
     showToast("Date is required");
-
     return;
 
   }
 
 
-  showLoader("Saving entry...");
-
-
   try{
 
-    const response = await fetch(
+    const response =
+    await fetch(
       DATA_API_URL,
       {
         method:"POST",
@@ -1785,7 +1863,7 @@ async function saveEntry(){
 
 
     const result =
-      await response.json();
+    await response.json();
 
 
     if(!result.success){
@@ -1800,9 +1878,12 @@ async function saveEntry(){
 
     closeModal("entryModal");
 
-    showToast("Entry saved successfully");
+    showToast(
+      "Entry saved successfully"
+    );
 
-    await loadData();
+
+    loadData();
 
 
   }catch(error){
@@ -1811,12 +1892,8 @@ async function saveEntry(){
 
     showToast(
       error.message ||
-      "Failed to save entry"
+      "Failed to save"
     );
-
-  }finally{
-
-    hideLoader();
 
   }
 
@@ -1824,13 +1901,13 @@ async function saveEntry(){
 
 
 /* =========================================================
-   EDIT ENTRY
+   EDIT
 ========================================================= */
 
 function openEditModal(row){
 
   editingRow =
-    Number(row.row || 0);
+  Number(row.row || 0);
 
 
   if(!editingRow){
@@ -1842,25 +1919,33 @@ function openEditModal(row){
   }
 
 
-  document.getElementById("editName").value =
-    row.Name || "";
+  document.getElementById(
+    "editName"
+  ).value =
+  row.Name || "";
 
 
-  document.getElementById("editIp").value =
-    row.Ip || "";
+  document.getElementById(
+    "editIp"
+  ).value =
+  row.Ip || "";
 
 
-  document.getElementById("editWork").value =
-    row.Work || "";
+  document.getElementById(
+    "editWork"
+  ).value =
+  row.Work || "";
 
 
-  document.getElementById("editDate").value =
-    normalizeDate(row.Date);
+  document.getElementById(
+    "editDate"
+  ).value =
+  normalizeDate(row.Date);
 
 
-  document
-    .getElementById("editEntryModal")
-    .classList.add("show");
+  document.getElementById(
+    "editEntryModal"
+  ).classList.add("show");
 
 }
 
@@ -1877,26 +1962,32 @@ async function saveEdit(){
 
 
   const name =
-    document.getElementById("editName")
-    .value.trim();
+  document.getElementById(
+    "editName"
+  ).value.trim();
+
 
   const ip =
-    document.getElementById("editIp")
-    .value.trim();
+  document.getElementById(
+    "editIp"
+  ).value.trim();
+
 
   const work =
-    document.getElementById("editWork")
-    .value.trim();
+  document.getElementById(
+    "editWork"
+  ).value.trim();
+
 
   const date =
-    document.getElementById("editDate")
-    .value;
+  document.getElementById(
+    "editDate"
+  ).value;
 
 
   if(!name){
 
     showToast("Name is required");
-
     return;
 
   }
@@ -1905,7 +1996,6 @@ async function saveEdit(){
   if(!ip){
 
     showToast("IP is required");
-
     return;
 
   }
@@ -1914,7 +2004,6 @@ async function saveEdit(){
   if(!work){
 
     showToast("Work is required");
-
     return;
 
   }
@@ -1923,18 +2012,15 @@ async function saveEdit(){
   if(!date){
 
     showToast("Date is required");
-
     return;
 
   }
 
 
-  showLoader("Updating entry...");
-
-
   try{
 
-    const response = await fetch(
+    const response =
+    await fetch(
       DATA_API_URL,
       {
         method:"POST",
@@ -1960,7 +2046,7 @@ async function saveEdit(){
 
 
     const result =
-      await response.json();
+    await response.json();
 
 
     if(!result.success){
@@ -1973,13 +2059,20 @@ async function saveEdit(){
     }
 
 
-    closeModal("editEntryModal");
+    closeModal(
+      "editEntryModal"
+    );
 
-    editingRow = null;
 
-    showToast("Entry updated successfully");
+    editingRow=null;
 
-    await loadData();
+
+    showToast(
+      "Entry updated successfully"
+    );
+
+
+    loadData();
 
 
   }catch(error){
@@ -1990,10 +2083,6 @@ async function saveEdit(){
       error.message ||
       "Failed to update"
     );
-
-  }finally{
-
-    hideLoader();
 
   }
 
@@ -2026,12 +2115,10 @@ async function sellEntry(row){
   }
 
 
-  showLoader("Selling entry...");
-
-
   try{
 
-    const response = await fetch(
+    const response =
+    await fetch(
       DATA_API_URL,
       {
         method:"POST",
@@ -2051,7 +2138,7 @@ async function sellEntry(row){
 
 
     const result =
-      await response.json();
+    await response.json();
 
 
     if(!result.success){
@@ -2064,9 +2151,12 @@ async function sellEntry(row){
     }
 
 
-    showToast("Entry sold successfully");
+    showToast(
+      "Entry sold successfully"
+    );
 
-    await loadData();
+
+    loadData();
 
 
   }catch(error){
@@ -2077,10 +2167,6 @@ async function sellEntry(row){
       error.message ||
       "Failed to sell"
     );
-
-  }finally{
-
-    hideLoader();
 
   }
 
@@ -2113,12 +2199,10 @@ async function deleteEntry(row){
   }
 
 
-  showLoader("Deleting entry...");
-
-
   try{
 
-    const response = await fetch(
+    const response =
+    await fetch(
       DATA_API_URL,
       {
         method:"POST",
@@ -2138,7 +2222,7 @@ async function deleteEntry(row){
 
 
     const result =
-      await response.json();
+    await response.json();
 
 
     if(!result.success){
@@ -2151,9 +2235,12 @@ async function deleteEntry(row){
     }
 
 
-    showToast("Entry deleted successfully");
+    showToast(
+      "Entry deleted successfully"
+    );
 
-    await loadData();
+
+    loadData();
 
 
   }catch(error){
@@ -2164,10 +2251,6 @@ async function deleteEntry(row){
       error.message ||
       "Failed to delete"
     );
-
-  }finally{
-
-    hideLoader();
 
   }
 
@@ -2181,66 +2264,75 @@ async function deleteEntry(row){
 function applyFilters(){
 
   const search =
-    document.getElementById("searchInput")
-    .value
-    .trim()
-    .toLowerCase();
+  document.getElementById(
+    "searchInput"
+  ).value
+  .trim()
+  .toLowerCase();
 
 
   const from =
-    document.getElementById("fromDate")
-    .value;
+  document.getElementById(
+    "fromDate"
+  ).value;
 
 
   const to =
-    document.getElementById("toDate")
-    .value;
+  document.getElementById(
+    "toDate"
+  ).value;
 
 
   const filtered =
-    allData.filter(function(row){
+  allData.filter(function(row){
 
-      const text =
-        JSON.stringify(row)
-        .toLowerCase();
-
-
-      if(
-        search &&
-        !text.includes(search)
-      ){
-
-        return false;
-
-      }
+    const text =
+    JSON.stringify(row)
+    .toLowerCase();
 
 
-      const date =
-        normalizeDate(
-          row.Date ??
-          row.date ??
-          row[3] ??
-          ""
-        );
+    if(
+      search &&
+      !text.includes(search)
+    ){
+
+      return false;
+
+    }
 
 
-      if(from && date < from){
-
-        return false;
-
-      }
-
-
-      if(to && date > to){
-
-        return false;
-
-      }
+    const date =
+    normalizeDate(
+      row.Date ??
+      row.date ??
+      row[3] ??
+      ""
+    );
 
 
-      return true;
+    if(
+      from &&
+      date < from
+    ){
 
-    });
+      return false;
+
+    }
+
+
+    if(
+      to &&
+      date > to
+    ){
+
+      return false;
+
+    }
+
+
+    return true;
+
+  });
 
 
   renderData(filtered);
@@ -2250,11 +2342,20 @@ function applyFilters(){
 
 function clearFilters(){
 
-  document.getElementById("searchInput").value = "";
+  document.getElementById(
+    "searchInput"
+  ).value="";
 
-  document.getElementById("fromDate").value = "";
 
-  document.getElementById("toDate").value = "";
+  document.getElementById(
+    "fromDate"
+  ).value="";
+
+
+  document.getElementById(
+    "toDate"
+  ).value="";
+
 
   renderData(allData);
 
@@ -2267,9 +2368,10 @@ function clearFilters(){
 
 function openUsersModal(){
 
-  document
-    .getElementById("usersModal")
-    .classList.add("show");
+  document.getElementById(
+    "usersModal"
+  ).classList.add("show");
+
 
   loadUsers();
 
@@ -2279,12 +2381,17 @@ function openUsersModal(){
 async function loadUsers(){
 
   const body =
-    document.getElementById("usersBody");
+  document.getElementById(
+    "usersBody"
+  );
 
 
-  body.innerHTML = `
+  body.innerHTML=`
     <tr>
-      <td colspan="5" class="empty">
+      <td
+        colspan="5"
+        class="empty"
+      >
         Loading users...
       </td>
     </tr>
@@ -2293,24 +2400,27 @@ async function loadUsers(){
 
   try{
 
-    const response = await fetch(
+    const response =
+    await fetch(
       USER_API_URL +
       "?action=getUsers&requester=" +
-      encodeURIComponent(currentUsername) +
+      encodeURIComponent(
+        currentUsername
+      ) +
       "&_=" +
       Date.now()
     );
 
 
     const result =
-      await response.json();
+    await response.json();
 
 
     if(!result.success){
 
       throw new Error(
         result.message ||
-        "Failed to load users"
+        "Failed"
       );
 
     }
@@ -2327,9 +2437,12 @@ async function loadUsers(){
 
     console.error(error);
 
-    body.innerHTML = `
+    body.innerHTML=`
       <tr>
-        <td colspan="5" class="empty">
+        <td
+          colspan="5"
+          class="empty"
+        >
           Failed to load users
         </td>
       </tr>
@@ -2343,14 +2456,19 @@ async function loadUsers(){
 function renderUsers(users){
 
   const body =
-    document.getElementById("usersBody");
+  document.getElementById(
+    "usersBody"
+  );
 
 
   if(!users.length){
 
-    body.innerHTML = `
+    body.innerHTML=`
       <tr>
-        <td colspan="5" class="empty">
+        <td
+          colspan="5"
+          class="empty"
+        >
           No users found
         </td>
       </tr>
@@ -2362,111 +2480,123 @@ function renderUsers(users){
 
 
   body.innerHTML =
-    users.map(function(user){
+  users.map(function(user){
 
-      const username =
-        user.username ||
-        user.Username ||
-        "";
-
-
-      const name =
-        user.name ||
-        user.Name ||
-        "";
+    const username =
+    user.username ||
+    user.Username ||
+    "";
 
 
-      const role =
-        user.role ||
-        user.Role ||
-        "";
+    const name =
+    user.name ||
+    user.Name ||
+    "";
 
 
-      const status =
-        user.status ||
-        user.Status ||
-        "";
+    const role =
+    user.role ||
+    user.Role ||
+    "";
 
 
-      const isCurrent =
-        username.toLowerCase() ===
-        currentUsername.toLowerCase();
+    const status =
+    user.status ||
+    user.Status ||
+    "";
 
 
-      const statusClass =
-        String(status).toLowerCase() === "active"
-          ? "status-active"
-          : "status-block";
+    const isCurrent =
+    username.toLowerCase() ===
+    currentUsername.toLowerCase();
 
 
-      return `
+    const statusClass =
+    String(status).toLowerCase()
+    === "active"
+    ? "status-active"
+    : "status-block";
 
-        <tr>
 
-          <td>
-            ${escapeHtml(username)}
-          </td>
+    const nextStatus =
+    String(status).toLowerCase()
+    === "active"
+    ? "Block"
+    : "Active";
 
-          <td>
-            ${escapeHtml(name)}
-          </td>
 
-          <td>
-            ${escapeHtml(role)}
-          </td>
+    return `
 
-          <td>
+      <tr>
 
-            <span class="status ${statusClass}">
-              ${escapeHtml(status)}
-            </span>
+        <td>
+          ${escapeHtml(username)}
+        </td>
 
-          </td>
+        <td>
+          ${escapeHtml(name)}
+        </td>
 
-          <td>
+        <td>
+          ${escapeHtml(role)}
+        </td>
 
-            <div class="row-actions">
+        <td>
 
-              <button
-                class="action-btn action-edit"
-                onclick='editUser(${JSON.stringify(user)})'
-              >
-                Edit
-              </button>
+          <span
+            class="status ${statusClass}"
+          >
+            ${escapeHtml(status)}
+          </span>
 
-              ${
-                !isCurrent
-                ? `
-                  <button
-                    class="action-btn ${
-                      String(status).toLowerCase() === "active"
-                      ? "action-delete"
-                      : "action-sell"
-                    }"
-                    onclick="changeUserStatus(
-                      '${escapeJs(username)}',
-                      '${String(status).toLowerCase() === "active" ? "Block" : "Active"}'
-                    )"
-                  >
-                    ${
-                      String(status).toLowerCase() === "active"
-                      ? "Block"
-                      : "Unblock"
-                    }
-                  </button>
-                `
-                : ""
-              }
+        </td>
 
-            </div>
+        <td>
 
-          </td>
+          <div class="row-actions">
 
-        </tr>
+            <button
+              class="action-btn action-edit"
+              onclick='editUser(${JSON.stringify(user)})'
+            >
+              Edit
+            </button>
 
-      `;
+            ${
+              !isCurrent
+              ?
+              `
+                <button
+                  class="action-btn ${
+                    nextStatus === "Block"
+                    ? "action-delete"
+                    : "action-sell"
+                  }"
+                  onclick="changeUserStatus(
+                    '${escapeJs(username)}',
+                    '${nextStatus}'
+                  )"
+                >
+                  ${
+                    nextStatus === "Block"
+                    ? "Block"
+                    : "Unblock"
+                  }
+                </button>
+              `
+              :
+              ""
+            }
 
-    }).join("");
+          </div>
+
+        </td>
+
+      </tr>
+
+    `;
+
+  }).join("");
 
 }
 
@@ -2477,32 +2607,47 @@ function renderUsers(users){
 
 function openAddUserModal(){
 
-  editingUser = false;
+  editingUser=false;
 
-  document.getElementById("userModalTitle")
-    .textContent = "Add User";
 
-  document.getElementById("originalUsername")
-    .value = "";
+  document.getElementById(
+    "userModalTitle"
+  ).textContent="Add User";
 
-  document.getElementById("userUsername")
-    .value = "";
 
-  document.getElementById("userName")
-    .value = "";
+  document.getElementById(
+    "originalUsername"
+  ).value="";
 
-  document.getElementById("userPassword")
-    .value = "";
 
-  document.getElementById("userRole")
-    .value = "guest";
+  document.getElementById(
+    "userUsername"
+  ).value="";
 
-  document.getElementById("userStatus")
-    .value = "Active";
 
-  document
-    .getElementById("userModal")
-    .classList.add("show");
+  document.getElementById(
+    "userName"
+  ).value="";
+
+
+  document.getElementById(
+    "userPassword"
+  ).value="";
+
+
+  document.getElementById(
+    "userRole"
+  ).value="guest";
+
+
+  document.getElementById(
+    "userStatus"
+  ).value="Active";
+
+
+  document.getElementById(
+    "userModal"
+  ).classList.add("show");
 
 }
 
@@ -2513,54 +2658,62 @@ function openAddUserModal(){
 
 function editUser(user){
 
-  editingUser = true;
+  editingUser=true;
 
-  document.getElementById("userModalTitle")
-    .textContent = "Edit User";
+
+  document.getElementById(
+    "userModalTitle"
+  ).textContent="Edit User";
 
 
   const username =
-    user.username ||
-    user.Username ||
-    "";
+  user.username ||
+  user.Username ||
+  "";
 
 
-  document.getElementById("originalUsername")
-    .value = username;
+  document.getElementById(
+    "originalUsername"
+  ).value=username;
 
 
-  document.getElementById("userUsername")
-    .value = username;
+  document.getElementById(
+    "userUsername"
+  ).value=username;
 
 
-  document.getElementById("userName")
-    .value =
-      user.name ||
-      user.Name ||
-      "";
+  document.getElementById(
+    "userName"
+  ).value=
+  user.name ||
+  user.Name ||
+  "";
 
 
-  document.getElementById("userPassword")
-    .value = "";
+  document.getElementById(
+    "userPassword"
+  ).value="";
 
 
-  document.getElementById("userRole")
-    .value =
-      user.role ||
-      user.Role ||
-      "guest";
+  document.getElementById(
+    "userRole"
+  ).value=
+  user.role ||
+  user.Role ||
+  "guest";
 
 
-  document.getElementById("userStatus")
-    .value =
-      user.status ||
-      user.Status ||
-      "Active";
+  document.getElementById(
+    "userStatus"
+  ).value=
+  user.status ||
+  user.Status ||
+  "Active";
 
 
-  document
-    .getElementById("userModal")
-    .classList.add("show");
+  document.getElementById(
+    "userModal"
+  ).classList.add("show");
 
 }
 
@@ -2572,39 +2725,44 @@ function editUser(user){
 async function saveUser(){
 
   const username =
-    document.getElementById("userUsername")
-    .value.trim();
+  document.getElementById(
+    "userUsername"
+  ).value.trim();
 
 
   const name =
-    document.getElementById("userName")
-    .value.trim();
+  document.getElementById(
+    "userName"
+  ).value.trim();
 
 
   const password =
-    document.getElementById("userPassword")
-    .value;
+  document.getElementById(
+    "userPassword"
+  ).value;
 
 
   const role =
-    document.getElementById("userRole")
-    .value;
+  document.getElementById(
+    "userRole"
+  ).value;
 
 
   const status =
-    document.getElementById("userStatus")
-    .value;
+  document.getElementById(
+    "userStatus"
+  ).value;
 
 
   const originalUsername =
-    document.getElementById("originalUsername")
-    .value;
+  document.getElementById(
+    "originalUsername"
+  ).value;
 
 
   if(!username){
 
     showToast("Username is required");
-
     return;
 
   }
@@ -2613,67 +2771,61 @@ async function saveUser(){
   if(!name){
 
     showToast("Name is required");
-
     return;
 
   }
 
 
-  if(!editingUser && !password){
+  if(
+    !editingUser &&
+    !password
+  ){
 
     showToast("Password is required");
-
     return;
 
   }
-
-
-  showLoader(
-    editingUser
-      ? "Updating user..."
-      : "Creating user..."
-  );
 
 
   try{
 
-    const payload = {
-
-      action:
-        editingUser
-          ? "editUser"
-          : "addUser",
-
-      username:username,
-
-      name:name,
-
-      password:password,
-
-      role:role,
-
-      status:status,
-
-      originalUsername:
-        originalUsername,
-
-      requester:
-        currentUsername
-
-    };
-
-
-    const response = await fetch(
+    const response =
+    await fetch(
       USER_API_URL,
       {
         method:"POST",
-        body:JSON.stringify(payload)
+
+        body:JSON.stringify({
+
+          action:
+          editingUser
+          ? "editUser"
+          : "addUser",
+
+          username:username,
+
+          name:name,
+
+          password:password,
+
+          role:role,
+
+          status:status,
+
+          originalUsername:
+          originalUsername,
+
+          requester:
+          currentUsername
+
+        })
+
       }
     );
 
 
     const result =
-      await response.json();
+    await response.json();
 
 
     if(!result.success){
@@ -2686,12 +2838,15 @@ async function saveUser(){
     }
 
 
-    closeModal("userModal");
+    closeModal(
+      "userModal"
+    );
+
 
     showToast(
       editingUser
-        ? "User updated successfully"
-        : "User created successfully"
+      ? "User updated successfully"
+      : "User created successfully"
     );
 
 
@@ -2709,17 +2864,13 @@ async function saveUser(){
       "Operation failed"
     );
 
-  }finally{
-
-    hideLoader();
-
   }
 
 }
 
 
 /* =========================================================
-   CHANGE USER STATUS
+   USER STATUS
 ========================================================= */
 
 async function changeUserStatus(
@@ -2756,12 +2907,10 @@ async function changeUserStatus(
   }
 
 
-  showLoader("Updating status...");
-
-
   try{
 
-    const response = await fetch(
+    const response =
+    await fetch(
       USER_API_URL,
       {
         method:"POST",
@@ -2783,7 +2932,7 @@ async function changeUserStatus(
 
 
     const result =
-      await response.json();
+    await response.json();
 
 
     if(!result.success){
@@ -2810,12 +2959,8 @@ async function changeUserStatus(
 
     showToast(
       error.message ||
-      "Failed to update status"
+      "Failed"
     );
-
-  }finally{
-
-    hideLoader();
 
   }
 
@@ -2823,20 +2968,29 @@ async function changeUserStatus(
 
 
 /* =========================================================
-   CHANGE PASSWORD
+   PASSWORD
 ========================================================= */
 
 function openChangePasswordModal(){
 
-  document.getElementById("currentPassword").value = "";
+  document.getElementById(
+    "currentPassword"
+  ).value="";
 
-  document.getElementById("newPassword").value = "";
 
-  document.getElementById("confirmPassword").value = "";
+  document.getElementById(
+    "newPassword"
+  ).value="";
 
-  document
-    .getElementById("passwordModal")
-    .classList.add("show");
+
+  document.getElementById(
+    "confirmPassword"
+  ).value="";
+
+
+  document.getElementById(
+    "passwordModal"
+  ).classList.add("show");
 
 }
 
@@ -2844,23 +2998,28 @@ function openChangePasswordModal(){
 async function changePassword(){
 
   const currentPassword =
-    document.getElementById("currentPassword")
-    .value;
+  document.getElementById(
+    "currentPassword"
+  ).value;
 
 
   const newPassword =
-    document.getElementById("newPassword")
-    .value;
+  document.getElementById(
+    "newPassword"
+  ).value;
 
 
   const confirmPassword =
-    document.getElementById("confirmPassword")
-    .value;
+  document.getElementById(
+    "confirmPassword"
+  ).value;
 
 
   if(!currentPassword){
 
-    showToast("Enter current password");
+    showToast(
+      "Enter current password"
+    );
 
     return;
 
@@ -2869,28 +3028,33 @@ async function changePassword(){
 
   if(!newPassword){
 
-    showToast("Enter new password");
+    showToast(
+      "Enter new password"
+    );
 
     return;
 
   }
 
 
-  if(newPassword !== confirmPassword){
+  if(
+    newPassword !==
+    confirmPassword
+  ){
 
-    showToast("Passwords do not match");
+    showToast(
+      "Passwords do not match"
+    );
 
     return;
 
   }
-
-
-  showLoader("Changing password...");
 
 
   try{
 
-    const response = await fetch(
+    const response =
+    await fetch(
       USER_API_URL,
       {
         method:"POST",
@@ -2901,9 +3065,11 @@ async function changePassword(){
 
           username:currentUsername,
 
-          currentPassword:currentPassword,
+          currentPassword:
+          currentPassword,
 
-          newPassword:newPassword
+          newPassword:
+          newPassword
 
         })
 
@@ -2912,7 +3078,7 @@ async function changePassword(){
 
 
     const result =
-      await response.json();
+    await response.json();
 
 
     if(!result.success){
@@ -2925,7 +3091,10 @@ async function changePassword(){
     }
 
 
-    closeModal("passwordModal");
+    closeModal(
+      "passwordModal"
+    );
+
 
     showToast(
       "Password changed successfully"
@@ -2938,12 +3107,8 @@ async function changePassword(){
 
     showToast(
       error.message ||
-      "Failed to change password"
+      "Failed"
     );
-
-  }finally{
-
-    hideLoader();
 
   }
 
@@ -2956,63 +3121,73 @@ async function changePassword(){
 
 function closeModal(id){
 
-  document
-    .getElementById(id)
-    .classList.remove("show");
+  const modal =
+  document.getElementById(id);
+
+
+  if(modal){
+
+    modal.classList.remove("show");
+
+  }
 
 }
 
 
-/* Close modal by clicking outside */
-
 document.addEventListener(
-  "click",
-  function(e){
+"click",
+function(e){
 
-    if(e.target.classList.contains("modal")){
+  if(
+    e.target.classList.contains(
+      "modal"
+    )
+  ){
 
-      e.target.classList.remove("show");
-
-    }
+    e.target.classList.remove(
+      "show"
+    );
 
   }
-);
+
+});
 
 
 /* =========================================================
-   PROFILE MENU
+   PROFILE
 ========================================================= */
 
 function toggleProfileMenu(){
 
-  document
-    .getElementById("profileMenu")
-    .classList.toggle("show");
+  document.getElementById(
+    "profileMenu"
+  ).classList.toggle("show");
 
 }
 
 
 document.addEventListener(
-  "click",
-  function(e){
+"click",
+function(e){
 
-    const profile =
-      document.querySelector(".profile");
+  const profile =
+  document.querySelector(
+    ".profile"
+  );
 
 
-    if(
-      profile &&
-      !profile.contains(e.target)
-    ){
+  if(
+    profile &&
+    !profile.contains(e.target)
+  ){
 
-      document
-        .getElementById("profileMenu")
-        .classList.remove("show");
-
-    }
+    document.getElementById(
+      "profileMenu"
+    ).classList.remove("show");
 
   }
-);
+
+});
 
 
 /* =========================================================
@@ -3021,14 +3196,22 @@ document.addEventListener(
 
 function toggleTheme(){
 
-  document.body.classList.toggle("dark");
+  document.body.classList.toggle(
+    "dark"
+  );
+
 
   const dark =
-    document.body.classList.contains("dark");
+  document.body.classList.contains(
+    "dark"
+  );
+
 
   localStorage.setItem(
     "theme",
-    dark ? "dark" : "light"
+    dark
+    ? "dark"
+    : "light"
   );
 
 }
@@ -3037,39 +3220,16 @@ function toggleTheme(){
 function loadTheme(){
 
   if(
-    localStorage.getItem("theme") === "dark"
+    localStorage.getItem("theme")
+    ===
+    "dark"
   ){
 
-    document.body.classList.add("dark");
+    document.body.classList.add(
+      "dark"
+    );
 
   }
-
-}
-
-
-/* =========================================================
-   LOADER
-========================================================= */
-
-function showLoader(text){
-
-  document.getElementById("loaderText")
-    .textContent =
-      text || "Loading...";
-
-
-  document
-    .getElementById("loader")
-    .classList.add("show");
-
-}
-
-
-function hideLoader(){
-
-  document
-    .getElementById("loader")
-    .classList.remove("show");
 
 }
 
@@ -3084,26 +3244,36 @@ let toastTimer;
 function showToast(message){
 
   const toast =
-    document.getElementById("toast");
+  document.getElementById(
+    "toast"
+  );
 
 
-  toast.textContent = message;
+  toast.textContent =
+  message;
 
-  toast.classList.add("show");
+
+  toast.classList.add(
+    "show"
+  );
 
 
-  clearTimeout(toastTimer);
+  clearTimeout(
+    toastTimer
+  );
 
 
   toastTimer =
-    setTimeout(
-      function(){
+  setTimeout(
+    function(){
 
-        toast.classList.remove("show");
+      toast.classList.remove(
+        "show"
+      );
 
-      },
-      3000
-    );
+    },
+    3000
+  );
 
 }
 
@@ -3114,25 +3284,23 @@ function showToast(message){
 
 function getTodayDate(){
 
-  const d = new Date();
-
-  const year =
-    d.getFullYear();
+  const d =
+  new Date();
 
 
-  const month =
+  return [
+
+    d.getFullYear(),
+
     String(
-      d.getMonth() + 1
-    ).padStart(2,"0");
+      d.getMonth()+1
+    ).padStart(2,"0"),
 
-
-  const day =
     String(
       d.getDate()
-    ).padStart(2,"0");
+    ).padStart(2,"0")
 
-
-  return `${year}-${month}-${day}`;
+  ].join("-");
 
 }
 
@@ -3144,7 +3312,8 @@ function normalizeDate(value){
 
   if(
     typeof value === "string" &&
-    /^\d{4}-\d{2}-\d{2}$/.test(value)
+    /^\d{4}-\d{2}-\d{2}$/
+    .test(value)
   ){
 
     return value;
@@ -3153,10 +3322,14 @@ function normalizeDate(value){
 
 
   const d =
-    new Date(value);
+  new Date(value);
 
 
-  if(isNaN(d.getTime())){
+  if(
+    isNaN(
+      d.getTime()
+    )
+  ){
 
     return "";
 
@@ -3164,10 +3337,11 @@ function normalizeDate(value){
 
 
   return [
+
     d.getFullYear(),
 
     String(
-      d.getMonth() + 1
+      d.getMonth()+1
     ).padStart(2,"0"),
 
     String(
@@ -3185,7 +3359,7 @@ function formatDate(value){
 
 
   const normalized =
-    normalizeDate(value);
+  normalizeDate(value);
 
 
   if(!normalized){
@@ -3196,7 +3370,7 @@ function formatDate(value){
 
 
   const parts =
-    normalized.split("-");
+  normalized.split("-");
 
 
   return (
@@ -3211,29 +3385,33 @@ function formatDate(value){
 
 
 /* =========================================================
-   ESCAPE HTML
+   ESCAPE
 ========================================================= */
 
 function escapeHtml(value){
 
-  return String(value ?? "")
-    .replace(/&/g,"&amp;")
-    .replace(/</g,"&lt;")
-    .replace(/>/g,"&gt;")
-    .replace(/"/g,"&quot;")
-    .replace(/'/g,"&#039;");
+  return String(
+    value ?? ""
+  )
+  .replace(/&/g,"&amp;")
+  .replace(/</g,"&lt;")
+  .replace(/>/g,"&gt;")
+  .replace(/"/g,"&quot;")
+  .replace(/'/g,"&#039;");
 
 }
 
 
 function escapeJs(value){
 
-  return String(value ?? "")
-    .replace(/\\/g,"\\\\")
-    .replace(/'/g,"\\'")
-    .replace(/"/g,'\\"')
-    .replace(/\n/g,"\\n")
-    .replace(/\r/g,"\\r");
+  return String(
+    value ?? ""
+  )
+  .replace(/\\/g,"\\\\")
+  .replace(/'/g,"\\'")
+  .replace(/"/g,'\\"')
+  .replace(/\n/g,"\\n")
+  .replace(/\r/g,"\\r");
 
 }
 
@@ -3244,27 +3422,60 @@ function escapeJs(value){
 
 function logout(){
 
-  localStorage.removeItem("dashboardAuth");
-  localStorage.removeItem("username");
-  localStorage.removeItem("name");
-  localStorage.removeItem("role");
-  localStorage.removeItem("status");
-  localStorage.removeItem("userData");
-  localStorage.removeItem("loginData");
-  localStorage.removeItem("loggedUser");
-  localStorage.removeItem("currentUser");
-  localStorage.removeItem("userInfo");
+  localStorage.removeItem(
+    "dashboardAuth"
+  );
 
-  sessionStorage.removeItem("dashboardAuth");
+  localStorage.removeItem(
+    "username"
+  );
+
+  localStorage.removeItem(
+    "name"
+  );
+
+  localStorage.removeItem(
+    "role"
+  );
+
+  localStorage.removeItem(
+    "status"
+  );
+
+  localStorage.removeItem(
+    "userData"
+  );
+
+  localStorage.removeItem(
+    "loginData"
+  );
+
+  localStorage.removeItem(
+    "loggedUser"
+  );
+
+  localStorage.removeItem(
+    "currentUser"
+  );
+
+  localStorage.removeItem(
+    "userInfo"
+  );
+
+
+  sessionStorage.removeItem(
+    "dashboardAuth"
+  );
+
 
   window.location.href =
-    "index.html";
+  "index.html";
 
 }
 
 
 /* =========================================================
-   BACK BUTTON PROTECTION
+   BACK PROTECTION
 ========================================================= */
 
 history.pushState(
@@ -3275,29 +3486,28 @@ history.pushState(
 
 
 window.addEventListener(
-  "popstate",
-  function(){
+"popstate",
+function(){
 
-    history.pushState(
-      null,
-      null,
-      location.href
-    );
+  history.pushState(
+    null,
+    null,
+    location.href
+  );
 
-  }
-);
+});
 
 
 window.addEventListener(
-  "pageshow",
-  function(){
+"pageshow",
+function(){
 
-    checkLogin();
+  checkLogin();
 
-  }
-);
+});
 
 </script>
 
 </body>
+
 </html>
