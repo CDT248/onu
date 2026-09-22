@@ -1004,6 +1004,21 @@ td{
 
       </div>
 
+
+      <!-- NEW DATE FIELD -->
+
+      <div class="form-group full">
+
+        <label>Date</label>
+
+        <input
+          class="input"
+          id="entryDate"
+          type="date"
+        >
+
+      </div>
+
     </div>
 
 
@@ -1561,10 +1576,6 @@ async function loadUser(){
     );
 
 
-    // --------------------------------------------------------
-    // BLOCK CHECK
-    // --------------------------------------------------------
-
     if(
       String(user.status)
         .toLowerCase() ===
@@ -1920,6 +1931,40 @@ function openEntryModal(){
   ).value = "";
 
 
+  // ========================================================
+  // AUTOMATIC TODAY DATE
+  // ========================================================
+
+  const today =
+    new Date();
+
+
+  const year =
+    today.getFullYear();
+
+
+  const month =
+    String(
+      today.getMonth() + 1
+    ).padStart(2,"0");
+
+
+  const day =
+    String(
+      today.getDate()
+    ).padStart(2,"0");
+
+
+  document.getElementById(
+    "entryDate"
+  ).value =
+    year +
+    "-" +
+    month +
+    "-" +
+    day;
+
+
   openModal(
     "entryModal"
   );
@@ -1951,10 +1996,27 @@ async function saveEntry(){
     ).value.trim();
 
 
+  const date =
+    document.getElementById(
+      "entryDate"
+    ).value;
+
+
   if(!name || !work){
 
     showToast(
       "Name and Work are required.",
+      "error"
+    );
+
+    return;
+  }
+
+
+  if(!date){
+
+    showToast(
+      "Date is required.",
       "error"
     );
 
@@ -1984,6 +2046,8 @@ async function saveEntry(){
             ip:ip,
 
             work:work,
+
+            date:date,
 
             username:
               currentUsername
@@ -2593,7 +2657,6 @@ async function saveUser(){
     loadUsers();
 
 
-    // নিজের information change হলে reload
     if(
       editingUser &&
       originalUsername.toLowerCase() ===
