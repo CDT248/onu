@@ -16,6 +16,10 @@
 
 <style>
 
+/* =========================================================
+   RESET
+========================================================= */
+
 *{
   box-sizing:border-box;
   margin:0;
@@ -36,7 +40,8 @@ body.dark{
 }
 
 button,
-input{
+input,
+select{
   font-family:inherit;
 }
 
@@ -51,7 +56,7 @@ button{
 
 .header{
   height:70px;
-  background:#ffffff;
+  background:#fff;
   border-bottom:1px solid #e5e7eb;
   display:flex;
   align-items:center;
@@ -81,7 +86,7 @@ body.dark .header{
   height:38px;
   border-radius:11px;
   background:#16a34a;
-  color:white;
+  color:#fff;
   display:flex;
   align-items:center;
   justify-content:center;
@@ -91,7 +96,7 @@ body.dark .header{
 .header-right{
   display:flex;
   align-items:center;
-  gap:9px;
+  gap:8px;
 }
 
 
@@ -114,7 +119,7 @@ body.dark .header{
 
 .btn-green{
   background:#16a34a;
-  color:white;
+  color:#fff;
 }
 
 .btn-green:hover{
@@ -132,7 +137,11 @@ body.dark .header{
 
 .btn-danger{
   background:#ef4444;
-  color:white;
+  color:#fff;
+}
+
+.btn-danger:hover{
+  background:#dc2626;
 }
 
 body.dark .btn-light{
@@ -157,11 +166,11 @@ body.dark .btn-light:hover{
 
 
 /* =========================================================
-   FILTER AREA
+   FILTER
 ========================================================= */
 
 .filter-box{
-  background:#ffffff;
+  background:#fff;
   border:1px solid #e5e7eb;
   border-radius:15px;
   padding:18px;
@@ -196,7 +205,8 @@ body.dark .field label{
   color:#94a3b8;
 }
 
-.field input{
+.field input,
+.field select{
   width:100%;
   height:42px;
   border:1px solid #dbe2ea;
@@ -207,12 +217,14 @@ body.dark .field label{
   color:#172033;
 }
 
-.field input:focus{
+.field input:focus,
+.field select:focus{
   border-color:#16a34a;
-  box-shadow:0 0 0 3px rgba(22,163,74,.10);
+  box-shadow:0 0 0 3px rgba(22,163,74,.1);
 }
 
-body.dark .field input{
+body.dark .field input,
+body.dark .field select{
   background:#111827;
   border-color:#334155;
   color:#f3f4f6;
@@ -225,11 +237,11 @@ body.dark .field input{
 
 
 /* =========================================================
-   TABLE CARD
+   TABLE
 ========================================================= */
 
 .table-card{
-  background:#ffffff;
+  background:#fff;
   border:1px solid #e5e7eb;
   border-radius:15px;
   overflow:hidden;
@@ -274,7 +286,7 @@ body.dark .table-count{
 table{
   width:100%;
   border-collapse:collapse;
-  min-width:650px;
+  min-width:700px;
 }
 
 thead{
@@ -326,6 +338,66 @@ body.dark tbody tr:hover{
 
 body.dark .empty{
   color:#94a3b8;
+}
+
+
+/* =========================================================
+   BADGES
+========================================================= */
+
+.badge{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding:5px 10px;
+  border-radius:20px;
+  font-size:11px;
+  font-weight:700;
+}
+
+.badge-active{
+  background:#dcfce7;
+  color:#15803d;
+}
+
+.badge-blocked{
+  background:#fee2e2;
+  color:#dc2626;
+}
+
+.badge-inactive{
+  background:#fef3c7;
+  color:#b45309;
+}
+
+.badge-admin{
+  background:#ede9fe;
+  color:#6d28d9;
+}
+
+.badge-manager{
+  background:#dbeafe;
+  color:#1d4ed8;
+}
+
+.badge-support{
+  background:#dcfce7;
+  color:#15803d;
+}
+
+.badge-call{
+  background:#cffafe;
+  color:#0e7490;
+}
+
+.badge-guest{
+  background:#f1f5f9;
+  color:#475569;
+}
+
+body.dark .badge-guest{
+  background:#273449;
+  color:#cbd5e1;
 }
 
 
@@ -432,13 +504,13 @@ body.dark .profile-item:hover{
 
 
 /* =========================================================
-   MODAL
+   MODAL BACKGROUND
 ========================================================= */
 
 .modal-bg{
   position:fixed;
   inset:0;
-  background:rgba(15,23,42,.55);
+  background:rgba(15,23,42,.58);
   display:none;
   align-items:center;
   justify-content:center;
@@ -450,6 +522,11 @@ body.dark .profile-item:hover{
   display:flex;
 }
 
+
+/* =========================================================
+   MODAL
+========================================================= */
+
 .modal{
   width:100%;
   max-width:460px;
@@ -457,6 +534,12 @@ body.dark .profile-item:hover{
   border-radius:16px;
   padding:24px;
   box-shadow:0 25px 60px rgba(0,0,0,.2);
+  max-height:90vh;
+  overflow-y:auto;
+}
+
+.modal.large{
+  max-width:900px;
 }
 
 body.dark .modal{
@@ -490,6 +573,11 @@ body.dark .close{
   color:#e5e7eb;
 }
 
+
+/* =========================================================
+   MODAL FORM
+========================================================= */
+
 .modal-field{
   margin-bottom:15px;
 }
@@ -506,20 +594,25 @@ body.dark .modal-field label{
   color:#cbd5e1;
 }
 
-.modal-field input{
+.modal-field input,
+.modal-field select{
   width:100%;
   height:44px;
   border:1px solid #dbe2ea;
   border-radius:9px;
   padding:0 12px;
   outline:none;
+  background:#fff;
+  color:#172033;
 }
 
-.modal-field input:focus{
+.modal-field input:focus,
+.modal-field select:focus{
   border-color:#16a34a;
 }
 
-body.dark .modal-field input{
+body.dark .modal-field input,
+body.dark .modal-field select{
   background:#111827;
   border-color:#334155;
   color:#fff;
@@ -530,6 +623,66 @@ body.dark .modal-field input{
   justify-content:flex-end;
   gap:9px;
   margin-top:20px;
+}
+
+
+/* =========================================================
+   USERS TOOLBAR
+========================================================= */
+
+.users-toolbar{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  margin-bottom:15px;
+}
+
+.users-search{
+  flex:1;
+}
+
+.users-search input{
+  width:100%;
+  height:42px;
+  border:1px solid #dbe2ea;
+  border-radius:9px;
+  padding:0 12px;
+  outline:none;
+}
+
+.users-search input:focus{
+  border-color:#16a34a;
+}
+
+body.dark .users-search input{
+  background:#111827;
+  border-color:#334155;
+  color:#fff;
+}
+
+
+/* =========================================================
+   USER ACTION BUTTON
+========================================================= */
+
+.edit-btn{
+  border:0;
+  background:#eff6ff;
+  color:#2563eb;
+  padding:7px 11px;
+  border-radius:7px;
+  font-size:12px;
+  font-weight:700;
+}
+
+.edit-btn:hover{
+  background:#dbeafe;
+}
+
+body.dark .edit-btn{
+  background:#172554;
+  color:#93c5fd;
 }
 
 
@@ -612,26 +765,10 @@ body.dark .loader-bg{
    MOBILE
 ========================================================= */
 
-@media(max-width:900px){
+@media(max-width:1000px){
 
   .header{
     padding:0 15px;
-  }
-
-  .logo span{
-    display:none;
-  }
-
-  .header-right{
-    gap:6px;
-  }
-
-  .btn{
-    padding:9px 11px;
-  }
-
-  .main{
-    padding:18px 12px;
   }
 
   .filter-row{
@@ -644,7 +781,7 @@ body.dark .loader-bg{
 
 }
 
-@media(max-width:600px){
+@media(max-width:700px){
 
   .header{
     height:auto;
@@ -652,10 +789,27 @@ body.dark .loader-bg{
     padding:10px 12px;
   }
 
-  .header-right .theme-text,
-  .header-right .reload-text,
-  .header-right .new-text{
+  .logo span{
     display:none;
+  }
+
+  .header-right{
+    gap:5px;
+  }
+
+  .header-right .reload-text,
+  .header-right .new-text,
+  .header-right .users-text,
+  .header-right .theme-text{
+    display:none;
+  }
+
+  .btn{
+    padding:9px 10px;
+  }
+
+  .main{
+    padding:18px 12px;
   }
 
   .filter-row{
@@ -672,6 +826,15 @@ body.dark .loader-bg{
 
   .filter-buttons .btn{
     flex:1;
+  }
+
+  .users-toolbar{
+    flex-direction:column;
+    align-items:stretch;
+  }
+
+  .users-toolbar .btn{
+    width:100%;
   }
 
   .modal{
@@ -723,7 +886,21 @@ body.dark .loader-bg{
     </button>
 
 
-    <!-- New Entry -->
+    <!-- USERS -->
+
+    <button
+      class="btn btn-light"
+      id="usersButton"
+      onclick="openUsersModal()"
+    >
+      👥
+      <span class="users-text">
+        Users
+      </span>
+    </button>
+
+
+    <!-- NEW ENTRY -->
 
     <button
       class="btn btn-green"
@@ -736,7 +913,7 @@ body.dark .loader-bg{
     </button>
 
 
-    <!-- Dark Mode -->
+    <!-- THEME -->
 
     <button
       class="btn btn-light"
@@ -750,7 +927,7 @@ body.dark .loader-bg{
     </button>
 
 
-    <!-- Profile -->
+    <!-- PROFILE -->
 
     <div class="profile-wrap">
 
@@ -909,10 +1086,9 @@ body.dark .loader-bg{
   </section>
 
 
-  <!-- TABLE -->
+  <!-- DATA TABLE -->
 
   <section class="table-card">
-
 
     <div class="table-header">
 
@@ -938,21 +1114,10 @@ body.dark .loader-bg{
 
           <tr>
 
-            <th>
-              Name
-            </th>
-
-            <th>
-              IP
-            </th>
-
-            <th>
-              Work
-            </th>
-
-            <th>
-              Date
-            </th>
+            <th>Name</th>
+            <th>IP</th>
+            <th>Work</th>
+            <th>Date</th>
 
           </tr>
 
@@ -982,6 +1147,296 @@ body.dark .loader-bg{
 
 
 </main>
+
+
+<!-- =========================================================
+     USERS MODAL
+========================================================= -->
+
+<div
+  class="modal-bg"
+  id="usersModal"
+>
+
+  <div class="modal large">
+
+    <div class="modal-head">
+
+      <div class="modal-title">
+        User Management
+      </div>
+
+      <button
+        class="close"
+        onclick="closeUsersModal()"
+      >
+        ×
+      </button>
+
+    </div>
+
+
+    <div class="users-toolbar">
+
+      <div class="users-search">
+
+        <input
+          type="text"
+          id="userSearch"
+          placeholder="Search username, name, role or status..."
+          oninput="filterUsers()"
+        >
+
+      </div>
+
+
+      <button
+        class="btn btn-green"
+        onclick="openAddUserModal()"
+      >
+        + Add User
+      </button>
+
+    </div>
+
+
+    <div class="table-wrap">
+
+      <table>
+
+        <thead>
+
+          <tr>
+
+            <th>
+              Username
+            </th>
+
+            <th>
+              Name
+            </th>
+
+            <th>
+              Role
+            </th>
+
+            <th>
+              Status
+            </th>
+
+            <th>
+              Action
+            </th>
+
+          </tr>
+
+        </thead>
+
+
+        <tbody id="usersBody">
+
+          <tr>
+
+            <td
+              colspan="5"
+              class="empty"
+            >
+              Loading users...
+            </td>
+
+          </tr>
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- =========================================================
+     ADD / EDIT USER MODAL
+========================================================= -->
+
+<div
+  class="modal-bg"
+  id="userFormModal"
+>
+
+  <div class="modal">
+
+    <div class="modal-head">
+
+      <div
+        class="modal-title"
+        id="userFormTitle"
+      >
+        Add User
+      </div>
+
+      <button
+        class="close"
+        onclick="closeUserFormModal()"
+      >
+        ×
+      </button>
+
+    </div>
+
+
+    <!-- Username -->
+
+    <div class="modal-field">
+
+      <label>
+        Username
+      </label>
+
+      <input
+        type="text"
+        id="formUsername"
+        placeholder="Enter username"
+      >
+
+    </div>
+
+
+    <!-- Password -->
+
+    <div class="modal-field">
+
+      <label>
+        Password
+      </label>
+
+      <input
+        type="password"
+        id="formPassword"
+        placeholder="Enter password"
+      >
+
+      <div
+        id="passwordHint"
+        style="
+          font-size:11px;
+          color:#64748b;
+          margin-top:5px;
+        "
+      >
+        Password is required for new users.
+      </div>
+
+    </div>
+
+
+    <!-- Name -->
+
+    <div class="modal-field">
+
+      <label>
+        Name
+      </label>
+
+      <input
+        type="text"
+        id="formName"
+        placeholder="Enter name"
+      >
+
+    </div>
+
+
+    <!-- Role -->
+
+    <div class="modal-field">
+
+      <label>
+        Role
+      </label>
+
+      <select
+        id="formRole"
+      >
+
+        <option value="admin">
+          Admin
+        </option>
+
+        <option value="manager">
+          Manager
+        </option>
+
+        <option value="support">
+          Support
+        </option>
+
+        <option value="call">
+          Call
+        </option>
+
+        <option value="guest">
+          Guest
+        </option>
+
+      </select>
+
+    </div>
+
+
+    <!-- Status -->
+
+    <div class="modal-field">
+
+      <label>
+        Status
+      </label>
+
+      <select
+        id="formStatus"
+      >
+
+        <option value="Active">
+          Active
+        </option>
+
+        <option value="Blocked">
+          Blocked
+        </option>
+
+        <option value="Inactive">
+          Inactive
+        </option>
+
+      </select>
+
+    </div>
+
+
+    <div class="modal-actions">
+
+      <button
+        class="btn btn-light"
+        onclick="closeUserFormModal()"
+      >
+        Cancel
+      </button>
+
+      <button
+        class="btn btn-green"
+        id="userSaveButton"
+        onclick="saveUser()"
+      >
+        Add User
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
 
 
 <!-- =========================================================
@@ -1223,13 +1678,13 @@ body.dark .loader-bg{
 
 
 // USER SPREADSHEET API
-// Login / Get User / Change Password
+// Login / User / Add User / Edit User / Change Password
 
 const USER_API_URL =
   "https://script.google.com/macros/s/AKfycbw00GHHheuvtdQtgPURjs4PtsM48-4yaFx-_ms0ZBV5FHhnmcdbJ5DHr3Aix8JPF0kQzA/exec";
 
 
-// DATA / LOADING SPREADSHEET API
+// DATA SPREADSHEET API
 // Dashboard Data / New Entry
 
 const DATA_API_URL =
@@ -1237,12 +1692,18 @@ const DATA_API_URL =
 
 
 // ============================================================
-// GLOBAL VARIABLES
+// GLOBAL
 // ============================================================
 
 let currentUser = null;
 
 let allData = [];
+
+let allUsers = [];
+
+let editingUsername = "";
+
+let userFormMode = "add";
 
 let toastTimer = null;
 
@@ -1274,20 +1735,20 @@ function checkLogin(){
       "dashboardAuth"
     );
 
-
   const sessionAuth =
     sessionStorage.getItem(
       "dashboardAuth"
     );
 
 
-  if (
+  if(
     auth !== "true" &&
     sessionAuth !== "true"
   ){
 
-    window.location.href =
-      "index.html";
+    window.location.replace(
+      "index.html"
+    );
 
     return;
 
@@ -1310,10 +1771,6 @@ async function loadUser(){
     let savedUser = null;
 
 
-    // --------------------------------------------------------
-    // Try userData
-    // --------------------------------------------------------
-
     const userData =
       localStorage.getItem(
         "userData"
@@ -1325,16 +1782,14 @@ async function loadUser(){
       try{
 
         savedUser =
-          JSON.parse(userData);
+          JSON.parse(
+            userData
+          );
 
       }catch(e){}
 
     }
 
-
-    // --------------------------------------------------------
-    // Try loginData
-    // --------------------------------------------------------
 
     if(!savedUser){
 
@@ -1349,7 +1804,9 @@ async function loadUser(){
         try{
 
           const parsed =
-            JSON.parse(loginData);
+            JSON.parse(
+              loginData
+            );
 
           savedUser =
             parsed.user ||
@@ -1361,10 +1818,6 @@ async function loadUser(){
 
     }
 
-
-    // --------------------------------------------------------
-    // Try currentUser
-    // --------------------------------------------------------
 
     if(!savedUser){
 
@@ -1379,7 +1832,9 @@ async function loadUser(){
         try{
 
           savedUser =
-            JSON.parse(current);
+            JSON.parse(
+              current
+            );
 
         }catch(e){}
 
@@ -1387,10 +1842,6 @@ async function loadUser(){
 
     }
 
-
-    // --------------------------------------------------------
-    // Username fallback
-    // --------------------------------------------------------
 
     let username =
       localStorage.getItem(
@@ -1419,21 +1870,13 @@ async function loadUser(){
     }
 
 
-    // --------------------------------------------------------
-    // Fetch current user from USER API
-    // --------------------------------------------------------
-
-    const url =
-      USER_API_URL +
-      "?action=getUser&username=" +
-      encodeURIComponent(
-        username
-      );
-
-
     const response =
       await fetch(
-        url,
+        USER_API_URL +
+        "?action=getUser&username=" +
+        encodeURIComponent(
+          username
+        ),
         {
           method:"GET",
           cache:"no-store"
@@ -1470,6 +1913,8 @@ async function loadUser(){
 
     updateProfileUI();
 
+    updateUsersButton();
+
     loadData();
 
 
@@ -1477,8 +1922,6 @@ async function loadUser(){
 
     console.error(error);
 
-
-    // Use saved local data if API temporarily fails
 
     const saved =
       localStorage.getItem(
@@ -1494,6 +1937,9 @@ async function loadUser(){
           JSON.parse(saved);
 
         updateProfileUI();
+
+        updateUsersButton();
+
         loadData();
 
         return;
@@ -1514,7 +1960,7 @@ async function loadUser(){
 
 
 // ============================================================
-// UPDATE PROFILE UI
+// PROFILE UI
 // ============================================================
 
 function updateProfileUI(){
@@ -1561,8 +2007,6 @@ function updateProfileUI(){
       .toUpperCase();
 
 
-  // Keep local information updated
-
   localStorage.setItem(
     "username",
     username
@@ -1589,6 +2033,52 @@ function updateProfileUI(){
       currentUser
     )
   );
+
+}
+
+
+// ============================================================
+// USER BUTTON PERMISSION
+// ============================================================
+
+function updateUsersButton(){
+
+  const button =
+    document.getElementById(
+      "usersButton"
+    );
+
+
+  if(!button){
+    return;
+  }
+
+
+  const role =
+    String(
+      currentUser &&
+      currentUser.role
+        ? currentUser.role
+        : ""
+    )
+    .trim()
+    .toLowerCase();
+
+
+  if(
+    role === "admin" ||
+    role === "manager"
+  ){
+
+    button.style.display =
+      "block";
+
+  }else{
+
+    button.style.display =
+      "none";
+
+  }
 
 }
 
@@ -1689,7 +2179,7 @@ async function loadData(){
 
 
 // ============================================================
-// APPLY FILTERS
+// FILTER DATA
 // ============================================================
 
 function applyFilters(){
@@ -1742,8 +2232,6 @@ function applyFilters(){
           );
 
 
-        // Search
-
         if(
           search &&
           !(
@@ -1760,8 +2248,6 @@ function applyFilters(){
 
         }
 
-
-        // Date
 
         if(
           fromDate ||
@@ -1820,7 +2306,7 @@ function applyFilters(){
 
 
 // ============================================================
-// PARSE DATE
+// DATE PARSER
 // ============================================================
 
 function parseDateForFilter(
@@ -1846,8 +2332,6 @@ function parseDateForFilter(
 
   }
 
-
-  // dd MMMM yyyy
 
   const match =
     value.match(
@@ -1886,9 +2370,13 @@ function parseDateForFilter(
     ){
 
       return new Date(
-        Number(match[3]),
+        Number(
+          match[3]
+        ),
         month,
-        Number(match[1])
+        Number(
+          match[1]
+        )
       );
 
     }
@@ -1993,41 +2481,6 @@ function renderData(
 
 
 // ============================================================
-// ESCAPE HTML
-// ============================================================
-
-function escapeHtml(
-  value
-){
-
-  return String(
-    value || ""
-  )
-  .replace(
-    /&/g,
-    "&amp;"
-  )
-  .replace(
-    /</g,
-    "&lt;"
-  )
-  .replace(
-    />/g,
-    "&gt;"
-  )
-  .replace(
-    /"/g,
-    "&quot;"
-  )
-  .replace(
-    /'/g,
-    "&#039;"
-  );
-
-}
-
-
-// ============================================================
 // CLEAR FILTERS
 // ============================================================
 
@@ -2037,11 +2490,9 @@ function clearFilters(){
     "searchInput"
   ).value = "";
 
-
   document.getElementById(
     "fromDate"
   ).value = "";
-
 
   document.getElementById(
     "toDate"
@@ -2056,7 +2507,7 @@ function clearFilters(){
 
 
 // ============================================================
-// OPEN ENTRY MODAL
+// NEW ENTRY
 // ============================================================
 
 function openEntryModal(){
@@ -2081,22 +2532,17 @@ function openEntryModal(){
     "";
 
 
-  const now =
-    new Date();
-
-
   document.getElementById(
     "entryDate"
   ).value =
     formatDateTime(
-      now
+      new Date()
     );
 
 
   document.getElementById(
     "entryIP"
   ).value = "";
-
 
   document.getElementById(
     "entryWork"
@@ -2123,10 +2569,6 @@ function openEntryModal(){
 
 }
 
-
-// ============================================================
-// CLOSE ENTRY MODAL
-// ============================================================
 
 function closeEntryModal(){
 
@@ -2211,7 +2653,8 @@ async function saveEntry(){
 
           body:JSON.stringify({
 
-            action:"addEntry",
+            action:
+              "addEntry",
 
             username:
               currentUser.username,
@@ -2266,7 +2709,7 @@ async function saveEntry(){
 
 
     showToast(
-      "Could not connect to server.",
+      "Could not connect to Data server.",
       "error"
     );
 
@@ -2281,81 +2724,939 @@ async function saveEntry(){
 
 
 // ============================================================
-// FORMAT DATE TIME
+// USERS MODAL
 // ============================================================
 
-function formatDateTime(
-  date
-){
+async function openUsersModal(){
 
-  const day =
-    String(
-      date.getDate()
-    ).padStart(
-      2,
-      "0"
+  if(!currentUser){
+
+    showToast(
+      "User information not available.",
+      "error"
     );
 
+    return;
 
-  const month =
+  }
+
+
+  const role =
     String(
-      date.getMonth() + 1
-    ).padStart(
-      2,
-      "0"
+      currentUser.role || ""
+    )
+    .toLowerCase();
+
+
+  if(
+    role !== "admin" &&
+    role !== "manager"
+  ){
+
+    showToast(
+      "Only Admin or Manager can manage users.",
+      "error"
     );
 
+    return;
 
-  const year =
-    date.getFullYear();
-
-
-  const hours =
-    String(
-      date.getHours()
-    ).padStart(
-      2,
-      "0"
-    );
+  }
 
 
-  const minutes =
-    String(
-      date.getMinutes()
-    ).padStart(
-      2,
-      "0"
-    );
+  document.getElementById(
+    "usersModal"
+  ).classList.add(
+    "show"
+  );
 
 
-  const seconds =
-    String(
-      date.getSeconds()
-    ).padStart(
-      2,
-      "0"
-    );
+  await loadUsers();
+
+}
 
 
-  return (
-    day +
-    "/" +
-    month +
-    "/" +
-    year +
-    " " +
-    hours +
-    ":" +
-    minutes +
-    ":" +
-    seconds
+function closeUsersModal(){
+
+  document.getElementById(
+    "usersModal"
+  ).classList.remove(
+    "show"
   );
 
 }
 
 
 // ============================================================
-// OPEN PASSWORD MODAL
+// LOAD USERS
+// ============================================================
+
+async function loadUsers(){
+
+  const body =
+    document.getElementById(
+      "usersBody"
+    );
+
+
+  body.innerHTML = `
+
+    <tr>
+
+      <td
+        colspan="5"
+        class="empty"
+      >
+        Loading users...
+      </td>
+
+    </tr>
+
+  `;
+
+
+  try{
+
+    const requester =
+      currentUser.username;
+
+
+    const response =
+      await fetch(
+        USER_API_URL +
+        "?action=getUsers&requester=" +
+        encodeURIComponent(
+          requester
+        ) +
+        "&_=" +
+        Date.now(),
+        {
+          method:"GET",
+          cache:"no-store"
+        }
+      );
+
+
+    const result =
+      await response.json();
+
+
+    if(
+      !result ||
+      !result.success
+    ){
+
+      throw new Error(
+        result &&
+        result.message
+          ? result.message
+          : "Could not load users."
+      );
+
+    }
+
+
+    allUsers =
+      Array.isArray(
+        result.users
+      )
+        ? result.users
+        : [];
+
+
+    renderUsers(
+      allUsers
+    );
+
+
+  }catch(error){
+
+    console.error(error);
+
+
+    body.innerHTML = `
+
+      <tr>
+
+        <td
+          colspan="5"
+          class="empty"
+        >
+          ${escapeHtml(
+            error.message ||
+            "Could not load users."
+          )}
+        </td>
+
+      </tr>
+
+    `;
+
+
+    showToast(
+      error.message ||
+      "Could not load users.",
+      "error"
+    );
+
+  }
+
+}
+
+
+// ============================================================
+// RENDER USERS
+// ============================================================
+
+function renderUsers(
+  users
+){
+
+  const body =
+    document.getElementById(
+      "usersBody"
+    );
+
+
+  if(!users.length){
+
+    body.innerHTML = `
+
+      <tr>
+
+        <td
+          colspan="5"
+          class="empty"
+        >
+          No users found.
+        </td>
+
+      </tr>
+
+    `;
+
+    return;
+
+  }
+
+
+  body.innerHTML =
+    users
+      .map(
+        function(user){
+
+          return `
+
+            <tr>
+
+              <td>
+                <strong>
+                  ${escapeHtml(
+                    user.username
+                  )}
+                </strong>
+              </td>
+
+              <td>
+                ${escapeHtml(
+                  user.name
+                )}
+              </td>
+
+              <td>
+                <span
+                  class="badge badge-${getRoleClass(
+                    user.role
+                  )}"
+                >
+                  ${escapeHtml(
+                    capitalize(
+                      user.role
+                    )
+                  )}
+                </span>
+              </td>
+
+              <td>
+                <span
+                  class="badge badge-${getStatusClass(
+                    user.status
+                  )}"
+                >
+                  ${escapeHtml(
+                    capitalize(
+                      user.status
+                    )
+                  )}
+                </span>
+              </td>
+
+              <td>
+
+                <button
+                  class="edit-btn"
+                  onclick="openEditUserModal(
+                    '${escapeJs(
+                      user.username
+                    )}'
+                  )"
+                >
+                  Edit
+                </button>
+
+              </td>
+
+            </tr>
+
+          `;
+
+        }
+      )
+      .join("");
+
+}
+
+
+// ============================================================
+// USER SEARCH
+// ============================================================
+
+function filterUsers(){
+
+  const search =
+    document.getElementById(
+      "userSearch"
+    ).value
+      .trim()
+      .toLowerCase();
+
+
+  const filtered =
+    allUsers.filter(
+      function(user){
+
+        return (
+
+          String(
+            user.username || ""
+          )
+          .toLowerCase()
+          .includes(search)
+
+          ||
+
+          String(
+            user.name || ""
+          )
+          .toLowerCase()
+          .includes(search)
+
+          ||
+
+          String(
+            user.role || ""
+          )
+          .toLowerCase()
+          .includes(search)
+
+          ||
+
+          String(
+            user.status || ""
+          )
+          .toLowerCase()
+          .includes(search)
+
+        );
+
+      }
+    );
+
+
+  renderUsers(
+    filtered
+  );
+
+}
+
+
+// ============================================================
+// ADD USER MODAL
+// ============================================================
+
+function openAddUserModal(){
+
+  userFormMode =
+    "add";
+
+  editingUsername =
+    "";
+
+
+  document.getElementById(
+    "userFormTitle"
+  ).textContent =
+    "Add User";
+
+
+  document.getElementById(
+    "userSaveButton"
+  ).textContent =
+    "Add User";
+
+
+  document.getElementById(
+    "formUsername"
+  ).value = "";
+
+
+  document.getElementById(
+    "formPassword"
+  ).value = "";
+
+
+  document.getElementById(
+    "formName"
+  ).value = "";
+
+
+  document.getElementById(
+    "formRole"
+  ).value =
+    "support";
+
+
+  document.getElementById(
+    "formStatus"
+  ).value =
+    "Active";
+
+
+  document.getElementById(
+    "passwordHint"
+  ).textContent =
+    "Password is required for new users.";
+
+
+  document.getElementById(
+    "userFormModal"
+  ).classList.add(
+    "show"
+  );
+
+
+  setTimeout(
+    function(){
+
+      document.getElementById(
+        "formUsername"
+      ).focus();
+
+    },
+    100
+  );
+
+}
+
+
+// ============================================================
+// EDIT USER MODAL
+// ============================================================
+
+function openEditUserModal(
+  username
+){
+
+  const user =
+    allUsers.find(
+      function(item){
+
+        return String(
+          item.username
+        )
+        .toLowerCase() ===
+        String(
+          username
+        )
+        .toLowerCase();
+
+      }
+    );
+
+
+  if(!user){
+
+    showToast(
+      "User not found.",
+      "error"
+    );
+
+    return;
+
+  }
+
+
+  userFormMode =
+    "edit";
+
+
+  editingUsername =
+    user.username;
+
+
+  document.getElementById(
+    "userFormTitle"
+  ).textContent =
+    "Edit User";
+
+
+  document.getElementById(
+    "userSaveButton"
+  ).textContent =
+    "Save Changes";
+
+
+  document.getElementById(
+    "formUsername"
+  ).value =
+    user.username;
+
+
+  document.getElementById(
+    "formPassword"
+  ).value = "";
+
+
+  document.getElementById(
+    "formName"
+  ).value =
+    user.name || "";
+
+
+  document.getElementById(
+    "formRole"
+  ).value =
+    user.role || "guest";
+
+
+  document.getElementById(
+    "formStatus"
+  ).value =
+    user.status || "Active";
+
+
+  document.getElementById(
+    "passwordHint"
+  ).textContent =
+    "Leave password empty to keep the current password.";
+
+
+  document.getElementById(
+    "userFormModal"
+  ).classList.add(
+    "show"
+  );
+
+}
+
+
+function closeUserFormModal(){
+
+  document.getElementById(
+    "userFormModal"
+  ).classList.remove(
+    "show"
+  );
+
+}
+
+
+// ============================================================
+// SAVE USER
+// ============================================================
+
+async function saveUser(){
+
+  if(!currentUser){
+
+    showToast(
+      "User information not available.",
+      "error"
+    );
+
+    return;
+
+  }
+
+
+  const username =
+    document.getElementById(
+      "formUsername"
+    ).value.trim();
+
+
+  const password =
+    document.getElementById(
+      "formPassword"
+    ).value;
+
+
+  const name =
+    document.getElementById(
+      "formName"
+    ).value.trim();
+
+
+  const role =
+    document.getElementById(
+      "formRole"
+    ).value;
+
+
+  const status =
+    document.getElementById(
+      "formStatus"
+    ).value;
+
+
+  if(!username){
+
+    showToast(
+      "Username is required.",
+      "error"
+    );
+
+    return;
+
+  }
+
+
+  if(
+    userFormMode === "add" &&
+    !password
+  ){
+
+    showToast(
+      "Password is required.",
+      "error"
+    );
+
+    return;
+
+  }
+
+
+  if(
+    password &&
+    password.length < 4
+  ){
+
+    showToast(
+      "Password must be at least 4 characters.",
+      "error"
+    );
+
+    return;
+
+  }
+
+
+  if(!name){
+
+    showToast(
+      "Name is required.",
+      "error"
+    );
+
+    return;
+
+  }
+
+
+  showLoader();
+
+
+  try{
+
+    let body;
+
+
+    // --------------------------------------------------------
+    // ADD
+    // --------------------------------------------------------
+
+    if(
+      userFormMode === "add"
+    ){
+
+      body = {
+
+        action:
+          "addUser",
+
+        requester:
+          currentUser.username,
+
+        username:
+          username,
+
+        password:
+          password,
+
+        name:
+          name,
+
+        role:
+          role,
+
+        status:
+          status
+
+      };
+
+    }
+
+
+    // --------------------------------------------------------
+    // EDIT
+    // --------------------------------------------------------
+
+    else{
+
+      body = {
+
+        action:
+          "editUser",
+
+        requester:
+          currentUser.username,
+
+        originalUsername:
+          editingUsername,
+
+        username:
+          username,
+
+        password:
+          password,
+
+        name:
+          name,
+
+        role:
+          role,
+
+        status:
+          status
+
+      };
+
+    }
+
+
+    const response =
+      await fetch(
+        USER_API_URL,
+        {
+          method:"POST",
+
+          headers:{
+            "Content-Type":
+              "text/plain;charset=utf-8"
+          },
+
+          body:
+            JSON.stringify(
+              body
+            )
+
+        }
+      );
+
+
+    const result =
+      await response.json();
+
+
+    if(
+      result &&
+      result.success
+    ){
+
+      closeUserFormModal();
+
+
+      showToast(
+        userFormMode === "add"
+          ? "User added successfully."
+          : "User updated successfully.",
+        "success"
+      );
+
+
+      await loadUsers();
+
+
+    }else{
+
+      showToast(
+        result &&
+        result.message
+          ? result.message
+          : "Operation failed.",
+        "error"
+      );
+
+    }
+
+
+  }catch(error){
+
+    console.error(error);
+
+
+    showToast(
+      "Could not connect to User server.",
+      "error"
+    );
+
+
+  }finally{
+
+    hideLoader();
+
+  }
+
+}
+
+
+// ============================================================
+// ROLE CLASS
+// ============================================================
+
+function getRoleClass(
+  role
+){
+
+  const value =
+    String(
+      role || ""
+    )
+    .trim()
+    .toLowerCase();
+
+
+  if(
+    value === "admin"
+  ){
+
+    return "admin";
+
+  }
+
+
+  if(
+    value === "manager"
+  ){
+
+    return "manager";
+
+  }
+
+
+  if(
+    value === "support"
+  ){
+
+    return "support";
+
+  }
+
+
+  if(
+    value === "call"
+  ){
+
+    return "call";
+
+  }
+
+
+  return "guest";
+
+}
+
+
+// ============================================================
+// STATUS CLASS
+// ============================================================
+
+function getStatusClass(
+  status
+){
+
+  const value =
+    String(
+      status || ""
+    )
+    .trim()
+    .toLowerCase();
+
+
+  if(
+    value === "active"
+  ){
+
+    return "active";
+
+  }
+
+
+  if(
+    value === "blocked"
+  ){
+
+    return "blocked";
+
+  }
+
+
+  return "inactive";
+
+}
+
+
+// ============================================================
+// CAPITALIZE
+// ============================================================
+
+function capitalize(
+  value
+){
+
+  const text =
+    String(
+      value || ""
+    );
+
+
+  if(!text){
+    return "";
+  }
+
+
+  return (
+    text
+      .charAt(0)
+      .toUpperCase() +
+    text
+      .slice(1)
+  );
+
+}
+
+
+// ============================================================
+// CHANGE PASSWORD
 // ============================================================
 
 function openPasswordModal(){
@@ -2367,11 +3668,9 @@ function openPasswordModal(){
     "currentPassword"
   ).value = "";
 
-
   document.getElementById(
     "newPassword"
   ).value = "";
-
 
   document.getElementById(
     "confirmPassword"
@@ -2399,10 +3698,6 @@ function openPasswordModal(){
 }
 
 
-// ============================================================
-// CLOSE PASSWORD MODAL
-// ============================================================
-
 function closePasswordModal(){
 
   document.getElementById(
@@ -2413,10 +3708,6 @@ function closePasswordModal(){
 
 }
 
-
-// ============================================================
-// CHANGE PASSWORD
-// ============================================================
 
 async function changePassword(){
 
@@ -2523,10 +3814,6 @@ async function changePassword(){
 
   try{
 
-    // IMPORTANT:
-    // Change Password goes to USER API,
-    // NOT Data API.
-
     const response =
       await fetch(
         USER_API_URL,
@@ -2538,21 +3825,22 @@ async function changePassword(){
               "text/plain;charset=utf-8"
           },
 
-          body:JSON.stringify({
+          body:
+            JSON.stringify({
 
-            action:
-              "changePassword",
+              action:
+                "changePassword",
 
-            username:
-              currentUser.username,
+              username:
+                currentUser.username,
 
-            currentPassword:
-              currentPassword,
+              currentPassword:
+                currentPassword,
 
-            newPassword:
-              newPassword
+              newPassword:
+                newPassword
 
-          })
+            })
 
         }
       );
@@ -2574,21 +3862,6 @@ async function changePassword(){
         "Password changed successfully.",
         "success"
       );
-
-
-      document.getElementById(
-        "currentPassword"
-      ).value = "";
-
-
-      document.getElementById(
-        "newPassword"
-      ).value = "";
-
-
-      document.getElementById(
-        "confirmPassword"
-      ).value = "";
 
 
     }else{
@@ -2669,8 +3942,12 @@ document.addEventListener(
     if(
       menu &&
       button &&
-      !menu.contains(event.target) &&
-      !button.contains(event.target)
+      !menu.contains(
+        event.target
+      ) &&
+      !button.contains(
+        event.target
+      )
     ){
 
       menu.classList.remove(
@@ -2729,7 +4006,7 @@ function logout(){
 
 
 // ============================================================
-// DARK MODE
+// THEME
 // ============================================================
 
 function loadTheme(){
@@ -2907,11 +4184,157 @@ function hideLoader(){
 
 
 // ============================================================
-// CLOSE MODALS WHEN CLICK OUTSIDE
+// ESCAPE HTML
+// ============================================================
+
+function escapeHtml(
+  value
+){
+
+  return String(
+    value || ""
+  )
+  .replace(
+    /&/g,
+    "&amp;"
+  )
+  .replace(
+    /</g,
+    "&lt;"
+  )
+  .replace(
+    />/g,
+    "&gt;"
+  )
+  .replace(
+    /"/g,
+    "&quot;"
+  )
+  .replace(
+    /'/g,
+    "&#039;"
+  );
+
+}
+
+
+// ============================================================
+// ESCAPE JAVASCRIPT
+// ============================================================
+
+function escapeJs(
+  value
+){
+
+  return String(
+    value || ""
+  )
+  .replace(
+    /\\/g,
+    "\\\\"
+  )
+  .replace(
+    /'/g,
+    "\\'"
+  )
+  .replace(
+    /"/g,
+    '\\"'
+  )
+  .replace(
+    /\n/g,
+    "\\n"
+  )
+  .replace(
+    /\r/g,
+    "\\r"
+  );
+
+}
+
+
+// ============================================================
+// FORMAT DATE TIME
+// ============================================================
+
+function formatDateTime(
+  date
+){
+
+  const day =
+    String(
+      date.getDate()
+    ).padStart(
+      2,
+      "0"
+    );
+
+
+  const month =
+    String(
+      date.getMonth() + 1
+    ).padStart(
+      2,
+      "0"
+    );
+
+
+  const year =
+    date.getFullYear();
+
+
+  const hours =
+    String(
+      date.getHours()
+    ).padStart(
+      2,
+      "0"
+    );
+
+
+  const minutes =
+    String(
+      date.getMinutes()
+    ).padStart(
+      2,
+      "0"
+    );
+
+
+  const seconds =
+    String(
+      date.getSeconds()
+    ).padStart(
+      2,
+      "0"
+    );
+
+
+  return (
+    day +
+    "/" +
+    month +
+    "/" +
+    year +
+    " " +
+    hours +
+    ":" +
+    minutes +
+    ":" +
+    seconds
+  );
+
+}
+
+
+// ============================================================
+// MODAL OUTSIDE CLICK
 // ============================================================
 
 document
-  .getElementById("entryModal")
+  .getElementById(
+    "entryModal"
+  )
   .addEventListener(
     "click",
     function(event){
@@ -2930,7 +4353,9 @@ document
 
 
 document
-  .getElementById("passwordModal")
+  .getElementById(
+    "passwordModal"
+  )
   .addEventListener(
     "click",
     function(event){
@@ -2941,6 +4366,48 @@ document
       ){
 
         closePasswordModal();
+
+      }
+
+    }
+  );
+
+
+document
+  .getElementById(
+    "usersModal"
+  )
+  .addEventListener(
+    "click",
+    function(event){
+
+      if(
+        event.target ===
+        this
+      ){
+
+        closeUsersModal();
+
+      }
+
+    }
+  );
+
+
+document
+  .getElementById(
+    "userFormModal"
+  )
+  .addEventListener(
+    "click",
+    function(event){
+
+      if(
+        event.target ===
+        this
+      ){
+
+        closeUserFormModal();
 
       }
 
