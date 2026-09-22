@@ -1,9 +1,16 @@
 <!DOCTYPE html>
+
 <html lang="en">
+
 <head>
 
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta
+name="viewport"
+content="width=device-width, initial-scale=1.0"
+
+>
 
 <title>Support Dashboard</title>
 
@@ -24,24 +31,40 @@
 body{
   font-family:Arial,Helvetica,sans-serif;
   background:#f4f7fb;
-  color:#1f2937;
+  color:#172033;
   min-height:100vh;
+  transition:.3s;
 }
 
-/* ================= HEADER ================= */
+body.dark{
+  background:#101522;
+  color:#f5f7fb;
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
 
 .header{
-  background:linear-gradient(135deg,#2563eb,#4f46e5);
-  color:white;
-  padding:14px 20px;
+  height:70px;
+  background:#ffffff;
   display:flex;
   align-items:center;
   justify-content:space-between;
-  gap:15px;
-  box-shadow:0 4px 15px rgba(0,0,0,.12);
+  padding:0 22px;
+  box-shadow:0 3px 15px rgba(0,0,0,.08);
+  position:sticky;
+  top:0;
+  z-index:100;
 }
 
-.header-left{
+.dark .header{
+  background:#171d2b;
+  box-shadow:0 3px 15px rgba(0,0,0,.25);
+}
+
+.logo-area{
   display:flex;
   align-items:center;
   gap:12px;
@@ -51,96 +74,187 @@ body{
   width:42px;
   height:42px;
   border-radius:12px;
-  background:rgba(255,255,255,.18);
   display:flex;
   align-items:center;
   justify-content:center;
+  background:linear-gradient(135deg,#2563eb,#7c3aed);
+  color:white;
   font-size:22px;
   font-weight:bold;
 }
 
-.header-title{
-  font-size:20px;
-  font-weight:700;
+.logo-text h2{
+  font-size:19px;
 }
 
-.header-sub{
+.logo-text p{
   font-size:12px;
-  opacity:.8;
-  margin-top:2px;
+  color:#7b8496;
+  margin-top:3px;
 }
 
-.header-right{
+.header-actions{
   display:flex;
   align-items:center;
   gap:8px;
 }
 
-.icon-btn,
-.profile-btn{
+.icon-btn{
+  width:40px;
+  height:40px;
   border:none;
-  cursor:pointer;
-  color:white;
-  background:rgba(255,255,255,.15);
   border-radius:10px;
-  padding:9px 12px;
+  cursor:pointer;
+  background:#f0f3f8;
+  font-size:18px;
   transition:.2s;
 }
 
-.icon-btn:hover,
-.profile-btn:hover{
-  background:rgba(255,255,255,.25);
+.icon-btn:hover{
+  transform:translateY(-1px);
+  background:#e4e9f2;
+}
+
+.dark .icon-btn{
+  background:#252d3d;
+  color:white;
+}
+
+
+/* =========================================================
+   PROFILE
+========================================================= */
+
+.profile{
+  position:relative;
 }
 
 .profile-btn{
+  border:none;
+  background:transparent;
   display:flex;
   align-items:center;
-  gap:7px;
+  gap:8px;
+  cursor:pointer;
+  padding:4px;
 }
 
-/* ================= CONTAINER ================= */
+.profile-avatar{
+  width:40px;
+  height:40px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:linear-gradient(135deg,#2563eb,#7c3aed);
+  color:white;
+  font-weight:bold;
+}
+
+.profile-name{
+  text-align:left;
+}
+
+.profile-name strong{
+  display:block;
+  font-size:13px;
+}
+
+.profile-name span{
+  display:block;
+  color:#8a93a5;
+  font-size:11px;
+  margin-top:2px;
+}
+
+.profile-menu{
+  position:absolute;
+  right:0;
+  top:52px;
+  width:190px;
+  background:white;
+  border-radius:12px;
+  box-shadow:0 12px 35px rgba(0,0,0,.15);
+  padding:7px;
+  display:none;
+}
+
+.profile-menu.show{
+  display:block;
+}
+
+.dark .profile-menu{
+  background:#1d2534;
+}
+
+.profile-menu button{
+  width:100%;
+  border:none;
+  background:transparent;
+  text-align:left;
+  padding:11px 12px;
+  border-radius:8px;
+  cursor:pointer;
+  font-size:13px;
+  color:inherit;
+}
+
+.profile-menu button:hover{
+  background:#f1f4f9;
+}
+
+.dark .profile-menu button:hover{
+  background:#293244;
+}
+
+
+/* =========================================================
+   MAIN
+========================================================= */
 
 .container{
-  width:min(1400px,96%);
-  margin:20px auto;
+  max-width:1450px;
+  margin:auto;
+  padding:25px;
 }
-
-/* ================= TOP ================= */
 
 .top-bar{
   display:flex;
-  align-items:center;
   justify-content:space-between;
+  align-items:center;
   gap:15px;
-  margin-bottom:16px;
+  margin-bottom:20px;
   flex-wrap:wrap;
 }
 
-.page-title{
+.page-title h1{
   font-size:25px;
-  font-weight:700;
 }
 
-.page-subtitle{
-  color:#6b7280;
+.page-title p{
+  color:#7b8496;
+  margin-top:5px;
   font-size:13px;
-  margin-top:4px;
 }
 
-.top-actions{
+.actions{
   display:flex;
-  gap:8px;
+  gap:9px;
   flex-wrap:wrap;
 }
 
 .btn{
   border:none;
   border-radius:10px;
-  padding:10px 15px;
+  padding:11px 16px;
   cursor:pointer;
-  font-size:14px;
   font-weight:600;
+  font-size:13px;
   transition:.2s;
+}
+
+.btn:hover{
+  transform:translateY(-1px);
 }
 
 .btn-primary{
@@ -148,204 +262,387 @@ body{
   color:white;
 }
 
-.btn-primary:hover{
-  background:#1d4ed8;
-}
-
 .btn-secondary{
-  background:white;
-  color:#374151;
-  border:1px solid #e5e7eb;
+  background:#eef2f7;
+  color:#253047;
 }
 
-.btn-secondary:hover{
-  background:#f9fafb;
+.dark .btn-secondary{
+  background:#252d3d;
+  color:white;
 }
 
-/* ================= STATS ================= */
-
-.stats{
-  display:flex;
-  gap:10px;
-  margin-bottom:16px;
-  flex-wrap:wrap;
+.btn-success{
+  background:#16a34a;
+  color:white;
 }
 
-.stat{
-  background:white;
-  border:1px solid #e5e7eb;
-  border-radius:12px;
-  padding:11px 16px;
-  min-width:130px;
-  box-shadow:0 2px 8px rgba(0,0,0,.04);
+.btn-danger{
+  background:#dc2626;
+  color:white;
 }
 
-.stat-label{
-  color:#6b7280;
-  font-size:12px;
+.btn-warning{
+  background:#f59e0b;
+  color:white;
 }
 
-.stat-value{
-  font-size:20px;
-  font-weight:700;
-  margin-top:3px;
-}
 
-/* ================= FILTER ================= */
+/* =========================================================
+   FILTER CARD
+========================================================= */
 
 .filter-card{
   background:white;
-  border:1px solid #e5e7eb;
-  border-radius:14px;
-  padding:15px;
-  margin-bottom:16px;
-  box-shadow:0 2px 8px rgba(0,0,0,.04);
+  border-radius:15px;
+  padding:17px;
+  box-shadow:0 4px 20px rgba(0,0,0,.06);
+  margin-bottom:18px;
 }
 
-.filter-grid{
+.dark .filter-card{
+  background:#171d2b;
+}
+
+.filters{
   display:grid;
-  grid-template-columns:
-    minmax(180px,1.5fr)
-    minmax(140px,1fr)
-    minmax(140px,1fr)
-    minmax(140px,.8fr)
-    auto;
+  grid-template-columns:2fr 1fr 1fr 170px auto;
   gap:10px;
-  align-items:end;
 }
 
-.field{
-  display:flex;
-  flex-direction:column;
-  gap:6px;
-}
-
-.field label{
-  font-size:12px;
-  font-weight:600;
-  color:#6b7280;
-}
-
-input,
-select{
+.input,
+.select{
   width:100%;
-  height:40px;
-  border:1px solid #dbe1ea;
+  border:1px solid #dce2eb;
+  background:#fff;
+  color:#172033;
   border-radius:9px;
-  padding:0 11px;
+  padding:11px 12px;
   outline:none;
-  background:white;
-  color:#111827;
+  font-size:13px;
 }
 
-input:focus,
-select:focus{
+.input:focus,
+.select:focus{
   border-color:#2563eb;
-  box-shadow:0 0 0 3px rgba(37,99,235,.1);
 }
 
-/* ================= TABLE ================= */
+.dark .input,
+.dark .select{
+  background:#202838;
+  color:white;
+  border-color:#343e51;
+}
+
+
+/* =========================================================
+   TABLE
+========================================================= */
 
 .table-card{
   background:white;
-  border:1px solid #e5e7eb;
-  border-radius:14px;
+  border-radius:15px;
+  box-shadow:0 4px 20px rgba(0,0,0,.06);
   overflow:hidden;
-  box-shadow:0 2px 8px rgba(0,0,0,.04);
+}
+
+.dark .table-card{
+  background:#171d2b;
 }
 
 .table-wrap{
-  width:100%;
-  overflow-x:auto;
+  overflow:auto;
 }
 
 table{
   width:100%;
   border-collapse:collapse;
-  min-width:850px;
+  min-width:800px;
 }
 
 thead{
-  background:#f8fafc;
+  background:#f7f9fc;
 }
 
-th,
-td{
-  padding:12px 13px;
-  border-bottom:1px solid #edf0f4;
+.dark thead{
+  background:#202838;
+}
+
+th{
   text-align:left;
+  padding:14px;
+  font-size:12px;
+  color:#687286;
+  white-space:nowrap;
+}
+
+td{
+  padding:14px;
+  border-top:1px solid #edf0f5;
   font-size:13px;
   white-space:nowrap;
 }
 
-th{
-  color:#475569;
-  font-size:12px;
-  text-transform:uppercase;
-  letter-spacing:.3px;
+.dark td{
+  border-color:#293243;
 }
 
-tbody tr:hover{
-  background:#f8fbff;
+.dark th{
+  color:#aeb6c6;
 }
 
 .empty{
   text-align:center;
-  padding:35px;
-  color:#9ca3af;
+  padding:45px;
+  color:#8a93a5;
 }
 
-/* ================= ACTION ================= */
 
-.action-box{
+/* =========================================================
+   MODAL
+========================================================= */
+
+.modal-bg{
+  position:fixed;
+  inset:0;
+  background:rgba(10,16,28,.62);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  z-index:500;
+  padding:20px;
+}
+
+.modal-bg.show{
   display:flex;
-  gap:5px;
 }
 
-.action-btn{
+.modal{
+  width:100%;
+  max-width:560px;
+  max-height:90vh;
+  overflow:auto;
+  background:white;
+  border-radius:17px;
+  box-shadow:0 20px 70px rgba(0,0,0,.25);
+  padding:22px;
+}
+
+.dark .modal{
+  background:#171d2b;
+}
+
+.modal.large{
+  max-width:900px;
+}
+
+.modal-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:20px;
+}
+
+.modal-head h3{
+  font-size:19px;
+}
+
+.close{
+  width:34px;
+  height:34px;
   border:none;
-  border-radius:7px;
-  padding:6px 9px;
+  border-radius:9px;
+  background:#eef1f6;
   cursor:pointer;
+  font-size:18px;
+}
+
+.dark .close{
+  background:#273041;
+  color:white;
+}
+
+.form-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:13px;
+}
+
+.form-group{
+  margin-bottom:13px;
+}
+
+.form-group.full{
+  grid-column:1/-1;
+}
+
+.form-group label{
+  display:block;
   font-size:12px;
   font-weight:600;
+  margin-bottom:6px;
 }
 
-.edit-btn{
-  background:#eff6ff;
-  color:#2563eb;
+.modal-footer{
+  display:flex;
+  justify-content:flex-end;
+  gap:9px;
+  margin-top:18px;
 }
 
-.sell-btn{
-  background:#ecfdf5;
-  color:#059669;
+
+/* =========================================================
+   USER TABLE
+========================================================= */
+
+.user-table-wrap{
+  overflow:auto;
 }
 
-.delete-btn{
-  background:#fef2f2;
-  color:#dc2626;
+.user-table{
+  width:100%;
+  min-width:700px;
 }
 
-.action-btn:hover{
-  opacity:.8;
+.status{
+  display:inline-flex;
+  padding:5px 9px;
+  border-radius:20px;
+  font-size:11px;
+  font-weight:bold;
 }
 
-/* ================= TABLE LOADING ================= */
+.status-active{
+  background:#dcfce7;
+  color:#15803d;
+}
 
-.table-loading{
-  padding:30px;
+.status-block{
+  background:#fee2e2;
+  color:#b91c1c;
+}
+
+.role{
+  display:inline-flex;
+  padding:5px 9px;
+  border-radius:20px;
+  background:#e0e7ff;
+  color:#4338ca;
+  font-size:11px;
+  font-weight:bold;
+}
+
+.user-actions{
+  display:flex;
+  gap:6px;
+}
+
+.small-btn{
+  border:none;
+  padding:7px 10px;
+  border-radius:7px;
+  cursor:pointer;
+  font-size:11px;
+  font-weight:bold;
+}
+
+.small-edit{
+  background:#dbeafe;
+  color:#1d4ed8;
+}
+
+.small-block{
+  background:#fee2e2;
+  color:#b91c1c;
+}
+
+.small-unblock{
+  background:#dcfce7;
+  color:#15803d;
+}
+
+
+/* =========================================================
+   TOAST
+========================================================= */
+
+.toast{
+  position:fixed;
+  right:20px;
+  bottom:20px;
+  min-width:260px;
+  max-width:400px;
+  padding:13px 16px;
+  border-radius:11px;
+  background:#172033;
+  color:white;
+  box-shadow:0 10px 35px rgba(0,0,0,.2);
+  transform:translateY(100px);
+  opacity:0;
+  pointer-events:none;
+  transition:.3s;
+  z-index:1000;
+  font-size:13px;
+}
+
+.toast.show{
+  transform:translateY(0);
+  opacity:1;
+}
+
+.toast.success{
+  background:#15803d;
+}
+
+.toast.error{
+  background:#b91c1c;
+}
+
+
+/* =========================================================
+   LOADER
+========================================================= */
+
+.loader-bg{
+  position:fixed;
+  inset:0;
+  background:rgba(255,255,255,.7);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  z-index:2000;
+  backdrop-filter:blur(3px);
+}
+
+.dark .loader-bg{
+  background:rgba(10,15,25,.72);
+}
+
+.loader-bg.show{
+  display:flex;
+}
+
+.loader-box{
+  background:white;
+  padding:25px 30px;
+  border-radius:15px;
   text-align:center;
-  color:#6b7280;
+  box-shadow:0 10px 40px rgba(0,0,0,.18);
+}
+
+.dark .loader-box{
+  background:#1b2331;
+  color:white;
 }
 
 .spinner{
-  width:26px;
-  height:26px;
-  border:3px solid #e5e7eb;
+  width:35px;
+  height:35px;
+  border:4px solid #e3e8f0;
   border-top-color:#2563eb;
   border-radius:50%;
-  animation:spin .7s linear infinite;
-  margin:0 auto 9px;
+  animation:spin .8s linear infinite;
+  margin:0 auto 12px;
 }
 
 @keyframes spin{
@@ -354,204 +651,39 @@ tbody tr:hover{
   }
 }
 
-/* ================= PAGINATION ================= */
 
-.pagination{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  padding:12px 15px;
-  gap:10px;
-  flex-wrap:wrap;
-}
+/* =========================================================
+   MOBILE
+========================================================= */
 
-.page-info{
-  font-size:12px;
-  color:#6b7280;
-}
-
-.page-buttons{
-  display:flex;
-  gap:5px;
-  flex-wrap:wrap;
-}
-
-.page-btn{
-  min-width:34px;
-  height:32px;
-  border:1px solid #e5e7eb;
-  background:white;
-  border-radius:7px;
-  cursor:pointer;
-}
-
-.page-btn.active{
-  background:#2563eb;
-  color:white;
-  border-color:#2563eb;
-}
-
-.page-btn:disabled{
-  opacity:.45;
-  cursor:not-allowed;
-}
-
-/* ================= MODAL ================= */
-
-.modal{
-  position:fixed;
-  inset:0;
-  background:rgba(15,23,42,.55);
-  display:none;
-  align-items:center;
-  justify-content:center;
-  padding:15px;
-  z-index:1000;
-}
-
-.modal.show{
-  display:flex;
-}
-
-.modal-box{
-  width:min(500px,100%);
-  background:white;
-  border-radius:16px;
-  padding:20px;
-  box-shadow:0 20px 60px rgba(0,0,0,.25);
-}
-
-.modal-header{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  margin-bottom:18px;
-}
-
-.modal-title{
-  font-size:19px;
-  font-weight:700;
-}
-
-.close-btn{
-  border:none;
-  background:#f3f4f6;
-  width:32px;
-  height:32px;
-  border-radius:8px;
-  cursor:pointer;
-  font-size:18px;
-}
-
-.modal-form{
-  display:grid;
-  gap:13px;
-}
-
-.modal-actions{
-  display:flex;
-  justify-content:flex-end;
-  gap:8px;
-  margin-top:8px;
-}
-
-/* ================= TOAST ================= */
-
-.toast-container{
-  position:fixed;
-  top:20px;
-  right:20px;
-  z-index:3000;
-  display:flex;
-  flex-direction:column;
-  gap:8px;
-}
-
-.toast{
-  min-width:240px;
-  max-width:350px;
-  padding:12px 15px;
-  border-radius:10px;
-  background:#111827;
-  color:white;
-  box-shadow:0 10px 30px rgba(0,0,0,.2);
-  animation:toastIn .25s ease;
-  font-size:13px;
-}
-
-.toast.success{
-  background:#059669;
-}
-
-.toast.error{
-  background:#dc2626;
-}
-
-@keyframes toastIn{
-  from{
-    transform:translateX(30px);
-    opacity:0;
-  }
-  to{
-    transform:translateX(0);
-    opacity:1;
-  }
-}
-
-/* ================= RESPONSIVE ================= */
-
-@media(max-width:900px){
-
-  .filter-grid{
-    grid-template-columns:1fr 1fr;
-  }
-
-}
-
-@media(max-width:600px){
+@media(max-width:800px){
 
   .header{
-    padding:12px;
+    padding:0 13px;
   }
 
-  .header-title{
-    font-size:17px;
+  .profile-name{
+    display:none;
   }
 
   .container{
-    width:94%;
-    margin:14px auto;
+    padding:15px;
   }
 
-  .page-title{
-    font-size:21px;
-  }
-
-  .filter-grid{
+  .filters{
     grid-template-columns:1fr;
   }
 
-  .top-actions{
-    width:100%;
+  .form-grid{
+    grid-template-columns:1fr;
   }
 
-  .top-actions .btn{
-    flex:1;
+  .form-group.full{
+    grid-column:auto;
   }
 
-  .stat{
-    flex:1;
-  }
-
-  .toast-container{
-    left:12px;
-    right:12px;
-    top:12px;
-  }
-
-  .toast{
-    min-width:0;
-    max-width:none;
+  .page-title h1{
+    font-size:21px;
   }
 
 }
@@ -562,815 +694,1092 @@ tbody tr:hover{
 
 <body>
 
-
-<!-- ============================================================
+<!-- =======================================================
      HEADER
-============================================================ -->
+======================================================= -->
 
 <header class="header">
 
-  <div class="header-left">
+  <div class="logo-area">
 
-    <div class="logo">
-      S
-    </div>
+```
+<div class="logo">
+  S
+</div>
 
-    <div>
-      <div class="header-title">
-        Support Dashboard
-      </div>
+<div class="logo-text">
 
-      <div class="header-sub">
-        Data Management System
-      </div>
-    </div>
+  <h2>Support Dashboard</h2>
+
+  <p>Admin Management System</p>
+
+</div>
+```
 
   </div>
 
+  <div class="header-actions">
 
-  <div class="header-right">
+```
+<button
+  class="icon-btn"
+  onclick="loadData()"
+  title="Reload"
+>
+  ↻
+</button>
 
-    <button
-      class="icon-btn"
-      onclick="loadCurrentData()"
-      title="Refresh"
+
+<button
+  class="btn btn-primary"
+  onclick="openUsersModal()"
+>
+  Users
+</button>
+
+
+<button
+  class="btn btn-success"
+  onclick="openEntryModal()"
+>
+  + New Entry
+</button>
+
+
+<button
+  class="icon-btn"
+  onclick="toggleTheme()"
+  id="themeBtn"
+  title="Theme"
+>
+  🌙
+</button>
+
+
+<div class="profile">
+
+  <button
+    class="profile-btn"
+    onclick="toggleProfileMenu()"
+  >
+
+    <div
+      class="profile-avatar"
+      id="profileAvatar"
     >
-      ↻
-    </button>
+      U
+    </div>
 
-    <button
-      class="profile-btn"
-      onclick="showProfile()"
-    >
-      👤
-      <span id="profileName">
+    <div class="profile-name">
+
+      <strong id="profileName">
+        User
+      </strong>
+
+      <span id="profileRole">
         User
       </span>
+
+    </div>
+
+  </button>
+
+
+  <div
+    class="profile-menu"
+    id="profileMenu"
+  >
+
+    <button onclick="openPasswordModal()">
+      🔑 Change Password
     </button>
+
+    <button onclick="logout()">
+      🚪 Logout
+    </button>
+
+  </div>
+
+</div>
+```
 
   </div>
 
 </header>
 
-
-<!-- ============================================================
+<!-- =======================================================
      MAIN
-============================================================ -->
+======================================================= -->
 
-<div class="container">
-
+<main class="container">
 
   <div class="top-bar">
 
-    <div>
+```
+<div class="page-title">
 
-      <div class="page-title">
-        Dashboard
-      </div>
+  <h1>Dashboard</h1>
 
-      <div class="page-subtitle">
-        Manage your support data
-      </div>
+  <p>
+    Manage support data and users
+  </p>
 
-    </div>
+</div>
 
 
-    <div class="top-actions">
+<div class="actions">
 
-      <button
-        class="btn btn-secondary"
-        onclick="loadCurrentData()"
-      >
-        ↻ Refresh
-      </button>
+  <button
+    class="btn btn-primary"
+    onclick="loadData()"
+  >
+    Refresh Data
+  </button>
 
-      <button
-        class="btn btn-primary"
-        onclick="openNewEntry()"
-      >
-        + New Entry
-      </button>
-
-    </div>
+</div>
+```
 
   </div>
 
-
-  <!-- ============================================================
-       STATS
-  ============================================================ -->
-
-  <div class="stats">
-
-    <div class="stat">
-
-      <div class="stat-label">
-        Total Data
-      </div>
-
-      <div
-        class="stat-value"
-        id="totalData"
-      >
-        0
-      </div>
-
-    </div>
-
-
-    <div class="stat">
-
-      <div class="stat-label">
-        Showing
-      </div>
-
-      <div
-        class="stat-value"
-        id="showingData"
-      >
-        0
-      </div>
-
-    </div>
-
-  </div>
-
-
-  <!-- ============================================================
+  <!-- =====================================================
        FILTER
-  ============================================================ -->
+  ====================================================== -->
 
   <div class="filter-card">
 
-    <div class="filter-grid">
+```
+<div class="filters">
+
+  <input
+    type="text"
+    class="input"
+    id="searchInput"
+    placeholder="Search..."
+    oninput="applyFilters()"
+  >
 
 
-      <div class="field">
-
-        <label>
-          Search
-        </label>
-
-        <input
-          type="text"
-          id="searchInput"
-          placeholder="Search name, IP or work..."
-          oninput="applyFilters()"
-        >
-
-      </div>
+  <input
+    type="date"
+    class="input"
+    id="fromDate"
+    onchange="applyFilters()"
+  >
 
 
-      <div class="field">
-
-        <label>
-          From Date
-        </label>
-
-        <input
-          type="date"
-          id="fromDate"
-          onchange="applyFilters()"
-        >
-
-      </div>
+  <input
+    type="date"
+    class="input"
+    id="toDate"
+    onchange="applyFilters()"
+  >
 
 
-      <div class="field">
+  <!-- NEW DATA TYPE SELECTOR -->
 
-        <label>
-          To Date
-        </label>
+  <select
+    class="select"
+    id="dataType"
+    onchange="changeDataType()"
+  >
 
-        <input
-          type="date"
-          id="toDate"
-          onchange="applyFilters()"
-        >
+    <option value="data">
+      Data
+    </option>
 
-      </div>
+    <option value="sell">
+      Sell
+    </option>
 
+    <option value="delete">
+      Delete
+    </option>
 
-      <div class="field">
-
-        <label>
-          Data Type
-        </label>
-
-        <select
-          id="dataType"
-          onchange="changeDataType()"
-        >
-
-          <option value="data">
-            Data
-          </option>
-
-          <option value="sell">
-            Sell
-          </option>
-
-          <option value="delete">
-            Delete
-          </option>
-
-        </select>
-
-      </div>
+  </select>
 
 
-      <button
-        class="btn btn-secondary"
-        onclick="clearFilters()"
-      >
-        Clear
-      </button>
+  <button
+    class="btn btn-secondary"
+    onclick="clearFilters()"
+  >
+    Clear
+  </button>
 
-
-    </div>
+</div>
+```
 
   </div>
 
-
-  <!-- ============================================================
-       TABLE
-  ============================================================ -->
+  <!-- =====================================================
+       DATA TABLE
+  ====================================================== -->
 
   <div class="table-card">
 
-    <div class="table-wrap">
+```
+<div class="table-wrap">
 
-      <table>
+  <table>
 
-        <thead id="tableHead">
+    <thead id="tableHead">
 
-          <tr>
+      <tr>
 
-            <th>
-              Name
-            </th>
+        <th>Name</th>
 
-            <th>
-              IP
-            </th>
+        <th>IP</th>
 
-            <th>
-              Work
-            </th>
+        <th>Work</th>
 
-            <th>
-              Date
-            </th>
+        <th>Date</th>
 
-            <th>
-              Action
-            </th>
+      </tr>
 
-          </tr>
-
-        </thead>
+    </thead>
 
 
-        <tbody id="tableBody">
+    <tbody id="dataBody">
 
-          <tr>
+      <tr>
 
-            <td
-              colspan="5"
-              class="empty"
-            >
-              Loading data...
+        <td
+          colspan="4"
+          class="empty"
+        >
+          Loading data...
+        </td>
 
-            </td>
+      </tr>
 
-          </tr>
+    </tbody>
 
-        </tbody>
+  </table>
 
-      </table>
-
-    </div>
-
-
-    <!-- PAGINATION -->
-
-    <div class="pagination">
-
-      <div
-        class="page-info"
-        id="pageInfo"
-      >
-        Page 1
-      </div>
-
-
-      <div
-        class="page-buttons"
-        id="pageButtons"
-      >
-      </div>
-
-    </div>
+</div>
+```
 
   </div>
 
-</div>
+</main>
 
-
-<!-- ============================================================
+<!-- =======================================================
      NEW ENTRY MODAL
-============================================================ -->
+======================================================= -->
 
 <div
-  class="modal"
+  class="modal-bg"
   id="entryModal"
 >
 
-  <div class="modal-box">
+  <div class="modal">
 
-    <div class="modal-header">
+```
+<div class="modal-head">
 
-      <div
-        class="modal-title"
-        id="modalTitle"
-      >
-        New Entry
-      </div>
+  <h3>New Entry</h3>
 
-      <button
-        class="close-btn"
-        onclick="closeEntryModal()"
-      >
-        ×
-      </button>
+  <button
+    class="close"
+    onclick="closeModal('entryModal')"
+  >
+    ×
+  </button>
 
-    </div>
+</div>
 
 
-    <div class="modal-form">
+<div class="form-grid">
+
+  <div class="form-group">
+
+    <label>Name</label>
+
+    <input
+      class="input"
+      id="entryName"
+      type="text"
+    >
+
+  </div>
 
 
-      <div class="field">
+  <div class="form-group">
 
-        <label>
-          Name
-        </label>
+    <label>IP</label>
 
-        <input
-          type="text"
-          id="entryName"
-          placeholder="Enter name"
-        >
+    <input
+      class="input"
+      id="entryIp"
+      type="text"
+    >
 
-      </div>
+  </div>
 
 
-      <div class="field">
+  <div class="form-group full">
 
-        <label>
-          IP
-        </label>
+    <label>Work</label>
 
-        <input
-          type="text"
-          id="entryIp"
-          placeholder="Enter IP"
-        >
+    <input
+      class="input"
+      id="entryWork"
+      type="text"
+    >
 
-      </div>
+  </div>
 
 
-      <div class="field">
+  <div class="form-group full">
 
-        <label>
-          Work
-        </label>
+    <label>Date</label>
 
-        <input
-          type="text"
-          id="entryWork"
-          placeholder="Enter work"
-        >
-
-      </div>
-
-
-      <div class="field">
-
-        <label>
-          Date
-        </label>
-
-        <input
-          type="date"
-          id="entryDate"
-        >
-
-      </div>
-
-
-      <div class="modal-actions">
-
-        <button
-          class="btn btn-secondary"
-          onclick="closeEntryModal()"
-        >
-          Cancel
-        </button>
-
-        <button
-          class="btn btn-primary"
-          id="saveBtn"
-          onclick="saveEntry()"
-        >
-          Save
-        </button>
-
-      </div>
-
-    </div>
+    <input
+      class="input"
+      id="entryDate"
+      type="date"
+    >
 
   </div>
 
 </div>
 
 
-<!-- ============================================================
-     PROFILE MODAL
-============================================================ -->
+<div class="modal-footer">
+
+  <button
+    class="btn btn-secondary"
+    onclick="closeModal('entryModal')"
+  >
+    Cancel
+  </button>
+
+  <button
+    class="btn btn-primary"
+    onclick="saveEntry()"
+  >
+    Save
+  </button>
+
+</div>
+```
+
+  </div>
+
+</div>
+
+<!-- =======================================================
+     USERS MODAL
+======================================================= -->
 
 <div
-  class="modal"
-  id="profileModal"
+  class="modal-bg"
+  id="usersModal"
 >
 
-  <div class="modal-box">
+  <div class="modal large">
 
-    <div class="modal-header">
+```
+<div class="modal-head">
 
-      <div class="modal-title">
-        Profile
-      </div>
+  <h3>User Management</h3>
 
-      <button
-        class="close-btn"
-        onclick="closeProfile()"
-      >
-        ×
-      </button>
+  <button
+    class="close"
+    onclick="closeModal('usersModal')"
+  >
+    ×
+  </button>
 
-    </div>
-
-
-    <div style="line-height:1.8;font-size:14px;">
-
-      <div>
-        <b>Name:</b>
-        <span id="profileModalName">
-          -
-        </span>
-      </div>
-
-      <div>
-        <b>Username:</b>
-        <span id="profileUsername">
-          -
-        </span>
-      </div>
-
-      <div>
-        <b>Role:</b>
-        <span id="profileRole">
-          -
-        </span>
-      </div>
-
-    </div>
+</div>
 
 
-    <div class="modal-actions">
+<div style="margin-bottom:15px;">
 
-      <button
-        class="btn btn-secondary"
-        onclick="closeProfile()"
-      >
-        Close
-      </button>
+  <button
+    class="btn btn-success"
+    onclick="openAddUserModal()"
+  >
+    + Add User
+  </button>
 
-      <button
-        class="btn"
-        style="background:#fee2e2;color:#dc2626;"
-        onclick="logout()"
-      >
-        Logout
-      </button>
+</div>
 
-    </div>
+
+<div class="user-table-wrap">
+
+  <table class="user-table">
+
+    <thead>
+
+      <tr>
+
+        <th>Username</th>
+
+        <th>Name</th>
+
+        <th>Role</th>
+
+        <th>Status</th>
+
+        <th>Action</th>
+
+      </tr>
+
+    </thead>
+
+
+    <tbody id="usersBody">
+
+      <tr>
+
+        <td
+          colspan="5"
+          class="empty"
+        >
+          Loading users...
+        </td>
+
+      </tr>
+
+    </tbody>
+
+  </table>
+
+</div>
+```
+
+  </div>
+
+</div>
+
+<!-- =======================================================
+     ADD / EDIT USER MODAL
+======================================================= -->
+
+<div
+  class="modal-bg"
+  id="userFormModal"
+>
+
+  <div class="modal">
+
+```
+<div class="modal-head">
+
+  <h3 id="userFormTitle">
+    Add User
+  </h3>
+
+  <button
+    class="close"
+    onclick="closeModal('userFormModal')"
+  >
+    ×
+  </button>
+
+</div>
+
+
+<input
+  type="hidden"
+  id="originalUsername"
+>
+
+
+<div class="form-grid">
+
+
+  <div class="form-group">
+
+    <label>Username</label>
+
+    <input
+      class="input"
+      id="userUsername"
+      type="text"
+    >
+
+  </div>
+
+
+  <div class="form-group">
+
+    <label>Name</label>
+
+    <input
+      class="input"
+      id="userName"
+      type="text"
+    >
+
+  </div>
+
+
+  <div class="form-group">
+
+    <label>Password</label>
+
+    <input
+      class="input"
+      id="userPassword"
+      type="password"
+      placeholder="Password"
+    >
+
+  </div>
+
+
+  <div class="form-group">
+
+    <label>Role</label>
+
+    <select
+      class="select"
+      id="userRole"
+    >
+
+      <option value="admin">
+        Admin
+      </option>
+
+      <option value="manager">
+        Manager
+      </option>
+
+      <option value="support">
+        Support
+      </option>
+
+      <option value="call">
+        Call
+      </option>
+
+      <option value="guest">
+        Guest
+      </option>
+
+    </select>
+
+  </div>
+
+
+  <div class="form-group full">
+
+    <label>Status</label>
+
+    <select
+      class="select"
+      id="userStatus"
+    >
+
+      <option value="Active">
+        Active
+      </option>
+
+      <option value="Block">
+        Block
+      </option>
+
+    </select>
 
   </div>
 
 </div>
 
 
-<!-- ============================================================
-     TOAST
-============================================================ -->
+<div class="modal-footer">
+
+  <button
+    class="btn btn-secondary"
+    onclick="closeModal('userFormModal')"
+  >
+    Cancel
+  </button>
+
+  <button
+    class="btn btn-primary"
+    onclick="saveUser()"
+  >
+    Save User
+  </button>
+
+</div>
+```
+
+  </div>
+
+</div>
+
+<!-- =======================================================
+     CHANGE PASSWORD MODAL
+======================================================= -->
 
 <div
-  class="toast-container"
-  id="toastContainer"
-></div>
+  class="modal-bg"
+  id="passwordModal"
+>
 
+  <div class="modal">
+
+```
+<div class="modal-head">
+
+  <h3>Change Password</h3>
+
+  <button
+    class="close"
+    onclick="closeModal('passwordModal')"
+  >
+    ×
+  </button>
+
+</div>
+
+
+<div class="form-group">
+
+  <label>Current Password</label>
+
+  <input
+    class="input"
+    id="currentPassword"
+    type="password"
+  >
+
+</div>
+
+
+<div class="form-group">
+
+  <label>New Password</label>
+
+  <input
+    class="input"
+    id="newPassword"
+    type="password"
+  >
+
+</div>
+
+
+<div class="modal-footer">
+
+  <button
+    class="btn btn-secondary"
+    onclick="closeModal('passwordModal')"
+  >
+    Cancel
+  </button>
+
+  <button
+    class="btn btn-primary"
+    onclick="changePassword()"
+  >
+    Change Password
+  </button>
+
+</div>
+```
+
+  </div>
+
+</div>
+
+<!-- =======================================================
+     LOADER
+======================================================= -->
+
+<div
+  class="loader-bg"
+  id="loader"
+>
+
+  <div class="loader-box">
+
+```
+<div class="spinner"></div>
+
+<div id="loaderText">
+  Loading...
+</div>
+```
+
+  </div>
+
+</div>
+
+<!-- =======================================================
+     TOAST
+======================================================= -->
+
+<div
+  class="toast"
+  id="toast"
+></div>
 
 <script>
 
-/* ============================================================
-   4 API URLS
-============================================================ */
 
-// 1. USER API
+// ============================================================
+// 4 API URLS
+// ============================================================
+
 const USER_API_URL =
   "https://script.google.com/macros/s/AKfycbw00GHHheuvtdQtgPURjs4PtsM48-4yaFx-_ms0ZBV5FHhnmcdbJ5DHr3Aix8JPF0kQzA/exec";
 
 
-// 2. SELL API
-const SELL_API_URL =
-  "https://script.google.com/macros/s/AKfycbyiKn1MH1ZQvebSIo83bZzbbfJimmfRf9PjlPI4w1q1UliuF27gKViYM24oXakpkHuP/exec";
-
-
-// 3. DELETE API
-const DELETE_API_URL =
-  "https://script.google.com/macros/s/AKfycbwDL1JIV7QYcH84VGiWxhUoT-wN9UfuGn0t9boYrs_FaG_ZfcVGjNmaTqSTC6ev0Ig9Kg/exec";
-
-
-// 4. NEW ENTRY / MAIN DATA API
 const DATA_API_URL =
   "https://script.google.com/macros/s/AKfycbz59T-4CKQDbHJB_ql6OYZf18eN7XUmttp0d2FaOM5pm27yCBOWrEilqA_zMOnFq_rz/exec";
 
 
-/* ============================================================
-   VARIABLES
-============================================================ */
+const SELL_API_URL =
+  "https://script.google.com/macros/s/AKfycbyiKn1MH1ZQvebSIo83bZzbbfJimmfRf9PjlPI4w1q1UliuF27gKViYM24oXakpkHuP/exec";
+
+
+const DELETE_API_URL =
+  "https://script.google.com/macros/s/AKfycbwDL1JIV7QYcH84VGiWxhUoT-wN9UfuGn0t9boYrs_FaG_ZfcVGjNmaTqSTC6ev0Ig9Kg/exec";
+
+
+
+// ============================================================
+// GLOBAL VARIABLES
+// ============================================================
 
 let allData = [];
 
-let filteredData = [];
+let editingUser = false;
 
-let currentPage = 1;
+let currentDataType = "data";
 
-const rowsPerPage = 10;
-
-let currentType = "data";
-
-let editingRow = null;
-
-
-// Cache
-const dataCache = {
-  data: null,
-  sell: null,
-  delete: null
-};
+let currentUsername =
+  localStorage.getItem("username") ||
+  localStorage.getItem("loggedUser") ||
+  "";
 
 
-/* ============================================================
-   LOGIN CHECK
-============================================================ */
 
-function checkLogin(){
-
-  const logged =
-    localStorage.getItem("dashboardAuth") ||
-    sessionStorage.getItem("dashboardAuth");
-
-  if(
-    logged !== "true"
-  ){
-
-    window.location.href =
-      "index.html";
-
-    return false;
-
-  }
-
-  return true;
-
-}
-
-
-/* ============================================================
-   LOAD PROFILE
-============================================================ */
-
-function loadProfile(){
-
-  let userData = null;
-
-  try{
-
-    const raw =
-      localStorage.getItem("userData");
-
-    if(raw){
-
-      userData =
-        JSON.parse(raw);
-
-    }
-
-  }catch(e){}
-
-
-  const name =
-    localStorage.getItem("name") ||
-    localStorage.getItem("loggedUser") ||
-    (userData && userData.name) ||
-    "User";
-
-
-  const username =
-    localStorage.getItem("username") ||
-    (userData && userData.username) ||
-    "-";
-
-
-  const role =
-    localStorage.getItem("role") ||
-    (userData && userData.role) ||
-    "-";
-
-
-  document.getElementById(
-    "profileName"
-  ).textContent = name;
-
-
-  document.getElementById(
-    "profileModalName"
-  ).textContent = name;
-
-
-  document.getElementById(
-    "profileUsername"
-  ).textContent = username;
-
-
-  document.getElementById(
-    "profileRole"
-  ).textContent = role;
-
-}
-
-
-/* ============================================================
-   PAGE LOAD
-============================================================ */
+// ============================================================
+// PAGE LOAD
+// ============================================================
 
 document.addEventListener(
   "DOMContentLoaded",
   function(){
 
-    if(!checkLogin()) return;
+    loadTheme();
 
-    loadProfile();
+    loadUser();
 
-    /*
-     * IMPORTANT:
-     * Only Data API is loaded initially.
-     * Sell/Delete are NOT loaded here.
-     */
-
-    loadData("data");
+    loadData();
 
   }
 );
 
 
-/* ============================================================
-   API URL SELECTOR
-============================================================ */
 
-function getApiUrl(type){
+// ============================================================
+// CHECK LOGIN
+// ============================================================
 
-  if(type === "sell"){
+function checkLogin(){
 
-    return SELL_API_URL;
-
-  }
-
-  if(type === "delete"){
-
-    return DELETE_API_URL;
-
-  }
-
-  return DATA_API_URL;
-
-}
-
-
-/* ============================================================
-   API ACTION SELECTOR
-============================================================ */
-
-function getGetAction(type){
-
-  if(type === "sell"){
-
-    return "getSellData";
-
-  }
-
-  if(type === "delete"){
-
-    return "getDeletedData";
-
-  }
-
-  return "getData";
-
-}
-
-
-/* ============================================================
-   LOAD DATA
-============================================================ */
-
-async function loadData(type){
-
-  currentType = type;
-
-  currentPage = 1;
-
-
-  /*
-   * If cached data exists:
-   * show it immediately.
-   */
-
-  if(
-    dataCache[type] !== null
-  ){
-
-    allData =
-      dataCache[type];
-
-    applyFilters();
-
-
-    /*
-     * Refresh selected API in background.
-     */
-
-    refreshFromApi(
-      type,
-      true
+  const auth =
+    localStorage.getItem(
+      "dashboardAuth"
+    ) ||
+    sessionStorage.getItem(
+      "dashboardAuth"
     );
 
-    return;
 
+  if(auth !== "true"){
+
+    window.location.href =
+      "index.html";
+
+    return false;
   }
 
 
-  showTableLoading();
-
-
-  await refreshFromApi(
-    type,
-    false
-  );
-
+  return true;
 }
 
 
-/* ============================================================
-   REFRESH FROM API
-============================================================ */
 
-async function refreshFromApi(
-  type,
-  silent
-){
+// ============================================================
+// LOAD USER
+// ============================================================
 
-  if(!silent){
+async function loadUser(){
 
-    showTableLoading();
+  if(!checkLogin()) return;
 
+
+  if(!currentUsername){
+
+    logout();
+
+    return;
   }
 
 
   try{
 
-    const api =
-      getApiUrl(type);
+    const url =
+      USER_API_URL +
+      "?action=getUser&username=" +
+      encodeURIComponent(
+        currentUsername
+      ) +
+      "&_=" +
+      Date.now();
 
-    const action =
-      getGetAction(type);
 
+    const response =
+      await fetch(
+        url,
+        {
+          cache:"no-store"
+        }
+      );
+
+
+    const result =
+      await response.json();
+
+
+    if(!result.success){
+
+      showToast(
+        result.message ||
+        "Unable to load user.",
+        "error"
+      );
+
+      return;
+    }
+
+
+    const user =
+      result.user;
+
+
+    document.getElementById(
+      "profileName"
+    ).textContent =
+      user.name ||
+      user.username;
+
+
+    document.getElementById(
+      "profileRole"
+    ).textContent =
+      user.role;
+
+
+    document.getElementById(
+      "profileAvatar"
+    ).textContent =
+      (
+        user.name ||
+        user.username ||
+        "U"
+      )
+      .charAt(0)
+      .toUpperCase();
+
+
+    localStorage.setItem(
+      "name",
+      user.name || ""
+    );
+
+    localStorage.setItem(
+      "role",
+      user.role || ""
+    );
+
+    localStorage.setItem(
+      "status",
+      user.status || ""
+    );
+
+
+    if(
+      String(user.status)
+        .toLowerCase() ===
+      "block"
+    ){
+
+      logout();
+
+      return;
+    }
+
+
+  }catch(error){
+
+    console.error(error);
+
+    showToast(
+      "Unable to connect to User API.",
+      "error"
+    );
+  }
+}
+
+
+
+// ============================================================
+// CHANGE DATA TYPE
+// ============================================================
+
+function changeDataType(){
+
+  currentDataType =
+    document.getElementById(
+      "dataType"
+    ).value;
+
+
+  allData = [];
+
+
+  updateTableHeader();
+
+
+  clearOnlyFilters();
+
+
+  loadData();
+}
+
+
+
+// ============================================================
+// UPDATE TABLE HEADER
+// ============================================================
+
+function updateTableHeader(){
+
+  const head =
+    document.getElementById(
+      "tableHead"
+    );
+
+
+  if(currentDataType === "delete"){
+
+    head.innerHTML = `
+      <tr>
+        <th>Name</th>
+        <th>IP</th>
+        <th>Work</th>
+        <th>Date</th>
+        <th>Dellet Time</th>
+        <th>User</th>
+      </tr>
+    `;
+
+    return;
+  }
+
+
+  if(currentDataType === "sell"){
+
+    head.innerHTML = `
+      <tr>
+        <th>Name</th>
+        <th>IP</th>
+        <th>Work</th>
+        <th>Date</th>
+        <th>Sell Date</th>
+      </tr>
+    `;
+
+    return;
+  }
+
+
+  head.innerHTML = `
+    <tr>
+      <th>Name</th>
+      <th>IP</th>
+      <th>Work</th>
+      <th>Date</th>
+    </tr>
+  `;
+}
+
+
+
+// ============================================================
+// LOAD DATA
+// ONLY SELECTED API WILL LOAD
+// ============================================================
+
+async function loadData(){
+
+  if(!checkLogin()) return;
+
+
+  const body =
+    document.getElementById(
+      "dataBody"
+    );
+
+
+  const colspan =
+    currentDataType === "delete"
+      ? 6
+      : currentDataType === "sell"
+        ? 5
+        : 4;
+
+
+  body.innerHTML = `
+    <tr>
+      <td colspan="${colspan}" class="empty">
+        Loading ${escapeHtml(currentDataType)} data...
+      </td>
+    </tr>
+  `;
+
+
+  let apiUrl = "";
+  let action = "";
+
+
+  if(currentDataType === "data"){
+
+    apiUrl =
+      DATA_API_URL;
+
+    action =
+      "getData";
+
+  }else if(currentDataType === "sell"){
+
+    apiUrl =
+      SELL_API_URL;
+
+    action =
+      "getSellData";
+
+  }else if(currentDataType === "delete"){
+
+    apiUrl =
+      DELETE_API_URL;
+
+    action =
+      "getDeletedData";
+  }
+
+
+  try{
 
     const url =
-      api +
+      apiUrl +
       "?action=" +
       encodeURIComponent(action) +
       "&_=" +
@@ -1381,20 +1790,9 @@ async function refreshFromApi(
       await fetch(
         url,
         {
-          method:"GET",
           cache:"no-store"
         }
       );
-
-
-    if(!response.ok){
-
-      throw new Error(
-        "Server error: " +
-        response.status
-      );
-
-    }
 
 
     const result =
@@ -1402,172 +1800,253 @@ async function refreshFromApi(
 
 
     if(
-      !result ||
       result.success === false
     ){
 
       throw new Error(
-        result &&
-        result.message
-          ? result.message
-          : "Failed to load data"
+        result.message ||
+        "Unable to load data."
       );
-
     }
 
 
-    const newData =
-      Array.isArray(result.data)
-        ? result.data
-        : [];
+    allData =
+      result.data ||
+      result.users ||
+      [];
 
 
-    dataCache[type] =
-      newData;
-
-
-    /*
-     * Only use latest response
-     * if user is still viewing
-     * this type.
-     */
-
-    if(
-      currentType === type
-    ){
-
-      allData =
-        newData;
-
-      applyFilters();
-
-    }
+    renderData(
+      allData
+    );
 
 
   }catch(error){
 
-    if(!silent){
+    console.error(error);
 
-      showTableError(
-        error.message
-      );
 
-    }else{
+    body.innerHTML = `
+      <tr>
+        <td
+          colspan="${colspan}"
+          class="empty"
+        >
+          Unable to load data.
+        </td>
+      </tr>
+    `;
 
-      showToast(
-        "Refresh failed: " +
-        error.message,
-        "error"
-      );
 
-    }
+    showToast(
+      error.message ||
+      "Data loading failed.",
+      "error"
+    );
+  }
+}
 
+
+
+// ============================================================
+// RENDER DATA
+// ============================================================
+
+function renderData(data){
+
+  const body =
+    document.getElementById(
+      "dataBody"
+    );
+
+
+  let colspan =
+    currentDataType === "delete"
+      ? 6
+      : currentDataType === "sell"
+        ? 5
+        : 4;
+
+
+  if(
+    !data ||
+    !data.length
+  ){
+
+    body.innerHTML = `
+      <tr>
+        <td colspan="${colspan}" class="empty">
+          No data found.
+        </td>
+      </tr>
+    `;
+
+    return;
   }
 
+
+  body.innerHTML =
+    data.map(
+      function(row){
+
+        const name =
+          row.Name ??
+          row.name ??
+          row[0] ??
+          "";
+
+
+        const ip =
+          row.Ip ??
+          row.IP ??
+          row.ip ??
+          row[1] ??
+          "";
+
+
+        const work =
+          row.Work ??
+          row.work ??
+          row[2] ??
+          "";
+
+
+        const date =
+          row.Date ??
+          row.date ??
+          row[3] ??
+          "";
+
+
+        if(currentDataType === "sell"){
+
+          const sellDate =
+            row.SellDate ??
+            row.sellDate ??
+            row["Sell Date"] ??
+            row[4] ??
+            "";
+
+
+          return `
+            <tr>
+
+              <td>
+                ${escapeHtml(name)}
+              </td>
+
+              <td>
+                ${escapeHtml(ip)}
+              </td>
+
+              <td>
+                ${escapeHtml(work)}
+              </td>
+
+              <td>
+                ${escapeHtml(formatDate(date))}
+              </td>
+
+              <td>
+                ${escapeHtml(formatDate(sellDate))}
+              </td>
+
+            </tr>
+          `;
+        }
+
+
+        if(currentDataType === "delete"){
+
+          const deleteTime =
+            row.DelletTime ??
+            row.DeleteTime ??
+            row.Dellet ??
+            row["Dellet time"] ??
+            row[4] ??
+            "";
+
+
+          const user =
+            row.User ??
+            row.user ??
+            row[5] ??
+            "";
+
+
+          return `
+            <tr>
+
+              <td>
+                ${escapeHtml(name)}
+              </td>
+
+              <td>
+                ${escapeHtml(ip)}
+              </td>
+
+              <td>
+                ${escapeHtml(work)}
+              </td>
+
+              <td>
+                ${escapeHtml(formatDate(date))}
+              </td>
+
+              <td>
+                ${escapeHtml(formatDate(deleteTime))}
+              </td>
+
+              <td>
+                ${escapeHtml(user)}
+              </td>
+
+            </tr>
+          `;
+        }
+
+
+        return `
+          <tr>
+
+            <td>
+              ${escapeHtml(name)}
+            </td>
+
+            <td>
+              ${escapeHtml(ip)}
+            </td>
+
+            <td>
+              ${escapeHtml(work)}
+            </td>
+
+            <td>
+              ${escapeHtml(formatDate(date))}
+            </td>
+
+          </tr>
+        `;
+
+      }
+    )
+    .join("");
 }
 
 
-/* ============================================================
-   CHANGE DATA TYPE
-============================================================ */
 
-function changeDataType(){
-
-  const type =
-    document.getElementById(
-      "dataType"
-    ).value;
-
-
-  loadData(type);
-
-}
-
-
-/* ============================================================
-   TABLE LOADING
-============================================================ */
-
-function showTableLoading(){
-
-  const colspan =
-    currentType === "data"
-      ? 5
-      : 6;
-
-
-  document.getElementById(
-    "tableBody"
-  ).innerHTML = `
-
-    <tr>
-
-      <td
-        colspan="${colspan}"
-        class="empty"
-      >
-
-        <div class="table-loading">
-
-          <div class="spinner"></div>
-
-          Loading data...
-
-        </div>
-
-      </td>
-
-    </tr>
-
-  `;
-
-}
-
-
-/* ============================================================
-   TABLE ERROR
-============================================================ */
-
-function showTableError(message){
-
-  const colspan =
-    currentType === "data"
-      ? 5
-      : 6;
-
-
-  document.getElementById(
-    "tableBody"
-  ).innerHTML = `
-
-    <tr>
-
-      <td
-        colspan="${colspan}"
-        class="empty"
-      >
-
-        ${escapeHtml(message)}
-
-      </td>
-
-    </tr>
-
-  `;
-
-}
-
-
-/* ============================================================
-   FILTER
-============================================================ */
+// ============================================================
+// FILTER
+// ============================================================
 
 function applyFilters(){
 
   const search =
-    document.getElementById(
-      "searchInput"
-    ).value
+    document
+      .getElementById(
+        "searchInput"
+      )
+      .value
       .trim()
       .toLowerCase();
 
@@ -1584,631 +2063,119 @@ function applyFilters(){
     ).value;
 
 
-  filteredData =
+  const filtered =
     allData.filter(
-      item => {
+      function(row){
 
-        let matchesSearch = true;
-
-        let matchesFrom = true;
-
-        let matchesTo = true;
-
-
-        if(search){
-
-          const text = (
-
-            String(
-              item.Name || ""
-            ) +
-
-            " " +
-
-            String(
-              item.IP ||
-              item.Ip ||
-              ""
-            ) +
-
-            " " +
-
-            String(
-              item.Work || ""
-            )
-
+        const text =
+          JSON.stringify(
+            row
           ).toLowerCase();
 
 
-          matchesSearch =
-            text.includes(search);
+        if(
+          search &&
+          !text.includes(search)
+        ){
 
+          return false;
         }
 
 
-        const dateValue =
-          String(
-            item.Date || ""
-          );
+        const rawDate =
+          row.Date ??
+          row.date ??
+          row[3] ??
+          "";
 
 
-        if(from){
+        if(
+          from ||
+          to
+        ){
 
-          matchesFrom =
-            dateValue >= from;
+          const date =
+            normalizeDate(
+              rawDate
+            );
 
+
+          if(!date){
+
+            return true;
+          }
+
+
+          if(
+            from &&
+            date < from
+          ){
+
+            return false;
+          }
+
+
+          if(
+            to &&
+            date > to
+          ){
+
+            return false;
+          }
         }
 
 
-        if(to){
-
-          matchesTo =
-            dateValue <= to;
-
-        }
-
-
-        return (
-          matchesSearch &&
-          matchesFrom &&
-          matchesTo
-        );
-
+        return true;
       }
     );
 
 
-  currentPage = 1;
-
-  renderTable();
-
+  renderData(
+    filtered
+  );
 }
 
 
-/* ============================================================
-   RENDER TABLE
-============================================================ */
 
-function renderTable(){
+// ============================================================
+// CLEAR FILTERS
+// ============================================================
 
-  const tbody =
-    document.getElementById(
-      "tableBody"
-    );
+function clearFilters(){
 
+  clearOnlyFilters();
 
-  const total =
-    filteredData.length;
-
-
-  document.getElementById(
-    "totalData"
-  ).textContent =
-    total;
-
-
-  const totalPages =
-    Math.max(
-      1,
-      Math.ceil(
-        total /
-        rowsPerPage
-      )
-    );
-
-
-  if(
-    currentPage >
-    totalPages
-  ){
-
-    currentPage =
-      totalPages;
-
-  }
-
-
-  const start =
-    (currentPage - 1) *
-    rowsPerPage;
-
-
-  const end =
-    Math.min(
-      start +
-      rowsPerPage,
-      total
-    );
-
-
-  const pageData =
-    filteredData.slice(
-      start,
-      end
-    );
-
-
-  document.getElementById(
-    "showingData"
-  ).textContent =
-    pageData.length;
-
-
-  /* --------------------------------
-     HEADERS
-  -------------------------------- */
-
-  const thead =
-    document.getElementById(
-      "tableHead"
-    );
-
-
-  if(
-    currentType === "data"
-  ){
-
-    thead.innerHTML = `
-
-      <tr>
-
-        <th>Name</th>
-
-        <th>IP</th>
-
-        <th>Work</th>
-
-        <th>Date</th>
-
-        <th>Action</th>
-
-      </tr>
-
-    `;
-
-  }else{
-
-    const extra =
-      currentType === "sell"
-        ? "Sell Date"
-        : "Dellet Time";
-
-
-    thead.innerHTML = `
-
-      <tr>
-
-        <th>Name</th>
-
-        <th>IP</th>
-
-        <th>Work</th>
-
-        <th>Date</th>
-
-        <th>${extra}</th>
-
-        <th>User</th>
-
-      </tr>
-
-    `;
-
-  }
-
-
-  /* --------------------------------
-     EMPTY
-  -------------------------------- */
-
-  if(pageData.length === 0){
-
-    const colspan =
-      currentType === "data"
-        ? 5
-        : 6;
-
-
-    tbody.innerHTML = `
-
-      <tr>
-
-        <td
-          colspan="${colspan}"
-          class="empty"
-        >
-
-          No data found
-
-        </td>
-
-      </tr>
-
-    `;
-
-
-    renderPagination();
-
-    return;
-
-  }
-
-
-  /* --------------------------------
-     DATA
-  -------------------------------- */
-
-  if(
-    currentType === "data"
-  ){
-
-    tbody.innerHTML =
-      pageData
-        .map(
-          item => `
-
-            <tr>
-
-              <td>
-                ${escapeHtml(item.Name)}
-              </td>
-
-              <td>
-                ${escapeHtml(
-                  item.IP ||
-                  item.Ip ||
-                  ""
-                )}
-              </td>
-
-              <td>
-                ${escapeHtml(item.Work)}
-              </td>
-
-              <td>
-                ${formatDisplayDate(item.Date)}
-              </td>
-
-              <td>
-
-                <div class="action-box">
-
-                  <button
-                    class="action-btn edit-btn"
-                    onclick="editEntry(${item.row})"
-                  >
-                    Edit
-                  </button>
-
-                  <button
-                    class="action-btn sell-btn"
-                    onclick="sellEntry(${item.row})"
-                  >
-                    Sell
-                  </button>
-
-                  <button
-                    class="action-btn delete-btn"
-                    onclick="deleteEntry(${item.row})"
-                  >
-                    Delete
-                  </button>
-
-                </div>
-
-              </td>
-
-            </tr>
-
-          `
-        )
-        .join("");
-
-  }
-
-
-  /* --------------------------------
-     SELL
-  -------------------------------- */
-
-  else if(
-    currentType === "sell"
-  ){
-
-    tbody.innerHTML =
-      pageData
-        .map(
-          item => `
-
-            <tr>
-
-              <td>
-                ${escapeHtml(item.Name)}
-              </td>
-
-              <td>
-                ${escapeHtml(
-                  item.IP ||
-                  item.Ip ||
-                  ""
-                )}
-              </td>
-
-              <td>
-                ${escapeHtml(item.Work)}
-              </td>
-
-              <td>
-                ${formatDisplayDate(item.Date)}
-              </td>
-
-              <td>
-                ${escapeHtml(
-                  item.SellDate ||
-                  ""
-                )}
-              </td>
-
-              <td>
-                ${escapeHtml(
-                  item.User ||
-                  ""
-                )}
-              </td>
-
-            </tr>
-
-          `
-        )
-        .join("");
-
-  }
-
-
-  /* --------------------------------
-     DELETE
-  -------------------------------- */
-
-  else{
-
-    tbody.innerHTML =
-      pageData
-        .map(
-          item => `
-
-            <tr>
-
-              <td>
-                ${escapeHtml(item.Name)}
-              </td>
-
-              <td>
-                ${escapeHtml(
-                  item.IP ||
-                  item.Ip ||
-                  ""
-                )}
-              </td>
-
-              <td>
-                ${escapeHtml(item.Work)}
-              </td>
-
-              <td>
-                ${formatDisplayDate(item.Date)}
-              </td>
-
-              <td>
-                ${escapeHtml(
-                  item.DelletTime ||
-                  ""
-                )}
-              </td>
-
-              <td>
-                ${escapeHtml(
-                  item.User ||
-                  ""
-                )}
-              </td>
-
-            </tr>
-
-          `
-        )
-        .join("");
-
-  }
-
-
-  renderPagination();
-
+  renderData(
+    allData
+  );
 }
 
 
-/* ============================================================
-   PAGINATION
-============================================================ */
 
-function renderPagination(){
+function clearOnlyFilters(){
 
-  const total =
-    filteredData.length;
-
-
-  const totalPages =
-    Math.max(
-      1,
-      Math.ceil(
-        total /
-        rowsPerPage
-      )
-    );
-
-
-  const buttons =
-    document.getElementById(
-      "pageButtons"
-    );
+  document.getElementById(
+    "searchInput"
+  ).value = "";
 
 
   document.getElementById(
-    "pageInfo"
-  ).textContent =
-    "Page " +
-    currentPage +
-    " of " +
-    totalPages;
+    "fromDate"
+  ).value = "";
 
 
-  let html = "";
-
-
-  html += `
-
-    <button
-      class="page-btn"
-      onclick="goToPage(${currentPage - 1})"
-      ${currentPage <= 1 ? "disabled" : ""}
-    >
-      ‹
-    </button>
-
-  `;
-
-
-  const maxButtons = 5;
-
-
-  let startPage =
-    Math.max(
-      1,
-      currentPage -
-      Math.floor(maxButtons / 2)
-    );
-
-
-  let endPage =
-    Math.min(
-      totalPages,
-      startPage +
-      maxButtons -
-      1
-    );
-
-
-  if(
-    endPage -
-    startPage +
-    1 <
-    maxButtons
-  ){
-
-    startPage =
-      Math.max(
-        1,
-        endPage -
-        maxButtons +
-        1
-      );
-
-  }
-
-
-  for(
-    let i = startPage;
-    i <= endPage;
-    i++
-  ){
-
-    html += `
-
-      <button
-        class="page-btn ${
-          i === currentPage
-            ? "active"
-            : ""
-        }"
-        onclick="goToPage(${i})"
-      >
-        ${i}
-      </button>
-
-    `;
-
-  }
-
-
-  html += `
-
-    <button
-      class="page-btn"
-      onclick="goToPage(${currentPage + 1})"
-      ${currentPage >= totalPages ? "disabled" : ""}
-    >
-      ›
-    </button>
-
-  `;
-
-
-  buttons.innerHTML =
-    html;
-
+  document.getElementById(
+    "toDate"
+  ).value = "";
 }
 
 
-function goToPage(page){
 
-  const totalPages =
-    Math.max(
-      1,
-      Math.ceil(
-        filteredData.length /
-        rowsPerPage
-      )
-    );
+// ============================================================
+// OPEN ENTRY MODAL
+// ============================================================
 
-
-  if(
-    page < 1 ||
-    page > totalPages
-  ){
-
-    return;
-
-  }
-
-
-  currentPage =
-    page;
-
-
-  renderTable();
-
-}
-
-
-/* ============================================================
-   NEW ENTRY
-============================================================ */
-
-function openNewEntry(){
-
-  editingRow = null;
-
-
-  document.getElementById(
-    "modalTitle"
-  ).textContent =
-    "New Entry";
-
-
-  document.getElementById(
-    "saveBtn"
-  ).textContent =
-    "Save";
-
+function openEntryModal(){
 
   document.getElementById(
     "entryName"
@@ -2225,108 +2192,47 @@ function openNewEntry(){
   ).value = "";
 
 
-  document.getElementById(
-    "entryDate"
-  ).value =
-    new Date()
-      .toISOString()
-      .split("T")[0];
+  const today =
+    new Date();
 
 
-  document.getElementById(
-    "entryModal"
-  ).classList.add("show");
-
-}
+  const year =
+    today.getFullYear();
 
 
-function closeEntryModal(){
-
-  document.getElementById(
-    "entryModal"
-  ).classList.remove("show");
-
-}
+  const month =
+    String(
+      today.getMonth() + 1
+    ).padStart(2,"0");
 
 
-/* ============================================================
-   EDIT
-============================================================ */
-
-function editEntry(row){
-
-  const item =
-    allData.find(
-      x =>
-        Number(x.row) ===
-        Number(row)
-    );
-
-
-  if(!item){
-
-    showToast(
-      "Data not found",
-      "error"
-    );
-
-    return;
-
-  }
-
-
-  editingRow =
-    row;
-
-
-  document.getElementById(
-    "modalTitle"
-  ).textContent =
-    "Edit Entry";
-
-
-  document.getElementById(
-    "saveBtn"
-  ).textContent =
-    "Update";
-
-
-  document.getElementById(
-    "entryName"
-  ).value =
-    item.Name || "";
-
-
-  document.getElementById(
-    "entryIp"
-  ).value =
-    item.IP ||
-    item.Ip ||
-    "";
-
-
-  document.getElementById(
-    "entryWork"
-  ).value =
-    item.Work || "";
+  const day =
+    String(
+      today.getDate()
+    ).padStart(2,"0");
 
 
   document.getElementById(
     "entryDate"
   ).value =
-    item.Date || "";
+    year +
+    "-" +
+    month +
+    "-" +
+    day;
 
 
-  document.getElementById(
+  openModal(
     "entryModal"
-  ).classList.add("show");
-
+  );
 }
 
 
-/* ============================================================
-   SAVE / UPDATE
-============================================================ */
+
+// ============================================================
+// SAVE ENTRY
+// NEW ENTRY API ONLY
+// ============================================================
 
 async function saveEntry(){
 
@@ -2354,111 +2260,641 @@ async function saveEntry(){
     ).value;
 
 
-  if(!name){
+  if(!name || !work){
 
     showToast(
-      "Name is required",
+      "Name and Work are required.",
       "error"
     );
 
     return;
-
-  }
-
-
-  if(!ip){
-
-    showToast(
-      "IP is required",
-      "error"
-    );
-
-    return;
-
-  }
-
-
-  if(!work){
-
-    showToast(
-      "Work is required",
-      "error"
-    );
-
-    return;
-
   }
 
 
   if(!date){
 
     showToast(
-      "Date is required",
+      "Date is required.",
       "error"
     );
 
     return;
-
   }
 
 
-  const saveBtn =
-    document.getElementById(
-      "saveBtn"
-    );
-
-
-  saveBtn.disabled =
-    true;
-
-  saveBtn.textContent =
-    editingRow
-      ? "Updating..."
-      : "Saving...";
+  showLoader(
+    "Saving entry..."
+  );
 
 
   try{
 
-    const action =
-      editingRow
-        ? "editData"
-        : "addData";
+    const response =
+      await fetch(
+        DATA_API_URL,
+        {
+          method:"POST",
+
+          body:JSON.stringify({
+
+            action:"addData",
+
+            name:name,
+
+            ip:ip,
+
+            work:work,
+
+            date:date,
+
+            username:
+              currentUsername
+
+          })
+        }
+      );
 
 
-    const body = {
+    const result =
+      await response.json();
 
-      action: action,
 
-      name: name,
+    if(!result.success){
 
-      ip: ip,
+      throw new Error(
+        result.message ||
+        "Unable to save entry."
+      );
+    }
 
-      work: work,
 
-      date: date
+    closeModal(
+      "entryModal"
+    );
+
+
+    showToast(
+      "Entry saved successfully.",
+      "success"
+    );
+
+
+    if(currentDataType !== "data"){
+
+      document.getElementById(
+        "dataType"
+      ).value = "data";
+
+      currentDataType = "data";
+
+      updateTableHeader();
+    }
+
+
+    loadData();
+
+
+  }catch(error){
+
+    console.error(error);
+
+    showToast(
+      error.message ||
+      "Save failed.",
+      "error"
+    );
+
+
+  }finally{
+
+    hideLoader();
+
+  }
+}
+
+
+
+// ============================================================
+// OPEN USERS MODAL
+// ============================================================
+
+function openUsersModal(){
+
+  openModal(
+    "usersModal"
+  );
+
+
+  loadUsers();
+}
+
+
+
+// ============================================================
+// LOAD USERS
+// ============================================================
+
+async function loadUsers(){
+
+  const body =
+    document.getElementById(
+      "usersBody"
+    );
+
+
+  body.innerHTML = `
+    <tr>
+      <td colspan="5" class="empty">
+        Loading users...
+      </td>
+    </tr>
+  `;
+
+
+  try{
+
+    const url =
+      USER_API_URL +
+      "?action=getUsers&requester=" +
+      encodeURIComponent(
+        currentUsername
+      ) +
+      "&_=" +
+      Date.now();
+
+
+    const response =
+      await fetch(
+        url,
+        {
+          cache:"no-store"
+        }
+      );
+
+
+    const result =
+      await response.json();
+
+
+    if(!result.success){
+
+      throw new Error(
+        result.message ||
+        "Unable to load users."
+      );
+    }
+
+
+    renderUsers(
+      result.users || []
+    );
+
+
+  }catch(error){
+
+    console.error(error);
+
+    body.innerHTML = `
+      <tr>
+        <td colspan="5" class="empty">
+          ${escapeHtml(
+            error.message ||
+            "Unable to load users."
+          )}
+        </td>
+      </tr>
+    `;
+
+    showToast(
+      error.message ||
+      "Unable to load users.",
+      "error"
+    );
+  }
+}
+
+
+
+// ============================================================
+// RENDER USERS
+// ============================================================
+
+function renderUsers(users){
+
+  const body =
+    document.getElementById(
+      "usersBody"
+    );
+
+
+  if(
+    !users ||
+    !users.length
+  ){
+
+    body.innerHTML = `
+      <tr>
+        <td colspan="5" class="empty">
+          No users found.
+        </td>
+      </tr>
+    `;
+
+    return;
+  }
+
+
+  body.innerHTML =
+    users.map(
+      function(user){
+
+        const username =
+          user.username || "";
+
+
+        const name =
+          user.name || "";
+
+
+        const role =
+          user.role || "guest";
+
+
+        const status =
+          String(
+            user.status || "Active"
+          );
+
+
+        const isBlock =
+          status.toLowerCase() ===
+          "block";
+
+
+        const statusHtml =
+          isBlock
+
+            ? `
+              <span class="status status-block">
+                Block
+              </span>
+            `
+
+            : `
+              <span class="status status-active">
+                Active
+              </span>
+            `;
+
+
+        const actionHtml =
+          username.toLowerCase() ===
+          currentUsername.toLowerCase()
+
+            ? `
+              <span
+                style="
+                  color:#8a93a5;
+                  font-size:11px;
+                "
+              >
+                Current User
+              </span>
+            `
+
+            : isBlock
+
+              ? `
+                <button
+                  class="small-btn small-unblock"
+                  onclick='changeUserStatus(
+                    ${JSON.stringify(username)},
+                    "Active"
+                  )'
+                >
+                  Unblock
+                </button>
+              `
+
+              : `
+                <button
+                  class="small-btn small-block"
+                  onclick='changeUserStatus(
+                    ${JSON.stringify(username)},
+                    "Block"
+                  )'
+                >
+                  Block
+                </button>
+              `;
+
+
+        return `
+          <tr>
+
+            <td>
+              <strong>
+                ${escapeHtml(username)}
+              </strong>
+            </td>
+
+            <td>
+              ${escapeHtml(name)}
+            </td>
+
+            <td>
+              <span class="role">
+                ${escapeHtml(role)}
+              </span>
+            </td>
+
+            <td>
+              ${statusHtml}
+            </td>
+
+            <td>
+
+              <div class="user-actions">
+
+                <button
+                  class="small-btn small-edit"
+                  onclick='editUser(
+                    ${JSON.stringify(user)}
+                  )'
+                >
+                  Edit
+                </button>
+
+                ${actionHtml}
+
+              </div>
+
+            </td>
+
+          </tr>
+        `;
+
+      }
+    )
+    .join("");
+}
+
+
+
+// ============================================================
+// OPEN ADD USER
+// ============================================================
+
+function openAddUserModal(){
+
+  editingUser = false;
+
+
+  document.getElementById(
+    "userFormTitle"
+  ).textContent =
+    "Add User";
+
+
+  document.getElementById(
+    "originalUsername"
+  ).value = "";
+
+
+  document.getElementById(
+    "userUsername"
+  ).value = "";
+
+
+  document.getElementById(
+    "userName"
+  ).value = "";
+
+
+  document.getElementById(
+    "userPassword"
+  ).value = "";
+
+
+  document.getElementById(
+    "userRole"
+  ).value = "guest";
+
+
+  document.getElementById(
+    "userStatus"
+  ).value = "Active";
+
+
+  openModal(
+    "userFormModal"
+  );
+}
+
+
+
+// ============================================================
+// EDIT USER
+// ============================================================
+
+function editUser(user){
+
+  editingUser = true;
+
+
+  document.getElementById(
+    "userFormTitle"
+  ).textContent =
+    "Edit User";
+
+
+  document.getElementById(
+    "originalUsername"
+  ).value =
+    user.username || "";
+
+
+  document.getElementById(
+    "userUsername"
+  ).value =
+    user.username || "";
+
+
+  document.getElementById(
+    "userName"
+  ).value =
+    user.name || "";
+
+
+  document.getElementById(
+    "userPassword"
+  ).value = "";
+
+
+  document.getElementById(
+    "userRole"
+  ).value =
+    user.role || "guest";
+
+
+  document.getElementById(
+    "userStatus"
+  ).value =
+    String(
+      user.status || "Active"
+    ).toLowerCase() ===
+    "block"
+      ? "Block"
+      : "Active";
+
+
+  openModal(
+    "userFormModal"
+  );
+}
+
+
+
+// ============================================================
+// SAVE USER
+// ============================================================
+
+async function saveUser(){
+
+  const username =
+    document.getElementById(
+      "userUsername"
+    ).value.trim();
+
+
+  const name =
+    document.getElementById(
+      "userName"
+    ).value.trim();
+
+
+  const password =
+    document.getElementById(
+      "userPassword"
+    ).value;
+
+
+  const role =
+    document.getElementById(
+      "userRole"
+    ).value;
+
+
+  const status =
+    document.getElementById(
+      "userStatus"
+    ).value;
+
+
+  const originalUsername =
+    document.getElementById(
+      "originalUsername"
+    ).value;
+
+
+  if(!username){
+
+    showToast(
+      "Username is required.",
+      "error"
+    );
+
+    return;
+  }
+
+
+  if(!name){
+
+    showToast(
+      "Name is required.",
+      "error"
+    );
+
+    return;
+  }
+
+
+  if(
+    !editingUser &&
+    !password
+  ){
+
+    showToast(
+      "Password is required.",
+      "error"
+    );
+
+    return;
+  }
+
+
+  showLoader(
+    editingUser
+      ? "Updating user..."
+      : "Adding user..."
+  );
+
+
+  try{
+
+    const payload = {
+
+      action:
+        editingUser
+          ? "editUser"
+          : "addUser",
+
+      requester:
+        currentUsername,
+
+      username:
+        username,
+
+      name:
+        name,
+
+      role:
+        role,
+
+      status:
+        status
 
     };
 
 
-    if(editingRow){
+    if(editingUser){
 
-      body.row =
-        editingRow;
+      payload.originalUsername =
+        originalUsername;
 
+
+      if(password){
+
+        payload.password =
+          password;
+      }
+
+    }else{
+
+      payload.password =
+        password;
     }
 
 
     const response =
       await fetch(
-        DATA_API_URL,
+        USER_API_URL,
         {
           method:"POST",
-          headers:{
-            "Content-Type":
-              "text/plain;charset=utf-8"
-          },
-          body:
-            JSON.stringify(body)
+
+          body:JSON.stringify(
+            payload
+          )
         }
       );
 
@@ -2467,138 +2903,140 @@ async function saveEntry(){
       await response.json();
 
 
-    if(
-      !result ||
-      result.success === false
-    ){
+    if(!result.success){
 
       throw new Error(
-        result &&
-        result.message
-          ? result.message
-          : "Operation failed"
+        result.message ||
+        "Operation failed."
       );
-
     }
 
 
-    dataCache.data =
-      null;
-
-
-    closeEntryModal();
+    closeModal(
+      "userFormModal"
+    );
 
 
     showToast(
-      editingRow
-        ? "Entry updated successfully"
-        : "Entry added successfully",
+      result.message ||
+      "User saved successfully.",
       "success"
     );
 
 
-    editingRow =
-      null;
+    loadUsers();
 
 
-    await loadData(
-      "data"
-    );
+    if(
+      editingUser &&
+      originalUsername.toLowerCase() ===
+      currentUsername.toLowerCase()
+    ){
+
+      loadUser();
+    }
+
 
   }catch(error){
 
+    console.error(error);
+
     showToast(
-      error.message,
+      error.message ||
+      "Unable to save user.",
       "error"
     );
+
 
   }finally{
 
-    saveBtn.disabled =
-      false;
-
-    saveBtn.textContent =
-      editingRow
-        ? "Update"
-        : "Save";
+    hideLoader();
 
   }
-
 }
 
 
-/* ============================================================
-   SELL
-============================================================ */
 
-async function sellEntry(row){
+// ============================================================
+// BLOCK / UNBLOCK USER
+// ============================================================
 
-  const item =
-    allData.find(
-      x =>
-        Number(x.row) ===
-        Number(row)
-    );
+async function changeUserStatus(
+  username,
+  status
+){
+
+  if(
+    !username ||
+    !status
+  ){
+
+    return;
+  }
 
 
-  if(!item){
+  if(
+    username.toLowerCase() ===
+    currentUsername.toLowerCase()
+  ){
 
     showToast(
-      "Data not found",
+      "You cannot change your own account status.",
       "error"
     );
 
     return;
-
   }
 
 
-  const username =
-    localStorage.getItem(
-      "username"
-    ) ||
-    localStorage.getItem(
-      "loggedUser"
-    ) ||
-    "";
+  const actionText =
+    status === "Block"
+      ? "block"
+      : "unblock";
 
 
   if(
     !confirm(
-      "Are you sure you want to sell this entry?"
+      "Are you sure you want to " +
+      actionText +
+      " this user?"
     )
   ){
 
     return;
-
   }
+
+
+  showLoader(
+    status === "Block"
+      ? "Blocking user..."
+      : "Unblocking user..."
+  );
 
 
   try{
 
     const response =
       await fetch(
-        SELL_API_URL,
+        USER_API_URL,
         {
           method:"POST",
-          headers:{
-            "Content-Type":
-              "text/plain;charset=utf-8"
-          },
-          body:
-            JSON.stringify({
 
-              action:
-                "sellData",
+          body:JSON.stringify({
 
-              row:
-                row,
+            action:
+              "toggleUserStatus",
 
-              user:
-                username
+            requester:
+              currentUsername,
 
-            })
+            username:
+              username,
 
+            status:
+              status
+
+          })
         }
       );
 
@@ -2607,409 +3045,516 @@ async function sellEntry(row){
       await response.json();
 
 
-    if(
-      !result ||
-      result.success === false
-    ){
+    if(!result.success){
 
       throw new Error(
-        result &&
-        result.message
-          ? result.message
-          : "Sell failed"
+        result.message ||
+        "Status change failed."
       );
-
     }
 
 
-    /*
-     * Clear both affected caches.
-     */
-
-    dataCache.data =
-      null;
-
-    dataCache.sell =
-      null;
-
-
     showToast(
-      "Entry sold successfully",
+      result.message ||
+      "Status changed successfully.",
       "success"
     );
 
 
-    /*
-     * Reload current Data only.
-     */
+    loadUsers();
 
-    await loadData(
-      "data"
-    );
 
   }catch(error){
 
+    console.error(error);
+
     showToast(
-      error.message,
+      error.message ||
+      "Unable to change user status.",
       "error"
     );
 
-  }
 
+  }finally{
+
+    hideLoader();
+
+  }
 }
 
 
-/* ============================================================
-   DELETE
-============================================================ */
 
-async function deleteEntry(row){
+// ============================================================
+// CHANGE PASSWORD MODAL
+// ============================================================
 
-  const item =
-    allData.find(
-      x =>
-        Number(x.row) ===
-        Number(row)
-    );
+function openPasswordModal(){
+
+  closeProfileMenu();
 
 
-  if(!item){
+  document.getElementById(
+    "currentPassword"
+  ).value = "";
+
+
+  document.getElementById(
+    "newPassword"
+  ).value = "";
+
+
+  openModal(
+    "passwordModal"
+  );
+}
+
+
+
+// ============================================================
+// CHANGE PASSWORD
+// ============================================================
+
+async function changePassword(){
+
+  const currentPassword =
+    document.getElementById(
+      "currentPassword"
+    ).value;
+
+
+  const newPassword =
+    document.getElementById(
+      "newPassword"
+    ).value;
+
+
+  if(!currentPassword){
 
     showToast(
-      "Data not found",
+      "Current password is required.",
       "error"
     );
 
     return;
+  }
 
+
+  if(!newPassword){
+
+    showToast(
+      "New password is required.",
+      "error"
+    );
+
+    return;
   }
 
 
   if(
-    !confirm(
-      "Are you sure you want to delete this entry?"
-    )
+    newPassword.length < 4
   ){
 
-    return;
+    showToast(
+      "New password must be at least 4 characters.",
+      "error"
+    );
 
+    return;
   }
 
 
-  const username =
-    localStorage.getItem(
-      "username"
-    ) ||
-    localStorage.getItem(
-      "loggedUser"
-    ) ||
-    "";
+  showLoader(
+    "Changing password..."
+  );
 
 
   try{
 
-    /*
-     * STEP 1:
-     * Save to Delete Sheet
-     */
-
-    const archiveResponse =
+    const response =
       await fetch(
-        DELETE_API_URL,
+        USER_API_URL,
         {
           method:"POST",
-          headers:{
-            "Content-Type":
-              "text/plain;charset=utf-8"
-          },
-          body:
-            JSON.stringify({
 
-              action:
-                "deleteData",
+          body:JSON.stringify({
 
-              name:
-                item.Name || "",
+            action:
+              "changePassword",
 
-              ip:
-                item.IP ||
-                item.Ip ||
-                "",
+            requester:
+              currentUsername,
 
-              work:
-                item.Work || "",
+            username:
+              currentUsername,
 
-              date:
-                item.Date || "",
+            currentPassword:
+              currentPassword,
 
-              user:
-                username
+            newPassword:
+              newPassword
 
-            })
-
+          })
         }
       );
 
 
-    const archiveResult =
-      await archiveResponse.json();
+    const result =
+      await response.json();
 
 
-    if(
-      !archiveResult ||
-      archiveResult.success === false
-    ){
+    if(!result.success){
 
       throw new Error(
-        archiveResult &&
-        archiveResult.message
-          ? archiveResult.message
-          : "Could not save Delete record"
+        result.message ||
+        "Password change failed."
       );
-
     }
 
 
-    /*
-     * STEP 2:
-     * Remove from Main Data Sheet
-     */
-
-    const deleteResponse =
-      await fetch(
-        DATA_API_URL,
-        {
-          method:"POST",
-          headers:{
-            "Content-Type":
-              "text/plain;charset=utf-8"
-          },
-          body:
-            JSON.stringify({
-
-              action:
-                "deleteData",
-
-              row:
-                row
-
-            })
-
-        }
-      );
-
-
-    const deleteResult =
-      await deleteResponse.json();
-
-
-    if(
-      !deleteResult ||
-      deleteResult.success === false
-    ){
-
-      throw new Error(
-        deleteResult &&
-        deleteResult.message
-          ? deleteResult.message
-          : "Could not remove main data"
-      );
-
-    }
-
-
-    /*
-     * Clear affected caches.
-     */
-
-    dataCache.data =
-      null;
-
-    dataCache.delete =
-      null;
+    closeModal(
+      "passwordModal"
+    );
 
 
     showToast(
-      "Entry deleted successfully",
+      "Password changed successfully.",
       "success"
     );
 
 
-    await loadData(
-      "data"
-    );
-
   }catch(error){
 
+    console.error(error);
+
     showToast(
-      error.message,
+      error.message ||
+      "Unable to change password.",
       "error"
     );
 
+
+  }finally{
+
+    hideLoader();
+
   }
-
 }
 
 
-/* ============================================================
-   CLEAR FILTERS
-============================================================ */
 
-function clearFilters(){
+// ============================================================
+// THEME
+// ============================================================
 
-  document.getElementById(
-    "searchInput"
-  ).value = "";
+function loadTheme(){
 
-
-  document.getElementById(
-    "fromDate"
-  ).value = "";
+  const theme =
+    localStorage.getItem(
+      "dashboardTheme"
+    );
 
 
-  document.getElementById(
-    "toDate"
-  ).value = "";
+  if(theme === "dark"){
 
+    document.body.classList.add(
+      "dark"
+    );
 
-  applyFilters();
+    document.getElementById(
+      "themeBtn"
+    ).textContent =
+      "☀️";
 
+  }else{
+
+    document.getElementById(
+      "themeBtn"
+    ).textContent =
+      "🌙";
+  }
 }
 
 
-/* ============================================================
-   REFRESH CURRENT DATA
-============================================================ */
 
-function loadCurrentData(){
+function toggleTheme(){
 
-  dataCache[currentType] =
-    null;
-
-
-  loadData(
-    currentType
+  document.body.classList.toggle(
+    "dark"
   );
 
-}
+
+  const dark =
+    document.body.classList.contains(
+      "dark"
+    );
 
 
-/* ============================================================
-   PROFILE
-============================================================ */
-
-function showProfile(){
-
-  loadProfile();
+  localStorage.setItem(
+    "dashboardTheme",
+    dark
+      ? "dark"
+      : "light"
+  );
 
 
   document.getElementById(
-    "profileModal"
-  ).classList.add("show");
-
+    "themeBtn"
+  ).textContent =
+    dark
+      ? "☀️"
+      : "🌙";
 }
 
 
-function closeProfile(){
+
+// ============================================================
+// PROFILE MENU
+// ============================================================
+
+function toggleProfileMenu(){
 
   document.getElementById(
-    "profileModal"
-  ).classList.remove("show");
-
+    "profileMenu"
+  ).classList.toggle(
+    "show"
+  );
 }
 
 
-/* ============================================================
-   LOGOUT
-============================================================ */
 
-function logout(){
+function closeProfileMenu(){
 
-  const keys = [
-
-    "dashboardAuth",
-    "username",
-    "userData",
-    "loginData",
-    "loggedUser",
-    "currentUser",
-    "userInfo",
-    "name",
-    "role",
-    "picture"
-
-  ];
+  document.getElementById(
+    "profileMenu"
+  ).classList.remove(
+    "show"
+  );
+}
 
 
-  keys.forEach(
-    key =>
-      localStorage.removeItem(
-        key
+
+document.addEventListener(
+  "click",
+  function(event){
+
+    const profile =
+      document.querySelector(
+        ".profile"
+      );
+
+
+    if(
+      profile &&
+      !profile.contains(
+        event.target
       )
-  );
+    ){
+
+      closeProfileMenu();
+    }
+
+  }
+);
 
 
-  sessionStorage.removeItem(
-    "dashboardAuth"
-  );
 
+// ============================================================
+// MODAL
+// ============================================================
 
-  window.location.href =
-    "index.html";
+function openModal(id){
 
+  document
+    .getElementById(id)
+    .classList.add(
+      "show"
+    );
 }
 
 
-/* ============================================================
-   TOAST
-============================================================ */
+
+function closeModal(id){
+
+  document
+    .getElementById(id)
+    .classList.remove(
+      "show"
+    );
+}
+
+
+
+// ============================================================
+// LOADER
+// ============================================================
+
+function showLoader(text){
+
+  document.getElementById(
+    "loaderText"
+  ).textContent =
+    text || "Loading...";
+
+
+  document.getElementById(
+    "loader"
+  ).classList.add(
+    "show"
+  );
+}
+
+
+
+function hideLoader(){
+
+  document.getElementById(
+    "loader"
+  ).classList.remove(
+    "show"
+  );
+}
+
+
+
+// ============================================================
+// TOAST
+// ============================================================
+
+let toastTimer;
+
 
 function showToast(
   message,
   type="success"
 ){
 
-  const container =
-    document.getElementById(
-      "toastContainer"
-    );
-
-
   const toast =
-    document.createElement(
-      "div"
+    document.getElementById(
+      "toast"
     );
-
-
-  toast.className =
-    "toast " +
-    type;
 
 
   toast.textContent =
     message;
 
 
-  container.appendChild(
-    toast
+  toast.className =
+    "toast show " +
+    type;
+
+
+  clearTimeout(
+    toastTimer
   );
 
 
-  setTimeout(
-    () => {
+  toastTimer =
+    setTimeout(
+      function(){
 
-      toast.remove();
+        toast.classList.remove(
+          "show"
+        );
 
-    },
-    3000
-  );
-
+      },
+      3000
+    );
 }
 
 
-/* ============================================================
-   ESCAPE HTML
-============================================================ */
+
+// ============================================================
+// DATE FORMAT
+// ============================================================
+
+function formatDate(value){
+
+  if(!value){
+
+    return "";
+  }
+
+
+  const date =
+    new Date(value);
+
+
+  if(
+    isNaN(
+      date.getTime()
+    )
+  ){
+
+    return String(value);
+  }
+
+
+  return date.toLocaleString(
+    "en-GB",
+    {
+      day:"2-digit",
+      month:"short",
+      year:"numeric",
+      hour:"2-digit",
+      minute:"2-digit"
+    }
+  );
+}
+
+
+
+function normalizeDate(value){
+
+  if(!value){
+
+    return "";
+  }
+
+
+  const date =
+    new Date(value);
+
+
+  if(
+    isNaN(
+      date.getTime()
+    )
+  ){
+
+    return "";
+  }
+
+
+  const y =
+    date.getFullYear();
+
+
+  const m =
+    String(
+      date.getMonth() + 1
+    ).padStart(2,"0");
+
+
+  const d =
+    String(
+      date.getDate()
+    ).padStart(2,"0");
+
+
+  return (
+    y +
+    "-" +
+    m +
+    "-" +
+    d
+  );
+}
+
+
+
+// ============================================================
+// ESCAPE HTML
+// ============================================================
 
 function escapeHtml(value){
 
@@ -3036,99 +3581,60 @@ function escapeHtml(value){
     /'/g,
     "&#039;"
   );
-
 }
 
 
-/* ============================================================
-   DATE DISPLAY
-============================================================ */
 
-function formatDisplayDate(value){
+// ============================================================
+// LOGOUT
+// ============================================================
 
-  if(!value){
+function logout(){
 
-    return "";
+  const keys = [
 
-  }
+    "dashboardAuth",
+    "username",
+    "name",
+    "role",
+    "status",
+    "userData",
+    "loginData",
+    "loggedUser",
+    "currentUser",
+    "userInfo"
 
-
-  const text =
-    String(value);
-
-
-  if(
-    /^\d{4}-\d{2}-\d{2}$/.test(
-      text
-    )
-  ){
-
-    const parts =
-      text.split("-");
+  ];
 
 
-    return (
-      parts[2] +
-      "/" +
-      parts[1] +
-      "/" +
-      parts[0]
-    );
+  keys.forEach(
+    function(key){
 
-  }
+      localStorage.removeItem(
+        key
+      );
+
+      sessionStorage.removeItem(
+        key
+      );
+
+    }
+  );
 
 
-  return text;
+  sessionStorage.clear();
 
+
+  window.location.replace(
+    "index.html"
+  );
 }
 
 
-/* ============================================================
-   CLOSE MODALS WHEN CLICK OUTSIDE
-============================================================ */
 
-document.addEventListener(
-  "click",
-  function(e){
-
-    const entryModal =
-      document.getElementById(
-        "entryModal"
-      );
-
-
-    const profileModal =
-      document.getElementById(
-        "profileModal"
-      );
-
-
-    if(
-      e.target ===
-      entryModal
-    ){
-
-      closeEntryModal();
-
-    }
-
-
-    if(
-      e.target ===
-      profileModal
-    ){
-
-      closeProfile();
-
-    }
-
-  }
-);
-
-
-/* ============================================================
-   BACK BUTTON PROTECTION
-============================================================ */
+// ============================================================
+// BACK BUTTON PROTECTION
+// ============================================================
 
 history.pushState(
   null,
@@ -3150,7 +3656,24 @@ window.addEventListener(
   }
 );
 
+
+
+// ============================================================
+// PREVENT CACHE
+// ============================================================
+
+window.addEventListener(
+  "pageshow",
+  function(){
+
+    checkLogin();
+
+  }
+);
+
+
 </script>
 
 </body>
+
 </html>
