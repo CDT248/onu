@@ -1,99 +1,219 @@
-```html
+
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Login</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <style>
-    body{
-      font-family:Arial;
-      background:#f2f5f9;
-      display:flex;
-      justify-content:center;
-      align-items:center;
-      height:100vh;
-    }
+<title>Login</title>
 
-    .login{
-      width:300px;
-      background:white;
-      padding:30px;
-      border-radius:10px;
-      box-shadow:0 5px 20px #ccc;
-    }
+<style>
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+  font-family:Arial,sans-serif;
+}
 
-    h2{
-      text-align:center;
-      margin-bottom:25px;
-    }
+body{
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background:linear-gradient(135deg,#4f46e5,#7c3aed,#06b6d4);
+}
 
-    input{
-      width:100%;
-      padding:12px;
-      margin:8px 0;
-      box-sizing:border-box;
-      border:1px solid #ddd;
-      border-radius:6px;
-    }
+/* Login Box */
+.login{
+  width:360px;
+  padding:35px;
+  background:rgba(255,255,255,.15);
+  border:1px solid rgba(255,255,255,.3);
+  border-radius:20px;
+  backdrop-filter:blur(15px);
+  box-shadow:0 20px 50px rgba(0,0,0,.25);
+  color:white;
+}
 
-    button{
-      width:100%;
-      padding:12px;
-      margin-top:15px;
-      border:0;
-      border-radius:6px;
-      background:#1976d2;
-      color:white;
-      font-size:16px;
-      cursor:pointer;
-    }
+/* Logo */
+.logo{
+  width:65px;
+  height:65px;
+  margin:auto;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:18px;
+  background:white;
+  color:#4f46e5;
+  font-size:30px;
+  box-shadow:0 8px 20px rgba(0,0,0,.2);
+}
 
-    button:hover{
-      background:#125ca8;
-    }
-  </style>
+h2{
+  text-align:center;
+  margin:18px 0 7px;
+  font-size:28px;
+}
+
+.subtitle{
+  text-align:center;
+  font-size:13px;
+  opacity:.8;
+  margin-bottom:25px;
+}
+
+/* Input */
+.input{
+  margin-bottom:16px;
+}
+
+.input label{
+  display:block;
+  margin-bottom:7px;
+  font-size:13px;
+}
+
+.input-box{
+  position:relative;
+}
+
+input{
+  width:100%;
+  padding:13px 42px 13px 14px;
+  border:1px solid rgba(255,255,255,.3);
+  border-radius:10px;
+  outline:none;
+  background:rgba(255,255,255,.15);
+  color:white;
+  font-size:14px;
+}
+
+input::placeholder{
+  color:rgba(255,255,255,.6);
+}
+
+input:focus{
+  border-color:white;
+  background:rgba(255,255,255,.22);
+}
+
+/* Password Eye */
+.eye{
+  position:absolute;
+  right:13px;
+  top:50%;
+  transform:translateY(-50%);
+  cursor:pointer;
+}
+
+/* Button */
+button{
+  width:100%;
+  padding:13px;
+  margin-top:8px;
+  border:0;
+  border-radius:10px;
+  background:white;
+  color:#4f46e5;
+  font-size:16px;
+  font-weight:bold;
+  cursor:pointer;
+  transition:.2s;
+}
+
+button:hover{
+  transform:translateY(-2px);
+  box-shadow:0 8px 20px rgba(0,0,0,.2);
+}
+
+.footer{
+  text-align:center;
+  margin-top:20px;
+  font-size:12px;
+  opacity:.65;
+}
+</style>
 </head>
 
 <body>
 
-  <div class="login">
+<div class="login">
 
-    <h2>Login</h2>
+  <div class="logo">🔐</div>
 
+  <h2>Welcome Back</h2>
+
+  <div class="subtitle">
+    Login to access your dashboard
+  </div>
+
+  <div class="input">
+    <label>Username</label>
     <input
       type="text"
       id="username"
-      placeholder="Username"
+      placeholder="Enter username"
     >
-
-    <input
-      type="password"
-      id="password"
-      placeholder="Password"
-    >
-
-    <button onclick="login()">Login</button>
-
   </div>
 
-  <script>
-    function login(){
+  <div class="input">
+    <label>Password</label>
 
-      let username =
-        document.getElementById("username").value;
+    <div class="input-box">
 
-      let password =
-        document.getElementById("password").value;
+      <input
+        type="password"
+        id="password"
+        placeholder="Enter password"
+      >
 
-      if(username == "admin" && password == "1234"){
-        window.location.href = "ad.html";
-      }else{
-        alert("Wrong username or password");
-      }
+      <span class="eye" onclick="showPassword()">👁</span>
 
-    }
-  </script>
+    </div>
+  </div>
+
+  <button onclick="login()">Login</button>
+
+  <div class="footer">
+    © 2026 Dashboard
+  </div>
+
+</div>
+
+<script>
+
+function showPassword(){
+
+  let p = document.getElementById("password");
+
+  p.type = p.type === "password"
+    ? "text"
+    : "password";
+
+}
+
+function login(){
+
+  let user =
+    document.getElementById("username").value;
+
+  let pass =
+    document.getElementById("password").value;
+
+  if(user === "admin" && pass === "1234"){
+
+    window.location.href = "ad.html";
+
+  }else{
+
+    alert("Wrong username or password");
+
+  }
+
+}
+
+</script>
 
 </body>
 </html>
-```
