@@ -4,13 +4,13 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 
-<title>Login to Dashboard</title>
+<title>Login</title>
 
 <style>
 *{
-  box-sizing:border-box;
   margin:0;
   padding:0;
+  box-sizing:border-box;
   font-family:Arial,sans-serif;
 }
 
@@ -19,156 +19,207 @@ body{
   display:flex;
   justify-content:center;
   align-items:center;
-  background:#f4f7fb;
+  background:#183f35;
 }
 
-.login{
-  width:520px;
-  padding:55px 70px;
-  background:white;
-  border:1px solid #ddd;
-  border-radius:16px;
-  box-shadow:0 15px 40px rgba(0,0,0,.08);
-}
-
-h1{
-  text-align:center;
-  font-size:32px;
-  color:#171717;
-  margin-bottom:45px;
-}
-
-.input{
+/* Main Box */
+.login-box{
+  width:900px;
+  height:520px;
   display:flex;
-  height:58px;
-  border:2px solid #e3e5e8;
-  border-radius:10px;
-  margin-bottom:20px;
+  overflow:hidden;
+  border-radius:30px;
+  background:#285b4d;
+  box-shadow:0 25px 60px rgba(0,0,0,.35);
+}
+
+/* Left */
+.left{
+  width:55%;
+  background:#f7fbfa;
+  position:relative;
+  display:flex;
+  justify-content:center;
+  align-items:center;
   overflow:hidden;
 }
 
-.icon{
-  width:62px;
+/* Curved edge */
+.left:after{
+  content:"";
+  position:absolute;
+  width:250px;
+  height:650px;
+  right:-170px;
+  top:-65px;
+  background:#f7fbfa;
+  border-radius:50%;
+}
+
+.left-content{
+  position:relative;
+  z-index:2;
+  text-align:center;
+}
+
+.logo{
+  position:absolute;
+  top:30px;
+  left:35px;
+  font-size:16px;
+  font-weight:bold;
+  color:#286052;
+}
+
+.illustration{
+  width:270px;
+  height:270px;
+  border-radius:50%;
+  background:#dcefeb;
   display:flex;
   justify-content:center;
   align-items:center;
-  font-size:24px;
-  color:#888;
-  border-right:2px solid #e5e5e5;
+  font-size:110px;
 }
 
-.input input{
-  flex:1;
+.welcome{
+  margin-top:20px;
+  color:#285b4d;
+  font-size:18px;
+}
+
+/* Right */
+.right{
+  width:45%;
+  padding:75px 55px;
+  color:white;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+}
+
+.right h1{
+  font-size:34px;
+  margin-bottom:30px;
+}
+
+label{
+  display:block;
+  font-size:13px;
+  margin-bottom:7px;
+}
+
+input{
+  width:100%;
+  height:42px;
   border:0;
   outline:0;
-  padding:0 20px;
-  font-size:18px;
-  color:#333;
+  border-radius:22px;
+  padding:0 18px;
+  margin-bottom:18px;
+  background:#173f34;
+  color:white;
 }
 
-.input input::placeholder{
-  color:#999;
-  font-style:italic;
-}
-
-.options{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  margin:28px 0;
-  font-size:16px;
-}
-
-.remember{
-  color:#777;
-}
-
-.remember input{
-  width:18px;
-  height:18px;
-  vertical-align:middle;
-  margin-right:7px;
+input::placeholder{
+  color:#91aaa2;
 }
 
 .forgot{
-  color:#1761a8;
-  text-decoration:none;
-}
-
-.forgot:hover{
-  text-decoration:underline;
+  display:block;
+  text-align:right;
+  color:#91aaa2;
+  font-size:11px;
+  margin-top:-8px;
+  margin-bottom:22px;
+  cursor:pointer;
 }
 
 button{
-  display:block;
-  width:210px;
-  height:65px;
-  margin:0 auto 35px;
+  width:100%;
+  height:45px;
   border:0;
-  border-radius:18px;
-  background:linear-gradient(#1765b4,#124d87);
+  border-radius:25px;
+  background:#68b8b1;
   color:white;
-  font-size:27px;
+  font-size:14px;
   cursor:pointer;
-  box-shadow:0 8px 18px rgba(20,80,140,.25);
+  transition:.2s;
 }
 
 button:hover{
+  background:#80cbc4;
   transform:translateY(-2px);
-  box-shadow:0 12px 22px rgba(20,80,140,.3);
 }
 
-.continue{
-  display:flex;
-  align-items:center;
-  gap:15px;
-  color:#999;
-  font-size:17px;
-  margin-bottom:25px;
+.register{
+  text-align:center;
+  margin-top:22px;
+  font-size:12px;
+  color:#d0ddd9;
 }
 
-.line{
-  flex:1;
-  height:1px;
-  background:#aaa;
+.register a{
+  color:#79c7c0;
+  text-decoration:underline;
 }
 
-.social{
-  display:flex;
-  justify-content:center;
-  gap:45px;
+.footer{
+  text-align:center;
+  margin-top:45px;
+  font-size:9px;
+  color:#77958d;
 }
 
-.social div{
-  width:65px;
-  height:65px;
-  border-radius:50%;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  background:#1765b4;
-  color:white;
-  font-size:28px;
-}
+/* Mobile */
+@media(max-width:700px){
 
-@media(max-width:600px){
-
-  .login{
-    width:92%;
-    padding:40px 25px;
+  body{
+    padding:20px;
   }
 
-  h1{
-    font-size:27px;
-    margin-bottom:35px;
+  .login-box{
+    width:100%;
+    height:auto;
+    min-height:600px;
+    display:block;
   }
 
-  button{
-    width:190px;
+  .left{
+    width:100%;
+    height:220px;
   }
 
-  .options{
-    font-size:14px;
+  .left:after{
+    display:none;
+  }
+
+  .logo{
+    top:18px;
+    left:20px;
+  }
+
+  .illustration{
+    width:120px;
+    height:120px;
+    font-size:55px;
+  }
+
+  .welcome{
+    display:none;
+  }
+
+  .right{
+    width:100%;
+    padding:35px 30px;
+  }
+
+  .right h1{
+    font-size:28px;
+  }
+
+  .footer{
+    margin-top:25px;
   }
 }
 </style>
@@ -176,60 +227,75 @@ button:hover{
 
 <body>
 
-<div class="login">
+<div class="login-box">
 
-  <h1>Log in to Dashboard</h1>
+  <!-- LEFT SIDE -->
+  <div class="left">
 
-  <div class="input">
-    <div class="icon">✉</div>
+    <div class="logo">
+      YOUR LOGO
+    </div>
+
+    <div class="left-content">
+
+      <div class="illustration">
+        🎄
+      </div>
+
+      <div class="welcome">
+        Welcome to our Dashboard
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- RIGHT SIDE -->
+  <div class="right">
+
+    <h1>Login</h1>
+
+    <label>Username</label>
+
     <input
       type="text"
       id="username"
-      placeholder="Username"
+      placeholder="Enter your username"
     >
-  </div>
 
-  <div class="input">
-    <div class="icon">🔒</div>
+    <label>Password</label>
+
     <input
       type="password"
       id="password"
-      placeholder="Password"
+      placeholder="Enter your password"
     >
-  </div>
 
-  <div class="options">
-
-    <label class="remember">
-      <input type="checkbox">
-      Remember me
-    </label>
-
-    <a href="#" class="forgot">
+    <span class="forgot">
       Forgot Password?
-    </a>
+    </span>
 
-  </div>
+    <button onclick="login()">
+      Login to Dashboard
+    </button>
 
-  <button onclick="login()">
-    Login
-  </button>
+    <div class="register">
+      Don't have an account?
+      <a href="#">Register Now</a>
+    </div>
 
-  <div class="continue">
-    <div class="line"></div>
-    <span>Continue with</span>
-    <div class="line"></div>
-  </div>
+    <div class="footer">
+      © 2026 Dashboard • Terms and Services
+    </div>
 
-  <div class="social">
-    <div>✉</div>
-    <div>▣</div>
-    <div>👤</div>
   </div>
 
 </div>
 
+
 <script>
+
 function login(){
 
   let username =
@@ -239,12 +305,17 @@ function login(){
     document.getElementById("password").value;
 
   if(username=="admin" && password=="1234"){
+
     window.location.href="ad.html";
+
   }else{
+
     alert("Wrong username or password");
+
   }
 
 }
+
 </script>
 
 </body>
