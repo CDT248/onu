@@ -4,13 +4,15 @@
 <head>
 
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Dashboard</title>
 
 <link
   rel="icon"
   type="image/png"
+  sizes="128x128"
   href="https://cdn-icons-png.flaticon.com/128/17163/17163834.png"
 >
 
@@ -20,826 +22,514 @@
   margin:0;
   padding:0;
   box-sizing:border-box;
-  font-family:Arial,sans-serif;
-}
-
-:root{
-  --bg:#f4f8f7;
-  --card:#ffffff;
-  --text:#183f35;
-  --muted:#78918a;
-  --primary:#285b4d;
-  --secondary:#68b8b1;
-  --border:#e3ece9;
-  --shadow:0 10px 30px rgba(24,63,53,.08);
-}
-
-body.dark{
-  --bg:#101c19;
-  --card:#172a25;
-  --text:#f2f8f6;
-  --muted:#91aaa2;
-  --primary:#68b8b1;
-  --secondary:#4d968f;
-  --border:#29423b;
-  --shadow:0 10px 30px rgba(0,0,0,.25);
+  font-family:Arial,Helvetica,sans-serif;
 }
 
 body{
   min-height:100vh;
-  background:var(--bg);
-  color:var(--text);
-  transition:.25s;
+  background:#f4f7fb;
+  color:#1f2937;
+  transition:.3s;
+}
+
+body.dark{
+  background:#101827;
+  color:#fff;
 }
 
 
-/* =========================
-   HEADER
-========================= */
+/* ================= HEADER ================= */
 
 .header{
-  height:75px;
-  background:var(--card);
-  border-bottom:1px solid var(--border);
-
+  height:72px;
+  background:#fff;
   display:flex;
   align-items:center;
   justify-content:space-between;
-
-  padding:0 35px;
-
+  padding:0 28px;
+  box-shadow:0 3px 15px rgba(0,0,0,.08);
   position:sticky;
   top:0;
   z-index:100;
-
-  box-shadow:var(--shadow);
 }
 
-.header-left{
-  display:flex;
-  align-items:center;
-  gap:14px;
+.dark .header{
+  background:#172033;
 }
 
-.logo{
-  width:42px;
-  height:42px;
-
-  border-radius:13px;
-
-  display:flex;
-  align-items:center;
-  justify-content:center;
-
-  background:var(--primary);
-  color:white;
-
-  font-size:20px;
-  font-weight:bold;
-}
-
-.dashboard-title{
-  font-size:20px;
-  font-weight:bold;
-}
-
-.dashboard-subtitle{
-  font-size:11px;
-  color:var(--muted);
-  margin-top:3px;
-}
-
-
-/* =========================
-   HEADER RIGHT
-========================= */
-
-.header-right{
+.logoArea{
   display:flex;
   align-items:center;
   gap:12px;
 }
 
-.icon-btn{
+.logo{
   width:42px;
   height:42px;
-
-  border:1px solid var(--border);
   border-radius:12px;
-
-  background:var(--card);
-  color:var(--text);
-
-  cursor:pointer;
-
+  background:linear-gradient(135deg,#0f9d58,#087f45);
   display:flex;
   align-items:center;
   justify-content:center;
+  color:white;
+  font-size:22px;
+  font-weight:bold;
+}
 
-  font-size:18px;
+.titleBox h2{
+  font-size:20px;
+}
 
+.titleBox p{
+  font-size:12px;
+  color:#7b8494;
+  margin-top:3px;
+}
+
+.dark .titleBox p{
+  color:#aeb7c6;
+}
+
+.headerRight{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.iconBtn{
+  width:42px;
+  height:42px;
+  border:0;
+  border-radius:12px;
+  background:#f0f3f7;
+  cursor:pointer;
+  font-size:19px;
   transition:.2s;
 }
 
-.icon-btn:hover{
-  background:var(--primary);
-  color:white;
+.iconBtn:hover{
   transform:translateY(-2px);
 }
 
+.dark .iconBtn{
+  background:#263247;
+  color:white;
+}
 
-/* =========================
-   USER PROFILE
-========================= */
+
+/* ================= PROFILE ================= */
 
 .profile{
   position:relative;
 }
 
-.profile-btn{
-  height:45px;
-
-  border:1px solid var(--border);
+.profileBtn{
+  border:0;
+  background:#f0f3f7;
+  padding:7px 12px 7px 8px;
   border-radius:25px;
-
-  background:var(--card);
-  color:var(--text);
-
-  padding:4px 12px 4px 5px;
-
   display:flex;
   align-items:center;
-  gap:9px;
-
+  gap:8px;
   cursor:pointer;
+}
+
+.dark .profileBtn{
+  background:#263247;
+  color:white;
 }
 
 .avatar{
-  width:35px;
-  height:35px;
-
+  width:34px;
+  height:34px;
   border-radius:50%;
-
-  background:var(--secondary);
-  color:white;
-
+  background:linear-gradient(135deg,#18a765,#087f45);
   display:flex;
   align-items:center;
   justify-content:center;
-
+  color:white;
   font-weight:bold;
-  font-size:14px;
+}
 
+.profileName{
+  max-width:120px;
   overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
 }
 
-.avatar img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-}
-
-.profile-name{
-  font-size:12px;
-  font-weight:bold;
-}
-
-.profile-role{
-  font-size:9px;
-  color:var(--muted);
-  margin-top:2px;
-}
-
-
-/* =========================
-   PROFILE MENU
-========================= */
-
-.profile-menu{
-  position:absolute;
-
-  right:0;
-  top:56px;
-
-  width:220px;
-
-  background:var(--card);
-
-  border:1px solid var(--border);
-
-  border-radius:16px;
-
-  box-shadow:0 20px 45px rgba(0,0,0,.15);
-
-  padding:10px;
-
+.dropdown{
   display:none;
+  position:absolute;
+  right:0;
+  top:52px;
+  width:190px;
+  background:white;
+  border-radius:15px;
+  padding:8px;
+  box-shadow:0 10px 35px rgba(0,0,0,.18);
+  z-index:200;
 }
 
-.profile-menu.show{
+.dark .dropdown{
+  background:#1c273a;
+}
+
+.dropdown.show{
   display:block;
-  animation:menu .15s ease;
 }
 
-@keyframes menu{
-
-  from{
-    opacity:0;
-    transform:translateY(-5px);
-  }
-
-  to{
-    opacity:1;
-    transform:translateY(0);
-  }
-
-}
-
-.profile-info{
+.dropdown button{
+  width:100%;
+  border:0;
+  background:transparent;
+  text-align:left;
   padding:12px;
-
-  border-bottom:1px solid var(--border);
-
-  margin-bottom:7px;
-}
-
-.profile-info strong{
-  display:block;
+  border-radius:10px;
+  cursor:pointer;
   font-size:14px;
 }
 
-.profile-info span{
-  font-size:10px;
-  color:var(--muted);
+.dropdown button:hover{
+  background:#f0f3f7;
 }
 
-.menu-item{
-  width:100%;
-
-  border:0;
-
-  background:transparent;
-
-  color:var(--text);
-
-  text-align:left;
-
-  padding:11px 12px;
-
-  border-radius:10px;
-
-  cursor:pointer;
-
-  font-size:12px;
+.dark .dropdown button{
+  color:white;
 }
 
-.menu-item:hover{
-  background:var(--bg);
-}
-
-.menu-item.logout{
-  color:#d9534f;
+.dark .dropdown button:hover{
+  background:#29364c;
 }
 
 
-/* =========================
-   MAIN
-========================= */
+/* ================= MAIN ================= */
 
-.main{
-  padding:30px 35px;
-  max-width:1400px;
-  margin:auto;
+.container{
+  width:min(1200px,94%);
+  margin:30px auto;
 }
 
-
-/* =========================
-   WELCOME
-========================= */
-
-.welcome-box{
+.welcome{
+  background:linear-gradient(135deg,#0f9d58,#087f45);
+  border-radius:22px;
+  padding:30px;
+  color:white;
   display:flex;
   justify-content:space-between;
   align-items:center;
-
+  gap:20px;
   margin-bottom:25px;
 }
 
-.welcome-title{
+.welcome h1{
   font-size:27px;
-  font-weight:bold;
+  margin-bottom:7px;
 }
 
-.welcome-text{
-  margin-top:7px;
-  color:var(--muted);
-  font-size:13px;
-}
-
-
-/* =========================
-   ACTION BUTTONS
-========================= */
-
-.actions{
-  display:flex;
-  gap:10px;
-  flex-wrap:wrap;
-}
-
-.action-btn{
-  border:0;
-
-  padding:12px 18px;
-
-  border-radius:12px;
-
-  cursor:pointer;
-
-  background:var(--primary);
-
-  color:white;
-
-  font-size:12px;
-  font-weight:bold;
-
-  transition:.2s;
-}
-
-.action-btn:hover{
-  transform:translateY(-2px);
+.welcome p{
   opacity:.9;
+  font-size:14px;
 }
 
-.action-btn.refresh{
-  background:var(--secondary);
+.newBtn{
+  border:0;
+  background:white;
+  color:#087f45;
+  padding:13px 20px;
+  border-radius:12px;
+  font-weight:bold;
+  cursor:pointer;
+  font-size:14px;
+  white-space:nowrap;
 }
 
-.action-btn.dark{
-  background:#273c37;
+.newBtn:hover{
+  transform:translateY(-2px);
 }
 
 
-/* =========================
-   CARDS
-========================= */
+/* ================= CARDS ================= */
 
 .cards{
   display:grid;
-
-  grid-template-columns:
-  repeat(4,1fr);
-
+  grid-template-columns:repeat(4,1fr);
   gap:18px;
-
   margin-bottom:25px;
 }
 
 .card{
-  background:var(--card);
-
-  border:1px solid var(--border);
-
+  background:white;
   border-radius:18px;
-
   padding:22px;
-
-  box-shadow:var(--shadow);
-
-  transition:.2s;
+  box-shadow:0 5px 20px rgba(0,0,0,.06);
 }
 
-.card:hover{
-  transform:translateY(-3px);
+.dark .card{
+  background:#172033;
 }
 
-.card-top{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
+.cardLabel{
+  color:#8a94a6;
+  font-size:12px;
+  text-transform:uppercase;
+  margin-bottom:8px;
 }
 
-.card-icon{
-  width:42px;
-  height:42px;
-
-  border-radius:12px;
-
-  display:flex;
-  align-items:center;
-  justify-content:center;
-
-  background:#dcefeb;
-
-  font-size:19px;
+.dark .cardLabel{
+  color:#9faabd;
 }
 
-body.dark .card-icon{
-  background:#223b34;
-}
-
-.card-label{
-  margin-top:16px;
-
-  color:var(--muted);
-
-  font-size:11px;
-}
-
-.card-value{
-  margin-top:5px;
-
-  font-size:24px;
-
+.cardValue{
+  font-size:22px;
   font-weight:bold;
 }
 
 
-/* =========================
-   CONTENT BOX
-========================= */
+/* ================= TABLE ================= */
 
-.content{
-  display:grid;
-
-  grid-template-columns:
-  1fr 330px;
-
-  gap:20px;
-}
-
-.box{
-  background:var(--card);
-
-  border:1px solid var(--border);
-
-  border-radius:18px;
-
-  box-shadow:var(--shadow);
-
+.tableBox{
+  background:white;
+  border-radius:20px;
+  padding:22px;
+  box-shadow:0 5px 20px rgba(0,0,0,.06);
   overflow:hidden;
 }
 
-.box-header{
-  padding:20px;
-
-  border-bottom:1px solid var(--border);
-
-  display:flex;
-
-  justify-content:space-between;
-
-  align-items:center;
+.dark .tableBox{
+  background:#172033;
 }
 
-.box-title{
-  font-size:16px;
+.tableHeader{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-bottom:18px;
+}
+
+.tableHeader h3{
+  font-size:18px;
+}
+
+.refreshText{
+  border:0;
+  background:#eef7f2;
+  color:#087f45;
+  padding:9px 13px;
+  border-radius:10px;
+  cursor:pointer;
   font-weight:bold;
 }
 
-.box-subtitle{
-  font-size:10px;
-  color:var(--muted);
-  margin-top:4px;
+.dark .refreshText{
+  background:#263b35;
+  color:#62d49a;
 }
 
-
-/* =========================
-   TABLE
-========================= */
-
-.table-wrap{
-  width:100%;
-  overflow:auto;
+.tableScroll{
+  overflow-x:auto;
 }
 
 table{
   width:100%;
   border-collapse:collapse;
+  min-width:650px;
+}
+
+thead{
+  background:#f5f7fa;
+}
+
+.dark thead{
+  background:#202c40;
 }
 
 th{
-  padding:13px 18px;
-
+  padding:14px 15px;
   text-align:left;
+  font-size:13px;
+  color:#697386;
+}
 
-  font-size:10px;
-
-  color:var(--muted);
-
-  background:var(--bg);
-
-  white-space:nowrap;
+.dark th{
+  color:#b8c1d0;
 }
 
 td{
-  padding:15px 18px;
-
-  border-top:1px solid var(--border);
-
-  font-size:11px;
-
-  white-space:nowrap;
+  padding:15px;
+  border-bottom:1px solid #edf0f4;
+  font-size:14px;
 }
 
-.status{
-  display:inline-block;
-
-  padding:5px 10px;
-
-  border-radius:20px;
-
-  background:#dff4e8;
-
-  color:#27734a;
-
-  font-size:9px;
-
-  font-weight:bold;
+.dark td{
+  border-color:#293448;
 }
 
-body.dark .status{
-  background:#193b2d;
-  color:#7bd69d;
+tbody tr:hover{
+  background:#f8fafc;
 }
 
+.dark tbody tr:hover{
+  background:#202c40;
+}
 
-/* =========================
-   SIDE PROFILE CARD
-========================= */
-
-.user-card{
-  padding:25px;
-
+.empty{
   text-align:center;
-}
-
-.big-avatar{
-  width:85px;
-  height:85px;
-
-  border-radius:50%;
-
-  background:var(--secondary);
-
-  color:white;
-
-  margin:auto;
-
-  display:flex;
-  align-items:center;
-  justify-content:center;
-
-  font-size:30px;
-  font-weight:bold;
-
-  overflow:hidden;
-}
-
-.big-avatar img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-}
-
-.user-name{
-  margin-top:15px;
-
-  font-size:18px;
-
-  font-weight:bold;
-}
-
-.user-username{
-  margin-top:5px;
-
-  font-size:11px;
-
-  color:var(--muted);
-}
-
-.role-badge{
-  display:inline-block;
-
-  margin-top:12px;
-
-  padding:6px 13px;
-
-  border-radius:20px;
-
-  background:#dcefeb;
-
-  color:#285b4d;
-
-  font-size:10px;
-
-  font-weight:bold;
-}
-
-body.dark .role-badge{
-  background:#223b34;
-  color:#8fd7d0;
-}
-
-.info-row{
-  display:flex;
-
-  justify-content:space-between;
-
-  padding:13px 0;
-
-  border-bottom:1px solid var(--border);
-
-  font-size:11px;
-}
-
-.info-row:last-child{
-  border-bottom:0;
-}
-
-.info-label{
-  color:var(--muted);
+  padding:35px;
+  color:#8a94a6;
 }
 
 
-/* =========================
-   NEW ENTRY MODAL
-========================= */
+/* ================= MODAL ================= */
 
-.modal{
-  position:fixed;
-
-  inset:0;
-
-  background:rgba(0,0,0,.55);
-
+.modalOverlay{
   display:none;
-
-  justify-content:center;
-
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.55);
   align-items:center;
-
-  z-index:1000;
-
+  justify-content:center;
+  z-index:500;
   padding:20px;
 }
 
-.modal.show{
+.modalOverlay.show{
   display:flex;
 }
 
-.modal-box{
-  width:430px;
-
-  max-width:100%;
-
-  background:var(--card);
-
-  border-radius:20px;
-
+.modal{
+  width:100%;
+  max-width:470px;
+  background:white;
+  border-radius:22px;
   padding:25px;
-
-  box-shadow:0 25px 70px rgba(0,0,0,.3);
-
-  animation:modal .2s ease;
+  box-shadow:0 20px 60px rgba(0,0,0,.3);
+  animation:popup .2s ease;
 }
 
-@keyframes modal{
+.dark .modal{
+  background:#172033;
+  color:white;
+}
+
+@keyframes popup{
 
   from{
     opacity:0;
-    transform:scale(.9);
+    transform:scale(.95) translateY(10px);
   }
 
   to{
     opacity:1;
-    transform:scale(1);
+    transform:scale(1) translateY(0);
   }
 
 }
 
-.modal-header{
+.modalTitle{
   display:flex;
-
   justify-content:space-between;
-
   align-items:center;
-
   margin-bottom:22px;
 }
 
-.modal-title{
-  font-size:19px;
-  font-weight:bold;
+.modalTitle h2{
+  font-size:20px;
 }
 
-.close{
-  width:34px;
-  height:34px;
-
+.closeBtn{
+  width:35px;
+  height:35px;
   border:0;
-
   border-radius:10px;
-
-  background:var(--bg);
-
-  color:var(--text);
-
+  background:#f0f2f5;
   cursor:pointer;
-
   font-size:18px;
 }
 
-.form-group{
-  margin-bottom:15px;
-}
-
-.form-group label{
-  display:block;
-
-  margin-bottom:7px;
-
-  font-size:11px;
-
-  color:var(--muted);
-}
-
-.form-group input,
-.form-group textarea{
-  width:100%;
-
-  border:1px solid var(--border);
-
-  outline:0;
-
-  background:var(--bg);
-
-  color:var(--text);
-
-  border-radius:11px;
-
-  padding:11px 13px;
-
-  font-size:12px;
-}
-
-.form-group textarea{
-  min-height:80px;
-  resize:vertical;
-}
-
-.submit-btn{
-  width:100%;
-
-  height:43px;
-
-  border:0;
-
-  border-radius:22px;
-
-  background:var(--primary);
-
+.dark .closeBtn{
+  background:#29364b;
   color:white;
+}
 
-  cursor:pointer;
+.formGroup{
+  margin-bottom:16px;
+}
 
-  font-size:12px;
-
+.formGroup label{
+  display:block;
+  font-size:13px;
   font-weight:bold;
+  margin-bottom:7px;
+}
 
+.formGroup input{
+  width:100%;
+  padding:13px 14px;
+  border:1px solid #dce1e8;
+  border-radius:11px;
+  outline:none;
+  font-size:14px;
+  background:white;
+}
+
+.formGroup input:focus{
+  border-color:#0f9d58;
+  box-shadow:0 0 0 3px rgba(15,157,88,.1);
+}
+
+.dark .formGroup input{
+  background:#202c40;
+  color:white;
+  border-color:#344258;
+}
+
+.formGroup input[readonly]{
+  background:#f3f5f7;
+  color:#6b7280;
+  cursor:not-allowed;
+}
+
+.dark .formGroup input[readonly]{
+  background:#222d40;
+  color:#9ba6b8;
+}
+
+.saveBtn{
+  width:100%;
+  border:0;
+  background:linear-gradient(135deg,#0f9d58,#087f45);
+  color:white;
+  padding:14px;
+  border-radius:12px;
+  cursor:pointer;
+  font-size:15px;
+  font-weight:bold;
   margin-top:5px;
 }
 
+.saveBtn:disabled{
+  opacity:.6;
+  cursor:not-allowed;
+}
 
-/* =========================
-   TOAST
-========================= */
+
+/* ================= TOAST ================= */
 
 .toast{
   position:fixed;
-
-  right:25px;
-  bottom:25px;
-
-  background:var(--primary);
-
+  right:22px;
+  bottom:22px;
+  background:#172033;
   color:white;
-
-  padding:13px 18px;
-
+  padding:14px 18px;
   border-radius:12px;
-
-  font-size:11px;
-
-  box-shadow:0 15px 35px rgba(0,0,0,.2);
-
+  box-shadow:0 10px 30px rgba(0,0,0,.2);
   transform:translateY(100px);
-
   opacity:0;
-
   transition:.3s;
-
-  z-index:2000;
+  z-index:1000;
+  max-width:320px;
 }
 
 .toast.show{
@@ -847,88 +537,83 @@ body.dark .role-badge{
   opacity:1;
 }
 
+.toast.success{
+  background:#087f45;
+}
 
-/* =========================
-   MOBILE
-========================= */
+.toast.error{
+  background:#c62828;
+}
 
-@media(max-width:950px){
+
+/* ================= LOADER ================= */
+
+.loading{
+  display:none;
+  text-align:center;
+  padding:30px;
+  color:#7b8494;
+}
+
+.loading.show{
+  display:block;
+}
+
+
+/* ================= RESPONSIVE ================= */
+
+@media(max-width:900px){
 
   .cards{
-    grid-template-columns:
-    repeat(2,1fr);
-  }
-
-  .content{
-    grid-template-columns:1fr;
+    grid-template-columns:repeat(2,1fr);
   }
 
 }
 
-@media(max-width:700px){
+@media(max-width:600px){
 
   .header{
-    padding:0 15px;
-    height:65px;
+    padding:0 14px;
   }
 
-  .dashboard-title{
-    font-size:16px;
-  }
-
-  .dashboard-subtitle{
+  .titleBox p{
     display:none;
   }
 
-  .profile-name{
+  .profileName{
     display:none;
   }
 
-  .main{
-    padding:20px 15px;
+  .container{
+    width:94%;
+    margin:20px auto;
   }
 
-  .welcome-box{
-    display:block;
+  .welcome{
+    padding:22px;
+    flex-direction:column;
+    align-items:flex-start;
   }
 
-  .actions{
-    margin-top:18px;
-  }
-
-  .cards{
-    grid-template-columns:1fr 1fr;
-    gap:10px;
-  }
-
-  .card{
-    padding:16px;
-  }
-
-  .card-value{
-    font-size:20px;
-  }
-
-}
-
-@media(max-width:450px){
-
-  .welcome-title{
+  .welcome h1{
     font-size:23px;
   }
 
   .cards{
-    grid-template-columns:1fr;
+    grid-template-columns:1fr 1fr;
+    gap:12px;
   }
 
-  .header-left .logo{
-    width:36px;
-    height:36px;
+  .card{
+    padding:17px;
   }
 
-  .icon-btn{
-    width:36px;
-    height:36px;
+  .cardValue{
+    font-size:18px;
+  }
+
+  .tableBox{
+    padding:15px;
   }
 
 }
@@ -941,65 +626,53 @@ body.dark .role-badge{
 <body>
 
 
-<!-- =========================
-     HEADER
-========================= -->
+<!-- ================= HEADER ================= -->
 
 <header class="header">
 
-  <div class="header-left">
+  <div class="logoArea">
 
     <div class="logo">
       D
     </div>
 
-    <div>
+    <div class="titleBox">
 
-      <div class="dashboard-title">
-        Dashboard
-      </div>
+      <h2>Dashboard</h2>
 
-      <div class="dashboard-subtitle">
-        Welcome to your workspace
-      </div>
+      <p>
+        Data Management System
+      </p>
 
     </div>
 
   </div>
 
 
-  <div class="header-right">
-
-
-    <!-- Refresh -->
+  <div class="headerRight">
 
     <button
-      class="icon-btn"
-      onclick="refreshPage()"
+      class="iconBtn"
+      onclick="loadData()"
       title="Refresh"
     >
       ↻
     </button>
 
 
-    <!-- Dark Mode -->
-
     <button
-      class="icon-btn"
-      onclick="toggleDarkMode()"
-      id="darkButton"
+      class="iconBtn"
+      onclick="toggleDark()"
       title="Dark Mode"
     >
-      🌙
+      ◐
     </button>
 
-
-    <!-- Profile -->
 
     <div class="profile">
 
       <button
-        class="profile-btn"
+        class="profileBtn"
         onclick="toggleProfile()"
       >
 
@@ -1010,23 +683,12 @@ body.dark .role-badge{
           U
         </div>
 
-        <div>
-
-          <div
-            class="profile-name"
-            id="headerName"
-          >
-            User
-          </div>
-
-          <div
-            class="profile-role"
-            id="headerRole"
-          >
-            User
-          </div>
-
-        </div>
+        <span
+          class="profileName"
+          id="headerName"
+        >
+          User
+        </span>
 
         <span>⌄</span>
 
@@ -1034,51 +696,15 @@ body.dark .role-badge{
 
 
       <div
-        class="profile-menu"
+        class="dropdown"
         id="profileMenu"
       >
 
-        <div class="profile-info">
-
-          <strong id="menuName">
-            User
-          </strong>
-
-          <span id="menuUsername">
-            @username
-          </span>
-
-        </div>
-
-
-        <button
-          class="menu-item"
-          onclick="showProfile()"
-        >
+        <button onclick="showProfile()">
           👤 My Profile
         </button>
 
-
-        <button
-          class="menu-item"
-          onclick="changePassword()"
-        >
-          🔐 Change Password
-        </button>
-
-
-        <button
-          class="menu-item"
-          onclick="toggleDarkMode();closeProfile()"
-        >
-          🌙 Dark Mode
-        </button>
-
-
-        <button
-          class="menu-item logout"
-          onclick="logout()"
-        >
+        <button onclick="logout()">
           🚪 Logout
         </button>
 
@@ -1092,372 +718,192 @@ body.dark .role-badge{
 
 
 
-<!-- =========================
-     MAIN
-========================= -->
+<!-- ================= MAIN ================= -->
 
-<main class="main">
+<main class="container">
 
 
-  <!-- Welcome -->
+  <!-- WELCOME -->
 
-  <div class="welcome-box">
+  <section class="welcome">
 
     <div>
 
-      <div
-        class="welcome-title"
-        id="welcomeName"
-      >
-        Welcome 👋
+      <h1>
+        Welcome,
+        <span id="welcomeName">
+          User
+        </span>
+      </h1>
+
+      <p>
+        Manage your entries from your dashboard.
+      </p>
+
+    </div>
+
+
+    <button
+      class="newBtn"
+      onclick="openEntryModal()"
+    >
+      ＋ New Entry
+    </button>
+
+  </section>
+
+
+
+  <!-- CARDS -->
+
+  <section class="cards">
+
+    <div class="card">
+
+      <div class="cardLabel">
+        Username
       </div>
 
-      <div class="welcome-text">
-        Manage your dashboard from here.
+      <div
+        class="cardValue"
+        id="usernameCard"
+      >
+        -
       </div>
 
     </div>
 
 
-    <div class="actions">
+    <div class="card">
 
-      <button
-        class="action-btn"
-        onclick="openNewEntry()"
+      <div class="cardLabel">
+        Role
+      </div>
+
+      <div
+        class="cardValue"
+        id="roleCard"
       >
-        ＋ New Entry
-      </button>
+        -
+      </div>
 
+    </div>
+
+
+    <div class="card">
+
+      <div class="cardLabel">
+        Status
+      </div>
+
+      <div
+        class="cardValue"
+        id="statusCard"
+      >
+        -
+      </div>
+
+    </div>
+
+
+    <div class="card">
+
+      <div class="cardLabel">
+        Total Entries
+      </div>
+
+      <div
+        class="cardValue"
+        id="totalCard"
+      >
+        0
+      </div>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- DATA TABLE -->
+
+  <section class="tableBox">
+
+    <div class="tableHeader">
+
+      <h3>
+        Recent Entries
+      </h3>
 
       <button
-        class="action-btn refresh"
-        onclick="refreshPage()"
+        class="refreshText"
+        onclick="loadData()"
       >
         ↻ Refresh
       </button>
 
-
-      <button
-        class="action-btn dark"
-        onclick="toggleDarkMode()"
-      >
-        ◐ Dark Mode
-      </button>
-
     </div>
 
-  </div>
+
+    <div class="tableScroll">
+
+      <table>
+
+        <thead>
+
+          <tr>
+
+            <th>Name</th>
+
+            <th>IP</th>
+
+            <th>Work</th>
+
+            <th>Date</th>
+
+          </tr>
+
+        </thead>
 
 
+        <tbody id="dataBody"></tbody>
 
-  <!-- Cards -->
-
-  <div class="cards">
-
-
-    <div class="card">
-
-      <div class="card-top">
-
-        <div>
-          <div class="card-label">
-            USERNAME
-          </div>
-
-          <div
-            class="card-value"
-            id="cardUsername"
-          >
-            -
-          </div>
-        </div>
-
-        <div class="card-icon">
-          👤
-        </div>
-
-      </div>
+      </table>
 
     </div>
 
 
-    <div class="card">
-
-      <div class="card-top">
-
-        <div>
-          <div class="card-label">
-            ROLE
-          </div>
-
-          <div
-            class="card-value"
-            id="cardRole"
-          >
-            -
-          </div>
-        </div>
-
-        <div class="card-icon">
-          🛡️
-        </div>
-
-      </div>
-
+    <div
+      class="loading"
+      id="loading"
+    >
+      Loading data...
     </div>
 
-
-    <div class="card">
-
-      <div class="card-top">
-
-        <div>
-          <div class="card-label">
-            STATUS
-          </div>
-
-          <div
-            class="card-value"
-            id="cardStatus"
-          >
-            -
-          </div>
-        </div>
-
-        <div class="card-icon">
-          ✓
-        </div>
-
-      </div>
-
-    </div>
-
-
-    <div class="card">
-
-      <div class="card-top">
-
-        <div>
-          <div class="card-label">
-            TODAY
-          </div>
-
-          <div
-            class="card-value"
-            id="today"
-          >
-            -
-          </div>
-        </div>
-
-        <div class="card-icon">
-          📅
-        </div>
-
-      </div>
-
-    </div>
-
-  </div>
-
-
-
-  <!-- Content -->
-
-  <div class="content">
-
-
-    <!-- Recent Entries -->
-
-    <div class="box">
-
-      <div class="box-header">
-
-        <div>
-
-          <div class="box-title">
-            Recent Entries
-          </div>
-
-          <div class="box-subtitle">
-            Your latest dashboard activity
-          </div>
-
-        </div>
-
-        <button
-          class="action-btn refresh"
-          onclick="refreshPage()"
-        >
-          Refresh
-        </button>
-
-      </div>
-
-
-      <div class="table-wrap">
-
-        <table>
-
-          <thead>
-
-            <tr>
-              <th>NAME</th>
-              <th>USERNAME</th>
-              <th>ROLE</th>
-              <th>STATUS</th>
-            </tr>
-
-          </thead>
-
-
-          <tbody id="tableBody">
-
-            <tr>
-
-              <td id="tableName">
-                -
-              </td>
-
-              <td id="tableUsername">
-                -
-              </td>
-
-              <td id="tableRole">
-                -
-              </td>
-
-              <td>
-                <span
-                  class="status"
-                  id="tableStatus"
-                >
-                  -
-                </span>
-              </td>
-
-            </tr>
-
-          </tbody>
-
-        </table>
-
-      </div>
-
-    </div>
-
-
-
-    <!-- User Card -->
-
-    <div class="box">
-
-      <div class="user-card">
-
-        <div
-          class="big-avatar"
-          id="bigAvatar"
-        >
-          U
-        </div>
-
-
-        <div
-          class="user-name"
-          id="profileName"
-        >
-          User
-        </div>
-
-
-        <div
-          class="user-username"
-          id="profileUsername"
-        >
-          @username
-        </div>
-
-
-        <div
-          class="role-badge"
-          id="profileRole"
-        >
-          User
-        </div>
-
-
-        <div style="margin-top:25px;">
-
-          <div class="info-row">
-
-            <span class="info-label">
-              Status
-            </span>
-
-            <strong id="profileStatus">
-              Active
-            </strong>
-
-          </div>
-
-
-          <div class="info-row">
-
-            <span class="info-label">
-              Login
-            </span>
-
-            <strong>
-              Online
-            </strong>
-
-          </div>
-
-
-          <div class="info-row">
-
-            <span class="info-label">
-              Date
-            </span>
-
-            <strong id="profileDate">
-              -
-            </strong>
-
-          </div>
-
-        </div>
-
-      </div>
-
-    </div>
-
-  </div>
+  </section>
 
 </main>
 
 
 
-<!-- =========================
-     NEW ENTRY MODAL
-========================= -->
+<!-- ================= NEW ENTRY MODAL ================= -->
 
 <div
-  class="modal"
-  id="newEntryModal"
+  class="modalOverlay"
+  id="entryModal"
 >
 
-  <div class="modal-box">
+  <div class="modal">
 
-    <div class="modal-header">
+    <div class="modalTitle">
 
-      <div class="modal-title">
+      <h2>
         New Entry
-      </div>
+      </h2>
 
       <button
-        class="close"
-        onclick="closeNewEntry()"
+        class="closeBtn"
+        onclick="closeEntryModal()"
       >
         ×
       </button>
@@ -1465,56 +911,97 @@ body.dark .role-badge{
     </div>
 
 
-    <div class="form-group">
-
-      <label>
-        Name
-      </label>
-
-      <input
-        type="text"
-        id="entryName"
-        placeholder="Enter name"
-      >
-
-    </div>
-
-
-    <div class="form-group">
-
-      <label>
-        IP
-      </label>
-
-      <input
-        type="text"
-        id="entryIp"
-        placeholder="Enter IP"
-      >
-
-    </div>
-
-
-    <div class="form-group">
-
-      <label>
-        Work
-      </label>
-
-      <textarea
-        id="entryWork"
-        placeholder="Enter work details"
-      ></textarea>
-
-    </div>
-
-
-    <button
-      class="submit-btn"
-      onclick="saveEntry()"
+    <form
+      id="entryForm"
+      onsubmit="saveEntry(event)"
     >
-      Save Entry
-    </button>
+
+
+      <!-- NAME -->
+
+      <div class="formGroup">
+
+        <label>
+          Name
+        </label>
+
+        <input
+          type="text"
+          id="entryName"
+          readonly
+        >
+
+      </div>
+
+
+
+      <!-- IP -->
+
+      <div class="formGroup">
+
+        <label>
+          IP
+        </label>
+
+        <input
+          type="text"
+          id="entryIP"
+          placeholder="Enter IP address"
+          autocomplete="off"
+          required
+        >
+
+      </div>
+
+
+
+      <!-- WORK -->
+
+      <div class="formGroup">
+
+        <label>
+          Work
+        </label>
+
+        <input
+          type="text"
+          id="entryWork"
+          placeholder="Enter work"
+          autocomplete="off"
+          required
+        >
+
+      </div>
+
+
+
+      <!-- DATE -->
+
+      <div class="formGroup">
+
+        <label>
+          Date
+        </label>
+
+        <input
+          type="text"
+          id="entryDate"
+          readonly
+        >
+
+      </div>
+
+
+
+      <button
+        type="submit"
+        class="saveBtn"
+        id="saveBtn"
+      >
+        Entry
+      </button>
+
+    </form>
 
   </div>
 
@@ -1522,62 +1009,181 @@ body.dark .role-badge{
 
 
 
-<!-- TOAST -->
+<!-- ================= TOAST ================= -->
 
 <div
   class="toast"
   id="toast"
->
-  Done
-</div>
+></div>
 
 
 
 <script>
 
 
-/* =========================
-   USER DATA
-========================= */
+// ============================================================
+// NEW API URL
+// ============================================================
 
-let userData = {};
+const API_URL =
+  "https://script.google.com/macros/s/AKfycbz59T-4CKQDbHJB_ql6OYZf18eN7XUmttp0d2FaOM5pm27yCBOWrEilqA_zMOnFq_rz/exec";
 
 
-/* =========================
-   LOAD USER
-========================= */
+// ============================================================
+// USER DATA
+// ============================================================
 
-function loadUser(){
+let userData = null;
+
+
+// ============================================================
+// PAGE LOAD
+// ============================================================
+
+document.addEventListener(
+  "DOMContentLoaded",
+  function(){
+
+    checkLogin();
+
+    loadDarkMode();
+
+  }
+);
+
+
+// ============================================================
+// CHECK LOGIN
+// ============================================================
+
+function checkLogin(){
+
+  let savedUser = null;
+
 
   try{
 
-    const saved =
-      localStorage.getItem("userData");
+    savedUser =
+      JSON.parse(
+        localStorage.getItem(
+          "userData"
+        ) || "null"
+      );
 
+  }catch(e){
 
-    if(saved){
-
-      userData =
-        JSON.parse(saved);
-
-    }
-
-  }catch(error){
-
-    console.error(error);
+    savedUser = null;
 
   }
 
 
-  const username =
-    userData.username ||
-    localStorage.getItem("username") ||
-    "User";
+  if(!savedUser){
+
+    try{
+
+      savedUser =
+        JSON.parse(
+          localStorage.getItem(
+            "loginData"
+          ) || "null"
+        );
+
+
+      if(
+        savedUser &&
+        savedUser.user
+      ){
+
+        savedUser =
+          savedUser.user;
+
+      }
+
+    }catch(e){
+
+      savedUser = null;
+
+    }
+
+  }
+
+
+  const loggedUsername =
+    localStorage.getItem(
+      "username"
+    );
+
+
+  if(
+    !savedUser &&
+    !loggedUsername
+  ){
+
+    window.location.href =
+      "index.html";
+
+    return;
+
+  }
+
+
+  if(!savedUser){
+
+    savedUser = {
+
+      username:
+        loggedUsername || "",
+
+      name:
+        localStorage.getItem(
+          "name"
+        ) ||
+        loggedUsername ||
+        "",
+
+      role:
+        localStorage.getItem(
+          "role"
+        ) ||
+        "User",
+
+      status:
+        "Active"
+
+    };
+
+  }
+
+
+  userData =
+    savedUser;
+
+
+  setUserUI();
+
+  loadData();
+
+}
+
+
+// ============================================================
+// SET USER UI
+// ============================================================
+
+function setUserUI(){
+
+  if(!userData) return;
 
 
   const name =
     userData.name ||
-    username;
+    userData.username ||
+    "User";
+
+
+  const username =
+    userData.username ||
+    "User";
 
 
   const role =
@@ -1590,301 +1196,568 @@ function loadUser(){
     "Active";
 
 
-  /* Header */
+  document.getElementById(
+    "welcomeName"
+  ).textContent =
+    name;
+
 
   document.getElementById(
     "headerName"
-  ).innerText = name;
+  ).textContent =
+    name;
 
 
   document.getElementById(
-    "headerRole"
-  ).innerText = role;
+    "usernameCard"
+  ).textContent =
+    username;
 
 
   document.getElementById(
-    "menuName"
-  ).innerText = name;
+    "roleCard"
+  ).textContent =
+    role;
 
 
   document.getElementById(
-    "menuUsername"
-  ).innerText =
-    "@" + username;
-
-
-  /* Welcome */
-
-  document.getElementById(
-    "welcomeName"
-  ).innerText =
-    "Welcome, " + name + " 👋";
-
-
-  /* Cards */
-
-  document.getElementById(
-    "cardUsername"
-  ).innerText = username;
+    "statusCard"
+  ).textContent =
+    status;
 
 
   document.getElementById(
-    "cardRole"
-  ).innerText = role;
+    "avatar"
+  ).textContent =
+    name
+      .charAt(0)
+      .toUpperCase();
 
 
   document.getElementById(
-    "cardStatus"
-  ).innerText = status;
+    "entryName"
+  ).value =
+    name;
 
 
-  /* Table */
-
-  document.getElementById(
-    "tableName"
-  ).innerText = name;
-
-
-  document.getElementById(
-    "tableUsername"
-  ).innerText = username;
-
-
-  document.getElementById(
-    "tableRole"
-  ).innerText = role;
-
-
-  document.getElementById(
-    "tableStatus"
-  ).innerText = status;
-
-
-  /* Profile */
-
-  document.getElementById(
-    "profileName"
-  ).innerText = name;
-
-
-  document.getElementById(
-    "profileUsername"
-  ).innerText =
-    "@" + username;
-
-
-  document.getElementById(
-    "profileRole"
-  ).innerText = role;
-
-
-  document.getElementById(
-    "profileStatus"
-  ).innerText = status;
-
-
-  /* Avatar */
-
-  const picture =
-    userData.picture ||
-    localStorage.getItem("picture") ||
-    "";
-
-
-  const firstLetter =
-    name.charAt(0).toUpperCase();
-
-
-  if(picture){
-
-    document.getElementById(
-      "avatar"
-    ).innerHTML =
-      '<img src="' +
-      picture +
-      '" alt="Profile">';
-
-
-    document.getElementById(
-      "bigAvatar"
-    ).innerHTML =
-      '<img src="' +
-      picture +
-      '" alt="Profile">';
-
-  }else{
-
-    document.getElementById(
-      "avatar"
-    ).innerText =
-      firstLetter;
-
-
-    document.getElementById(
-      "bigAvatar"
-    ).innerText =
-      firstLetter;
-
-  }
+  setToday();
 
 }
 
 
-/* =========================
-   DATE
-========================= */
+// ============================================================
+// TODAY DATE
+// ============================================================
 
-function setDate(){
+function setToday(){
 
   const now =
     new Date();
 
 
-  const options = {
-    day:"2-digit",
-    month:"short",
-    year:"numeric"
-  };
+  const day =
+    String(
+      now.getDate()
+    ).padStart(2,"0");
 
 
-  const date =
-    now.toLocaleDateString(
-      "en-US",
-      options
-    );
+  const month =
+    String(
+      now.getMonth() + 1
+    ).padStart(2,"0");
+
+
+  const year =
+    now.getFullYear();
+
+
+  const hours =
+    String(
+      now.getHours()
+    ).padStart(2,"0");
+
+
+  const minutes =
+    String(
+      now.getMinutes()
+    ).padStart(2,"0");
+
+
+  const seconds =
+    String(
+      now.getSeconds()
+    ).padStart(2,"0");
 
 
   document.getElementById(
-    "today"
-  ).innerText = date;
-
-
-  document.getElementById(
-    "profileDate"
-  ).innerText = date;
+    "entryDate"
+  ).value =
+    `${day}/${month}/${year} ${hours}:${minutes}:${seconds}`;
 
 }
 
 
-/* =========================
-   REFRESH
-========================= */
+// ============================================================
+// LOAD DATA FROM GOOGLE SHEET
+// ============================================================
 
-function refreshPage(){
+async function loadData(){
 
-  const button =
-    document.querySelector(
-      ".action-btn.refresh"
-    );
-
-
-  showToast("Refreshing...");
-
-
-  setTimeout(function(){
-
-    window.location.reload();
-
-  },400);
-
-}
-
-
-/* =========================
-   DARK MODE
-========================= */
-
-function toggleDarkMode(){
-
-  document.body.classList.toggle(
-    "dark"
-  );
-
-
-  const dark =
-    document.body.classList.contains(
-      "dark"
-    );
-
-
-  localStorage.setItem(
-    "darkMode",
-    dark ? "true" : "false"
-  );
-
-
-  document.getElementById(
-    "darkButton"
-  ).innerText =
-    dark ? "☀️" : "🌙";
-
-}
-
-
-/* =========================
-   LOAD DARK MODE
-========================= */
-
-function loadDarkMode(){
-
-  const dark =
-    localStorage.getItem(
-      "darkMode"
-    );
-
-
-  if(dark === "true"){
-
-    document.body.classList.add(
-      "dark"
-    );
-
-
+  const loading =
     document.getElementById(
-      "darkButton"
-    ).innerText = "☀️";
+      "loading"
+    );
+
+
+  const body =
+    document.getElementById(
+      "dataBody"
+    );
+
+
+  loading.classList.add(
+    "show"
+  );
+
+
+  try{
+
+    const response =
+      await fetch(
+        API_URL +
+        "?action=getData&_=" +
+        Date.now(),
+        {
+          method:"GET",
+          cache:"no-store"
+        }
+      );
+
+
+    const result =
+      await response.json();
+
+
+    if(
+      !result.success
+    ){
+
+      throw new Error(
+        result.message ||
+        "Unable to load data."
+      );
+
+    }
+
+
+    renderData(
+      result.data || []
+    );
+
+
+  }catch(error){
+
+    body.innerHTML = `
+      <tr>
+        <td
+          colspan="4"
+          class="empty"
+        >
+          Unable to load data.
+        </td>
+      </tr>
+    `;
+
+
+    showToast(
+      error.message,
+      "error"
+    );
+
+  }finally{
+
+    loading.classList.remove(
+      "show"
+    );
 
   }
 
 }
 
 
-/* =========================
-   PROFILE MENU
-========================= */
+// ============================================================
+// RENDER SHEET DATA
+// ============================================================
 
-function toggleProfile(){
+function renderData(data){
 
-  document
-    .getElementById("profileMenu")
-    .classList.toggle("show");
+  const body =
+    document.getElementById(
+      "dataBody"
+    );
+
+
+  document.getElementById(
+    "totalCard"
+  ).textContent =
+    data.length;
+
+
+  if(
+    !data ||
+    data.length === 0
+  ){
+
+    body.innerHTML = `
+      <tr>
+        <td
+          colspan="4"
+          class="empty"
+        >
+          No entries found.
+        </td>
+      </tr>
+    `;
+
+    return;
+
+  }
+
+
+  body.innerHTML = "";
+
+
+  data.forEach(
+    function(row){
+
+      const tr =
+        document.createElement(
+          "tr"
+        );
+
+
+      tr.innerHTML = `
+
+        <td>
+          ${escapeHTML(row.name)}
+        </td>
+
+        <td>
+          ${escapeHTML(row.ip)}
+        </td>
+
+        <td>
+          ${escapeHTML(row.work)}
+        </td>
+
+        <td>
+          ${escapeHTML(row.date)}
+        </td>
+
+      `;
+
+
+      body.appendChild(
+        tr
+      );
+
+    }
+  );
 
 }
 
 
-function closeProfile(){
+// ============================================================
+// OPEN NEW ENTRY
+// ============================================================
+
+function openEntryModal(){
+
+  if(!userData){
+
+    showToast(
+      "User information not found.",
+      "error"
+    );
+
+    return;
+
+  }
+
+
+  // Name cannot be edited
+  document.getElementById(
+    "entryName"
+  ).value =
+    userData.name ||
+    userData.username ||
+    "";
+
+
+  // Clear IP
+  document.getElementById(
+    "entryIP"
+  ).value = "";
+
+
+  // Clear Work
+  document.getElementById(
+    "entryWork"
+  ).value = "";
+
+
+  // Date automatically selected
+  setToday();
+
+
+  document.getElementById(
+    "entryModal"
+  ).classList.add(
+    "show"
+  );
+
+
+  setTimeout(
+    function(){
+
+      document.getElementById(
+        "entryIP"
+      ).focus();
+
+    },
+    100
+  );
+
+}
+
+
+// ============================================================
+// CLOSE ENTRY
+// ============================================================
+
+function closeEntryModal(){
+
+  document.getElementById(
+    "entryModal"
+  ).classList.remove(
+    "show"
+  );
+
+}
+
+
+// ============================================================
+// SAVE ENTRY TO SHEET
+// ============================================================
+
+async function saveEntry(event){
+
+  event.preventDefault();
+
+
+  if(!userData){
+
+    showToast(
+      "Login information not found.",
+      "error"
+    );
+
+    return;
+
+  }
+
+
+  const ip =
+    document.getElementById(
+      "entryIP"
+    ).value.trim();
+
+
+  const work =
+    document.getElementById(
+      "entryWork"
+    ).value.trim();
+
+
+  if(!ip){
+
+    showToast(
+      "Please enter IP.",
+      "error"
+    );
+
+    return;
+
+  }
+
+
+  if(!work){
+
+    showToast(
+      "Please enter Work.",
+      "error"
+    );
+
+    return;
+
+  }
+
+
+  const saveBtn =
+    document.getElementById(
+      "saveBtn"
+    );
+
+
+  saveBtn.disabled =
+    true;
+
+
+  saveBtn.textContent =
+    "Saving...";
+
+
+  try{
+
+    const payload = {
+
+      action:
+        "addEntry",
+
+      username:
+        userData.username ||
+        localStorage.getItem(
+          "username"
+        ) ||
+        "",
+
+      name:
+        userData.name ||
+        userData.username ||
+        "",
+
+      ip:
+        ip,
+
+      work:
+        work,
+
+      date:
+        new Date().toISOString()
+
+    };
+
+
+    const response =
+      await fetch(
+        API_URL,
+        {
+
+          method:"POST",
+
+          headers:{
+            "Content-Type":
+              "text/plain;charset=utf-8"
+          },
+
+          body:
+            JSON.stringify(
+              payload
+            )
+
+        }
+      );
+
+
+    const result =
+      await response.json();
+
+
+    if(
+      !result.success
+    ){
+
+      throw new Error(
+        result.message ||
+        "Entry could not be saved."
+      );
+
+    }
+
+
+    closeEntryModal();
+
+
+    showToast(
+      "Entry saved successfully.",
+      "success"
+    );
+
+
+    // Reload Sheet data
+    await loadData();
+
+
+  }catch(error){
+
+    showToast(
+      error.message,
+      "error"
+    );
+
+  }finally{
+
+    saveBtn.disabled =
+      false;
+
+    saveBtn.textContent =
+      "Entry";
+
+  }
+
+}
+
+
+// ============================================================
+// PROFILE MENU
+// ============================================================
+
+function toggleProfile(){
 
   document
-    .getElementById("profileMenu")
-    .classList.remove("show");
+    .getElementById(
+      "profileMenu"
+    )
+    .classList.toggle(
+      "show"
+    );
 
 }
 
 
 document.addEventListener(
   "click",
-  function(e){
+  function(event){
 
     const profile =
-      document.querySelector(".profile");
+      document.querySelector(
+        ".profile"
+      );
 
 
     if(
-      profile &&
-      !profile.contains(e.target)
+      !profile.contains(
+        event.target
+      )
     ){
 
-      closeProfile();
+      document
+        .getElementById(
+          "profileMenu"
+        )
+        .classList.remove(
+          "show"
+        );
 
     }
 
@@ -1892,48 +1765,38 @@ document.addEventListener(
 );
 
 
-/* =========================
-   PROFILE
-========================= */
+// ============================================================
+// PROFILE
+// ============================================================
 
 function showProfile(){
 
-  closeProfile();
-
   document
-    .getElementById("newEntryModal")
-    .classList.remove("show");
-
-  showToast(
-    "Profile: " +
-    (
-      userData.name ||
-      userData.username ||
-      "User"
+    .getElementById(
+      "profileMenu"
     )
-  );
+    .classList.remove(
+      "show"
+    );
 
-}
-
-
-/* =========================
-   CHANGE PASSWORD
-========================= */
-
-function changePassword(){
-
-  closeProfile();
 
   showToast(
-    "Please contact your administrator to change password."
+    "Logged in as " +
+    (
+      userData
+        ? userData.name ||
+          userData.username
+        : "User"
+    ),
+    "success"
   );
 
 }
 
 
-/* =========================
-   LOGOUT
-========================= */
+// ============================================================
+// LOGOUT
+// ============================================================
 
 function logout(){
 
@@ -1965,6 +1828,7 @@ function logout(){
     "userInfo"
   );
 
+
   sessionStorage.removeItem(
     "dashboardAuth"
   );
@@ -1977,120 +1841,57 @@ function logout(){
 }
 
 
-/* =========================
-   NEW ENTRY
-========================= */
+// ============================================================
+// DARK MODE
+// ============================================================
 
-function openNewEntry(){
+function toggleDark(){
 
-  document
-    .getElementById("newEntryModal")
-    .classList.add("show");
-
-}
+  document.body.classList.toggle(
+    "dark"
+  );
 
 
-function closeNewEntry(){
-
-  document
-    .getElementById("newEntryModal")
-    .classList.remove("show");
-
-}
-
-
-/* =========================
-   SAVE ENTRY
-========================= */
-
-function saveEntry(){
-
-  const name =
-    document
-      .getElementById("entryName")
-      .value.trim();
-
-
-  const ip =
-    document
-      .getElementById("entryIp")
-      .value.trim();
-
-
-  const work =
-    document
-      .getElementById("entryWork")
-      .value.trim();
-
-
-  if(!name){
-
-    showToast(
-      "Please enter name."
-    );
-
-    return;
-
-  }
-
-
-  if(!ip){
-
-    showToast(
-      "Please enter IP."
-    );
-
-    return;
-
-  }
-
-
-  if(!work){
-
-    showToast(
-      "Please enter work."
-    );
-
-    return;
-
-  }
-
-
-  /*
-   * এখানে পরে Google Sheet API
-   * connect করা যাবে।
-   */
-
-  closeNewEntry();
-
-
-  document.getElementById(
-    "entryName"
-  ).value = "";
-
-
-  document.getElementById(
-    "entryIp"
-  ).value = "";
-
-
-  document.getElementById(
-    "entryWork"
-  ).value = "";
-
-
-  showToast(
-    "Entry saved successfully."
+  localStorage.setItem(
+    "darkMode",
+    document.body.classList.contains(
+      "dark"
+    )
+      ? "true"
+      : "false"
   );
 
 }
 
 
-/* =========================
-   TOAST
-========================= */
+function loadDarkMode(){
 
-function showToast(message){
+  if(
+    localStorage.getItem(
+      "darkMode"
+    ) === "true"
+  ){
+
+    document.body.classList.add(
+      "dark"
+    );
+
+  }
+
+}
+
+
+// ============================================================
+// TOAST
+// ============================================================
+
+let toastTimer;
+
+
+function showToast(
+  message,
+  type = ""
+){
 
   const toast =
     document.getElementById(
@@ -2098,39 +1899,85 @@ function showToast(message){
     );
 
 
-  toast.innerText =
+  toast.textContent =
     message;
 
 
-  toast.classList.add(
-    "show"
+  toast.className =
+    "toast show " +
+    type;
+
+
+  clearTimeout(
+    toastTimer
   );
 
 
-  setTimeout(function(){
+  toastTimer =
+    setTimeout(
+      function(){
 
-    toast.classList.remove(
-      "show"
+        toast.classList.remove(
+          "show"
+        );
+
+      },
+      3000
     );
-
-  },2500);
 
 }
 
 
-/* =========================
-   MODAL OUTSIDE CLICK
-========================= */
+// ============================================================
+// ESCAPE HTML
+// ============================================================
+
+function escapeHTML(value){
+
+  return String(
+    value ?? ""
+  )
+  .replace(
+    /&/g,
+    "&amp;"
+  )
+  .replace(
+    /</g,
+    "&lt;"
+  )
+  .replace(
+    />/g,
+    "&gt;"
+  )
+  .replace(
+    /"/g,
+    "&quot;"
+  )
+  .replace(
+    /'/g,
+    "&#039;"
+  );
+
+}
+
+
+// ============================================================
+// CLOSE MODAL OUTSIDE CLICK
+// ============================================================
 
 document
-  .getElementById("newEntryModal")
+  .getElementById(
+    "entryModal"
+  )
   .addEventListener(
     "click",
-    function(e){
+    function(event){
 
-      if(e.target === this){
+      if(
+        event.target === this
+      ){
 
-        closeNewEntry();
+        closeEntryModal();
 
       }
 
@@ -2138,47 +1985,49 @@ document
   );
 
 
-/* =========================
-   LOGIN PROTECTION
-========================= */
+// ============================================================
+// ESC KEY
+// ============================================================
 
-function checkLogin(){
+document.addEventListener(
+  "keydown",
+  function(event){
 
-  const auth =
-    localStorage.getItem(
-      "dashboardAuth"
-    );
+    if(
+      event.key === "Escape"
+    ){
 
+      closeEntryModal();
 
-  if(auth !== "true"){
-
-    window.location.replace(
-      "index.html"
-    );
-
-    return false;
+    }
 
   }
+);
 
 
-  return true;
+// ============================================================
+// BACK BUTTON PROTECTION
+// ============================================================
 
-}
+history.pushState(
+  null,
+  "",
+  location.href
+);
 
 
-/* =========================
-   START
-========================= */
+window.addEventListener(
+  "popstate",
+  function(){
 
-if(checkLogin()){
+    history.pushState(
+      null,
+      "",
+      location.href
+    );
 
-  loadUser();
-
-  setDate();
-
-  loadDarkMode();
-
-}
+  }
+);
 
 </script>
 
