@@ -4,18 +4,14 @@
 <head>
 
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 
-<meta
-  name="viewport"
-  content="width=device-width, initial-scale=1.0"
->
-
-<title>Data Dashboard</title>
+<title>Dashboard</title>
 
 <link
   rel="icon"
   type="image/png"
-  href="https://cdn-icons-png.flaticon.com/128/10552/10552177.png"
+  href="https://cdn-icons-png.flaticon.com/128/17163/17163834.png"
 >
 
 <style>
@@ -24,482 +20,668 @@
   margin:0;
   padding:0;
   box-sizing:border-box;
-  font-family:Arial,Helvetica,sans-serif;
+  font-family:Arial,sans-serif;
 }
 
 :root{
-  --bg:#f4f7f6;
+  --bg:#f4f8f7;
   --card:#ffffff;
-  --text:#1f2937;
-  --muted:#6b7280;
-  --border:#e5e7eb;
-  --input:#ffffff;
-  --thead:#f8fafc;
-  --hover:#fafafa;
-
-  --green:#087f5b;
-  --green-dark:#066b4d;
-
-  --blue:#2563eb;
-  --red:#dc2626;
-  --orange:#d97706;
-  --purple:#7c3aed;
-
-  --shadow:rgba(0,0,0,.20);
+  --text:#183f35;
+  --muted:#78918a;
+  --primary:#285b4d;
+  --secondary:#68b8b1;
+  --border:#e3ece9;
+  --shadow:0 10px 30px rgba(24,63,53,.08);
 }
 
 body.dark{
-  --bg:#111827;
-  --card:#1f2937;
-  --text:#f9fafb;
-  --muted:#9ca3af;
-  --border:#374151;
-  --input:#111827;
-  --thead:#172033;
-  --hover:#263244;
-  --shadow:rgba(0,0,0,.50);
+  --bg:#101c19;
+  --card:#172a25;
+  --text:#f2f8f6;
+  --muted:#91aaa2;
+  --primary:#68b8b1;
+  --secondary:#4d968f;
+  --border:#29423b;
+  --shadow:0 10px 30px rgba(0,0,0,.25);
 }
 
 body{
+  min-height:100vh;
   background:var(--bg);
   color:var(--text);
-  transition:
-    background .25s,
-    color .25s;
+  transition:.25s;
 }
 
-button{
-  border:none;
-  cursor:pointer;
-  transition:.2s;
-}
 
-button:disabled{
-  cursor:not-allowed;
-  opacity:.5;
-}
+/* =========================
+   HEADER
+========================= */
 
 .header{
-  width:100%;
-  min-height:70px;
+  height:75px;
   background:var(--card);
   border-bottom:1px solid var(--border);
+
   display:flex;
   align-items:center;
   justify-content:space-between;
-  padding:0 25px;
+
+  padding:0 35px;
+
   position:sticky;
   top:0;
   z-index:100;
+
+  box-shadow:var(--shadow);
+}
+
+.header-left{
+  display:flex;
+  align-items:center;
+  gap:14px;
 }
 
 .logo{
-  font-size:22px;
-  font-weight:700;
-  color:var(--green);
+  width:42px;
+  height:42px;
+
+  border-radius:13px;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  background:var(--primary);
+  color:white;
+
+  font-size:20px;
+  font-weight:bold;
 }
+
+.dashboard-title{
+  font-size:20px;
+  font-weight:bold;
+}
+
+.dashboard-subtitle{
+  font-size:11px;
+  color:var(--muted);
+  margin-top:3px;
+}
+
+
+/* =========================
+   HEADER RIGHT
+========================= */
 
 .header-right{
   display:flex;
   align-items:center;
-  gap:10px;
+  gap:12px;
 }
 
-.header-user{
+.icon-btn{
+  width:42px;
   height:42px;
-  padding:0 14px;
-  border-radius:8px;
-  background:var(--input);
+
   border:1px solid var(--border);
+  border-radius:12px;
+
+  background:var(--card);
   color:var(--text);
+
+  cursor:pointer;
+
   display:flex;
   align-items:center;
-  gap:7px;
-  font-size:13px;
-  font-weight:600;
-  white-space:nowrap;
+  justify-content:center;
+
+  font-size:18px;
+
+  transition:.2s;
 }
 
-.header-user .user-icon{
-  font-size:16px;
+.icon-btn:hover{
+  background:var(--primary);
+  color:white;
+  transform:translateY(-2px);
 }
 
-.header-user span{
-  color:var(--green);
-  max-width:180px;
-  overflow:hidden;
-  text-overflow:ellipsis;
+
+/* =========================
+   USER PROFILE
+========================= */
+
+.profile{
+  position:relative;
 }
 
-.btn{
-  padding:11px 17px;
-  border-radius:8px;
-  font-size:14px;
-  font-weight:600;
-}
+.profile-btn{
+  height:45px;
 
-.btn-primary{
-  background:var(--green);
-  color:#fff;
-}
-
-.btn-primary:hover{
-  background:var(--green-dark);
-}
-
-.btn-refresh,
-.theme-btn,
-.btn-cancel{
-  background:var(--input);
-  color:var(--text);
   border:1px solid var(--border);
+  border-radius:25px;
+
+  background:var(--card);
+  color:var(--text);
+
+  padding:4px 12px 4px 5px;
+
+  display:flex;
+  align-items:center;
+  gap:9px;
+
+  cursor:pointer;
 }
 
-.btn-refresh:hover,
-.theme-btn:hover,
-.btn-cancel:hover{
-  background:var(--hover);
-}
+.avatar{
+  width:35px;
+  height:35px;
 
-.theme-btn{
-  height:42px;
-  padding:0 14px;
-  border-radius:8px;
-  font-size:13px;
-  font-weight:600;
-}
+  border-radius:50%;
 
-.btn-logout{
-  background:#dc2626;
-  color:#fff;
-  padding:11px 17px;
-  border-radius:8px;
+  background:var(--secondary);
+  color:white;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  font-weight:bold;
   font-size:14px;
-  font-weight:600;
+
+  overflow:hidden;
 }
 
-.btn-logout:hover{
-  background:#b91c1c;
+.avatar img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
 }
+
+.profile-name{
+  font-size:12px;
+  font-weight:bold;
+}
+
+.profile-role{
+  font-size:9px;
+  color:var(--muted);
+  margin-top:2px;
+}
+
 
 /* =========================
    PROFILE MENU
 ========================= */
 
-.profile-wrap{
-  position:relative;
-}
-
-.profile-btn{
-  height:42px;
-  padding:0 13px;
-  border-radius:8px;
-  background:var(--input);
-  color:var(--text);
-  border:1px solid var(--border);
-  display:flex;
-  align-items:center;
-  gap:8px;
-  font-size:13px;
-  font-weight:600;
-}
-
-.profile-btn:hover{
-  background:var(--hover);
-}
-
-.profile-avatar{
-  width:27px;
-  height:27px;
-  border-radius:50%;
-  background:var(--green);
-  color:#fff;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:14px;
-}
-
-.profile-arrow{
-  font-size:11px;
-  color:var(--muted);
-}
-
 .profile-menu{
   position:absolute;
+
   right:0;
-  top:50px;
+  top:56px;
+
   width:220px;
+
   background:var(--card);
+
   border:1px solid var(--border);
-  border-radius:12px;
-  box-shadow:0 15px 40px var(--shadow);
-  padding:7px;
+
+  border-radius:16px;
+
+  box-shadow:0 20px 45px rgba(0,0,0,.15);
+
+  padding:10px;
+
   display:none;
-  z-index:1000;
 }
 
 .profile-menu.show{
   display:block;
+  animation:menu .15s ease;
+}
+
+@keyframes menu{
+
+  from{
+    opacity:0;
+    transform:translateY(-5px);
+  }
+
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+
 }
 
 .profile-info{
   padding:12px;
+
   border-bottom:1px solid var(--border);
-  margin-bottom:5px;
+
+  margin-bottom:7px;
 }
 
-.profile-info-name{
+.profile-info strong{
+  display:block;
   font-size:14px;
-  font-weight:700;
-  color:var(--text);
-  overflow:hidden;
-  text-overflow:ellipsis;
-  white-space:nowrap;
 }
 
-.profile-info-label{
-  margin-top:3px;
-  font-size:11px;
+.profile-info span{
+  font-size:10px;
   color:var(--muted);
 }
 
-.profile-menu-item{
+.menu-item{
   width:100%;
-  padding:11px 12px;
-  border-radius:8px;
+
+  border:0;
+
   background:transparent;
+
   color:var(--text);
-  display:flex;
-  align-items:center;
-  gap:10px;
+
   text-align:left;
-  font-size:13px;
-  font-weight:600;
+
+  padding:11px 12px;
+
+  border-radius:10px;
+
+  cursor:pointer;
+
+  font-size:12px;
 }
 
-.profile-menu-item:hover{
-  background:var(--hover);
+.menu-item:hover{
+  background:var(--bg);
 }
 
-.profile-menu-item.logout-item{
-  color:#dc2626;
+.menu-item.logout{
+  color:#d9534f;
 }
 
-.profile-menu-item.logout-item:hover{
-  background:#fef2f2;
-}
-
-body.dark .profile-menu-item.logout-item:hover{
-  background:#3a2020;
-}
 
 /* =========================
    MAIN
 ========================= */
 
-.container{
-  width:100%;
-  max-width:1500px;
+.main{
+  padding:30px 35px;
+  max-width:1400px;
   margin:auto;
-  padding:25px;
 }
 
-.top-section{
+
+/* =========================
+   WELCOME
+========================= */
+
+.welcome-box{
   display:flex;
   justify-content:space-between;
   align-items:center;
-  gap:15px;
-  margin-bottom:20px;
+
+  margin-bottom:25px;
 }
 
-.title h1{
+.welcome-title{
   font-size:27px;
-  margin-bottom:5px;
+  font-weight:bold;
 }
 
-.title p{
+.welcome-text{
+  margin-top:7px;
   color:var(--muted);
-  font-size:14px;
+  font-size:13px;
 }
 
-.filter-box{
-  background:var(--card);
-  border:1px solid var(--border);
-  border-radius:12px;
-  padding:18px;
-  margin-bottom:20px;
-}
 
-.filters{
-  display:grid;
-  grid-template-columns:1fr auto;
-  gap:12px;
-  align-items:end;
-}
+/* =========================
+   ACTION BUTTONS
+========================= */
 
-.field{
+.actions{
   display:flex;
-  flex-direction:column;
-  gap:6px;
+  gap:10px;
+  flex-wrap:wrap;
 }
 
-.field label{
-  font-size:12px;
-  font-weight:600;
-  color:var(--muted);
-}
+.action-btn{
+  border:0;
 
-.field input,
-.field select{
-  width:100%;
-  height:42px;
-  border:1px solid var(--border);
-  border-radius:8px;
-  padding:0 12px;
-  outline:none;
-  background:var(--input);
-  color:var(--text);
-  font-size:14px;
-}
+  padding:12px 18px;
 
-.field input:focus,
-.field select:focus{
-  border-color:var(--green);
-}
-
-.table-box{
-  background:var(--card);
-  border:1px solid var(--border);
   border-radius:12px;
+
+  cursor:pointer;
+
+  background:var(--primary);
+
+  color:white;
+
+  font-size:12px;
+  font-weight:bold;
+
+  transition:.2s;
+}
+
+.action-btn:hover{
+  transform:translateY(-2px);
+  opacity:.9;
+}
+
+.action-btn.refresh{
+  background:var(--secondary);
+}
+
+.action-btn.dark{
+  background:#273c37;
+}
+
+
+/* =========================
+   CARDS
+========================= */
+
+.cards{
+  display:grid;
+
+  grid-template-columns:
+  repeat(4,1fr);
+
+  gap:18px;
+
+  margin-bottom:25px;
+}
+
+.card{
+  background:var(--card);
+
+  border:1px solid var(--border);
+
+  border-radius:18px;
+
+  padding:22px;
+
+  box-shadow:var(--shadow);
+
+  transition:.2s;
+}
+
+.card:hover{
+  transform:translateY(-3px);
+}
+
+.card-top{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.card-icon{
+  width:42px;
+  height:42px;
+
+  border-radius:12px;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  background:#dcefeb;
+
+  font-size:19px;
+}
+
+body.dark .card-icon{
+  background:#223b34;
+}
+
+.card-label{
+  margin-top:16px;
+
+  color:var(--muted);
+
+  font-size:11px;
+}
+
+.card-value{
+  margin-top:5px;
+
+  font-size:24px;
+
+  font-weight:bold;
+}
+
+
+/* =========================
+   CONTENT BOX
+========================= */
+
+.content{
+  display:grid;
+
+  grid-template-columns:
+  1fr 330px;
+
+  gap:20px;
+}
+
+.box{
+  background:var(--card);
+
+  border:1px solid var(--border);
+
+  border-radius:18px;
+
+  box-shadow:var(--shadow);
+
   overflow:hidden;
 }
 
-.table-header{
-  padding:16px 18px;
+.box-header{
+  padding:20px;
+
   border-bottom:1px solid var(--border);
+
   display:flex;
+
   justify-content:space-between;
+
   align-items:center;
 }
 
-.table-header h2{
-  font-size:17px;
+.box-title{
+  font-size:16px;
+  font-weight:bold;
 }
 
-.total-count{
-  font-size:13px;
+.box-subtitle{
+  font-size:10px;
   color:var(--muted);
+  margin-top:4px;
 }
 
-.table-wrapper{
+
+/* =========================
+   TABLE
+========================= */
+
+.table-wrap{
   width:100%;
-  overflow-x:auto;
+  overflow:auto;
 }
 
 table{
   width:100%;
   border-collapse:collapse;
-  min-width:700px;
 }
 
 th{
-  background:var(--thead);
-  padding:14px;
+  padding:13px 18px;
+
   text-align:left;
-  font-size:12px;
+
+  font-size:10px;
+
   color:var(--muted);
+
+  background:var(--bg);
+
   white-space:nowrap;
-  border-bottom:1px solid var(--border);
 }
 
 td{
-  padding:14px;
-  border-bottom:1px solid var(--border);
-  font-size:13px;
+  padding:15px 18px;
+
+  border-top:1px solid var(--border);
+
+  font-size:11px;
+
   white-space:nowrap;
 }
 
-tr:hover td{
-  background:var(--hover);
+.status{
+  display:inline-block;
+
+  padding:5px 10px;
+
+  border-radius:20px;
+
+  background:#dff4e8;
+
+  color:#27734a;
+
+  font-size:9px;
+
+  font-weight:bold;
 }
 
-.date-cell{
-  color:var(--muted);
-  font-weight:500;
+body.dark .status{
+  background:#193b2d;
+  color:#7bd69d;
 }
 
-.actions{
-  display:flex;
-  gap:7px;
-  align-items:center;
-}
-
-.btn-sell{
-  padding:7px 11px;
-  border-radius:6px;
-  font-size:13px;
-  font-weight:600;
-  background:#fff7ed;
-  color:#d97706;
-}
-
-.btn-sell:hover{
-  background:#ffedd5;
-}
-
-.pagination-box{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding:15px 18px;
-  border-top:1px solid var(--border);
-}
-
-.page-info{
-  font-size:13px;
-  color:var(--muted);
-}
-
-.pagination{
-  display:flex;
-  gap:5px;
-  flex-wrap:wrap;
-}
-
-.page-btn{
-  min-width:35px;
-  height:35px;
-  border:1px solid var(--border);
-  background:var(--input);
-  color:var(--text);
-  border-radius:6px;
-  font-size:13px;
-}
-
-.page-btn:hover{
-  background:var(--hover);
-}
-
-.page-btn.active{
-  background:var(--green);
-  color:#fff;
-  border-color:var(--green);
-}
 
 /* =========================
-   MODAL
+   SIDE PROFILE CARD
+========================= */
+
+.user-card{
+  padding:25px;
+
+  text-align:center;
+}
+
+.big-avatar{
+  width:85px;
+  height:85px;
+
+  border-radius:50%;
+
+  background:var(--secondary);
+
+  color:white;
+
+  margin:auto;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  font-size:30px;
+  font-weight:bold;
+
+  overflow:hidden;
+}
+
+.big-avatar img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+.user-name{
+  margin-top:15px;
+
+  font-size:18px;
+
+  font-weight:bold;
+}
+
+.user-username{
+  margin-top:5px;
+
+  font-size:11px;
+
+  color:var(--muted);
+}
+
+.role-badge{
+  display:inline-block;
+
+  margin-top:12px;
+
+  padding:6px 13px;
+
+  border-radius:20px;
+
+  background:#dcefeb;
+
+  color:#285b4d;
+
+  font-size:10px;
+
+  font-weight:bold;
+}
+
+body.dark .role-badge{
+  background:#223b34;
+  color:#8fd7d0;
+}
+
+.info-row{
+  display:flex;
+
+  justify-content:space-between;
+
+  padding:13px 0;
+
+  border-bottom:1px solid var(--border);
+
+  font-size:11px;
+}
+
+.info-row:last-child{
+  border-bottom:0;
+}
+
+.info-label{
+  color:var(--muted);
+}
+
+
+/* =========================
+   NEW ENTRY MODAL
 ========================= */
 
 .modal{
   position:fixed;
+
   inset:0;
+
   background:rgba(0,0,0,.55);
+
   display:none;
+
   justify-content:center;
+
   align-items:center;
+
+  z-index:1000;
+
   padding:20px;
-  z-index:999;
 }
 
 .modal.show{
@@ -507,185 +689,157 @@ tr:hover td{
 }
 
 .modal-box{
-  width:100%;
-  max-width:700px;
-  max-height:95vh;
-  overflow-y:auto;
+  width:430px;
+
+  max-width:100%;
+
   background:var(--card);
-  color:var(--text);
-  border-radius:16px;
-  box-shadow:0 20px 60px var(--shadow);
+
+  border-radius:20px;
+
+  padding:25px;
+
+  box-shadow:0 25px 70px rgba(0,0,0,.3);
+
+  animation:modal .2s ease;
+}
+
+@keyframes modal{
+
+  from{
+    opacity:0;
+    transform:scale(.9);
+  }
+
+  to{
+    opacity:1;
+    transform:scale(1);
+  }
+
 }
 
 .modal-header{
-  padding:20px 24px;
-  border-bottom:1px solid var(--border);
   display:flex;
+
   justify-content:space-between;
+
   align-items:center;
-  position:sticky;
-  top:0;
-  background:var(--card);
-  z-index:2;
+
+  margin-bottom:22px;
 }
 
-.modal-header h2{
-  font-size:20px;
+.modal-title{
+  font-size:19px;
+  font-weight:bold;
 }
 
-.close-btn{
-  width:36px;
-  height:36px;
-  border-radius:50%;
-  background:var(--input);
-  border:1px solid var(--border);
-  font-size:22px;
+.close{
+  width:34px;
+  height:34px;
+
+  border:0;
+
+  border-radius:10px;
+
+  background:var(--bg);
+
   color:var(--text);
-}
 
-.close-btn:hover{
-  background:var(--hover);
-}
+  cursor:pointer;
 
-.form{
-  padding:30px 25px;
-}
-
-.form-grid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:22px 18px;
+  font-size:18px;
 }
 
 .form-group{
-  display:flex;
-  flex-direction:column;
-  gap:9px;
-}
-
-.form-group.full{
-  grid-column:1 / -1;
+  margin-bottom:15px;
 }
 
 .form-group label{
-  font-size:13px;
-  font-weight:600;
+  display:block;
+
+  margin-bottom:7px;
+
+  font-size:11px;
+
+  color:var(--muted);
 }
 
 .form-group input,
 .form-group textarea{
   width:100%;
-  border:1px solid var(--border);
-  border-radius:9px;
-  padding:13px 14px;
-  outline:none;
-  font-size:14px;
-  background:var(--input);
-  color:var(--text);
-}
 
-.form-group input{
-  height:48px;
+  border:1px solid var(--border);
+
+  outline:0;
+
+  background:var(--bg);
+
+  color:var(--text);
+
+  border-radius:11px;
+
+  padding:11px 13px;
+
+  font-size:12px;
 }
 
 .form-group textarea{
-  min-height:150px;
+  min-height:80px;
   resize:vertical;
 }
 
-.form-group input:focus,
-.form-group textarea:focus{
-  border-color:var(--green);
-}
-
-.form-group input[readonly]{
-  background:var(--thead);
-  color:var(--muted);
-  cursor:not-allowed;
-}
-
-.form-footer{
-  display:flex;
-  justify-content:flex-end;
-  gap:10px;
-  padding-top:30px;
-}
-
-/* Change Password */
-
-.password-modal-box{
-  max-width:460px;
-}
-
-.password-form{
-  padding:25px;
-}
-
-.password-note{
-  background:var(--thead);
-  border:1px solid var(--border);
-  border-radius:9px;
-  padding:12px;
-  margin-bottom:18px;
-  color:var(--muted);
-  font-size:12px;
-  line-height:1.5;
-}
-
-.password-field{
-  margin-bottom:17px;
-}
-
-.password-field label{
-  display:block;
-  font-size:13px;
-  font-weight:600;
-  margin-bottom:8px;
-}
-
-.password-field input{
+.submit-btn{
   width:100%;
-  height:46px;
-  border:1px solid var(--border);
-  border-radius:8px;
-  padding:0 13px;
-  outline:none;
-  background:var(--input);
-  color:var(--text);
-  font-size:14px;
+
+  height:43px;
+
+  border:0;
+
+  border-radius:22px;
+
+  background:var(--primary);
+
+  color:white;
+
+  cursor:pointer;
+
+  font-size:12px;
+
+  font-weight:bold;
+
+  margin-top:5px;
 }
 
-.password-field input:focus{
-  border-color:var(--green);
-}
 
-.loading{
-  text-align:center;
-  padding:45px 20px;
-  color:var(--muted);
-}
-
-.empty{
-  text-align:center;
-  padding:55px 20px;
-  color:var(--muted);
-}
+/* =========================
+   TOAST
+========================= */
 
 .toast{
   position:fixed;
+
   right:25px;
   bottom:25px;
-  min-width:260px;
-  padding:14px 17px;
-  border-radius:9px;
-  color:#fff;
-  background:#111827;
-  box-shadow:0 10px 30px rgba(0,0,0,.2);
+
+  background:var(--primary);
+
+  color:white;
+
+  padding:13px 18px;
+
+  border-radius:12px;
+
+  font-size:11px;
+
+  box-shadow:0 15px 35px rgba(0,0,0,.2);
+
   transform:translateY(100px);
+
   opacity:0;
+
   transition:.3s;
-  z-index:3000;
-  font-size:14px;
+
+  z-index:2000;
 }
 
 .toast.show{
@@ -693,115 +847,88 @@ tr:hover td{
   opacity:1;
 }
 
-.toast.success{
-  background:#087f5b;
-}
 
-.toast.error{
-  background:#dc2626;
-}
+/* =========================
+   MOBILE
+========================= */
 
-@media(max-width:900px){
+@media(max-width:950px){
 
-  .top-section{
-    align-items:flex-start;
-    flex-direction:column;
+  .cards{
+    grid-template-columns:
+    repeat(2,1fr);
+  }
+
+  .content{
+    grid-template-columns:1fr;
   }
 
 }
 
-@media(max-width:600px){
+@media(max-width:700px){
 
   .header{
-    min-height:70px;
-    padding:12px 15px;
+    padding:0 15px;
+    height:65px;
+  }
+
+  .dashboard-title{
+    font-size:16px;
+  }
+
+  .dashboard-subtitle{
+    display:none;
+  }
+
+  .profile-name{
+    display:none;
+  }
+
+  .main{
+    padding:20px 15px;
+  }
+
+  .welcome-box{
+    display:block;
+  }
+
+  .actions{
+    margin-top:18px;
+  }
+
+  .cards{
+    grid-template-columns:1fr 1fr;
     gap:10px;
-    flex-wrap:wrap;
   }
 
-  .logo{
-    font-size:18px;
+  .card{
+    padding:16px;
   }
 
-  .header-right{
-    gap:6px;
-    width:100%;
-    justify-content:flex-end;
-    flex-wrap:wrap;
+  .card-value{
+    font-size:20px;
   }
 
-  .header-user{
-    height:38px;
-    padding:0 10px;
-    font-size:12px;
+}
+
+@media(max-width:450px){
+
+  .welcome-title{
+    font-size:23px;
   }
 
-  .header-user span{
-    max-width:100px;
-  }
-
-  .header-right .btn,
-  .theme-btn{
-    padding:9px 10px;
-    font-size:12px;
-    height:38px;
-  }
-
-  .btn-logout{
-    padding:9px 10px;
-    font-size:12px;
-  }
-
-  .profile-btn{
-    height:38px;
-    padding:0 9px;
-    font-size:12px;
-  }
-
-  .profile-menu{
-    top:45px;
-    right:0;
-    width:205px;
-  }
-
-  .container{
-    padding:15px;
-  }
-
-  .filters{
+  .cards{
     grid-template-columns:1fr;
   }
 
-  .form-grid{
-    grid-template-columns:1fr;
+  .header-left .logo{
+    width:36px;
+    height:36px;
   }
 
-  .form-group.full{
-    grid-column:auto;
-  }
-
-  .form{
-    padding:25px 18px;
-  }
-
-  .modal{
-    padding:10px;
-  }
-
-  .modal-box{
-    max-height:96vh;
-    border-radius:13px;
-  }
-
-  .pagination-box{
-    flex-direction:column;
-    gap:12px;
-  }
-
-  .toast{
-    left:15px;
-    right:15px;
-    min-width:auto;
+  .icon-btn{
+    width:36px;
+    height:36px;
   }
 
 }
@@ -810,78 +937,101 @@ tr:hover td{
 
 </head>
 
+
 <body>
+
+
+<!-- =========================
+     HEADER
+========================= -->
 
 <header class="header">
 
-  <div class="logo">
-    Data DASHBOARD
-  </div>
+  <div class="header-left">
 
-  <div class="header-right">
+    <div class="logo">
+      D
+    </div>
 
-    <!-- USERNAME -->
-    <div
-      class="header-user"
-      id="headerUser"
-      title="Logged in user"
-    >
+    <div>
 
-      <span class="user-icon">
-        👤
-      </span>
+      <div class="dashboard-title">
+        Dashboard
+      </div>
 
-      <span id="usernameDisplay">
-        User
-      </span>
+      <div class="dashboard-subtitle">
+        Welcome to your workspace
+      </div>
 
     </div>
 
-    <button
-      class="theme-btn"
-      id="themeBtn"
-      onclick="toggleTheme()"
-    >
-      🌙 Dark
-    </button>
+  </div>
+
+
+  <div class="header-right">
+
+
+    <!-- Refresh -->
 
     <button
-      class="btn btn-refresh"
-      id="refreshBtn"
-      onclick="loadData()"
+      class="icon-btn"
+      onclick="refreshPage()"
+      title="Refresh"
     >
-      🔄 Refresh
+      ↻
     </button>
+
+
+    <!-- Dark Mode -->
 
     <button
-      class="btn btn-primary"
-      onclick="openEntryModal()"
+      class="icon-btn"
+      onclick="toggleDarkMode()"
+      id="darkButton"
+      title="Dark Mode"
     >
-      ➕ New Entry
+      🌙
     </button>
 
-    <!-- PROFILE -->
-    <div class="profile-wrap">
+
+    <!-- Profile -->
+
+    <div class="profile">
 
       <button
         class="profile-btn"
-        id="profileBtn"
-        onclick="toggleProfileMenu(event)"
+        onclick="toggleProfile()"
       >
 
-        <span class="profile-avatar">
-          👤
-        </span>
+        <div
+          class="avatar"
+          id="avatar"
+        >
+          U
+        </div>
 
-        <span>
-          Profile
-        </span>
+        <div>
 
-        <span class="profile-arrow">
-          ▼
-        </span>
+          <div
+            class="profile-name"
+            id="headerName"
+          >
+            User
+          </div>
+
+          <div
+            class="profile-role"
+            id="headerRole"
+          >
+            User
+          </div>
+
+        </div>
+
+        <span>⌄</span>
 
       </button>
+
 
       <div
         class="profile-menu"
@@ -890,37 +1040,46 @@ tr:hover td{
 
         <div class="profile-info">
 
-          <div
-            class="profile-info-name"
-            id="profileUsername"
-          >
+          <strong id="menuName">
             User
-          </div>
+          </strong>
 
-          <div class="profile-info-label">
-            Logged in account
-          </div>
+          <span id="menuUsername">
+            @username
+          </span>
 
         </div>
 
-        <button
-          class="profile-menu-item"
-          onclick="openPasswordModal()"
-        >
-          🔑
-          <span>
-            Change Password
-          </span>
-        </button>
 
         <button
-          class="profile-menu-item logout-item"
-          onclick="logoutUser()"
+          class="menu-item"
+          onclick="showProfile()"
         >
-          🚪
-          <span>
-            Logout
-          </span>
+          👤 My Profile
+        </button>
+
+
+        <button
+          class="menu-item"
+          onclick="changePassword()"
+        >
+          🔐 Change Password
+        </button>
+
+
+        <button
+          class="menu-item"
+          onclick="toggleDarkMode();closeProfile()"
+        >
+          🌙 Dark Mode
+        </button>
+
+
+        <button
+          class="menu-item logout"
+          onclick="logout()"
+        >
+          🚪 Logout
         </button>
 
       </div>
@@ -931,952 +1090,1098 @@ tr:hover td{
 
 </header>
 
-<main class="container">
 
-  <div class="top-section">
 
-    <div class="title">
+<!-- =========================
+     MAIN
+========================= -->
 
-      <h1>
-        Data Dashboard
-      </h1>
+<main class="main">
 
-      <p>
-        Manage your Data entries
-      </p>
+
+  <!-- Welcome -->
+
+  <div class="welcome-box">
+
+    <div>
+
+      <div
+        class="welcome-title"
+        id="welcomeName"
+      >
+        Welcome 👋
+      </div>
+
+      <div class="welcome-text">
+        Manage your dashboard from here.
+      </div>
+
+    </div>
+
+
+    <div class="actions">
+
+      <button
+        class="action-btn"
+        onclick="openNewEntry()"
+      >
+        ＋ New Entry
+      </button>
+
+
+      <button
+        class="action-btn refresh"
+        onclick="refreshPage()"
+      >
+        ↻ Refresh
+      </button>
+
+
+      <button
+        class="action-btn dark"
+        onclick="toggleDarkMode()"
+      >
+        ◐ Dark Mode
+      </button>
 
     </div>
 
   </div>
 
-  <section class="filter-box">
 
-    <div class="filters">
 
-      <div class="field search-field">
+  <!-- Cards -->
 
-        <label>
-          🔍 Search
-        </label>
+  <div class="cards">
 
-        <input
-          type="text"
-          id="searchInput"
-          placeholder="Search Name, IP or Work..."
-          oninput="applyFilters()"
+
+    <div class="card">
+
+      <div class="card-top">
+
+        <div>
+          <div class="card-label">
+            USERNAME
+          </div>
+
+          <div
+            class="card-value"
+            id="cardUsername"
+          >
+            -
+          </div>
+        </div>
+
+        <div class="card-icon">
+          👤
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div class="card">
+
+      <div class="card-top">
+
+        <div>
+          <div class="card-label">
+            ROLE
+          </div>
+
+          <div
+            class="card-value"
+            id="cardRole"
+          >
+            -
+          </div>
+        </div>
+
+        <div class="card-icon">
+          🛡️
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div class="card">
+
+      <div class="card-top">
+
+        <div>
+          <div class="card-label">
+            STATUS
+          </div>
+
+          <div
+            class="card-value"
+            id="cardStatus"
+          >
+            -
+          </div>
+        </div>
+
+        <div class="card-icon">
+          ✓
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div class="card">
+
+      <div class="card-top">
+
+        <div>
+          <div class="card-label">
+            TODAY
+          </div>
+
+          <div
+            class="card-value"
+            id="today"
+          >
+            -
+          </div>
+        </div>
+
+        <div class="card-icon">
+          📅
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+
+  <!-- Content -->
+
+  <div class="content">
+
+
+    <!-- Recent Entries -->
+
+    <div class="box">
+
+      <div class="box-header">
+
+        <div>
+
+          <div class="box-title">
+            Recent Entries
+          </div>
+
+          <div class="box-subtitle">
+            Your latest dashboard activity
+          </div>
+
+        </div>
+
+        <button
+          class="action-btn refresh"
+          onclick="refreshPage()"
         >
+          Refresh
+        </button>
 
       </div>
 
-      <button
-        class="btn btn-refresh"
-        onclick="clearFilters()"
-      >
-        Clear
-      </button>
 
-    </div>
+      <div class="table-wrap">
 
-  </section>
+        <table>
 
-  <section class="table-box">
+          <thead>
 
-    <div class="table-header">
+            <tr>
+              <th>NAME</th>
+              <th>USERNAME</th>
+              <th>ROLE</th>
+              <th>STATUS</th>
+            </tr>
 
-      <h2>
-        All Entries
-      </h2>
+          </thead>
 
-      <div class="total-count">
 
-        Total:
-        <strong id="totalCount">
-          0
-        </strong>
+          <tbody id="tableBody">
+
+            <tr>
+
+              <td id="tableName">
+                -
+              </td>
+
+              <td id="tableUsername">
+                -
+              </td>
+
+              <td id="tableRole">
+                -
+              </td>
+
+              <td>
+                <span
+                  class="status"
+                  id="tableStatus"
+                >
+                  -
+                </span>
+              </td>
+
+            </tr>
+
+          </tbody>
+
+        </table>
 
       </div>
 
     </div>
 
-    <div class="table-wrapper">
 
-      <table>
 
-        <thead>
+    <!-- User Card -->
 
-          <tr>
+    <div class="box">
 
-            <th>
-              Name
-            </th>
+      <div class="user-card">
 
-            <th>
-              IP
-            </th>
+        <div
+          class="big-avatar"
+          id="bigAvatar"
+        >
+          U
+        </div>
 
-            <th>
-              Work
-            </th>
 
-            <th>
+        <div
+          class="user-name"
+          id="profileName"
+        >
+          User
+        </div>
+
+
+        <div
+          class="user-username"
+          id="profileUsername"
+        >
+          @username
+        </div>
+
+
+        <div
+          class="role-badge"
+          id="profileRole"
+        >
+          User
+        </div>
+
+
+        <div style="margin-top:25px;">
+
+          <div class="info-row">
+
+            <span class="info-label">
+              Status
+            </span>
+
+            <strong id="profileStatus">
+              Active
+            </strong>
+
+          </div>
+
+
+          <div class="info-row">
+
+            <span class="info-label">
+              Login
+            </span>
+
+            <strong>
+              Online
+            </strong>
+
+          </div>
+
+
+          <div class="info-row">
+
+            <span class="info-label">
               Date
-            </th>
+            </span>
 
-            <th>
-              Action
-            </th>
+            <strong id="profileDate">
+              -
+            </strong>
 
-          </tr>
+          </div>
 
-        </thead>
+        </div>
 
-        <tbody id="tableBody">
-
-          <tr>
-
-            <td colspan="5">
-
-              <div class="loading">
-                Loading data...
-              </div>
-
-            </td>
-
-          </tr>
-
-        </tbody>
-
-      </table>
-
-    </div>
-
-    <div class="pagination-box">
-
-      <div
-        class="page-info"
-        id="pageInfo"
-      >
-        Page 1
       </div>
 
-      <div
-        class="pagination"
-        id="pagination"
-      ></div>
-
     </div>
 
-  </section>
+  </div>
 
 </main>
 
-<!-- NEW ENTRY MODAL -->
+
+
+<!-- =========================
+     NEW ENTRY MODAL
+========================= -->
 
 <div
   class="modal"
-  id="entryModal"
+  id="newEntryModal"
 >
 
   <div class="modal-box">
 
     <div class="modal-header">
 
-      <h2>
+      <div class="modal-title">
         New Entry
-      </h2>
+      </div>
 
       <button
-        class="close-btn"
-        onclick="closeEntryModal()"
+        class="close"
+        onclick="closeNewEntry()"
       >
         ×
       </button>
 
     </div>
 
-    <form
-      class="form"
-      id="entryForm"
-      onsubmit="submitEntry(event)"
-    >
 
-      <div class="form-grid">
+    <div class="form-group">
 
-        <div class="form-group">
+      <label>
+        Name
+      </label>
 
-          <label>
-            Username
-          </label>
-
-          <input
-            type="text"
-            id="nameInput"
-            readonly
-          >
-
-        </div>
-
-        <div class="form-group">
-
-          <label>
-            IP
-          </label>
-
-          <input
-            type="text"
-            id="ipInput"
-            placeholder="Enter IP"
-            autocomplete="off"
-            required
-          >
-
-        </div>
-
-        <div class="form-group full">
-
-          <label>
-            Work
-          </label>
-
-          <textarea
-            id="workInput"
-            placeholder="Enter work"
-            required
-          ></textarea>
-
-        </div>
-
-        <div class="form-group">
-
-          <label>
-            Date
-          </label>
-
-          <input
-            type="text"
-            id="dateInput"
-            readonly
-          >
-
-        </div>
-
-      </div>
-
-      <div class="form-footer">
-
-        <button
-          type="button"
-          class="btn btn-cancel"
-          onclick="closeEntryModal()"
-        >
-          Cancel
-        </button>
-
-        <button
-          type="submit"
-          class="btn btn-primary"
-          id="submitBtn"
-        >
-          Save Entry
-        </button>
-
-      </div>
-
-    </form>
-
-  </div>
-
-</div>
-
-<!-- CHANGE PASSWORD MODAL -->
-
-<div
-  class="modal"
-  id="passwordModal"
->
-
-  <div class="modal-box password-modal-box">
-
-    <div class="modal-header">
-
-      <h2>
-        Change Password
-      </h2>
-
-      <button
-        class="close-btn"
-        onclick="closePasswordModal()"
+      <input
+        type="text"
+        id="entryName"
+        placeholder="Enter name"
       >
-        ×
-      </button>
 
     </div>
 
-    <form
-      class="password-form"
-      id="passwordForm"
-      onsubmit="changePassword(event)"
+
+    <div class="form-group">
+
+      <label>
+        IP
+      </label>
+
+      <input
+        type="text"
+        id="entryIp"
+        placeholder="Enter IP"
+      >
+
+    </div>
+
+
+    <div class="form-group">
+
+      <label>
+        Work
+      </label>
+
+      <textarea
+        id="entryWork"
+        placeholder="Enter work details"
+      ></textarea>
+
+    </div>
+
+
+    <button
+      class="submit-btn"
+      onclick="saveEntry()"
     >
-
-      <div class="password-note">
-
-        Change the password for your current account.
-        Make sure your new password is secure.
-
-      </div>
-
-      <div class="password-field">
-
-        <label>
-          Username
-        </label>
-
-        <input
-          type="text"
-          id="passwordUsername"
-          readonly
-        >
-
-      </div>
-
-      <div class="password-field">
-
-        <label>
-          Current Password
-        </label>
-
-        <input
-          type="password"
-          id="currentPassword"
-          placeholder="Enter current password"
-          autocomplete="current-password"
-          required
-        >
-
-      </div>
-
-      <div class="password-field">
-
-        <label>
-          New Password
-        </label>
-
-        <input
-          type="password"
-          id="newPassword"
-          placeholder="Enter new password"
-          autocomplete="new-password"
-          minlength="4"
-          required
-        >
-
-      </div>
-
-      <div class="password-field">
-
-        <label>
-          Confirm New Password
-        </label>
-
-        <input
-          type="password"
-          id="confirmPassword"
-          placeholder="Confirm new password"
-          autocomplete="new-password"
-          minlength="4"
-          required
-        >
-
-      </div>
-
-      <div class="form-footer">
-
-        <button
-          type="button"
-          class="btn btn-cancel"
-          onclick="closePasswordModal()"
-        >
-          Cancel
-        </button>
-
-        <button
-          type="submit"
-          class="btn btn-primary"
-          id="changePasswordBtn"
-        >
-          Change Password
-        </button>
-
-      </div>
-
-    </form>
+      Save Entry
+    </button>
 
   </div>
 
 </div>
+
+
+
+<!-- TOAST -->
 
 <div
   class="toast"
   id="toast"
-></div>
+>
+  Done
+</div>
+
+
 
 <script>
 
-const API_URL =
-"https://script.google.com/macros/s/AKfycbx6fo2Nogf3ETCtS_B-o0HCFqEs3vYkJ9IT9uu_-3l1w8fNJw77mZipeyFm-zZcjUw-5Q/exec";
-
-const LOGIN_PAGE =
-"index.html";
-
-const ROWS_PER_PAGE =
-10;
-
-const SESSION_TIMEOUT =
-5 * 60 * 1000;
-
-let inactivityTimer =
-null;
-
-let allData = [];
-
-let filteredData = [];
-
-let currentPage = 1;
 
 /* =========================
-   USER
+   USER DATA
 ========================= */
 
-function getLoggedInUsername(){
+let userData = {};
 
-  const keys = [
-    "username",
-    "Username",
-    "user",
-    "userData",
-    "loginData",
-    "loggedUser",
-    "currentUser",
-    "userInfo"
-  ];
-
-  for(
-    const key of keys
-  ){
-
-    const value =
-      localStorage.getItem(key);
-
-    if(!value){
-      continue;
-    }
-
-    try{
-
-      const parsed =
-        JSON.parse(value);
-
-      if(
-        parsed &&
-        typeof parsed === "object"
-      ){
-
-        const username =
-          parsed.username ||
-          parsed.Username ||
-          parsed.userName ||
-          parsed.name ||
-          parsed.user;
-
-        if(username){
-
-          return String(
-            username
-          ).trim();
-
-        }
-
-      }
-
-    }catch(error){
-
-      return String(
-        value
-      ).trim();
-
-    }
-
-  }
-
-  return "";
-
-}
-
-function showLoggedInUsername(){
-
-  const username =
-    getLoggedInUsername();
-
-  const display =
-    document.getElementById(
-      "usernameDisplay"
-    );
-
-  const profileUsername =
-    document.getElementById(
-      "profileUsername"
-    );
-
-  if(display){
-
-    display.textContent =
-      username || "User";
-
-  }
-
-  if(profileUsername){
-
-    profileUsername.textContent =
-      username || "User";
-
-  }
-
-}
-
-function checkLogin(){
-
-  const username =
-    getLoggedInUsername();
-
-  if(!username){
-
-    window.location.replace(
-      LOGIN_PAGE
-    );
-
-    return false;
-
-  }
-
-  showLoggedInUsername();
-
-  return true;
-
-}
 
 /* =========================
-   PROFILE MENU
+   LOAD USER
 ========================= */
 
-function toggleProfileMenu(event){
-
-  if(event){
-
-    event.stopPropagation();
-
-  }
-
-  const menu =
-    document.getElementById(
-      "profileMenu"
-    );
-
-  if(!menu){
-
-    return;
-
-  }
-
-  menu.classList.toggle(
-    "show"
-  );
-
-}
-
-function closeProfileMenu(){
-
-  const menu =
-    document.getElementById(
-      "profileMenu"
-    );
-
-  if(menu){
-
-    menu.classList.remove(
-      "show"
-    );
-
-  }
-
-}
-
-/* Close profile menu when clicking outside */
-
-document.addEventListener(
-  "click",
-  function(event){
-
-    const profileWrap =
-      document.querySelector(
-        ".profile-wrap"
-      );
-
-    if(
-      profileWrap &&
-      !profileWrap.contains(event.target)
-    ){
-
-      closeProfileMenu();
-
-    }
-
-  }
-);
-
-/* =========================
-   LOGOUT
-========================= */
-
-function logoutUser(){
+function loadUser(){
 
   try{
 
-    const savedTheme =
-      localStorage.getItem(
-        "dashboardTheme"
-      );
+    const saved =
+      localStorage.getItem("userData");
 
-    localStorage.clear();
 
-    if(savedTheme){
+    if(saved){
 
-      localStorage.setItem(
-        "dashboardTheme",
-        savedTheme
-      );
+      userData =
+        JSON.parse(saved);
 
     }
-
-    sessionStorage.clear();
-
-    clearTimeout(
-      inactivityTimer
-    );
-
-    window.location.replace(
-      LOGIN_PAGE
-    );
 
   }catch(error){
 
-    console.error(
-      "Logout Error:",
-      error
-    );
-
-    window.location.href =
-      LOGIN_PAGE;
+    console.error(error);
 
   }
 
-}
 
-/* =========================
-   SESSION
-========================= */
+  const username =
+    userData.username ||
+    localStorage.getItem("username") ||
+    "User";
 
-function resetInactivityTimer(){
 
-  clearTimeout(
-    inactivityTimer
-  );
+  const name =
+    userData.name ||
+    username;
 
-  inactivityTimer =
-    setTimeout(
-      function(){
 
-        showToast(
-          "Session expired. Please login again.",
-          "error"
-        );
+  const role =
+    userData.role ||
+    "User";
 
-        setTimeout(
-          function(){
 
-            logoutUser();
+  const status =
+    userData.status ||
+    "Active";
 
-          },
-          500
-        );
 
-      },
-      SESSION_TIMEOUT
-    );
+  /* Header */
 
-}
+  document.getElementById(
+    "headerName"
+  ).innerText = name;
 
-function startActivityMonitor(){
 
-  const events = [
-    "click",
-    "mousemove",
-    "mousedown",
-    "keydown",
-    "scroll",
-    "touchstart",
-    "input"
-  ];
+  document.getElementById(
+    "headerRole"
+  ).innerText = role;
 
-  events.forEach(
-    function(eventName){
 
-      document.addEventListener(
-        eventName,
-        resetInactivityTimer,
-        {
-          passive:true
-        }
-      );
+  document.getElementById(
+    "menuName"
+  ).innerText = name;
 
-    }
-  );
 
-  resetInactivityTimer();
+  document.getElementById(
+    "menuUsername"
+  ).innerText =
+    "@" + username;
 
-}
 
-/* =========================
-   THEME
-========================= */
+  /* Welcome */
 
-function loadTheme(){
+  document.getElementById(
+    "welcomeName"
+  ).innerText =
+    "Welcome, " + name + " 👋";
 
-  const saved =
-    localStorage.getItem(
-      "dashboardTheme"
-    );
 
-  if(saved === "dark"){
+  /* Cards */
 
-    document.body.classList.add(
-      "dark"
-    );
+  document.getElementById(
+    "cardUsername"
+  ).innerText = username;
+
+
+  document.getElementById(
+    "cardRole"
+  ).innerText = role;
+
+
+  document.getElementById(
+    "cardStatus"
+  ).innerText = status;
+
+
+  /* Table */
+
+  document.getElementById(
+    "tableName"
+  ).innerText = name;
+
+
+  document.getElementById(
+    "tableUsername"
+  ).innerText = username;
+
+
+  document.getElementById(
+    "tableRole"
+  ).innerText = role;
+
+
+  document.getElementById(
+    "tableStatus"
+  ).innerText = status;
+
+
+  /* Profile */
+
+  document.getElementById(
+    "profileName"
+  ).innerText = name;
+
+
+  document.getElementById(
+    "profileUsername"
+  ).innerText =
+    "@" + username;
+
+
+  document.getElementById(
+    "profileRole"
+  ).innerText = role;
+
+
+  document.getElementById(
+    "profileStatus"
+  ).innerText = status;
+
+
+  /* Avatar */
+
+  const picture =
+    userData.picture ||
+    localStorage.getItem("picture") ||
+    "";
+
+
+  const firstLetter =
+    name.charAt(0).toUpperCase();
+
+
+  if(picture){
+
+    document.getElementById(
+      "avatar"
+    ).innerHTML =
+      '<img src="' +
+      picture +
+      '" alt="Profile">';
+
+
+    document.getElementById(
+      "bigAvatar"
+    ).innerHTML =
+      '<img src="' +
+      picture +
+      '" alt="Profile">';
 
   }else{
 
-    document.body.classList.remove(
-      "dark"
-    );
+    document.getElementById(
+      "avatar"
+    ).innerText =
+      firstLetter;
+
+
+    document.getElementById(
+      "bigAvatar"
+    ).innerText =
+      firstLetter;
 
   }
 
-  updateThemeButton();
+}
+
+
+/* =========================
+   DATE
+========================= */
+
+function setDate(){
+
+  const now =
+    new Date();
+
+
+  const options = {
+    day:"2-digit",
+    month:"short",
+    year:"numeric"
+  };
+
+
+  const date =
+    now.toLocaleDateString(
+      "en-US",
+      options
+    );
+
+
+  document.getElementById(
+    "today"
+  ).innerText = date;
+
+
+  document.getElementById(
+    "profileDate"
+  ).innerText = date;
 
 }
 
-function toggleTheme(){
+
+/* =========================
+   REFRESH
+========================= */
+
+function refreshPage(){
+
+  const button =
+    document.querySelector(
+      ".action-btn.refresh"
+    );
+
+
+  showToast("Refreshing...");
+
+
+  setTimeout(function(){
+
+    window.location.reload();
+
+  },400);
+
+}
+
+
+/* =========================
+   DARK MODE
+========================= */
+
+function toggleDarkMode(){
 
   document.body.classList.toggle(
     "dark"
   );
+
 
   const dark =
     document.body.classList.contains(
       "dark"
     );
 
+
   localStorage.setItem(
-    "dashboardTheme",
-    dark
-      ? "dark"
-      : "light"
+    "darkMode",
+    dark ? "true" : "false"
   );
 
-  updateThemeButton();
+
+  document.getElementById(
+    "darkButton"
+  ).innerText =
+    dark ? "☀️" : "🌙";
 
 }
 
-function updateThemeButton(){
-
-  const btn =
-    document.getElementById(
-      "themeBtn"
-    );
-
-  if(!btn){
-    return;
-  }
-
-  if(
-    document.body.classList.contains(
-      "dark"
-    )
-  ){
-
-    btn.textContent =
-      "☀️ White";
-
-  }else{
-
-    btn.textContent =
-      "🌙 Dark";
-
-  }
-
-}
 
 /* =========================
-   LOAD DATA
+   LOAD DARK MODE
 ========================= */
 
-async function loadData(){
+function loadDarkMode(){
 
-  if(!checkLogin()){
-    return;
+  const dark =
+    localStorage.getItem(
+      "darkMode"
+    );
+
+
+  if(dark === "true"){
+
+    document.body.classList.add(
+      "dark"
+    );
+
+
+    document.getElementById(
+      "darkButton"
+    ).innerText = "☀️";
+
   }
 
-  const btn =
-    document.getElementById(
-      "refreshBtn"
-    );
+}
 
-  btn.disabled =
-    true;
 
-  btn.textContent =
-    "⏳ Loading...";
+/* =========================
+   PROFILE MENU
+========================= */
 
-  showLoading();
+function toggleProfile(){
 
-  try{
+  document
+    .getElementById("profileMenu")
+    .classList.toggle("show");
 
-    const response =
-      await fetch(
+}
 
-        API_URL +
-        "?action=getData&_=" +
-        Date.now(),
 
-        {
-          method:"GET",
-          cache:"no-store"
-        }
+function closeProfile(){
 
-      );
+  document
+    .getElementById("profileMenu")
+    .classList.remove("show");
 
-    if(!response.ok){
+}
 
-      throw new Error(
-        "Server error: " +
-        response.status
-      );
 
-    }
+document.addEventListener(
+  "click",
+  function(e){
 
-    const result =
-      await response.json();
+    const profile =
+      document.querySelector(".profile");
+
 
     if(
-      result.success === false
+      profile &&
+      !profile.contains(e.target)
     ){
 
-      throw new Error(
-        result.message ||
-        "Failed to load data."
-      );
+      closeProfile();
 
     }
 
-    if(
-      !Array.isArray(
-        result.data
-      )
-    ){
+  }
+);
 
-      throw new Error(
-        "Invalid data received."
-      );
 
-    }
+/* =========================
+   PROFILE
+========================= */
 
-    allData =
-      result.data;
+function showProfile(){
 
-    filteredData =
-      [...allData];
+  closeProfile();
 
-    currentPage =
-      1;
+  document
+    .getElementById("newEntryModal")
+    .classList.remove("show");
 
-    renderTable();
+  showToast(
+    "Profile: " +
+    (
+      userData.name ||
+      userData.username ||
+      "User"
+    )
+  );
 
-    updateTotal();
+}
 
-  }catch(error){
 
-    console.error(
-      "Load Error:",
-      error
-    );
+/* =========================
+   CHANGE PASSWORD
+========================= */
 
-    showError(
-      error.message ||
-      "Failed to load data."
-    );
+function changePassword(){
+
+  closeProfile();
+
+  showToast(
+    "Please contact your administrator to change password."
+  );
+
+}
+
+
+/* =========================
+   LOGOUT
+========================= */
+
+function logout(){
+
+  localStorage.removeItem(
+    "dashboardAuth"
+  );
+
+  localStorage.removeItem(
+    "username"
+  );
+
+  localStorage.removeItem(
+    "userData"
+  );
+
+  localStorage.removeItem(
+    "loginData"
+  );
+
+  localStorage.removeItem(
+    "loggedUser"
+  );
+
+  localStorage.removeItem(
+    "currentUser"
+  );
+
+  localStorage.removeItem(
+    "userInfo"
+  );
+
+  sessionStorage.removeItem(
+    "dashboardAuth"
+  );
+
+
+  window.location.replace(
+    "index.html"
+  );
+
+}
+
+
+/* =========================
+   NEW ENTRY
+========================= */
+
+function openNewEntry(){
+
+  document
+    .getElementById("newEntryModal")
+    .classList.add("show");
+
+}
+
+
+function closeNewEntry(){
+
+  document
+    .getElementById("newEntryModal")
+    .classList.remove("show");
+
+}
+
+
+/* =========================
+   SAVE ENTRY
+========================= */
+
+function saveEntry(){
+
+  const name =
+    document
+      .getElementById("entryName")
+      .value.trim();
+
+
+  const ip =
+    document
+      .getElementById("entryIp")
+      .value.trim();
+
+
+  const work =
+    document
+      .getElementById("entryWork")
+      .value.trim();
+
+
+  if(!name){
 
     showToast(
-      error.message ||
-      "Data loading failed.",
-      "error"
+      "Please enter name."
     );
-
-  }finally{
-
-    btn.disabled =
-      false;
-
-    btn.textContent =
-      "🔄 Refresh";
-
-  }
-
-}
-
-/* =========================
-   TABLE
-========================= */
-
-function renderTable(){
-
-  const tbody =
-    document.getElementById(
-      "tableBody"
-    );
-
-  if(
-    filteredData.length === 0
-  ){
-
-    tbody.innerHTML = `
-
-      <tr>
-
-        <td colspan="5">
-
-          <div class="empty">
-            No data found.
-          </div>
-
-        </td>
-
-      </tr>
-
-    `;
-
-    renderPagination();
 
     return;
 
   }
 
-  const
+
+  if(!ip){
+
+    showToast(
+      "Please enter IP."
+    );
+
+    return;
+
+  }
+
+
+  if(!work){
+
+    showToast(
+      "Please enter work."
+    );
+
+    return;
+
+  }
+
+
+  /*
+   * এখানে পরে Google Sheet API
+   * connect করা যাবে।
+   */
+
+  closeNewEntry();
+
+
+  document.getElementById(
+    "entryName"
+  ).value = "";
+
+
+  document.getElementById(
+    "entryIp"
+  ).value = "";
+
+
+  document.getElementById(
+    "entryWork"
+  ).value = "";
+
+
+  showToast(
+    "Entry saved successfully."
+  );
+
+}
+
+
+/* =========================
+   TOAST
+========================= */
+
+function showToast(message){
+
+  const toast =
+    document.getElementById(
+      "toast"
+    );
+
+
+  toast.innerText =
+    message;
+
+
+  toast.classList.add(
+    "show"
+  );
+
+
+  setTimeout(function(){
+
+    toast.classList.remove(
+      "show"
+    );
+
+  },2500);
+
+}
+
+
+/* =========================
+   MODAL OUTSIDE CLICK
+========================= */
+
+document
+  .getElementById("newEntryModal")
+  .addEventListener(
+    "click",
+    function(e){
+
+      if(e.target === this){
+
+        closeNewEntry();
+
+      }
+
+    }
+  );
+
+
+/* =========================
+   LOGIN PROTECTION
+========================= */
+
+function checkLogin(){
+
+  const auth =
+    localStorage.getItem(
+      "dashboardAuth"
+    );
+
+
+  if(auth !== "true"){
+
+    window.location.replace(
+      "index.html"
+    );
+
+    return false;
+
+  }
+
+
+  return true;
+
+}
+
+
+/* =========================
+   START
+========================= */
+
+if(checkLogin()){
+
+  loadUser();
+
+  setDate();
+
+  loadDarkMode();
+
+}
+
+</script>
+
+</body>
+
+</html>
