@@ -95,6 +95,7 @@ body.dark{
   display:flex;
   align-items:center;
   gap:8px;
+  flex-wrap:wrap;
 }
 
 .icon-btn{
@@ -385,7 +386,7 @@ body.dark{
 table{
   width:100%;
   border-collapse:collapse;
-  min-width:800px;
+  min-width:850px;
 }
 
 thead{
@@ -689,6 +690,32 @@ td{
 
 
 /* =========================================================
+   ITEM TABLE
+========================================================= */
+
+.item-table-wrap{
+  overflow:auto;
+}
+
+.item-table{
+  width:100%;
+  min-width:550px;
+}
+
+.item-name{
+  font-weight:600;
+}
+
+.item-user{
+  color:#64748b;
+}
+
+.dark .item-user{
+  color:#cbd5e1;
+}
+
+
+/* =========================================================
    TOAST
 ========================================================= */
 
@@ -893,6 +920,14 @@ td{
       onclick="openUsersModal()"
     >
       Users
+    </button>
+
+
+    <button
+      class="btn btn-warning"
+      onclick="openItemsModal()"
+    >
+      Items
     </button>
 
 
@@ -1109,6 +1144,8 @@ td{
 
             <th>Date</th>
 
+            <th>Item</th>
+
             <th>Action</th>
 
           </tr>
@@ -1121,7 +1158,7 @@ td{
           <tr>
 
             <td
-              colspan="5"
+              colspan="6"
               class="empty"
             >
               Loading data...
@@ -1221,7 +1258,7 @@ td{
       </div>
 
 
-      <div class="form-group full">
+      <div class="form-group">
 
         <label>Date</label>
 
@@ -1230,6 +1267,24 @@ td{
           id="entryDate"
           type="date"
         >
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label>Item</label>
+
+        <select
+          class="select"
+          id="entryItem"
+        >
+
+          <option value="">
+            Loading Items...
+          </option>
+
+        </select>
 
       </div>
 
@@ -1505,6 +1560,102 @@ td{
 
 
 <!-- =======================================================
+     ITEM MANAGEMENT MODAL
+======================================================= -->
+
+<div
+  class="modal-bg"
+  id="itemsModal"
+>
+
+  <div class="modal large">
+
+    <div class="modal-head">
+
+      <h3>Item Management</h3>
+
+      <button
+        class="close"
+        onclick="closeModal('itemsModal')"
+      >
+        ×
+      </button>
+
+    </div>
+
+
+    <div
+      style="
+        display:flex;
+        gap:10px;
+        margin-bottom:18px;
+      "
+    >
+
+      <input
+        class="input"
+        id="newItemName"
+        type="text"
+        placeholder="Enter new item name"
+        onkeydown="if(event.key==='Enter') addNewItem()"
+      >
+
+      <button
+        class="btn btn-success"
+        onclick="addNewItem()"
+        style="white-space:nowrap;"
+      >
+        + Add Item
+      </button>
+
+    </div>
+
+
+    <div class="item-table-wrap">
+
+      <table class="item-table">
+
+        <thead>
+
+          <tr>
+
+            <th>Item</th>
+
+            <th>Date</th>
+
+            <th>User</th>
+
+          </tr>
+
+        </thead>
+
+
+        <tbody id="itemsBody">
+
+          <tr>
+
+            <td
+              colspan="3"
+              class="empty"
+            >
+              Loading items...
+            </td>
+
+          </tr>
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+
+<!-- =======================================================
      CHANGE PASSWORD MODAL
 ======================================================= -->
 
@@ -1636,6 +1787,14 @@ const DELETE_API_URL =
   "https://script.google.com/macros/s/AKfycbwDL1JIV7QYcH84VGiWxhUoT-wN9UfuGn0t9boYrs_FaG_ZfcVGjNmaTqSTC6ev0Ig9Kg/exec";
 
 
+/* =========================================================
+   NEW ITEM API
+========================================================= */
+
+const ITEM_API_URL =
+  "https://script.google.com/macros/s/AKfycby2e7dzGE5vkS0Q-Eyl9MKLAbkkkD8f37eIVj7VuV8bPytWGOH7cwJ3w25efP7MLGshOw/exec";
+
+
 
 // ============================================================
 // GLOBAL VARIABLES
@@ -1661,6 +1820,16 @@ let sellCache = null;
 
 let deleteCache = null;
 
+
+/* =========================================================
+   ITEM VARIABLES
+========================================================= */
+
+let itemList = [];
+
+let itemCache = null;
+
+
 let currentUsername =
   localStorage.getItem("username") ||
   localStorage.getItem("loggedUser") ||
@@ -1685,6 +1854,8 @@ document.addEventListener(
     loadUser();
 
     loadData();
+
+    loadItems();
 
   }
 );
@@ -1920,6 +2091,7 @@ function updateTableHeader(){
         <th>IP</th>
         <th>Work</th>
         <th>Date</th>
+        <th>Item</th>
         <th>Sell Date</th>
         <th>User</th>
       </tr>
@@ -1937,6 +2109,7 @@ function updateTableHeader(){
         <th>IP</th>
         <th>Work</th>
         <th>Date</th>
+        <th>Item</th>
         <th>Delete Time</th>
         <th>User</th>
       </tr>
@@ -1952,6 +2125,7 @@ function updateTableHeader(){
       <th>IP</th>
       <th>Work</th>
       <th>Date</th>
+      <th>Item</th>
       <th>Action</th>
     </tr>
   `;
@@ -2011,14 +2185,14 @@ async function loadData(force=false){
   }
 
 
-  let colspan = 5;
+  let colspan = 6;
 
-  if(currentDataType === "sell"){
-    colspan = 6;
-  }
+  if(
+    currentDataType === "sell" ||
+    currentDataType === "delete"
+  ){
 
-  if(currentDataType === "delete"){
-    colspan = 6;
+    colspan = 7;
   }
 
 
@@ -2218,7 +2392,7 @@ function renderData(data){
   if(!body) return;
 
 
-  let colspan = 5;
+  let colspan = 6;
 
 
   if(
@@ -2226,7 +2400,7 @@ function renderData(data){
     currentDataType === "delete"
   ){
 
-    colspan = 6;
+    colspan = 7;
   }
 
 
@@ -2333,6 +2507,13 @@ function renderData(data){
             "";
 
 
+          const item =
+            row.Item ??
+            row.item ??
+            row[4] ??
+            "";
+
+
           const rowNumber =
             row.row ??
             row.Row ??
@@ -2350,7 +2531,7 @@ function renderData(data){
               row.sellDate ??
               row["Sell Date"] ??
               row.Sell_Date ??
-              row[4] ??
+              row[5] ??
               "";
 
 
@@ -2359,7 +2540,7 @@ function renderData(data){
               row.user ??
               row.Username ??
               row.username ??
-              row[5] ??
+              row[6] ??
               "";
 
 
@@ -2382,6 +2563,10 @@ function renderData(data){
                   ${escapeHtml(
                     formatDate(date)
                   )}
+                </td>
+
+                <td>
+                  ${escapeHtml(item)}
                 </td>
 
                 <td>
@@ -2409,7 +2594,7 @@ function renderData(data){
               row.Dellet ??
               row["Dellet time"] ??
               row["Delete Time"] ??
-              row[4] ??
+              row[5] ??
               "";
 
 
@@ -2418,7 +2603,7 @@ function renderData(data){
               row.user ??
               row.Username ??
               row.username ??
-              row[5] ??
+              row[6] ??
               "";
 
 
@@ -2441,6 +2626,10 @@ function renderData(data){
                   ${escapeHtml(
                     formatDate(date)
                   )}
+                </td>
+
+                <td>
+                  ${escapeHtml(item)}
                 </td>
 
                 <td>
@@ -2477,6 +2666,10 @@ function renderData(data){
                 ${escapeHtml(
                   formatDate(date)
                 )}
+              </td>
+
+              <td>
+                ${escapeHtml(item)}
               </td>
 
               <td>
@@ -2870,7 +3063,7 @@ function clearOnlyFilters(){
 // OPEN NEW ENTRY MODAL
 // ============================================================
 
-function openEntryModal(){
+async function openEntryModal(){
 
   editingDataRow = null;
 
@@ -2905,6 +3098,15 @@ function openEntryModal(){
   document.getElementById(
     "entryWork"
   ).value = "";
+
+
+  document.getElementById(
+    "entryItem"
+  ).innerHTML = `
+    <option value="">
+      Loading Items...
+    </option>
+  `;
 
 
   const today =
@@ -2948,6 +3150,10 @@ function openEntryModal(){
   openModal(
     "entryModal"
   );
+
+
+  await loadItems();
+
 }
 
 
@@ -2956,7 +3162,7 @@ function openEntryModal(){
 // EDIT DATA
 // ============================================================
 
-function editDataEntry(index){
+async function editDataEntry(index){
 
   if(
     currentDataType !== "data"
@@ -3050,9 +3256,34 @@ function editDataEntry(index){
     );
 
 
+  document.getElementById(
+    "entryItem"
+  ).innerHTML = `
+    <option value="">
+      Loading Items...
+    </option>
+  `;
+
+
   openModal(
     "entryModal"
   );
+
+
+  await loadItems();
+
+
+  const selectedItem =
+    row.Item ??
+    row.item ??
+    row[4] ??
+    "";
+
+
+  document.getElementById(
+    "entryItem"
+  ).value =
+    selectedItem;
 
 }
 
@@ -3167,6 +3398,12 @@ async function saveEntry(){
     ).value;
 
 
+  const item =
+    document.getElementById(
+      "entryItem"
+    ).value.trim();
+
+
   const rowNumber =
     document.getElementById(
       "editingRow"
@@ -3199,6 +3436,17 @@ async function saveEntry(){
 
     showToast(
       "Date is required.",
+      "error"
+    );
+
+    return;
+  }
+
+
+  if(!item){
+
+    showToast(
+      "Please select an Item.",
       "error"
     );
 
@@ -3239,6 +3487,9 @@ async function saveEntry(){
 
       date:
         date,
+
+      item:
+        item,
 
       username:
         currentUsername
@@ -3420,6 +3671,13 @@ async function sellDataEntry(index){
 
   try{
 
+    const item =
+      row.Item ??
+      row.item ??
+      row[4] ??
+      "";
+
+
     const response =
       await fetch(
         SELL_API_URL,
@@ -3436,6 +3694,9 @@ async function sellDataEntry(index){
                 Number(
                   rowNumber
                 ),
+
+              item:
+                item,
 
               username:
                 currentUsername,
@@ -3489,21 +3750,9 @@ async function sellDataEntry(index){
     );
 
 
-    if(
-      currentDataType === "data"
-    ){
-
-      await loadData(
-        true
-      );
-
-    }else{
-
-      await loadData(
-        true
-      );
-
-    }
+    await loadData(
+      true
+    );
 
 
   }catch(error){
@@ -3596,11 +3845,6 @@ async function deleteDataEntry(index){
 
   try{
 
-    /*
-     * প্রথমে Delete sheet-এ archive করা হবে।
-     * archive সফল না হলে Main sheet থেকে data delete হবে না।
-     */
-
     const name =
       row.Name ??
       row.name ??
@@ -3630,6 +3874,13 @@ async function deleteDataEntry(index){
       "";
 
 
+    const item =
+      row.Item ??
+      row.item ??
+      row[4] ??
+      "";
+
+
     const archiveResponse =
       await fetch(
         DELETE_API_URL,
@@ -3653,6 +3904,9 @@ async function deleteDataEntry(index){
 
               date:
                 date,
+
+              item:
+                item,
 
               username:
                 currentUsername,
@@ -3690,11 +3944,6 @@ async function deleteDataEntry(index){
       );
     }
 
-
-    /*
-     * Delete sheet-এ সফলভাবে save হওয়ার পর
-     * Main Data sheet থেকে row delete করা হবে।
-     */
 
     const deleteResponse =
       await fetch(
@@ -3777,6 +4026,522 @@ async function deleteDataEntry(index){
     showToast(
       error.message ||
       "Delete failed.",
+      "error"
+    );
+
+
+  }finally{
+
+    hideLoader();
+
+  }
+
+}
+
+
+
+// ============================================================
+// ITEM MANAGEMENT
+// ============================================================
+
+function openItemsModal(){
+
+  document.getElementById(
+    "newItemName"
+  ).value = "";
+
+
+  openModal(
+    "itemsModal"
+  );
+
+
+  loadItems(true);
+
+}
+
+
+
+// ============================================================
+// LOAD ITEMS
+// ============================================================
+
+async function loadItems(force=false){
+
+  const body =
+    document.getElementById(
+      "itemsBody"
+    );
+
+
+  if(
+    !force &&
+    Array.isArray(itemCache)
+  ){
+
+    itemList =
+      itemCache;
+
+    renderItems(
+      itemList
+    );
+
+    populateItemSelect();
+
+    return itemList;
+
+  }
+
+
+  if(body){
+
+    body.innerHTML = `
+      <tr>
+        <td
+          colspan="3"
+          class="empty"
+        >
+          <div class="table-loading">
+            <div class="mini-spinner"></div>
+            <span>
+              Loading items...
+            </span>
+          </div>
+        </td>
+      </tr>
+    `;
+
+  }
+
+
+  try{
+
+    const url =
+      ITEM_API_URL +
+      "?action=getItems" +
+      "&_=" +
+      Date.now();
+
+
+    const response =
+      await fetch(
+        url,
+        {
+          method:"GET",
+          cache:"no-store"
+        }
+      );
+
+
+    if(!response.ok){
+
+      throw new Error(
+        "Item API connection failed. HTTP " +
+        response.status
+      );
+
+    }
+
+
+    const result =
+      await response.json();
+
+
+    if(
+      !result ||
+      result.success === false
+    ){
+
+      throw new Error(
+        result &&
+        result.message
+          ? result.message
+          : "Unable to load items."
+      );
+
+    }
+
+
+    itemList =
+      Array.isArray(
+        result.data
+      )
+        ? result.data
+        : [];
+
+
+    itemCache =
+      itemList;
+
+
+    renderItems(
+      itemList
+    );
+
+
+    populateItemSelect();
+
+
+    return itemList;
+
+
+  }catch(error){
+
+    console.error(
+      "loadItems:",
+      error
+    );
+
+
+    if(body){
+
+      body.innerHTML = `
+        <tr>
+          <td
+            colspan="3"
+            class="empty"
+          >
+            ${escapeHtml(
+              error.message ||
+              "Unable to load items."
+            )}
+          </td>
+        </tr>
+      `;
+
+    }
+
+
+    showToast(
+      error.message ||
+      "Unable to load items.",
+      "error"
+    );
+
+
+    return [];
+
+  }
+
+}
+
+
+
+// ============================================================
+// RENDER ITEMS
+// ============================================================
+
+function renderItems(items){
+
+  const body =
+    document.getElementById(
+      "itemsBody"
+    );
+
+
+  if(!body) return;
+
+
+  if(
+    !Array.isArray(items) ||
+    items.length === 0
+  ){
+
+    body.innerHTML = `
+      <tr>
+        <td
+          colspan="3"
+          class="empty"
+        >
+          No items found.
+        </td>
+      </tr>
+    `;
+
+    return;
+
+  }
+
+
+  body.innerHTML =
+    items
+      .map(
+        function(item){
+
+          item =
+            item || {};
+
+
+          const name =
+            item.Item ??
+            item.item ??
+            item.name ??
+            "";
+
+
+          const date =
+            item.Date ??
+            item.date ??
+            "";
+
+
+          const user =
+            item.User ??
+            item.user ??
+            item.username ??
+            "";
+
+
+          return `
+            <tr>
+
+              <td>
+                <span class="item-name">
+                  ${escapeHtml(name)}
+                </span>
+              </td>
+
+              <td>
+                ${escapeHtml(
+                  formatDate(date)
+                )}
+              </td>
+
+              <td>
+                <span class="item-user">
+                  ${escapeHtml(user)}
+                </span>
+              </td>
+
+            </tr>
+          `;
+
+        }
+      )
+      .join("");
+
+}
+
+
+
+// ============================================================
+// POPULATE ITEM DROPDOWN
+// ============================================================
+
+function populateItemSelect(
+  selectedValue=""
+){
+
+  const select =
+    document.getElementById(
+      "entryItem"
+    );
+
+
+  if(!select) return;
+
+
+  if(
+    !Array.isArray(itemList) ||
+    itemList.length === 0
+  ){
+
+    select.innerHTML = `
+      <option value="">
+        No Item Available
+      </option>
+    `;
+
+    return;
+  }
+
+
+  let html = `
+    <option value="">
+      Select Item
+    </option>
+  `;
+
+
+  itemList.forEach(
+    function(item){
+
+      item =
+        item || {};
+
+
+      const name =
+        String(
+          item.Item ??
+          item.item ??
+          ""
+        ).trim();
+
+
+      if(!name) return;
+
+
+      html += `
+        <option
+          value="${escapeHtml(name)}"
+        >
+          ${escapeHtml(name)}
+        </option>
+      `;
+
+    }
+  );
+
+
+  select.innerHTML =
+    html;
+
+
+  if(selectedValue){
+
+    select.value =
+      selectedValue;
+
+  }
+
+}
+
+
+
+// ============================================================
+// ADD NEW ITEM
+// ============================================================
+
+async function addNewItem(){
+
+  const input =
+    document.getElementById(
+      "newItemName"
+    );
+
+
+  if(!input) return;
+
+
+  const item =
+    input.value.trim();
+
+
+  if(!item){
+
+    showToast(
+      "Item name is required.",
+      "error"
+    );
+
+    input.focus();
+
+    return;
+  }
+
+
+  if(!currentUsername){
+
+    showToast(
+      "User information not found.",
+      "error"
+    );
+
+    return;
+  }
+
+
+  showLoader(
+    "Adding item..."
+  );
+
+
+  try{
+
+    const response =
+      await fetch(
+        ITEM_API_URL,
+        {
+          method:"POST",
+
+          body:
+            JSON.stringify({
+
+              action:
+                "addItem",
+
+              item:
+                item,
+
+              user:
+                currentUsername,
+
+              username:
+                currentUsername
+
+            })
+        }
+      );
+
+
+    if(!response.ok){
+
+      throw new Error(
+        "Item API connection failed."
+      );
+
+    }
+
+
+    const result =
+      await response.json();
+
+
+    if(
+      !result ||
+      !result.success
+    ){
+
+      throw new Error(
+        result &&
+        result.message
+          ? result.message
+          : "Unable to add item."
+      );
+
+    }
+
+
+    input.value = "";
+
+
+    itemCache =
+      null;
+
+
+    await loadItems(
+      true
+    );
+
+
+    showToast(
+      result.message ||
+      "Item added successfully.",
+      "success"
+    );
+
+
+  }catch(error){
+
+    console.error(
+      "addNewItem:",
+      error
+    );
+
+
+    showToast(
+      error.message ||
+      "Unable to add item.",
       "error"
     );
 
@@ -5272,6 +6037,7 @@ function normalizeDate(value){
     "-" +
     d
   );
+
 }
 
 
