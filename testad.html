@@ -655,8 +655,6 @@ body.dark .btn-secondary{
 
 <body>
 
-<!-- ================= HEADER ================= -->
-
 <header class="header">
 
   <div class="header-inner">
@@ -737,8 +735,6 @@ body.dark .btn-secondary{
 </header>
 
 
-<!-- ================= MAIN ================= -->
-
 <main class="container">
 
   <h1 class="page-title">
@@ -748,9 +744,6 @@ body.dark .btn-secondary{
   <p class="page-subtitle">
     Manage support data and users
   </p>
-
-
-  <!-- FILTER -->
 
   <div class="filter-card">
 
@@ -763,7 +756,7 @@ body.dark .btn-secondary{
           id="searchInput"
           type="text"
           placeholder="Search..."
-          oninput="applyFilters()">
+          oninput="applyFilters">
 
       </div>
 
@@ -825,8 +818,6 @@ body.dark .btn-secondary{
   </div>
 
 
-  <!-- TABLE -->
-
   <div class="table-card">
 
     <div class="table-wrap">
@@ -872,7 +863,7 @@ body.dark .btn-secondary{
 </main>
 
 
-<!-- ================= NEW ENTRY MODAL ================= -->
+<!-- NEW ENTRY -->
 
 <div
   class="modal"
@@ -898,9 +889,7 @@ body.dark .btn-secondary{
 
       <div class="form-group">
 
-        <label>
-          Name
-        </label>
+        <label>Name</label>
 
         <input
           class="input"
@@ -912,9 +901,7 @@ body.dark .btn-secondary{
 
       <div class="form-group">
 
-        <label>
-          IP
-        </label>
+        <label>IP</label>
 
         <input
           class="input"
@@ -926,9 +913,7 @@ body.dark .btn-secondary{
 
       <div class="form-group">
 
-        <label>
-          Work
-        </label>
+        <label>Work</label>
 
         <input
           class="input"
@@ -940,9 +925,7 @@ body.dark .btn-secondary{
 
       <div class="form-group">
 
-        <label>
-          Date
-        </label>
+        <label>Date</label>
 
         <input
           class="input"
@@ -953,9 +936,7 @@ body.dark .btn-secondary{
 
       <div class="form-group">
 
-        <label>
-          Item
-        </label>
+        <label>Item</label>
 
         <select
           class="select"
@@ -992,7 +973,7 @@ body.dark .btn-secondary{
 </div>
 
 
-<!-- ================= USERS MODAL ================= -->
+<!-- USERS -->
 
 <div
   class="modal"
@@ -1004,9 +985,7 @@ body.dark .btn-secondary{
 
     <div class="modal-header">
 
-      <h3>
-        Users
-      </h3>
+      <h3>Users</h3>
 
       <button
         class="close-btn"
@@ -1068,7 +1047,7 @@ body.dark .btn-secondary{
 </div>
 
 
-<!-- ================= USER EDIT MODAL ================= -->
+<!-- USER EDIT -->
 
 <div
   class="modal"
@@ -1094,9 +1073,7 @@ body.dark .btn-secondary{
 
       <div class="form-group">
 
-        <label>
-          Username
-        </label>
+        <label>Username</label>
 
         <input
           class="input"
@@ -1107,9 +1084,7 @@ body.dark .btn-secondary{
 
       <div class="form-group">
 
-        <label>
-          Password
-        </label>
+        <label>Password</label>
 
         <input
           class="input"
@@ -1120,9 +1095,7 @@ body.dark .btn-secondary{
 
       <div class="form-group">
 
-        <label>
-          Name
-        </label>
+        <label>Name</label>
 
         <input
           class="input"
@@ -1133,33 +1106,17 @@ body.dark .btn-secondary{
 
       <div class="form-group">
 
-        <label>
-          Role
-        </label>
+        <label>Role</label>
 
         <select
           class="select"
           id="userRole">
 
-          <option value="admin">
-            Admin
-          </option>
-
-          <option value="manager">
-            Manager
-          </option>
-
-          <option value="support">
-            Support
-          </option>
-
-          <option value="call">
-            Call
-          </option>
-
-          <option value="guest">
-            Guest
-          </option>
+          <option value="admin">Admin</option>
+          <option value="manager">Manager</option>
+          <option value="support">Support</option>
+          <option value="call">Call</option>
+          <option value="guest">Guest</option>
 
         </select>
 
@@ -1167,9 +1124,7 @@ body.dark .btn-secondary{
 
       <div class="form-group">
 
-        <label>
-          Status
-        </label>
+        <label>Status</label>
 
         <select
           class="select"
@@ -1210,7 +1165,7 @@ body.dark .btn-secondary{
 </div>
 
 
-<!-- ================= ITEMS MODAL ================= -->
+<!-- ITEMS -->
 
 <div
   class="modal"
@@ -1220,9 +1175,7 @@ body.dark .btn-secondary{
 
     <div class="modal-header">
 
-      <h3>
-        Item Management
-      </h3>
+      <h3>Item Management</h3>
 
       <button
         class="close-btn"
@@ -1262,7 +1215,7 @@ body.dark .btn-secondary{
 </div>
 
 
-<!-- ================= PASSWORD MODAL ================= -->
+<!-- PASSWORD -->
 
 <div
   class="modal"
@@ -1272,9 +1225,7 @@ body.dark .btn-secondary{
 
     <div class="modal-header">
 
-      <h3>
-        Change Password
-      </h3>
+      <h3>Change Password</h3>
 
       <button
         class="close-btn"
@@ -1288,9 +1239,7 @@ body.dark .btn-secondary{
 
       <div class="form-group">
 
-        <label>
-          Current Password
-        </label>
+        <label>Current Password</label>
 
         <input
           class="input"
@@ -1301,9 +1250,7 @@ body.dark .btn-secondary{
 
       <div class="form-group">
 
-        <label>
-          New Password
-        </label>
+        <label>New Password</label>
 
         <input
           class="input"
@@ -1314,9 +1261,7 @@ body.dark .btn-secondary{
 
       <div class="form-group">
 
-        <label>
-          Confirm Password
-        </label>
+        <label>Confirm Password</label>
 
         <input
           class="input"
@@ -1348,7 +1293,7 @@ body.dark .btn-secondary{
 </div>
 
 
-<!-- ================= LOADER ================= -->
+<!-- LOADER -->
 
 <div
   class="loader"
@@ -1359,7 +1304,7 @@ body.dark .btn-secondary{
 </div>
 
 
-<!-- ================= TOAST ================= -->
+<!-- TOAST -->
 
 <div
   class="toast"
@@ -1381,9 +1326,6 @@ const DATA_API_URL =
 
 const SELL_API_URL =
 "https://script.google.com/macros/s/AKfycbyiKn1MH1ZQvebSIo83bZzbbfJimmfRf9PjlPI4w1q1UliuF27gKViYM24oXakpkHuP/exec";
-
-const PAID_API_URL =
-"https://script.google.com/macros/s/AKfycbkDEHln_Dj_0YfB421POWa2XAuN6g2PDypQtyS2arrxgPVtyZZOwAp_TKLrUnRudKng/exec";
 
 const DELETE_API_URL =
 "https://script.google.com/macros/s/AKfycbwDL1JIV7QYcH84VGiWxhUoT-wN9UfuGn0t9boYrs_FaG_ZfcVGjNmaTqSTC6ev0Ig9Kg/exec";
@@ -1665,7 +1607,13 @@ async function loadData(){
 
     }else if(currentDataType==="paid"){
 
-      apiUrl=PAID_API_URL;
+      /*
+        IMPORTANT:
+        Paid data is served from the SAME
+        Sell + Paid API.
+      */
+
+      apiUrl=SELL_API_URL;
       action="getPaidData";
       cache=paidCache;
 
@@ -1695,22 +1643,43 @@ async function loadData(){
       "?action="+
       encodeURIComponent(action);
 
+
+    console.log(
+      "Loading:",
+      currentDataType,
+      url
+    );
+
+
     const response=
       await fetch(url);
+
 
     const result=
       await response.json();
 
+
+    console.log(
+      "API Result:",
+      result
+    );
+
+
     let newData=[];
 
+
     if(Array.isArray(result)){
+
       newData=result;
+
     }else if(Array.isArray(result.data)){
+
       newData=result.data;
+
     }else if(Array.isArray(result.rows)){
+
       newData=result.rows;
-    }else if(result.success && Array.isArray(result.data)){
-      newData=result.data;
+
     }
 
 
@@ -1734,9 +1703,13 @@ async function loadData(){
 
   }catch(error){
 
-    console.error(error);
+    console.error(
+      "Load data error:",
+      error
+    );
 
     showToast(
+      error.message ||
       "Failed to load data",
       "error"
     );
@@ -2163,22 +2136,6 @@ function clearFilters(){
   ).value="";
 
   applyFilters();
-
-}
-
-function clearOnlyFilters(){
-
-  document.getElementById(
-    "searchInput"
-  ).value="";
-
-  document.getElementById(
-    "fromDate"
-  ).value="";
-
-  document.getElementById(
-    "toDate"
-  ).value="";
 
 }
 
