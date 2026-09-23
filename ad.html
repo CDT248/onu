@@ -428,6 +428,11 @@ td{
   color:#b91c1c;
 }
 
+.action-paid{
+  background:#dcfce7;
+  color:#15803d;
+}
+
 .pagination{
   display:flex;
   justify-content:center;
@@ -942,7 +947,7 @@ td{
         class="input"
         id="searchInput"
         placeholder="Search..."
-        oninput="applyFilters">
+        oninput="applyFilters()">
 
       <input
         type="date"
@@ -1520,6 +1525,9 @@ const DATA_API_URL =
 const SELL_API_URL =
 "https://script.google.com/macros/s/AKfycbyiKn1MH1ZQvebSIo83bZzbbfJimmfRf9PjlPI4w1q1UliuF27gKViYM24oXakpkHuP/exec";
 
+const PAID_API_URL =
+"https://script.google.com/macros/s/AKfycby_kDEHln_Dj_0YfB421POWa2XAuN6g2PDypQtyS2arrxgPVtyZZOwAp_TKLrUnRudKng/exec";
+
 const DELETE_API_URL =
 "https://script.google.com/macros/s/AKfycbwDL1JIV7QYcH84VGiWxhUoT-wN9UfuGn0t9boYrs_FaG_ZfcVGjNmaTqSTC6ev0Ig9Kg/exec";
 
@@ -1536,6 +1544,7 @@ let filteredData=[];
 
 let editingUser=false;
 let editingDataRow=null;
+let editingSellRow=null;
 
 let currentDataType="data";
 let currentPage=1;
@@ -1736,6 +1745,7 @@ function updateTableHeader(){
         <th>Item</th>
         <th>Sell Date</th>
         <th>User</th>
+        <th>Action</th>
       </tr>
     `;
 
@@ -1810,6 +1820,8 @@ async function loadData(force=false){
   const colspan=
     currentDataType==="data" ?
     6 :
+    currentDataType==="sell" ?
+    8 :
     7;
 
   body.innerHTML=`
@@ -1945,6 +1957,8 @@ function renderData(data){
   const colspan=
     currentDataType==="data" ?
     6 :
+    currentDataType==="sell" ?
+    8 :
     7;
 
   if(
@@ -2027,6 +2041,8 @@ function renderData(data){
           row.SellDate ??
           row.sellDate ??
           row["Sell Date"] ??
+          row.sellTime ??
+          row["Sell time"] ??
           row[5] ??
           "";
 
@@ -2038,6 +2054,13 @@ function renderData(data){
           row[6] ??
           "";
 
+        const rowNumber=
+          row.rowNumber ??
+          row.row ??
+          row.Row ??
+          row.rowIndex ??
+          "";
+
         return`
           <tr>
             <td>${escapeHtml(name)}</td>
@@ -2047,6 +2070,27 @@ function renderData(data){
             <td>${escapeHtml(item)}</td>
             <td>${escapeHtml(formatDate(sellDate))}</td>
             <td>${escapeHtml(user)}</td>
+
+            <td>
+
+              <div class="row-actions">
+
+                <button
+                  class="action-btn action-edit"
+                  onclick="editSellEntry(${start+index})">
+                  Edit
+                </button>
+
+                <button
+                  class="action-btn action-paid"
+                  onclick="paidSellEntry(${start+index})">
+                  Paid
+                </button>
+
+              </div>
+
+            </td>
+
           </tr>
         `;
       }
@@ -2361,6 +2405,7 @@ function clearOnlyFilters(){
 function openEntryModal(){
 
   editingDataRow=null;
+  editingSellRow=null;
 
   document.getElementById(
     "entryModalTitle"
@@ -2446,6 +2491,7 @@ function editDataEntry(index){
   }
 
   editingDataRow=row;
+  editingSellRow=null;
 
   const rowNumber=
     row.row ??
@@ -2461,6 +2507,123 @@ function editDataEntry(index){
   document.getElementById(
     "entryModalTitle"
   ).textContent="Edit Entry";
+
+  document.getElementById(
+    "entrySaveButton"
+  ).textContent="Update";
+
+  document.getElementById(
+    "entryName"
+  ).value=
+    row.Name ??
+    row.name ??
+    row[0] ??
+    "";
+
+  document.getElementById(
+    "entryIp"
+  ).value=
+    row.Ip ??
+    row.IP ??
+    row.ip ??
+    row[1] ??
+    "";
+
+  document.getElementById(
+    "entryWork"
+  ).value=
+    row.Work ??
+    row.work ??
+    row[2] ??
+    "";
+
+  document.getElementById(
+    "entryDate"
+  ).value=
+    getDateInputValue(
+      row.Date ??
+      row.date ??
+      row[3] ??
+      ""
+    );
+
+  const selectedItem=
+    row.Item ??
+    row.item ??
+    row[4] ??
+    "";
+
+  populateItemSelect(selectedItem);
+
+  openModal("entryModal");
+
+  if(!Array.isArray(itemCache)){
+
+    loadItems().then(function(){
+
+      populateItemSelect(
+        selectedItem
+      );
+
+    });
+
+  }
+
+}
+
+
+/* ============================================================
+   EDIT SELL
+============================================================ */
+
+function editSellEntry(index){
+
+  if(currentDataType!=="sell")
+    return;
+
+  const row=
+    filteredData[index];
+
+  if(!row){
+
+    showToast(
+      "Sell row not found.",
+      "error"
+    );
+
+    return;
+  }
+
+  const rowNumber=
+    row.rowNumber ??
+    row.row ??
+    row.Row ??
+    row.rowIndex ??
+    "";
+
+  if(
+    !rowNumber ||
+    Number(rowNumber)<2
+  ){
+
+    showToast(
+      "Sell row number not found.",
+      "error"
+    );
+
+    return;
+  }
+
+  editingSellRow=row;
+  editingDataRow=null;
+
+  document.getElementById(
+    "editingRow"
+  ).value=rowNumber;
+
+  document.getElementById(
+    "entryModalTitle"
+  ).textContent="Edit Sell";
 
   document.getElementById(
     "entrySaveButton"
@@ -2652,6 +2815,12 @@ async function saveEntry(){
     return;
   }
 
+  const isSellEdit=
+    Boolean(
+      editingSellRow &&
+      rowNumber
+    );
+
   const isEdit=
     Boolean(rowNumber);
 
@@ -2665,6 +2834,8 @@ async function saveEntry(){
     saveButton.disabled=true;
 
     saveButton.textContent=
+      isSellEdit ?
+      "Updating..." :
       isEdit ?
       "Updating..." :
       "Saving...";
@@ -2672,17 +2843,114 @@ async function saveEntry(){
 
   try{
 
+    /* --------------------------------------------------------
+       SELL EDIT
+    -------------------------------------------------------- */
+
+    if(isSellEdit){
+
+      const payload={
+
+        action:"editSellData",
+
+        row:Number(rowNumber),
+
+        rowNumber:Number(rowNumber),
+
+        name:name,
+
+        ip:ip,
+
+        work:work,
+
+        date:date,
+
+        item:item,
+
+        username:currentUsername,
+
+        user:currentUsername
+
+      };
+
+      const response=
+        await fetch(
+          SELL_API_URL,
+          {
+            method:"POST",
+
+            headers:{
+              "Content-Type":
+                "text/plain;charset=utf-8"
+            },
+
+            body:
+              JSON.stringify(payload)
+          }
+        );
+
+      if(!response.ok)
+        throw new Error(
+          "Sell API connection failed."
+        );
+
+      const result=
+        await response.json();
+
+      if(
+        !result ||
+        !result.success
+      ){
+
+        throw new Error(
+          result &&
+          result.message
+          ?
+          result.message
+          :
+          "Unable to update Sell data."
+        );
+      }
+
+      editingSellRow=null;
+
+      closeModal("entryModal");
+
+      sellCache=null;
+
+      showToast(
+        result.message ||
+        "Sell data updated successfully.",
+        "success"
+      );
+
+      await loadData(true);
+
+      return;
+    }
+
+
+    /* --------------------------------------------------------
+       NORMAL DATA EDIT / ADD
+    -------------------------------------------------------- */
+
     const payload={
+
       action:
         isEdit ?
         "editData" :
         "addData",
 
       name:name,
+
       ip:ip,
+
       work:work,
+
       date:date,
+
       item:item,
+
       username:currentUsername
     };
 
@@ -2780,10 +3048,269 @@ async function saveEntry(){
       saveButton.disabled=false;
 
       saveButton.textContent=
+        isSellEdit ?
+        "Update" :
         isEdit ?
         "Update" :
         "Save";
     }
+  }
+}
+
+
+/* ============================================================
+   PAID SELL
+============================================================ */
+
+async function paidSellEntry(index){
+
+  if(currentDataType!=="sell")
+    return;
+
+  const row=
+    filteredData[index];
+
+  if(!row){
+
+    showToast(
+      "Sell row not found.",
+      "error"
+    );
+
+    return;
+  }
+
+  const rowNumber=
+    row.rowNumber ??
+    row.row ??
+    row.Row ??
+    row.rowIndex ??
+    "";
+
+  if(
+    !rowNumber ||
+    Number(rowNumber)<2
+  ){
+
+    showToast(
+      "Sell row number not found. Paid cannot continue.",
+      "error"
+    );
+
+    return;
+  }
+
+  const name=
+    row.Name ??
+    row.name ??
+    row[0] ??
+    "";
+
+  const ip=
+    row.Ip ??
+    row.IP ??
+    row.ip ??
+    row[1] ??
+    "";
+
+  const work=
+    row.Work ??
+    row.work ??
+    row[2] ??
+    "";
+
+  const date=
+    row.Date ??
+    row.date ??
+    row[3] ??
+    "";
+
+  const item=
+    row.Item ??
+    row.item ??
+    row[4] ??
+    "";
+
+  const sellTime=
+    row.SellDate ??
+    row.sellDate ??
+    row["Sell Date"] ??
+    row.sellTime ??
+    row["Sell time"] ??
+    row[5] ??
+    "";
+
+  const sellUser=
+    row.User ??
+    row.user ??
+    row.Username ??
+    row.username ??
+    row[6] ??
+    "";
+
+  const paidUser=
+    currentUsername ||
+    localStorage.getItem("username") ||
+    localStorage.getItem("loggedUser") ||
+    "";
+
+  if(!paidUser){
+
+    showToast(
+      "Logged-in username not found.",
+      "error"
+    );
+
+    return;
+  }
+
+  if(
+    !confirm(
+      "Are you sure you want to mark this Sell as Paid?"
+    )
+  )
+    return;
+
+  showLoader("Processing Paid...");
+
+  try{
+
+    /*
+       IMPORTANT:
+
+       The Sell API's paidData action should:
+       1. Read the Sell row
+       2. Add it to Paid
+       3. Delete the original Sell row
+
+       This keeps the move atomic and prevents
+       duplicate Paid rows.
+    */
+
+    const payload={
+
+      action:"paidData",
+
+      row:Number(rowNumber),
+
+      rowNumber:Number(rowNumber),
+
+      name:name,
+
+      ip:ip,
+
+      work:work,
+
+      date:date,
+
+      item:item,
+
+      sellTime:sellTime,
+
+      sellUser:sellUser,
+
+      user:sellUser,
+
+      username:paidUser,
+
+      paidUser:paidUser,
+
+      PaidUser:paidUser
+
+    };
+
+    const response=
+      await fetch(
+        SELL_API_URL,
+        {
+          method:"POST",
+
+          headers:{
+            "Content-Type":
+              "text/plain;charset=utf-8"
+          },
+
+          body:
+            JSON.stringify(payload)
+        }
+      );
+
+    if(!response.ok){
+
+      throw new Error(
+        "Sell API connection failed. HTTP "+
+        response.status
+      );
+    }
+
+    const responseText=
+      await response.text();
+
+    let result;
+
+    try{
+
+      result=
+        JSON.parse(responseText);
+
+    }catch(error){
+
+      console.error(
+        "Paid API response:",
+        responseText
+      );
+
+      throw new Error(
+        "Paid operation returned an invalid response."
+      );
+    }
+
+    if(
+      !result ||
+      result.success!==true
+    ){
+
+      throw new Error(
+        result &&
+        result.message
+        ?
+        result.message
+        :
+        "Unable to mark Sell as Paid."
+      );
+    }
+
+    /*
+       Server confirmed Paid operation.
+       Reload Sell data so the paid row disappears.
+    */
+
+    sellCache=null;
+
+    showToast(
+      result.message ||
+      "Paid successfully.",
+      "success"
+    );
+
+    await loadData(true);
+
+  }catch(error){
+
+    console.error(
+      "paidSellEntry:",
+      error
+    );
+
+    showToast(
+      error.message ||
+      "Paid operation failed.",
+      "error"
+    );
+
+  }finally{
+
+    hideLoader();
   }
 }
 
@@ -2887,7 +3414,6 @@ function updateLocalEditedRow(newRow){
 
 /* ============================================================
    SELL
-   FIXED VERSION
 ============================================================ */
 
 async function sellDataEntry(index){
@@ -2908,23 +3434,12 @@ async function sellDataEntry(index){
     return;
   }
 
-  /*
-     First try the row number supplied by
-     the Data API.
-  */
-
   let rowNumber=
     row.row ??
     row.Row ??
     row.rowNumber ??
     row.rowIndex ??
     "";
-
-  /*
-     If the API did not return row number,
-     find the same object in allData.
-     Sheet row 1 = header, so data starts at row 2.
-  */
 
   if(
     rowNumber===null ||
@@ -2941,11 +3456,6 @@ async function sellDataEntry(index){
         actualIndex+2;
 
     }else{
-
-      /*
-         Fallback: find the row by
-         Name + IP + Work + Date + Item.
-      */
 
       const rowName=
         String(
@@ -3134,13 +3644,6 @@ async function sellDataEntry(index){
       );
     }
 
-    /*
-       Complete Sell payload.
-       Sell API receives:
-       Name | IP | Work | Date | Item | User
-       plus original main-sheet row number.
-    */
-
     const payload={
 
       action:"sellData",
@@ -3173,12 +3676,6 @@ async function sellDataEntry(index){
       "Sending Sell request:",
       payload
     );
-
-    /*
-       text/plain is intentional for Apps Script.
-       Backend reads:
-       JSON.parse(e.postData.contents)
-    */
 
     const response=
       await fetch(
@@ -3247,11 +3744,6 @@ async function sellDataEntry(index){
       );
 
     }
-
-    /*
-       Only remove from local Data
-       after Sell API confirms success.
-    */
 
     removeLocalDataRow(
       rowNumber
@@ -5416,4 +5908,3 @@ window.addEventListener(
 
 </body>
 </html>
-
