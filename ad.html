@@ -942,7 +942,7 @@ td{
         class="input"
         id="searchInput"
         placeholder="Search..."
-        oninput="applyFilters()">
+        oninput="applyFilters">
 
       <input
         type="date"
@@ -1565,12 +1565,6 @@ document.addEventListener("DOMContentLoaded",function(){
 
   if(!checkLogin()) return;
 
-  /*
-     Important:
-     এগুলো একটার পর একটা await করা হচ্ছে না।
-     তাই User/Data/Item API একসাথে load হবে।
-  */
-
   loadUser();
   loadData();
   loadItems();
@@ -1803,11 +1797,6 @@ async function loadData(force=false){
 
   if(currentDataType==="delete")
     cache=deleteCache;
-
-  /*
-     Cache থাকলে API call হবে না।
-     এতে Data/Sell/Delete change করতে দ্রুত হবে।
-  */
 
   if(!force && Array.isArray(cache)){
 
@@ -2367,7 +2356,6 @@ function clearOnlyFilters(){
 
 /* ============================================================
    ENTRY MODAL
-   FAST VERSION
 ============================================================ */
 
 function openEntryModal(){
@@ -2400,12 +2388,6 @@ function openEntryModal(){
     "entryWork"
   ).value="";
 
-  /*
-     IMPORTANT:
-     Item cache থাকলে API call হবে না।
-     তাই modal instantly open হবে।
-  */
-
   populateItemSelect();
 
   const today=
@@ -2434,11 +2416,6 @@ function openEntryModal(){
     day;
 
   openModal("entryModal");
-
-  /*
-     Item এখনো load না হয়ে থাকলে
-     background-এ load হবে।
-  */
 
   if(!Array.isArray(itemCache))
     loadItems();
@@ -2530,10 +2507,6 @@ function editDataEntry(index){
     row[4] ??
     "";
 
-  /*
-     Cache থাকলে instant dropdown.
-  */
-
   populateItemSelect(selectedItem);
 
   openModal("entryModal");
@@ -2595,7 +2568,6 @@ function getDateInputValue(value){
 
 /* ============================================================
    SAVE ENTRY
-   FAST VERSION
 ============================================================ */
 
 async function saveEntry(){
@@ -2750,18 +2722,6 @@ async function saveEntry(){
       );
     }
 
-    /*
-       ======================================================
-       IMPORTANT SPEED FIX
-       ======================================================
-
-       এখানে আর await loadData(true) করা হচ্ছে না।
-
-       অর্থাৎ Google Sheet save হওয়ার পর
-       আবার পুরো sheet download করার জন্য
-       user-কে অপেক্ষা করতে হবে না।
-    */
-
     const newRow={
       row:
         isEdit ?
@@ -2836,11 +2796,6 @@ function insertLocalNewRow(row){
 
   if(!Array.isArray(dataCache))
     dataCache=[];
-
-  /*
-     Sheet-এ নতুন row 2-তে insert হয়।
-     তাই পুরোনো row numbers +1 হবে।
-  */
 
   dataCache=
     dataCache.map(function(oldRow){
@@ -2932,7 +2887,7 @@ function updateLocalEditedRow(newRow){
 
 /* ============================================================
    SELL
-   FAST LOCAL UPDATE
+   FIXED VERSION
 ============================================================ */
 
 async function sellDataEntry(index){
@@ -2953,18 +2908,172 @@ async function sellDataEntry(index){
     return;
   }
 
-  const rowNumber=
+  /*
+     First try the row number supplied by
+     the Data API.
+  */
+
+  let rowNumber=
     row.row ??
     row.Row ??
     row.rowNumber ??
     row.rowIndex ??
     "";
 
-  if(!rowNumber){
+  /*
+     If the API did not return row number,
+     find the same object in allData.
+     Sheet row 1 = header, so data starts at row 2.
+  */
+
+  if(
+    rowNumber===null ||
+    rowNumber===undefined ||
+    String(rowNumber).trim()===""
+  ){
+
+    const actualIndex=
+      allData.indexOf(row);
+
+    if(actualIndex>=0){
+
+      rowNumber=
+        actualIndex+2;
+
+    }else{
+
+      /*
+         Fallback: find the row by
+         Name + IP + Work + Date + Item.
+      */
+
+      const rowName=
+        String(
+          row.Name ??
+          row.name ??
+          row[0] ??
+          ""
+        ).trim();
+
+      const rowIp=
+        String(
+          row.Ip ??
+          row.IP ??
+          row.ip ??
+          row[1] ??
+          ""
+        ).trim();
+
+      const rowWork=
+        String(
+          row.Work ??
+          row.work ??
+          row[2] ??
+          ""
+        ).trim();
+
+      const rowDate=
+        String(
+          row.Date ??
+          row.date ??
+          row[3] ??
+          ""
+        ).trim();
+
+      const rowItem=
+        String(
+          row.Item ??
+          row.item ??
+          row[4] ??
+          ""
+        ).trim();
+
+      const foundIndex=
+        allData.findIndex(function(item){
+
+          item=item || {};
+
+          const name=
+            String(
+              item.Name ??
+              item.name ??
+              item[0] ??
+              ""
+            ).trim();
+
+          const ip=
+            String(
+              item.Ip ??
+              item.IP ??
+              item.ip ??
+              item[1] ??
+              ""
+            ).trim();
+
+          const work=
+            String(
+              item.Work ??
+              item.work ??
+              item[2] ??
+              ""
+            ).trim();
+
+          const date=
+            String(
+              item.Date ??
+              item.date ??
+              item[3] ??
+              ""
+            ).trim();
+
+          const itemName=
+            String(
+              item.Item ??
+              item.item ??
+              item[4] ??
+              ""
+            ).trim();
+
+          return(
+            name===rowName &&
+            ip===rowIp &&
+            work===rowWork &&
+            date===rowDate &&
+            itemName===rowItem
+          );
+
+        });
+
+      if(foundIndex>=0){
+
+        rowNumber=
+          foundIndex+2;
+
+      }
+    }
+  }
+
+  rowNumber=
+    Number(rowNumber);
+
+  if(
+    !Number.isInteger(rowNumber) ||
+    rowNumber<2
+  ){
 
     showToast(
-      "Row number not found. Sell cannot continue.",
+      "Unable to find the correct sheet row. Sell cannot continue.",
       "error"
+    );
+
+    console.error(
+      "Sell row number error:",
+      {
+        index:index,
+        row:row,
+        allData:allData,
+        filteredData:filteredData
+      }
     );
 
     return;
@@ -2981,11 +3090,95 @@ async function sellDataEntry(index){
 
   try{
 
+    const name=
+      row.Name ??
+      row.name ??
+      row[0] ??
+      "";
+
+    const ip=
+      row.Ip ??
+      row.IP ??
+      row.ip ??
+      row[1] ??
+      "";
+
+    const work=
+      row.Work ??
+      row.work ??
+      row[2] ??
+      "";
+
+    const date=
+      row.Date ??
+      row.date ??
+      row[3] ??
+      "";
+
     const item=
       row.Item ??
       row.item ??
       row[4] ??
       "";
+
+    const username=
+      currentUsername ||
+      localStorage.getItem("username") ||
+      localStorage.getItem("loggedUser") ||
+      "";
+
+    if(!username){
+
+      throw new Error(
+        "Logged-in username not found."
+      );
+    }
+
+    /*
+       Complete Sell payload.
+       Sell API receives:
+       Name | IP | Work | Date | Item | User
+       plus original main-sheet row number.
+    */
+
+    const payload={
+
+      action:"sellData",
+
+      row:rowNumber,
+
+      rowNumber:rowNumber,
+
+      name:name,
+
+      ip:ip,
+
+      work:work,
+
+      date:date,
+
+      item:item,
+
+      username:username,
+
+      user:username,
+
+      SellUser:username,
+
+      sellUser:username
+
+    };
+
+    console.log(
+      "Sending Sell request:",
+      payload
+    );
+
+    /*
+       text/plain is intentional for Apps Script.
+       Backend reads:
+       JSON.parse(e.postData.contents)
+    */
 
     const response=
       await fetch(
@@ -2993,33 +3186,55 @@ async function sellDataEntry(index){
         {
           method:"POST",
 
-          body:JSON.stringify({
+          headers:{
+            "Content-Type":
+              "text/plain;charset=utf-8"
+          },
 
-            action:"sellData",
-
-            row:Number(rowNumber),
-
-            item:item,
-
-            username:currentUsername,
-
-            user:currentUsername
-
-          })
+          body:
+            JSON.stringify(payload)
         }
       );
 
-    if(!response.ok)
+    if(!response.ok){
+
       throw new Error(
-        "Sell API connection failed."
+        "Sell API connection failed. HTTP "+
+        response.status
       );
 
-    const result=
-      await response.json();
+    }
+
+    const responseText=
+      await response.text();
+
+    let result;
+
+    try{
+
+      result=
+        JSON.parse(responseText);
+
+    }catch(parseError){
+
+      console.error(
+        "Sell API returned invalid JSON:",
+        responseText
+      );
+
+      throw new Error(
+        "Sell API did not return a valid response."
+      );
+    }
+
+    console.log(
+      "Sell API response:",
+      result
+    );
 
     if(
       !result ||
-      !result.success
+      result.success!==true
     ){
 
       throw new Error(
@@ -3030,18 +3245,43 @@ async function sellDataEntry(index){
         :
         "Unable to sell data."
       );
+
     }
 
     /*
-       Local cache থেকে row remove.
-       আর API reload নয়।
+       Only remove from local Data
+       after Sell API confirms success.
     */
 
     removeLocalDataRow(
-      Number(rowNumber)
+      rowNumber
     );
 
     sellCache=null;
+
+    dataCache=
+      Array.isArray(dataCache)
+      ?
+      dataCache
+      :
+      [];
+
+    allData=
+      dataCache;
+
+    currentDataType="data";
+
+    const dataType=
+      document.getElementById(
+        "dataType"
+      );
+
+    if(dataType)
+      dataType.value="data";
+
+    updateTableHeader();
+
+    applyFilters();
 
     showToast(
       result.message ||
@@ -3071,7 +3311,6 @@ async function sellDataEntry(index){
 
 /* ============================================================
    DELETE DATA
-   FAST LOCAL UPDATE
 ============================================================ */
 
 async function deleteDataEntry(index){
@@ -3151,10 +3390,6 @@ async function deleteDataEntry(index){
       row[4] ??
       "";
 
-    /*
-       First archive.
-    */
-
     const archiveResponse=
       await fetch(
         DELETE_API_URL,
@@ -3201,10 +3436,6 @@ async function deleteDataEntry(index){
       );
     }
 
-    /*
-       Then delete main row.
-    */
-
     const deleteResponse=
       await fetch(
         DATA_API_URL,
@@ -3245,10 +3476,6 @@ async function deleteDataEntry(index){
         "Delete archive saved, but main data could not be removed."
       );
     }
-
-    /*
-       Local update.
-    */
 
     removeLocalDataRow(
       Number(rowNumber)
@@ -3307,10 +3534,6 @@ function removeLocalDataRow(rowNumber){
 
     });
 
-  /*
-     Sheet row numbers after deleted row shift up.
-  */
-
   dataCache=
     dataCache.map(function(row){
 
@@ -3351,11 +3574,6 @@ function openItemsModal(){
   ).value="";
 
   openModal("itemsModal");
-
-  /*
-     Cache থাকলে instant.
-     Force করলে fresh API.
-  */
 
   loadItems(true);
 }
