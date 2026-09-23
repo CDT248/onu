@@ -1,0 +1,5644 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Support Dashboard</title>
+
+<link rel="icon"
+      type="image/png"
+      href="https://cdn-icons-png.flaticon.com/128/17163/17163834.png">
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+body{
+  font-family:Arial,Helvetica,sans-serif;
+  background:#f4f7fb;
+  color:#172033;
+  min-height:100vh;
+  transition:.3s;
+}
+
+body.dark{
+  background:#101522;
+  color:#f5f7fb;
+}
+
+.header{
+  height:70px;
+  background:#fff;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 22px;
+  box-shadow:0 3px 15px rgba(0,0,0,.08);
+  position:sticky;
+  top:0;
+  z-index:100;
+}
+
+.dark .header{
+  background:#171d2b;
+  box-shadow:0 3px 15px rgba(0,0,0,.25);
+}
+
+.logo-area{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+
+.logo{
+  width:42px;
+  height:42px;
+  border-radius:12px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:linear-gradient(135deg,#2563eb,#7c3aed);
+  color:#fff;
+  font-size:22px;
+  font-weight:bold;
+}
+
+.logo-text h2{
+  font-size:19px;
+}
+
+.logo-text p{
+  font-size:12px;
+  color:#7b8496;
+  margin-top:3px;
+}
+
+.header-actions{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  flex-wrap:wrap;
+}
+
+.icon-btn{
+  width:40px;
+  height:40px;
+  border:none;
+  border-radius:10px;
+  cursor:pointer;
+  background:#f0f3f8;
+  font-size:18px;
+  transition:.2s;
+}
+
+.icon-btn:hover{
+  transform:translateY(-1px);
+  background:#e4e9f2;
+}
+
+.dark .icon-btn{
+  background:#252d3d;
+  color:#fff;
+}
+
+.profile{
+  position:relative;
+}
+
+.profile-btn{
+  border:none;
+  background:transparent;
+  display:flex;
+  align-items:center;
+  gap:8px;
+  cursor:pointer;
+  padding:4px;
+}
+
+.profile-avatar{
+  width:40px;
+  height:40px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:linear-gradient(135deg,#2563eb,#7c3aed);
+  color:#fff;
+  font-weight:bold;
+}
+
+.profile-name{
+  text-align:left;
+}
+
+.profile-name strong{
+  display:block;
+  font-size:13px;
+}
+
+.profile-name span{
+  display:block;
+  color:#8a93a5;
+  font-size:11px;
+  margin-top:2px;
+}
+
+.profile-menu{
+  position:absolute;
+  right:0;
+  top:52px;
+  width:190px;
+  background:#fff;
+  border-radius:12px;
+  box-shadow:0 12px 35px rgba(0,0,0,.15);
+  padding:7px;
+  display:none;
+}
+
+.profile-menu.show{
+  display:block;
+}
+
+.dark .profile-menu{
+  background:#1d2534;
+}
+
+.profile-menu button{
+  width:100%;
+  border:none;
+  background:transparent;
+  text-align:left;
+  padding:11px 12px;
+  border-radius:8px;
+  cursor:pointer;
+  font-size:13px;
+  color:inherit;
+}
+
+.profile-menu button:hover{
+  background:#f1f4f9;
+}
+
+.dark .profile-menu button:hover{
+  background:#293244;
+}
+
+.container{
+  max-width:1450px;
+  margin:auto;
+  padding:25px;
+}
+
+.top-bar{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:15px;
+  margin-bottom:20px;
+  flex-wrap:wrap;
+}
+
+.page-title h1{
+  font-size:25px;
+}
+
+.page-title p{
+  color:#7b8496;
+  margin-top:5px;
+  font-size:13px;
+}
+
+.actions{
+  display:flex;
+  gap:9px;
+  flex-wrap:wrap;
+}
+
+.btn{
+  border:none;
+  border-radius:10px;
+  padding:11px 16px;
+  cursor:pointer;
+  font-weight:600;
+  font-size:13px;
+  transition:.2s;
+}
+
+.btn:hover{
+  transform:translateY(-1px);
+}
+
+.btn:disabled{
+  opacity:.6;
+  cursor:not-allowed;
+  transform:none;
+}
+
+.btn-primary{
+  background:#2563eb;
+  color:#fff;
+}
+
+.btn-secondary{
+  background:#eef2f7;
+  color:#253047;
+}
+
+.dark .btn-secondary{
+  background:#252d3d;
+  color:#fff;
+}
+
+.btn-success{
+  background:#16a34a;
+  color:#fff;
+}
+
+.btn-danger{
+  background:#dc2626;
+  color:#fff;
+}
+
+.btn-warning{
+  background:#f59e0b;
+  color:#fff;
+}
+
+.filter-card{
+  background:#fff;
+  border-radius:15px;
+  padding:17px;
+  box-shadow:0 4px 20px rgba(0,0,0,.06);
+  margin-bottom:18px;
+}
+
+.dark .filter-card{
+  background:#171d2b;
+}
+
+.filters{
+  display:grid;
+  grid-template-columns:2fr 1fr 1fr 170px auto;
+  gap:10px;
+}
+
+.input,
+.select{
+  width:100%;
+  border:1px solid #dce2eb;
+  background:#fff;
+  color:#172033;
+  border-radius:9px;
+  padding:11px 12px;
+  outline:none;
+  font-size:13px;
+}
+
+.input:focus,
+.select:focus{
+  border-color:#2563eb;
+}
+
+.dark .input,
+.dark .select{
+  background:#202838;
+  color:#fff;
+  border-color:#343e51;
+}
+
+.summary-bar{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:12px 15px;
+  background:#f8fafc;
+  border-top:1px solid #edf0f5;
+  border-bottom:1px solid #edf0f5;
+}
+
+.dark .summary-bar{
+  background:#202838;
+  border-color:#293243;
+}
+
+.total-text{
+  font-size:13px;
+  font-weight:600;
+  color:#64748b;
+}
+
+.dark .total-text{
+  color:#cbd5e1;
+}
+
+.table-card{
+  background:#fff;
+  border-radius:15px;
+  box-shadow:0 4px 20px rgba(0,0,0,.06);
+  overflow:hidden;
+}
+
+.dark .table-card{
+  background:#171d2b;
+}
+
+.table-wrap{
+  overflow:auto;
+}
+
+table{
+  width:100%;
+  border-collapse:collapse;
+  min-width:850px;
+}
+
+thead{
+  background:#f7f9fc;
+}
+
+.dark thead{
+  background:#202838;
+}
+
+th{
+  text-align:left;
+  padding:14px;
+  font-size:12px;
+  color:#687286;
+  white-space:nowrap;
+}
+
+td{
+  padding:14px;
+  border-top:1px solid #edf0f5;
+  font-size:13px;
+  white-space:nowrap;
+}
+
+.dark td{
+  border-color:#293243;
+}
+
+.dark th{
+  color:#aeb6c6;
+}
+
+.empty{
+  text-align:center;
+  padding:45px;
+  color:#8a93a5;
+}
+
+.row-actions{
+  display:flex;
+  align-items:center;
+  gap:6px;
+}
+
+.action-btn{
+  border:none;
+  padding:7px 10px;
+  border-radius:7px;
+  cursor:pointer;
+  font-size:11px;
+  font-weight:bold;
+  transition:.2s;
+}
+
+.action-btn:hover{
+  transform:translateY(-1px);
+}
+
+.action-edit{
+  background:#dbeafe;
+  color:#1d4ed8;
+}
+
+.action-sell{
+  background:#dcfce7;
+  color:#15803d;
+}
+
+.action-delete{
+  background:#fee2e2;
+  color:#b91c1c;
+}
+
+.action-paid{
+  background:#dcfce7;
+  color:#15803d;
+}
+
+.pagination{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:6px;
+  padding:15px;
+  border-top:1px solid #edf0f5;
+  flex-wrap:wrap;
+}
+
+.dark .pagination{
+  border-color:#293243;
+}
+
+.page-btn{
+  min-width:34px;
+  height:34px;
+  border:none;
+  border-radius:8px;
+  background:#eef2f7;
+  color:#253047;
+  cursor:pointer;
+  font-size:12px;
+  font-weight:bold;
+}
+
+.page-btn:hover{
+  background:#dbe4f0;
+}
+
+.page-btn.active{
+  background:#2563eb;
+  color:#fff;
+}
+
+.page-btn:disabled{
+  opacity:.45;
+  cursor:not-allowed;
+}
+
+.dark .page-btn{
+  background:#252d3d;
+  color:#fff;
+}
+
+.dark .page-btn:hover{
+  background:#303a4e;
+}
+
+.dark .page-btn.active{
+  background:#2563eb;
+}
+
+.modal-bg{
+  position:fixed;
+  inset:0;
+  background:rgba(10,16,28,.62);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  z-index:500;
+  padding:20px;
+}
+
+.modal-bg.show{
+  display:flex;
+}
+
+.modal{
+  width:100%;
+  max-width:560px;
+  max-height:90vh;
+  overflow:auto;
+  background:#fff;
+  border-radius:17px;
+  box-shadow:0 20px 70px rgba(0,0,0,.25);
+  padding:22px;
+}
+
+.dark .modal{
+  background:#171d2b;
+}
+
+.modal.large{
+  max-width:900px;
+}
+
+.modal-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:20px;
+}
+
+.modal-head h3{
+  font-size:19px;
+}
+
+.close{
+  width:34px;
+  height:34px;
+  border:none;
+  border-radius:9px;
+  background:#eef1f6;
+  cursor:pointer;
+  font-size:18px;
+}
+
+.dark .close{
+  background:#273041;
+  color:#fff;
+}
+
+.form-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:13px;
+}
+
+.form-group{
+  margin-bottom:13px;
+}
+
+.form-group.full{
+  grid-column:1/-1;
+}
+
+.form-group label{
+  display:block;
+  font-size:12px;
+  font-weight:600;
+  margin-bottom:6px;
+}
+
+.modal-footer{
+  display:flex;
+  justify-content:flex-end;
+  gap:9px;
+  margin-top:18px;
+}
+
+.user-table-wrap,
+.item-table-wrap{
+  overflow:auto;
+}
+
+.user-table,
+.item-table{
+  width:100%;
+  min-width:700px;
+}
+
+.status{
+  display:inline-flex;
+  padding:5px 9px;
+  border-radius:20px;
+  font-size:11px;
+  font-weight:bold;
+}
+
+.status-active{
+  background:#dcfce7;
+  color:#15803d;
+}
+
+.status-block{
+  background:#fee2e2;
+  color:#b91c1c;
+}
+
+.role{
+  display:inline-flex;
+  padding:5px 9px;
+  border-radius:20px;
+  background:#e0e7ff;
+  color:#4338ca;
+  font-size:11px;
+  font-weight:bold;
+}
+
+.user-actions{
+  display:flex;
+  gap:6px;
+}
+
+.small-btn{
+  border:none;
+  padding:7px 10px;
+  border-radius:7px;
+  cursor:pointer;
+  font-size:11px;
+  font-weight:bold;
+}
+
+.small-edit{
+  background:#dbeafe;
+  color:#1d4ed8;
+}
+
+.small-block{
+  background:#fee2e2;
+  color:#b91c1c;
+}
+
+.small-unblock{
+  background:#dcfce7;
+  color:#15803d;
+}
+
+.item-name{
+  font-weight:600;
+}
+
+.item-user{
+  color:#64748b;
+}
+
+.dark .item-user{
+  color:#cbd5e1;
+}
+
+.item-delete-btn{
+  border:none;
+  background:#fee2e2;
+  color:#b91c1c;
+  padding:7px 11px;
+  border-radius:7px;
+  cursor:pointer;
+  font-size:11px;
+  font-weight:bold;
+  transition:.2s;
+}
+
+.item-delete-btn:hover{
+  background:#fecaca;
+  transform:translateY(-1px);
+}
+
+.dark .item-delete-btn{
+  background:#3b2027;
+  color:#fca5a5;
+}
+
+.dark .item-delete-btn:hover{
+  background:#4a252e;
+}
+
+.toast{
+  position:fixed;
+  right:20px;
+  bottom:20px;
+  min-width:260px;
+  max-width:400px;
+  padding:13px 16px;
+  border-radius:11px;
+  background:#172033;
+  color:#fff;
+  box-shadow:0 10px 35px rgba(0,0,0,.2);
+  transform:translateY(100px);
+  opacity:0;
+  pointer-events:none;
+  transition:.3s;
+  z-index:3000;
+  font-size:13px;
+}
+
+.toast.show{
+  transform:translateY(0);
+  opacity:1;
+}
+
+.toast.success{
+  background:#15803d;
+}
+
+.toast.error{
+  background:#b91c1c;
+}
+
+.loader-bg{
+  position:fixed;
+  inset:0;
+  background:rgba(255,255,255,.7);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  z-index:2000;
+  backdrop-filter:blur(3px);
+}
+
+.dark .loader-bg{
+  background:rgba(10,15,25,.72);
+}
+
+.loader-bg.show{
+  display:flex;
+}
+
+.loader-box{
+  background:#fff;
+  padding:25px 30px;
+  border-radius:15px;
+  text-align:center;
+  box-shadow:0 10px 40px rgba(0,0,0,.18);
+}
+
+.dark .loader-box{
+  background:#1b2331;
+  color:#fff;
+}
+
+.spinner{
+  width:35px;
+  height:35px;
+  border:4px solid #e3e8f0;
+  border-top-color:#2563eb;
+  border-radius:50%;
+  animation:spin .8s linear infinite;
+  margin:0 auto 12px;
+}
+
+@keyframes spin{
+  to{transform:rotate(360deg);}
+}
+
+.table-loading{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  padding:35px;
+  color:#64748b;
+  font-size:13px;
+}
+
+.dark .table-loading{
+  color:#cbd5e1;
+}
+
+.mini-spinner{
+  width:22px;
+  height:22px;
+  border:3px solid #e2e8f0;
+  border-top-color:#2563eb;
+  border-radius:50%;
+  animation:spin .7s linear infinite;
+}
+
+@media(max-width:800px){
+
+  .header{
+    padding:0 13px;
+  }
+
+  .profile-name{
+    display:none;
+  }
+
+  .container{
+    padding:15px;
+  }
+
+  .filters{
+    grid-template-columns:1fr;
+  }
+
+  .form-grid{
+    grid-template-columns:1fr;
+  }
+
+  .form-group.full{
+    grid-column:auto;
+  }
+
+  .page-title h1{
+    font-size:21px;
+  }
+
+  .summary-bar{
+    align-items:flex-start;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header class="header">
+
+  <div class="logo-area">
+
+    <div class="logo">S</div>
+
+    <div class="logo-text">
+      <h2>Support Dashboard</h2>
+      <p>Admin Management System</p>
+    </div>
+
+  </div>
+
+  <div class="header-actions">
+
+    <button
+      class="icon-btn"
+      onclick="loadData(true)"
+      title="Reload">
+      ↻
+    </button>
+
+    <button
+      class="btn btn-primary"
+      onclick="openUsersModal()">
+      Users
+    </button>
+
+    <button
+      class="btn btn-warning"
+      onclick="openItemsModal()">
+      Items
+    </button>
+
+    <button
+      class="btn btn-success"
+      onclick="openEntryModal()">
+      + New Entry
+    </button>
+
+    <button
+      class="icon-btn"
+      onclick="toggleTheme()"
+      id="themeBtn"
+      title="Theme">
+      🌙
+    </button>
+
+    <div class="profile">
+
+      <button
+        class="profile-btn"
+        onclick="toggleProfileMenu()">
+
+        <div
+          class="profile-avatar"
+          id="profileAvatar">
+          U
+        </div>
+
+        <div class="profile-name">
+
+          <strong id="profileName">User</strong>
+
+          <span id="profileRole">User</span>
+
+        </div>
+
+      </button>
+
+      <div
+        class="profile-menu"
+        id="profileMenu">
+
+        <button onclick="openPasswordModal()">
+          🔑 Change Password
+        </button>
+
+        <button onclick="logout()">
+          🚪 Logout
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</header>
+
+
+<main class="container">
+
+  <div class="top-bar">
+
+    <div class="page-title">
+
+      <h1>Dashboard</h1>
+
+      <p>
+        Manage support data and users
+      </p>
+
+    </div>
+
+    <div class="actions">
+
+      <button
+        class="btn btn-primary"
+        onclick="loadData(true)">
+        Refresh Data
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <div class="filter-card">
+
+    <div class="filters">
+
+      <input
+        type="text"
+        class="input"
+        id="searchInput"
+        placeholder="Search..."
+        oninput="applyFilters()">
+
+      <input
+        type="date"
+        class="input"
+        id="fromDate"
+        onchange="applyFilters()">
+
+      <input
+        type="date"
+        class="input"
+        id="toDate"
+        onchange="applyFilters()">
+
+      <select
+        class="select"
+        id="dataType"
+        onchange="changeDataType()">
+
+        <option value="data">Data</option>
+        <option value="sell">Sell</option>
+        <option value="delete">Delete</option>
+
+      </select>
+
+      <button
+        class="btn btn-secondary"
+        onclick="clearFilters()">
+        Clear
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <div class="table-card">
+
+    <div class="summary-bar">
+
+      <div
+        class="total-text"
+        id="totalData">
+        Total Data: 0
+      </div>
+
+      <div
+        class="total-text"
+        id="pageInfo">
+        Page 1
+      </div>
+
+    </div>
+
+    <div class="table-wrap">
+
+      <table>
+
+        <thead id="tableHead">
+
+          <tr>
+            <th>Name</th>
+            <th>IP</th>
+            <th>Work</th>
+            <th>Date</th>
+            <th>Item</th>
+            <th>Action</th>
+          </tr>
+
+        </thead>
+
+        <tbody id="dataBody">
+
+          <tr>
+            <td
+              colspan="6"
+              class="empty">
+              Loading data...
+            </td>
+          </tr>
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+    <div
+      class="pagination"
+      id="pagination">
+    </div>
+
+  </div>
+
+</main>
+
+
+<!-- ENTRY MODAL -->
+
+<div
+  class="modal-bg"
+  id="entryModal">
+
+  <div class="modal">
+
+    <div class="modal-head">
+
+      <h3 id="entryModalTitle">
+        New Entry
+      </h3>
+
+      <button
+        class="close"
+        onclick="closeModal('entryModal')">
+        ×
+      </button>
+
+    </div>
+
+    <input
+      type="hidden"
+      id="editingRow">
+
+    <div class="form-grid">
+
+      <div class="form-group">
+
+        <label>Name</label>
+
+        <input
+          class="input"
+          id="entryName"
+          type="text">
+
+      </div>
+
+      <div class="form-group">
+
+        <label>IP</label>
+
+        <input
+          class="input"
+          id="entryIp"
+          type="text">
+
+      </div>
+
+      <div class="form-group full">
+
+        <label>Work</label>
+
+        <input
+          class="input"
+          id="entryWork"
+          type="text">
+
+      </div>
+
+      <div class="form-group">
+
+        <label>Date</label>
+
+        <input
+          class="input"
+          id="entryDate"
+          type="date">
+
+      </div>
+
+      <div class="form-group">
+
+        <label>Item</label>
+
+        <select
+          class="select"
+          id="entryItem">
+
+          <option value="">
+            Loading Items...
+          </option>
+
+        </select>
+
+      </div>
+
+    </div>
+
+    <div class="modal-footer">
+
+      <button
+        class="btn btn-secondary"
+        onclick="closeModal('entryModal')">
+        Cancel
+      </button>
+
+      <button
+        class="btn btn-primary"
+        id="entrySaveButton"
+        onclick="saveEntry()">
+        Save
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- USERS MODAL -->
+
+<div
+  class="modal-bg"
+  id="usersModal">
+
+  <div class="modal large">
+
+    <div class="modal-head">
+
+      <h3>User Management</h3>
+
+      <button
+        class="close"
+        onclick="closeModal('usersModal')">
+        ×
+      </button>
+
+    </div>
+
+    <div style="margin-bottom:15px;">
+
+      <button
+        class="btn btn-success"
+        onclick="openAddUserModal()">
+        + Add User
+      </button>
+
+    </div>
+
+    <div class="user-table-wrap">
+
+      <table class="user-table">
+
+        <thead>
+
+          <tr>
+            <th>Username</th>
+            <th>Name</th>
+            <th>Role</th>
+            <th>Status</th>
+            <th>Action</th>
+          </tr>
+
+        </thead>
+
+        <tbody id="usersBody">
+
+          <tr>
+            <td
+              colspan="5"
+              class="empty">
+              Loading users...
+            </td>
+          </tr>
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- USER FORM -->
+
+<div
+  class="modal-bg"
+  id="userFormModal">
+
+  <div class="modal">
+
+    <div class="modal-head">
+
+      <h3 id="userFormTitle">
+        Add User
+      </h3>
+
+      <button
+        class="close"
+        onclick="closeModal('userFormModal')">
+        ×
+      </button>
+
+    </div>
+
+    <input
+      type="hidden"
+      id="originalUsername">
+
+    <div class="form-grid">
+
+      <div class="form-group">
+
+        <label>Username</label>
+
+        <input
+          class="input"
+          id="userUsername"
+          type="text">
+
+      </div>
+
+      <div class="form-group">
+
+        <label>Name</label>
+
+        <input
+          class="input"
+          id="userName"
+          type="text">
+
+      </div>
+
+      <div class="form-group">
+
+        <label>Password</label>
+
+        <input
+          class="input"
+          id="userPassword"
+          type="password"
+          placeholder="Password">
+
+      </div>
+
+      <div class="form-group">
+
+        <label>Role</label>
+
+        <select
+          class="select"
+          id="userRole">
+
+          <option value="admin">Admin</option>
+          <option value="manager">Manager</option>
+          <option value="support">Support</option>
+          <option value="call">Call</option>
+          <option value="guest">Guest</option>
+
+        </select>
+
+      </div>
+
+      <div class="form-group full">
+
+        <label>Status</label>
+
+        <select
+          class="select"
+          id="userStatus">
+
+          <option value="Active">Active</option>
+          <option value="Block">Block</option>
+
+        </select>
+
+      </div>
+
+    </div>
+
+    <div class="modal-footer">
+
+      <button
+        class="btn btn-secondary"
+        onclick="closeModal('userFormModal')">
+        Cancel
+      </button>
+
+      <button
+        class="btn btn-primary"
+        onclick="saveUser()">
+        Save User
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- ITEM MANAGEMENT -->
+
+<div
+  class="modal-bg"
+  id="itemsModal">
+
+  <div class="modal large">
+
+    <div class="modal-head">
+
+      <h3>Item Management</h3>
+
+      <button
+        class="close"
+        onclick="closeModal('itemsModal')">
+        ×
+      </button>
+
+    </div>
+
+    <div
+      style="
+        display:flex;
+        gap:10px;
+        margin-bottom:18px;
+      ">
+
+      <input
+        class="input"
+        id="newItemName"
+        type="text"
+        placeholder="Enter new item name"
+        onkeydown="if(event.key==='Enter') addNewItem()">
+
+      <button
+        class="btn btn-success"
+        onclick="addNewItem()"
+        style="white-space:nowrap;">
+        + Add Item
+      </button>
+
+    </div>
+
+    <div class="item-table-wrap">
+
+      <table class="item-table">
+
+        <thead>
+
+          <tr>
+            <th>Item</th>
+            <th>Date</th>
+            <th>User</th>
+            <th>Action</th>
+          </tr>
+
+        </thead>
+
+        <tbody id="itemsBody">
+
+          <tr>
+            <td
+              colspan="4"
+              class="empty">
+              Loading items...
+            </td>
+          </tr>
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+  </div>
+
+</div>
+
+<div
+  class="modal-bg"
+  id="passwordModal">
+
+  <div class="modal">
+
+    <div class="modal-head">
+
+      <h3>Change Password</h3>
+
+      <button
+        class="close"
+        onclick="closeModal('passwordModal')">
+        ×
+      </button>
+
+    </div>
+
+    <div class="form-group">
+
+      <label>Current Password</label>
+
+      <input
+        class="input"
+        id="currentPassword"
+        type="password">
+
+    </div>
+
+    <div class="form-group">
+
+      <label>New Password</label>
+
+      <input
+        class="input"
+        id="newPassword"
+        type="password">
+
+    </div>
+
+    <div class="modal-footer">
+
+      <button
+        class="btn btn-secondary"
+        onclick="closeModal('passwordModal')">
+        Cancel
+      </button>
+
+      <button
+        class="btn btn-primary"
+        onclick="changePassword()">
+        Change Password
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<div
+  class="loader-bg"
+  id="loader">
+
+  <div class="loader-box">
+
+    <div class="spinner"></div>
+
+    <div id="loaderText">
+      Loading...
+    </div>
+
+  </div>
+
+</div>
+
+
+<div
+  class="toast"
+  id="toast">
+</div>
+
+
+<script>
+
+const USER_API_URL =
+"https://script.google.com/macros/s/AKfycbw00GHHheuvtdQtgPURjs4PtsM48-4yaFx-_ms0ZBV5FHhnmcdbJ5DHr3Aix8JPF0kQzA/exec";
+
+const DATA_API_URL =
+"https://script.google.com/macros/s/AKfycbz59T-4CKQDbHJB_ql6OYZf18eN7XUmttp0d2FaOM5pm27yCBOWrEilqA_zMOnFq_rz/exec";
+
+const SELL_API_URL =
+"https://script.google.com/macros/s/AKfycbyiKn1MH1ZQvebSIo83bZzbbfJimmfRf9PjlPI4w1q1UliuF27gKViYM24oXakpkHuP/exec";
+
+const PAID_API_URL =
+"https://script.google.com/macros/s/AKfycby_kDEHln_Dj_0YfB421POWa2XAuN6g2PDypQtyS2arrxgPVtyZZOwAp_TKLrUnRudKng/exec";
+
+const DELETE_API_URL =
+"https://script.google.com/macros/s/AKfycbwDL1JIV7QYcH84VGiWxhUoT-wN9UfuGn0t9boYrs_FaG_ZfcVGjNmaTqSTC6ev0Ig9Kg/exec";
+
+const ITEM_API_URL =
+"https://script.google.com/macros/s/AKfycby2e7dzGE5vkS0Q-Eyl9MKLAbkkkD8f37eIVj7VuV8bPytWGOH7cwJ3w25efP7MLGshOw/exec";
+
+let allData=[];
+let filteredData=[];
+
+let editingUser=false;
+let editingDataRow=null;
+let editingSellRow=null;
+
+let currentDataType="data";
+let currentPage=1;
+
+const pageSize=10;
+
+let dataCache=null;
+let sellCache=null;
+let deleteCache=null;
+
+let itemList=[];
+let itemCache=null;
+
+let currentUsername=
+  localStorage.getItem("username") ||
+  localStorage.getItem("loggedUser") ||
+  "";
+
+document.addEventListener("DOMContentLoaded",function(){
+
+  loadTheme();
+
+  if(!checkLogin()) return;
+
+  loadUser();
+  loadData();
+  loadItems();
+
+});
+
+function checkLogin(){
+
+  const auth=
+    localStorage.getItem("dashboardAuth") ||
+    sessionStorage.getItem("dashboardAuth");
+
+  if(auth!=="true"){
+
+    window.location.replace("index.html");
+
+    return false;
+  }
+
+  return true;
+}
+
+async function loadUser(){
+
+  if(!checkLogin()) return;
+
+  if(!currentUsername){
+
+    logout();
+    return;
+  }
+
+  try{
+
+    const url=
+      USER_API_URL+
+      "?action=getUser"+
+      "&username="+
+      encodeURIComponent(currentUsername)+
+      "&_="+Date.now();
+
+    const response=
+      await fetch(url,{
+        method:"GET",
+        cache:"no-store"
+      });
+
+    if(!response.ok)
+      throw new Error("User API connection failed.");
+
+    const result=await response.json();
+
+    if(!result.success)
+      throw new Error(
+        result.message ||
+        "Unable to load user."
+      );
+
+    const user=result.user || {};
+
+    const displayName=
+      user.name ||
+      user.username ||
+      currentUsername;
+
+    document.getElementById("profileName").textContent=
+      displayName;
+
+    document.getElementById("profileRole").textContent=
+      user.role || "User";
+
+    document.getElementById("profileAvatar").textContent=
+      displayName.charAt(0).toUpperCase();
+
+    localStorage.setItem(
+      "name",
+      user.name || ""
+    );
+
+    localStorage.setItem(
+      "role",
+      user.role || ""
+    );
+
+    localStorage.setItem(
+      "status",
+      user.status || ""
+    );
+
+    if(
+      String(user.status || "")
+        .trim()
+        .toLowerCase()==="block"
+    ){
+
+      logout();
+      return;
+    }
+
+  }catch(error){
+
+    console.error("loadUser:",error);
+
+    showToast(
+      error.message ||
+      "Unable to connect to User API.",
+      "error"
+    );
+
+  }
+}
+
+function changeDataType(){
+
+  const select=
+    document.getElementById("dataType");
+
+  currentDataType=
+    select ?
+    select.value :
+    "data";
+
+  currentPage=1;
+
+  allData=[];
+  filteredData=[];
+
+  clearOnlyFilters();
+
+  updateTableHeader();
+
+  loadData();
+
+}
+
+function updateTableHeader(){
+
+  const head=
+    document.getElementById("tableHead");
+
+  if(currentDataType==="sell"){
+
+    head.innerHTML=`
+      <tr>
+        <th>Name</th>
+        <th>IP</th>
+        <th>Work</th>
+        <th>Date</th>
+        <th>Item</th>
+        <th>Sell Date</th>
+        <th>User</th>
+        <th>Action</th>
+      </tr>
+    `;
+
+    return;
+  }
+
+  if(currentDataType==="delete"){
+
+    head.innerHTML=`
+      <tr>
+        <th>Name</th>
+        <th>IP</th>
+        <th>Work</th>
+        <th>Date</th>
+        <th>Item</th>
+        <th>Delete Time</th>
+        <th>User</th>
+      </tr>
+    `;
+
+    return;
+  }
+
+  head.innerHTML=`
+    <tr>
+      <th>Name</th>
+      <th>IP</th>
+      <th>Work</th>
+      <th>Date</th>
+      <th>Item</th>
+      <th>Action</th>
+    </tr>
+  `;
+}
+
+async function loadData(force=false){
+
+  if(!checkLogin()) return;
+
+  const body=
+    document.getElementById("dataBody");
+
+  if(!body) return;
+
+  currentPage=1;
+
+  let cache=null;
+
+  if(currentDataType==="data")
+    cache=dataCache;
+
+  if(currentDataType==="sell")
+    cache=sellCache;
+
+  if(currentDataType==="delete")
+    cache=deleteCache;
+
+  if(!force && Array.isArray(cache)){
+
+    allData=cache;
+
+    applyFilters();
+
+    return;
+  }
+
+  const colspan=
+    currentDataType==="data" ?
+    6 :
+    currentDataType==="sell" ?
+    8 :
+    7;
+
+  body.innerHTML=`
+    <tr>
+      <td colspan="${colspan}">
+        <div class="table-loading">
+          <div class="mini-spinner"></div>
+          <span>
+            Loading ${escapeHtml(currentDataType)} data...
+          </span>
+        </div>
+      </td>
+    </tr>
+  `;
+
+  let apiUrl="";
+  let action="";
+
+  if(currentDataType==="sell"){
+
+    apiUrl=SELL_API_URL;
+    action="getSellData";
+
+  }else if(currentDataType==="delete"){
+
+    apiUrl=DELETE_API_URL;
+    action="getDeletedData";
+
+  }else{
+
+    apiUrl=DATA_API_URL;
+    action="getData";
+  }
+
+  try{
+
+    const response=
+      await fetch(
+        apiUrl+
+        "?action="+
+        encodeURIComponent(action)+
+        "&_="+Date.now(),
+        {
+          method:"GET",
+          cache:"no-store"
+        }
+      );
+
+    if(!response.ok)
+      throw new Error(
+        "API connection failed. HTTP "+
+        response.status
+      );
+
+    const result=
+      await response.json();
+
+    if(
+      !result ||
+      result.success===false
+    ){
+
+      throw new Error(
+        result &&
+        result.message
+        ?
+        result.message
+        :
+        "Unable to load data."
+      );
+    }
+
+    const newData=
+      Array.isArray(result.data)
+      ?
+      result.data
+      :
+      [];
+
+    allData=newData;
+
+    if(currentDataType==="data")
+      dataCache=newData;
+
+    if(currentDataType==="sell")
+      sellCache=newData;
+
+    if(currentDataType==="delete")
+      deleteCache=newData;
+
+    applyFilters();
+
+  }catch(error){
+
+    console.error("loadData:",error);
+
+    body.innerHTML=`
+      <tr>
+        <td
+          colspan="${colspan}"
+          class="empty">
+          ${escapeHtml(
+            error.message ||
+            "Unable to load data."
+          )}
+        </td>
+      </tr>
+    `;
+
+    updateTotal(0);
+    updatePagination(0);
+
+    showToast(
+      error.message ||
+      "Data loading failed.",
+      "error"
+    );
+  }
+}
+
+function renderData(data){
+
+  const body=
+    document.getElementById("dataBody");
+
+  if(!body) return;
+
+  const colspan=
+    currentDataType==="data" ?
+    6 :
+    currentDataType==="sell" ?
+    8 :
+    7;
+
+  if(
+    !Array.isArray(data) ||
+    data.length===0
+  ){
+
+    body.innerHTML=`
+      <tr>
+        <td
+          colspan="${colspan}"
+          class="empty">
+          No data found.
+        </td>
+      </tr>
+    `;
+
+    updateTotal(0);
+    updatePagination(0);
+
+    return;
+  }
+
+  const total=data.length;
+
+  const totalPages=
+    Math.ceil(total/pageSize);
+
+  if(currentPage>totalPages)
+    currentPage=totalPages;
+
+  const start=
+    (currentPage-1)*pageSize;
+
+  const end=
+    start+pageSize;
+
+  const pageData=
+    data.slice(start,end);
+
+  body.innerHTML=
+    pageData.map(function(row,index){
+
+      row=row || {};
+
+      const name=
+        row.Name ??
+        row.name ??
+        row[0] ??
+        "";
+
+      const ip=
+        row.Ip ??
+        row.IP ??
+        row.ip ??
+        row[1] ??
+        "";
+
+      const work=
+        row.Work ??
+        row.work ??
+        row[2] ??
+        "";
+
+      const date=
+        row.Date ??
+        row.date ??
+        row[3] ??
+        "";
+
+      const item=
+        row.Item ??
+        row.item ??
+        row[4] ??
+        "";
+
+      if(currentDataType==="sell"){
+
+        const sellDate=
+          row.SellDate ??
+          row.sellDate ??
+          row["Sell Date"] ??
+          row.sellTime ??
+          row["Sell time"] ??
+          row[5] ??
+          "";
+
+        const user=
+          row.User ??
+          row.user ??
+          row.Username ??
+          row.username ??
+          row[6] ??
+          "";
+
+        const rowNumber=
+          row.rowNumber ??
+          row.row ??
+          row.Row ??
+          row.rowIndex ??
+          "";
+
+        return`
+          <tr>
+            <td>${escapeHtml(name)}</td>
+            <td>${escapeHtml(ip)}</td>
+            <td>${escapeHtml(work)}</td>
+            <td>${escapeHtml(formatDate(date))}</td>
+            <td>${escapeHtml(item)}</td>
+            <td>${escapeHtml(formatDate(sellDate))}</td>
+            <td>${escapeHtml(user)}</td>
+
+            <td>
+
+              <div class="row-actions">
+
+                <button
+                  class="action-btn action-edit"
+                  onclick="editSellEntry(${start+index})">
+                  Edit
+                </button>
+
+                <button
+                  class="action-btn action-paid"
+                  onclick="paidSellEntry(${start+index})">
+                  Paid
+                </button>
+
+              </div>
+
+            </td>
+
+          </tr>
+        `;
+      }
+
+      if(currentDataType==="delete"){
+
+        const deleteTime=
+          row.DelletTime ??
+          row.DeleteTime ??
+          row.Dellet ??
+          row["Delete Time"] ??
+          row[5] ??
+          "";
+
+        const user=
+          row.User ??
+          row.user ??
+          row.Username ??
+          row.username ??
+          row[6] ??
+          "";
+
+        return`
+          <tr>
+            <td>${escapeHtml(name)}</td>
+            <td>${escapeHtml(ip)}</td>
+            <td>${escapeHtml(work)}</td>
+            <td>${escapeHtml(formatDate(date))}</td>
+            <td>${escapeHtml(item)}</td>
+            <td>${escapeHtml(formatDate(deleteTime))}</td>
+            <td>${escapeHtml(user)}</td>
+          </tr>
+        `;
+      }
+
+      return`
+        <tr>
+
+          <td>${escapeHtml(name)}</td>
+
+          <td>${escapeHtml(ip)}</td>
+
+          <td>${escapeHtml(work)}</td>
+
+          <td>${escapeHtml(formatDate(date))}</td>
+
+          <td>${escapeHtml(item)}</td>
+
+          <td>
+
+            <div class="row-actions">
+
+              <button
+                class="action-btn action-edit"
+                onclick="editDataEntry(${start+index})">
+                Edit
+              </button>
+
+              <button
+                class="action-btn action-sell"
+                onclick="sellDataEntry(${start+index})">
+                Sell
+              </button>
+
+              <button
+                class="action-btn action-delete"
+                onclick="deleteDataEntry(${start+index})">
+                Delete
+              </button>
+
+            </div>
+
+          </td>
+
+        </tr>
+      `;
+
+    }).join("");
+
+  updateTotal(total);
+  updatePagination(total);
+}
+
+function updateTotal(total){
+
+  const element=
+    document.getElementById("totalData");
+
+  if(element)
+    element.textContent=
+      "Total Data: "+
+      Number(total || 0);
+}
+
+function updatePagination(total){
+
+  const pagination=
+    document.getElementById("pagination");
+
+  const pageInfo=
+    document.getElementById("pageInfo");
+
+  if(!pagination) return;
+
+  const totalPages=
+    Math.ceil(
+      Number(total || 0)/
+      pageSize
+    );
+
+  if(totalPages<=1){
+
+    pagination.innerHTML="";
+
+    if(pageInfo){
+
+      pageInfo.textContent=
+        total>0 ?
+        "Page 1" :
+        "Page 0";
+    }
+
+    return;
+  }
+
+  if(currentPage>totalPages)
+    currentPage=totalPages;
+
+  if(pageInfo){
+
+    pageInfo.textContent=
+      "Page "+
+      currentPage+
+      " of "+
+      totalPages;
+  }
+
+  let html=`
+    <button
+      class="page-btn"
+      onclick="goToPage(${currentPage-1})"
+      ${currentPage<=1 ? "disabled" : ""}>
+      ‹
+    </button>
+  `;
+
+  for(
+    let i=1;
+    i<=totalPages;
+    i++
+  ){
+
+    html+=`
+      <button
+        class="page-btn ${
+          i===currentPage ?
+          "active" :
+          ""
+        }"
+        onclick="goToPage(${i})">
+        ${i}
+      </button>
+    `;
+  }
+
+  html+=`
+    <button
+      class="page-btn"
+      onclick="goToPage(${currentPage+1})"
+      ${currentPage>=totalPages ? "disabled" : ""}>
+      ›
+    </button>
+  `;
+
+  pagination.innerHTML=html;
+}
+
+
+function goToPage(page){
+
+  const totalPages=
+    Math.ceil(
+      filteredData.length/
+      pageSize
+    );
+
+  if(
+    page<1 ||
+    page>totalPages
+  )
+    return;
+
+  currentPage=page;
+
+  renderData(filteredData);
+}
+
+function applyFilters(){
+
+  const search=
+    document.getElementById("searchInput")
+    .value
+    .trim()
+    .toLowerCase();
+
+  const from=
+    document.getElementById("fromDate").value;
+
+  const to=
+    document.getElementById("toDate").value;
+
+  filteredData=
+    allData.filter(function(row){
+
+      row=row || {};
+
+      const text=
+        JSON.stringify(row)
+        .toLowerCase();
+
+      if(
+        search &&
+        !text.includes(search)
+      )
+        return false;
+
+      const rawDate=
+        row.Date ??
+        row.date ??
+        row[3] ??
+        "";
+
+      if(from || to){
+
+        const date=
+          normalizeDate(rawDate);
+
+        if(!date)
+          return true;
+
+        if(from && date<from)
+          return false;
+
+        if(to && date>to)
+          return false;
+      }
+
+      return true;
+    });
+
+  currentPage=1;
+
+  renderData(filteredData);
+}
+
+function clearFilters(){
+
+  clearOnlyFilters();
+
+  currentPage=1;
+
+  applyFilters();
+}
+
+
+function clearOnlyFilters(){
+
+  const search=
+    document.getElementById("searchInput");
+
+  const from=
+    document.getElementById("fromDate");
+
+  const to=
+    document.getElementById("toDate");
+
+  if(search)
+    search.value="";
+
+  if(from)
+    from.value="";
+
+  if(to)
+    to.value="";
+}
+
+function openEntryModal(){
+
+  editingDataRow=null;
+  editingSellRow=null;
+
+  document.getElementById(
+    "entryModalTitle"
+  ).textContent="New Entry";
+
+  document.getElementById(
+    "entrySaveButton"
+  ).textContent="Save";
+
+  document.getElementById(
+    "editingRow"
+  ).value="";
+
+  document.getElementById(
+    "entryName"
+  ).value=
+    localStorage.getItem("name") ||
+    "";
+
+  document.getElementById(
+    "entryIp"
+  ).value="";
+
+  document.getElementById(
+    "entryWork"
+  ).value="";
+
+  populateItemSelect();
+
+  const today=
+    new Date();
+
+  const year=
+    today.getFullYear();
+
+  const month=
+    String(
+      today.getMonth()+1
+    ).padStart(2,"0");
+
+  const day=
+    String(
+      today.getDate()
+    ).padStart(2,"0");
+
+  document.getElementById(
+    "entryDate"
+  ).value=
+    year+
+    "-"+
+    month+
+    "-"+
+    day;
+
+  openModal("entryModal");
+
+  if(!Array.isArray(itemCache))
+    loadItems();
+
+}
+
+function editDataEntry(index){
+
+  if(currentDataType!=="data")
+    return;
+
+  const row=
+    filteredData[index];
+
+  if(!row){
+
+    showToast(
+      "Data row not found.",
+      "error"
+    );
+
+    return;
+  }
+
+  editingDataRow=row;
+  editingSellRow=null;
+
+  const rowNumber=
+    row.row ??
+    row.Row ??
+    row.rowNumber ??
+    row.rowIndex ??
+    "";
+
+  document.getElementById(
+    "editingRow"
+  ).value=rowNumber;
+
+  document.getElementById(
+    "entryModalTitle"
+  ).textContent="Edit Entry";
+
+  document.getElementById(
+    "entrySaveButton"
+  ).textContent="Update";
+
+  document.getElementById(
+    "entryName"
+  ).value=
+    row.Name ??
+    row.name ??
+    row[0] ??
+    "";
+
+  document.getElementById(
+    "entryIp"
+  ).value=
+    row.Ip ??
+    row.IP ??
+    row.ip ??
+    row[1] ??
+    "";
+
+  document.getElementById(
+    "entryWork"
+  ).value=
+    row.Work ??
+    row.work ??
+    row[2] ??
+    "";
+
+  document.getElementById(
+    "entryDate"
+  ).value=
+    getDateInputValue(
+      row.Date ??
+      row.date ??
+      row[3] ??
+      ""
+    );
+
+  const selectedItem=
+    row.Item ??
+    row.item ??
+    row[4] ??
+    "";
+
+  populateItemSelect(selectedItem);
+
+  openModal("entryModal");
+
+  if(!Array.isArray(itemCache)){
+
+    loadItems().then(function(){
+
+      populateItemSelect(
+        selectedItem
+      );
+
+    });
+
+  }
+
+}
+
+function editSellEntry(index){
+
+  if(currentDataType!=="sell")
+    return;
+
+  const row=
+    filteredData[index];
+
+  if(!row){
+
+    showToast(
+      "Sell row not found.",
+      "error"
+    );
+
+    return;
+  }
+
+  const rowNumber=
+    row.rowNumber ??
+    row.row ??
+    row.Row ??
+    row.rowIndex ??
+    "";
+
+  if(
+    !rowNumber ||
+    Number(rowNumber)<2
+  ){
+
+    showToast(
+      "Sell row number not found.",
+      "error"
+    );
+
+    return;
+  }
+
+  editingSellRow=row;
+  editingDataRow=null;
+
+  document.getElementById(
+    "editingRow"
+  ).value=rowNumber;
+
+  document.getElementById(
+    "entryModalTitle"
+  ).textContent="Edit Sell";
+
+  document.getElementById(
+    "entrySaveButton"
+  ).textContent="Update";
+
+  document.getElementById(
+    "entryName"
+  ).value=
+    row.Name ??
+    row.name ??
+    row[0] ??
+    "";
+
+  document.getElementById(
+    "entryIp"
+  ).value=
+    row.Ip ??
+    row.IP ??
+    row.ip ??
+    row[1] ??
+    "";
+
+  document.getElementById(
+    "entryWork"
+  ).value=
+    row.Work ??
+    row.work ??
+    row[2] ??
+    "";
+
+  document.getElementById(
+    "entryDate"
+  ).value=
+    getDateInputValue(
+      row.Date ??
+      row.date ??
+      row[3] ??
+      ""
+    );
+
+  const selectedItem=
+    row.Item ??
+    row.item ??
+    row[4] ??
+    "";
+
+  populateItemSelect(selectedItem);
+
+  openModal("entryModal");
+
+  if(!Array.isArray(itemCache)){
+
+    loadItems().then(function(){
+
+      populateItemSelect(
+        selectedItem
+      );
+
+    });
+
+  }
+
+}
+
+function getDateInputValue(value){
+
+  if(!value)
+    return "";
+
+  const text=
+    String(value).trim();
+
+  if(
+    /^\d{4}-\d{2}-\d{2}$/.test(text)
+  )
+    return text;
+
+  const date=
+    new Date(value);
+
+  if(isNaN(date.getTime()))
+    return "";
+
+  const y=
+    date.getFullYear();
+
+  const m=
+    String(
+      date.getMonth()+1
+    ).padStart(2,"0");
+
+  const d=
+    String(
+      date.getDate()
+    ).padStart(2,"0");
+
+  return y+"-"+m+"-"+d;
+}
+
+async function saveEntry(){
+
+  const name=
+    document.getElementById(
+      "entryName"
+    ).value.trim();
+
+  const ip=
+    document.getElementById(
+      "entryIp"
+    ).value.trim();
+
+  const work=
+    document.getElementById(
+      "entryWork"
+    ).value.trim();
+
+  const date=
+    document.getElementById(
+      "entryDate"
+    ).value;
+
+  const item=
+    document.getElementById(
+      "entryItem"
+    ).value.trim();
+
+  const rowNumber=
+    document.getElementById(
+      "editingRow"
+    ).value;
+
+  if(!name){
+
+    showToast(
+      "Name is required.",
+      "error"
+    );
+
+    return;
+  }
+
+  if(!ip){
+
+    showToast(
+      "IP is required.",
+      "error"
+    );
+
+    return;
+  }
+
+  if(!work){
+
+    showToast(
+      "Work is required.",
+      "error"
+    );
+
+    return;
+  }
+
+  if(!date){
+
+    showToast(
+      "Date is required.",
+      "error"
+    );
+
+    return;
+  }
+
+  if(!item){
+
+    showToast(
+      "Please select an Item.",
+      "error"
+    );
+
+    return;
+  }
+
+  const isSellEdit=
+    Boolean(
+      editingSellRow &&
+      rowNumber
+    );
+
+  const isEdit=
+    Boolean(rowNumber);
+
+  const saveButton=
+    document.getElementById(
+      "entrySaveButton"
+    );
+
+  if(saveButton){
+
+    saveButton.disabled=true;
+
+    saveButton.textContent=
+      isSellEdit ?
+      "Updating..." :
+      isEdit ?
+      "Updating..." :
+      "Saving...";
+  }
+
+  try{
+
+    if(isSellEdit){
+
+      const payload={
+
+        action:"editSellData",
+
+        row:Number(rowNumber),
+
+        rowNumber:Number(rowNumber),
+
+        name:name,
+
+        ip:ip,
+
+        work:work,
+
+        date:date,
+
+        item:item,
+
+        username:currentUsername,
+
+        user:currentUsername
+
+      };
+
+      const response=
+        await fetch(
+          SELL_API_URL,
+          {
+            method:"POST",
+
+            headers:{
+              "Content-Type":
+                "text/plain;charset=utf-8"
+            },
+
+            body:
+              JSON.stringify(payload)
+          }
+        );
+
+      if(!response.ok)
+        throw new Error(
+          "Sell API connection failed."
+        );
+
+      const result=
+        await response.json();
+
+      if(
+        !result ||
+        !result.success
+      ){
+
+        throw new Error(
+          result &&
+          result.message
+          ?
+          result.message
+          :
+          "Unable to update Sell data."
+        );
+      }
+
+      editingSellRow=null;
+
+      closeModal("entryModal");
+
+      sellCache=null;
+
+      showToast(
+        result.message ||
+        "Sell data updated successfully.",
+        "success"
+      );
+
+      await loadData(true);
+
+      return;
+    }
+
+    const payload={
+
+      action:
+        isEdit ?
+        "editData" :
+        "addData",
+
+      name:name,
+
+      ip:ip,
+
+      work:work,
+
+      date:date,
+
+      item:item,
+
+      username:currentUsername
+    };
+
+    if(isEdit)
+      payload.row=
+        Number(rowNumber);
+
+    const response=
+      await fetch(
+        DATA_API_URL,
+        {
+          method:"POST",
+          body:JSON.stringify(payload)
+        }
+      );
+
+    if(!response.ok)
+      throw new Error(
+        "Data API connection failed."
+      );
+
+    const result=
+      await response.json();
+
+    if(
+      !result ||
+      !result.success
+    ){
+
+      throw new Error(
+        result &&
+        result.message
+        ?
+        result.message
+        :
+        "Unable to save entry."
+      );
+    }
+
+    const newRow={
+      row:
+        isEdit ?
+        Number(rowNumber) :
+        2,
+
+      Name:name,
+      Ip:ip,
+      Work:work,
+      Date:date,
+      Item:item
+    };
+
+    if(isEdit){
+
+      updateLocalEditedRow(
+        newRow
+      );
+
+    }else{
+
+      insertLocalNewRow(
+        newRow
+      );
+
+    }
+
+    closeModal("entryModal");
+
+    showToast(
+      isEdit
+      ?
+      "Entry updated successfully."
+      :
+      "Entry saved successfully.",
+      "success"
+    );
+
+  }catch(error){
+
+    console.error(
+      "saveEntry:",
+      error
+    );
+
+    showToast(
+      error.message ||
+      "Save failed.",
+      "error"
+    );
+
+  }finally{
+
+    if(saveButton){
+
+      saveButton.disabled=false;
+
+      saveButton.textContent=
+        isSellEdit ?
+        "Update" :
+        isEdit ?
+        "Update" :
+        "Save";
+    }
+  }
+}
+
+async function paidSellEntry(index){
+
+  if(currentDataType!=="sell")
+    return;
+
+  const row=
+    filteredData[index];
+
+  if(!row){
+
+    showToast(
+      "Sell row not found.",
+      "error"
+    );
+
+    return;
+  }
+
+  const rowNumber=
+    row.rowNumber ??
+    row.row ??
+    row.Row ??
+    row.rowIndex ??
+    "";
+
+  if(
+    !rowNumber ||
+    Number(rowNumber)<2
+  ){
+
+    showToast(
+      "Sell row number not found. Paid cannot continue.",
+      "error"
+    );
+
+    return;
+  }
+
+  const name=
+    row.Name ??
+    row.name ??
+    row[0] ??
+    "";
+
+  const ip=
+    row.Ip ??
+    row.IP ??
+    row.ip ??
+    row[1] ??
+    "";
+
+  const work=
+    row.Work ??
+    row.work ??
+    row[2] ??
+    "";
+
+  const date=
+    row.Date ??
+    row.date ??
+    row[3] ??
+    "";
+
+  const item=
+    row.Item ??
+    row.item ??
+    row[4] ??
+    "";
+
+  const sellTime=
+    row.SellDate ??
+    row.sellDate ??
+    row["Sell Date"] ??
+    row.sellTime ??
+    row["Sell time"] ??
+    row[5] ??
+    "";
+
+  const sellUser=
+    row.User ??
+    row.user ??
+    row.Username ??
+    row.username ??
+    row[6] ??
+    "";
+
+  const paidUser=
+    currentUsername ||
+    localStorage.getItem("username") ||
+    localStorage.getItem("loggedUser") ||
+    "";
+
+  if(!paidUser){
+
+    showToast(
+      "Logged-in username not found.",
+      "error"
+    );
+
+    return;
+  }
+
+  if(
+    !confirm(
+      "Are you sure you want to mark this Sell as Paid?"
+    )
+  )
+    return;
+
+  showLoader("Processing Paid...");
+
+  try{
+
+    const payload={
+
+      action:"paidData",
+
+      row:Number(rowNumber),
+
+      rowNumber:Number(rowNumber),
+
+      name:name,
+
+      ip:ip,
+
+      work:work,
+
+      date:date,
+
+      item:item,
+
+      sellTime:sellTime,
+
+      sellUser:sellUser,
+
+      user:sellUser,
+
+      username:paidUser,
+
+      paidUser:paidUser,
+
+      PaidUser:paidUser
+
+    };
+
+    const response=
+      await fetch(
+        SELL_API_URL,
+        {
+          method:"POST",
+
+          headers:{
+            "Content-Type":
+              "text/plain;charset=utf-8"
+          },
+
+          body:
+            JSON.stringify(payload)
+        }
+      );
+
+    if(!response.ok){
+
+      throw new Error(
+        "Sell API connection failed. HTTP "+
+        response.status
+      );
+    }
+
+    const responseText=
+      await response.text();
+
+    let result;
+
+    try{
+
+      result=
+        JSON.parse(responseText);
+
+    }catch(error){
+
+      console.error(
+        "Paid API response:",
+        responseText
+      );
+
+      throw new Error(
+        "Paid operation returned an invalid response."
+      );
+    }
+
+    if(
+      !result ||
+      result.success!==true
+    ){
+
+      throw new Error(
+        result &&
+        result.message
+        ?
+        result.message
+        :
+        "Unable to mark Sell as Paid."
+      );
+    }
+
+    sellCache=null;
+
+    showToast(
+      result.message ||
+      "Paid successfully.",
+      "success"
+    );
+
+    await loadData(true);
+
+  }catch(error){
+
+    console.error(
+      "paidSellEntry:",
+      error
+    );
+
+    showToast(
+      error.message ||
+      "Paid operation failed.",
+      "error"
+    );
+
+  }finally{
+
+    hideLoader();
+  }
+}
+
+function insertLocalNewRow(row){
+
+  if(!Array.isArray(dataCache))
+    dataCache=[];
+
+  dataCache=
+    dataCache.map(function(oldRow){
+
+      oldRow=oldRow || {};
+
+      const oldNumber=
+        Number(
+          oldRow.row ??
+          oldRow.Row ??
+          oldRow.rowNumber ??
+          0
+        );
+
+      if(oldNumber>=2){
+
+        oldRow.row=
+          oldNumber+1;
+      }
+
+      return oldRow;
+
+    });
+
+  dataCache.unshift(row);
+
+  allData=dataCache;
+
+  currentDataType="data";
+
+  document.getElementById(
+    "dataType"
+  ).value="data";
+
+  updateTableHeader();
+
+  applyFilters();
+}
+
+function updateLocalEditedRow(newRow){
+
+  if(!Array.isArray(dataCache))
+    return;
+
+  const targetRow=
+    Number(newRow.row);
+
+  dataCache=
+    dataCache.map(function(row){
+
+      row=row || {};
+
+      const rowNumber=
+        Number(
+          row.row ??
+          row.Row ??
+          row.rowNumber ??
+          0
+        );
+
+      if(
+        rowNumber===targetRow
+      ){
+
+        return newRow;
+      }
+
+      return row;
+    });
+
+  allData=dataCache;
+
+  currentDataType="data";
+
+  document.getElementById(
+    "dataType"
+  ).value="data";
+
+  updateTableHeader();
+
+  applyFilters();
+}
+
+async function sellDataEntry(index){
+
+  if(currentDataType!=="data")
+    return;
+
+  const row=
+    filteredData[index];
+
+  if(!row){
+
+    showToast(
+      "Data row not found.",
+      "error"
+    );
+
+    return;
+  }
+
+  let rowNumber=
+    row.row ??
+    row.Row ??
+    row.rowNumber ??
+    row.rowIndex ??
+    "";
+
+  if(
+    rowNumber===null ||
+    rowNumber===undefined ||
+    String(rowNumber).trim()===""
+  ){
+
+    const actualIndex=
+      allData.indexOf(row);
+
+    if(actualIndex>=0){
+
+      rowNumber=
+        actualIndex+2;
+
+    }else{
+
+      const rowName=
+        String(
+          row.Name ??
+          row.name ??
+          row[0] ??
+          ""
+        ).trim();
+
+      const rowIp=
+        String(
+          row.Ip ??
+          row.IP ??
+          row.ip ??
+          row[1] ??
+          ""
+        ).trim();
+
+      const rowWork=
+        String(
+          row.Work ??
+          row.work ??
+          row[2] ??
+          ""
+        ).trim();
+
+      const rowDate=
+        String(
+          row.Date ??
+          row.date ??
+          row[3] ??
+          ""
+        ).trim();
+
+      const rowItem=
+        String(
+          row.Item ??
+          row.item ??
+          row[4] ??
+          ""
+        ).trim();
+
+      const foundIndex=
+        allData.findIndex(function(item){
+
+          item=item || {};
+
+          const name=
+            String(
+              item.Name ??
+              item.name ??
+              item[0] ??
+              ""
+            ).trim();
+
+          const ip=
+            String(
+              item.Ip ??
+              item.IP ??
+              item.ip ??
+              item[1] ??
+              ""
+            ).trim();
+
+          const work=
+            String(
+              item.Work ??
+              item.work ??
+              item[2] ??
+              ""
+            ).trim();
+
+          const date=
+            String(
+              item.Date ??
+              item.date ??
+              item[3] ??
+              ""
+            ).trim();
+
+          const itemName=
+            String(
+              item.Item ??
+              item.item ??
+              item[4] ??
+              ""
+            ).trim();
+
+          return(
+            name===rowName &&
+            ip===rowIp &&
+            work===rowWork &&
+            date===rowDate &&
+            itemName===rowItem
+          );
+
+        });
+
+      if(foundIndex>=0){
+
+        rowNumber=
+          foundIndex+2;
+
+      }
+    }
+  }
+
+  rowNumber=
+    Number(rowNumber);
+
+  if(
+    !Number.isInteger(rowNumber) ||
+    rowNumber<2
+  ){
+
+    showToast(
+      "Unable to find the correct sheet row. Sell cannot continue.",
+      "error"
+    );
+
+    console.error(
+      "Sell row number error:",
+      {
+        index:index,
+        row:row,
+        allData:allData,
+        filteredData:filteredData
+      }
+    );
+
+    return;
+  }
+
+  if(
+    !confirm(
+      "Are you sure you want to Sell this data?"
+    )
+  )
+    return;
+
+  showLoader("Selling data...");
+
+  try{
+
+    const name=
+      row.Name ??
+      row.name ??
+      row[0] ??
+      "";
+
+    const ip=
+      row.Ip ??
+      row.IP ??
+      row.ip ??
+      row[1] ??
+      "";
+
+    const work=
+      row.Work ??
+      row.work ??
+      row[2] ??
+      "";
+
+    const date=
+      row.Date ??
+      row.date ??
+      row[3] ??
+      "";
+
+    const item=
+      row.Item ??
+      row.item ??
+      row[4] ??
+      "";
+
+    const username=
+      currentUsername ||
+      localStorage.getItem("username") ||
+      localStorage.getItem("loggedUser") ||
+      "";
+
+    if(!username){
+
+      throw new Error(
+        "Logged-in username not found."
+      );
+    }
+
+    const payload={
+
+      action:"sellData",
+
+      row:rowNumber,
+
+      rowNumber:rowNumber,
+
+      name:name,
+
+      ip:ip,
+
+      work:work,
+
+      date:date,
+
+      item:item,
+
+      username:username,
+
+      user:username,
+
+      SellUser:username,
+
+      sellUser:username
+
+    };
+
+    console.log(
+      "Sending Sell request:",
+      payload
+    );
+
+    const response=
+      await fetch(
+        SELL_API_URL,
+        {
+          method:"POST",
+
+          headers:{
+            "Content-Type":
+              "text/plain;charset=utf-8"
+          },
+
+          body:
+            JSON.stringify(payload)
+        }
+      );
+
+    if(!response.ok){
+
+      throw new Error(
+        "Sell API connection failed. HTTP "+
+        response.status
+      );
+
+    }
+
+    const responseText=
+      await response.text();
+
+    let result;
+
+    try{
+
+      result=
+        JSON.parse(responseText);
+
+    }catch(parseError){
+
+      console.error(
+        "Sell API returned invalid JSON:",
+        responseText
+      );
+
+      throw new Error(
+        "Sell API did not return a valid response."
+      );
+    }
+
+    console.log(
+      "Sell API response:",
+      result
+    );
+
+    if(
+      !result ||
+      result.success!==true
+    ){
+
+      throw new Error(
+        result &&
+        result.message
+        ?
+        result.message
+        :
+        "Unable to sell data."
+      );
+
+    }
+
+    removeLocalDataRow(
+      rowNumber
+    );
+
+    sellCache=null;
+
+    dataCache=
+      Array.isArray(dataCache)
+      ?
+      dataCache
+      :
+      [];
+
+    allData=
+      dataCache;
+
+    currentDataType="data";
+
+    const dataType=
+      document.getElementById(
+        "dataType"
+      );
+
+    if(dataType)
+      dataType.value="data";
+
+    updateTableHeader();
+
+    applyFilters();
+
+    showToast(
+      result.message ||
+      "Data sold successfully.",
+      "success"
+    );
+
+  }catch(error){
+
+    console.error(
+      "sellDataEntry:",
+      error
+    );
+
+    showToast(
+      error.message ||
+      "Sell failed.",
+      "error"
+    );
+
+  }finally{
+
+    hideLoader();
+  }
+}
+
+
+async function deleteDataEntry(index){
+
+  if(currentDataType!=="data")
+    return;
+
+  const row=
+    filteredData[index];
+
+  if(!row){
+
+    showToast(
+      "Data row not found.",
+      "error"
+    );
+
+    return;
+  }
+
+  const rowNumber=
+    row.row ??
+    row.Row ??
+    row.rowNumber ??
+    row.rowIndex ??
+    "";
+
+  if(!rowNumber){
+
+    showToast(
+      "Row number not found. Delete cannot continue.",
+      "error"
+    );
+
+    return;
+  }
+
+  if(
+    !confirm(
+      "Are you sure you want to Delete this data?"
+    )
+  )
+    return;
+
+  showLoader("Deleting data...");
+
+  try{
+
+    const name=
+      row.Name ??
+      row.name ??
+      row[0] ??
+      "";
+
+    const ip=
+      row.Ip ??
+      row.IP ??
+      row.ip ??
+      row[1] ??
+      "";
+
+    const work=
+      row.Work ??
+      row.work ??
+      row[2] ??
+      "";
+
+    const date=
+      row.Date ??
+      row.date ??
+      row[3] ??
+      "";
+
+    const item=
+      row.Item ??
+      row.item ??
+      row[4] ??
+      "";
+
+    const archiveResponse=
+      await fetch(
+        DELETE_API_URL,
+        {
+          method:"POST",
+
+          body:JSON.stringify({
+
+            action:"deleteData",
+
+            name:name,
+            ip:ip,
+            work:work,
+            date:date,
+            item:item,
+
+            username:currentUsername,
+            user:currentUsername
+
+          })
+        }
+      );
+
+    if(!archiveResponse.ok)
+      throw new Error(
+        "Delete API connection failed."
+      );
+
+    const archiveResult=
+      await archiveResponse.json();
+
+    if(
+      !archiveResult ||
+      !archiveResult.success
+    ){
+
+      throw new Error(
+        archiveResult &&
+        archiveResult.message
+        ?
+        archiveResult.message
+        :
+        "Unable to archive deleted data."
+      );
+    }
+
+    const deleteResponse=
+      await fetch(
+        DATA_API_URL,
+        {
+          method:"POST",
+
+          body:JSON.stringify({
+
+            action:"deleteData",
+
+            row:Number(rowNumber),
+
+            username:currentUsername
+
+          })
+        }
+      );
+
+    if(!deleteResponse.ok)
+      throw new Error(
+        "Main Data API connection failed while deleting."
+      );
+
+    const deleteResult=
+      await deleteResponse.json();
+
+    if(
+      !deleteResult ||
+      !deleteResult.success
+    ){
+
+      throw new Error(
+        deleteResult &&
+        deleteResult.message
+        ?
+        deleteResult.message
+        :
+        "Delete archive saved, but main data could not be removed."
+      );
+    }
+
+    removeLocalDataRow(
+      Number(rowNumber)
+    );
+
+    deleteCache=null;
+
+    showToast(
+      "Data deleted successfully.",
+      "success"
+    );
+
+  }catch(error){
+
+    console.error(
+      "deleteDataEntry:",
+      error
+    );
+
+    showToast(
+      error.message ||
+      "Delete failed.",
+      "error"
+    );
+
+  }finally{
+
+    hideLoader();
+  }
+}
+
+function removeLocalDataRow(rowNumber){
+
+  if(!Array.isArray(dataCache))
+    return;
+
+  dataCache=
+    dataCache.filter(function(row){
+
+      row=row || {};
+
+      const number=
+        Number(
+          row.row ??
+          row.Row ??
+          row.rowNumber ??
+          0
+        );
+
+      return number!==rowNumber;
+
+    });
+
+  dataCache=
+    dataCache.map(function(row){
+
+      row=row || {};
+
+      const number=
+        Number(
+          row.row ??
+          row.Row ??
+          row.rowNumber ??
+          0
+        );
+
+      if(number>rowNumber){
+
+        row.row=
+          number-1;
+      }
+
+      return row;
+
+    });
+
+  allData=dataCache;
+
+  applyFilters();
+}
+
+function openItemsModal(){
+
+  document.getElementById(
+    "newItemName"
+  ).value="";
+
+  openModal("itemsModal");
+
+  loadItems(true);
+}
+
+async function loadItems(force=false){
+
+  const body=
+    document.getElementById("itemsBody");
+
+  if(
+    !force &&
+    Array.isArray(itemCache)
+  ){
+
+    itemList=itemCache;
+
+    renderItems(itemList);
+
+    populateItemSelect();
+
+    return itemList;
+  }
+
+  if(body){
+
+    body.innerHTML=`
+      <tr>
+        <td
+          colspan="4"
+          class="empty">
+
+          <div class="table-loading">
+
+            <div class="mini-spinner"></div>
+
+            <span>
+              Loading items...
+            </span>
+
+          </div>
+
+        </td>
+      </tr>
+    `;
+  }
+
+  try{
+
+    const response=
+      await fetch(
+        ITEM_API_URL+
+        "?action=getItems&_="+Date.now(),
+        {
+          method:"GET",
+          cache:"no-store"
+        }
+      );
+
+    if(!response.ok)
+      throw new Error(
+        "Item API connection failed. HTTP "+
+        response.status
+      );
+
+    const result=
+      await response.json();
+
+    if(
+      !result ||
+      result.success===false
+    ){
+
+      throw new Error(
+        result &&
+        result.message
+        ?
+        result.message
+        :
+        "Unable to load items."
+      );
+    }
+
+    itemList=
+      Array.isArray(result.data)
+      ?
+      result.data
+      :
+      [];
+
+    itemCache=itemList;
+
+    renderItems(itemList);
+
+    populateItemSelect();
+
+    return itemList;
+
+  }catch(error){
+
+    console.error(
+      "loadItems:",
+      error
+    );
+
+    if(body){
+
+      body.innerHTML=`
+        <tr>
+          <td
+            colspan="4"
+            class="empty">
+
+            ${escapeHtml(
+              error.message ||
+              "Unable to load items."
+            )}
+
+          </td>
+        </tr>
+      `;
+    }
+
+    showToast(
+      error.message ||
+      "Unable to load items.",
+      "error"
+    );
+
+    return [];
+  }
+}
+
+function renderItems(items){
+
+  const body=
+    document.getElementById(
+      "itemsBody"
+    );
+
+  if(!body) return;
+
+  if(
+    !Array.isArray(items) ||
+    items.length===0
+  ){
+
+    body.innerHTML=`
+      <tr>
+        <td
+          colspan="4"
+          class="empty">
+          No items found.
+        </td>
+      </tr>
+    `;
+
+    return;
+  }
+
+  body.innerHTML=
+    items.map(function(item){
+
+      item=item || {};
+
+      const name=
+        item.Item ??
+        item.item ??
+        item.name ??
+        "";
+
+      const date=
+        item.Date ??
+        item.date ??
+        "";
+
+      const user=
+        item.User ??
+        item.user ??
+        item.username ??
+        "";
+
+      const row=
+        item.row ??
+        item.Row ??
+        item.rowNumber ??
+        item.rowIndex ??
+        "";
+
+      return`
+        <tr>
+
+          <td>
+            <span class="item-name">
+              ${escapeHtml(name)}
+            </span>
+          </td>
+
+          <td>
+            ${escapeHtml(
+              formatDate(date)
+            )}
+          </td>
+
+          <td>
+            <span class="item-user">
+              ${escapeHtml(user)}
+            </span>
+          </td>
+
+          <td>
+
+            <button
+              class="item-delete-btn"
+              onclick='deleteItem(
+                ${JSON.stringify(row)},
+                ${JSON.stringify(name)}
+              )'>
+              🗑 Delete
+            </button>
+
+          </td>
+
+        </tr>
+      `;
+
+    }).join("");
+}
+
+async function deleteItem(
+  row,
+  itemName
+){
+
+  if(!row){
+
+    showToast(
+      "Item row not found.",
+      "error"
+    );
+
+    return;
+  }
+
+  if(
+    !confirm(
+      'Are you sure you want to delete "'+
+      itemName+
+      '"?'
+    )
+  )
+    return;
+
+  showLoader("Deleting item...");
+
+  try{
+
+    const response=
+      await fetch(
+        ITEM_API_URL,
+        {
+          method:"POST",
+
+          body:JSON.stringify({
+
+            action:"deleteItem",
+
+            row:Number(row)
+
+          })
+        }
+      );
+
+    if(!response.ok)
+      throw new Error(
+        "Item API connection failed."
+      );
+
+    const result=
+      await response.json();
+
+    if(
+      !result ||
+      !result.success
+    ){
+
+      throw new Error(
+        result &&
+        result.message
+        ?
+        result.message
+        :
+        "Unable to delete item."
+      );
+    }
+
+    itemCache=null;
+
+    await loadItems(true);
+
+    showToast(
+      result.message ||
+      "Item deleted successfully.",
+      "success"
+    );
+
+  }catch(error){
+
+    console.error(
+      "deleteItem:",
+      error
+    );
+
+    showToast(
+      error.message ||
+      "Unable to delete item.",
+      "error"
+    );
+
+  }finally{
+
+    hideLoader();
+  }
+}
+
+function populateItemSelect(
+  selectedValue=""
+){
+
+  const select=
+    document.getElementById(
+      "entryItem"
+    );
+
+  if(!select) return;
+
+  if(
+    !Array.isArray(itemList) ||
+    itemList.length===0
+  ){
+
+    select.innerHTML=`
+      <option value="">
+        No Item Available
+      </option>
+    `;
+
+    return;
+  }
+
+  let html=`
+    <option value="">
+      Select Item
+    </option>
+  `;
+
+  itemList.forEach(function(item){
+
+    item=item || {};
+
+    const name=
+      String(
+        item.Item ??
+        item.item ??
+        ""
+      ).trim();
+
+    if(!name) return;
+
+    html+=`
+      <option value="${escapeHtml(name)}">
+        ${escapeHtml(name)}
+      </option>
+    `;
+  });
+
+  select.innerHTML=html;
+
+  if(selectedValue)
+    select.value=selectedValue;
+}
+
+async function addNewItem(){
+
+  const input=
+    document.getElementById(
+      "newItemName"
+    );
+
+  if(!input){
+
+    showToast(
+      "Item input not found.",
+      "error"
+    );
+
+    return;
+  }
+
+  const item=
+    String(
+      input.value || ""
+    ).trim();
+
+  if(!item){
+
+    showToast(
+      "Item name is required.",
+      "error"
+    );
+
+    input.focus();
+
+    return;
+  }
+
+  if(!currentUsername){
+
+    showToast(
+      "User information not found.",
+      "error"
+    );
+
+    return;
+  }
+
+  showLoader("Adding item...");
+
+  try{
+
+    const payload={
+
+      action:"addItem",
+
+      item:item,
+
+      itemName:item,
+
+      Item:item,
+
+      name:item,
+
+      user:currentUsername,
+
+      username:currentUsername
+
+    };
+
+    const response=
+      await fetch(
+        ITEM_API_URL,
+        {
+          method:"POST",
+
+          body:JSON.stringify(payload)
+        }
+      );
+
+    if(!response.ok)
+      throw new Error(
+        "Item API connection failed."
+      );
+
+    const result=
+      await response.json();
+
+    if(
+      !result ||
+      !result.success
+    ){
+
+      throw new Error(
+        result &&
+        result.message
+        ?
+        result.message
+        :
+        "Unable to add item."
+      );
+    }
+
+    input.value="";
+
+    itemCache=null;
+
+    await loadItems(true);
+
+    showToast(
+      result.message ||
+      "Item added successfully.",
+      "success"
+    );
+
+  }catch(error){
+
+    console.error(
+      "addNewItem:",
+      error
+    );
+
+    showToast(
+      error.message ||
+      "Unable to add item.",
+      "error"
+    );
+
+  }finally{
+
+    hideLoader();
+  }
+}
+
+function openUsersModal(){
+
+  openModal("usersModal");
+
+  loadUsers();
+}
+
+
+async function loadUsers(){
+
+  const body=
+    document.getElementById(
+      "usersBody"
+    );
+
+  if(!body) return;
+
+  body.innerHTML=`
+    <tr>
+      <td
+        colspan="5"
+        class="empty">
+        Loading users...
+      </td>
+    </tr>
+  `;
+
+  try{
+
+    const response=
+      await fetch(
+        USER_API_URL+
+        "?action=getUsers"+
+        "&requester="+
+        encodeURIComponent(
+          currentUsername
+        )+
+        "&_="+Date.now(),
+        {
+          method:"GET",
+          cache:"no-store"
+        }
+      );
+
+    if(!response.ok)
+      throw new Error(
+        "User API connection failed."
+      );
+
+    const result=
+      await response.json();
+
+    if(
+      !result ||
+      !result.success
+    ){
+
+      throw new Error(
+        result &&
+        result.message
+        ?
+        result.message
+        :
+        "Unable to load users."
+      );
+    }
+
+    renderUsers(
+      Array.isArray(result.users)
+      ?
+      result.users
+      :
+      []
+    );
+
+  }catch(error){
+
+    console.error(
+      "loadUsers:",
+      error
+    );
+
+    body.innerHTML=`
+      <tr>
+        <td
+          colspan="5"
+          class="empty">
+
+          ${escapeHtml(
+            error.message ||
+            "Unable to load users."
+          )}
+
+        </td>
+      </tr>
+    `;
+
+    showToast(
+      error.message ||
+      "Unable to load users.",
+      "error"
+    );
+  }
+}
+
+function renderUsers(users){
+
+  const body=
+    document.getElementById(
+      "usersBody"
+    );
+
+  if(
+    !Array.isArray(users) ||
+    users.length===0
+  ){
+
+    body.innerHTML=`
+      <tr>
+        <td
+          colspan="5"
+          class="empty">
+          No users found.
+        </td>
+      </tr>
+    `;
+
+    return;
+  }
+
+  body.innerHTML=
+    users.map(function(user){
+
+      user=user || {};
+
+      const username=
+        String(
+          user.username || ""
+        );
+
+      const name=
+        String(
+          user.name || ""
+        );
+
+      const role=
+        String(
+          user.role || "guest"
+        );
+
+      const status=
+        String(
+          user.status || "Active"
+        );
+
+      const isBlock=
+        status.toLowerCase()==="block";
+
+      const statusHtml=
+        isBlock
+        ?
+        `<span class="status status-block">
+          Block
+        </span>`
+        :
+        `<span class="status status-active">
+          Active
+        </span>`;
+
+      const isCurrentUser=
+        username.toLowerCase()===
+        currentUsername.toLowerCase();
+
+      let actionHtml="";
+
+      if(isCurrentUser){
+
+        actionHtml=`
+          <span
+            style="
+              color:#8a93a5;
+              font-size:11px;">
+            Current User
+          </span>
+        `;
+
+      }else if(isBlock){
+
+        actionHtml=`
+          <button
+            class="small-btn small-unblock"
+            onclick='changeUserStatus(
+              ${JSON.stringify(username)},
+              "Active"
+            )'>
+            Unblock
+          </button>
+        `;
+
+      }else{
+
+        actionHtml=`
+          <button
+            class="small-btn small-block"
+            onclick='changeUserStatus(
+              ${JSON.stringify(username)},
+              "Block"
+            )'>
+            Block
+          </button>
+        `;
+      }
+
+      return`
+        <tr>
+
+          <td>
+            <strong>
+              ${escapeHtml(username)}
+            </strong>
+          </td>
+
+          <td>
+            ${escapeHtml(name)}
+          </td>
+
+          <td>
+            <span class="role">
+              ${escapeHtml(role)}
+            </span>
+          </td>
+
+          <td>
+            ${statusHtml}
+          </td>
+
+          <td>
+
+            <div class="user-actions">
+
+              <button
+                class="small-btn small-edit"
+                onclick='editUser(
+                  ${JSON.stringify(user)}
+                )'>
+                Edit
+              </button>
+
+              ${actionHtml}
+
+            </div>
+
+          </td>
+
+        </tr>
+      `;
+
+    }).join("");
+}
+
+function openAddUserModal(){
+
+  editingUser=false;
+
+  document.getElementById(
+    "userFormTitle"
+  ).textContent="Add User";
+
+  document.getElementById(
+    "originalUsername"
+  ).value="";
+
+  document.getElementById(
+    "userUsername"
+  ).value="";
+
+  document.getElementById(
+    "userName"
+  ).value="";
+
+  document.getElementById(
+    "userPassword"
+  ).value="";
+
+  document.getElementById(
+    "userRole"
+  ).value="guest";
+
+  document.getElementById(
+    "userStatus"
+  ).value="Active";
+
+  openModal("userFormModal");
+}
+
+function editUser(user){
+
+  user=user || {};
+
+  editingUser=true;
+
+  document.getElementById(
+    "userFormTitle"
+  ).textContent="Edit User";
+
+  document.getElementById(
+    "originalUsername"
+  ).value=
+    user.username || "";
+
+  document.getElementById(
+    "userUsername"
+  ).value=
+    user.username || "";
+
+  document.getElementById(
+    "userName"
+  ).value=
+    user.name || "";
+
+  document.getElementById(
+    "userPassword"
+  ).value="";
+
+  document.getElementById(
+    "userRole"
+  ).value=
+    user.role || "guest";
+
+  document.getElementById(
+    "userStatus"
+  ).value=
+    String(
+      user.status || "Active"
+    ).toLowerCase()==="block"
+    ?
+    "Block"
+    :
+    "Active";
+
+  openModal("userFormModal");
+}
+
+async function saveUser(){
+
+  const username=
+    document.getElementById(
+      "userUsername"
+    ).value.trim();
+
+  const name=
+    document.getElementById(
+      "userName"
+    ).value.trim();
+
+  const password=
+    document.getElementById(
+      "userPassword"
+    ).value;
+
+  const role=
+    document.getElementById(
+      "userRole"
+    ).value;
+
+  const status=
+    document.getElementById(
+      "userStatus"
+    ).value;
+
+  const originalUsername=
+    document.getElementById(
+      "originalUsername"
+    ).value;
+
+  if(!username){
+
+    showToast(
+      "Username is required.",
+      "error"
+    );
+
+    return;
+  }
+
+  if(!name){
+
+    showToast(
+      "Name is required.",
+      "error"
+    );
+
+    return;
+  }
+
+  if(
+    !editingUser &&
+    !password
+  ){
+
+    showToast(
+      "Password is required.",
+      "error"
+    );
+
+    return;
+  }
+
+  showLoader(
+    editingUser
+    ?
+    "Updating user..."
+    :
+    "Adding user..."
+  );
+
+  try{
+
+    const payload={
+
+      action:
+        editingUser
+        ?
+        "editUser"
+        :
+        "addUser",
+
+      requester:
+        currentUsername,
+
+      username:
+        username,
+
+      name:
+        name,
+
+      role:
+        role,
+
+      status:
+        status
+
+    };
+
+    if(editingUser){
+
+      payload.originalUsername=
+        originalUsername;
+
+      if(password)
+        payload.password=
+          password;
+
+    }else{
+
+      payload.password=
+        password;
+    }
+
+    const response=
+      await fetch(
+        USER_API_URL,
+        {
+          method:"POST",
+          body:JSON.stringify(
+            payload
+          )
+        }
+      );
+
+    if(!response.ok)
+      throw new Error(
+        "User API connection failed."
+      );
+
+    const result=
+      await response.json();
+
+    if(
+      !result ||
+      !result.success
+    ){
+
+      throw new Error(
+        result &&
+        result.message
+        ?
+        result.message
+        :
+        "Operation failed."
+      );
+    }
+
+    closeModal(
+      "userFormModal"
+    );
+
+    showToast(
+      result.message ||
+      "User saved successfully.",
+      "success"
+    );
+
+    loadUsers();
+
+    if(
+      editingUser &&
+      originalUsername &&
+      originalUsername.toLowerCase()===
+      currentUsername.toLowerCase()
+    ){
+
+      loadUser();
+    }
+
+  }catch(error){
+
+    console.error(
+      "saveUser:",
+      error
+    );
+
+    showToast(
+      error.message ||
+      "Unable to save user.",
+      "error"
+    );
+
+  }finally{
+
+    hideLoader();
+  }
+}
+
+async function changeUserStatus(
+  username,
+  status
+){
+
+  if(
+    !username ||
+    !status
+  )
+    return;
+
+  if(
+    username.toLowerCase()===
+    currentUsername.toLowerCase()
+  ){
+
+    showToast(
+      "You cannot change your own account status.",
+      "error"
+    );
+
+    return;
+  }
+
+  const actionText=
+    status==="Block"
+    ?
+    "block"
+    :
+    "unblock";
+
+  if(
+    !confirm(
+      "Are you sure you want to "+
+      actionText+
+      " this user?"
+    )
+  )
+    return;
+
+  showLoader(
+    status==="Block"
+    ?
+    "Blocking user..."
+    :
+    "Unblocking user..."
+  );
+
+  try{
+
+    const response=
+      await fetch(
+        USER_API_URL,
+        {
+          method:"POST",
+
+          body:JSON.stringify({
+
+            action:
+              "toggleUserStatus",
+
+            requester:
+              currentUsername,
+
+            username:
+              username,
+
+            status:
+              status
+
+          })
+        }
+      );
+
+    if(!response.ok)
+      throw new Error(
+        "User API connection failed."
+      );
+
+    const result=
+      await response.json();
+
+    if(
+      !result ||
+      !result.success
+    ){
+
+      throw new Error(
+        result &&
+        result.message
+        ?
+        result.message
+        :
+        "Status change failed."
+      );
+    }
+
+    showToast(
+      result.message ||
+      "Status changed successfully.",
+      "success"
+    );
+
+    loadUsers();
+
+  }catch(error){
+
+    console.error(
+      "changeUserStatus:",
+      error
+    );
+
+    showToast(
+      error.message ||
+      "Unable to change user status.",
+      "error"
+    );
+
+  }finally{
+
+    hideLoader();
+  }
+}
+
+function openPasswordModal(){
+
+  closeProfileMenu();
+
+  document.getElementById(
+    "currentPassword"
+  ).value="";
+
+  document.getElementById(
+    "newPassword"
+  ).value="";
+
+  openModal(
+    "passwordModal"
+  );
+}
+
+
+async function changePassword(){
+
+  const currentPassword=
+    document.getElementById(
+      "currentPassword"
+    ).value;
+
+  const newPassword=
+    document.getElementById(
+      "newPassword"
+    ).value;
+
+  if(!currentPassword){
+
+    showToast(
+      "Current password is required.",
+      "error"
+    );
+
+    return;
+  }
+
+  if(!newPassword){
+
+    showToast(
+      "New password is required.",
+      "error"
+    );
+
+    return;
+  }
+
+  if(newPassword.length<4){
+
+    showToast(
+      "New password must be at least 4 characters.",
+      "error"
+    );
+
+    return;
+  }
+
+  showLoader(
+    "Changing password..."
+  );
+
+  try{
+
+    const response=
+      await fetch(
+        USER_API_URL,
+        {
+          method:"POST",
+
+          body:JSON.stringify({
+
+            action:
+              "changePassword",
+
+            requester:
+              currentUsername,
+
+            username:
+              currentUsername,
+
+            currentPassword:
+              currentPassword,
+
+            newPassword:
+              newPassword
+
+          })
+        }
+      );
+
+    if(!response.ok)
+      throw new Error(
+        "User API connection failed."
+      );
+
+    const result=
+      await response.json();
+
+    if(
+      !result ||
+      !result.success
+    ){
+
+      throw new Error(
+        result &&
+        result.message
+        ?
+        result.message
+        :
+        "Password change failed."
+      );
+    }
+
+    closeModal(
+      "passwordModal"
+    );
+
+    showToast(
+      "Password changed successfully.",
+      "success"
+    );
+
+  }catch(error){
+
+    console.error(
+      "changePassword:",
+      error
+    );
+
+    showToast(
+      error.message ||
+      "Unable to change password.",
+      "error"
+    );
+
+  }finally{
+
+    hideLoader();
+  }
+}
+
+function loadTheme(){
+
+  const theme=
+    localStorage.getItem(
+      "dashboardTheme"
+    );
+
+  const themeBtn=
+    document.getElementById(
+      "themeBtn"
+    );
+
+  if(theme==="dark"){
+
+    document.body.classList.add(
+      "dark"
+    );
+
+    if(themeBtn)
+      themeBtn.textContent="☀️";
+
+  }else{
+
+    document.body.classList.remove(
+      "dark"
+    );
+
+    if(themeBtn)
+      themeBtn.textContent="🌙";
+  }
+}
+
+
+function toggleTheme(){
+
+  document.body.classList.toggle(
+    "dark"
+  );
+
+  const dark=
+    document.body.classList.contains(
+      "dark"
+    );
+
+  localStorage.setItem(
+    "dashboardTheme",
+    dark ?
+    "dark" :
+    "light"
+  );
+
+  const themeBtn=
+    document.getElementById(
+      "themeBtn"
+    );
+
+  if(themeBtn){
+
+    themeBtn.textContent=
+      dark ?
+      "☀️" :
+      "🌙";
+  }
+}
+
+function toggleProfileMenu(){
+
+  const menu=
+    document.getElementById(
+      "profileMenu"
+    );
+
+  if(menu)
+    menu.classList.toggle(
+      "show"
+    );
+}
+
+
+function closeProfileMenu(){
+
+  const menu=
+    document.getElementById(
+      "profileMenu"
+    );
+
+  if(menu)
+    menu.classList.remove(
+      "show"
+    );
+}
+
+
+document.addEventListener(
+  "click",
+  function(event){
+
+    const profile=
+      document.querySelector(
+        ".profile"
+      );
+
+    if(
+      profile &&
+      !profile.contains(
+        event.target
+      )
+    ){
+
+      closeProfileMenu();
+    }
+  }
+);
+
+function openModal(id){
+
+  const modal=
+    document.getElementById(id);
+
+  if(modal)
+    modal.classList.add(
+      "show"
+    );
+}
+
+
+function closeModal(id){
+
+  const modal=
+    document.getElementById(id);
+
+  if(modal)
+    modal.classList.remove(
+      "show"
+    );
+}
+
+function showLoader(text){
+
+  const loaderText=
+    document.getElementById(
+      "loaderText"
+    );
+
+  const loader=
+    document.getElementById(
+      "loader"
+    );
+
+  if(loaderText)
+    loaderText.textContent=
+      text ||
+      "Loading...";
+
+  if(loader)
+    loader.classList.add(
+      "show"
+    );
+}
+
+
+function hideLoader(){
+
+  const loader=
+    document.getElementById(
+      "loader"
+    );
+
+  if(loader)
+    loader.classList.remove(
+      "show"
+    );
+}
+
+let toastTimer;
+
+function showToast(
+  message,
+  type="success"
+){
+
+  const toast=
+    document.getElementById(
+      "toast"
+    );
+
+  if(!toast) return;
+
+  toast.textContent=
+    message || "";
+
+  toast.className=
+    "toast show "+
+    type;
+
+  clearTimeout(
+    toastTimer
+  );
+
+  toastTimer=
+    setTimeout(
+      function(){
+
+        toast.classList.remove(
+          "show"
+        );
+
+      },
+      3000
+    );
+}
+
+function formatDate(value){
+
+  if(
+    value===null ||
+    value===undefined ||
+    value===""
+  )
+    return "";
+
+  const text=
+    String(value).trim();
+
+  const dateOnlyMatch=
+    text.match(
+      /^(\d{4})-(\d{2})-(\d{2})$/
+    );
+
+  if(dateOnlyMatch){
+
+    const date=
+      new Date(
+        Number(
+          dateOnlyMatch[1]
+        ),
+        Number(
+          dateOnlyMatch[2]
+        )-1,
+        Number(
+          dateOnlyMatch[3]
+        )
+      );
+
+    if(!isNaN(
+      date.getTime()
+    )){
+
+      return date.toLocaleDateString(
+        "en-GB",
+        {
+          day:"2-digit",
+          month:"short",
+          year:"numeric"
+        }
+      );
+    }
+  }
+
+  const date=
+    new Date(value);
+
+  if(isNaN(
+    date.getTime()
+  ))
+    return text;
+
+  return date.toLocaleString(
+    "en-GB",
+    {
+      day:"2-digit",
+      month:"short",
+      year:"numeric",
+      hour:"2-digit",
+      minute:"2-digit"
+    }
+  );
+}
+
+function normalizeDate(value){
+
+  if(
+    value===null ||
+    value===undefined ||
+    value===""
+  )
+    return "";
+
+  const text=
+    String(value).trim();
+
+  const dateOnlyMatch=
+    text.match(
+      /^(\d{4})-(\d{2})-(\d{2})$/
+    );
+
+  if(dateOnlyMatch)
+    return text;
+
+  const date=
+    new Date(value);
+
+  if(isNaN(
+    date.getTime()
+  ))
+    return "";
+
+  const y=
+    date.getFullYear();
+
+  const m=
+    String(
+      date.getMonth()+1
+    ).padStart(2,"0");
+
+  const d=
+    String(
+      date.getDate()
+    ).padStart(2,"0");
+
+  return y+"-"+m+"-"+d;
+}
+
+function escapeHtml(value){
+
+  return String(
+    value ?? ""
+  )
+  .replace(
+    /&/g,
+    "&amp;"
+  )
+  .replace(
+    /</g,
+    "&lt;"
+  )
+  .replace(
+    />/g,
+    "&gt;"
+  )
+  .replace(
+    /"/g,
+    "&quot;"
+  )
+  .replace(
+    /'/g,
+    "&#039;"
+  );
+}
+
+function logout(){
+
+  const keys=[
+
+    "dashboardAuth",
+    "username",
+    "name",
+    "role",
+    "status",
+    "userData",
+    "loginData",
+    "loggedUser",
+    "currentUser",
+    "userInfo"
+
+  ];
+
+  keys.forEach(
+    function(key){
+
+      localStorage.removeItem(
+        key
+      );
+
+      sessionStorage.removeItem(
+        key
+      );
+
+    }
+  );
+
+  sessionStorage.clear();
+
+  window.location.replace(
+    "index.html"
+  );
+}
+
+history.pushState(
+  null,
+  "",
+  location.href
+);
+
+window.addEventListener(
+  "popstate",
+  function(){
+
+    history.pushState(
+      null,
+      "",
+      location.href
+    );
+  }
+);
+
+window.addEventListener(
+  "pageshow",
+  function(){
+
+    checkLogin();
+
+  }
+);
+
+</script>
+
+</body>
+</html>
