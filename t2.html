@@ -1,0 +1,5680 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Support Dashboard</title>
+
+<link
+  rel="icon"
+  type="image/png"
+  sizes="128x128"
+  href="https://cdn-icons-png.flaticon.com/128/17163/17163834.png"
+>
+
+<style>
+
+/* ============================================================
+   RESET
+============================================================ */
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+:root{
+
+  --bg:#f5f7fa;
+  --card:#ffffff;
+  --card2:#fafbfc;
+
+  --text:#17202a;
+  --muted:#6b7280;
+
+  --border:#dfe4ea;
+
+  --primary:#198754;
+  --primary2:#146c43;
+  --primary-light:#e8f5ee;
+
+  --danger:#dc3545;
+  --danger-light:#fdecee;
+
+  --warning:#c98a00;
+  --warning-light:#fff6dc;
+
+  --info:#2563eb;
+  --info-light:#eaf1ff;
+
+  --shadow:0 4px 18px rgba(15,23,42,.07);
+  --shadow-lg:0 16px 45px rgba(15,23,42,.14);
+
+  --radius:10px;
+}
+
+body.dark{
+
+  --bg:#101418;
+  --card:#181d22;
+  --card2:#1d2329;
+
+  --text:#f1f5f9;
+  --muted:#9ca3af;
+
+  --border:#303841;
+
+  --primary:#35b878;
+  --primary2:#26945d;
+  --primary-light:#183b2a;
+
+  --danger:#ef5350;
+  --danger-light:#432326;
+
+  --warning:#e3a72f;
+  --warning-light:#42361d;
+
+  --info:#5b8def;
+  --info-light:#1d2d4a;
+
+  --shadow:0 4px 20px rgba(0,0,0,.22);
+  --shadow-lg:0 18px 50px rgba(0,0,0,.40);
+}
+
+body{
+
+  font-family:
+    Inter,
+    "Segoe UI",
+    Roboto,
+    Arial,
+    Helvetica,
+    sans-serif;
+
+  background:var(--bg);
+  color:var(--text);
+
+  min-height:100vh;
+
+  transition:
+    background .25s ease,
+    color .25s ease;
+}
+
+button,
+input,
+select{
+  font-family:inherit;
+}
+
+button{
+  cursor:pointer;
+}
+
+
+/* ============================================================
+   HEADER
+============================================================ */
+
+.header{
+
+  position:sticky;
+  top:0;
+  z-index:100;
+
+  background:rgba(255,255,255,.96);
+
+  border-bottom:1px solid var(--border);
+
+  padding:12px 24px;
+
+  box-shadow:
+    0 2px 12px rgba(15,23,42,.06);
+
+  backdrop-filter:blur(12px);
+}
+
+body.dark .header{
+  background:rgba(24,29,34,.96);
+}
+
+.header-inner{
+
+  width:100%;
+  max-width:1500px;
+
+  margin:auto;
+
+  display:flex;
+  align-items:center;
+
+  gap:9px;
+}
+
+
+/* LOGO */
+
+.logo{
+
+  position:relative;
+
+  font-size:20px;
+
+  font-weight:800;
+
+  letter-spacing:-.3px;
+
+  margin-right:auto;
+
+  white-space:nowrap;
+
+  color:var(--text);
+}
+
+.logo span{
+  color:var(--primary);
+}
+
+
+/* HEADER BUTTON */
+
+.header-btn{
+
+  border:1px solid var(--border);
+
+  padding:9px 14px;
+
+  min-height:40px;
+
+  border-radius:8px;
+
+  background:var(--card);
+
+  color:var(--text);
+
+  font-size:13px;
+
+  font-weight:700;
+
+  transition:
+    background .18s ease,
+    border-color .18s ease,
+    color .18s ease,
+    transform .18s ease,
+    box-shadow .18s ease;
+}
+
+.header-btn:hover{
+
+  background:var(--primary-light);
+
+  border-color:rgba(25,135,84,.25);
+
+  color:var(--primary2);
+
+  transform:translateY(-1px);
+
+  box-shadow:
+    0 4px 10px rgba(25,135,84,.08);
+}
+
+.header-btn:active{
+  transform:translateY(0);
+}
+
+.header-btn.green{
+
+  background:var(--primary);
+
+  border-color:var(--primary);
+
+  color:#fff;
+
+  box-shadow:
+    0 4px 10px rgba(25,135,84,.18);
+}
+
+.header-btn.green:hover{
+
+  background:var(--primary2);
+
+  border-color:var(--primary2);
+
+  color:#fff;
+}
+
+
+/* THEME */
+
+.theme-btn{
+
+  width:40px;
+  height:40px;
+
+  border:1px solid var(--border);
+
+  border-radius:8px;
+
+  background:var(--card);
+
+  color:var(--text);
+
+  font-size:17px;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  transition:.18s ease;
+}
+
+.theme-btn:hover{
+
+  background:var(--primary-light);
+
+  border-color:rgba(25,135,84,.3);
+
+  transform:translateY(-1px);
+}
+
+
+/* ============================================================
+   PROFILE
+============================================================ */
+
+.profile-wrap{
+  position:relative;
+}
+
+.profile-btn{
+
+  border:0;
+
+  background:transparent;
+
+  display:flex;
+
+  align-items:center;
+
+  gap:8px;
+
+  color:var(--text);
+
+  font-weight:700;
+
+  padding:3px 2px 3px 7px;
+
+  border-radius:8px;
+
+  transition:.18s ease;
+}
+
+.profile-btn:hover{
+  background:var(--primary-light);
+}
+
+.profile-circle{
+
+  width:38px;
+  height:38px;
+
+  border-radius:50%;
+
+  background:
+    linear-gradient(
+      145deg,
+      var(--primary),
+      #42b883
+    );
+
+  color:#fff;
+
+  display:flex;
+
+  justify-content:center;
+
+  align-items:center;
+
+  font-size:14px;
+
+  font-weight:800;
+
+  box-shadow:
+    0 2px 8px rgba(25,135,84,.22);
+}
+
+.profile-btn span{
+
+  font-size:13px;
+
+  max-width:120px;
+
+  overflow:hidden;
+
+  text-overflow:ellipsis;
+
+  white-space:nowrap;
+}
+
+.profile-menu{
+
+  position:absolute;
+
+  right:0;
+
+  top:50px;
+
+  width:205px;
+
+  background:var(--card);
+
+  border:1px solid var(--border);
+
+  border-radius:10px;
+
+  box-shadow:var(--shadow-lg);
+
+  overflow:hidden;
+
+  display:none;
+
+  z-index:500;
+
+  padding:5px;
+}
+
+.profile-menu.show{
+
+  display:block;
+
+  animation:
+    menuIn .16s ease;
+}
+
+@keyframes menuIn{
+
+  from{
+    opacity:0;
+    transform:translateY(-5px);
+  }
+
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+
+}
+
+.profile-menu button{
+
+  width:100%;
+
+  border:0;
+
+  background:transparent;
+
+  color:var(--text);
+
+  text-align:left;
+
+  padding:11px 12px;
+
+  border-radius:7px;
+
+  font-size:13px;
+
+  font-weight:600;
+
+  transition:.15s ease;
+}
+
+.profile-menu button:hover{
+
+  background:var(--primary-light);
+
+  color:var(--primary2);
+}
+
+.profile-menu button.logout{
+  color:var(--danger);
+}
+
+.profile-menu button.logout:hover{
+
+  background:var(--danger-light);
+
+  color:var(--danger);
+}
+
+
+/* ============================================================
+   MAIN
+============================================================ */
+
+.container{
+
+  width:100%;
+
+  max-width:1500px;
+
+  margin:auto;
+
+  padding:24px;
+}
+
+.page-title{
+
+  font-size:25px;
+
+  line-height:1.2;
+
+  font-weight:800;
+
+  letter-spacing:-.4px;
+
+  margin-bottom:5px;
+}
+
+.page-subtitle{
+
+  color:var(--muted);
+
+  font-size:13px;
+
+  margin-bottom:20px;
+}
+
+
+/* ============================================================
+   FILTER
+============================================================ */
+
+.filter-card{
+
+  background:var(--card);
+
+  border:1px solid var(--border);
+
+  border-radius:10px;
+
+  padding:13px;
+
+  box-shadow:var(--shadow);
+
+  margin-bottom:18px;
+}
+
+.filter-bar{
+
+  display:flex;
+
+  align-items:center;
+
+  gap:9px;
+
+  flex-wrap:wrap;
+}
+
+.search-box{
+
+  flex:1;
+
+  min-width:250px;
+}
+
+.input,
+.select{
+
+  width:100%;
+
+  min-height:40px;
+
+  border:1px solid var(--border);
+
+  background:var(--card);
+
+  color:var(--text);
+
+  border-radius:8px;
+
+  padding:9px 11px;
+
+  outline:none;
+
+  font-size:13px;
+
+  transition:
+    border-color .18s ease,
+    box-shadow .18s ease,
+    background .18s ease;
+}
+
+.input::placeholder{
+  color:#9aa2ad;
+}
+
+.input:hover,
+.select:hover{
+  border-color:#c6ccd4;
+}
+
+.input:focus,
+.select:focus{
+
+  border-color:var(--primary);
+
+  box-shadow:
+    0 0 0 3px
+    rgba(25,135,84,.10);
+}
+
+.date-box{
+  width:155px;
+}
+
+.filter-btn{
+
+  border:1px solid var(--border);
+
+  min-height:40px;
+
+  padding:9px 16px;
+
+  border-radius:8px;
+
+  background:var(--card);
+
+  color:var(--text);
+
+  font-size:13px;
+
+  font-weight:700;
+
+  transition:.18s ease;
+}
+
+.filter-btn:hover{
+
+  background:var(--primary-light);
+
+  border-color:rgba(25,135,84,.25);
+
+  color:var(--primary2);
+}
+
+
+/* ============================================================
+   TABLE
+============================================================ */
+
+.table-card{
+
+  background:var(--card);
+
+  border:1px solid var(--border);
+
+  border-radius:10px;
+
+  box-shadow:var(--shadow);
+
+  overflow:hidden;
+}
+
+.table-wrap{
+
+  width:100%;
+
+  overflow-x:auto;
+}
+
+table{
+
+  width:100%;
+
+  min-width:900px;
+
+  border-collapse:separate;
+
+  border-spacing:0;
+}
+
+thead{
+  background:#f4f6f8;
+}
+
+body.dark thead{
+  background:#20272e;
+}
+
+th{
+
+  color:var(--text);
+
+  font-size:12px;
+
+  font-weight:800;
+
+  text-align:center;
+
+  padding:12px 10px;
+
+  border-bottom:1px solid var(--border);
+
+  white-space:nowrap;
+
+  text-transform:uppercase;
+
+  letter-spacing:.35px;
+}
+
+td{
+
+  text-align:center;
+
+  padding:11px 10px;
+
+  border-bottom:1px solid var(--border);
+
+  color:var(--text);
+
+  font-size:13px;
+
+  white-space:nowrap;
+}
+
+tbody tr{
+
+  transition:
+    background .15s ease;
+}
+
+tbody tr:last-child td{
+  border-bottom:0;
+}
+
+tbody tr:hover{
+  background:var(--primary-light);
+}
+
+.empty-row{
+
+  padding:40px !important;
+
+  color:var(--muted);
+
+  font-size:13px !important;
+}
+
+
+/* ============================================================
+   ACTION
+============================================================ */
+
+.action-wrap{
+
+  display:flex;
+
+  justify-content:center;
+
+  align-items:center;
+
+  gap:5px;
+
+  flex-wrap:wrap;
+}
+
+.action-btn{
+
+  border:1px solid transparent;
+
+  padding:6px 10px;
+
+  min-height:30px;
+
+  border-radius:6px;
+
+  font-size:11px;
+
+  font-weight:800;
+
+  transition:
+    transform .15s ease,
+    box-shadow .15s ease,
+    background .15s ease;
+}
+
+.action-btn:hover{
+
+  transform:translateY(-1px);
+
+  box-shadow:
+    0 3px 8px rgba(15,23,42,.08);
+}
+
+.action-btn:active{
+  transform:translateY(0);
+}
+
+.edit-btn{
+
+  background:var(--info-light);
+
+  color:#1d4ed8;
+
+  border-color:rgba(37,99,235,.08);
+}
+
+.sell-btn{
+
+  background:var(--primary-light);
+
+  color:var(--primary2);
+
+  border-color:rgba(25,135,84,.08);
+}
+
+.delete-btn{
+
+  background:var(--danger-light);
+
+  color:#b42332;
+
+  border-color:rgba(220,53,69,.08);
+}
+
+.paid-btn{
+
+  background:var(--warning-light);
+
+  color:#946c08;
+
+  border-color:rgba(201,138,0,.10);
+}
+
+
+/* ============================================================
+   PAGINATION
+============================================================ */
+
+.pagination{
+
+  display:flex;
+
+  justify-content:center;
+
+  align-items:center;
+
+  gap:5px;
+
+  padding:14px;
+
+  border-top:1px solid var(--border);
+
+  background:var(--card2);
+}
+
+.page-btn{
+
+  min-width:34px;
+
+  height:34px;
+
+  border:1px solid var(--border);
+
+  background:var(--card);
+
+  color:var(--text);
+
+  border-radius:7px;
+
+  font-size:12px;
+
+  font-weight:700;
+
+  transition:.15s ease;
+}
+
+.page-btn:hover{
+
+  border-color:var(--primary);
+
+  color:var(--primary);
+}
+
+.page-btn.active{
+
+  background:var(--primary);
+
+  border-color:var(--primary);
+
+  color:#fff;
+
+  box-shadow:
+    0 3px 8px rgba(25,135,84,.18);
+}
+
+
+/* ============================================================
+   MODAL
+============================================================ */
+
+.modal{
+
+  position:fixed;
+
+  inset:0;
+
+  background:
+    rgba(15,23,42,.58);
+
+  backdrop-filter:blur(3px);
+
+  display:none;
+
+  align-items:center;
+
+  justify-content:center;
+
+  z-index:1000;
+
+  padding:15px;
+}
+
+.modal.show{
+
+  display:flex;
+
+  animation:
+    modalBg .18s ease;
+}
+
+@keyframes modalBg{
+
+  from{
+    opacity:0;
+  }
+
+  to{
+    opacity:1;
+  }
+
+}
+
+.modal-box{
+
+  width:100%;
+
+  max-width:520px;
+
+  max-height:90vh;
+
+  overflow-y:auto;
+
+  background:var(--card);
+
+  border:1px solid var(--border);
+
+  border-radius:12px;
+
+  box-shadow:var(--shadow-lg);
+
+  animation:
+    modalIn .2s ease;
+}
+
+@keyframes modalIn{
+
+  from{
+
+    opacity:0;
+
+    transform:
+      translateY(10px)
+      scale(.985);
+
+  }
+
+  to{
+
+    opacity:1;
+
+    transform:
+      translateY(0)
+      scale(1);
+
+  }
+
+}
+
+.modal-header{
+
+  display:flex;
+
+  align-items:center;
+
+  padding:15px 18px;
+
+  border-bottom:1px solid var(--border);
+
+  background:var(--card2);
+}
+
+.modal-header h3{
+
+  margin-right:auto;
+
+  font-size:16px;
+
+  font-weight:800;
+
+  letter-spacing:-.2px;
+}
+
+.close-btn{
+
+  border:0;
+
+  background:transparent;
+
+  color:var(--muted);
+
+  font-size:24px;
+
+  width:32px;
+
+  height:32px;
+
+  border-radius:7px;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  transition:.15s ease;
+}
+
+.close-btn:hover{
+
+  background:var(--danger-light);
+
+  color:var(--danger);
+}
+
+.modal-body{
+  padding:18px;
+}
+
+.form-group{
+  margin-bottom:14px;
+}
+
+.form-group:last-child{
+  margin-bottom:0;
+}
+
+.form-group label{
+
+  display:block;
+
+  margin-bottom:6px;
+
+  font-size:12px;
+
+  font-weight:800;
+
+  color:var(--text);
+
+  letter-spacing:.15px;
+}
+
+.modal-footer{
+
+  display:flex;
+
+  justify-content:flex-end;
+
+  gap:8px;
+
+  padding:14px 18px;
+
+  border-top:1px solid var(--border);
+
+  background:var(--card2);
+}
+
+.btn{
+
+  border:0;
+
+  min-height:38px;
+
+  padding:9px 16px;
+
+  border-radius:7px;
+
+  font-size:12px;
+
+  font-weight:800;
+
+  transition:
+    transform .15s ease,
+    box-shadow .15s ease,
+    background .15s ease;
+}
+
+.btn:hover{
+
+  transform:translateY(-1px);
+
+  box-shadow:
+    0 4px 10px rgba(15,23,42,.10);
+}
+
+.btn:active{
+  transform:translateY(0);
+}
+
+.btn-primary{
+
+  background:var(--primary);
+
+  color:#fff;
+}
+
+.btn-primary:hover{
+  background:var(--primary2);
+}
+
+.btn-secondary{
+
+  background:#e9ecef;
+
+  color:#343a40;
+}
+
+body.dark .btn-secondary{
+
+  background:#343b43;
+
+  color:#f8fafc;
+}
+
+.btn-danger{
+
+  background:var(--danger);
+
+  color:#fff;
+}
+
+
+/* ============================================================
+   USERS
+============================================================ */
+
+.users-list{
+
+  overflow-x:auto;
+
+  border:1px solid var(--border);
+
+  border-radius:8px;
+}
+
+.user-table{
+  min-width:650px;
+}
+
+.user-table thead{
+  background:#f4f6f8;
+}
+
+body.dark .user-table thead{
+  background:#20272e;
+}
+
+.status-active{
+
+  color:#198754;
+
+  font-weight:800;
+
+  background:var(--primary-light);
+
+  border-radius:20px;
+
+  padding:4px 9px;
+
+  display:inline-block;
+
+  font-size:11px;
+}
+
+.status-block{
+
+  color:#dc3545;
+
+  font-weight:800;
+
+  background:var(--danger-light);
+
+  border-radius:20px;
+
+  padding:4px 9px;
+
+  display:inline-block;
+
+  font-size:11px;
+}
+
+.user-action{
+
+  display:flex;
+
+  justify-content:center;
+
+  align-items:center;
+
+  gap:5px;
+}
+
+
+/* ============================================================
+   ITEMS
+============================================================ */
+
+.item-list{
+
+  display:flex;
+
+  flex-direction:column;
+
+  gap:7px;
+
+  margin-top:14px;
+}
+
+.item-row{
+
+  display:flex;
+
+  align-items:center;
+
+  padding:10px 12px;
+
+  border:1px solid var(--border);
+
+  border-radius:8px;
+
+  background:var(--card2);
+
+  transition:.15s ease;
+}
+
+.item-row:hover{
+
+  border-color:rgba(25,135,84,.3);
+
+  background:var(--primary-light);
+}
+
+.item-row span{
+
+  margin-right:auto;
+
+  font-size:13px;
+
+  font-weight:600;
+}
+
+.item-delete{
+
+  border:0;
+
+  background:var(--danger-light);
+
+  color:#b42332;
+
+  padding:6px 9px;
+
+  border-radius:6px;
+
+  font-size:11px;
+
+  font-weight:800;
+
+  transition:.15s ease;
+}
+
+.item-delete:hover{
+
+  background:#f8d7da;
+
+  transform:translateY(-1px);
+}
+
+
+/* ============================================================
+   LOADER
+============================================================ */
+
+.loader{
+
+  position:fixed;
+
+  inset:0;
+
+  background:
+    rgba(15,23,42,.45);
+
+  backdrop-filter:blur(3px);
+
+  display:none;
+
+  align-items:center;
+
+  justify-content:center;
+
+  z-index:3000;
+}
+
+.loader.show{
+  display:flex;
+}
+
+.spinner{
+
+  width:44px;
+
+  height:44px;
+
+  border:4px solid
+    rgba(255,255,255,.35);
+
+  border-top-color:
+    var(--primary);
+
+  border-radius:50%;
+
+  animation:
+    spin .75s linear infinite;
+
+  background:transparent;
+}
+
+@keyframes spin{
+
+  to{
+    transform:rotate(360deg);
+  }
+
+}
+
+
+/* ============================================================
+   TOAST
+============================================================ */
+
+.toast{
+
+  position:fixed;
+
+  right:20px;
+
+  bottom:20px;
+
+  min-width:240px;
+
+  max-width:380px;
+
+  background:#212529;
+
+  color:#fff;
+
+  padding:12px 15px;
+
+  border-radius:8px;
+
+  border:1px solid rgba(255,255,255,.08);
+
+  box-shadow:var(--shadow-lg);
+
+  z-index:4000;
+
+  transform:translateY(100px);
+
+  opacity:0;
+
+  transition:
+    transform .25s ease,
+    opacity .25s ease;
+
+  font-size:13px;
+
+  font-weight:600;
+}
+
+.toast.show{
+
+  transform:translateY(0);
+
+  opacity:1;
+}
+
+.toast.success{
+  background:#198754;
+}
+
+.toast.error{
+  background:#dc3545;
+}
+
+
+/* ============================================================
+   SCROLLBAR
+============================================================ */
+
+::-webkit-scrollbar{
+  width:8px;
+  height:8px;
+}
+
+::-webkit-scrollbar-track{
+  background:transparent;
+}
+
+::-webkit-scrollbar-thumb{
+
+  background:#c4cad1;
+
+  border-radius:10px;
+}
+
+::-webkit-scrollbar-thumb:hover{
+  background:#9da5ae;
+}
+
+body.dark ::-webkit-scrollbar-thumb{
+  background:#46505a;
+}
+
+body.dark ::-webkit-scrollbar-thumb:hover{
+  background:#596570;
+}
+
+
+/* ============================================================
+   SELECTION
+============================================================ */
+
+::selection{
+
+  background:rgba(25,135,84,.20);
+
+  color:var(--text);
+}
+
+
+/* ============================================================
+   RESPONSIVE
+============================================================ */
+
+@media(max-width:1000px){
+
+  .header{
+    padding:11px 15px;
+  }
+
+  .container{
+    padding:18px;
+  }
+
+  .header-btn{
+    padding:9px 11px;
+  }
+
+}
+
+
+@media(max-width:800px){
+
+  .header{
+    padding:10px;
+  }
+
+  .header-inner{
+
+    flex-wrap:wrap;
+
+    gap:7px;
+  }
+
+  .logo{
+
+    width:100%;
+
+    margin-bottom:3px;
+
+    font-size:19px;
+  }
+
+  .header-btn{
+
+    padding:8px 10px;
+
+    min-height:38px;
+
+    font-size:11px;
+  }
+
+  .theme-btn{
+
+    width:38px;
+
+    height:38px;
+  }
+
+  .profile-btn{
+    padding-left:3px;
+  }
+
+  .profile-btn span{
+    display:none;
+  }
+
+  .profile-circle{
+
+    width:38px;
+
+    height:38px;
+  }
+
+  .container{
+    padding:13px;
+  }
+
+  .page-title{
+    font-size:21px;
+  }
+
+  .page-subtitle{
+
+    font-size:12px;
+
+    margin-bottom:15px;
+  }
+
+  .filter-card{
+    padding:10px;
+  }
+
+  .filter-bar{
+    gap:8px;
+  }
+
+  .search-box{
+    min-width:100%;
+  }
+
+  .date-box{
+    width:calc(50% - 4px);
+  }
+
+  .filter-bar > div[style*="width:150px"]{
+
+    width:calc(50% - 4px) !important;
+  }
+
+  .filter-btn{
+
+    width:calc(50% - 4px);
+  }
+
+  .modal-box{
+
+    max-height:94vh;
+
+    border-radius:10px;
+  }
+
+  .modal-body{
+    padding:15px;
+  }
+
+  .modal-footer{
+    padding:12px 15px;
+  }
+
+  .toast{
+
+    left:12px;
+
+    right:12px;
+
+    bottom:12px;
+
+    min-width:auto;
+
+    max-width:none;
+
+    text-align:center;
+  }
+
+}
+
+
+@media(max-width:480px){
+
+  .header-inner{
+    gap:5px;
+  }
+
+  .header-btn{
+
+    flex:1;
+
+    padding:8px 6px;
+
+    font-size:10px;
+  }
+
+  .theme-btn{
+
+    flex:0 0 38px;
+  }
+
+  .profile-btn{
+
+    flex:0 0 38px;
+  }
+
+  .date-box{
+    width:100%;
+  }
+
+  .filter-bar > div[style*="width:150px"]{
+
+    width:100% !important;
+  }
+
+  .filter-btn{
+    width:100%;
+  }
+
+  .action-btn{
+
+    padding:6px 8px;
+
+    font-size:10px;
+  }
+
+}
+
+</style>
+
+
+</head>
+
+
+<body>
+
+
+<header class="header">
+
+  <div class="header-inner">
+
+    <div class="logo">
+      Support <span>Dashboard</span>
+    </div>
+
+
+    <button
+      class="header-btn"
+      onclick="loadData()">
+      ↻ Reload
+    </button>
+
+
+    <button
+      class="header-btn"
+      onclick="openUsersModal()">
+      Users
+    </button>
+
+
+    <button
+      class="header-btn"
+      onclick="openItemsModal()">
+      Items
+    </button>
+
+
+    <button
+      class="header-btn green"
+      onclick="openNewEntryModal()">
+      + New Entry
+    </button>
+
+
+    <button
+      class="theme-btn"
+      id="themeBtn"
+      onclick="toggleTheme()">
+      🌙
+    </button>
+
+
+    <div class="profile-wrap">
+
+      <button
+        class="profile-btn"
+        onclick="toggleProfileMenu()">
+
+        <div
+          class="profile-circle"
+          id="profileCircle">
+          U
+        </div>
+
+        <span id="profileName">
+          User
+        </span>
+
+      </button>
+
+
+      <div
+        class="profile-menu"
+        id="profileMenu">
+
+        <button onclick="openPasswordModal()">
+          🔑 Change Password
+        </button>
+
+        <button
+          class="logout"
+          onclick="logout()">
+          🚪 Logout
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</header>
+
+
+
+<main class="container">
+
+
+  <h1 class="page-title">
+    Support Dashboard
+  </h1>
+
+
+  <p class="page-subtitle">
+    Manage support data and users
+  </p>
+
+
+  <div class="filter-card">
+
+    <div class="filter-bar">
+
+
+      <div class="search-box">
+
+        <input
+          class="input"
+          id="searchInput"
+          type="text"
+          placeholder="Search..."
+          oninput="applyFilters()">
+
+      </div>
+
+
+      <div class="date-box">
+
+        <input
+          class="input"
+          id="fromDate"
+          type="date"
+          onchange="applyFilters()">
+
+      </div>
+
+
+      <div class="date-box">
+
+        <input
+          class="input"
+          id="toDate"
+          type="date"
+          onchange="applyFilters()">
+
+      </div>
+
+
+      <div style="width:150px">
+
+        <select
+          class="select"
+          id="dataType"
+          onchange="changeDataType()">
+
+          <option value="data">
+            Data
+          </option>
+
+          <option value="sell">
+            Sell
+          </option>
+
+          <option value="paid">
+            Paid
+          </option>
+
+          <option value="delete">
+            Delete
+          </option>
+
+        </select>
+
+      </div>
+
+
+      <button
+        class="filter-btn"
+        onclick="clearFilters()">
+        Clear
+      </button>
+
+
+    </div>
+
+  </div>
+
+
+
+  <div class="table-card">
+
+    <div class="table-wrap">
+
+      <table>
+
+        <thead id="tableHead">
+
+          <tr>
+
+            <th>Name</th>
+
+            <th>IP</th>
+
+            <th>Work</th>
+
+            <th>Date</th>
+
+            <th>Item</th>
+
+            <th>Action</th>
+
+          </tr>
+
+        </thead>
+
+
+        <tbody id="tableBody">
+
+          <tr>
+
+            <td
+              colspan="6"
+              class="empty-row">
+
+              Loading...
+
+            </td>
+
+          </tr>
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+
+    <div
+      class="pagination"
+      id="pagination">
+    </div>
+
+  </div>
+
+
+</main>
+
+
+
+<!-- ============================================================
+     NEW ENTRY
+============================================================ -->
+
+<div
+  class="modal"
+  id="entryModal">
+
+
+  <div class="modal-box">
+
+
+    <div class="modal-header">
+
+      <h3 id="entryModalTitle">
+        New Entry
+      </h3>
+
+
+      <button
+        class="close-btn"
+        onclick="closeModal('entryModal')">
+        ×
+      </button>
+
+    </div>
+
+
+    <div class="modal-body">
+
+
+      <div class="form-group">
+
+        <label>Name</label>
+
+        <input
+          class="input"
+          id="entryName"
+          type="text"
+          readonly>
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label>IP</label>
+
+        <input
+          class="input"
+          id="entryIP"
+          type="text"
+          placeholder="Enter IP">
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label>Work</label>
+
+        <input
+          class="input"
+          id="entryWork"
+          type="text"
+          placeholder="Enter Work">
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label>Date</label>
+
+        <input
+          class="input"
+          id="entryDate"
+          type="date">
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label>Item</label>
+
+        <select
+          class="select"
+          id="entryItem">
+
+          <option value="">
+            Select Item
+          </option>
+
+        </select>
+
+      </div>
+
+
+    </div>
+
+
+    <div class="modal-footer">
+
+      <button
+        class="btn btn-secondary"
+        onclick="closeModal('entryModal')">
+        Cancel
+      </button>
+
+
+      <button
+        class="btn btn-primary"
+        onclick="saveEntry()">
+        Save
+      </button>
+
+    </div>
+
+
+  </div>
+
+</div>
+
+
+
+<!-- ============================================================
+     USERS
+============================================================ -->
+
+<div
+  class="modal"
+  id="usersModal">
+
+
+  <div
+    class="modal-box"
+    style="max-width:900px">
+
+
+    <div class="modal-header">
+
+      <h3>Users</h3>
+
+
+      <button
+        class="close-btn"
+        onclick="closeModal('usersModal')">
+        ×
+      </button>
+
+    </div>
+
+
+    <div class="modal-body">
+
+
+      <div
+        style="
+          display:flex;
+          justify-content:flex-end;
+          margin-bottom:12px
+        ">
+
+        <button
+          class="btn btn-primary"
+          onclick="openAddUserModal()">
+
+          + Add User
+
+        </button>
+
+      </div>
+
+
+      <div class="users-list">
+
+        <table class="user-table">
+
+          <thead>
+
+            <tr>
+
+              <th>Username</th>
+
+              <th>Name</th>
+
+              <th>Role</th>
+
+              <th>Status</th>
+
+              <th>Action</th>
+
+            </tr>
+
+          </thead>
+
+
+          <tbody id="usersBody">
+
+            <tr>
+
+              <td
+                colspan="5"
+                class="empty-row">
+
+                Loading...
+
+              </td>
+
+            </tr>
+
+          </tbody>
+
+        </table>
+
+      </div>
+
+
+    </div>
+
+
+  </div>
+
+</div>
+
+
+
+<!-- ============================================================
+     USER EDIT
+============================================================ -->
+
+<div
+  class="modal"
+  id="userEditModal">
+
+
+  <div class="modal-box">
+
+
+    <div class="modal-header">
+
+      <h3 id="userEditTitle">
+        Add User
+      </h3>
+
+
+      <button
+        class="close-btn"
+        onclick="closeModal('userEditModal')">
+        ×
+      </button>
+
+    </div>
+
+
+    <div class="modal-body">
+
+
+      <div class="form-group">
+
+        <label>Username</label>
+
+        <input
+          class="input"
+          id="userUsername"
+          type="text">
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label>Password</label>
+
+        <input
+          class="input"
+          id="userPassword"
+          type="text">
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label>Name</label>
+
+        <input
+          class="input"
+          id="userName"
+          type="text">
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label>Role</label>
+
+        <select
+          class="select"
+          id="userRole">
+
+          <option value="admin">
+            Admin
+          </option>
+
+          <option value="manager">
+            Manager
+          </option>
+
+          <option value="support">
+            Support
+          </option>
+
+          <option value="call">
+            Call
+          </option>
+
+          <option value="guest">
+            Guest
+          </option>
+
+        </select>
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label>Status</label>
+
+        <select
+          class="select"
+          id="userStatus">
+
+          <option value="Active">
+            Active
+          </option>
+
+          <option value="Block">
+            Block
+          </option>
+
+        </select>
+
+      </div>
+
+
+    </div>
+
+
+    <div class="modal-footer">
+
+      <button
+        class="btn btn-secondary"
+        onclick="closeModal('userEditModal')">
+
+        Cancel
+
+      </button>
+
+
+      <button
+        class="btn btn-primary"
+        onclick="saveUser()">
+
+        Save
+
+      </button>
+
+    </div>
+
+
+  </div>
+
+</div>
+
+
+
+<!-- ============================================================
+     ITEMS
+============================================================ -->
+
+<div
+  class="modal"
+  id="itemsModal">
+
+
+  <div class="modal-box">
+
+
+    <div class="modal-header">
+
+      <h3>
+        Item Management
+      </h3>
+
+
+      <button
+        class="close-btn"
+        onclick="closeModal('itemsModal')">
+
+        ×
+
+      </button>
+
+    </div>
+
+
+    <div class="modal-body">
+
+
+      <div
+        style="
+          display:flex;
+          gap:8px
+        ">
+
+        <input
+          class="input"
+          id="newItemName"
+          placeholder="New Item">
+
+
+        <button
+          class="btn btn-primary"
+          onclick="addNewItem()">
+
+          Add
+
+        </button>
+
+      </div>
+
+
+      <div
+        class="item-list"
+        id="itemList">
+      </div>
+
+
+    </div>
+
+
+  </div>
+
+</div>
+
+
+
+<!-- ============================================================
+     PASSWORD
+============================================================ -->
+
+<div
+  class="modal"
+  id="passwordModal">
+
+
+  <div class="modal-box">
+
+
+    <div class="modal-header">
+
+      <h3>
+        Change Password
+      </h3>
+
+
+      <button
+        class="close-btn"
+        onclick="closeModal('passwordModal')">
+
+        ×
+
+      </button>
+
+    </div>
+
+
+    <div class="modal-body">
+
+
+      <div class="form-group">
+
+        <label>
+          Current Password
+        </label>
+
+        <input
+          class="input"
+          id="currentPassword"
+          type="password">
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label>
+          New Password
+        </label>
+
+        <input
+          class="input"
+          id="newPassword"
+          type="password">
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label>
+          Confirm Password
+        </label>
+
+        <input
+          class="input"
+          id="confirmPassword"
+          type="password">
+
+      </div>
+
+
+    </div>
+
+
+    <div class="modal-footer">
+
+      <button
+        class="btn btn-secondary"
+        onclick="closeModal('passwordModal')">
+
+        Cancel
+
+      </button>
+
+
+      <button
+        class="btn btn-primary"
+        onclick="changePassword()">
+
+        Change Password
+
+      </button>
+
+    </div>
+
+
+  </div>
+
+</div>
+
+
+
+<!-- ============================================================
+     LOADER
+============================================================ -->
+
+<div
+  class="loader"
+  id="loader">
+
+  <div class="spinner"></div>
+
+</div>
+
+
+
+<!-- ============================================================
+     TOAST
+============================================================ -->
+
+<div
+  class="toast"
+  id="toast">
+</div>
+
+
+
+<script>
+
+/* ============================================================
+   API URLS
+============================================================ */
+
+const USER_API_URL =
+"https://script.google.com/macros/s/AKfycbw00GHHheuvtdQtgPURjs4PtsM48-4yaFx-_ms0ZBV5FHhnmcdbJ5DHr3Aix8JPF0kQzA/exec";
+
+const DATA_API_URL =
+"https://script.google.com/macros/s/AKfycbz59T-4CKQDbHJB_ql6OYZf18eN7XUmttp0d2FaOM5pm27yCBOWrEilqA_zMOnFq_rz/exec";
+
+const SELL_API_URL =
+"https://script.google.com/macros/s/AKfycbyiKn1MH1ZQvebSIo83bZzbbfJimmfRf9PjlPI4w1q1UliuF27gKViYM24oXakpkHuP/exec";
+
+const DELETE_API_URL =
+"https://script.google.com/macros/s/AKfycbwDL1JIV7QYcH84VGiWxhUoT-wN9UfuGn0t9boYrs_FaG_ZfcVGjNmaTqSTC6ev0Ig9Kg/exec";
+
+const ITEM_API_URL =
+"https://script.google.com/macros/s/AKfycby2e7dzGE5vkS0Q-Eyl9MKLAbkkkD8f37eIVj7VuV8bPytWGOH7cwJ3w25efP7MLGshOw/exec";
+
+
+/* ============================================================
+   VARIABLES
+============================================================ */
+
+let allData=[];
+let filteredData=[];
+
+let dataCache=null;
+let sellCache=null;
+let paidCache=null;
+let deleteCache=null;
+let itemCache=null;
+
+let itemList=[];
+
+let currentDataType="data";
+let currentPage=1;
+
+const pageSize=10;
+
+let currentUsername="";
+let currentUserData=null;
+
+let editingDataRow=null;
+let editingSellRow=null;
+let editingUser=null;
+
+
+/* ============================================================
+   DOM READY
+============================================================ */
+
+document.addEventListener(
+  "DOMContentLoaded",
+  function(){
+
+    loadTheme();
+
+    checkLogin();
+
+    loadUser();
+
+    loadData();
+
+    loadItems();
+
+  }
+);
+
+
+/* ============================================================
+   LOGIN CHECK
+============================================================ */
+
+function checkLogin(){
+
+  const auth=
+    localStorage.getItem("dashboardAuth") ||
+    sessionStorage.getItem("dashboardAuth");
+
+  if(!auth){
+
+    window.location.href="index.html";
+
+    return false;
+  }
+
+  currentUsername=
+    localStorage.getItem("username") ||
+    localStorage.getItem("loggedUser") ||
+    "";
+
+  return true;
+}
+
+
+/* ============================================================
+   LOAD CURRENT USER
+============================================================ */
+
+async function loadUser(){
+
+  if(!currentUsername)
+    return;
+
+  try{
+
+    const url=
+      USER_API_URL+
+      "?action=getUser"+
+      "&username="+
+      encodeURIComponent(currentUsername);
+
+    const response=
+      await fetch(url);
+
+    const result=
+      await response.json();
+
+    if(result.success && result.user){
+
+      currentUserData=result.user;
+
+      const name=
+        result.user.name ||
+        result.user.Name ||
+        currentUsername;
+
+      localStorage.setItem(
+        "userData",
+        JSON.stringify(result.user)
+      );
+
+      document.getElementById(
+        "profileName"
+      ).textContent=name;
+
+      document.getElementById(
+        "profileCircle"
+      ).textContent=
+        name.charAt(0).toUpperCase();
+
+      const entryName=
+        document.getElementById("entryName");
+
+      if(entryName)
+        entryName.value=name;
+
+    }
+
+  }catch(error){
+
+    console.error(error);
+
+  }
+
+}
+
+
+/* ============================================================
+   CHANGE DATA TYPE
+============================================================ */
+
+function changeDataType(){
+
+  const select=
+    document.getElementById("dataType");
+
+  currentDataType=
+    select ?
+    select.value :
+    "data";
+
+  currentPage=1;
+
+  allData=[];
+  filteredData=[];
+
+  updateTableHeader();
+
+  loadData();
+
+}
+
+
+/* ============================================================
+   TABLE HEADER
+============================================================ */
+
+function updateTableHeader(){
+
+  const head=
+    document.getElementById("tableHead");
+
+  if(currentDataType==="sell"){
+
+    head.innerHTML=`
+      <tr>
+        <th>Name</th>
+        <th>IP</th>
+        <th>Work</th>
+        <th>Date</th>
+        <th>Item</th>
+        <th>Sell time</th>
+        <th>User</th>
+        <th>Action</th>
+      </tr>
+    `;
+
+    return;
+  }
+
+
+  if(currentDataType==="paid"){
+
+    head.innerHTML=`
+      <tr>
+        <th>Name</th>
+        <th>IP</th>
+        <th>Work</th>
+        <th>Date</th>
+        <th>Item</th>
+        <th>Sell time</th>
+        <th>User</th>
+        <th>Paid time</th>
+        <th>Paid User</th>
+      </tr>
+    `;
+
+    return;
+  }
+
+
+  if(currentDataType==="delete"){
+
+    head.innerHTML=`
+      <tr>
+        <th>Name</th>
+        <th>IP</th>
+        <th>Work</th>
+        <th>Date</th>
+        <th>Item</th>
+        <th>Delete Time</th>
+        <th>User</th>
+      </tr>
+    `;
+
+    return;
+  }
+
+
+  head.innerHTML=`
+    <tr>
+      <th>Name</th>
+      <th>IP</th>
+      <th>Work</th>
+      <th>Date</th>
+      <th>Item</th>
+      <th>Action</th>
+    </tr>
+  `;
+
+}
+
+
+/* ============================================================
+   LOAD DATA
+============================================================ */
+
+async function loadData(){
+
+  showLoader();
+
+  try{
+
+    let apiUrl="";
+    let action="";
+    let cache=null;
+
+    if(currentDataType==="data"){
+
+      apiUrl=DATA_API_URL;
+      action="getData";
+      cache=dataCache;
+
+    }else if(currentDataType==="sell"){
+
+      apiUrl=SELL_API_URL;
+      action="getSellData";
+      cache=sellCache;
+
+    }else if(currentDataType==="paid"){
+
+      apiUrl=SELL_API_URL;
+      action="getPaidData";
+      cache=paidCache;
+
+    }else if(currentDataType==="delete"){
+
+      apiUrl=DELETE_API_URL;
+      action="getDeletedData";
+      cache=deleteCache;
+
+    }
+
+
+    if(cache){
+
+      allData=cache;
+
+      applyFilters();
+
+      hideLoader();
+
+      return;
+    }
+
+
+    const url=
+      apiUrl+
+      "?action="+
+      encodeURIComponent(action);
+
+
+    console.log(
+      "Loading:",
+      currentDataType,
+      url
+    );
+
+
+    const response=
+      await fetch(url);
+
+
+    const result=
+      await response.json();
+
+
+    console.log(
+      "API Result:",
+      result
+    );
+
+
+    let newData=[];
+
+
+    if(Array.isArray(result)){
+
+      newData=result;
+
+    }else if(Array.isArray(result.data)){
+
+      newData=result.data;
+
+    }else if(Array.isArray(result.rows)){
+
+      newData=result.rows;
+
+    }
+
+
+    if(currentDataType==="data")
+      dataCache=newData;
+
+    if(currentDataType==="sell")
+      sellCache=newData;
+
+    if(currentDataType==="paid")
+      paidCache=newData;
+
+    if(currentDataType==="delete")
+      deleteCache=newData;
+
+
+    allData=newData;
+
+    applyFilters();
+
+
+  }catch(error){
+
+    console.error(
+      "Load data error:",
+      error
+    );
+
+    showToast(
+      error.message ||
+      "Failed to load data",
+      "error"
+    );
+
+    allData=[];
+
+    applyFilters();
+
+  }finally{
+
+    hideLoader();
+
+  }
+
+}
+
+
+/* ============================================================
+   RENDER DATA
+============================================================ */
+
+function renderData(){
+
+  const body=
+    document.getElementById(
+      "tableBody"
+    );
+
+  const colspan=
+    currentDataType==="data" ?
+    6 :
+    currentDataType==="sell" ?
+    8 :
+    currentDataType==="paid" ?
+    9 :
+    7;
+
+
+  if(!filteredData.length){
+
+    body.innerHTML=`
+      <tr>
+        <td
+          colspan="${colspan}"
+          class="empty-row">
+          No data found
+        </td>
+      </tr>
+    `;
+
+    renderPagination();
+
+    return;
+  }
+
+
+  const start=
+    (currentPage-1)*pageSize;
+
+  const rows=
+    filteredData.slice(
+      start,
+      start+pageSize
+    );
+
+
+  body.innerHTML=
+    rows.map(function(row,index){
+
+      return renderSingleRow(
+        row,
+        start+index
+      );
+
+    }).join("");
+
+
+  renderPagination();
+
+}
+
+
+/* ============================================================
+   RENDER SINGLE ROW
+============================================================ */
+
+function renderSingleRow(row,index){
+
+  const name=
+    row.Name ??
+    row.name ??
+    row[0] ??
+    "";
+
+  const ip=
+    row.IP ??
+    row.Ip ??
+    row.ip ??
+    row[1] ??
+    "";
+
+  const work=
+    row.Work ??
+    row.work ??
+    row[2] ??
+    "";
+
+  const date=
+    row.Date ??
+    row.date ??
+    row[3] ??
+    "";
+
+  const item=
+    row.Item ??
+    row.item ??
+    row[4] ??
+    "";
+
+
+  /* ================= PAID ================= */
+
+  if(currentDataType==="paid"){
+
+    const sellTime=
+      row["Sell time"] ??
+      row.SellTime ??
+      row.sellTime ??
+      row["Sell Date"] ??
+      row.sellDate ??
+      row[5] ??
+      "";
+
+    const user=
+      row.User ??
+      row.user ??
+      row.username ??
+      row.Username ??
+      row[6] ??
+      "";
+
+    const paidTime=
+      row["Paid time"] ??
+      row.PaidTime ??
+      row.paidTime ??
+      row[7] ??
+      "";
+
+    const paidUser=
+      row["Paid User"] ??
+      row.PaidUser ??
+      row.paidUser ??
+      row[8] ??
+      "";
+
+    return`
+      <tr>
+
+        <td>${escapeHtml(name)}</td>
+
+        <td>${escapeHtml(ip)}</td>
+
+        <td>${escapeHtml(work)}</td>
+
+        <td>${escapeHtml(formatDate(date))}</td>
+
+        <td>${escapeHtml(item)}</td>
+
+        <td>${escapeHtml(formatDateTime(sellTime))}</td>
+
+        <td>${escapeHtml(user)}</td>
+
+        <td>${escapeHtml(formatDateTime(paidTime))}</td>
+
+        <td>${escapeHtml(paidUser)}</td>
+
+      </tr>
+    `;
+
+  }
+
+
+  /* ================= SELL ================= */
+
+  if(currentDataType==="sell"){
+
+    const sellTime=
+      row["Sell time"] ??
+      row.SellTime ??
+      row.sellTime ??
+      row[5] ??
+      "";
+
+    const user=
+      row.User ??
+      row.user ??
+      row.username ??
+      row.Username ??
+      row[6] ??
+      "";
+
+    const rowNumber=
+      row.rowNumber ??
+      row.row ??
+      row._row ??
+      index+2;
+
+    return`
+      <tr>
+
+        <td>${escapeHtml(name)}</td>
+
+        <td>${escapeHtml(ip)}</td>
+
+        <td>${escapeHtml(work)}</td>
+
+        <td>${escapeHtml(formatDate(date))}</td>
+
+        <td>${escapeHtml(item)}</td>
+
+        <td>${escapeHtml(formatDateTime(sellTime))}</td>
+
+        <td>${escapeHtml(user)}</td>
+
+        <td>
+
+          <div class="action-wrap">
+
+            <button
+              class="action-btn edit-btn"
+              onclick='editSellEntry(${JSON.stringify(row)})'>
+              Edit
+            </button>
+
+            <button
+              class="action-btn paid-btn"
+              onclick='paidSellEntry(${JSON.stringify(row)})'>
+              Paid
+            </button>
+
+          </div>
+
+        </td>
+
+      </tr>
+    `;
+
+  }
+
+
+  /* ================= DELETE ================= */
+
+  if(currentDataType==="delete"){
+
+    const deleteTime=
+      row["Delete time"] ??
+      row.DeleteTime ??
+      row.deleteTime ??
+      row[5] ??
+      "";
+
+    const user=
+      row.User ??
+      row.user ??
+      row.username ??
+      row.Username ??
+      row[6] ??
+      "";
+
+    return`
+      <tr>
+
+        <td>${escapeHtml(name)}</td>
+
+        <td>${escapeHtml(ip)}</td>
+
+        <td>${escapeHtml(work)}</td>
+
+        <td>${escapeHtml(formatDate(date))}</td>
+
+        <td>${escapeHtml(item)}</td>
+
+        <td>${escapeHtml(formatDateTime(deleteTime))}</td>
+
+        <td>${escapeHtml(user)}</td>
+
+      </tr>
+    `;
+
+  }
+
+
+  /* ================= DATA ================= */
+
+  const rowNumber=
+    row.rowNumber ??
+    row.row ??
+    row._row ??
+    index+2;
+
+  return`
+    <tr>
+
+      <td>${escapeHtml(name)}</td>
+
+      <td>${escapeHtml(ip)}</td>
+
+      <td>${escapeHtml(work)}</td>
+
+      <td>${escapeHtml(formatDate(date))}</td>
+
+      <td>${escapeHtml(item)}</td>
+
+      <td>
+
+        <div class="action-wrap">
+
+          <button
+            class="action-btn edit-btn"
+            onclick='editDataEntry(${JSON.stringify(row)})'>
+            Edit
+          </button>
+
+          <button
+            class="action-btn sell-btn"
+            onclick='sellDataEntry(${JSON.stringify(row)})'>
+            Sell
+          </button>
+
+          <button
+            class="action-btn delete-btn"
+            onclick='deleteDataEntry(${JSON.stringify(row)})'>
+            Delete
+          </button>
+
+        </div>
+
+      </td>
+
+    </tr>
+  `;
+
+}
+
+
+/* ============================================================
+   FILTER
+============================================================ */
+
+function applyFilters(){
+
+  const search=
+    document.getElementById(
+      "searchInput"
+    ).value
+    .trim()
+    .toLowerCase();
+
+  const from=
+    document.getElementById(
+      "fromDate"
+    ).value;
+
+  const to=
+    document.getElementById(
+      "toDate"
+    ).value;
+
+
+  filteredData=
+    allData.filter(function(row){
+
+      const json=
+        JSON.stringify(row)
+        .toLowerCase();
+
+      if(search && !json.includes(search))
+        return false;
+
+
+      const date=
+        row.Date ??
+        row.date ??
+        row[3] ??
+        "";
+
+      const dateValue=
+        normalizeDateForFilter(date);
+
+
+      if(from && dateValue<from)
+        return false;
+
+      if(to && dateValue>to)
+        return false;
+
+
+      return true;
+
+    });
+
+
+  currentPage=1;
+
+  renderData();
+
+}
+
+
+/* ============================================================
+   CLEAR FILTER
+============================================================ */
+
+function clearFilters(){
+
+  document.getElementById(
+    "searchInput"
+  ).value="";
+
+  document.getElementById(
+    "fromDate"
+  ).value="";
+
+  document.getElementById(
+    "toDate"
+  ).value="";
+
+  applyFilters();
+
+}
+
+
+/* ============================================================
+   PAGINATION
+============================================================ */
+
+function renderPagination(){
+
+  const box=
+    document.getElementById(
+      "pagination"
+    );
+
+  const total=
+    Math.ceil(
+      filteredData.length/pageSize
+    );
+
+  if(total<=1){
+
+    box.innerHTML="";
+
+    return;
+  }
+
+
+  let html="";
+
+  for(let i=1;i<=total;i++){
+
+    html+=`
+      <button
+        class="page-btn ${i===currentPage?"active":""}"
+        onclick="goPage(${i})">
+        ${i}
+      </button>
+    `;
+
+  }
+
+  box.innerHTML=html;
+
+}
+
+
+function goPage(page){
+
+  currentPage=page;
+
+  renderData();
+
+}
+
+
+/* ============================================================
+   NEW ENTRY
+============================================================ */
+
+function openNewEntryModal(){
+
+  editingDataRow=null;
+  editingSellRow=null;
+
+  document.getElementById(
+    "entryModalTitle"
+  ).textContent="New Entry";
+
+  const userData=
+    currentUserData ||
+    JSON.parse(
+      localStorage.getItem("userData") ||
+      "{}"
+    );
+
+  document.getElementById(
+    "entryName"
+  ).value=
+    userData.name ||
+    userData.Name ||
+    currentUsername ||
+    "";
+
+  document.getElementById(
+    "entryIP"
+  ).value="";
+
+  document.getElementById(
+    "entryWork"
+  ).value="";
+
+  document.getElementById(
+    "entryDate"
+  ).value=
+    todayString();
+
+  document.getElementById(
+    "entryItem"
+  ).value="";
+
+  populateItemSelect();
+
+  document.getElementById(
+    "entryModal"
+  ).classList.add("show");
+
+}
+
+
+/* ============================================================
+   EDIT DATA
+============================================================ */
+
+function editDataEntry(row){
+
+  editingDataRow=row;
+  editingSellRow=null;
+
+  document.getElementById(
+    "entryModalTitle"
+  ).textContent="Edit Entry";
+
+  document.getElementById(
+    "entryName"
+  ).value=
+    row.Name ??
+    row.name ??
+    row[0] ??
+    "";
+
+  document.getElementById(
+    "entryIP"
+  ).value=
+    row.IP ??
+    row.Ip ??
+    row.ip ??
+    row[1] ??
+    "";
+
+  document.getElementById(
+    "entryWork"
+  ).value=
+    row.Work ??
+    row.work ??
+    row[2] ??
+    "";
+
+  document.getElementById(
+    "entryDate"
+  ).value=
+    normalizeDateForInput(
+      row.Date ??
+      row.date ??
+      row[3] ??
+      ""
+    );
+
+  populateItemSelect(
+    row.Item ??
+    row.item ??
+    row[4] ??
+    ""
+  );
+
+  document.getElementById(
+    "entryModal"
+  ).classList.add("show");
+
+}
+
+
+/* ============================================================
+   EDIT SELL
+============================================================ */
+
+function editSellEntry(row){
+
+  editingSellRow=row;
+  editingDataRow=null;
+
+  document.getElementById(
+    "entryModalTitle"
+  ).textContent="Edit Sell Entry";
+
+  document.getElementById(
+    "entryName"
+  ).value=
+    row.Name ??
+    row.name ??
+    row[0] ??
+    "";
+
+  document.getElementById(
+    "entryIP"
+  ).value=
+    row.IP ??
+    row.Ip ??
+    row.ip ??
+    row[1] ??
+    "";
+
+  document.getElementById(
+    "entryWork"
+  ).value=
+    row.Work ??
+    row.work ??
+    row[2] ??
+    "";
+
+  document.getElementById(
+    "entryDate"
+  ).value=
+    normalizeDateForInput(
+      row.Date ??
+      row.date ??
+      row[3] ??
+      ""
+    );
+
+  populateItemSelect(
+    row.Item ??
+    row.item ??
+    row[4] ??
+    ""
+  );
+
+  document.getElementById(
+    "entryModal"
+  ).classList.add("show");
+
+}
+
+
+/* ============================================================
+   SAVE ENTRY
+============================================================ */
+
+async function saveEntry(){
+
+  const name=
+    document.getElementById(
+      "entryName"
+    ).value.trim();
+
+  const ip=
+    document.getElementById(
+      "entryIP"
+    ).value.trim();
+
+  const work=
+    document.getElementById(
+      "entryWork"
+    ).value.trim();
+
+  const date=
+    document.getElementById(
+      "entryDate"
+    ).value;
+
+  const item=
+    document.getElementById(
+      "entryItem"
+    ).value;
+
+
+  if(!ip || !work || !date){
+
+    showToast(
+      "Please fill all required fields",
+      "error"
+    );
+
+    return;
+  }
+
+
+  showLoader();
+
+  try{
+
+    if(editingSellRow){
+
+      const rowNumber=
+        editingSellRow.rowNumber ??
+        editingSellRow.row ??
+        editingSellRow._row ??
+        "";
+
+      const payload={
+
+        action:"editSellData",
+
+        row:rowNumber,
+
+        rowNumber:rowNumber,
+
+        name:name,
+
+        ip:ip,
+
+        work:work,
+
+        date:date,
+
+        item:item,
+
+        username:currentUsername,
+
+        user:currentUsername
+
+      };
+
+
+      const response=
+        await fetch(
+          SELL_API_URL,
+          {
+            method:"POST",
+            body:JSON.stringify(payload)
+          }
+        );
+
+      const result=
+        await response.json();
+
+
+      if(!result.success){
+
+        throw new Error(
+          result.message ||
+          "Edit failed"
+        );
+
+      }
+
+
+      showToast(
+        "Sell entry updated",
+        "success"
+      );
+
+      closeModal("entryModal");
+
+      sellCache=null;
+
+      if(currentDataType==="sell")
+        await loadData();
+
+      return;
+
+    }
+
+
+    const rowNumber=
+      editingDataRow ?
+      (
+        editingDataRow.rowNumber ??
+        editingDataRow.row ??
+        editingDataRow._row ??
+        ""
+      ) :
+      "";
+
+
+    const payload={
+
+      action:
+        editingDataRow ?
+        "editData" :
+        "addData",
+
+      row:rowNumber,
+
+      rowNumber:rowNumber,
+
+      name:name,
+
+      ip:ip,
+
+      work:work,
+
+      date:date,
+
+      item:item,
+
+      username:currentUsername,
+
+      user:currentUsername
+
+    };
+
+
+    const response=
+      await fetch(
+        DATA_API_URL,
+        {
+          method:"POST",
+          body:JSON.stringify(payload)
+        }
+      );
+
+    const result=
+      await response.json();
+
+
+    if(!result.success){
+
+      throw new Error(
+        result.message ||
+        "Save failed"
+      );
+
+    }
+
+
+    showToast(
+      editingDataRow ?
+      "Entry updated" :
+      "Entry added",
+      "success"
+    );
+
+    closeModal("entryModal");
+
+    dataCache=null;
+
+    if(currentDataType==="data")
+      await loadData();
+
+  }catch(error){
+
+    console.error(error);
+
+    showToast(
+      error.message ||
+      "Operation failed",
+      "error"
+    );
+
+  }finally{
+
+    hideLoader();
+
+  }
+
+}
+
+
+/* ============================================================
+   SELL DATA
+============================================================ */
+
+async function sellDataEntry(row){
+
+  if(!confirm(
+    "Are you sure you want to sell this entry?"
+  ))
+    return;
+
+
+  showLoader();
+
+  try{
+
+    const rowNumber=
+      row.rowNumber ??
+      row.row ??
+      row._row ??
+      "";
+
+
+    const name=
+      row.Name ??
+      row.name ??
+      row[0] ??
+      "";
+
+    const ip=
+      row.IP ??
+      row.Ip ??
+      row.ip ??
+      row[1] ??
+      "";
+
+    const work=
+      row.Work ??
+      row.work ??
+      row[2] ??
+      "";
+
+    const date=
+      row.Date ??
+      row.date ??
+      row[3] ??
+      "";
+
+    const item=
+      row.Item ??
+      row.item ??
+      row[4] ??
+      "";
+
+
+    const payload={
+
+      action:"sellData",
+
+      row:rowNumber,
+
+      rowNumber:rowNumber,
+
+      name:name,
+
+      ip:ip,
+
+      work:work,
+
+      date:date,
+
+      item:item,
+
+      username:currentUsername,
+
+      user:currentUsername,
+
+      SellUser:currentUsername,
+
+      sellUser:currentUsername
+
+    };
+
+
+    const response=
+      await fetch(
+        SELL_API_URL,
+        {
+          method:"POST",
+          body:JSON.stringify(payload)
+        }
+      );
+
+
+    const result=
+      await response.json();
+
+
+    if(!result.success){
+
+      throw new Error(
+        result.message ||
+        "Sell failed"
+      );
+
+    }
+
+
+    showToast(
+      "Data sold successfully",
+      "success"
+    );
+
+
+    dataCache=null;
+    sellCache=null;
+
+
+    if(currentDataType==="data" ||
+       currentDataType==="sell"){
+
+      await loadData();
+
+    }
+
+
+  }catch(error){
+
+    console.error(error);
+
+    showToast(
+      error.message ||
+      "Sell failed",
+      "error"
+    );
+
+  }finally{
+
+    hideLoader();
+
+  }
+
+}
+
+
+/* ============================================================
+   PAID SELL
+============================================================ */
+
+async function paidSellEntry(row){
+
+  if(!confirm(
+    "Mark this Sell entry as Paid?"
+  ))
+    return;
+
+
+  showLoader();
+
+  try{
+
+    const rowNumber=
+      row.rowNumber ??
+      row.row ??
+      row._row ??
+      "";
+
+
+    const name=
+      row.Name ??
+      row.name ??
+      row[0] ??
+      "";
+
+    const ip=
+      row.IP ??
+      row.Ip ??
+      row.ip ??
+      row[1] ??
+      "";
+
+    const work=
+      row.Work ??
+      row.work ??
+      row[2] ??
+      "";
+
+    const date=
+      row.Date ??
+      row.date ??
+      row[3] ??
+      "";
+
+    const item=
+      row.Item ??
+      row.item ??
+      row[4] ??
+      "";
+
+    const sellTime=
+      row["Sell time"] ??
+      row.SellTime ??
+      row.sellTime ??
+      row[5] ??
+      "";
+
+    const sellUser=
+      row.User ??
+      row.user ??
+      row.username ??
+      row.Username ??
+      row[6] ??
+      "";
+
+
+    const payload={
+
+      action:"paidData",
+
+      row:rowNumber,
+
+      rowNumber:rowNumber,
+
+      name:name,
+
+      ip:ip,
+
+      work:work,
+
+      date:date,
+
+      item:item,
+
+      sellTime:sellTime,
+
+      sellUser:sellUser,
+
+      user:currentUsername,
+
+      username:currentUsername,
+
+      paidUser:currentUsername,
+
+      PaidUser:currentUsername
+
+    };
+
+
+    const response=
+      await fetch(
+        SELL_API_URL,
+        {
+          method:"POST",
+          body:JSON.stringify(payload)
+        }
+      );
+
+
+    const result=
+      await response.json();
+
+
+    if(!result.success){
+
+      throw new Error(
+        result.message ||
+        "Paid operation failed"
+      );
+
+    }
+
+
+    showToast(
+      "Marked as Paid successfully",
+      "success"
+    );
+
+
+    sellCache=null;
+    paidCache=null;
+
+
+    if(currentDataType==="sell" ||
+       currentDataType==="paid"){
+
+      await loadData();
+
+    }
+
+
+  }catch(error){
+
+    console.error(error);
+
+    showToast(
+      error.message ||
+      "Paid operation failed",
+      "error"
+    );
+
+  }finally{
+
+    hideLoader();
+
+  }
+
+}
+
+
+/* ============================================================
+   DELETE DATA
+============================================================ */
+
+async function deleteDataEntry(row){
+
+  if(!confirm(
+    "Are you sure you want to delete this entry?"
+  ))
+    return;
+
+
+  showLoader();
+
+  try{
+
+    const rowNumber=
+      row.rowNumber ??
+      row.row ??
+      row._row ??
+      "";
+
+
+    const name=
+      row.Name ??
+      row.name ??
+      row[0] ??
+      "";
+
+    const ip=
+      row.IP ??
+      row.Ip ??
+      row.ip ??
+      row[1] ??
+      "";
+
+    const work=
+      row.Work ??
+      row.work ??
+      row[2] ??
+      "";
+
+    const date=
+      row.Date ??
+      row.date ??
+      row[3] ??
+      "";
+
+    const item=
+      row.Item ??
+      row.item ??
+      row[4] ??
+      "";
+
+
+    const archivePayload={
+
+      action:"deleteData",
+
+      row:rowNumber,
+
+      rowNumber:rowNumber,
+
+      name:name,
+
+      ip:ip,
+
+      work:work,
+
+      date:date,
+
+      item:item,
+
+      username:currentUsername,
+
+      user:currentUsername
+
+    };
+
+
+    const archiveResponse=
+      await fetch(
+        DELETE_API_URL,
+        {
+          method:"POST",
+          body:JSON.stringify(
+            archivePayload
+          )
+        }
+      );
+
+
+    const archiveResult=
+      await archiveResponse.json();
+
+
+    if(!archiveResult.success){
+
+      throw new Error(
+        archiveResult.message ||
+        "Archive failed"
+      );
+
+    }
+
+
+    const deletePayload={
+
+      action:"deleteData",
+
+      row:rowNumber,
+
+      rowNumber:rowNumber
+
+    };
+
+
+    const deleteResponse=
+      await fetch(
+        DATA_API_URL,
+        {
+          method:"POST",
+          body:JSON.stringify(
+            deletePayload
+          )
+        }
+      );
+
+
+    const deleteResult=
+      await deleteResponse.json();
+
+
+    if(!deleteResult.success){
+
+      throw new Error(
+        deleteResult.message ||
+        "Delete failed"
+      );
+
+    }
+
+
+    showToast(
+      "Entry deleted",
+      "success"
+    );
+
+
+    dataCache=null;
+    deleteCache=null;
+
+
+    if(currentDataType==="data" ||
+       currentDataType==="delete"){
+
+      await loadData();
+
+    }
+
+
+  }catch(error){
+
+    console.error(error);
+
+    showToast(
+      error.message ||
+      "Delete failed",
+      "error"
+    );
+
+  }finally{
+
+    hideLoader();
+
+  }
+
+}
+
+
+/* ============================================================
+   USERS
+============================================================ */
+
+async function openUsersModal(){
+
+  document.getElementById(
+    "usersModal"
+  ).classList.add("show");
+
+  await loadUsers();
+
+}
+
+
+async function loadUsers(){
+
+  const body=
+    document.getElementById(
+      "usersBody"
+    );
+
+  body.innerHTML=`
+    <tr>
+      <td colspan="5" class="empty-row">
+        Loading...
+      </td>
+    </tr>
+  `;
+
+
+  try{
+
+    const url=
+      USER_API_URL+
+      "?action=getUsers"+
+      "&requester="+
+      encodeURIComponent(
+        currentUsername
+      );
+
+
+    const response=
+      await fetch(url);
+
+    const result=
+      await response.json();
+
+    let users=[];
+
+    if(Array.isArray(result))
+      users=result;
+
+    else if(Array.isArray(result.users))
+      users=result.users;
+
+    else if(Array.isArray(result.data))
+      users=result.data;
+
+
+    renderUsers(users);
+
+
+  }catch(error){
+
+    console.error(error);
+
+    body.innerHTML=`
+      <tr>
+        <td colspan="5" class="empty-row">
+          Failed to load users
+        </td>
+      </tr>
+    `;
+
+  }
+
+}
+
+
+function renderUsers(users){
+
+  const body=
+    document.getElementById(
+      "usersBody"
+    );
+
+
+  if(!users.length){
+
+    body.innerHTML=`
+      <tr>
+        <td colspan="5" class="empty-row">
+          No users found
+        </td>
+      </tr>
+    `;
+
+    return;
+  }
+
+
+  body.innerHTML=
+    users.map(function(user){
+
+      const username=
+        user.Username ??
+        user.username ??
+        user[0] ??
+        "";
+
+      const password=
+        user.Password ??
+        user.password ??
+        user[1] ??
+        "";
+
+      const name=
+        user.Name ??
+        user.name ??
+        user[2] ??
+        "";
+
+      const role=
+        user.Role ??
+        user.role ??
+        user[3] ??
+        "";
+
+      const status=
+        user.Status ??
+        user.status ??
+        user[4] ??
+        "";
+
+
+      const active=
+        String(status)
+        .toLowerCase()
+        .includes("active");
+
+
+      const own=
+        username.toLowerCase() ===
+        currentUsername.toLowerCase();
+
+
+      return`
+        <tr>
+
+          <td>${escapeHtml(username)}</td>
+
+          <td>${escapeHtml(name)}</td>
+
+          <td>${escapeHtml(role)}</td>
+
+          <td class="${active?
+            "status-active":
+            "status-block"}">
+            ${escapeHtml(status)}
+          </td>
+
+          <td>
+
+            <div class="user-action">
+
+              <button
+                class="action-btn edit-btn"
+                onclick='editUser(${JSON.stringify({
+                  username,
+                  password,
+                  name,
+                  role,
+                  status
+                })})'>
+                Edit
+              </button>
+
+              <button
+                class="action-btn ${active?
+                  "delete-btn":
+                  "sell-btn"}"
+                ${own?"disabled":""}
+                onclick='changeUserStatus(
+                  "${escapeJs(username)}",
+                  "${escapeJs(status)}"
+                )'>
+                ${active?"Block":"Unblock"}
+              </button>
+
+            </div>
+
+          </td>
+
+        </tr>
+      `;
+
+    }).join("");
+
+}
+
+
+/* ============================================================
+   ADD USER
+============================================================ */
+
+function openAddUserModal(){
+
+  editingUser=null;
+
+  document.getElementById(
+    "userEditTitle"
+  ).textContent="Add User";
+
+  document.getElementById(
+    "userUsername"
+  ).value="";
+
+  document.getElementById(
+    "userPassword"
+  ).value="";
+
+  document.getElementById(
+    "userName"
+  ).value="";
+
+  document.getElementById(
+    "userRole"
+  ).value="support";
+
+  document.getElementById(
+    "userStatus"
+  ).value="Active";
+
+
+  document.getElementById(
+    "userEditModal"
+  ).classList.add("show");
+
+}
+
+
+/* ============================================================
+   EDIT USER
+============================================================ */
+
+function editUser(user){
+
+  editingUser=user;
+
+  document.getElementById(
+    "userEditTitle"
+  ).textContent="Edit User";
+
+  document.getElementById(
+    "userUsername"
+  ).value=
+    user.username || "";
+
+  document.getElementById(
+    "userPassword"
+  ).value=
+    user.password || "";
+
+  document.getElementById(
+    "userName"
+  ).value=
+    user.name || "";
+
+  document.getElementById(
+    "userRole"
+  ).value=
+    user.role || "support";
+
+  document.getElementById(
+    "userStatus"
+  ).value=
+    user.status || "Active";
+
+
+  document.getElementById(
+    "userEditModal"
+  ).classList.add("show");
+
+}
+
+
+/* ============================================================
+   SAVE USER
+============================================================ */
+
+async function saveUser(){
+
+  const username=
+    document.getElementById(
+      "userUsername"
+    ).value.trim();
+
+  const password=
+    document.getElementById(
+      "userPassword"
+    ).value;
+
+  const name=
+    document.getElementById(
+      "userName"
+    ).value.trim();
+
+  const role=
+    document.getElementById(
+      "userRole"
+    ).value;
+
+  const status=
+    document.getElementById(
+      "userStatus"
+    ).value;
+
+
+  if(!username || !name){
+
+    showToast(
+      "Username and Name are required",
+      "error"
+    );
+
+    return;
+  }
+
+
+  if(!editingUser && !password){
+
+    showToast(
+      "Password is required",
+      "error"
+    );
+
+    return;
+  }
+
+
+  showLoader();
+
+  try{
+
+    let payload;
+
+
+    if(editingUser){
+
+      payload={
+
+        action:"editUser",
+
+        requester:currentUsername,
+
+        originalUsername:
+          editingUser.username,
+
+        username:username,
+
+        password:password,
+
+        name:name,
+
+        role:role,
+
+        status:status
+
+      };
+
+    }else{
+
+      payload={
+
+        action:"addUser",
+
+        requester:currentUsername,
+
+        username:username,
+
+        password:password,
+
+        name:name,
+
+        role:role,
+
+        status:status
+
+      };
+
+    }
+
+
+    const response=
+      await fetch(
+        USER_API_URL,
+        {
+          method:"POST",
+          body:JSON.stringify(payload)
+        }
+      );
+
+
+    const result=
+      await response.json();
+
+
+    if(!result.success){
+
+      throw new Error(
+        result.message ||
+        "User save failed"
+      );
+
+    }
+
+
+    showToast(
+      editingUser ?
+      "User updated" :
+      "User added",
+      "success"
+    );
+
+
+    closeModal("userEditModal");
+
+    await loadUsers();
+
+
+  }catch(error){
+
+    console.error(error);
+
+    showToast(
+      error.message ||
+      "User save failed",
+      "error"
+    );
+
+  }finally{
+
+    hideLoader();
+
+  }
+
+}
+
+
+/* ============================================================
+   BLOCK / UNBLOCK USER
+============================================================ */
+
+async function changeUserStatus(
+  username,
+  currentStatus
+){
+
+  if(
+    username.toLowerCase()===
+    currentUsername.toLowerCase()
+  ){
+
+    showToast(
+      "You cannot block your own account",
+      "error"
+    );
+
+    return;
+  }
+
+
+  const isActive=
+    String(currentStatus)
+    .toLowerCase()
+    .includes("active");
+
+
+  const newStatus=
+    isActive ?
+    "Block" :
+    "Active";
+
+
+  if(!confirm(
+    `Change ${username} status to ${newStatus}?`
+  ))
+    return;
+
+
+  showLoader();
+
+  try{
+
+    const payload={
+
+      action:"toggleUserStatus",
+
+      requester:currentUsername,
+
+      username:username,
+
+      status:newStatus,
+
+      newStatus:newStatus
+
+    };
+
+
+    const response=
+      await fetch(
+        USER_API_URL,
+        {
+          method:"POST",
+          body:JSON.stringify(payload)
+        }
+      );
+
+
+    const result=
+      await response.json();
+
+
+    if(!result.success){
+
+      throw new Error(
+        result.message ||
+        "Status change failed"
+      );
+
+    }
+
+
+    showToast(
+      `User ${newStatus}`,
+      "success"
+    );
+
+
+    await loadUsers();
+
+
+  }catch(error){
+
+    console.error(error);
+
+    showToast(
+      error.message ||
+      "Status change failed",
+      "error"
+    );
+
+  }finally{
+
+    hideLoader();
+
+  }
+
+}
+
+
+/* ============================================================
+   ITEMS
+============================================================ */
+
+async function openItemsModal(){
+
+  document.getElementById(
+    "itemsModal"
+  ).classList.add("show");
+
+  await loadItems();
+
+}
+
+
+async function loadItems(){
+
+  try{
+
+    const url=
+      ITEM_API_URL+
+      "?action=getItems";
+
+
+    const response=
+      await fetch(url);
+
+    const result=
+      await response.json();
+
+
+    if(Array.isArray(result))
+      itemList=result;
+
+    else if(Array.isArray(result.items))
+      itemList=result.items;
+
+    else if(Array.isArray(result.data))
+      itemList=result.data;
+
+    else
+      itemList=[];
+
+
+    itemCache=itemList;
+
+    renderItems();
+
+    populateItemSelect();
+
+  }catch(error){
+
+    console.error(error);
+
+    itemList=[];
+
+    renderItems();
+
+  }
+
+}
+
+
+function renderItems(){
+
+  const box=
+    document.getElementById(
+      "itemList"
+    );
+
+
+  if(!itemList.length){
+
+    box.innerHTML=`
+      <div style="
+        color:var(--muted);
+        text-align:center;
+        padding:15px">
+        No items found
+      </div>
+    `;
+
+    return;
+  }
+
+
+  box.innerHTML=
+    itemList.map(function(item){
+
+      const value=
+        typeof item==="object" ?
+        (
+          item.Item ??
+          item.item ??
+          item.name ??
+          ""
+        ) :
+        item;
+
+
+      return`
+        <div class="item-row">
+
+          <span>
+            ${escapeHtml(value)}
+          </span>
+
+          <button
+            class="item-delete"
+            onclick='deleteItem("${escapeJs(value)}")'>
+            Delete
+          </button>
+
+        </div>
+      `;
+
+    }).join("");
+
+}
+
+
+function populateItemSelect(selected=""){
+
+  const select=
+    document.getElementById(
+      "entryItem"
+    );
+
+  if(!select)
+    return;
+
+
+  const options=
+    itemList.map(function(item){
+
+      const value=
+        typeof item==="object" ?
+        (
+          item.Item ??
+          item.item ??
+          item.name ??
+          ""
+        ) :
+        item;
+
+      return`
+        <option
+          value="${escapeHtml(value)}"
+          ${value===selected?"selected":""}>
+          ${escapeHtml(value)}
+        </option>
+      `;
+
+    }).join("");
+
+
+  select.innerHTML=
+    `<option value="">Select Item</option>`+
+    options;
+
+}
+
+
+async function addNewItem(){
+
+  const input=
+    document.getElementById(
+      "newItemName"
+    );
+
+  const name=
+    input.value.trim();
+
+
+  if(!name){
+
+    showToast(
+      "Enter item name",
+      "error"
+    );
+
+    return;
+  }
+
+
+  showLoader();
+
+  try{
+
+    const payload={
+
+      action:"addItem",
+
+      item:name,
+
+      name:name
+
+    };
+
+
+    const response=
+      await fetch(
+        ITEM_API_URL,
+        {
+          method:"POST",
+          body:JSON.stringify(payload)
+        }
+      );
+
+
+    const result=
+      await response.json();
+
+
+    if(!result.success){
+
+      throw new Error(
+        result.message ||
+        "Item add failed"
+      );
+
+    }
+
+
+    input.value="";
+
+
+    showToast(
+      "Item added",
+      "success"
+    );
+
+
+    await loadItems();
+
+
+  }catch(error){
+
+    console.error(error);
+
+    showToast(
+      error.message ||
+      "Item add failed",
+      "error"
+    );
+
+  }finally{
+
+    hideLoader();
+
+  }
+
+}
+
+
+async function deleteItem(item){
+
+  if(!confirm(
+    `Delete item "${item}"?`
+  ))
+    return;
+
+
+  showLoader();
+
+  try{
+
+    const payload={
+
+      action:"deleteItem",
+
+      item:item,
+
+      name:item
+
+    };
+
+
+    const response=
+      await fetch(
+        ITEM_API_URL,
+        {
+          method:"POST",
+          body:JSON.stringify(payload)
+        }
+      );
+
+
+    const result=
+      await response.json();
+
+
+    if(!result.success){
+
+      throw new Error(
+        result.message ||
+        "Item delete failed"
+      );
+
+    }
+
+
+    showToast(
+      "Item deleted",
+      "success"
+    );
+
+
+    await loadItems();
+
+
+  }catch(error){
+
+    console.error(error);
+
+    showToast(
+      error.message ||
+      "Item delete failed",
+      "error"
+    );
+
+  }finally{
+
+    hideLoader();
+
+  }
+
+}
+
+
+/* ============================================================
+   CHANGE PASSWORD
+============================================================ */
+
+function openPasswordModal(){
+
+  document.getElementById(
+    "currentPassword"
+  ).value="";
+
+  document.getElementById(
+    "newPassword"
+  ).value="";
+
+  document.getElementById(
+    "confirmPassword"
+  ).value="";
+
+
+  document.getElementById(
+    "passwordModal"
+  ).classList.add("show");
+
+}
+
+
+async function changePassword(){
+
+  const currentPassword=
+    document.getElementById(
+      "currentPassword"
+    ).value;
+
+  const newPassword=
+    document.getElementById(
+      "newPassword"
+    ).value;
+
+  const confirmPassword=
+    document.getElementById(
+      "confirmPassword"
+    ).value;
+
+
+  if(!currentPassword ||
+     !newPassword ||
+     !confirmPassword){
+
+    showToast(
+      "Please fill all fields",
+      "error"
+    );
+
+    return;
+  }
+
+
+  if(newPassword!==confirmPassword){
+
+    showToast(
+      "New passwords do not match",
+      "error"
+    );
+
+    return;
+  }
+
+
+  showLoader();
+
+  try{
+
+    const payload={
+
+      action:"changePassword",
+
+      username:currentUsername,
+
+      currentPassword:currentPassword,
+
+      newPassword:newPassword
+
+    };
+
+
+    const response=
+      await fetch(
+        USER_API_URL,
+        {
+          method:"POST",
+          body:JSON.stringify(payload)
+        }
+      );
+
+
+    const result=
+      await response.json();
+
+
+    if(!result.success){
+
+      throw new Error(
+        result.message ||
+        "Password change failed"
+      );
+
+    }
+
+
+    showToast(
+      "Password changed successfully",
+      "success"
+    );
+
+
+    closeModal("passwordModal");
+
+
+  }catch(error){
+
+    console.error(error);
+
+    showToast(
+      error.message ||
+      "Password change failed",
+      "error"
+    );
+
+  }finally{
+
+    hideLoader();
+
+  }
+
+}
+
+
+/* ============================================================
+   THEME
+============================================================ */
+
+function loadTheme(){
+
+  const theme=
+    localStorage.getItem(
+      "dashboardTheme"
+    );
+
+
+  if(theme==="dark"){
+
+    document.body.classList.add("dark");
+
+    document.getElementById(
+      "themeBtn"
+    ).textContent="☀️";
+
+  }else{
+
+    document.getElementById(
+      "themeBtn"
+    ).textContent="🌙";
+
+  }
+
+}
+
+
+function toggleTheme(){
+
+  document.body.classList.toggle("dark");
+
+  const dark=
+    document.body.classList.contains("dark");
+
+
+  localStorage.setItem(
+    "dashboardTheme",
+    dark ?
+    "dark" :
+    "light"
+  );
+
+
+  document.getElementById(
+    "themeBtn"
+  ).textContent=
+    dark ?
+    "☀️" :
+    "🌙";
+
+}
+
+
+/* ============================================================
+   PROFILE MENU
+============================================================ */
+
+function toggleProfileMenu(){
+
+  document.getElementById(
+    "profileMenu"
+  ).classList.toggle("show");
+
+}
+
+
+document.addEventListener(
+  "click",
+  function(event){
+
+    const menu=
+      document.getElementById(
+        "profileMenu"
+      );
+
+    const btn=
+      document.querySelector(
+        ".profile-btn"
+      );
+
+
+    if(
+      menu &&
+      btn &&
+      !menu.contains(event.target) &&
+      !btn.contains(event.target)
+    ){
+
+      menu.classList.remove("show");
+
+    }
+
+  }
+);
+
+
+/* ============================================================
+   LOGOUT
+============================================================ */
+
+function logout(){
+
+  localStorage.removeItem(
+    "dashboardAuth"
+  );
+
+  sessionStorage.removeItem(
+    "dashboardAuth"
+  );
+
+  localStorage.removeItem(
+    "username"
+  );
+
+  localStorage.removeItem(
+    "loggedUser"
+  );
+
+  localStorage.removeItem(
+    "currentUser"
+  );
+
+  localStorage.removeItem(
+    "userData"
+  );
+
+  window.location.href=
+    "index.html";
+
+}
+
+
+/* ============================================================
+   MODAL
+============================================================ */
+
+function closeModal(id){
+
+  const modal=
+    document.getElementById(id);
+
+  if(modal)
+    modal.classList.remove("show");
+
+}
+
+
+window.addEventListener(
+  "click",
+  function(event){
+
+    if(event.target.classList.contains("modal")){
+
+      event.target.classList.remove("show");
+
+    }
+
+  }
+);
+
+
+/* ============================================================
+   LOADER
+============================================================ */
+
+function showLoader(){
+
+  document.getElementById(
+    "loader"
+  ).classList.add("show");
+
+}
+
+
+function hideLoader(){
+
+  document.getElementById(
+    "loader"
+  ).classList.remove("show");
+
+}
+
+
+/* ============================================================
+   TOAST
+============================================================ */
+
+let toastTimer=null;
+
+function showToast(
+  message,
+  type="success"
+){
+
+  const toast=
+    document.getElementById(
+      "toast"
+    );
+
+
+  toast.textContent=message;
+
+  toast.className=
+    "toast show "+
+    type;
+
+
+  clearTimeout(toastTimer);
+
+
+  toastTimer=
+    setTimeout(
+      function(){
+
+        toast.classList.remove(
+          "show"
+        );
+
+      },
+      3000
+    );
+
+}
+
+
+/* ============================================================
+   DATE FUNCTIONS
+============================================================ */
+
+function todayString(){
+
+  const d=new Date();
+
+  const year=
+    d.getFullYear();
+
+  const month=
+    String(
+      d.getMonth()+1
+    ).padStart(2,"0");
+
+  const day=
+    String(
+      d.getDate()
+    ).padStart(2,"0");
+
+
+  return`${year}-${month}-${day}`;
+
+}
+
+
+function normalizeDateForInput(value){
+
+  if(!value)
+    return"";
+
+
+  if(value instanceof Date)
+    return todayString();
+
+
+  const str=
+    String(value);
+
+
+  if(/^\d{4}-\d{2}-\d{2}/.test(str))
+    return str.substring(0,10);
+
+
+  const d=
+    new Date(str);
+
+
+  if(isNaN(d.getTime()))
+    return"";
+
+
+  return`${d.getFullYear()}-${
+    String(d.getMonth()+1).padStart(2,"0")
+  }-${
+    String(d.getDate()).padStart(2,"0")
+  }`;
+
+}
+
+
+function normalizeDateForFilter(value){
+
+  if(!value)
+    return"";
+
+
+  const str=
+    String(value);
+
+
+  if(/^\d{4}-\d{2}-\d{2}/.test(str))
+    return str.substring(0,10);
+
+
+  const match=
+    str.match(
+      /^(\d{1,2})[\/\-](\d{1,2})[\/\-](\d{4})$/
+    );
+
+
+  if(match){
+
+    return`${match[3]}-${
+      String(match[2]).padStart(2,"0")
+    }-${
+      String(match[1]).padStart(2,"0")
+    }`;
+
+  }
+
+
+  const d=
+    new Date(str);
+
+
+  if(isNaN(d.getTime()))
+    return"";
+
+
+  return`${d.getFullYear()}-${
+    String(d.getMonth()+1).padStart(2,"0")
+  }-${
+    String(d.getDate()).padStart(2,"0")
+  }`;
+
+}
+
+
+function formatDate(value){
+
+  if(!value)
+    return"";
+
+
+  const str=
+    String(value);
+
+
+  if(
+    /^\d{4}-\d{2}-\d{2}$/.test(str)
+  )
+    return str;
+
+
+  const d=
+    new Date(value);
+
+
+  if(isNaN(d.getTime()))
+    return str;
+
+
+  return d.toLocaleDateString();
+
+}
+
+
+function formatDateTime(value){
+
+  if(!value)
+    return"";
+
+
+  const d=
+    new Date(value);
+
+
+  if(isNaN(d.getTime()))
+    return String(value);
+
+
+  return d.toLocaleString();
+
+}
+
+
+/* ============================================================
+   ESCAPE
+============================================================ */
+
+function escapeHtml(value){
+
+  return String(value ?? "")
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
+
+}
+
+
+function escapeJs(value){
+
+  return String(value ?? "")
+    .replace(/\\/g,"\\\\")
+    .replace(/"/g,'\\"')
+    .replace(/'/g,"\\'");
+
+}
+
+
+/* ============================================================
+   BACK BUTTON PROTECTION
+============================================================ */
+
+history.pushState(
+  null,
+  "",
+  location.href
+);
+
+window.addEventListener(
+  "popstate",
+  function(){
+
+    history.pushState(
+      null,
+      "",
+      location.href
+    );
+
+  }
+);
+
+</script>
+
+
+</body>
+
+</html>
