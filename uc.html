@@ -306,6 +306,10 @@ TABLE
   border-radius:13px;
   overflow:hidden;
   box-shadow:var(--shadow);
+
+  /* IMPORTANT:
+     Loader will stay inside table only */
+  position:relative;
 }
 
 .table-wrap{
@@ -658,41 +662,60 @@ ITEM
 
 
 /* =========================================================
-LOADER
+TABLE LOADER
 ========================================================= */
 
-.loader{
+/*
+  OLD loader was full page:
+
   position:fixed;
   inset:0;
-  background:rgba(0,0,0,.40);
+
+  That has been removed.
+
+  New loader is ONLY inside .table-card.
+*/
+
+.table-loader{
+  position:absolute;
+  inset:0;
+  background:rgba(255,255,255,.72);
   display:none;
   align-items:center;
   justify-content:center;
-  z-index:2000;
+  z-index:50;
+  pointer-events:none;
 }
 
-.loader.show{
+body.dark .table-loader{
+  background:rgba(17,23,21,.72);
+}
+
+.table-loader.show{
   display:flex;
 }
 
-.loader-box{
+.table-loader-box{
   background:var(--card);
-  padding:22px 28px;
-  border-radius:12px;
-  box-shadow:var(--shadow);
+  padding:13px 18px;
+  border-radius:10px;
+  box-shadow:0 8px 25px rgba(0,0,0,.12);
+  border:1px solid var(--border);
   display:flex;
   align-items:center;
-  gap:12px;
-  font-size:13px;
+  gap:10px;
+  font-size:12px;
+  color:var(--text);
 }
 
 .spinner{
-  width:23px;
-  height:23px;
+  width:21px;
+  height:21px;
   border:3px solid var(--border);
   border-top-color:var(--primary);
   border-radius:50%;
-  animation:spin .7s linear infinite;
+  animation:spin .65s linear infinite;
+  flex-shrink:0;
 }
 
 @keyframes spin{
@@ -1047,6 +1070,26 @@ MAIN
       class="pagination"
       id="pagination"
     ></div>
+
+
+    <!-- TABLE ONLY LOADER -->
+
+    <div
+      class="table-loader"
+      id="loader"
+    >
+
+      <div class="table-loader-box">
+
+        <div class="spinner"></div>
+
+        <span id="loaderText">
+          Loading...
+        </span>
+
+      </div>
+
+    </div>
 
   </div>
 
@@ -1532,28 +1575,6 @@ PASSWORD MODAL
 
 
 <!-- ========================================================
-LOADER
-========================================================= -->
-
-<div
-  class="loader"
-  id="loader"
->
-
-  <div class="loader-box">
-
-    <div class="spinner"></div>
-
-    <span id="loaderText">
-      Loading...
-    </span>
-
-  </div>
-
-</div>
-
-
-<!-- ========================================================
 TOAST
 ========================================================= -->
 
@@ -1770,7 +1791,6 @@ async function loadUser(){
       }
 
 
-      // Block user
       if(
         String(status)
           .trim()
@@ -3248,10 +3268,6 @@ async function saveEntry(){
 
   try{
 
-    // --------------------------------------------------------
-    // EDIT SELL
-    // --------------------------------------------------------
-
     if(editingSellRow){
 
       const response =
@@ -3326,10 +3342,6 @@ async function saveEntry(){
     }
 
 
-    // --------------------------------------------------------
-    // EDIT NORMAL DATA
-    // --------------------------------------------------------
-
     if(editingDataRow){
 
       const response =
@@ -3397,10 +3409,6 @@ async function saveEntry(){
 
     }
 
-
-    // --------------------------------------------------------
-    // NEW ENTRY
-    // --------------------------------------------------------
 
     const response =
       await postJson(
@@ -3481,12 +3489,6 @@ async function saveEntry(){
 
 // ============================================================
 // SELL DATA
-// ============================================================
-// IMPORTANT FIX:
-// 1. Get exact original row from Data API.
-// 2. Save to Sell API.
-// 3. ONLY after Sell success, delete exact original row
-//    from Data API.
 // ============================================================
 
 async function sellDataEntry(
@@ -3603,11 +3605,6 @@ async function sellDataEntry(
 
   try{
 
-    // ========================================================
-    // STEP 1
-    // SELL API
-    // ========================================================
-
     const sellResult =
       await postJson(
         SELL_API_URL,
@@ -3616,7 +3613,6 @@ async function sellDataEntry(
           action:
             "sellData",
 
-          // Send exact original row
           row:
             rowNumber,
 
@@ -3669,11 +3665,6 @@ async function sellDataEntry(
     }
 
 
-    // ========================================================
-    // STEP 2
-    // DELETE ORIGINAL DATA ROW
-    // ========================================================
-
     const deleteResult =
       await postJson(
         DATA_API_URL,
@@ -3682,8 +3673,6 @@ async function sellDataEntry(
           action:
             "deleteData",
 
-          // VERY IMPORTANT
-          // Exact original Google Sheet row
           row:
             rowNumber,
 
@@ -3699,8 +3688,6 @@ async function sellDataEntry(
       deleteResult.success !== true
     ){
 
-      // Sell already succeeded.
-      // Do NOT pretend everything failed.
       console.error(
         "Sell succeeded but Data row delete failed:",
         deleteResult
@@ -3724,16 +3711,10 @@ async function sellDataEntry(
     }
 
 
-    // ========================================================
-    // STEP 3
-    // LOCAL CACHE CLEAN
-    // ========================================================
-
     dataCache = null;
     sellCache = null;
 
 
-    // Remove from current local array too
     allData =
       allData.filter(
         itemRow => {
@@ -3766,17 +3747,12 @@ async function sellDataEntry(
       );
 
 
-    // ========================================================
-    // SUCCESS
-    // ========================================================
-
     showToast(
       "Sold successfully and removed from Data",
       "success"
     );
 
 
-    // Show Data again with fresh data
     currentDataType =
       "data";
 
@@ -3913,10 +3889,6 @@ async function deleteDataEntry(
 
   try{
 
-    // --------------------------------------------------------
-    // First archive to Deleted API
-    // --------------------------------------------------------
-
     const archiveResult =
       await postJson(
         DELETE_API_URL,
@@ -3970,10 +3942,6 @@ async function deleteDataEntry(
 
     }
 
-
-    // --------------------------------------------------------
-    // Then delete original Data row
-    // --------------------------------------------------------
 
     const deleteResult =
       await postJson(
@@ -4894,7 +4862,6 @@ function renderUsers(
       `;
 
 
-      // Current user cannot block itself
       if(
         username !== currentUsername
       ){
@@ -5763,7 +5730,7 @@ function loadTheme(){
 
 
 // ============================================================
-// LOADER
+// TABLE LOADER
 // ============================================================
 
 function showLoader(
@@ -5782,9 +5749,20 @@ function showLoader(
     );
 
 
-  loaderText.textContent =
-    text ||
-    "Loading...";
+  if(!loader){
+
+    return;
+
+  }
+
+
+  if(loaderText){
+
+    loaderText.textContent =
+      text ||
+      "Loading...";
+
+  }
 
 
   loader.classList.add(
@@ -5796,13 +5774,19 @@ function showLoader(
 
 function hideLoader(){
 
-  document
-    .getElementById(
+  const loader =
+    document.getElementById(
       "loader"
-    )
-    .classList.remove(
+    );
+
+
+  if(loader){
+
+    loader.classList.remove(
       "show"
     );
+
+  }
 
 }
 
