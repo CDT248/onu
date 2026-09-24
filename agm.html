@@ -1,0 +1,1004 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Ewwar AGM - Accounting</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
+
+body{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    background:
+    linear-gradient(135deg,#123f34,#1f6b59,#0d3028);
+
+    color:white;
+    overflow:hidden;
+}
+
+/* Background */
+
+body::before,
+body::after{
+    content:"";
+    position:absolute;
+    border-radius:50%;
+    background:rgba(255,255,255,.05);
+}
+
+body::before{
+    width:420px;
+    height:420px;
+    top:-170px;
+    left:-120px;
+}
+
+body::after{
+    width:520px;
+    height:520px;
+    bottom:-240px;
+    right:-170px;
+}
+
+
+/* LOGIN BOX */
+
+.login-box{
+
+    position:relative;
+    z-index:5;
+
+    width:90%;
+    max-width:430px;
+
+    padding:40px 35px;
+
+    background:rgba(255,255,255,.09);
+
+    border:1px solid rgba(255,255,255,.16);
+
+    border-radius:28px;
+
+    backdrop-filter:blur(18px);
+    -webkit-backdrop-filter:blur(18px);
+
+    box-shadow:
+    0 25px 70px rgba(0,0,0,.4);
+}
+
+.login-title{
+    text-align:center;
+    font-size:30px;
+    font-weight:bold;
+    color:#80cbc4;
+    margin-bottom:8px;
+}
+
+.login-subtitle{
+    text-align:center;
+    color:#b8d1cc;
+    font-size:13px;
+    margin-bottom:30px;
+}
+
+label{
+    display:block;
+    font-size:13px;
+    margin-bottom:8px;
+    color:#dce9e6;
+}
+
+input{
+    width:100%;
+    height:46px;
+
+    border:1px solid rgba(255,255,255,.1);
+    outline:none;
+
+    border-radius:24px;
+
+    padding:0 18px;
+
+    margin-bottom:18px;
+
+    background:rgba(0,0,0,.22);
+
+    color:white;
+
+    font-size:14px;
+}
+
+input::placeholder{
+    color:#829c96;
+}
+
+.login-button{
+    width:100%;
+    height:46px;
+
+    border:0;
+    border-radius:24px;
+
+    background:#68b8b1;
+
+    color:white;
+
+    font-size:14px;
+    font-weight:bold;
+
+    cursor:pointer;
+
+    transition:.2s;
+}
+
+.login-button:hover{
+    background:#80cbc4;
+    transform:translateY(-2px);
+}
+
+.login-button:disabled{
+    opacity:.6;
+    cursor:not-allowed;
+    transform:none;
+}
+
+.error{
+    min-height:20px;
+
+    text-align:center;
+
+    margin-top:15px;
+
+    font-size:12px;
+
+    color:#ffaaa5;
+}
+
+
+/* MAIN PAGE */
+
+.main-page{
+
+    display:none;
+
+    position:relative;
+    z-index:5;
+
+    width:90%;
+    max-width:700px;
+
+    padding:55px 35px;
+
+    text-align:center;
+
+    background:rgba(255,255,255,.09);
+
+    border:1px solid rgba(255,255,255,.16);
+
+    border-radius:30px;
+
+    backdrop-filter:blur(18px);
+    -webkit-backdrop-filter:blur(18px);
+
+    box-shadow:
+    0 25px 70px rgba(0,0,0,.4);
+}
+
+
+/* BRAND */
+
+.brand{
+    font-size:38px;
+    font-weight:bold;
+
+    color:#80cbc4;
+
+    margin-bottom:8px;
+}
+
+.accounting{
+    font-size:12px;
+    color:#91aaa3;
+
+    text-transform:uppercase;
+
+    letter-spacing:2px;
+
+    margin-bottom:25px;
+}
+
+
+/* USER */
+
+.user-name{
+
+    font-size:22px;
+
+    color:white;
+
+    margin-bottom:8px;
+}
+
+.user-name span{
+    color:#80cbc4;
+}
+
+.user-role{
+
+    font-size:12px;
+
+    color:#9fb8b2;
+
+    margin-bottom:35px;
+}
+
+
+/* LOADER */
+
+.loader{
+
+    width:90px;
+    height:90px;
+
+    margin:0 auto 30px;
+
+    border:7px solid rgba(255,255,255,.12);
+
+    border-top:7px solid #70c8be;
+
+    border-right:7px solid #70c8be;
+
+    border-radius:50%;
+
+    animation:spin 1s linear infinite;
+}
+
+@keyframes spin{
+
+    100%{
+        transform:rotate(360deg);
+    }
+
+}
+
+
+/* MESSAGE */
+
+h1{
+
+    font-size:28px;
+
+    margin-bottom:15px;
+}
+
+.message{
+
+    font-size:15px;
+
+    line-height:1.8;
+
+    color:#d3e4df;
+
+    margin-bottom:28px;
+}
+
+
+/* STATUS */
+
+.status{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    padding:10px 20px;
+
+    border-radius:30px;
+
+    background:rgba(112,200,190,.1);
+
+    border:1px solid rgba(112,200,190,.22);
+
+    color:#9de0d8;
+
+    font-size:12px;
+}
+
+.dot{
+
+    width:9px;
+    height:9px;
+
+    border-radius:50%;
+
+    background:#69d6a8;
+
+    box-shadow:0 0 12px #69d6a8;
+
+    animation:pulse 1.5s infinite;
+}
+
+@keyframes pulse{
+
+    0%{
+        opacity:1;
+        transform:scale(1);
+    }
+
+    50%{
+        opacity:.4;
+        transform:scale(1.4);
+    }
+
+    100%{
+        opacity:1;
+        transform:scale(1);
+    }
+
+}
+
+
+/* TIME */
+
+.time{
+
+    margin-top:30px;
+
+    font-size:13px;
+
+    color:#91aaa3;
+}
+
+
+/* LOGOUT */
+
+.logout{
+
+    margin-top:28px;
+
+    padding:9px 20px;
+
+    border:1px solid rgba(255,255,255,.15);
+
+    border-radius:20px;
+
+    background:transparent;
+
+    color:#9fb8b2;
+
+    cursor:pointer;
+
+    font-size:12px;
+
+}
+
+.logout:hover{
+
+    background:rgba(255,255,255,.08);
+
+    color:white;
+
+}
+
+
+/* FOOTER */
+
+.footer{
+
+    margin-top:32px;
+
+    padding-top:20px;
+
+    border-top:1px solid rgba(255,255,255,.1);
+
+    font-size:10px;
+
+    color:#78948e;
+}
+
+
+/* MOBILE */
+
+@media(max-width:600px){
+
+    .login-box,
+    .main-page{
+
+        width:92%;
+
+        padding:38px 22px;
+
+        border-radius:25px;
+    }
+
+    .brand{
+        font-size:30px;
+    }
+
+    h1{
+        font-size:23px;
+    }
+
+    .message{
+        font-size:14px;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- ================= LOGIN ================= -->
+
+<div class="login-box" id="loginBox">
+
+    <div class="login-title">
+        Ewwar AGM
+    </div>
+
+    <div class="login-subtitle">
+        Accounting User Login
+    </div>
+
+
+    <label>
+        Username
+    </label>
+
+    <input
+        type="text"
+        id="username"
+        placeholder="Enter your username"
+        autocomplete="username"
+    >
+
+
+    <label>
+        Password
+    </label>
+
+    <input
+        type="password"
+        id="password"
+        placeholder="Enter your password"
+        autocomplete="current-password"
+    >
+
+
+    <button
+        class="login-button"
+        id="loginButton"
+        onclick="login()"
+    >
+        Login
+    </button>
+
+
+    <div
+        class="error"
+        id="error"
+    ></div>
+
+</div>
+
+
+<!-- ================= MAIN PAGE ================= -->
+
+<div class="main-page" id="mainPage">
+
+
+    <div class="brand">
+        Ewwar AGM
+    </div>
+
+
+    <div class="accounting">
+        Accounting Department
+    </div>
+
+
+    <div class="user-name">
+
+        Welcome,
+        <span id="displayUsername">
+            User
+        </span>
+
+    </div>
+
+
+    <div class="user-role">
+
+        Role: Accounting
+
+    </div>
+
+
+    <div class="loader"></div>
+
+
+    <h1>
+        কাজ চলছে
+    </h1>
+
+
+    <div class="message">
+
+        আপনার সাইটে বর্তমানে কাজ চলছে।<br>
+
+        অনুগ্রহ করে কিছুক্ষণ অপেক্ষা করুন।<br>
+
+        কাজ শেষ হলে সাইটটি আবার ব্যবহার করতে পারবেন।
+
+    </div>
+
+
+    <div class="status">
+
+        <span class="dot"></span>
+
+        Site Work In Progress
+
+    </div>
+
+
+    <div class="time">
+
+        বর্তমান সময়:
+        <span id="time">
+            Loading...
+        </span>
+
+    </div>
+
+
+    <button
+        class="logout"
+        onclick="logout()"
+    >
+        Logout
+    </button>
+
+
+    <div class="footer">
+
+        © 2026 Ewwar AGM
+        <br>
+        Accounting Access
+
+    </div>
+
+</div>
+
+
+<script>
+
+
+/* =========================================================
+   APPS SCRIPT API
+   ========================================================= */
+
+const API_URL =
+"https://script.google.com/macros/s/AKfycbw00GHHheuvtdQtgPURjs4PtsM48-4yaFx-_ms0ZBV5FHhnmcdbJ5DHr3Aix8JPF0kQzA/exec";
+
+
+/* =========================================================
+   LOGIN
+   ========================================================= */
+
+async function login(){
+
+    const username =
+        document.getElementById("username")
+        .value
+        .trim();
+
+    const password =
+        document.getElementById("password")
+        .value;
+
+    const button =
+        document.getElementById("loginButton");
+
+    const error =
+        document.getElementById("error");
+
+
+    error.innerText = "";
+
+
+    if(!username){
+
+        error.innerText =
+            "Please enter your username.";
+
+        return;
+    }
+
+
+    if(!password){
+
+        error.innerText =
+            "Please enter your password.";
+
+        return;
+    }
+
+
+    button.disabled = true;
+
+    button.innerText = "Verifying...";
+
+
+    try{
+
+        const url =
+            API_URL +
+            "?action=login" +
+            "&username=" +
+            encodeURIComponent(username) +
+            "&password=" +
+            encodeURIComponent(password);
+
+
+        const response =
+            await fetch(url,{
+                method:"GET",
+                cache:"no-store"
+            });
+
+
+        const result =
+            await response.json();
+
+
+        /* LOGIN SUCCESS */
+
+        if(result.success){
+
+            const user =
+                result.user;
+
+
+            const role =
+                String(user.role || "")
+                .trim()
+                .toLowerCase();
+
+
+            /*
+             * MUST BE ACCOUNTING
+             */
+
+            if(role !== "accounting"){
+
+                error.innerText =
+                    "Access denied. Accounting users only.";
+
+                button.disabled = false;
+
+                button.innerText = "Login";
+
+                return;
+            }
+
+
+            /*
+             * USERNAME FROM SERVER
+             */
+
+            const verifiedUsername =
+                String(user.username || username)
+                .trim();
+
+
+            /*
+             * SAVE SESSION
+             */
+
+            sessionStorage.setItem(
+                "accountingAuth",
+                "true"
+            );
+
+            sessionStorage.setItem(
+                "accountingUsername",
+                verifiedUsername
+            );
+
+            sessionStorage.setItem(
+                "accountingUser",
+                JSON.stringify(user)
+            );
+
+
+            localStorage.setItem(
+                "accountingUsername",
+                verifiedUsername
+            );
+
+
+            /*
+             * SHOW MAIN PAGE
+             */
+
+            showMainPage(
+                verifiedUsername
+            );
+
+        }
+
+        else{
+
+            error.innerText =
+                result.message ||
+                "Wrong username or password.";
+
+            button.disabled = false;
+
+            button.innerText = "Login";
+
+        }
+
+    }
+
+    catch(err){
+
+        console.error(err);
+
+        error.innerText =
+            "Unable to connect to server.";
+
+        button.disabled = false;
+
+        button.innerText = "Login";
+
+    }
+
+}
+
+
+/* =========================================================
+   SHOW MAIN PAGE
+   ========================================================= */
+
+function showMainPage(username){
+
+    document.getElementById("loginBox")
+        .style.display = "none";
+
+
+    document.getElementById("mainPage")
+        .style.display = "block";
+
+
+    document.getElementById("displayUsername")
+        .innerText = username;
+
+}
+
+
+/* =========================================================
+   CHECK EXISTING SESSION
+   ========================================================= */
+
+function checkSession(){
+
+    const auth =
+        sessionStorage.getItem(
+            "accountingAuth"
+        );
+
+    const username =
+        sessionStorage.getItem(
+            "accountingUsername"
+        );
+
+    const savedUser =
+        sessionStorage.getItem(
+            "accountingUser"
+        );
+
+
+    /*
+     * No session
+     */
+
+    if(
+        auth !== "true" ||
+        !username ||
+        !savedUser
+    ){
+
+        return;
+    }
+
+
+    try{
+
+        const user =
+            JSON.parse(savedUser);
+
+
+        const role =
+            String(user.role || "")
+            .trim()
+            .toLowerCase();
+
+
+        /*
+         * VERIFY ROLE AGAIN
+         */
+
+        if(role !== "accounting"){
+
+            logout();
+
+            return;
+        }
+
+
+        showMainPage(username);
+
+    }
+
+    catch(e){
+
+        logout();
+
+    }
+
+}
+
+
+/* =========================================================
+   LOGOUT
+   ========================================================= */
+
+function logout(){
+
+    sessionStorage.removeItem(
+        "accountingAuth"
+    );
+
+    sessionStorage.removeItem(
+        "accountingUsername"
+    );
+
+    sessionStorage.removeItem(
+        "accountingUser"
+    );
+
+    localStorage.removeItem(
+        "accountingUsername"
+    );
+
+
+    document.getElementById("mainPage")
+        .style.display = "none";
+
+
+    document.getElementById("loginBox")
+        .style.display = "block";
+
+
+    document.getElementById("username")
+        .value = "";
+
+    document.getElementById("password")
+        .value = "";
+
+}
+
+
+/* =========================================================
+   ENTER KEY
+   ========================================================= */
+
+document
+.getElementById("username")
+.addEventListener(
+    "keydown",
+    function(e){
+
+        if(e.key === "Enter"){
+            login();
+        }
+
+    }
+);
+
+
+document
+.getElementById("password")
+.addEventListener(
+    "keydown",
+    function(e){
+
+        if(e.key === "Enter"){
+            login();
+        }
+
+    }
+);
+
+
+/* =========================================================
+   BANGLADESH TIME
+   ========================================================= */
+
+function updateTime(){
+
+    const now =
+        new Date();
+
+
+    const options = {
+
+        timeZone:"Asia/Dhaka",
+
+        hour:"2-digit",
+
+        minute:"2-digit",
+
+        second:"2-digit",
+
+        hour12:true
+
+    };
+
+
+    const time =
+        now.toLocaleTimeString(
+            "en-US",
+            options
+        );
+
+
+    document.getElementById("time")
+        .innerText = time;
+
+}
+
+
+updateTime();
+
+setInterval(
+    updateTime,
+    1000
+);
+
+
+/* =========================================================
+   START
+   ========================================================= */
+
+checkSession();
+
+</script>
+
+
+</body>
+
+</html>
