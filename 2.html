@@ -2,45 +2,48 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>Support Dashboard</title>
 
 <style>
-*{
-  box-sizing:border-box;
-  margin:0;
-  padding:0;
-}
-
 :root{
-  --bg:#f4f7f9;
+  --bg:#f4f7f6;
   --card:#ffffff;
-  --text:#17202a;
-  --muted:#718096;
-  --border:#e2e8f0;
-  --primary:#16a34a;
-  --primary-dark:#15803d;
-  --danger:#dc2626;
-  --warning:#d97706;
-  --info:#2563eb;
-  --shadow:0 10px 30px rgba(15,23,42,.08);
+  --card2:#f8faf9;
+  --text:#17221d;
+  --muted:#718078;
+  --border:#dfe8e3;
+  --primary:#159447;
+  --primary2:#0c7436;
+  --danger:#dc3545;
+  --warning:#f0a202;
+  --info:#1684d4;
+  --shadow:0 10px 30px rgba(20,60,40,.08);
+  --radius:16px;
 }
 
 body.dark{
-  --bg:#0f172a;
-  --card:#172033;
-  --text:#f8fafc;
-  --muted:#94a3b8;
-  --border:#293548;
-  --shadow:0 10px 30px rgba(0,0,0,.25);
+  --bg:#0d1511;
+  --card:#142019;
+  --card2:#18271f;
+  --text:#edf7f0;
+  --muted:#9caf a4;
+  --border:#293b31;
+  --shadow:0 12px 35px rgba(0,0,0,.3);
 }
 
-body{
-  font-family:Arial,Helvetica,sans-serif;
+*{
+  box-sizing:border-box;
+}
+
+html,body{
+  margin:0;
+  padding:0;
+  width:100%;
+  min-height:100%;
+  font-family:Inter,Segoe UI,Arial,sans-serif;
   background:var(--bg);
   color:var(--text);
-  min-height:100vh;
-  transition:.25s;
 }
 
 button,
@@ -53,43 +56,63 @@ button{
   cursor:pointer;
 }
 
+.app{
+  min-height:100vh;
+}
+
+/* ================= HEADER ================= */
+
 .header{
-  height:70px;
-  background:var(--card);
-  border-bottom:1px solid var(--border);
-  display:flex;
-  align-items:center;
-  padding:0 22px;
-  gap:16px;
   position:sticky;
   top:0;
-  z-index:100;
+  z-index:50;
+  background:var(--card);
+  border-bottom:1px solid var(--border);
+  box-shadow:0 4px 20px rgba(0,0,0,.04);
+}
+
+.header-inner{
+  max-width:1500px;
+  margin:auto;
+  min-height:72px;
+  padding:12px 20px;
+  display:flex;
+  align-items:center;
+  gap:12px;
 }
 
 .logo{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  margin-right:auto;
+  min-width:190px;
+}
+
+.logo-icon{
   width:42px;
   height:42px;
-  border-radius:12px;
-  background:var(--primary);
+  border-radius:13px;
+  background:linear-gradient(135deg,var(--primary),var(--primary2));
   color:#fff;
   display:flex;
   align-items:center;
   justify-content:center;
   font-size:20px;
   font-weight:800;
+  box-shadow:0 7px 18px rgba(21,148,71,.25);
 }
 
-.header-title{
-  flex:1;
+.logo-text strong{
+  display:block;
+  font-size:17px;
 }
 
-.header-title h2{
-  font-size:19px;
-}
-
-.header-title span{
+.logo-text span{
+  display:block;
+  font-size:11px;
   color:var(--muted);
-  font-size:12px;
+  margin-top:2px;
 }
 
 .header-actions{
@@ -102,78 +125,84 @@ button{
   border:1px solid var(--border);
   background:var(--card);
   color:var(--text);
-  padding:9px 13px;
-  border-radius:9px;
+  border-radius:11px;
+  padding:10px 14px;
+  font-weight:700;
+  transition:.2s;
   display:inline-flex;
   align-items:center;
-  gap:6px;
-  transition:.2s;
+  justify-content:center;
+  gap:7px;
 }
 
 .btn:hover{
   transform:translateY(-1px);
+  border-color:var(--primary);
 }
 
-.btn.primary{
+.btn-primary{
   background:var(--primary);
   border-color:var(--primary);
   color:#fff;
 }
 
-.btn.primary:hover{
-  background:var(--primary-dark);
+.btn-primary:hover{
+  background:var(--primary2);
+  border-color:var(--primary2);
 }
 
-.btn.danger{
+.btn-danger{
   background:var(--danger);
   border-color:var(--danger);
   color:#fff;
 }
 
-.btn.warning{
-  background:var(--warning);
-  border-color:var(--warning);
-  color:#fff;
-}
-
-.btn.info{
+.btn-info{
   background:var(--info);
   border-color:var(--info);
   color:#fff;
 }
 
-.profile{
+.btn-warning{
+  background:var(--warning);
+  border-color:var(--warning);
+  color:#fff;
+}
+
+.btn-sm{
+  padding:7px 10px;
+  border-radius:8px;
+  font-size:12px;
+}
+
+.profile-wrap{
   position:relative;
 }
 
-.profile-btn{
+.profile{
   width:42px;
   height:42px;
   border-radius:50%;
   border:2px solid var(--primary);
-  overflow:hidden;
-  background:#ddd;
-  cursor:pointer;
-}
-
-.profile-btn img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
+  background:linear-gradient(135deg,#b9eac9,#51bc7b);
+  color:#0b5e2d;
+  font-weight:900;
+  display:flex;
+  align-items:center;
+  justify-content:center;
 }
 
 .profile-menu{
-  display:none;
   position:absolute;
-  right:0;
   top:52px;
+  right:0;
   width:190px;
   background:var(--card);
   border:1px solid var(--border);
-  border-radius:12px;
+  border-radius:13px;
   box-shadow:var(--shadow);
-  overflow:hidden;
-  z-index:500;
+  padding:7px;
+  display:none;
 }
 
 .profile-menu.show{
@@ -182,120 +211,176 @@ button{
 
 .profile-menu button{
   width:100%;
-  padding:12px 14px;
   border:0;
-  background:none;
+  background:transparent;
   color:var(--text);
+  padding:11px;
+  border-radius:9px;
   text-align:left;
 }
 
 .profile-menu button:hover{
-  background:var(--bg);
+  background:var(--card2);
 }
 
-.container{
-  padding:22px;
-  max-width:1600px;
+/* ================= MAIN ================= */
+
+.main{
+  max-width:1500px;
   margin:auto;
+  padding:20px;
 }
 
-.page-head{
+.page-title{
   display:flex;
-  align-items:center;
   justify-content:space-between;
+  align-items:center;
   gap:15px;
-  margin-bottom:18px;
+  margin-bottom:16px;
 }
 
-.page-head h1{
+.page-title h1{
+  margin:0;
   font-size:24px;
 }
 
-.page-head p{
+.page-title p{
+  margin:5px 0 0;
   color:var(--muted);
-  margin-top:4px;
   font-size:13px;
 }
 
-.filter-bar{
-  background:var(--card);
-  border:1px solid var(--border);
-  border-radius:14px;
-  padding:14px;
+/* ================= TABS ================= */
+
+.tabs{
   display:flex;
-  align-items:center;
-  gap:10px;
-  flex-wrap:wrap;
-  margin-bottom:18px;
-  box-shadow:var(--shadow);
+  gap:7px;
+  overflow-x:auto;
+  padding-bottom:4px;
+  margin-bottom:15px;
 }
 
-.search-wrap{
-  flex:1;
-  min-width:220px;
+.tab{
+  border:1px solid var(--border);
+  background:var(--card);
+  color:var(--muted);
+  border-radius:11px;
+  padding:10px 18px;
+  font-weight:800;
+  white-space:nowrap;
+}
+
+.tab.active{
+  color:#fff;
+  background:var(--primary);
+  border-color:var(--primary);
+}
+
+/* ================= FILTER ================= */
+
+.filter-card{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  padding:14px;
+  box-shadow:var(--shadow);
+  margin-bottom:16px;
+}
+
+.filter-grid{
+  display:grid;
+  grid-template-columns:minmax(220px,1fr) 150px 150px 145px auto;
+  gap:10px;
+  align-items:center;
+}
+
+.field{
   position:relative;
 }
 
-.search-wrap input{
-  width:100%;
-  padding:11px 13px;
-  border:1px solid var(--border);
-  border-radius:9px;
-  background:var(--bg);
-  color:var(--text);
-  outline:none;
+.field label{
+  display:block;
+  font-size:11px;
+  color:var(--muted);
+  margin:0 0 5px 2px;
+  font-weight:700;
 }
 
-.filter-bar input[type="date"],
-.filter-bar select{
-  padding:11px 12px;
+.input,
+.select{
+  width:100%;
+  height:42px;
+  padding:0 12px;
   border:1px solid var(--border);
-  border-radius:9px;
-  background:var(--bg);
-  color:var(--text);
+  border-radius:10px;
   outline:none;
+  background:var(--card2);
+  color:var(--text);
 }
+
+.input:focus,
+.select:focus{
+  border-color:var(--primary);
+  box-shadow:0 0 0 3px rgba(21,148,71,.1);
+}
+
+/* ================= TABLE ================= */
 
 .table-card{
-  position:relative;
   background:var(--card);
   border:1px solid var(--border);
-  border-radius:14px;
-  overflow:hidden;
+  border-radius:var(--radius);
   box-shadow:var(--shadow);
+  overflow:hidden;
 }
 
 .table-wrap{
-  overflow-x:auto;
+  width:100%;
+  overflow:auto;
 }
 
 table{
   width:100%;
-  border-collapse:collapse;
   min-width:900px;
+  border-collapse:collapse;
+}
+
+thead{
+  background:var(--card2);
 }
 
 th{
-  background:var(--bg);
-  color:var(--muted);
-  font-size:12px;
-  text-transform:uppercase;
-  letter-spacing:.4px;
   padding:13px 12px;
   text-align:left;
+  font-size:12px;
+  color:var(--muted);
   border-bottom:1px solid var(--border);
+  white-space:nowrap;
 }
 
 td{
   padding:13px 12px;
   border-bottom:1px solid var(--border);
   font-size:13px;
-  vertical-align:middle;
+  white-space:nowrap;
 }
 
 tbody tr:hover{
-  background:rgba(22,163,74,.035);
+  background:var(--card2);
 }
+
+.empty{
+  text-align:center;
+  padding:50px 20px;
+  color:var(--muted);
+}
+
+.empty-icon{
+  font-size:38px;
+  margin-bottom:8px;
+}
+
+/* ================= ACTIONS ================= */
 
 .actions{
   display:flex;
@@ -303,11 +388,12 @@ tbody tr:hover{
   flex-wrap:wrap;
 }
 
-.action-btn{
+.action{
   border:0;
-  border-radius:7px;
+  border-radius:8px;
   padding:7px 9px;
-  font-size:12px;
+  font-size:11px;
+  font-weight:800;
   color:#fff;
 }
 
@@ -315,122 +401,88 @@ tbody tr:hover{
   background:var(--info);
 }
 
-.action-sell{
-  background:var(--primary);
-}
-
+.action-sell,
 .action-paid{
-  background:#7c3aed;
+  background:var(--primary);
 }
 
 .action-delete{
   background:var(--danger);
 }
 
-.empty{
-  text-align:center;
-  padding:45px 15px;
+/* ================= BADGES ================= */
+
+.badge{
+  display:inline-flex;
+  align-items:center;
+  padding:5px 9px;
+  border-radius:30px;
+  font-size:11px;
+  font-weight:800;
+}
+
+.badge-active{
+  color:#087432;
+  background:#dff7e7;
+}
+
+.badge-blocked{
+  color:#b4232f;
+  background:#ffe1e4;
+}
+
+.badge-inactive{
+  color:#986900;
+  background:#fff0c7;
+}
+
+/* ================= PAGINATION ================= */
+
+.footer-bar{
+  padding:13px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  border-top:1px solid var(--border);
+}
+
+.page-info{
   color:var(--muted);
+  font-size:12px;
 }
 
 .pagination{
   display:flex;
-  justify-content:flex-end;
-  align-items:center;
-  gap:7px;
-  padding:13px;
+  gap:5px;
 }
 
-.pagination button{
+.page-btn{
   min-width:34px;
   height:34px;
   border:1px solid var(--border);
   background:var(--card);
   color:var(--text);
-  border-radius:7px;
+  border-radius:8px;
 }
 
-.pagination button.active{
+.page-btn.active{
+  color:#fff;
   background:var(--primary);
   border-color:var(--primary);
-  color:#fff;
 }
 
-.pagination button:disabled{
-  opacity:.45;
-  cursor:not-allowed;
-}
-
-.loader-overlay{
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,.45);
-  display:none;
-  align-items:center;
-  justify-content:center;
-  z-index:1000;
-}
-
-.loader-overlay.show{
-  display:flex;
-}
-
-.loader-box{
-  background:var(--card);
-  color:var(--text);
-  padding:25px 30px;
-  border-radius:15px;
-  min-width:180px;
-  text-align:center;
-  box-shadow:var(--shadow);
-}
-
-.spinner{
-  width:35px;
-  height:35px;
-  border:4px solid var(--border);
-  border-top-color:var(--primary);
-  border-radius:50%;
-  animation:spin .8s linear infinite;
-  margin:0 auto 12px;
-}
-
-@keyframes spin{
-  to{transform:rotate(360deg)}
-}
-
-.table-loader{
-  position:absolute;
-  inset:0;
-  background:rgba(255,255,255,.65);
-  display:none;
-  align-items:center;
-  justify-content:center;
-  z-index:10;
-}
-
-body.dark .table-loader{
-  background:rgba(15,23,42,.65);
-}
-
-.table-loader.show{
-  display:flex;
-}
-
-.table-loader .spinner{
-  width:30px;
-  height:30px;
-}
+/* ================= MODAL ================= */
 
 .modal{
   position:fixed;
   inset:0;
-  background:rgba(0,0,0,.5);
+  z-index:100;
+  background:rgba(0,0,0,.55);
   display:none;
   align-items:center;
   justify-content:center;
-  padding:15px;
-  z-index:900;
+  padding:20px;
 }
 
 .modal.show{
@@ -438,58 +490,46 @@ body.dark .table-loader{
 }
 
 .modal-box{
-  width:100%;
-  max-width:600px;
+  width:min(620px,100%);
   max-height:90vh;
   overflow:auto;
   background:var(--card);
-  color:var(--text);
-  border-radius:16px;
-  box-shadow:var(--shadow);
-}
-
-.modal-box.large{
-  max-width:950px;
+  border:1px solid var(--border);
+  border-radius:20px;
+  box-shadow:0 30px 70px rgba(0,0,0,.25);
 }
 
 .modal-head{
+  padding:17px 19px;
+  border-bottom:1px solid var(--border);
   display:flex;
   justify-content:space-between;
   align-items:center;
-  padding:17px 20px;
-  border-bottom:1px solid var(--border);
-  position:sticky;
-  top:0;
-  background:var(--card);
-  z-index:2;
 }
 
-.modal-head h3{
+.modal-head h2{
+  margin:0;
   font-size:18px;
 }
 
-.close-btn{
+.close{
+  width:35px;
+  height:35px;
   border:0;
-  background:none;
-  color:var(--muted);
-  font-size:24px;
-  cursor:pointer;
+  background:var(--card2);
+  color:var(--text);
+  border-radius:9px;
+  font-size:20px;
 }
 
 .modal-body{
-  padding:20px;
+  padding:19px;
 }
 
 .form-grid{
   display:grid;
   grid-template-columns:1fr 1fr;
-  gap:14px;
-}
-
-.form-group{
-  display:flex;
-  flex-direction:column;
-  gap:6px;
+  gap:13px;
 }
 
 .form-group.full{
@@ -497,150 +537,220 @@ body.dark .table-loader{
 }
 
 .form-group label{
+  display:block;
   font-size:12px;
+  font-weight:800;
   color:var(--muted);
-  font-weight:600;
+  margin-bottom:6px;
 }
 
-.form-group input,
-.form-group select{
-  width:100%;
-  padding:11px 12px;
-  border:1px solid var(--border);
-  border-radius:9px;
-  background:var(--bg);
-  color:var(--text);
-  outline:none;
+.readonly{
+  opacity:.75;
+  cursor:not-allowed;
 }
 
-.form-group input:focus,
-.form-group select:focus{
-  border-color:var(--primary);
-}
-
-.form-actions{
+.modal-foot{
+  padding:15px 19px;
+  border-top:1px solid var(--border);
   display:flex;
   justify-content:flex-end;
   gap:8px;
-  margin-top:20px;
 }
 
-.users-table,
-.items-table{
-  width:100%;
-  min-width:600px;
+/* ================= USERS ================= */
+
+.users-list{
+  overflow:auto;
 }
 
-.status-badge{
-  display:inline-block;
-  padding:5px 9px;
-  border-radius:20px;
-  font-size:11px;
-  font-weight:700;
+.user-row{
+  display:grid;
+  grid-template-columns:1.2fr 1.2fr 1fr 1fr 1fr auto;
+  gap:10px;
+  align-items:center;
+  padding:11px 0;
+  border-bottom:1px solid var(--border);
+  font-size:12px;
 }
 
-.status-active{
-  background:#dcfce7;
-  color:#15803d;
+.user-row:last-child{
+  border-bottom:0;
 }
 
-.status-blocked{
-  background:#fee2e2;
-  color:#b91c1c;
+.user-name{
+  font-weight:800;
 }
 
-.status-inactive{
-  background:#fef3c7;
-  color:#92400e;
+.user-muted{
+  color:var(--muted);
 }
 
-.toast{
-  position:fixed;
-  right:20px;
-  bottom:20px;
-  background:#17202a;
-  color:#fff;
-  padding:13px 17px;
-  border-radius:10px;
-  box-shadow:var(--shadow);
-  transform:translateY(100px);
-  opacity:0;
-  pointer-events:none;
-  transition:.3s;
-  z-index:2000;
-  max-width:360px;
-}
-
-.toast.show{
-  transform:translateY(0);
-  opacity:1;
-}
-
-.toast.success{
-  background:#15803d;
-}
-
-.toast.error{
-  background:#b91c1c;
-}
-
-.toast.warning{
-  background:#b45309;
-}
-
-.toast.info{
-  background:#1d4ed8;
-}
-
-.user-top{
+.user-actions{
   display:flex;
-  justify-content:flex-end;
-  margin-bottom:12px;
+  gap:5px;
+}
+
+/* ================= ITEMS ================= */
+
+.item-add{
+  display:flex;
+  gap:8px;
+  margin-bottom:15px;
 }
 
 .item-list{
   display:flex;
   flex-direction:column;
+  gap:7px;
+}
+
+.item-line{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:11px 13px;
+  border:1px solid var(--border);
+  background:var(--card2);
+  border-radius:10px;
+}
+
+/* ================= LOADER ================= */
+
+.loader{
+  position:fixed;
+  inset:0;
+  z-index:300;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  background:rgba(0,0,0,.4);
+}
+
+.loader.show{
+  display:flex;
+}
+
+.loader-box{
+  min-width:190px;
+  background:var(--card);
+  border-radius:16px;
+  padding:22px;
+  text-align:center;
+  box-shadow:var(--shadow);
+}
+
+.spinner{
+  width:38px;
+  height:38px;
+  margin:auto auto 12px;
+  border:4px solid var(--border);
+  border-top-color:var(--primary);
+  border-radius:50%;
+  animation:spin .8s linear infinite;
+}
+
+@keyframes spin{
+  to{transform:rotate(360deg)}
+}
+
+/* ================= TOAST ================= */
+
+.toast-container{
+  position:fixed;
+  right:20px;
+  bottom:20px;
+  z-index:400;
+  display:flex;
+  flex-direction:column;
   gap:8px;
 }
 
-.item-row{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding:10px 12px;
-  border:1px solid var(--border);
-  border-radius:9px;
-}
-
-.item-name{
+.toast{
+  min-width:260px;
+  max-width:380px;
+  padding:13px 15px;
+  border-radius:11px;
+  background:var(--card);
+  border-left:4px solid var(--primary);
+  box-shadow:var(--shadow);
   font-size:13px;
+  animation:toastIn .25s ease;
 }
 
-@media(max-width:800px){
-  .header{
-    padding:0 12px;
+.toast.error{
+  border-left-color:var(--danger);
+}
+
+.toast.warning{
+  border-left-color:var(--warning);
+}
+
+@keyframes toastIn{
+  from{opacity:0;transform:translateY(10px)}
+  to{opacity:1;transform:translateY(0)}
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media(max-width:1050px){
+  .filter-grid{
+    grid-template-columns:1fr 1fr;
   }
 
-  .header-title span{
+  .filter-grid .search-field{
+    grid-column:1/-1;
+  }
+
+  .user-row{
+    min-width:800px;
+  }
+
+  .users-list{
+    overflow-x:auto;
+  }
+}
+
+@media(max-width:720px){
+  .header-inner{
+    padding:10px 12px;
+  }
+
+  .logo{
+    min-width:auto;
+  }
+
+  .logo-text{
+    display:none;
+  }
+
+  .header-actions .label{
     display:none;
   }
 
   .header-actions .btn{
-    padding:8px;
-    font-size:0;
+    width:42px;
+    height:42px;
+    padding:0;
   }
 
-  .header-actions .btn:first-letter{
-    font-size:15px;
-  }
-
-  .container{
+  .main{
     padding:12px;
   }
 
-  .page-head{
+  .page-title{
     align-items:flex-start;
+  }
+
+  .page-title h1{
+    font-size:20px;
+  }
+
+  .filter-grid{
+    grid-template-columns:1fr;
+  }
+
+  .filter-grid .search-field{
+    grid-column:auto;
   }
 
   .form-grid{
@@ -650,167 +760,200 @@ body.dark .table-loader{
   .form-group.full{
     grid-column:auto;
   }
+
+  .footer-bar{
+    flex-direction:column;
+    align-items:flex-start;
+  }
 }
 </style>
 </head>
 
 <body>
 
+<div class="app">
+
+<!-- ================= HEADER ================= -->
+
 <header class="header">
+  <div class="header-inner">
 
-  <div class="logo">S</div>
+    <div class="logo">
+      <div class="logo-icon">S</div>
+      <div class="logo-text">
+        <strong>Support Dashboard</strong>
+        <span>Management System</span>
+      </div>
+    </div>
 
-  <div class="header-title">
-    <h2>Support Dashboard</h2>
-    <span id="headerUserText">Loading...</span>
-  </div>
+    <div class="header-actions">
 
-  <div class="header-actions">
-
-    <button class="btn" onclick="loadData()">
-      ↻ Reload
-    </button>
-
-    <button class="btn" onclick="openUsersModal()">
-      👥 Users
-    </button>
-
-    <button class="btn" onclick="openItemsModal()">
-      📦 Items
-    </button>
-
-    <button class="btn primary" onclick="openEntryModal()">
-      ＋ New Entry
-    </button>
-
-    <button class="btn" onclick="toggleTheme()">
-      🌙
-    </button>
-
-    <div class="profile">
-
-      <button class="profile-btn" onclick="toggleProfileMenu()">
-        <img
-          id="profileImage"
-          src="https://ui-avatars.com/api/?name=User&background=16a34a&color=fff"
-          alt="Profile"
-        >
+      <button class="btn" onclick="reloadCurrent()">
+        ↻ <span class="label">Reload</span>
       </button>
 
-      <div class="profile-menu" id="profileMenu">
+      <button class="btn" onclick="openUsersModal()">
+        👥 <span class="label">Users</span>
+      </button>
 
-        <button onclick="openPasswordModal()">
-          🔑 Change Password
-        </button>
+      <button class="btn" onclick="openItemsModal()">
+        📦 <span class="label">Items</span>
+      </button>
 
-        <button onclick="logout()">
-          🚪 Logout
-        </button>
+      <button class="btn btn-primary" onclick="openNewEntry()">
+        ＋ <span class="label">New Entry</span>
+      </button>
 
+      <button class="btn" onclick="toggleTheme()" id="themeBtn">
+        🌙 <span class="label">Dark</span>
+      </button>
+
+      <div class="profile-wrap">
+        <button class="profile" id="profileButton" onclick="toggleProfileMenu()">U</button>
+
+        <div class="profile-menu" id="profileMenu">
+          <button onclick="openPasswordModal();closeProfileMenu()">🔐 Change Password</button>
+          <button onclick="logout()">🚪 Logout</button>
+        </div>
       </div>
 
     </div>
 
   </div>
-
 </header>
 
 
-<main class="container">
+<!-- ================= MAIN ================= -->
 
-  <div class="page-head">
+<main class="main">
 
+  <div class="page-title">
     <div>
-      <h1 id="dataTitle">Data</h1>
-      <p id="dataSubtitle">
-        Manage support entries
-      </p>
+      <h1 id="pageTitle">Data</h1>
+      <p id="pageSubtitle">Manage support entries</p>
     </div>
-
   </div>
 
 
-  <div class="filter-bar">
+  <!-- TABS -->
 
-    <div class="search-wrap">
-      <input
-        type="text"
-        id="searchInput"
-        placeholder="Search..."
-        oninput="applyFilters()"
-      >
-    </div>
+  <div class="tabs">
 
-    <input
-      type="date"
-      id="fromDate"
-      onchange="applyFilters()"
-    >
+    <button class="tab active" id="tab-data" onclick="switchView('data')">
+      DATA
+    </button>
 
-    <input
-      type="date"
-      id="toDate"
-      onchange="applyFilters()"
-    >
+    <button class="tab" id="tab-sell" onclick="switchView('sell')">
+      SELL
+    </button>
 
-    <select
-      id="dataType"
-      onchange="changeDataType()"
-    >
-      <option value="data">DATA</option>
-      <option value="sell">SELL</option>
-      <option value="paid">PAID</option>
-      <option value="delete">DELETE</option>
-    </select>
+    <button class="tab" id="tab-paid" onclick="switchView('paid')">
+      PAID
+    </button>
 
-    <button class="btn" onclick="clearFilters()">
-      Clear
+    <button class="tab" id="tab-delete" onclick="switchView('delete')">
+      DELETE
     </button>
 
   </div>
 
 
-  <div class="table-card">
+  <!-- FILTER -->
 
-    <div class="table-loader" id="tableLoader">
-      <div class="spinner"></div>
+  <div class="filter-card">
+
+    <div class="filter-grid">
+
+      <div class="field search-field">
+        <label>Search</label>
+        <input
+          class="input"
+          id="searchInput"
+          type="text"
+          placeholder="Search Name, IP, Work, Item..."
+          oninput="applyFilters()"
+        >
+      </div>
+
+      <div class="field">
+        <label>From</label>
+        <input
+          class="input"
+          id="fromDate"
+          type="date"
+          onchange="applyFilters()"
+        >
+      </div>
+
+      <div class="field">
+        <label>To</label>
+        <input
+          class="input"
+          id="toDate"
+          type="date"
+          onchange="applyFilters()"
+        >
+      </div>
+
+      <div class="field">
+        <label>View</label>
+        <select class="select" id="viewSelect" onchange="switchView(this.value)">
+          <option value="data">DATA</option>
+          <option value="sell">SELL</option>
+          <option value="paid">PAID</option>
+          <option value="delete">DELETE</option>
+        </select>
+      </div>
+
+      <button class="btn" onclick="clearFilters()">
+        ✕ Clear
+      </button>
+
     </div>
 
-    <div class="table-wrap">
+  </div>
 
-      <table id="dataTable">
+
+  <!-- TABLE -->
+
+  <div class="table-card">
+
+    <div class="table-wrap">
+      <table>
 
         <thead id="tableHead"></thead>
 
         <tbody id="tableBody"></tbody>
 
       </table>
-
     </div>
 
-    <div class="pagination" id="pagination"></div>
+    <div class="footer-bar">
+
+      <div class="page-info" id="pageInfo">
+        Loading...
+      </div>
+
+      <div class="pagination" id="pagination"></div>
+
+    </div>
 
   </div>
 
 </main>
 
+</div>
 
-<!-- ENTRY MODAL -->
+
+<!-- ================= ENTRY MODAL ================= -->
 
 <div class="modal" id="entryModal">
 
   <div class="modal-box">
 
     <div class="modal-head">
-
-      <h3 id="entryModalTitle">
-        New Entry
-      </h3>
-
-      <button class="close-btn" onclick="closeModal('entryModal')">
-        ×
-      </button>
-
+      <h2 id="entryModalTitle">New Entry</h2>
+      <button class="close" onclick="closeModal('entryModal')">×</button>
     </div>
 
     <div class="modal-body">
@@ -820,7 +963,7 @@ body.dark .table-loader{
         <div class="form-group">
           <label>Name</label>
           <input
-            type="text"
+            class="input readonly"
             id="entryName"
             readonly
           >
@@ -829,7 +972,7 @@ body.dark .table-loader{
         <div class="form-group">
           <label>IP</label>
           <input
-            type="text"
+            class="input"
             id="entryIP"
             placeholder="Enter IP"
           >
@@ -838,7 +981,7 @@ body.dark .table-loader{
         <div class="form-group">
           <label>Work</label>
           <input
-            type="text"
+            class="input"
             id="entryWork"
             placeholder="Enter Work"
           >
@@ -847,38 +990,33 @@ body.dark .table-loader{
         <div class="form-group">
           <label>Date</label>
           <input
-            type="date"
+            class="input readonly"
             id="entryDate"
+            type="date"
             readonly
           >
         </div>
 
         <div class="form-group full">
           <label>Item</label>
-          <select id="entryItem">
+          <select class="select" id="entryItem">
             <option value="">Select Item</option>
           </select>
         </div>
 
       </div>
 
-      <div class="form-actions">
+    </div>
 
-        <button
-          class="btn"
-          onclick="closeModal('entryModal')"
-        >
-          Cancel
-        </button>
+    <div class="modal-foot">
 
-        <button
-          class="btn primary"
-          onclick="saveEntry()"
-        >
-          Save
-        </button>
+      <button class="btn" onclick="closeModal('entryModal')">
+        Cancel
+      </button>
 
-      </div>
+      <button class="btn btn-primary" onclick="saveEntry()">
+        Save
+      </button>
 
     </div>
 
@@ -887,53 +1025,30 @@ body.dark .table-loader{
 </div>
 
 
-<!-- USERS MODAL -->
+<!-- ================= USERS MODAL ================= -->
 
 <div class="modal" id="usersModal">
 
-  <div class="modal-box large">
+  <div class="modal-box" style="width:min(1050px,100%)">
 
     <div class="modal-head">
 
-      <h3>Users</h3>
+      <h2>Users Management</h2>
 
-      <button class="close-btn" onclick="closeModal('usersModal')">
-        ×
-      </button>
+      <button class="close" onclick="closeModal('usersModal')">×</button>
 
     </div>
 
     <div class="modal-body">
 
-      <div class="user-top">
-
-        <button
-          class="btn primary"
-          onclick="openAddUserModal()"
-        >
+      <div style="display:flex;justify-content:flex-end;margin-bottom:14px">
+        <button class="btn btn-primary" onclick="openUserForm()">
           ＋ Add User
         </button>
-
       </div>
 
-      <div class="table-wrap">
-
-        <table class="users-table">
-
-          <thead>
-            <tr>
-              <th>Username</th>
-              <th>Name</th>
-              <th>Role</th>
-              <th>Status</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-
-          <tbody id="usersTableBody"></tbody>
-
-        </table>
-
+      <div class="users-list" id="usersList">
+        Loading...
       </div>
 
     </div>
@@ -943,7 +1058,7 @@ body.dark .table-loader{
 </div>
 
 
-<!-- USER FORM -->
+<!-- ================= USER FORM ================= -->
 
 <div class="modal" id="userFormModal">
 
@@ -951,90 +1066,66 @@ body.dark .table-loader{
 
     <div class="modal-head">
 
-      <h3 id="userFormTitle">
-        Add User
-      </h3>
+      <h2 id="userFormTitle">Add User</h2>
 
-      <button
-        class="close-btn"
-        onclick="closeModal('userFormModal')"
-      >
-        ×
-      </button>
+      <button class="close" onclick="closeModal('userFormModal')">×</button>
 
     </div>
 
     <div class="modal-body">
 
+      <input type="hidden" id="originalUsername">
+
       <div class="form-grid">
 
         <div class="form-group">
           <label>Username</label>
-          <input
-            type="text"
-            id="userUsername"
-          >
+          <input class="input" id="userUsername">
         </div>
 
         <div class="form-group">
           <label>Password</label>
-          <input
-            type="text"
-            id="userPassword"
-          >
+          <input class="input" id="userPassword" type="password">
         </div>
 
         <div class="form-group">
           <label>Name</label>
-          <input
-            type="text"
-            id="userName"
-          >
+          <input class="input" id="userName">
         </div>
 
         <div class="form-group">
           <label>Role</label>
-
-          <select id="userRole">
+          <select class="select" id="userRole">
             <option value="admin">admin</option>
             <option value="manager">manager</option>
             <option value="support">support</option>
             <option value="call">call</option>
             <option value="guest">guest</option>
           </select>
-
         </div>
 
         <div class="form-group">
           <label>Status</label>
-
-          <select id="userStatus">
+          <select class="select" id="userStatus">
             <option value="Active">Active</option>
             <option value="Blocked">Blocked</option>
             <option value="Inactive">Inactive</option>
           </select>
-
         </div>
 
       </div>
 
-      <div class="form-actions">
+    </div>
 
-        <button
-          class="btn"
-          onclick="closeModal('userFormModal')"
-        >
-          Cancel
-        </button>
+    <div class="modal-foot">
 
-        <button
-          class="btn primary"
-          onclick="saveUser()"
-        >
-          Save User
-        </button>
+      <button class="btn" onclick="closeModal('userFormModal')">
+        Cancel
+      </button>
 
-      </div>
+      <button class="btn btn-primary" onclick="saveUser()">
+        Save User
+      </button>
 
     </div>
 
@@ -1043,7 +1134,7 @@ body.dark .table-loader{
 </div>
 
 
-<!-- ITEMS MODAL -->
+<!-- ================= ITEMS MODAL ================= -->
 
 <div class="modal" id="itemsModal">
 
@@ -1051,50 +1142,31 @@ body.dark .table-loader{
 
     <div class="modal-head">
 
-      <h3>Items</h3>
+      <h2>Items Management</h2>
 
-      <button
-        class="close-btn"
-        onclick="closeModal('itemsModal')"
-      >
-        ×
-      </button>
+      <button class="close" onclick="closeModal('itemsModal')">×</button>
 
     </div>
 
     <div class="modal-body">
 
-      <div class="form-grid">
+      <div class="item-add">
 
-        <div class="form-group">
-          <label>New Item</label>
+        <input
+          class="input"
+          id="newItemInput"
+          placeholder="Enter item name"
+        >
 
-          <input
-            type="text"
-            id="newItemName"
-            placeholder="Enter item"
-          >
-        </div>
-
-        <div class="form-group" style="justify-content:flex-end">
-
-          <button
-            class="btn primary"
-            onclick="addItem()"
-          >
-            ＋ Add Item
-          </button>
-
-        </div>
+        <button class="btn btn-primary" onclick="addItem()">
+          Add
+        </button>
 
       </div>
 
-      <br>
-
-      <div
-        class="item-list"
-        id="itemListContainer"
-      ></div>
+      <div class="item-list" id="itemsList">
+        Loading...
+      </div>
 
     </div>
 
@@ -1103,7 +1175,7 @@ body.dark .table-loader{
 </div>
 
 
-<!-- PASSWORD MODAL -->
+<!-- ================= PASSWORD MODAL ================= -->
 
 <div class="modal" id="passwordModal">
 
@@ -1111,14 +1183,9 @@ body.dark .table-loader{
 
     <div class="modal-head">
 
-      <h3>Change Password</h3>
+      <h2>Change Password</h2>
 
-      <button
-        class="close-btn"
-        onclick="closeModal('passwordModal')"
-      >
-        ×
-      </button>
+      <button class="close" onclick="closeModal('passwordModal')">×</button>
 
     </div>
 
@@ -1128,50 +1195,44 @@ body.dark .table-loader{
 
         <div class="form-group full">
           <label>Current Password</label>
-
           <input
-            type="password"
+            class="input"
             id="currentPassword"
+            type="password"
           >
         </div>
 
         <div class="form-group">
           <label>New Password</label>
-
           <input
-            type="password"
+            class="input"
             id="newPassword"
+            type="password"
           >
         </div>
 
         <div class="form-group">
-          <label>Confirm Password</label>
-
+          <label>Confirm New Password</label>
           <input
-            type="password"
+            class="input"
             id="confirmPassword"
+            type="password"
           >
         </div>
 
       </div>
 
-      <div class="form-actions">
+    </div>
 
-        <button
-          class="btn"
-          onclick="closeModal('passwordModal')"
-        >
-          Cancel
-        </button>
+    <div class="modal-foot">
 
-        <button
-          class="btn primary"
-          onclick="changePassword()"
-        >
-          Change Password
-        </button>
+      <button class="btn" onclick="closeModal('passwordModal')">
+        Cancel
+      </button>
 
-      </div>
+      <button class="btn btn-primary" onclick="changePassword()">
+        Change Password
+      </button>
 
     </div>
 
@@ -1180,24 +1241,24 @@ body.dark .table-loader{
 </div>
 
 
-<!-- LOADER -->
+<!-- ================= LOADER ================= -->
 
-<div class="loader-overlay" id="globalLoader">
+<div class="loader" id="loader">
 
   <div class="loader-box">
 
     <div class="spinner"></div>
 
-    <div id="loaderText">
-      Loading...
-    </div>
+    <div id="loaderText">Loading...</div>
 
   </div>
 
 </div>
 
 
-<div class="toast" id="toast"></div>
+<!-- ================= TOAST ================= -->
+
+<div class="toast-container" id="toastContainer"></div>
 
 
 <script>
@@ -1207,271 +1268,329 @@ body.dark .table-loader{
 ============================================================ */
 
 const USER_API_URL =
-  "https://script.google.com/macros/s/AKfycbw00GHHheuvtdQtgPURjs4PtsM48-4yaFx-_ms0ZBV5FHhnmcdbJ5DHr3Aix8JPF0kQzA/exec";
+"https://script.google.com/macros/s/AKfycbw00GHHheuvtdQtgPURjs4PtsM48-4yaFx-_ms0ZBV5FHhnmcdbJ5DHr3Aix8JPF0kQzA/exec";
 
 const DATA_API_URL =
-  "https://script.google.com/macros/s/AKfycbz59T-4CKQDbHJB_ql6OYZf18eN7XUmttp0d2FaOM5pm27yCBOWrEilqA_zMOnFq_rz/exec";
+"https://script.google.com/macros/s/AKfycbz59T-4CKQDbHJB_ql6OYZf18eN7XUmttp0d2FaOM5pm27yCBOWrEilqA_zMOnFq_rz/exec";
 
 const SELL_API_URL =
-  "https://script.google.com/macros/s/AKfycbyiKn1MH1ZQvebSIo83bZzbbfJimmfRf9PjlPI4w1q1UliuF27gKViYM24oXakpkHuP/exec";
+"https://script.google.com/macros/s/AKfycbyiKn1MH1ZQvebSIo83bZzbbfJimmfRf9PjlPI4w1q1UliuF27gKViYM24oXakpkHuP/exec";
 
-/*
- * IMPORTANT:
- * Correct Paid API URL
- */
 const PAID_API_URL =
-  "https://script.google.com/macros/s/AKfycby_kDEHln_Dj_0YfB421POWa2XAuN6g2PDypQtyS2arrxgPVtyZZOwAp_TKLrUnRudKng/exec";
+"https://script.google.com/macros/s/AKfycbwDL1JIV7QyC84VGiWxhUoT-wN9UfuGn0t9boYrs_FaG_ZfcVGjNmaTqSTC6ev0Ig9Kg/exec";
 
 const DELETE_API_URL =
-  "https://script.google.com/macros/s/AKfycbwDL1JIV7QyC84VGiWxhUoT-wN9UfuGn0t9boYrs_FaG_ZfcVGjNmaTqSTC6ev0Ig9Kg/exec";
+"https://script.google.com/macros/s/AKfycbwDL1JIV7QyC84VGiWxhUoT-wN9UfuGn0t9boYrs_FaG_ZfcVGjNmaTqSTC6ev0Ig9Kg/exec";
 
 const ITEM_API_URL =
-  "https://script.google.com/macros/s/AKfycby2e7dzGE5vkS0Q-Eyl9MKLAbkkkD8f37eIVj7VuV8bPytWGOH7cwJ3w25efP7MLGshOw/exec";
+"https://script.google.com/macros/s/AKfycby2e7dzGE5vkS0Q-Eyl9MKLAbkkkD8f37eIVj7VuV8bPytWGOH7cwJ3w25efP7MLGshOw/exec";
 
 
 /* ============================================================
-   GLOBAL STATE
+   STATE
 ============================================================ */
 
-let allData = [];
-let filteredData = [];
+let currentUsername = "";
+let currentUser = null;
 
-let editingUser = null;
-let editingDataRow = null;
-let editingSellRow = null;
-
-let currentDataType = "data";
-
-let currentPage = 1;
-const pageSize = 10;
+let currentView = "data";
 
 let dataCache = null;
 let sellCache = null;
 let paidCache = null;
 let deleteCache = null;
-
-let itemList = [];
-let itemCache = null;
-
 let usersCache = null;
+let itemsCache = null;
 
-let currentUsername =
-  localStorage.username ||
-  localStorage.loggedUser ||
-  "";
+let filteredData = [];
+
+let currentPage = 1;
+const PAGE_SIZE = 15;
+
+let editingIndex = -1;
+let editingType = "data";
+
+let inactivityTimer = null;
 
 
 /* ============================================================
-   DOM READY
+   INIT
 ============================================================ */
 
-document.addEventListener("DOMContentLoaded", function(){
+document.addEventListener("DOMContentLoaded", async function(){
+
+  loadAuth();
 
   loadTheme();
 
-  checkLogin();
+  setupInactivity();
 
-  loadUser();
+  setToday();
 
-  loadData();
+  updateProfile();
 
-  loadItems();
+  await loadItems();
 
-  setupBackProtection();
+  await loadData();
 
 });
 
 
 /* ============================================================
-   LOGIN CHECK
+   AUTH
 ============================================================ */
 
-function checkLogin(){
+function loadAuth(){
 
-  const auth =
-    localStorage.getItem("dashboardAuth") ||
-    sessionStorage.getItem("dashboardAuth");
+  currentUsername =
+    localStorage.getItem("username") ||
+    localStorage.getItem("loggedUser") ||
+    localStorage.getItem("currentUser") ||
+    "";
 
-  if(!auth){
+  const storedUser =
+    localStorage.getItem("userData") ||
+    localStorage.getItem("userInfo") ||
+    localStorage.getItem("loginData") ||
+    "";
 
-    window.location.href = "index.html";
+  if(storedUser){
+
+    try{
+      currentUser = JSON.parse(storedUser);
+    }catch(e){
+      currentUser = null;
+    }
 
   }
 
-}
-
-
-/* ============================================================
-   LOAD USER
-============================================================ */
-
-async function loadUser(){
-
-  if(!currentUsername){
+  if(!currentUsername && currentUser){
 
     currentUsername =
-      localStorage.getItem("username") ||
-      localStorage.getItem("loggedUser") ||
+      currentUser.username ||
+      currentUser.Username ||
       "";
 
   }
 
   if(!currentUsername){
 
-    document.getElementById("headerUserText").textContent =
-      "User";
-
+    window.location.href = "index.html";
     return;
-
-  }
-
-  try{
-
-    const url =
-      USER_API_URL +
-      "?action=getUser&username=" +
-      encodeURIComponent(currentUsername);
-
-    const response =
-      await fetch(url);
-
-    const result =
-      await response.json();
-
-    if(result && result.success !== false){
-
-      const user =
-        result.user ||
-        result.data ||
-        result;
-
-      const username =
-        user.Username ||
-        user.username ||
-        currentUsername;
-
-      const name =
-        user.Name ||
-        user.name ||
-        username;
-
-      const role =
-        user.Role ||
-        user.role ||
-        "";
-
-      const status =
-        user.Status ||
-        user.status ||
-        "";
-
-      currentUsername = username;
-
-      localStorage.setItem(
-        "username",
-        username
-      );
-
-      localStorage.setItem(
-        "loggedUser",
-        username
-      );
-
-      localStorage.setItem(
-        "userInfo",
-        JSON.stringify(user)
-      );
-
-      document.getElementById(
-        "headerUserText"
-      ).textContent =
-        name +
-        (role ? " • " + role : "");
-
-      if(
-        String(status).toLowerCase() === "blocked" ||
-        String(status).toLowerCase() === "block" ||
-        String(status).toLowerCase() === "inactive"
-      ){
-
-        showToast(
-          "Your account is not active.",
-          "error"
-        );
-
-        setTimeout(logout,1200);
-
-        return;
-
-      }
-
-      const picture =
-        user.Picture ||
-        user.picture ||
-        user.ProfilePicture ||
-        user.profilePicture ||
-        "";
-
-      if(picture){
-
-        document.getElementById(
-          "profileImage"
-        ).src = picture;
-
-      }else{
-
-        document.getElementById(
-          "profileImage"
-        ).src =
-          "https://ui-avatars.com/api/?name=" +
-          encodeURIComponent(name) +
-          "&background=16a34a&color=fff";
-
-      }
-
-    }
-
-  }catch(error){
-
-    console.error(
-      "loadUser error:",
-      error
-    );
-
-    document.getElementById(
-      "headerUserText"
-    ).textContent =
-      currentUsername || "User";
 
   }
 
 }
 
 
+function updateProfile(){
+
+  const btn =
+    document.getElementById("profileButton");
+
+  const name =
+    currentUser?.Name ||
+    currentUser?.name ||
+    currentUsername ||
+    "U";
+
+  btn.textContent =
+    String(name).charAt(0).toUpperCase();
+
+}
+
+
+function logout(){
+
+  localStorage.removeItem("dashboardAuth");
+  localStorage.removeItem("username");
+  localStorage.removeItem("userData");
+  localStorage.removeItem("loginData");
+  localStorage.removeItem("loggedUser");
+  localStorage.removeItem("currentUser");
+  localStorage.removeItem("userInfo");
+
+  sessionStorage.removeItem("dashboardAuth");
+
+  window.location.replace("index.html");
+
+}
+
+
 /* ============================================================
-   POST JSON
-   Apps Script friendly
+   PROFILE
 ============================================================ */
 
-async function postJson(url,payload){
+function toggleProfileMenu(){
+
+  document
+    .getElementById("profileMenu")
+    .classList.toggle("show");
+
+}
+
+
+function closeProfileMenu(){
+
+  document
+    .getElementById("profileMenu")
+    .classList.remove("show");
+
+}
+
+
+document.addEventListener("click",function(e){
+
+  const wrap =
+    document.querySelector(".profile-wrap");
+
+  if(wrap && !wrap.contains(e.target)){
+    closeProfileMenu();
+  }
+
+});
+
+
+/* ============================================================
+   THEME
+============================================================ */
+
+function loadTheme(){
+
+  const theme =
+    localStorage.getItem("dashboardTheme");
+
+  if(theme === "dark"){
+
+    document.body.classList.add("dark");
+
+    document.getElementById("themeBtn").innerHTML =
+      "☀️ <span class='label'>Light</span>";
+
+  }
+
+}
+
+
+function toggleTheme(){
+
+  document.body.classList.toggle("dark");
+
+  const dark =
+    document.body.classList.contains("dark");
+
+  localStorage.setItem(
+    "dashboardTheme",
+    dark ? "dark" : "light"
+  );
+
+  document.getElementById("themeBtn").innerHTML =
+    dark
+      ? "☀️ <span class='label'>Light</span>"
+      : "🌙 <span class='label'>Dark</span>";
+
+}
+
+
+/* ============================================================
+   MODAL
+============================================================ */
+
+function openModal(id){
+
+  document
+    .getElementById(id)
+    .classList.add("show");
+
+}
+
+
+function closeModal(id){
+
+  document
+    .getElementById(id)
+    .classList.remove("show");
+
+}
+
+
+document.querySelectorAll(".modal").forEach(function(modal){
+
+  modal.addEventListener("click",function(e){
+
+    if(e.target === modal){
+      modal.classList.remove("show");
+    }
+
+  });
+
+});
+
+
+/* ============================================================
+   LOADER
+============================================================ */
+
+function showLoader(text){
+
+  document.getElementById("loaderText").textContent =
+    text || "Loading...";
+
+  document
+    .getElementById("loader")
+    .classList.add("show");
+
+}
+
+
+function hideLoader(){
+
+  document
+    .getElementById("loader")
+    .classList.remove("show");
+
+}
+
+
+/* ============================================================
+   TOAST
+============================================================ */
+
+function showToast(message,type="success"){
+
+  const box =
+    document.createElement("div");
+
+  box.className =
+    "toast " + (type || "");
+
+  box.textContent =
+    message;
+
+  document
+    .getElementById("toastContainer")
+    .appendChild(box);
+
+  setTimeout(function(){
+
+    box.remove();
+
+  },3500);
+
+}
+
+
+/* ============================================================
+   HTTP
+============================================================ */
+
+async function getJson(url){
 
   const response =
-    await fetch(
-      url,
-      {
-        method:"POST",
-
-        headers:{
-          "Content-Type":
-            "text/plain;charset=utf-8"
-        },
-
-        body:
-          JSON.stringify(payload),
-
-        redirect:"follow"
-      }
-    );
+    await fetch(url,{
+      method:"GET",
+      cache:"no-store"
+    });
 
   const text =
     await response.text();
@@ -1479,17 +1598,40 @@ async function postJson(url,payload){
   let result;
 
   try{
+    result = JSON.parse(text);
+  }catch(e){
+    throw new Error("Invalid server response.");
+  }
 
-    result =
-      JSON.parse(text);
+  return result;
 
-  }catch(error){
+}
 
+
+async function postJson(url,payload){
+
+  const response =
+    await fetch(url,{
+      method:"POST",
+      headers:{
+        "Content-Type":"text/plain;charset=utf-8"
+      },
+      body:JSON.stringify(payload),
+      redirect:"follow"
+    });
+
+  const text =
+    await response.text();
+
+  let result;
+
+  try{
+    result = JSON.parse(text);
+  }catch(e){
     throw new Error(
       "Invalid server response: " +
-      text.substring(0,200)
+      text.substring(0,150)
     );
-
   }
 
   return result;
@@ -1498,81 +1640,53 @@ async function postJson(url,payload){
 
 
 /* ============================================================
-   DATA TYPE
+   VIEW
 ============================================================ */
 
-function changeDataType(){
+async function switchView(view){
 
-  currentDataType =
-    document.getElementById(
-      "dataType"
-    ).value;
+  currentView =
+    view || "data";
 
   currentPage = 1;
 
-  allData = [];
-  filteredData = [];
+  document
+    .querySelectorAll(".tab")
+    .forEach(function(tab){
+      tab.classList.remove("active");
+    });
 
-  document.getElementById(
-    "searchInput"
-  ).value = "";
+  const tab =
+    document.getElementById("tab-" + currentView);
 
-  document.getElementById(
-    "fromDate"
-  ).value = "";
-
-  document.getElementById(
-    "toDate"
-  ).value = "";
-
-  updateDataTitle();
-
-  loadData();
-
-}
-
-
-function updateDataTitle(){
-
-  const title =
-    document.getElementById(
-      "dataTitle"
-    );
-
-  const subtitle =
-    document.getElementById(
-      "dataSubtitle"
-    );
-
-  if(currentDataType === "data"){
-
-    title.textContent = "Data";
-
-    subtitle.textContent =
-      "Manage support entries";
-
-  }else if(currentDataType === "sell"){
-
-    title.textContent = "Sell Data";
-
-    subtitle.textContent =
-      "Manage sold entries";
-
-  }else if(currentDataType === "paid"){
-
-    title.textContent = "Paid Data";
-
-    subtitle.textContent =
-      "Manage paid entries";
-
-  }else{
-
-    title.textContent = "Delete Data";
-
-    subtitle.textContent =
-      "Deleted entries";
-
+  if(tab){
+    tab.classList.add("active");
   }
+
+  document.getElementById("viewSelect").value =
+    currentView;
+
+  const titles = {
+    data:"Data",
+    sell:"Sell",
+    paid:"Paid",
+    delete:"Delete"
+  };
+
+  const subtitles = {
+    data:"Manage support entries",
+    sell:"Sold entries",
+    paid:"Paid entries",
+    delete:"Deleted entries"
+  };
+
+  document.getElementById("pageTitle").textContent =
+    titles[currentView];
+
+  document.getElementById("pageSubtitle").textContent =
+    subtitles[currentView];
+
+  await loadData();
 
 }
 
@@ -1581,167 +1695,141 @@ function updateDataTitle(){
    LOAD DATA
 ============================================================ */
 
-async function loadData(){
-
-  checkLogin();
-
-  showTableLoader();
+async function loadData(force=false){
 
   try{
 
-    let url = "";
+    if(!force){
 
-    if(currentDataType === "data"){
-
-      if(dataCache){
-
-        allData =
-          Array.isArray(dataCache)
-            ? dataCache
-            : [];
-
-        applyFilters();
-
-        hideTableLoader();
-
+      if(currentView === "data" && dataCache){
+        renderCurrentView();
         return;
-
       }
+
+      if(currentView === "sell" && sellCache){
+        renderCurrentView();
+        return;
+      }
+
+      if(currentView === "paid" && paidCache){
+        renderCurrentView();
+        return;
+      }
+
+      if(currentView === "delete" && deleteCache){
+        renderCurrentView();
+        return;
+      }
+
+    }
+
+    showLoader("Loading " + currentView.toUpperCase() + "...");
+
+    let url;
+    let result;
+
+    if(currentView === "data"){
 
       url =
         DATA_API_URL +
-        "?action=getData";
+        "?action=getData&t=" +
+        Date.now();
 
-    }else if(currentDataType === "sell"){
+      result =
+        await getJson(url);
 
-      if(sellCache){
-
-        allData =
-          Array.isArray(sellCache)
-            ? sellCache
-            : [];
-
-        applyFilters();
-
-        hideTableLoader();
-
-        return;
-
+      if(!result.success){
+        throw new Error(result.message || "Unable to load data.");
       }
+
+      dataCache =
+        Array.isArray(result.data)
+          ? result.data
+          : [];
+
+    }
+
+    else if(currentView === "sell"){
 
       url =
         SELL_API_URL +
-        "?action=getSellData";
+        "?action=getSellData&t=" +
+        Date.now();
 
-    }else if(currentDataType === "paid"){
+      result =
+        await getJson(url);
 
-      if(paidCache){
-
-        allData =
-          Array.isArray(paidCache)
-            ? paidCache
-            : [];
-
-        applyFilters();
-
-        hideTableLoader();
-
-        return;
-
+      if(!result.success){
+        throw new Error(result.message || "Unable to load sell data.");
       }
+
+      sellCache =
+        Array.isArray(result.data)
+          ? result.data
+          : [];
+
+    }
+
+    else if(currentView === "paid"){
 
       url =
         PAID_API_URL +
-        "?action=getPaidData";
+        "?action=getPaidData&t=" +
+        Date.now();
 
-    }else{
+      result =
+        await getJson(url);
 
-      if(deleteCache){
-
-        allData =
-          Array.isArray(deleteCache)
-            ? deleteCache
-            : [];
-
-        applyFilters();
-
-        hideTableLoader();
-
-        return;
-
+      if(!result.success){
+        throw new Error(result.message || "Unable to load paid data.");
       }
+
+      paidCache =
+        Array.isArray(result.data)
+          ? result.data
+          : [];
+
+    }
+
+    else if(currentView === "delete"){
 
       url =
         DELETE_API_URL +
-        "?action=getDeletedData";
+        "?action=getDeletedData&t=" +
+        Date.now();
+
+      result =
+        await getJson(url);
+
+      if(!result.success){
+        throw new Error(result.message || "Unable to load deleted data.");
+      }
+
+      deleteCache =
+        Array.isArray(result.data)
+          ? result.data
+          : [];
 
     }
 
+    renderCurrentView();
 
-    const response =
-      await fetch(url);
+  }
+  catch(error){
 
-    const result =
-      await response.json();
-
-    if(!result || result.success !== true){
-
-      throw new Error(
-        result?.message ||
-        "Failed to load data."
-      );
-
-    }
-
-    allData =
-      Array.isArray(result.data)
-        ? result.data
-        : [];
-
-    if(currentDataType === "data"){
-
-      dataCache = allData;
-
-    }else if(currentDataType === "sell"){
-
-      sellCache = allData;
-
-    }else if(currentDataType === "paid"){
-
-      paidCache = allData;
-
-    }else{
-
-      deleteCache = allData;
-
-    }
-
-    currentPage = 1;
-
-    applyFilters();
-
-  }catch(error){
-
-    console.error(
-      "loadData error:",
-      error
-    );
-
-    allData = [];
-
-    filteredData = [];
-
-    renderData();
+    console.error(error);
 
     showToast(
-      error.message ||
-      "Failed to load data.",
+      error.message || "Data loading failed.",
       "error"
     );
 
-  }finally{
+    renderEmpty("Unable to load data.");
 
-    hideTableLoader();
+  }
+  finally{
+
+    hideLoader();
 
   }
 
@@ -1749,169 +1837,181 @@ async function loadData(){
 
 
 /* ============================================================
-   FILTER
+   NORMALIZE
 ============================================================ */
 
-function applyFilters(){
+function getCurrentRows(){
 
-  const search =
-    document.getElementById(
-      "searchInput"
-    ).value
-      .trim()
-      .toLowerCase();
+  if(currentView === "data")
+    return dataCache || [];
 
-  const from =
-    document.getElementById(
-      "fromDate"
-    ).value;
+  if(currentView === "sell")
+    return sellCache || [];
 
-  const to =
-    document.getElementById(
-      "toDate"
-    ).value;
+  if(currentView === "paid")
+    return paidCache || [];
 
-  filteredData =
-    allData.filter(function(row){
+  if(currentView === "delete")
+    return deleteCache || [];
 
-      let matchesSearch = true;
-
-      if(search){
-
-        matchesSearch =
-          Object.keys(row).some(function(key){
-
-            const value =
-              row[key];
-
-            return String(
-              value ?? ""
-            )
-              .toLowerCase()
-              .includes(search);
-
-          });
-
-      }
-
-      let matchesDate = true;
-
-      if(from || to){
-
-        const rawDate =
-          row.Date ||
-          row.date ||
-          "";
-
-        const rowDate =
-          normalizeDateForFilter(
-            rawDate
-          );
-
-        if(from && rowDate < from){
-
-          matchesDate = false;
-
-        }
-
-        if(to && rowDate > to){
-
-          matchesDate = false;
-
-        }
-
-      }
-
-      return (
-        matchesSearch &&
-        matchesDate
-      );
-
-    });
-
-  currentPage = 1;
-
-  renderData();
+  return [];
 
 }
 
 
-/* ============================================================
-   DATE NORMALIZER
-============================================================ */
+function getRealRowNumber(row){
 
-function normalizeDateForFilter(value){
-
-  if(!value){
-
-    return "";
-
-  }
-
-  const text =
-    String(value).trim();
-
-  if(/^\d{4}-\d{2}-\d{2}$/.test(text)){
-
-    return text;
-
-  }
-
-  const d =
-    new Date(text);
-
-  if(isNaN(d.getTime())){
-
-    return "";
-
-  }
-
-  const y =
-    d.getFullYear();
-
-  const m =
-    String(
-      d.getMonth()+1
-    ).padStart(2,"0");
-
-  const day =
-    String(
-      d.getDate()
-    ).padStart(2,"0");
-
-  return (
-    y +
-    "-" +
-    m +
-    "-" +
-    day
+  return Number(
+    row?.rowNumber ??
+    row?.row ??
+    row?.sheetRow ??
+    0
   );
 
 }
 
 
+function getIP(row){
+
+  return row?.IP ??
+    row?.Ip ??
+    row?.ip ??
+    "";
+
+}
+
+
+function getItem(row){
+
+  return row?.Item ??
+    row?.item ??
+    "";
+
+}
+
+
+function getUser(row){
+
+  return row?.User ??
+    row?.user ??
+    row?.username ??
+    "";
+
+}
+
+
+function getSellTime(row){
+
+  return row?.["Sell time"] ??
+    row?.SellTime ??
+    row?.SellDate ??
+    row?.sellDate ??
+    "";
+
+}
+
+
+function getPaidTime(row){
+
+  return row?.["Paid time"] ??
+    row?.PaidTime ??
+    row?.paidTime ??
+    "";
+
+}
+
+
+function getPaidUser(row){
+
+  return row?.["Paid User"] ??
+    row?.PaidUser ??
+    row?.PaidBy ??
+    "";
+
+}
+
+
+function getDeleteTime(row){
+
+  return row?.DelletTime ??
+    row?.DeleteTime ??
+    row?.["Delete time"] ??
+    "";
+
+}
+
+
 /* ============================================================
-   RENDER TABLE
+   RENDER
 ============================================================ */
 
-function renderData(){
+function renderCurrentView(){
+
+  const rows =
+    getCurrentRows();
+
+  const search =
+    document.getElementById("searchInput")
+      .value
+      .trim()
+      .toLowerCase();
+
+  const from =
+    document.getElementById("fromDate").value;
+
+  const to =
+    document.getElementById("toDate").value;
+
+  filteredData =
+    rows.filter(function(row){
+
+      if(search){
+
+        const found =
+          Object.keys(row || {}).some(function(key){
+
+            return String(row[key] ?? "")
+              .toLowerCase()
+              .includes(search);
+
+          });
+
+        if(!found) return false;
+
+      }
+
+      const rowDate =
+        normalizeDate(row?.Date);
+
+      if(from && rowDate && rowDate < from)
+        return false;
+
+      if(to && rowDate && rowDate > to)
+        return false;
+
+      return true;
+
+    });
+
+  renderTable();
+
+}
+
+
+function renderTable(){
 
   const head =
-    document.getElementById(
-      "tableHead"
-    );
+    document.getElementById("tableHead");
 
   const body =
-    document.getElementById(
-      "tableBody"
-    );
+    document.getElementById("tableBody");
 
   head.innerHTML = "";
   body.innerHTML = "";
 
   let headers = [];
 
-  if(currentDataType === "data"){
+  if(currentView === "data"){
 
     headers = [
       "Name",
@@ -1922,7 +2022,9 @@ function renderData(){
       "Action"
     ];
 
-  }else if(currentDataType === "sell"){
+  }
+
+  else if(currentView === "sell"){
 
     headers = [
       "Name",
@@ -1935,7 +2037,9 @@ function renderData(){
       "Action"
     ];
 
-  }else if(currentDataType === "paid"){
+  }
+
+  else if(currentView === "paid"){
 
     headers = [
       "Name",
@@ -1949,7 +2053,9 @@ function renderData(){
       "Paid User"
     ];
 
-  }else{
+  }
+
+  else if(currentView === "delete"){
 
     headers = [
       "Name",
@@ -1963,8 +2069,7 @@ function renderData(){
 
   }
 
-
-  const trHead =
+  const tr =
     document.createElement("tr");
 
   headers.forEach(function(header){
@@ -1972,13 +2077,14 @@ function renderData(){
     const th =
       document.createElement("th");
 
-    th.textContent = header;
+    th.textContent =
+      header;
 
-    trHead.appendChild(th);
+    tr.appendChild(th);
 
   });
 
-  head.appendChild(trHead);
+  head.appendChild(tr);
 
 
   if(!filteredData.length){
@@ -1992,355 +2098,136 @@ function renderData(){
     td.colSpan =
       headers.length;
 
-    td.className = "empty";
-
-    td.textContent =
-      "No data found.";
+    td.innerHTML =
+      '<div class="empty">' +
+      '<div class="empty-icon">📭</div>' +
+      '<div>No data found</div>' +
+      '</div>';
 
     tr.appendChild(td);
 
     body.appendChild(tr);
 
-    renderPagination();
+    updatePagination();
 
     return;
 
   }
 
 
-  const totalPages =
-    Math.ceil(
-      filteredData.length /
-      pageSize
-    );
-
-  if(currentPage > totalPages){
-
-    currentPage =
-      totalPages;
-
-  }
-
   const start =
-    (currentPage - 1) *
-    pageSize;
+    (currentPage - 1) * PAGE_SIZE;
 
-  const pageData =
-    filteredData.slice(
-      start,
-      start + pageSize
+  const end =
+    Math.min(
+      start + PAGE_SIZE,
+      filteredData.length
     );
 
+  const pageRows =
+    filteredData.slice(start,end);
 
-  pageData.forEach(function(row,index){
+
+  pageRows.forEach(function(row,index){
+
+    const realIndex =
+      start + index;
 
     const tr =
       document.createElement("tr");
 
-    if(currentDataType === "data"){
 
-      addCell(
-        tr,
-        row.Name
-      );
+    if(currentView === "data"){
 
-      addCell(
-        tr,
-        row.IP ??
-        row.Ip
-      );
+      addCell(tr,row.Name);
+      addCell(tr,getIP(row));
+      addCell(tr,row.Work);
+      addCell(tr,row.Date);
+      addCell(tr,getItem(row));
 
-      addCell(
-        tr,
-        row.Work
-      );
-
-      addCell(
-        tr,
-        row.Date
-      );
-
-      addCell(
-        tr,
-        row.Item
-      );
-
-      const actionTd =
+      const action =
         document.createElement("td");
 
-      const actions =
-        document.createElement("div");
+      action.innerHTML = `
+        <div class="actions">
+          <button class="action action-edit"
+            onclick="editDataEntry(${realIndex})">
+            Edit
+          </button>
 
-      actions.className =
-        "actions";
+          <button class="action action-sell"
+            onclick="sellDataEntry(${realIndex})">
+            Sell
+          </button>
 
+          <button class="action action-delete"
+            onclick="deleteDataEntry(${realIndex})">
+            Delete
+          </button>
+        </div>
+      `;
 
-      actions.appendChild(
-        actionButton(
-          "Edit",
-          "action-edit",
-          function(){
-            editDataEntry(
-              start + index
-            );
-          }
-        )
-      );
-
-
-      actions.appendChild(
-        actionButton(
-          "Sell",
-          "action-sell",
-          function(){
-            sellDataEntry(
-              start + index
-            );
-          }
-        )
-      );
-
-
-      actions.appendChild(
-        actionButton(
-          "Delete",
-          "action-delete",
-          function(){
-            deleteDataEntry(
-              start + index
-            );
-          }
-        )
-      );
-
-      actionTd.appendChild(actions);
-
-      tr.appendChild(actionTd);
+      tr.appendChild(action);
 
     }
 
 
-    else if(currentDataType === "sell"){
+    else if(currentView === "sell"){
 
-      addCell(
-        tr,
-        row.Name
-      );
+      addCell(tr,row.Name);
+      addCell(tr,getIP(row));
+      addCell(tr,row.Work);
+      addCell(tr,row.Date);
+      addCell(tr,getItem(row));
+      addCell(tr,getSellTime(row));
+      addCell(tr,getUser(row));
 
-      addCell(
-        tr,
-        row.IP ??
-        row.Ip
-      );
-
-      addCell(
-        tr,
-        row.Work
-      );
-
-      addCell(
-        tr,
-        row.Date
-      );
-
-      addCell(
-        tr,
-        row.Item
-      );
-
-
-      const sellDate =
-        row.SellDate ??
-        row.sellDate ??
-        row["Sell Date"] ??
-        row.sellTime ??
-        row["Sell time"] ??
-        row[5] ??
-        "";
-
-      const sellUser =
-        row.User ??
-        row.user ??
-        row.Username ??
-        row.username ??
-        row[6] ??
-        "";
-
-
-      addCell(
-        tr,
-        sellDate
-      );
-
-      addCell(
-        tr,
-        sellUser
-      );
-
-
-      const actionTd =
+      const action =
         document.createElement("td");
 
-      const actions =
-        document.createElement("div");
+      action.innerHTML = `
+        <div class="actions">
+          <button class="action action-edit"
+            onclick="editSellEntry(${realIndex})">
+            Edit
+          </button>
 
-      actions.className =
-        "actions";
+          <button class="action action-paid"
+            onclick="paidSellEntry(${realIndex})">
+            Paid
+          </button>
+        </div>
+      `;
 
-
-      actions.appendChild(
-        actionButton(
-          "Edit",
-          "action-edit",
-          function(){
-            editSellEntry(
-              start + index
-            );
-          }
-        )
-      );
-
-
-      actions.appendChild(
-        actionButton(
-          "Paid",
-          "action-paid",
-          function(){
-            paidSellEntry(
-              start + index
-            );
-          }
-        )
-      );
-
-      actionTd.appendChild(actions);
-
-      tr.appendChild(actionTd);
+      tr.appendChild(action);
 
     }
 
 
-    else if(currentDataType === "paid"){
+    else if(currentView === "paid"){
 
-      addCell(
-        tr,
-        row.Name
-      );
-
-      addCell(
-        tr,
-        row.IP ??
-        row.Ip
-      );
-
-      addCell(
-        tr,
-        row.Work
-      );
-
-      addCell(
-        tr,
-        row.Date
-      );
-
-      addCell(
-        tr,
-        row.Item
-      );
-
-
-      const sellDate =
-        row.SellDate ??
-        row.sellDate ??
-        row["Sell Date"] ??
-        row["Sell time"] ??
-        "";
-
-      const sellUser =
-        row.User ??
-        row.username ??
-        row.Username ??
-        "";
-
-      const paidTime =
-        row["Paid time"] ??
-        row.PaidTime ??
-        "";
-
-      const paidUser =
-        row["Paid User"] ??
-        row.PaidUser ??
-        "";
-
-
-      addCell(
-        tr,
-        sellDate
-      );
-
-      addCell(
-        tr,
-        sellUser
-      );
-
-      addCell(
-        tr,
-        paidTime
-      );
-
-      addCell(
-        tr,
-        paidUser
-      );
+      addCell(tr,row.Name);
+      addCell(tr,getIP(row));
+      addCell(tr,row.Work);
+      addCell(tr,row.Date);
+      addCell(tr,getItem(row));
+      addCell(tr,getSellTime(row));
+      addCell(tr,getUser(row));
+      addCell(tr,getPaidTime(row));
+      addCell(tr,getPaidUser(row));
 
     }
 
 
-    else{
+    else if(currentView === "delete"){
 
-      addCell(
-        tr,
-        row.Name
-      );
-
-      addCell(
-        tr,
-        row.IP ??
-        row.Ip
-      );
-
-      addCell(
-        tr,
-        row.Work
-      );
-
-      addCell(
-        tr,
-        row.Date
-      );
-
-      addCell(
-        tr,
-        row.Item
-      );
-
-      addCell(
-        tr,
-        row.DeleteDate ??
-        row.deleteDate ??
-        row["Delete time"] ??
-        row["Delete Time"] ??
-        row.DeleteTime ??
-        ""
-      );
-
-      addCell(
-        tr,
-        row.User ??
-        row.user ??
-        row.username ??
-        ""
-      );
+      addCell(tr,row.Name);
+      addCell(tr,getIP(row));
+      addCell(tr,row.Work);
+      addCell(tr,row.Date);
+      addCell(tr,getItem(row));
+      addCell(tr,getDeleteTime(row));
+      addCell(tr,getUser(row));
 
     }
 
@@ -2349,7 +2236,7 @@ function renderData(){
   });
 
 
-  renderPagination();
+  updatePagination();
 
 }
 
@@ -2360,36 +2247,27 @@ function addCell(tr,value){
     document.createElement("td");
 
   td.textContent =
-    value === null ||
-    value === undefined
-      ? ""
-      : String(value);
+    value == null ? "" : value;
 
   tr.appendChild(td);
 
 }
 
 
-function actionButton(
-  text,
-  className,
-  callback
-){
+function renderEmpty(message){
 
-  const btn =
-    document.createElement("button");
+  document.getElementById("tableHead").innerHTML = "";
 
-  btn.className =
-    "action-btn " +
-    className;
-
-  btn.textContent =
-    text;
-
-  btn.onclick =
-    callback;
-
-  return btn;
+  document.getElementById("tableBody").innerHTML = `
+    <tr>
+      <td>
+        <div class="empty">
+          <div class="empty-icon">⚠️</div>
+          <div>${escapeHtml(message)}</div>
+        </div>
+      </td>
+    </tr>
+  `;
 
 }
 
@@ -2398,79 +2276,99 @@ function actionButton(
    PAGINATION
 ============================================================ */
 
-function renderPagination(){
+function updatePagination(){
 
-  const box =
-    document.getElementById(
-      "pagination"
+  const total =
+    filteredData.length;
+
+  const pages =
+    Math.max(
+      1,
+      Math.ceil(total / PAGE_SIZE)
     );
 
-  box.innerHTML = "";
+  if(currentPage > pages)
+    currentPage = pages;
 
-  const totalPages =
-    Math.ceil(
-      filteredData.length /
-      pageSize
+  const start =
+    total
+      ? ((currentPage - 1) * PAGE_SIZE) + 1
+      : 0;
+
+  const end =
+    Math.min(
+      currentPage * PAGE_SIZE,
+      total
     );
 
-  if(totalPages <= 1){
+  document.getElementById("pageInfo").textContent =
+    total
+      ? `Showing ${start}-${end} of ${total}`
+      : "Showing 0 of 0";
 
+  const pagination =
+    document.getElementById("pagination");
+
+  pagination.innerHTML = "";
+
+  if(pages <= 1)
     return;
-
-  }
-
 
   const prev =
     document.createElement("button");
 
-  prev.textContent = "‹";
+  prev.className =
+    "page-btn";
+
+  prev.textContent =
+    "‹";
 
   prev.disabled =
     currentPage === 1;
 
-  prev.onclick = function(){
-
-    if(currentPage > 1){
-
-      currentPage--;
-
-      renderData();
-
-    }
-
-  };
-
-  box.appendChild(prev);
-
-
-  for(
-    let i=1;
-    i<=totalPages;
-    i++
-  ){
-
-    const button =
-      document.createElement("button");
-
-    button.textContent = i;
-
-    if(i === currentPage){
-
-      button.classList.add(
-        "active"
-      );
-
-    }
-
-    button.onclick = function(){
-
-      currentPage = i;
-
-      renderData();
-
+  prev.onclick =
+    function(){
+      if(currentPage > 1){
+        currentPage--;
+        renderTable();
+      }
     };
 
-    box.appendChild(button);
+  pagination.appendChild(prev);
+
+
+  let begin =
+    Math.max(
+      1,
+      currentPage - 2
+    );
+
+  let finish =
+    Math.min(
+      pages,
+      currentPage + 2
+    );
+
+
+  for(let i=begin;i<=finish;i++){
+
+    const btn =
+      document.createElement("button");
+
+    btn.className =
+      "page-btn" +
+      (i === currentPage ? " active" : "");
+
+    btn.textContent =
+      i;
+
+    btn.onclick =
+      function(){
+        currentPage = i;
+        renderTable();
+      };
+
+    pagination.appendChild(btn);
 
   }
 
@@ -2478,98 +2376,136 @@ function renderPagination(){
   const next =
     document.createElement("button");
 
-  next.textContent = "›";
+  next.className =
+    "page-btn";
+
+  next.textContent =
+    "›";
 
   next.disabled =
-    currentPage === totalPages;
+    currentPage === pages;
 
-  next.onclick = function(){
+  next.onclick =
+    function(){
 
-    if(
-      currentPage <
-      totalPages
-    ){
+      if(currentPage < pages){
 
-      currentPage++;
+        currentPage++;
 
-      renderData();
+        renderTable();
 
-    }
+      }
 
-  };
+    };
 
-  box.appendChild(next);
+  pagination.appendChild(next);
 
 }
 
 
 /* ============================================================
-   CLEAR FILTER
+   FILTER
 ============================================================ */
 
-function clearFilters(){
-
-  document.getElementById(
-    "searchInput"
-  ).value = "";
-
-  document.getElementById(
-    "fromDate"
-  ).value = "";
-
-  document.getElementById(
-    "toDate"
-  ).value = "";
+function applyFilters(){
 
   currentPage = 1;
 
-  applyFilters();
+  renderCurrentView();
+
+}
+
+
+function clearFilters(){
+
+  document.getElementById("searchInput").value = "";
+  document.getElementById("fromDate").value = "";
+  document.getElementById("toDate").value = "";
+
+  currentPage = 1;
+
+  renderCurrentView();
 
 }
 
 
 /* ============================================================
-   ENTRY MODAL
+   RELOAD
 ============================================================ */
 
-function openEntryModal(){
+async function reloadCurrent(){
 
-  editingDataRow = null;
-  editingSellRow = null;
+  if(currentView === "data")
+    dataCache = null;
 
-  document.getElementById(
-    "entryModalTitle"
-  ).textContent =
+  if(currentView === "sell")
+    sellCache = null;
+
+  if(currentView === "paid")
+    paidCache = null;
+
+  if(currentView === "delete")
+    deleteCache = null;
+
+  await loadData(true);
+
+}
+
+
+/* ============================================================
+   NEW ENTRY
+============================================================ */
+
+function setToday(){
+
+  const today =
+    new Date();
+
+  const year =
+    today.getFullYear();
+
+  const month =
+    String(today.getMonth()+1)
+      .padStart(2,"0");
+
+  const day =
+    String(today.getDate())
+      .padStart(2,"0");
+
+  document.getElementById("entryDate").value =
+    `${year}-${month}-${day}`;
+
+}
+
+
+function openNewEntry(){
+
+  editingIndex = -1;
+  editingType = "data";
+
+  document.getElementById("entryModalTitle").textContent =
     "New Entry";
 
-  document.getElementById(
-    "entryName"
-  ).value =
-    getCurrentUserName();
+  document.getElementById("entryName").value =
+    currentUser?.Name ||
+    currentUser?.name ||
+    currentUsername;
 
-  document.getElementById(
-    "entryIP"
-  ).value = "";
+  document.getElementById("entryIP").value = "";
+  document.getElementById("entryWork").value = "";
 
-  document.getElementById(
-    "entryWork"
-  ).value = "";
+  setToday();
 
-  document.getElementById(
-    "entryDate"
-  ).value =
-    todayDate();
-
-  populateItemSelect();
-
-  document.getElementById(
-    "entryItem"
-  ).value = "";
+  populateItemSelect("");
 
   openModal("entryModal");
 
 }
 
+
+/* ============================================================
+   EDIT DATA
+============================================================ */
 
 function editDataEntry(index){
 
@@ -2587,58 +2523,36 @@ function editDataEntry(index){
 
   }
 
-  editingDataRow =
-    getRealRowNumber(row);
+  editingIndex = index;
+  editingType = "data";
 
-  editingSellRow = null;
-
-  document.getElementById(
-    "entryModalTitle"
-  ).textContent =
+  document.getElementById("entryModalTitle").textContent =
     "Edit Entry";
 
-  document.getElementById(
-    "entryName"
-  ).value =
-    row.Name ||
-    "";
+  document.getElementById("entryName").value =
+    row.Name || "";
 
-  document.getElementById(
-    "entryIP"
-  ).value =
-    row.IP ??
-    row.Ip ??
-    "";
+  document.getElementById("entryIP").value =
+    getIP(row);
 
-  document.getElementById(
-    "entryWork"
-  ).value =
-    row.Work ||
-    "";
+  document.getElementById("entryWork").value =
+    row.Work || "";
 
-  document.getElementById(
-    "entryDate"
-  ).value =
-    normalizeDateForInput(
-      row.Date
-    );
+  document.getElementById("entryDate").value =
+    normalizeDate(row.Date) || "";
 
-  populateItemSelect();
-
-  setTimeout(function(){
-
-    document.getElementById(
-      "entryItem"
-    ).value =
-      row.Item ||
-      "";
-
-  },50);
+  populateItemSelect(
+    getItem(row)
+  );
 
   openModal("entryModal");
 
 }
 
+
+/* ============================================================
+   EDIT SELL
+============================================================ */
 
 function editSellEntry(index){
 
@@ -2656,53 +2570,27 @@ function editSellEntry(index){
 
   }
 
-  editingDataRow = null;
+  editingIndex = index;
+  editingType = "sell";
 
-  editingSellRow =
-    getRealRowNumber(row);
+  document.getElementById("entryModalTitle").textContent =
+    "Edit Sell";
 
-  document.getElementById(
-    "entryModalTitle"
-  ).textContent =
-    "Edit Sell Entry";
+  document.getElementById("entryName").value =
+    row.Name || "";
 
-  document.getElementById(
-    "entryName"
-  ).value =
-    row.Name ||
-    "";
+  document.getElementById("entryIP").value =
+    getIP(row);
 
-  document.getElementById(
-    "entryIP"
-  ).value =
-    row.IP ??
-    row.Ip ??
-    "";
+  document.getElementById("entryWork").value =
+    row.Work || "";
 
-  document.getElementById(
-    "entryWork"
-  ).value =
-    row.Work ||
-    "";
+  document.getElementById("entryDate").value =
+    normalizeDate(row.Date) || "";
 
-  document.getElementById(
-    "entryDate"
-  ).value =
-    normalizeDateForInput(
-      row.Date
-    );
-
-  populateItemSelect();
-
-  setTimeout(function(){
-
-    document.getElementById(
-      "entryItem"
-    ).value =
-      row.Item ||
-      "";
-
-  },50);
+  populateItemSelect(
+    getItem(row)
+  );
 
   openModal("entryModal");
 
@@ -2716,90 +2604,67 @@ function editSellEntry(index){
 async function saveEntry(){
 
   const name =
-    document.getElementById(
-      "entryName"
-    ).value.trim();
+    document.getElementById("entryName")
+      .value
+      .trim();
 
   const ip =
-    document.getElementById(
-      "entryIP"
-    ).value.trim();
+    document.getElementById("entryIP")
+      .value
+      .trim();
 
   const work =
-    document.getElementById(
-      "entryWork"
-    ).value.trim();
+    document.getElementById("entryWork")
+      .value
+      .trim();
 
   const date =
-    document.getElementById(
-      "entryDate"
-    ).value;
+    document.getElementById("entryDate")
+      .value;
 
   const item =
-    document.getElementById(
-      "entryItem"
-    ).value.trim();
+    document.getElementById("entryItem")
+      .value
+      .trim();
 
 
   if(!name){
 
-    showToast(
-      "Name is required.",
-      "error"
-    );
-
+    showToast("Name is required.","error");
     return;
 
   }
 
   if(!ip){
 
-    showToast(
-      "IP is required.",
-      "error"
-    );
-
+    showToast("IP is required.","error");
     return;
 
   }
 
   if(!work){
 
-    showToast(
-      "Work is required.",
-      "error"
-    );
-
+    showToast("Work is required.","error");
     return;
 
   }
 
   if(!date){
 
-    showToast(
-      "Date is required.",
-      "error"
-    );
-
+    showToast("Date is required.","error");
     return;
 
   }
 
   if(!item){
 
-    showToast(
-      "Item is required.",
-      "error"
-    );
-
+    showToast("Please select an Item.","error");
     return;
 
   }
 
 
-  showLoader(
-    "Saving..."
-  );
+  showLoader("Saving...");
 
 
   try{
@@ -2807,9 +2672,13 @@ async function saveEntry(){
     let result;
 
 
-    /* EDIT SELL */
+    if(editingType === "sell"){
 
-    if(editingSellRow){
+      const row =
+        filteredData[editingIndex];
+
+      const rowNumber =
+        getRealRowNumber(row);
 
       result =
         await postJson(
@@ -2817,70 +2686,30 @@ async function saveEntry(){
           {
             action:"editSellData",
 
-            row:
-              editingSellRow,
-
-            rowNumber:
-              editingSellRow,
+            row:rowNumber,
+            rowNumber:rowNumber,
 
             name:name,
-
             ip:ip,
-
             work:work,
-
             date:date,
-
             item:item,
 
-            username:
-              currentUsername,
-
-            user:
-              currentUsername
+            username:currentUsername,
+            user:currentUsername
           }
         );
-
-
-      if(!result || result.success !== true){
-
-        throw new Error(
-          result?.message ||
-          "Failed to update Sell entry."
-        );
-
-      }
-
-
-      sellCache = null;
-
-      closeModal(
-        "entryModal"
-      );
-
-      showToast(
-        "Sell entry updated successfully.",
-        "success"
-      );
-
-
-      if(currentDataType === "sell"){
-
-        await loadData();
-
-      }
-
-
-      editingSellRow = null;
-
-      return;
 
     }
 
 
-    /* EDIT DATA */
+    else if(editingIndex >= 0){
 
-    if(editingDataRow){
+      const row =
+        filteredData[editingIndex];
+
+      const rowNumber =
+        getRealRowNumber(row);
 
       result =
         await postJson(
@@ -2888,124 +2717,86 @@ async function saveEntry(){
           {
             action:"editData",
 
-            row:
-              editingDataRow,
-
-            rowNumber:
-              editingDataRow,
+            row:rowNumber,
+            rowNumber:rowNumber,
 
             name:name,
-
             ip:ip,
-
             work:work,
-
             date:date,
+            item:item,
 
-            item:item
+            username:currentUsername,
+            user:currentUsername
           }
         );
-
-
-      if(!result || result.success !== true){
-
-        throw new Error(
-          result?.message ||
-          "Failed to update entry."
-        );
-
-      }
-
-
-      dataCache = null;
-
-      closeModal(
-        "entryModal"
-      );
-
-      showToast(
-        "Entry updated successfully.",
-        "success"
-      );
-
-
-      if(currentDataType === "data"){
-
-        await loadData();
-
-      }
-
-
-      editingDataRow = null;
-
-      return;
 
     }
 
 
-    /* NEW DATA */
+    else{
 
-    result =
-      await postJson(
-        DATA_API_URL,
-        {
-          action:"addData",
+      result =
+        await postJson(
+          DATA_API_URL,
+          {
+            action:"addData",
 
-          name:name,
+            name:name,
+            ip:ip,
+            work:work,
+            date:date,
+            item:item,
 
-          ip:ip,
+            username:currentUsername,
+            user:currentUsername
+          }
+        );
 
-          work:work,
-
-          date:date,
-
-          item:item
-        }
-      );
+    }
 
 
     if(!result || result.success !== true){
 
       throw new Error(
         result?.message ||
-        "Failed to save entry."
+        "Save failed."
       );
 
     }
 
 
     dataCache = null;
+    sellCache = null;
 
-    closeModal(
-      "entryModal"
-    );
+    closeModal("entryModal");
 
     showToast(
-      "New entry added successfully.",
+      editingType === "sell"
+        ? "Sell entry updated successfully."
+        : editingIndex >= 0
+          ? "Entry updated successfully."
+          : "New entry added successfully.",
       "success"
     );
 
 
-    if(currentDataType === "data"){
+    editingIndex = -1;
 
-      await loadData();
+    await loadData(true);
 
-    }
+  }
+  catch(error){
 
-  }catch(error){
-
-    console.error(
-      "saveEntry error:",
-      error
-    );
+    console.error(error);
 
     showToast(
-      error.message ||
-      "Save failed.",
+      error.message || "Save failed.",
       "error"
     );
 
-  }finally{
+  }
+  finally{
 
     hideLoader();
 
@@ -3040,46 +2831,30 @@ async function sellDataEntry(index){
       "Are you sure you want to Sell this entry?"
     );
 
-  if(!confirmed){
-
+  if(!confirmed)
     return;
-
-  }
 
 
   const name =
-    row.Name ||
-    "";
+    row.Name || "";
 
   const ip =
-    row.IP ??
-    row.Ip ??
-    "";
+    getIP(row);
 
   const work =
-    row.Work ||
-    "";
+    row.Work || "";
 
   const date =
-    normalizeDateForInput(
-      row.Date
-    );
+    normalizeDate(row.Date);
 
   const item =
-    row.Item ||
-    "";
+    getItem(row);
 
 
-  if(
-    !name ||
-    !ip ||
-    !work ||
-    !date ||
-    !item
-  ){
+  if(!name || !ip || !work || !date){
 
     showToast(
-      "Incomplete data.",
+      "Incomplete data cannot be sold.",
       "error"
     );
 
@@ -3088,17 +2863,10 @@ async function sellDataEntry(index){
   }
 
 
-  showLoader(
-    "Selling..."
-  );
+  showLoader("Selling...");
 
 
   try{
-
-    /*
-     * First create Sell record.
-     * Only if Sell succeeds, delete source Data row.
-     */
 
     const sellResult =
       await postJson(
@@ -3107,23 +2875,14 @@ async function sellDataEntry(index){
           action:"sellData",
 
           name:name,
-
           ip:ip,
-
           work:work,
-
           date:date,
-
           item:item,
 
-          username:
-            currentUsername,
-
-          user:
-            currentUsername,
-
-          SellUser:
-            currentUsername
+          username:currentUsername,
+          user:currentUsername,
+          User:currentUsername
         }
       );
 
@@ -3135,96 +2894,80 @@ async function sellDataEntry(index){
 
       throw new Error(
         sellResult?.message ||
-        "Sell operation failed."
+        "Sell failed."
       );
 
     }
 
 
-    /*
-     * Remove from New Entry after successful Sell
-     */
-
     const rowNumber =
       getRealRowNumber(row);
 
 
-    if(rowNumber){
+    if(!rowNumber){
 
-      try{
+      throw new Error(
+        "Source row number was not found."
+      );
 
-        const deleteResult =
-          await postJson(
-            DATA_API_URL,
-            {
-              action:"deleteData",
-
-              row:
-                rowNumber,
-
-              rowNumber:
-                rowNumber
-            }
-          );
+    }
 
 
-        if(
-          !deleteResult ||
-          deleteResult.success !== true
-        ){
+    const deleteResult =
+      await postJson(
+        DATA_API_URL,
+        {
+          action:"deleteData",
 
-          console.warn(
-            "Sell successful but source delete failed:",
-            deleteResult
-          );
+          row:rowNumber,
+          rowNumber:rowNumber,
 
+          name:name,
+          ip:ip,
+          work:work,
+          date:date,
+          item:item,
+
+          username:currentUsername,
+          user:currentUsername
         }
+      );
 
-      }catch(deleteError){
 
-        console.warn(
-          "Source delete error:",
-          deleteError
-        );
+    if(
+      !deleteResult ||
+      deleteResult.success !== true
+    ){
 
-      }
+      throw new Error(
+        "Sold successfully, but source DATA row could not be removed."
+      );
 
     }
 
 
     dataCache = null;
-
     sellCache = null;
 
-
     showToast(
-      "Data sold successfully.",
+      "Entry sold successfully.",
       "success"
     );
 
+    await loadData(true);
 
-    if(currentDataType === "data" ||
-       currentDataType === "sell"){
+  }
+  catch(error){
 
-      await loadData();
-
-    }
-
-
-  }catch(error){
-
-    console.error(
-      "sellDataEntry error:",
-      error
-    );
+    console.error(error);
 
     showToast(
-      error.message ||
-      "Sell failed.",
+      error.message || "Sell failed.",
       "error"
     );
 
-  }finally{
+  }
+  finally{
 
     hideLoader();
 
@@ -3256,141 +2999,17 @@ async function paidSellEntry(index){
 
   const confirmed =
     window.confirm(
-      "Are you sure you want to mark this Sell entry as Paid?"
+      "Are you sure this Sell entry is Paid?"
     );
 
-  if(!confirmed){
-
+  if(!confirmed)
     return;
 
-  }
 
-
-  const name =
-    row.Name ||
-    "";
-
-  const ip =
-    row.IP ??
-    row.Ip ??
-    "";
-
-  const work =
-    row.Work ||
-    "";
-
-  const date =
-    normalizeDateForInput(
-      row.Date
-    );
-
-  const item =
-    row.Item ||
-    "";
-
-
-  const sellTime =
-    row.SellDate ??
-    row.sellDate ??
-    row["Sell Date"] ??
-    row.sellTime ??
-    row["Sell time"] ??
-    "";
-
-  const sellUser =
-    row.User ??
-    row.user ??
-    row.Username ??
-    row.username ??
-    "";
-
-
-  const paidUser =
-    currentUsername ||
-    localStorage.getItem("username") ||
-    localStorage.getItem("loggedUser") ||
-    "";
-
-
-  if(!name){
-
-    showToast(
-      "Name is required.",
-      "error"
-    );
-
-    return;
-
-  }
-
-  if(!ip){
-
-    showToast(
-      "IP is required.",
-      "error"
-    );
-
-    return;
-
-  }
-
-  if(!work){
-
-    showToast(
-      "Work is required.",
-      "error"
-    );
-
-    return;
-
-  }
-
-  if(!date){
-
-    showToast(
-      "Date is required.",
-      "error"
-    );
-
-    return;
-
-  }
-
-  if(!item){
-
-    showToast(
-      "Item is required.",
-      "error"
-    );
-
-    return;
-
-  }
-
-  if(!paidUser){
-
-    showToast(
-      "Paid User could not be identified.",
-      "error"
-    );
-
-    return;
-
-  }
-
-
-  showLoader(
-    "Processing Payment..."
-  );
+  showLoader("Processing Paid...");
 
 
   try{
-
-    /*
-     * IMPORTANT:
-     * Send exactly action = paidData
-     * to the correct PAID API.
-     */
 
     const result =
       await postJson(
@@ -3398,45 +3017,21 @@ async function paidSellEntry(index){
         {
           action:"paidData",
 
-          name:name,
+          name:row.Name || "",
+          ip:getIP(row),
+          work:row.Work || "",
+          date:normalizeDate(row.Date),
+          item:getItem(row),
 
-          ip:ip,
+          sellTime:getSellTime(row),
 
-          work:work,
+          username:currentUsername,
+          user:currentUsername,
+          User:currentUsername,
 
-          date:date,
-
-          item:item,
-
-          sellTime:
-            sellTime,
-
-          "Sell time":
-            sellTime,
-
-          username:
-            sellUser,
-
-          user:
-            sellUser,
-
-          User:
-            sellUser,
-
-          SellUser:
-            sellUser,
-
-          paidUser:
-            paidUser,
-
-          "Paid User":
-            paidUser,
-
-          PaidUser:
-            paidUser,
-
-          PaidBy:
-            paidUser
+          paidUser:currentUsername,
+          PaidUser:currentUsername,
+          PaidBy:currentUsername
         }
       );
 
@@ -3448,68 +3043,39 @@ async function paidSellEntry(index){
 
       throw new Error(
         result?.message ||
-        "Payment failed."
+        "Paid operation failed."
       );
 
     }
 
 
-    /*
-     * Payment successfully inserted into Paid sheet.
-     */
-
     paidCache = null;
 
-    sellCache = null;
-
-
     showToast(
-      "Payment data added successfully.",
+      "Paid entry added successfully.",
       "success"
     );
 
 
     /*
-     * Current Sell backend does not have
-     * deleteSellData action.
-     *
-     * Therefore Sell row is NOT deleted here.
+     * Current Sell API has no deleteSellData action.
+     * Therefore the Sell row is intentionally preserved.
      */
 
+    await loadData(true);
 
-    if(currentDataType === "sell"){
+  }
+  catch(error){
 
-      /*
-       * Keep Sell cache fresh.
-       * The row remains because current Sell API
-       * does not provide delete functionality.
-       */
-
-      sellCache = null;
-
-      await loadData();
-
-    }else if(currentDataType === "paid"){
-
-      await loadData();
-
-    }
-
-
-  }catch(error){
-
-    console.error(
-      "paidSellEntry error:",
-      error
-    );
+    console.error(error);
 
     showToast(
-      error.message ||
-      "Payment failed.",
+      error.message || "Paid operation failed.",
       "error"
     );
 
-  }finally{
+  }
+  finally{
 
     hideLoader();
 
@@ -3519,7 +3085,7 @@ async function paidSellEntry(index){
 
 
 /* ============================================================
-   DELETE DATA
+   DATA -> DELETE
 ============================================================ */
 
 async function deleteDataEntry(index){
@@ -3544,79 +3110,109 @@ async function deleteDataEntry(index){
       "Are you sure you want to Delete this entry?"
     );
 
-  if(!confirmed){
+  if(!confirmed)
+    return;
+
+
+  const rowNumber =
+    getRealRowNumber(row);
+
+
+  if(!rowNumber){
+
+    showToast(
+      "Original DATA row number not found.",
+      "error"
+    );
 
     return;
 
   }
 
 
-  showLoader(
-    "Deleting..."
-  );
+  showLoader("Deleting...");
 
 
   try{
 
-    const rowNumber =
-      getRealRowNumber(row);
+    /*
+     * First save a copy to Delete sheet.
+     * Delete API creates Row 2 automatically.
+     */
 
-
-    const result =
+    const deleteResult =
       await postJson(
         DELETE_API_URL,
         {
           action:"deleteData",
 
-          row:
-            rowNumber,
+          row:rowNumber,
+          rowNumber:rowNumber,
 
-          rowNumber:
-            rowNumber,
+          name:row.Name || "",
+          ip:getIP(row),
+          work:row.Work || "",
+          date:normalizeDate(row.Date),
+          item:getItem(row),
 
-          name:
-            row.Name || "",
-
-          ip:
-            row.IP ??
-            row.Ip ??
-            "",
-
-          work:
-            row.Work || "",
-
-          date:
-            row.Date || "",
-
-          item:
-            row.Item || "",
-
-          username:
-            currentUsername,
-
-          user:
-            currentUsername
+          username:currentUsername,
+          user:currentUsername
         }
       );
 
 
     if(
-      !result ||
-      result.success !== true
+      !deleteResult ||
+      deleteResult.success !== true
     ){
 
       throw new Error(
-        result?.message ||
-        "Delete failed."
+        deleteResult?.message ||
+        "Delete archive failed."
+      );
+
+    }
+
+
+    /*
+     * Now remove original row from DATA sheet.
+     */
+
+    const sourceResult =
+      await postJson(
+        DATA_API_URL,
+        {
+          action:"deleteData",
+
+          row:rowNumber,
+          rowNumber:rowNumber,
+
+          name:row.Name || "",
+          ip:getIP(row),
+          work:row.Work || "",
+          date:normalizeDate(row.Date),
+          item:getItem(row),
+
+          username:currentUsername,
+          user:currentUsername
+        }
+      );
+
+
+    if(
+      !sourceResult ||
+      sourceResult.success !== true
+    ){
+
+      throw new Error(
+        "Delete record was saved, but original DATA row could not be removed."
       );
 
     }
 
 
     dataCache = null;
-
     deleteCache = null;
-
 
     showToast(
       "Entry deleted successfully.",
@@ -3624,49 +3220,24 @@ async function deleteDataEntry(index){
     );
 
 
-    await loadData();
+    await loadData(true);
 
+  }
+  catch(error){
 
-  }catch(error){
-
-    console.error(
-      "deleteDataEntry error:",
-      error
-    );
+    console.error(error);
 
     showToast(
-      error.message ||
-      "Delete failed.",
+      error.message || "Delete failed.",
       "error"
     );
 
-  }finally{
+  }
+  finally{
 
     hideLoader();
 
   }
-
-}
-
-
-/* ============================================================
-   REAL ROW NUMBER
-============================================================ */
-
-function getRealRowNumber(row){
-
-  if(!row){
-
-    return 0;
-
-  }
-
-  return Number(
-    row.rowNumber ??
-    row.row ??
-    row.sheetRow ??
-    0
-  );
 
 }
 
@@ -3677,9 +3248,7 @@ function getRealRowNumber(row){
 
 async function openUsersModal(){
 
-  openModal(
-    "usersModal"
-  );
+  openModal("usersModal");
 
   await loadUsers();
 
@@ -3688,29 +3257,24 @@ async function openUsersModal(){
 
 async function loadUsers(){
 
-  const tbody =
-    document.getElementById(
-      "usersTableBody"
-    );
+  const list =
+    document.getElementById("usersList");
 
-  tbody.innerHTML =
-    '<tr><td colspan="5" class="empty">Loading users...</td></tr>';
+  list.innerHTML =
+    "Loading users...";
 
 
   try{
 
-    const url =
-      USER_API_URL +
-      "?action=getUsers&requester=" +
-      encodeURIComponent(
-        currentUsername
+    const result =
+      await getJson(
+        USER_API_URL +
+        "?action=getUsers&requester=" +
+        encodeURIComponent(currentUsername) +
+        "&t=" +
+        Date.now()
       );
 
-    const response =
-      await fetch(url);
-
-    const result =
-      await response.json();
 
     if(
       !result ||
@@ -3719,7 +3283,7 @@ async function loadUsers(){
 
       throw new Error(
         result?.message ||
-        "Failed to load users."
+        "Unable to load users."
       );
 
     }
@@ -3728,36 +3292,23 @@ async function loadUsers(){
     usersCache =
       Array.isArray(result.data)
         ? result.data
-        : (
-            Array.isArray(result.users)
-              ? result.users
-              : []
-          );
+        : Array.isArray(result.users)
+          ? result.users
+          : [];
 
 
     renderUsers();
 
+  }
+  catch(error){
 
-  }catch(error){
+    console.error(error);
 
-    console.error(
-      "loadUsers error:",
-      error
-    );
-
-    tbody.innerHTML =
-      '<tr><td colspan="5" class="empty">' +
-      escapeHtml(
-        error.message ||
-        "Failed to load users."
-      ) +
-      '</td></tr>';
-
-    showToast(
-      error.message ||
-      "Failed to load users.",
-      "error"
-    );
+    list.innerHTML =
+      `<div class="empty">
+        <div class="empty-icon">⚠️</div>
+        <div>${escapeHtml(error.message || "Unable to load users.")}</div>
+      </div>`;
 
   }
 
@@ -3766,202 +3317,118 @@ async function loadUsers(){
 
 function renderUsers(){
 
-  const tbody =
-    document.getElementById(
-      "usersTableBody"
-    );
+  const list =
+    document.getElementById("usersList");
 
-  tbody.innerHTML = "";
+  if(!usersCache || !usersCache.length){
 
-
-  if(
-    !Array.isArray(usersCache) ||
-    !usersCache.length
-  ){
-
-    tbody.innerHTML =
-      '<tr><td colspan="5" class="empty">No users found.</td></tr>';
+    list.innerHTML =
+      `<div class="empty">
+        <div class="empty-icon">👥</div>
+        <div>No users found.</div>
+      </div>`;
 
     return;
 
   }
 
 
-  usersCache.forEach(function(user){
+  list.innerHTML =
+    usersCache.map(function(user,index){
 
-    const username =
-      user.Username ??
-      user.username ??
-      "";
+      const username =
+        user.Username ??
+        user.username ??
+        "";
 
-    const name =
-      user.Name ??
-      user.name ??
-      "";
+      const name =
+        user.Name ??
+        user.name ??
+        "";
 
-    const role =
-      user.Role ??
-      user.role ??
-      "";
+      const role =
+        user.Role ??
+        user.role ??
+        "";
 
-    const status =
-      user.Status ??
-      user.status ??
-      "";
+      const status =
+        user.Status ??
+        user.status ??
+        "Inactive";
 
+      let badge =
+        "badge-inactive";
 
-    const tr =
-      document.createElement("tr");
+      if(
+        String(status).toLowerCase() === "active"
+      )
+        badge = "badge-active";
 
-
-    addCell(
-      tr,
-      username
-    );
-
-    addCell(
-      tr,
-      name
-    );
-
-    addCell(
-      tr,
-      role
-    );
+      else if(
+        String(status).toLowerCase() === "blocked"
+      )
+        badge = "badge-blocked";
 
 
-    const statusTd =
-      document.createElement("td");
+      return `
+        <div class="user-row">
 
-    const badge =
-      document.createElement("span");
+          <div class="user-name">
+            ${escapeHtml(username)}
+          </div>
 
-    badge.className =
-      "status-badge " +
-      getStatusClass(status);
+          <div>
+            ${escapeHtml(name)}
+          </div>
 
-    badge.textContent =
-      status || "";
+          <div class="user-muted">
+            ${escapeHtml(role)}
+          </div>
 
-    statusTd.appendChild(badge);
+          <div>
+            <span class="badge ${badge}">
+              ${escapeHtml(status)}
+            </span>
+          </div>
 
-    tr.appendChild(statusTd);
+          <div class="user-muted">
+            ${username === currentUsername ? "You" : ""}
+          </div>
 
+          <div class="user-actions">
 
-    const actionTd =
-      document.createElement("td");
+            <button
+              class="btn btn-sm"
+              onclick="editUser(${index})">
+              Edit
+            </button>
 
-    const actions =
-      document.createElement("div");
+            ${
+              username !== currentUsername
+              ? `
+                <button
+                  class="btn btn-sm ${
+                    String(status).toLowerCase() === "blocked"
+                      ? "btn-primary"
+                      : "btn-danger"
+                  }"
+                  onclick="toggleUserStatus(${index})">
+                  ${
+                    String(status).toLowerCase() === "blocked"
+                      ? "Unblock"
+                      : "Block"
+                  }
+                </button>
+              `
+              : ""
+            }
 
-    actions.className =
-      "actions";
+          </div>
 
+        </div>
+      `;
 
-    const editBtn =
-      actionButton(
-        "Edit",
-        "action-edit",
-        function(){
-
-          editUser(user);
-
-        }
-      );
-
-    actions.appendChild(
-      editBtn
-    );
-
-
-    const statusLower =
-      String(
-        status
-      ).toLowerCase();
-
-
-    const toggleBtn =
-      actionButton(
-        statusLower === "blocked" ||
-        statusLower === "block"
-          ? "Unblock"
-          : "Block",
-
-        statusLower === "blocked" ||
-        statusLower === "block"
-          ? "action-sell"
-          : "action-delete",
-
-        function(){
-
-          toggleUserStatus(
-            user
-          );
-
-        }
-      );
-
-
-    /*
-     * Do not allow blocking current logged-in user
-     */
-
-    if(
-      String(username).toLowerCase() ===
-      String(currentUsername).toLowerCase()
-    ){
-
-      toggleBtn.disabled = true;
-      toggleBtn.style.opacity = ".45";
-      toggleBtn.style.cursor = "not-allowed";
-
-    }
-
-
-    actions.appendChild(
-      toggleBtn
-    );
-
-
-    actionTd.appendChild(
-      actions
-    );
-
-    tr.appendChild(
-      actionTd
-    );
-
-
-    tbody.appendChild(tr);
-
-  });
-
-}
-
-
-function getStatusClass(status){
-
-  const s =
-    String(
-      status || ""
-    ).toLowerCase();
-
-  if(s === "active"){
-
-    return "status-active";
-
-  }
-
-  if(
-    s === "blocked" ||
-    s === "block"
-  ){
-
-    return "status-blocked";
-
-  }
-
-  return "status-inactive";
+    }).join("");
 
 }
 
@@ -3970,40 +3437,20 @@ function getStatusClass(status){
    ADD USER
 ============================================================ */
 
-function openAddUserModal(){
+function openUserForm(){
 
-  editingUser = null;
-
-  document.getElementById(
-    "userFormTitle"
-  ).textContent =
+  document.getElementById("userFormTitle").textContent =
     "Add User";
 
-  document.getElementById(
-    "userUsername"
-  ).value = "";
+  document.getElementById("originalUsername").value = "";
 
-  document.getElementById(
-    "userPassword"
-  ).value = "";
+  document.getElementById("userUsername").value = "";
+  document.getElementById("userPassword").value = "";
+  document.getElementById("userName").value = "";
+  document.getElementById("userRole").value = "support";
+  document.getElementById("userStatus").value = "Active";
 
-  document.getElementById(
-    "userName"
-  ).value = "";
-
-  document.getElementById(
-    "userRole"
-  ).value =
-    "support";
-
-  document.getElementById(
-    "userStatus"
-  ).value =
-    "Active";
-
-  openModal(
-    "userFormModal"
-  );
+  openModal("userFormModal");
 
 }
 
@@ -4012,79 +3459,56 @@ function openAddUserModal(){
    EDIT USER
 ============================================================ */
 
-function editUser(user){
+function editUser(index){
 
-  editingUser = user;
+  const user =
+    usersCache[index];
 
-  document.getElementById(
-    "userFormTitle"
-  ).textContent =
+  if(!user)
+    return;
+
+
+  document.getElementById("userFormTitle").textContent =
     "Edit User";
 
-  document.getElementById(
-    "userUsername"
-  ).value =
+
+  document.getElementById("originalUsername").value =
     user.Username ??
     user.username ??
     "";
 
-  document.getElementById(
-    "userPassword"
-  ).value =
+
+  document.getElementById("userUsername").value =
+    user.Username ??
+    user.username ??
+    "";
+
+
+  document.getElementById("userPassword").value =
     user.Password ??
     user.password ??
     "";
 
-  document.getElementById(
-    "userName"
-  ).value =
+
+  document.getElementById("userName").value =
     user.Name ??
     user.name ??
     "";
 
-  document.getElementById(
-    "userRole"
-  ).value =
+
+  document.getElementById("userRole").value =
     user.Role ??
     user.role ??
     "support";
 
-  document.getElementById(
-    "userStatus"
-  ).value =
-    normalizeStatus(
-      user.Status ??
-      user.status ??
-      "Active"
-    );
 
-  openModal(
-    "userFormModal"
-  );
-
-}
+  document.getElementById("userStatus").value =
+    user.Status ??
+    user.status ??
+    "Active";
 
 
-function normalizeStatus(status){
-
-  const s =
-    String(
-      status || ""
-    ).toLowerCase();
-
-  if(s === "blocked" || s === "block"){
-
-    return "Blocked";
-
-  }
-
-  if(s === "inactive"){
-
-    return "Inactive";
-
-  }
-
-  return "Active";
+  openModal("userFormModal");
 
 }
 
@@ -4095,30 +3519,32 @@ function normalizeStatus(status){
 
 async function saveUser(){
 
+  const originalUsername =
+    document.getElementById("originalUsername")
+      .value
+      .trim();
+
   const username =
-    document.getElementById(
-      "userUsername"
-    ).value.trim();
+    document.getElementById("userUsername")
+      .value
+      .trim();
 
   const password =
-    document.getElementById(
-      "userPassword"
-    ).value;
+    document.getElementById("userPassword")
+      .value;
 
   const name =
-    document.getElementById(
-      "userName"
-    ).value.trim();
+    document.getElementById("userName")
+      .value
+      .trim();
 
   const role =
-    document.getElementById(
-      "userRole"
-    ).value;
+    document.getElementById("userRole")
+      .value;
 
   const status =
-    document.getElementById(
-      "userStatus"
-    ).value;
+    document.getElementById("userStatus")
+      .value;
 
 
   if(!username){
@@ -4132,6 +3558,7 @@ async function saveUser(){
 
   }
 
+
   if(!password){
 
     showToast(
@@ -4142,6 +3569,7 @@ async function saveUser(){
     return;
 
   }
+
 
   if(!name){
 
@@ -4156,7 +3584,9 @@ async function saveUser(){
 
 
   showLoader(
-    "Saving User..."
+    originalUsername
+      ? "Updating user..."
+      : "Adding user..."
   );
 
 
@@ -4165,13 +3595,7 @@ async function saveUser(){
     let result;
 
 
-    if(editingUser){
-
-      const originalUsername =
-        editingUser.Username ??
-        editingUser.username ??
-        "";
-
+    if(originalUsername){
 
       result =
         await postJson(
@@ -4179,30 +3603,20 @@ async function saveUser(){
           {
             action:"editUser",
 
-            requester:
-              currentUsername,
+            requester:currentUsername,
 
-            originalUsername:
-              originalUsername,
+            originalUsername:originalUsername,
 
-            username:
-              username,
-
-            password:
-              password,
-
-            name:
-              name,
-
-            role:
-              role,
-
-            status:
-              status
+            username:username,
+            password:password,
+            name:name,
+            role:role,
+            status:status
           }
         );
 
-    }else{
+    }
+    else{
 
       result =
         await postJson(
@@ -4210,23 +3624,13 @@ async function saveUser(){
           {
             action:"addUser",
 
-            requester:
-              currentUsername,
+            requester:currentUsername,
 
-            username:
-              username,
-
-            password:
-              password,
-
-            name:
-              name,
-
-            role:
-              role,
-
-            status:
-              status
+            username:username,
+            password:password,
+            name:name,
+            role:role,
+            status:status
           }
         );
 
@@ -4240,43 +3644,36 @@ async function saveUser(){
 
       throw new Error(
         result?.message ||
-        "User save failed."
+        "User operation failed."
       );
 
     }
 
 
-    closeModal(
-      "userFormModal"
-    );
+    closeModal("userFormModal");
 
     showToast(
-      editingUser
+      originalUsername
         ? "User updated successfully."
         : "User added successfully.",
       "success"
     );
 
 
-    editingUser = null;
-
     await loadUsers();
 
+  }
+  catch(error){
 
-  }catch(error){
-
-    console.error(
-      "saveUser error:",
-      error
-    );
+    console.error(error);
 
     showToast(
-      error.message ||
-      "User save failed.",
+      error.message || "User operation failed.",
       "error"
     );
 
-  }finally{
+  }
+  finally{
 
     hideLoader();
 
@@ -4286,58 +3683,66 @@ async function saveUser(){
 
 
 /* ============================================================
-   BLOCK / UNBLOCK USER
+   BLOCK / UNBLOCK
 ============================================================ */
 
-async function toggleUserStatus(user){
+async function toggleUserStatus(index){
+
+  const user =
+    usersCache[index];
+
+  if(!user)
+    return;
+
 
   const username =
     user.Username ??
     user.username ??
     "";
 
-  const currentStatus =
-    user.Status ??
-    user.status ??
-    "Active";
 
-  const isBlocked =
-    String(
-      currentStatus
-    ).toLowerCase() === "blocked" ||
-    String(
-      currentStatus
-    ).toLowerCase() === "block";
+  if(username === currentUsername){
 
-
-  const newStatus =
-    isBlocked
-      ? "Active"
-      : "Blocked";
-
-
-  const confirmed =
-    window.confirm(
-      newStatus === "Blocked"
-        ? "Block user " +
-          username +
-          "?"
-        : "Unblock user " +
-          username +
-          "?"
+    showToast(
+      "You cannot block your own account.",
+      "warning"
     );
-
-  if(!confirmed){
 
     return;
 
   }
 
 
-  showLoader(
+  const oldStatus =
+    user.Status ??
+    user.status ??
+    "Active";
+
+
+  const newStatus =
+    String(oldStatus).toLowerCase() === "blocked"
+      ? "Active"
+      : "Blocked";
+
+
+  const actionText =
     newStatus === "Blocked"
-      ? "Blocking User..."
-      : "Unblocking User..."
+      ? "Block"
+      : "Unblock";
+
+
+  const confirmed =
+    window.confirm(
+      `Are you sure you want to ${actionText} ${username}?`
+    );
+
+
+  if(!confirmed)
+    return;
+
+
+  showLoader(
+    actionText + "ing user..."
   );
 
 
@@ -4349,14 +3754,11 @@ async function toggleUserStatus(user){
         {
           action:"editUser",
 
-          requester:
-            currentUsername,
+          requester:currentUsername,
 
-          originalUsername:
-            username,
+          originalUsername:username,
 
-          username:
-            username,
+          username:username,
 
           password:
             user.Password ??
@@ -4373,8 +3775,7 @@ async function toggleUserStatus(user){
             user.role ??
             "support",
 
-          status:
-            newStatus
+          status:newStatus
         }
       );
 
@@ -4386,37 +3787,33 @@ async function toggleUserStatus(user){
 
       throw new Error(
         result?.message ||
-        "Status update failed."
+        `${actionText} failed.`
       );
 
     }
 
 
     showToast(
-      newStatus === "Blocked"
-        ? "User blocked successfully."
-        : "User unblocked successfully.",
+      `User ${actionText.toLowerCase()}ed successfully.`,
       "success"
     );
 
 
     await loadUsers();
 
+  }
+  catch(error){
 
-  }catch(error){
-
-    console.error(
-      "toggleUserStatus error:",
-      error
-    );
+    console.error(error);
 
     showToast(
       error.message ||
-      "Status update failed.",
+      `${actionText} failed.`,
       "error"
     );
 
-  }finally{
+  }
+  finally{
 
     hideLoader();
 
@@ -4426,487 +3823,16 @@ async function toggleUserStatus(user){
 
 
 /* ============================================================
-   ITEMS
-============================================================ */
-
-async function openItemsModal(){
-
-  openModal(
-    "itemsModal"
-  );
-
-  await loadItems();
-
-}
-
-
-async function loadItems(){
-
-  try{
-
-    if(itemCache){
-
-      itemList =
-        Array.isArray(itemCache)
-          ? itemCache
-          : [];
-
-      renderItems();
-
-      populateItemSelect();
-
-      return;
-
-    }
-
-
-    const url =
-      ITEM_API_URL +
-      "?action=getItems";
-
-
-    const response =
-      await fetch(url);
-
-    const result =
-      await response.json();
-
-
-    if(
-      !result ||
-      result.success !== true
-    ){
-
-      throw new Error(
-        result?.message ||
-        "Failed to load items."
-      );
-
-    }
-
-
-    itemList =
-      Array.isArray(result.data)
-        ? result.data
-        : (
-            Array.isArray(result.items)
-              ? result.items
-              : []
-          );
-
-
-    /*
-     * Normalize possible object format.
-     */
-
-    itemList =
-      itemList
-        .map(function(item){
-
-          if(
-            typeof item === "string"
-          ){
-
-            return item;
-
-          }
-
-          return (
-            item.Item ??
-            item.item ??
-            item.Name ??
-            item.name ??
-            ""
-          );
-
-        })
-        .filter(Boolean);
-
-
-    itemCache =
-      itemList;
-
-
-    renderItems();
-
-    populateItemSelect();
-
-
-  }catch(error){
-
-    console.error(
-      "loadItems error:",
-      error
-    );
-
-    showToast(
-      error.message ||
-      "Failed to load items.",
-      "error"
-    );
-
-  }
-
-}
-
-
-function renderItems(){
-
-  const container =
-    document.getElementById(
-      "itemListContainer"
-    );
-
-  if(!container){
-
-    return;
-
-  }
-
-  container.innerHTML = "";
-
-
-  if(!itemList.length){
-
-    container.innerHTML =
-      '<div class="empty">No items found.</div>';
-
-    return;
-
-  }
-
-
-  itemList.forEach(function(item){
-
-    const row =
-      document.createElement(
-        "div"
-      );
-
-    row.className =
-      "item-row";
-
-
-    const name =
-      document.createElement(
-        "span"
-      );
-
-    name.className =
-      "item-name";
-
-    name.textContent =
-      item;
-
-
-    const deleteBtn =
-      document.createElement(
-        "button"
-      );
-
-    deleteBtn.className =
-      "action-btn action-delete";
-
-    deleteBtn.textContent =
-      "Delete";
-
-    deleteBtn.onclick =
-      function(){
-
-        deleteItem(item);
-
-      };
-
-
-    row.appendChild(name);
-
-    row.appendChild(
-      deleteBtn
-    );
-
-    container.appendChild(row);
-
-  });
-
-}
-
-
-function populateItemSelect(){
-
-  const select =
-    document.getElementById(
-      "entryItem"
-    );
-
-  if(!select){
-
-    return;
-
-  }
-
-
-  const oldValue =
-    select.value;
-
-
-  select.innerHTML =
-    '<option value="">Select Item</option>';
-
-
-  itemList.forEach(function(item){
-
-    const option =
-      document.createElement(
-        "option"
-      );
-
-    option.value =
-      item;
-
-    option.textContent =
-      item;
-
-    select.appendChild(
-      option
-    );
-
-  });
-
-
-  if(oldValue){
-
-    select.value =
-      oldValue;
-
-  }
-
-}
-
-
-/* ============================================================
-   ADD ITEM
-============================================================ */
-
-async function addItem(){
-
-  const item =
-    document.getElementById(
-      "newItemName"
-    ).value.trim();
-
-
-  if(!item){
-
-    showToast(
-      "Enter item name.",
-      "error"
-    );
-
-    return;
-
-  }
-
-
-  showLoader(
-    "Adding Item..."
-  );
-
-
-  try{
-
-    const result =
-      await postJson(
-        ITEM_API_URL,
-        {
-          action:"addItem",
-
-          item:
-            item,
-
-          name:
-            item,
-
-          Item:
-            item,
-
-          requester:
-            currentUsername
-        }
-      );
-
-
-    if(
-      !result ||
-      result.success !== true
-    ){
-
-      throw new Error(
-        result?.message ||
-        "Failed to add item."
-      );
-
-    }
-
-
-    document.getElementById(
-      "newItemName"
-    ).value = "";
-
-
-    itemCache = null;
-
-    await loadItems();
-
-
-    showToast(
-      "Item added successfully.",
-      "success"
-    );
-
-
-  }catch(error){
-
-    console.error(
-      "addItem error:",
-      error
-    );
-
-    showToast(
-      error.message ||
-      "Failed to add item.",
-      "error"
-    );
-
-  }finally{
-
-    hideLoader();
-
-  }
-
-}
-
-
-/* ============================================================
-   DELETE ITEM
-============================================================ */
-
-async function deleteItem(item){
-
-  const confirmed =
-    window.confirm(
-      "Delete item '" +
-      item +
-      "'?"
-    );
-
-  if(!confirmed){
-
-    return;
-
-  }
-
-
-  showLoader(
-    "Deleting Item..."
-  );
-
-
-  try{
-
-    const result =
-      await postJson(
-        ITEM_API_URL,
-        {
-          action:"deleteItem",
-
-          item:
-            item,
-
-          name:
-            item,
-
-          Item:
-            item,
-
-          requester:
-            currentUsername
-        }
-      );
-
-
-    if(
-      !result ||
-      result.success !== true
-    ){
-
-      throw new Error(
-        result?.message ||
-        "Failed to delete item."
-      );
-
-    }
-
-
-    itemCache = null;
-
-    await loadItems();
-
-
-    showToast(
-      "Item deleted successfully.",
-      "success"
-    );
-
-
-  }catch(error){
-
-    console.error(
-      "deleteItem error:",
-      error
-    );
-
-    showToast(
-      error.message ||
-      "Failed to delete item.",
-      "error"
-    );
-
-  }finally{
-
-    hideLoader();
-
-  }
-
-}
-
-
-/* ============================================================
-   CHANGE PASSWORD
+   PASSWORD
 ============================================================ */
 
 function openPasswordModal(){
 
-  document.getElementById(
-    "profileMenu"
-  ).classList.remove(
-    "show"
-  );
+  document.getElementById("currentPassword").value = "";
+  document.getElementById("newPassword").value = "";
+  document.getElementById("confirmPassword").value = "";
 
-  document.getElementById(
-    "currentPassword"
-  ).value = "";
-
-  document.getElementById(
-    "newPassword"
-  ).value = "";
-
-  document.getElementById(
-    "confirmPassword"
-  ).value = "";
-
-  openModal(
-    "passwordModal"
-  );
+  openModal("passwordModal");
 
 }
 
@@ -4914,19 +3840,16 @@ function openPasswordModal(){
 async function changePassword(){
 
   const currentPassword =
-    document.getElementById(
-      "currentPassword"
-    ).value;
+    document.getElementById("currentPassword")
+      .value;
 
   const newPassword =
-    document.getElementById(
-      "newPassword"
-    ).value;
+    document.getElementById("newPassword")
+      .value;
 
   const confirmPassword =
-    document.getElementById(
-      "confirmPassword"
-    ).value;
+    document.getElementById("confirmPassword")
+      .value;
 
 
   if(!currentPassword){
@@ -4940,6 +3863,7 @@ async function changePassword(){
 
   }
 
+
   if(!newPassword){
 
     showToast(
@@ -4950,6 +3874,19 @@ async function changePassword(){
     return;
 
   }
+
+
+  if(newPassword.length < 4){
+
+    showToast(
+      "New password must contain at least 4 characters.",
+      "error"
+    );
+
+    return;
+
+  }
+
 
   if(newPassword !== confirmPassword){
 
@@ -4963,9 +3900,7 @@ async function changePassword(){
   }
 
 
-  showLoader(
-    "Changing Password..."
-  );
+  showLoader("Changing password...");
 
 
   try{
@@ -4976,14 +3911,11 @@ async function changePassword(){
         {
           action:"changePassword",
 
-          username:
-            currentUsername,
+          username:currentUsername,
 
-          currentPassword:
-            currentPassword,
+          currentPassword:currentPassword,
 
-          newPassword:
-            newPassword
+          newPassword:newPassword
         }
       );
 
@@ -5001,23 +3933,17 @@ async function changePassword(){
     }
 
 
-    closeModal(
-      "passwordModal"
-    );
-
+    closeModal("passwordModal");
 
     showToast(
       "Password changed successfully.",
       "success"
     );
 
+  }
+  catch(error){
 
-  }catch(error){
-
-    console.error(
-      "changePassword error:",
-      error
-    );
+    console.error(error);
 
     showToast(
       error.message ||
@@ -5025,7 +3951,8 @@ async function changePassword(){
       "error"
     );
 
-  }finally{
+  }
+  finally{
 
     hideLoader();
 
@@ -5035,510 +3962,571 @@ async function changePassword(){
 
 
 /* ============================================================
-   PROFILE
+   ITEMS
 ============================================================ */
 
-function toggleProfileMenu(){
+async function openItemsModal(){
 
-  document.getElementById(
-    "profileMenu"
-  ).classList.toggle(
-    "show"
-  );
+  openModal("itemsModal");
+
+  await loadItems();
 
 }
 
 
-document.addEventListener(
-  "click",
-  function(event){
+async function loadItems(){
 
-    const profile =
-      document.querySelector(
-        ".profile"
-      );
+  const list =
+    document.getElementById("itemsList");
 
-    const menu =
-      document.getElementById(
-        "profileMenu"
-      );
+  if(!list)
+    return;
+
+
+  list.innerHTML =
+    "Loading items...";
+
+
+  try{
+
+    /*
+     * Try the common GET action names.
+     */
+
+    let result;
+
+    try{
+
+      result =
+        await getJson(
+          ITEM_API_URL +
+          "?action=getItems&t=" +
+          Date.now()
+        );
+
+    }
+    catch(e){
+
+      result =
+        await getJson(
+          ITEM_API_URL +
+          "?action=getItemData&t=" +
+          Date.now()
+        );
+
+    }
+
 
     if(
-      profile &&
-      menu &&
-      !profile.contains(
-        event.target
-      )
+      !result ||
+      result.success !== true
     ){
 
-      menu.classList.remove(
-        "show"
+      throw new Error(
+        result?.message ||
+        "Unable to load items."
       );
 
     }
 
+
+    const raw =
+      result.data ??
+      result.items ??
+      [];
+
+
+    itemsCache =
+      raw.map(function(item){
+
+        if(typeof item === "string")
+          return item;
+
+        return item.Item ??
+          item.item ??
+          item.Name ??
+          item.name ??
+          "";
+
+      }).filter(Boolean);
+
+
+    renderItems();
+
+    populateItemSelect(
+      document.getElementById("entryItem")?.value || ""
+    );
+
   }
-);
+  catch(error){
+
+    console.error(error);
+
+    itemsCache = [];
+
+    renderItems();
+
+    populateItemSelect("");
+
+    /*
+     * Do not block DATA if Item API is temporarily unavailable.
+     */
+
+  }
+
+}
+
+
+function renderItems(){
+
+  const list =
+    document.getElementById("itemsList");
+
+  if(!list)
+    return;
+
+
+  if(!itemsCache.length){
+
+    list.innerHTML =
+      `<div class="empty">
+        <div class="empty-icon">📦</div>
+        <div>No items found.</div>
+      </div>`;
+
+    return;
+
+  }
+
+
+  list.innerHTML =
+    itemsCache.map(function(item,index){
+
+      return `
+        <div class="item-line">
+
+          <span>${escapeHtml(item)}</span>
+
+          <button
+            class="btn btn-sm btn-danger"
+            onclick="deleteItem(${index})">
+            Delete
+          </button>
+
+        </div>
+      `;
+
+    }).join("");
+
+}
+
+
+function populateItemSelect(selected){
+
+  const select =
+    document.getElementById("entryItem");
+
+  if(!select)
+    return;
+
+
+  select.innerHTML =
+    `<option value="">Select Item</option>`;
+
+
+  (itemsCache || []).forEach(function(item){
+
+    const option =
+      document.createElement("option");
+
+    option.value =
+      item;
+
+    option.textContent =
+      item;
+
+    if(item === selected)
+      option.selected = true;
+
+    select.appendChild(option);
+
+  });
+
+
+  /*
+   * If an old item exists but is no longer
+   * in Item API, keep it selectable.
+   */
+
+  if(
+    selected &&
+    !(itemsCache || []).includes(selected)
+  ){
+
+    const option =
+      document.createElement("option");
+
+    option.value =
+      selected;
+
+    option.textContent =
+      selected;
+
+    option.selected = true;
+
+    select.appendChild(option);
+
+  }
+
+}
 
 
 /* ============================================================
-   LOGOUT
+   ADD ITEM
 ============================================================ */
 
-function logout(){
+async function addItem(){
 
-  localStorage.removeItem(
-    "dashboardAuth"
-  );
+  const input =
+    document.getElementById("newItemInput");
 
-  localStorage.removeItem(
-    "username"
-  );
-
-  localStorage.removeItem(
-    "loggedUser"
-  );
-
-  localStorage.removeItem(
-    "userInfo"
-  );
-
-  localStorage.removeItem(
-    "currentUser"
-  );
-
-  localStorage.removeItem(
-    "loginData"
-  );
-
-  sessionStorage.removeItem(
-    "dashboardAuth"
-  );
-
-  window.location.replace(
-    "index.html"
-  );
-
-}
+  const item =
+    input.value.trim();
 
 
-/* ============================================================
-   THEME
-============================================================ */
+  if(!item){
 
-function loadTheme(){
-
-  const theme =
-    localStorage.getItem(
-      "theme"
+    showToast(
+      "Item name is required.",
+      "error"
     );
 
-  if(theme === "dark"){
-
-    document.body.classList.add(
-      "dark"
-    );
-
-  }
-
-}
-
-
-function toggleTheme(){
-
-  document.body.classList.toggle(
-    "dark"
-  );
-
-  localStorage.setItem(
-    "theme",
-    document.body.classList.contains(
-      "dark"
-    )
-      ? "dark"
-      : "light"
-  );
-
-}
-
-
-/* ============================================================
-   MODAL
-============================================================ */
-
-function openModal(id){
-
-  const modal =
-    document.getElementById(id);
-
-  if(modal){
-
-    modal.classList.add(
-      "show"
-    );
-
-  }
-
-}
-
-
-function closeModal(id){
-
-  const modal =
-    document.getElementById(id);
-
-  if(modal){
-
-    modal.classList.remove(
-      "show"
-    );
+    return;
 
   }
 
 
-  if(id === "entryModal"){
-
-    editingDataRow = null;
-    editingSellRow = null;
-
-  }
-
-}
+  showLoader("Adding item...");
 
 
-document.addEventListener(
-  "click",
-  function(event){
+  try{
+
+    /*
+     * Main action.
+     */
+
+    let result;
+
+    try{
+
+      result =
+        await postJson(
+          ITEM_API_URL,
+          {
+            action:"addItem",
+            item:item,
+            name:item,
+            username:currentUsername,
+            user:currentUsername
+          }
+        );
+
+    }
+    catch(e){
+
+      result =
+        await postJson(
+          ITEM_API_URL,
+          {
+            action:"addItemData",
+            item:item,
+            name:item,
+            username:currentUsername,
+            user:currentUsername
+          }
+        );
+
+    }
+
 
     if(
-      event.target.classList.contains(
-        "modal"
-      )
+      !result ||
+      result.success !== true
     ){
 
-      event.target.classList.remove(
-        "show"
+      throw new Error(
+        result?.message ||
+        "Unable to add item."
       );
 
     }
 
-  }
-);
 
+    input.value = "";
 
-/* ============================================================
-   LOADER
-============================================================ */
-
-function showLoader(text){
-
-  document.getElementById(
-    "loaderText"
-  ).textContent =
-    text ||
-    "Loading...";
-
-  document.getElementById(
-    "globalLoader"
-  ).classList.add(
-    "show"
-  );
-
-}
-
-
-function hideLoader(){
-
-  document.getElementById(
-    "globalLoader"
-  ).classList.remove(
-    "show"
-  );
-
-}
-
-
-function showTableLoader(){
-
-  document.getElementById(
-    "tableLoader"
-  ).classList.add(
-    "show"
-  );
-
-}
-
-
-function hideTableLoader(){
-
-  document.getElementById(
-    "tableLoader"
-  ).classList.remove(
-    "show"
-  );
-
-}
-
-
-/* ============================================================
-   TOAST
-============================================================ */
-
-let toastTimer = null;
-
-function showToast(
-  message,
-  type="info"
-){
-
-  const toast =
-    document.getElementById(
-      "toast"
+    showToast(
+      "Item added successfully.",
+      "success"
     );
 
-  toast.textContent =
-    message;
 
-  toast.className =
-    "toast show " +
-    type;
+    await loadItems();
 
+  }
+  catch(error){
 
-  clearTimeout(
-    toastTimer
-  );
+    console.error(error);
 
+    showToast(
+      error.message ||
+      "Item add failed.",
+      "error"
+    );
 
-  toastTimer =
-    setTimeout(function(){
+  }
+  finally{
 
-      toast.className =
-        "toast";
+    hideLoader();
 
-    },3500);
+  }
 
 }
 
 
 /* ============================================================
-   HELPERS
+   DELETE ITEM
 ============================================================ */
 
-function todayDate(){
+async function deleteItem(index){
 
-  const d =
-    new Date();
+  const item =
+    itemsCache[index];
 
-  const y =
-    d.getFullYear();
+  if(!item)
+    return;
 
-  const m =
-    String(
-      d.getMonth()+1
-    ).padStart(2,"0");
 
-  const day =
-    String(
-      d.getDate()
-    ).padStart(2,"0");
+  const confirmed =
+    window.confirm(
+      `Delete item "${item}"?`
+    );
 
-  return (
-    y +
-    "-" +
-    m +
-    "-" +
-    day
-  );
+
+  if(!confirmed)
+    return;
+
+
+  showLoader("Deleting item...");
+
+
+  try{
+
+    let result;
+
+    try{
+
+      result =
+        await postJson(
+          ITEM_API_URL,
+          {
+            action:"deleteItem",
+            item:item,
+            name:item,
+            username:currentUsername,
+            user:currentUsername
+          }
+        );
+
+    }
+    catch(e){
+
+      result =
+        await postJson(
+          ITEM_API_URL,
+          {
+            action:"deleteItemData",
+            item:item,
+            name:item,
+            username:currentUsername,
+            user:currentUsername
+          }
+        );
+
+    }
+
+
+    if(
+      !result ||
+      result.success !== true
+    ){
+
+      throw new Error(
+        result?.message ||
+        "Unable to delete item."
+      );
+
+    }
+
+
+    showToast(
+      "Item deleted successfully.",
+      "success"
+    );
+
+
+    await loadItems();
+
+  }
+  catch(error){
+
+    console.error(error);
+
+    showToast(
+      error.message ||
+      "Item delete failed.",
+      "error"
+    );
+
+  }
+  finally{
+
+    hideLoader();
+
+  }
 
 }
 
 
-function normalizeDateForInput(value){
+/* ============================================================
+   DATE HELPERS
+============================================================ */
 
-  if(!value){
+function normalizeDate(value){
 
+  if(!value)
     return "";
-
-  }
 
   const text =
     String(value).trim();
 
 
   if(
-    /^\d{4}-\d{2}-\d{2}$/.test(
-      text
-    )
-  ){
-
+    /^\d{4}-\d{2}-\d{2}$/.test(text)
+  )
     return text;
 
+
+  const match =
+    text.match(
+      /^(\d{2})\/(\d{2})\/(\d{4})$/
+    );
+
+
+  if(match){
+
+    return (
+      match[3] +
+      "-" +
+      match[2] +
+      "-" +
+      match[1]
+    );
+
   }
 
 
-  const d =
-    new Date(text);
+  const date =
+    new Date(value);
 
-  if(isNaN(d.getTime())){
 
-    /*
-     * Try dd-MMM-yyyy
-     */
-
-    const parts =
-      text.split("-");
-
-    if(parts.length === 3){
-
-      const day =
-        parseInt(
-          parts[0],
-          10
-        );
-
-      const monthText =
-        parts[1];
-
-      const year =
-        parseInt(
-          parts[2],
-          10
-        );
-
-      const months = {
-        Jan:0,
-        Feb:1,
-        Mar:2,
-        Apr:3,
-        May:4,
-        Jun:5,
-        Jul:6,
-        Aug:7,
-        Sep:8,
-        Oct:9,
-        Nov:10,
-        Dec:11
-      };
-
-      const month =
-        months[
-          monthText
-        ] ??
-        months[
-          monthText.substring(
-            0,
-            1
-          ).toUpperCase() +
-          monthText.substring(
-            1
-          ).toLowerCase()
-        ];
-
-      if(
-        !isNaN(day) &&
-        month !== undefined &&
-        !isNaN(year)
-      ){
-
-        return (
-          year +
-          "-" +
-          String(
-            month+1
-          ).padStart(2,"0") +
-          "-" +
-          String(
-            day
-          ).padStart(2,"0")
-        );
-
-      }
-
-    }
-
+  if(isNaN(date.getTime()))
     return "";
 
-  }
 
+  const year =
+    date.getFullYear();
 
-  const y =
-    d.getFullYear();
-
-  const m =
-    String(
-      d.getMonth()+1
-    ).padStart(2,"0");
+  const month =
+    String(date.getMonth()+1)
+      .padStart(2,"0");
 
   const day =
-    String(
-      d.getDate()
-    ).padStart(2,"0");
+    String(date.getDate())
+      .padStart(2,"0");
 
-  return (
-    y +
-    "-" +
-    m +
-    "-" +
-    day
-  );
+
+  return `${year}-${month}-${day}`;
 
 }
 
 
-function getCurrentUserName(){
-
-  try{
-
-    const raw =
-      localStorage.getItem(
-        "userInfo"
-      );
-
-    if(raw){
-
-      const user =
-        JSON.parse(raw);
-
-      return (
-        user.Name ??
-        user.name ??
-        currentUsername
-      );
-
-    }
-
-  }catch(error){}
-
-  return currentUsername || "";
-
-}
-
+/* ============================================================
+   ESCAPE HTML
+============================================================ */
 
 function escapeHtml(value){
 
-  return String(
-    value ?? ""
-  )
-    .replace(
-      /&/g,
-      "&amp;"
-    )
-    .replace(
-      /</g,
-      "&lt;"
-    )
-    .replace(
-      />/g,
-      "&gt;"
-    )
-    .replace(
-      /"/g,
-      "&quot;"
-    )
-    .replace(
-      /'/g,
-      "&#039;"
+  return String(value ?? "")
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
+
+}
+
+
+/* ============================================================
+   INACTIVITY
+============================================================ */
+
+function setupInactivity(){
+
+  const events = [
+    "mousemove",
+    "mousedown",
+    "keydown",
+    "touchstart",
+    "scroll",
+    "click"
+  ];
+
+
+  events.forEach(function(event){
+
+    document.addEventListener(
+      event,
+      resetInactivity,
+      {passive:true}
     );
+
+  });
+
+
+  resetInactivity();
+
+}
+
+
+function resetInactivity(){
+
+  clearTimeout(inactivityTimer);
+
+
+  inactivityTimer =
+    setTimeout(function(){
+
+      showToast(
+        "Session expired due to inactivity.",
+        "warning"
+      );
+
+      setTimeout(
+        logout,
+        1000
+      );
+
+    },5 * 60 * 1000);
 
 }
 
@@ -5547,91 +4535,44 @@ function escapeHtml(value){
    BACK BUTTON PROTECTION
 ============================================================ */
 
-function setupBackProtection(){
+history.pushState(null,"",location.href);
 
-  history.pushState(
-    null,
-    "",
-    location.href
-  );
+window.addEventListener(
+  "popstate",
+  function(){
 
-  window.addEventListener(
-    "popstate",
-    function(){
-
-      history.pushState(
-        null,
-        "",
-        location.href
-      );
-
-    }
-  );
-
-}
-
-
-/* ============================================================
-   AUTO LOGOUT AFTER INACTIVITY
-   5 MINUTES
-============================================================ */
-
-let inactivityTimer;
-
-function resetInactivityTimer(){
-
-  clearTimeout(
-    inactivityTimer
-  );
-
-  inactivityTimer =
-    setTimeout(
-      function(){
-
-        showToast(
-          "Session expired.",
-          "warning"
-        );
-
-        setTimeout(
-          logout,
-          800
-        );
-
-      },
-      5 * 60 * 1000
+    history.pushState(
+      null,
+      "",
+      location.href
     );
 
-}
-
-
-[
-  "mousemove",
-  "keydown",
-  "click",
-  "scroll",
-  "touchstart"
-].forEach(function(event){
-
-  document.addEventListener(
-    event,
-    resetInactivityTimer,
-    {
-      passive:true
-    }
-  );
-
-});
-
-
-resetInactivityTimer();
+  }
+);
 
 
 /* ============================================================
-   INITIAL TITLE
+   ESC KEY
 ============================================================ */
 
-updateDataTitle();
+document.addEventListener(
+  "keydown",
+  function(e){
+
+    if(e.key === "Escape"){
+
+      document
+        .querySelectorAll(".modal.show")
+        .forEach(function(modal){
+          modal.classList.remove("show");
+        });
+
+      closeProfileMenu();
+
+    }
+
+  }
+);
 
 </script>
 
