@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Support Dashboard</title>
+
+<link
+  rel="icon"
+  type="image/png"
+  href="https://cdn-icons-png.flaticon.com/128/17163/17163834.png"
+>
+
+<link rel="stylesheet" href="ad.css">
+
+</head>
+
+<body>
+
+<header class="header">
+
+  <div class="logo-area">
+
+    <div class="logo">S</div>
+
+    <div class="logo-text">
+      <h2>Support Dashboard</h2>
+      <p>Admin Management System</p>
+    </div>
+
+  </div>
+
+  <div class="header-actions">
+
+    <button
+      class="icon-btn"
+      onclick="loadData(true)"
+      title="Reload">
+      ↻
+    </button>
+
+    <button
+      class="btn btn-primary"
+      onclick="openUsersModal()">
+      Users
+    </button>
+
+    <button
+      class="btn btn-warning"
+      onclick="openItemsModal()">
+      Items
+    </button>
+
+    <button
+      class="btn btn-success"
+      onclick="openEntryModal()">
+      + New Entry
+    </button>
+
+    <button
+      class="icon-btn"
+      onclick="toggleTheme()"
+      id="themeBtn"
+      title="Theme">
+      🌙
+    </button>
+
+    <div class="profile">
+
+      <button
+        class="profile-btn"
+        onclick="toggleProfileMenu()">
+
+        <div
+          class="profile-avatar"
+          id="profileAvatar">
+          U
+        </div>
+
+        <div class="profile-name">
+
+          <strong id="profileName">User</strong>
+
+          <span id="profileRole">User</span>
+
+        </div>
+
+      </button>
+
+      <div
+        class="profile-menu"
+        id="profileMenu">
+
+        <button onclick="openPasswordModal()">
+          🔑 Change Password
+        </button>
+
+        <button onclick="logout()">
+          🚪 Logout
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</header>
+
+
+<main class="container">
+
+  <div class="top-bar">
+
+    <div class="page-title">
+
+      <h1>Dashboard</h1>
+
+      <p>
+        Manage support data and users
+      </p>
+
+    </div>
+
+    <div class="actions">
+
+      <button
+        class="btn btn-primary"
+        onclick="loadData(true)">
+        Refresh Data
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <div class="filter-card">
+
+    <div class="filters">
+
+      <input
+        type="text"
+        class="input"
+        id="searchInput"
+        placeholder="Search..."
+        oninput="applyFilters">
+
+      <input
+        type="date"
+        class="input"
+        id="fromDate"
+        onchange="applyFilters()">
+
+      <input
+        type="date"
+        class="input"
+        id="toDate"
+        onchange="applyFilters()">
+
+      <select
+        class="select"
+        id="dataType"
+        onchange="changeDataType()">
+
+        <option value="data">Data</option>
+        <option value="sell">Sell</option>
+        <option value="delete">Delete</option>
+
+      </select>
+
+      <button
+        class="btn btn-secondary"
+        onclick="clearFilters()">
+        Clear
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <div class="table-card">
+
+    <div class="summary-bar">
+
+      <div
+        class="total-text"
+        id="totalData">
+        Total Data: 0
+      </div>
+
+      <div
+        class="total-text"
+        id="pageInfo">
+        Page 1
+      </div>
+
+    </div>
+
+    <div class="table-wrap">
+
+      <table>
+
+        <thead id="tableHead">
+
+          <tr>
+            <th>Name</th>
+            <th>IP</th>
+            <th>Work</th>
+            <th>Date</th>
+            <th>Item</th>
+            <th>Action</th>
+          </tr>
+
+        </thead>
+
+        <tbody id="dataBody">
+
+          <tr>
+            <td
+              colspan="6"
+              class="empty">
+              Loading data...
+            </td>
+          </tr>
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+    <div
+      class="pagination"
+      id="pagination">
+    </div>
+
+  </div>
+
+</main>
+
+
+<!-- ENTRY MODAL -->
+
+<div
+  class="modal-bg"
+  id="entryModal">
+
+  <div class="modal">
+
+    <div class="modal-head">
+
+      <h3 id="entryModalTitle">
+        New Entry
+      </h3>
+
+      <button
+        class="close"
+        onclick="closeModal('entryModal')">
+        ×
+      </button>
+
+    </div>
+
+    <input
+      type="hidden"
+      id="editingRow">
+
+    <div class="form-grid">
+
+      <div class="form-group">
+
+        <label>Name</label>
+
+        <input
+          class="input"
+          id="entryName"
+          type="text">
+
+      </div>
+
+      <div class="form-group">
+
+        <label>IP</label>
+
+        <input
+          class="input"
+          id="entryIp"
+          type="text">
+
+      </div>
+
+      <div class="form-group full">
+
+        <label>Work</label>
+
+        <input
+          class="input"
+          id="entryWork"
+          type="text">
+
+      </div>
+
+      <div class="form-group">
+
+        <label>Date</label>
+
+        <input
+          class="input"
+          id="entryDate"
+          type="date">
+
+      </div>
+
+      <div class="form-group">
+
+        <label>Item</label>
+
+        <select
+          class="select"
+          id="entryItem">
+
+          <option value="">
+            Loading Items...
+          </option>
+
+        </select>
+
+      </div>
+
+    </div>
+
+    <div class="modal-footer">
+
+      <button
+        class="btn btn-secondary"
+        onclick="closeModal('entryModal')">
+        Cancel
+      </button>
+
+      <button
+        class="btn btn-primary"
+        id="entrySaveButton"
+        onclick="saveEntry()">
+        Save
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- USERS MODAL -->
+
+<div
+  class="modal-bg"
+  id="usersModal">
+
+  <div class="modal large">
+
+    <div class="modal-head">
+
+      <h3>User Management</h3>
+
+      <button
+        class="close"
+        onclick="closeModal('usersModal')">
+        ×
+      </button>
+
+    </div>
+
+    <div style="margin-bottom:15px;">
+
+      <button
+        class="btn btn-success"
+        onclick="openAddUserModal()">
+        + Add User
+      </button>
+
+    </div>
+
+    <div class="user-table-wrap">
+
+      <table class="user-table">
+
+        <thead>
+
+          <tr>
+            <th>Username</th>
+            <th>Name</th>
+            <th>Role</th>
+            <th>Status</th>
+            <th>Action</th>
+          </tr>
+
+        </thead>
+
+        <tbody id="usersBody">
+
+          <tr>
+            <td
+              colspan="5"
+              class="empty">
+              Loading users...
+            </td>
+          </tr>
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- USER FORM -->
+
+<div
+  class="modal-bg"
+  id="userFormModal">
+
+  <div class="modal">
+
+    <div class="modal-head">
+
+      <h3 id="userFormTitle">
+        Add User
+      </h3>
+
+      <button
+        class="close"
+        onclick="closeModal('userFormModal')">
+        ×
+      </button>
+
+    </div>
+
+    <input
+      type="hidden"
+      id="originalUsername">
+
+    <div class="form-grid">
+
+      <div class="form-group">
+
+        <label>Username</label>
+
+        <input
+          class="input"
+          id="userUsername"
+          type="text">
+
+      </div>
+
+      <div class="form-group">
+
+        <label>Name</label>
+
+        <input
+          class="input"
+          id="userName"
+          type="text">
+
+      </div>
+
+      <div class="form-group">
+
+        <label>Password</label>
+
+        <input
+          class="input"
+          id="userPassword"
+          type="password"
+          placeholder="Password">
+
+      </div>
+
+      <div class="form-group">
+
+        <label>Role</label>
+
+        <select
+          class="select"
+          id="userRole">
+
+          <option value="admin">Admin</option>
+          <option value="manager">Manager</option>
+          <option value="support">Support</option>
+          <option value="call">Call</option>
+          <option value="guest">Guest</option>
+
+        </select>
+
+      </div>
+
+      <div class="form-group full">
+
+        <label>Status</label>
+
+        <select
+          class="select"
+          id="userStatus">
+
+          <option value="Active">Active</option>
+          <option value="Block">Block</option>
+
+        </select>
+
+      </div>
+
+    </div>
+
+    <div class="modal-footer">
+
+      <button
+        class="btn btn-secondary"
+        onclick="closeModal('userFormModal')">
+        Cancel
+      </button>
+
+      <button
+        class="btn btn-primary"
+        onclick="saveUser()">
+        Save User
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- ITEM MANAGEMENT -->
+
+<div
+  class="modal-bg"
+  id="itemsModal">
+
+  <div class="modal large">
+
+    <div class="modal-head">
+
+      <h3>Item Management</h3>
+
+      <button
+        class="close"
+        onclick="closeModal('itemsModal')">
+        ×
+      </button>
+
+    </div>
+
+    <div
+      style="
+        display:flex;
+        gap:10px;
+        margin-bottom:18px;
+      ">
+
+      <input
+        class="input"
+        id="newItemName"
+        type="text"
+        placeholder="Enter new item name"
+        onkeydown="if(event.key==='Enter') addNewItem()">
+
+      <button
+        class="btn btn-success"
+        onclick="addNewItem()"
+        style="white-space:nowrap;">
+        + Add Item
+      </button>
+
+    </div>
+
+    <div class="item-table-wrap">
+
+      <table class="item-table">
+
+        <thead>
+
+          <tr>
+            <th>Item</th>
+            <th>Date</th>
+            <th>User</th>
+            <th>Action</th>
+          </tr>
+
+        </thead>
+
+        <tbody id="itemsBody">
+
+          <tr>
+            <td
+              colspan="4"
+              class="empty">
+              Loading items...
+            </td>
+          </tr>
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- PASSWORD MODAL -->
+
+<div
+  class="modal-bg"
+  id="passwordModal">
+
+  <div class="modal">
+
+    <div class="modal-head">
+
+      <h3>Change Password</h3>
+
+      <button
+        class="close"
+        onclick="closeModal('passwordModal')">
+        ×
+      </button>
+
+    </div>
+
+    <div class="form-group">
+
+      <label>Current Password</label>
+
+      <input
+        class="input"
+        id="currentPassword"
+        type="password">
+
+    </div>
+
+    <div class="form-group">
+
+      <label>New Password</label>
+
+      <input
+        class="input"
+        id="newPassword"
+        type="password">
+
+    </div>
+
+    <div class="modal-footer">
+
+      <button
+        class="btn btn-secondary"
+        onclick="closeModal('passwordModal')">
+        Cancel
+      </button>
+
+      <button
+        class="btn btn-primary"
+        onclick="changePassword()">
+        Change Password
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- LOADER -->
+
+<div
+  class="loader-bg"
+  id="loader">
+
+  <div class="loader-box">
+
+    <div class="spinner"></div>
+
+    <div id="loaderText">
+      Loading...
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- TOAST -->
+
+<div
+  class="toast"
+  id="toast">
+</div>
+
+
+<script src="ad2.js"></script>
+
+</body>
+</html>
