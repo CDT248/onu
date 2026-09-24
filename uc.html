@@ -306,9 +306,6 @@ TABLE
   border-radius:13px;
   overflow:hidden;
   box-shadow:var(--shadow);
-
-  /* IMPORTANT:
-     Loader will stay inside table only */
   position:relative;
 }
 
@@ -665,17 +662,6 @@ ITEM
 TABLE LOADER
 ========================================================= */
 
-/*
-  OLD loader was full page:
-
-  position:fixed;
-  inset:0;
-
-  That has been removed.
-
-  New loader is ONLY inside .table-card.
-*/
-
 .table-loader{
   position:absolute;
   inset:0;
@@ -844,6 +830,7 @@ RESPONSIVE
 
 <body>
 
+
 <!-- ========================================================
 HEADER
 ========================================================= -->
@@ -857,8 +844,13 @@ HEADER
     </div>
 
     <div class="logo-text">
+
       <h1>Support Dashboard</h1>
-      <p>Admin Management System</p>
+
+      <p>
+        Admin Management System
+      </p>
+
     </div>
 
   </div>
@@ -914,11 +906,13 @@ HEADER
         class="profile-btn"
         onclick="toggleProfileMenu(event)"
       >
+
         <img
           id="profileImage"
           src="https://cdn-icons-png.flaticon.com/128/17163/17163834.png"
           alt="Profile"
         >
+
       </button>
 
 
@@ -944,11 +938,13 @@ HEADER
 </header>
 
 
+
 <!-- ========================================================
 MAIN
 ========================================================= -->
 
 <main class="main">
+
 
   <div class="toolbar">
 
@@ -975,7 +971,10 @@ MAIN
   </div>
 
 
-  <!-- FILTER -->
+
+  <!-- ======================================================
+  FILTER
+  ======================================================= -->
 
   <div class="filter-bar">
 
@@ -1030,6 +1029,10 @@ MAIN
           Sell
         </option>
 
+        <option value="paid">
+          Paid
+        </option>
+
         <option value="delete">
           Delete
         </option>
@@ -1049,7 +1052,10 @@ MAIN
   </div>
 
 
-  <!-- TABLE -->
+
+  <!-- ======================================================
+  TABLE
+  ======================================================= -->
 
   <div class="table-card">
 
@@ -1096,6 +1102,7 @@ MAIN
 </main>
 
 
+
 <!-- ========================================================
 ENTRY MODAL
 ========================================================= -->
@@ -1124,6 +1131,7 @@ ENTRY MODAL
 
 
     <div class="modal-body">
+
 
       <div class="form-group">
 
@@ -1217,6 +1225,7 @@ ENTRY MODAL
 </div>
 
 
+
 <!-- ========================================================
 USERS MODAL
 ========================================================= -->
@@ -1282,6 +1291,7 @@ USERS MODAL
 </div>
 
 
+
 <!-- ========================================================
 USER FORM MODAL
 ========================================================= -->
@@ -1310,6 +1320,7 @@ USER FORM MODAL
 
 
     <div class="modal-body">
+
 
       <div class="form-group">
 
@@ -1411,6 +1422,7 @@ USER FORM MODAL
 </div>
 
 
+
 <!-- ========================================================
 ITEM MODAL
 ========================================================= -->
@@ -1440,6 +1452,7 @@ ITEM MODAL
 
     <div class="modal-body">
 
+
       <div class="item-add-area">
 
         <input
@@ -1447,6 +1460,7 @@ ITEM MODAL
           id="newItem"
           placeholder="Enter new item"
         >
+
 
         <button
           class="item-add-btn"
@@ -1481,6 +1495,7 @@ ITEM MODAL
 </div>
 
 
+
 <!-- ========================================================
 PASSWORD MODAL
 ========================================================= -->
@@ -1509,6 +1524,7 @@ PASSWORD MODAL
 
 
     <div class="modal-body">
+
 
       <div class="form-group">
 
@@ -1574,6 +1590,7 @@ PASSWORD MODAL
 </div>
 
 
+
 <!-- ========================================================
 TOAST
 ========================================================= -->
@@ -1582,6 +1599,7 @@ TOAST
   class="toast"
   id="toast"
 ></div>
+
 
 
 <script>
@@ -1604,7 +1622,7 @@ const SELL_API_URL =
 
 
 const PAID_API_URL =
-  "https://script.google.com/macros/s/AKfycbx_kDEHln_Dj_0YfB421POWa2XAuN6g2PDypQtyS2arrxgPVtyZZOwAp_TKLrUnRudKng/exec";
+  "https://script.google.com/macros/s/AKfycbkDEHln_Dj_0YfB421POWa2XAuN6g2PDypQtyS2arrxgPVtyZZOwAp_TKLrUnRudKng/exec";
 
 
 const DELETE_API_URL =
@@ -1633,6 +1651,7 @@ const pageSize = 10;
 
 let dataCache = null;
 let sellCache = null;
+let paidCache = null;
 let deleteCache = null;
 
 let itemList = [];
@@ -1835,6 +1854,7 @@ function changeDataType(){
 
   dataCache = null;
   sellCache = null;
+  paidCache = null;
   deleteCache = null;
 
 
@@ -1896,6 +1916,15 @@ function updateDataTitle(){
       "Manage sold entries";
 
   }
+  else if(currentDataType === "paid"){
+
+    title.textContent =
+      "Paid Data";
+
+    subtitle.textContent =
+      "Paid entry history";
+
+  }
   else{
 
     title.textContent =
@@ -1954,6 +1983,22 @@ async function loadData(force=false){
 
   if(
     !force &&
+    currentDataType === "paid" &&
+    paidCache
+  ){
+
+    allData =
+      paidCache;
+
+    applyFilters();
+
+    return;
+
+  }
+
+
+  if(
+    !force &&
     currentDataType === "delete" &&
     deleteCache
   ){
@@ -1986,6 +2031,17 @@ async function loadData(force=false){
 
       action =
         "getSellData";
+
+    }
+
+
+    if(currentDataType === "paid"){
+
+      api =
+        PAID_API_URL;
+
+      action =
+        "getPaidData";
 
     }
 
@@ -2043,6 +2099,12 @@ async function loadData(force=false){
     else if(currentDataType === "sell"){
 
       sellCache =
+        allData;
+
+    }
+    else if(currentDataType === "paid"){
+
+      paidCache =
         allData;
 
     }
@@ -2133,6 +2195,21 @@ function renderData(data){
       "Sell Date",
       "User",
       "Action"
+    ];
+
+  }
+  else if(currentDataType === "paid"){
+
+    headers = [
+      "Name",
+      "IP",
+      "Work",
+      "Date",
+      "Item",
+      "Sell Date",
+      "Sell User",
+      "Paid Time",
+      "Paid User"
     ];
 
   }
@@ -2239,7 +2316,7 @@ function renderData(data){
 
 
   pageData.forEach(
-    (row, index) => {
+    (row,index) => {
 
       const tr =
         document.createElement("tr");
@@ -2310,6 +2387,10 @@ function renderData(data){
         item
       );
 
+
+      /* =====================================================
+         SELL
+      ====================================================== */
 
       if(
         currentDataType === "sell"
@@ -2410,6 +2491,85 @@ function renderData(data){
         );
 
       }
+
+
+      /* =====================================================
+         PAID
+      ====================================================== */
+
+      else if(
+        currentDataType === "paid"
+      ){
+
+        const sellDate =
+          row.SellDate ??
+          row.sellDate ??
+          row["Sell Date"] ??
+          row.sellTime ??
+          row["Sell time"] ??
+          row[5] ??
+          "";
+
+
+        const sellUser =
+          row.User ??
+          row.user ??
+          row.SellUser ??
+          row.sellUser ??
+          row[6] ??
+          "";
+
+
+        const paidTime =
+          row.PaidTime ??
+          row.paidTime ??
+          row["Paid Time"] ??
+          row[7] ??
+          "";
+
+
+        const paidUser =
+          row.PaidUser ??
+          row.paidUser ??
+          row["Paid User"] ??
+          row[8] ??
+          "";
+
+
+        addCell(
+          tr,
+          formatDateTime(
+            sellDate
+          )
+        );
+
+
+        addCell(
+          tr,
+          sellUser
+        );
+
+
+        addCell(
+          tr,
+          formatDateTime(
+            paidTime
+          )
+        );
+
+
+        addCell(
+          tr,
+          paidUser
+        );
+
+      }
+
+
+      /* =====================================================
+         DELETE
+      ====================================================== */
+
       else if(
         currentDataType === "delete"
       ){
@@ -2446,6 +2606,12 @@ function renderData(data){
         );
 
       }
+
+
+      /* =====================================================
+         DATA
+      ====================================================== */
+
       else{
 
         const actionTd =
@@ -3274,6 +3440,7 @@ async function saveEntry(){
         await postJson(
           SELL_API_URL,
           {
+
             action:
               "editSellData",
 
@@ -3348,6 +3515,7 @@ async function saveEntry(){
         await postJson(
           DATA_API_URL,
           {
+
             action:
               "editData",
 
@@ -3414,6 +3582,7 @@ async function saveEntry(){
       await postJson(
         DATA_API_URL,
         {
+
           action:
             "addData",
 
@@ -4040,12 +4209,6 @@ async function paidSellEntry(
   }
 
 
-  const rowNumber =
-    getRealRowNumber(
-      row
-    );
-
-
   showLoader(
     "Processing payment..."
   );
@@ -4053,19 +4216,32 @@ async function paidSellEntry(
 
   try{
 
+    const sellTime =
+      row.SellDate ??
+      row.sellDate ??
+      row["Sell Date"] ??
+      row.sellTime ??
+      row["Sell time"] ??
+      row[5] ??
+      "";
+
+
+    const sellUser =
+      row.User ??
+      row.user ??
+      row.Username ??
+      row.username ??
+      row[6] ??
+      "";
+
+
     const result =
       await postJson(
-        SELL_API_URL,
+        PAID_API_URL,
         {
 
           action:
             "paidData",
-
-          row:
-            rowNumber,
-
-          rowNumber:
-            rowNumber,
 
           name:
             row.Name ??
@@ -4099,21 +4275,10 @@ async function paidSellEntry(
             "",
 
           sellTime:
-            row.SellDate ??
-            row.sellDate ??
-            row["Sell Date"] ??
-            row.sellTime ??
-            row["Sell time"] ??
-            row[5] ??
-            "",
+            sellTime,
 
           sellUser:
-            row.User ??
-            row.user ??
-            row.Username ??
-            row.username ??
-            row[6] ??
-            "",
+            sellUser,
 
           user:
             currentUsername,
@@ -4146,19 +4311,47 @@ async function paidSellEntry(
     }
 
 
-    sellCache = null;
+    paidCache = null;
 
 
     showToast(
-      "Paid successfully",
+      "Paid successfully and added to Paid Sheet",
       "success"
     );
+
+
+    /*
+      Paid API is now separate.
+
+      We do NOT call SELL_API_URL with
+      "paidData" because the current separate
+      Sell Code.gs does not support that action.
+    */
+
+
+    currentDataType =
+      "paid";
+
+
+    document.getElementById(
+      "dataType"
+    ).value =
+      "paid";
+
+
+    updateDataTitle();
 
 
     await loadData(true);
 
 
   }catch(error){
+
+    console.error(
+      "Payment error:",
+      error
+    );
+
 
     showToast(
       error.message ||
