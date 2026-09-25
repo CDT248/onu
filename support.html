@@ -2,7 +2,6 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Support Dashboard</title>
@@ -469,6 +468,14 @@ tbody tr:last-child td{
   border-color:var(--primary);
 }
 
+/* AUTO FIELDS */
+
+#entryName,
+#entryDate{
+  cursor:not-allowed;
+  opacity:.78;
+}
+
 .form-actions{
   display:flex;
   justify-content:flex-end;
@@ -863,6 +870,8 @@ body.dark .table-loader{
 
     <div class="modal-body">
 
+      <!-- AUTO NAME -->
+
       <div class="form-group">
 
         <label>
@@ -873,9 +882,12 @@ body.dark .table-loader{
           type="text"
           id="entryName"
           readonly
+          tabindex="-1"
         >
 
       </div>
+
+      <!-- USER INPUT IP -->
 
       <div class="form-group">
 
@@ -891,6 +903,8 @@ body.dark .table-loader{
 
       </div>
 
+      <!-- USER INPUT WORK -->
+
       <div class="form-group">
 
         <label>
@@ -905,6 +919,8 @@ body.dark .table-loader{
 
       </div>
 
+      <!-- AUTO DATE -->
+
       <div class="form-group">
 
         <label>
@@ -915,9 +931,12 @@ body.dark .table-loader{
           type="date"
           id="entryDate"
           readonly
+          tabindex="-1"
         >
 
       </div>
+
+      <!-- ITEM -->
 
       <div class="form-group">
 
@@ -1095,9 +1114,18 @@ let itemList = [];
 
 let itemCache = null;
 
+
+/* ============================================================
+CURRENT USER
+============================================================ */
+
 let currentUsername =
   localStorage.getItem("username") ||
   localStorage.getItem("loggedUser") ||
+  "";
+
+let currentUserName =
+  localStorage.getItem("name") ||
   "";
 
 
@@ -1160,7 +1188,13 @@ LOAD USER
 async function loadUser(){
 
   if(!currentUsername){
+
+    currentUserName =
+      localStorage.getItem("name") ||
+      "";
+
     return;
+
   }
 
   try{
@@ -1186,15 +1220,57 @@ async function loadUser(){
       const user =
         result.user;
 
+
+      /*
+      ==========================================
+      USER NAME
+      ==========================================
+      */
+
       const name =
         user.Name ||
         user.name ||
         currentUsername;
 
+
+      /*
+      ==========================================
+      STORE CURRENT USER NAME
+      ==========================================
+      */
+
+      currentUserName =
+        String(name).trim();
+
+
+      localStorage.setItem(
+        "name",
+        currentUserName
+      );
+
+
+      /*
+      ==========================================
+      ROLE
+      ==========================================
+      */
+
       const role =
         user.Role ||
         user.role ||
         "";
+
+      localStorage.setItem(
+        "role",
+        role
+      );
+
+
+      /*
+      ==========================================
+      STATUS
+      ==========================================
+      */
 
       const status =
         user.Status ||
@@ -1202,19 +1278,16 @@ async function loadUser(){
         "";
 
       localStorage.setItem(
-        "name",
-        name
-      );
-
-      localStorage.setItem(
-        "role",
-        role
-      );
-
-      localStorage.setItem(
         "status",
         status
       );
+
+
+      /*
+      ==========================================
+      PROFILE IMAGE
+      ==========================================
+      */
 
       const profileImage =
         document.getElementById(
@@ -1235,6 +1308,13 @@ async function loadUser(){
         }
 
       }
+
+
+      /*
+      ==========================================
+      BLOCKED USER
+      ==========================================
+      */
 
       if(
         String(status)
@@ -1379,8 +1459,6 @@ function renderData(
 
   body.innerHTML = "";
 
-
-  /* ONLY THESE COLUMNS */
 
   const headers = [
     "Name",
@@ -1571,11 +1649,6 @@ function renderData(
         item
       );
 
-
-      /* ====================================================
-      ONLY SELL BUTTON
-      EDIT + DELETE REMOVED
-      ==================================================== */
 
       const actionTd =
         document.createElement(
@@ -1990,34 +2063,96 @@ NEW ENTRY
 
 function openEntryModal(){
 
+  /*
+  ============================================
+  GET LOGGED-IN USER NAME
+  ============================================
+  */
+
   const name =
-    localStorage.getItem(
-      "name"
-    ) ||
-    currentUsername;
+    String(
+      currentUserName ||
+      localStorage.getItem("name") ||
+      currentUsername ||
+      ""
+    ).trim();
 
 
-  document.getElementById(
-    "entryName"
-  ).value =
+  /*
+  ============================================
+  GET TODAY
+  ============================================
+  */
+
+  const today =
+    getToday();
+
+
+  /*
+  ============================================
+  NAME
+  AUTOMATIC + READ ONLY
+  ============================================
+  */
+
+  const nameInput =
+    document.getElementById(
+      "entryName"
+    );
+
+  nameInput.value =
     name;
 
+  nameInput.readOnly =
+    true;
+
+
+  /*
+  ============================================
+  IP
+  ============================================
+  */
 
   document.getElementById(
     "entryIP"
   ).value = "";
 
 
+  /*
+  ============================================
+  WORK
+  ============================================
+  */
+
   document.getElementById(
     "entryWork"
   ).value = "";
 
 
-  document.getElementById(
-    "entryDate"
-  ).value =
-    getToday();
+  /*
+  ============================================
+  DATE
+  AUTOMATIC + READ ONLY
+  ============================================
+  */
 
+  const dateInput =
+    document.getElementById(
+      "entryDate"
+    );
+
+  dateInput.value =
+    today;
+
+  dateInput.readOnly =
+    true;
+
+
+  /*
+  ============================================
+  ITEM
+  ============================================
+  */
 
   populateItemSelect();
 
@@ -2026,6 +2161,12 @@ function openEntryModal(){
     "entryItem"
   ).value = "";
 
+
+  /*
+  ============================================
+  OPEN
+  ============================================
+  */
 
   openModal(
     "entryModal"
@@ -2036,15 +2177,34 @@ function openEntryModal(){
 
 /* ============================================================
 SAVE NEW ENTRY
+IMPORTANT:
+NAME + DATE ARE ALWAYS GENERATED BY SYSTEM
 ============================================================ */
 
 async function saveEntry(){
 
-  const name =
-    document.getElementById(
-      "entryName"
-    ).value.trim();
+  /*
+  ============================================
+  NAME
+  DO NOT TRUST INPUT FIELD
+  ============================================
+  */
 
+  const name =
+    String(
+      currentUserName ||
+      localStorage.getItem("name") ||
+      currentUsername ||
+      ""
+    ).trim();
+
+
+  /*
+  ============================================
+  IP
+  USER INPUT
+  ============================================
+  */
 
   const ip =
     document.getElementById(
@@ -2052,17 +2212,36 @@ async function saveEntry(){
     ).value.trim();
 
 
+  /*
+  ============================================
+  WORK
+  USER INPUT
+  ============================================
+  */
+
   const work =
     document.getElementById(
       "entryWork"
     ).value.trim();
 
 
-  const date =
-    document.getElementById(
-      "entryDate"
-    ).value;
+  /*
+  ============================================
+  DATE
+  ALWAYS TODAY
+  DO NOT TRUST INPUT FIELD
+  ============================================
+  */
 
+  const date =
+    getToday();
+
+
+  /*
+  ============================================
+  ITEM
+  ============================================
+  */
 
   const item =
     document.getElementById(
@@ -2070,10 +2249,16 @@ async function saveEntry(){
     ).value.trim();
 
 
+  /*
+  ============================================
+  VALIDATION
+  ============================================
+  */
+
   if(!name){
 
     showToast(
-      "Name is required",
+      "User name could not be loaded",
       "error"
     );
 
@@ -2137,6 +2322,12 @@ async function saveEntry(){
 
   try{
 
+    /*
+    ==========================================
+    SEND DATA TO SERVER
+    ==========================================
+    */
+
     const result =
       await postJson(
         DATA_API_URL,
@@ -2164,6 +2355,12 @@ async function saveEntry(){
       );
 
 
+    /*
+    ==========================================
+    CHECK SERVER RESULT
+    ==========================================
+    */
+
     if(
       !result ||
       result.success !== true
@@ -2179,19 +2376,43 @@ async function saveEntry(){
     }
 
 
+    /*
+    ==========================================
+    CLEAR CACHE
+    ==========================================
+    */
+
     dataCache = null;
 
+
+    /*
+    ==========================================
+    CLOSE MODAL
+    ==========================================
+    */
 
     closeModal(
       "entryModal"
     );
 
 
+    /*
+    ==========================================
+    SUCCESS
+    ==========================================
+    */
+
     showToast(
       "Entry added successfully",
       "success"
     );
 
+
+    /*
+    ==========================================
+    RELOAD
+    ==========================================
+    */
 
     await loadData(
       true
@@ -2221,7 +2442,6 @@ async function saveEntry(){
 
 /* ============================================================
 SELL DATA
-ONLY SELL ACTION REMAINS
 ============================================================ */
 
 async function sellDataEntry(
@@ -2332,10 +2552,6 @@ async function sellDataEntry(
 
   try{
 
-    /* ===============================
-       SEND TO SELL SHEET
-    =============================== */
-
     const sellResult =
       await postJson(
         SELL_API_URL,
@@ -2395,10 +2611,6 @@ async function sellDataEntry(
 
     }
 
-
-    /* ===============================
-       REMOVE FROM DATA
-    =============================== */
 
     const deleteResult =
       await postJson(
