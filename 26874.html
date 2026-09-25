@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -959,12 +960,6 @@ USERS ADD BUTTON
 
   </div>
 
-
-  <!-- ======================================================
-       FILTER BAR
-       Search removed.
-       Name dropdown added.
-       ====================================================== -->
 
   <div class="filter-bar">
 
@@ -2851,6 +2846,11 @@ function openEntryModal(){
   ).value =
     name;
 
+  /* NEW ENTRY = NAME LOCKED */
+  document.getElementById(
+    "entryName"
+  ).readOnly = true;
+
   document.getElementById(
     "entryIP"
   ).value = "";
@@ -2863,6 +2863,11 @@ function openEntryModal(){
     "entryDate"
   ).value =
     getToday();
+
+  /* NEW ENTRY = DATE LOCKED */
+  document.getElementById(
+    "entryDate"
+  ).readOnly = true;
 
   populateItemSelect();
 
@@ -2915,6 +2920,11 @@ function editDataEntry(
     row[0] ??
     "";
 
+  /* EDIT = NAME EDITABLE */
+  document.getElementById(
+    "entryName"
+  ).readOnly = false;
+
   document.getElementById(
     "entryIP"
   ).value =
@@ -2941,6 +2951,11 @@ function editDataEntry(
       row[3] ??
       ""
     );
+
+  /* EDIT = DATE EDITABLE */
+  document.getElementById(
+    "entryDate"
+  ).readOnly = false;
 
   populateItemSelect();
 
@@ -2997,6 +3012,11 @@ function editSellEntry(
     row[0] ??
     "";
 
+  /* EDIT SELL = NAME EDITABLE */
+  document.getElementById(
+    "entryName"
+  ).readOnly = false;
+
   document.getElementById(
     "entryIP"
   ).value =
@@ -3023,6 +3043,11 @@ function editSellEntry(
       row[3] ??
       ""
     );
+
+  /* EDIT SELL = DATE EDITABLE */
+  document.getElementById(
+    "entryDate"
+  ).readOnly = false;
 
   populateItemSelect();
 
