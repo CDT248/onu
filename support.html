@@ -1,0 +1,958 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+  name="viewport"
+  content="width=device-width,initial-scale=1"
+>
+
+<title>Ewwar AGM</title>
+
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
+
+
+body{
+
+    min-height:100vh;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    background:
+    linear-gradient(
+        135deg,
+        #123f34,
+        #1f6b59,
+        #0d3028
+    );
+
+    color:white;
+
+    overflow:hidden;
+}
+
+
+/* BACKGROUND */
+
+body::before,
+body::after{
+
+    content:"";
+
+    position:absolute;
+
+    border-radius:50%;
+
+    background:
+    rgba(255,255,255,.05);
+
+}
+
+body::before{
+
+    width:420px;
+
+    height:420px;
+
+    top:-170px;
+
+    left:-120px;
+
+}
+
+body::after{
+
+    width:520px;
+
+    height:520px;
+
+    bottom:-240px;
+
+    right:-170px;
+
+}
+
+
+/* MAIN */
+
+.container{
+
+    position:relative;
+
+    z-index:5;
+
+    width:90%;
+
+    max-width:700px;
+
+    padding:55px 35px;
+
+    text-align:center;
+
+    background:
+    rgba(255,255,255,.09);
+
+    border:
+    1px solid
+    rgba(255,255,255,.16);
+
+    border-radius:30px;
+
+    backdrop-filter:blur(18px);
+
+    -webkit-backdrop-filter:blur(18px);
+
+    box-shadow:
+    0 25px 70px
+    rgba(0,0,0,.4);
+
+}
+
+
+/* BRAND */
+
+.brand{
+
+    font-size:38px;
+
+    font-weight:bold;
+
+    color:#80cbc4;
+
+    margin-bottom:8px;
+
+}
+
+
+.department{
+
+    font-size:12px;
+
+    color:#91aaa3;
+
+    text-transform:uppercase;
+
+    letter-spacing:2px;
+
+    margin-bottom:25px;
+
+}
+
+
+/* USER */
+
+.welcome{
+
+    font-size:22px;
+
+    margin-bottom:8px;
+
+}
+
+
+.welcome span{
+
+    color:#80cbc4;
+
+    font-weight:bold;
+
+}
+
+
+.role{
+
+    font-size:12px;
+
+    color:#9fb8b2;
+
+    margin-bottom:35px;
+
+}
+
+
+/* LOADER */
+
+.loader{
+
+    width:90px;
+
+    height:90px;
+
+    margin:
+    0 auto 30px;
+
+    border:
+    7px solid
+    rgba(255,255,255,.12);
+
+    border-top:
+    7px solid
+    #70c8be;
+
+    border-right:
+    7px solid
+    #70c8be;
+
+    border-radius:50%;
+
+    animation:
+    spin 1s linear infinite;
+
+}
+
+
+@keyframes spin{
+
+    100%{
+
+        transform:
+        rotate(360deg);
+
+    }
+
+}
+
+
+/* MESSAGE */
+
+h1{
+
+    font-size:28px;
+
+    margin-bottom:15px;
+
+}
+
+
+.message{
+
+    font-size:15px;
+
+    line-height:1.8;
+
+    color:#d3e4df;
+
+    margin-bottom:28px;
+
+}
+
+
+/* STATUS */
+
+.status{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    padding:10px 20px;
+
+    border-radius:30px;
+
+    background:
+    rgba(112,200,190,.1);
+
+    border:
+    1px solid
+    rgba(112,200,190,.22);
+
+    color:#9de0d8;
+
+    font-size:12px;
+
+}
+
+
+.dot{
+
+    width:9px;
+
+    height:9px;
+
+    border-radius:50%;
+
+    background:#69d6a8;
+
+    box-shadow:
+    0 0 12px
+    #69d6a8;
+
+    animation:
+    pulse 1.5s infinite;
+
+}
+
+
+@keyframes pulse{
+
+    0%{
+
+        opacity:1;
+
+        transform:
+        scale(1);
+
+    }
+
+    50%{
+
+        opacity:.4;
+
+        transform:
+        scale(1.4);
+
+    }
+
+    100%{
+
+        opacity:1;
+
+        transform:
+        scale(1);
+
+    }
+
+}
+
+
+/* TIME */
+
+.time{
+
+    margin-top:30px;
+
+    font-size:13px;
+
+    color:#91aaa3;
+
+}
+
+
+/* SESSION */
+
+.session{
+
+    margin-top:12px;
+
+    font-size:11px;
+
+    color:#718d86;
+
+}
+
+
+/* LOGOUT */
+
+.logout{
+
+    margin-top:28px;
+
+    padding:10px 25px;
+
+    border:
+    1px solid
+    rgba(255,255,255,.15);
+
+    border-radius:22px;
+
+    background:
+    rgba(255,255,255,.04);
+
+    color:#b3c7c2;
+
+    cursor:pointer;
+
+    font-size:12px;
+
+    transition:.2s;
+
+}
+
+
+.logout:hover{
+
+    background:
+    rgba(255,255,255,.1);
+
+    color:white;
+
+}
+
+
+/* FOOTER */
+
+.footer{
+
+    margin-top:32px;
+
+    padding-top:20px;
+
+    border-top:
+    1px solid
+    rgba(255,255,255,.1);
+
+    font-size:10px;
+
+    color:#78948e;
+
+}
+
+
+/* MOBILE */
+
+@media(max-width:600px){
+
+    .container{
+
+        width:92%;
+
+        padding:40px 22px;
+
+        border-radius:25px;
+
+    }
+
+    .brand{
+
+        font-size:30px;
+
+    }
+
+    h1{
+
+        font-size:23px;
+
+    }
+
+    .message{
+
+        font-size:14px;
+
+    }
+
+    .loader{
+
+        width:75px;
+
+        height:75px;
+
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<div class="container">
+
+
+    <div class="brand">
+        Ewwar AGM
+    </div>
+
+
+    <div class="department">
+        Accounting Department
+    </div>
+
+
+    <div class="welcome">
+
+        Welcome,
+        <span id="username">
+            User
+        </span>
+
+    </div>
+
+
+    <div class="role">
+
+        Role: Accounting
+
+    </div>
+
+
+    <div class="loader"></div>
+
+
+    <h1>
+        কাজ চলছে
+    </h1>
+
+
+    <div class="message">
+
+        আপনার সাইটে বর্তমানে কাজ চলছে।<br>
+
+        অনুগ্রহ করে কিছুক্ষণ অপেক্ষা করুন।<br>
+
+        কাজ শেষ হলে সাইটটি আবার ব্যবহার করতে পারবেন।
+
+    </div>
+
+
+    <div class="status">
+
+        <span class="dot"></span>
+
+        Site Work In Progress
+
+    </div>
+
+
+    <div class="time">
+
+        বর্তমান সময়:
+        <span id="currentTime">
+            Loading...
+        </span>
+
+    </div>
+
+
+    <div class="session">
+
+        Session expires in:
+        <span id="sessionTime">
+            10:00
+        </span>
+
+    </div>
+
+
+    <button
+        class="logout"
+        onclick="logout()"
+    >
+
+        Logout
+
+    </button>
+
+
+    <div class="footer">
+
+        © 2026 Ewwar AGM
+        <br>
+        Accounting Access
+
+    </div>
+
+
+</div>
+
+
+<script>
+
+
+/* =========================================================
+   SESSION SETTINGS
+   ========================================================= */
+
+const SESSION_TIME =
+10 * 60 * 1000;
+
+
+/* =========================================================
+   CHECK ACCOUNTING SESSION
+   ========================================================= */
+
+function verifySession(){
+
+    const auth =
+        sessionStorage.getItem(
+            "accountingAuth"
+        );
+
+    const username =
+        sessionStorage.getItem(
+            "accountingUsername"
+        );
+
+    const userData =
+        sessionStorage.getItem(
+            "accountingUser"
+        );
+
+    const expiry =
+        Number(
+            sessionStorage.getItem(
+                "sessionExpiry"
+            )
+        );
+
+
+    /* NO LOGIN */
+
+    if(
+        auth !== "true" ||
+        !username ||
+        !userData ||
+        !expiry
+    ){
+
+        goToLogin();
+
+        return false;
+
+    }
+
+
+    /* SESSION EXPIRED */
+
+    if(
+        Date.now() >= expiry
+    ){
+
+        logout();
+
+        return false;
+
+    }
+
+
+    /* VERIFY USER DATA */
+
+    try{
+
+        const user =
+            JSON.parse(userData);
+
+
+        const role =
+            String(
+                user.role || ""
+            )
+            .trim()
+            .toLowerCase();
+
+
+        /*
+         * MUST BE ACCOUNTING
+         */
+
+        if(
+            role !== "accounting"
+        ){
+
+            logout();
+
+            return false;
+
+        }
+
+
+        /*
+         * SHOW USERNAME
+         */
+
+        document.getElementById(
+            "username"
+        ).innerText =
+            username;
+
+
+        return true;
+
+    }
+
+    catch(error){
+
+        logout();
+
+        return false;
+
+    }
+
+}
+
+
+/* =========================================================
+   GO LOGIN
+   ========================================================= */
+
+function goToLogin(){
+
+    window.location.replace(
+        "index.html"
+    );
+
+}
+
+
+/* =========================================================
+   LOGOUT
+   ========================================================= */
+
+function logout(){
+
+    /*
+     * CLEAR ACCOUNTING SESSION
+     */
+
+    sessionStorage.removeItem(
+        "accountingAuth"
+    );
+
+    sessionStorage.removeItem(
+        "accountingUsername"
+    );
+
+    sessionStorage.removeItem(
+        "accountingUser"
+    );
+
+
+    /*
+     * CLEAR COMMON SESSION
+     */
+
+    sessionStorage.removeItem(
+        "dashboardAuth"
+    );
+
+    sessionStorage.removeItem(
+        "loginTime"
+    );
+
+    sessionStorage.removeItem(
+        "sessionExpiry"
+    );
+
+
+    /*
+     * CLEAR LOCAL LOGIN DATA
+     */
+
+    localStorage.removeItem(
+        "dashboardAuth"
+    );
+
+    localStorage.removeItem(
+        "username"
+    );
+
+    localStorage.removeItem(
+        "userData"
+    );
+
+    localStorage.removeItem(
+        "loginData"
+    );
+
+    localStorage.removeItem(
+        "loggedUser"
+    );
+
+    localStorage.removeItem(
+        "currentUser"
+    );
+
+    localStorage.removeItem(
+        "userInfo"
+    );
+
+    localStorage.removeItem(
+        "accountingUsername"
+    );
+
+
+    /*
+     * GO LOGIN
+     */
+
+    window.location.replace(
+        "index.html"
+    );
+
+}
+
+
+/* =========================================================
+   AUTO LOGOUT CHECK
+   ========================================================= */
+
+function checkExpiry(){
+
+    const expiry =
+        Number(
+            sessionStorage.getItem(
+                "sessionExpiry"
+            )
+        );
+
+
+    if(
+        !expiry ||
+        Date.now() >= expiry
+    ){
+
+        logout();
+
+        return;
+
+    }
+
+
+    /*
+     * REMAINING TIME
+     */
+
+    const remaining =
+        expiry - Date.now();
+
+
+    const minutes =
+        Math.floor(
+            remaining / 60000
+        );
+
+
+    const seconds =
+        Math.floor(
+            (remaining % 60000) / 1000
+        );
+
+
+    document.getElementById(
+        "sessionTime"
+    ).innerText =
+
+        String(minutes)
+        .padStart(2,"0")
+        + ":" +
+
+        String(seconds)
+        .padStart(2,"0");
+
+}
+
+
+/* =========================================================
+   BANGLADESH TIME
+   ========================================================= */
+
+function updateTime(){
+
+    const now =
+        new Date();
+
+
+    const options = {
+
+        timeZone:"Asia/Dhaka",
+
+        hour:"2-digit",
+
+        minute:"2-digit",
+
+        second:"2-digit",
+
+        hour12:true
+
+    };
+
+
+    document.getElementById(
+        "currentTime"
+    ).innerText =
+
+        now.toLocaleTimeString(
+            "en-US",
+            options
+        );
+
+}
+
+
+/* =========================================================
+   PREVENT BACK CACHE
+   ========================================================= */
+
+window.addEventListener(
+    "pageshow",
+    function(){
+
+        verifySession();
+
+    }
+);
+
+
+/* =========================================================
+   START
+   ========================================================= */
+
+if(
+    !verifySession()
+){
+
+    /* Already redirected */
+
+}
+
+
+updateTime();
+
+setInterval(
+    updateTime,
+    1000
+);
+
+
+checkExpiry();
+
+setInterval(
+    checkExpiry,
+    1000
+);
+
+
+/* =========================================================
+   AUTO LOGOUT WHEN TAB IS RETURNED
+   ========================================================= */
+
+document.addEventListener(
+    "visibilitychange",
+    function(){
+
+        if(
+            !document.hidden
+        ){
+
+            verifySession();
+
+        }
+
+    }
+);
+
+</script>
+
+
+</body>
+
+</html>
