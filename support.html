@@ -6,8 +6,10 @@
 
 <title>Support Dashboard</title>
 
-<link rel="icon"
-href="https://cdn-icons-png.flaticon.com/128/17163/17163834.png">
+<link
+  rel="icon"
+  href="https://cdn-icons-png.flaticon.com/128/17163/17163834.png"
+>
 
 <style>
 
@@ -328,7 +330,7 @@ tbody tr:last-child td{
   padding:40px !important;
 }
 
-/* ================= ACTION ================= */
+/* ================= SELL BUTTON ================= */
 
 .action-wrap{
   display:flex;
@@ -466,13 +468,12 @@ tbody tr:last-child td{
   border-color:var(--primary);
 }
 
-/* READ ONLY FIELD */
+/* AUTO FIELDS */
 
-.form-group input[readonly]{
-  opacity:.75;
+#entryName,
+#entryDate{
   cursor:not-allowed;
-  background:var(--bg);
-  border-color:var(--border);
+  opacity:.78;
 }
 
 .form-actions{
@@ -496,11 +497,6 @@ tbody tr:last-child td{
   background:var(--primary);
   color:#fff;
   font-weight:700;
-}
-
-.save-btn:disabled{
-  opacity:.6;
-  cursor:not-allowed;
 }
 
 /* ================= LOADER ================= */
@@ -561,9 +557,9 @@ body.dark .table-loader{
   bottom:20px;
   background:#17211b;
   color:#fff;
-  padding:13px 18px;
+  padding:12px 17px;
   border-radius:9px;
-  font-size:13px;
+  font-size:12px;
   box-shadow:var(--shadow);
   transform:translateY(80px);
   opacity:0;
@@ -621,6 +617,7 @@ body.dark .table-loader{
   .date-box{
     flex:1;
   }
+
 }
 
 @media(max-width:600px){
@@ -641,6 +638,7 @@ body.dark .table-loader{
   .filter-bar{
     padding:9px;
   }
+
 }
 
 </style>
@@ -659,8 +657,13 @@ body.dark .table-loader{
     </div>
 
     <div class="logo-text">
+
       <h1>Support Dashboard</h1>
-      <p>Admin Management System</p>
+
+      <p>
+        Admin Management System
+      </p>
+
     </div>
 
   </div>
@@ -670,20 +673,23 @@ body.dark .table-loader{
     <button
       class="header-btn"
       onclick="loadData(true)"
-      title="Reload">
+      title="Reload"
+    >
       ↻ <span>Reload</span>
     </button>
 
     <button
       class="header-btn primary"
-      onclick="openEntryModal()">
+      onclick="openEntryModal()"
+    >
       + <span>New Entry</span>
     </button>
 
     <button
       class="header-btn"
       onclick="toggleTheme()"
-      title="Dark Mode">
+      title="Dark Mode"
+    >
       ◐
     </button>
 
@@ -691,18 +697,21 @@ body.dark .table-loader{
 
       <button
         class="profile-btn"
-        onclick="toggleProfileMenu(event)">
+        onclick="toggleProfileMenu(event)"
+      >
 
         <img
           id="profileImage"
           src="https://cdn-icons-png.flaticon.com/128/17163/17163834.png"
-          alt="Profile">
+          alt="Profile"
+        >
 
       </button>
 
       <div
         class="profile-menu"
-        id="profileMenu">
+        id="profileMenu"
+      >
 
         <button onclick="openPasswordModal()">
           🔑 Change Password
@@ -728,7 +737,9 @@ body.dark .table-loader{
 
     <div class="toolbar-title">
 
-      <h2>Data</h2>
+      <h2>
+        Data
+      </h2>
 
       <p>
         Manage your support entries
@@ -738,13 +749,14 @@ body.dark .table-loader{
 
     <button
       class="refresh-btn"
-      onclick="loadData(true)">
+      onclick="loadData(true)"
+    >
       ↻ Refresh Data
     </button>
 
   </div>
 
-  <!-- FILTER -->
+  <!-- ================= FILTER ================= -->
 
   <div class="filter-bar">
 
@@ -754,7 +766,8 @@ body.dark .table-loader{
         type="text"
         id="searchInput"
         placeholder="Search Name, IP, Work, Item..."
-        oninput="applyFilters()">
+        oninput="applyFilters()"
+      >
 
     </div>
 
@@ -764,7 +777,8 @@ body.dark .table-loader{
         type="date"
         id="fromDate"
         onchange="applyFilters()"
-        title="From Date">
+        title="From Date"
+      >
 
     </div>
 
@@ -774,19 +788,21 @@ body.dark .table-loader{
         type="date"
         id="toDate"
         onchange="applyFilters()"
-        title="To Date">
+        title="To Date"
+      >
 
     </div>
 
     <button
       class="clear-btn"
-      onclick="clearFilters()">
+      onclick="clearFilters()"
+    >
       Clear
     </button>
 
   </div>
 
-  <!-- TABLE -->
+  <!-- ================= TABLE ================= -->
 
   <div class="table-card">
 
@@ -804,12 +820,13 @@ body.dark .table-loader{
 
     <div
       class="pagination"
-      id="pagination">
-    </div>
+      id="pagination"
+    ></div>
 
     <div
       class="table-loader"
-      id="loader">
+      id="loader"
+    >
 
       <div class="table-loader-box">
 
@@ -831,7 +848,8 @@ body.dark .table-loader{
 
 <div
   class="modal"
-  id="entryModal">
+  id="entryModal"
+>
 
   <div class="modal-box">
 
@@ -843,7 +861,8 @@ body.dark .table-loader{
 
       <button
         class="close-btn"
-        onclick="closeModal('entryModal')">
+        onclick="closeModal('entryModal')"
+      >
         ×
       </button>
 
@@ -851,7 +870,7 @@ body.dark .table-loader{
 
     <div class="modal-body">
 
-      <!-- NAME AUTO -->
+      <!-- AUTO NAME -->
 
       <div class="form-group">
 
@@ -862,11 +881,13 @@ body.dark .table-loader{
         <input
           type="text"
           id="entryName"
-          readonly>
+          readonly
+          tabindex="-1"
+        >
 
       </div>
 
-      <!-- IP -->
+      <!-- USER INPUT IP -->
 
       <div class="form-group">
 
@@ -877,11 +898,12 @@ body.dark .table-loader{
         <input
           type="text"
           id="entryIP"
-          placeholder="Enter IP">
+          placeholder="Enter IP"
+        >
 
       </div>
 
-      <!-- WORK -->
+      <!-- USER INPUT WORK -->
 
       <div class="form-group">
 
@@ -892,11 +914,12 @@ body.dark .table-loader{
         <input
           type="text"
           id="entryWork"
-          placeholder="Enter Work">
+          placeholder="Enter Work"
+        >
 
       </div>
 
-      <!-- DATE AUTO -->
+      <!-- AUTO DATE -->
 
       <div class="form-group">
 
@@ -907,7 +930,9 @@ body.dark .table-loader{
         <input
           type="date"
           id="entryDate"
-          readonly>
+          readonly
+          tabindex="-1"
+        >
 
       </div>
 
@@ -933,14 +958,15 @@ body.dark .table-loader{
 
         <button
           class="cancel-btn"
-          onclick="closeModal('entryModal')">
+          onclick="closeModal('entryModal')"
+        >
           Cancel
         </button>
 
         <button
           class="save-btn"
-          id="saveEntryBtn"
-          onclick="saveEntry()">
+          onclick="saveEntry()"
+        >
           Save Entry
         </button>
 
@@ -956,7 +982,8 @@ body.dark .table-loader{
 
 <div
   class="modal"
-  id="passwordModal">
+  id="passwordModal"
+>
 
   <div class="modal-box">
 
@@ -968,7 +995,8 @@ body.dark .table-loader{
 
       <button
         class="close-btn"
-        onclick="closeModal('passwordModal')">
+        onclick="closeModal('passwordModal')"
+      >
         ×
       </button>
 
@@ -985,7 +1013,8 @@ body.dark .table-loader{
         <input
           type="password"
           id="currentPassword"
-          placeholder="Current password">
+          placeholder="Current password"
+        >
 
       </div>
 
@@ -998,7 +1027,8 @@ body.dark .table-loader{
         <input
           type="password"
           id="newPassword"
-          placeholder="New password">
+          placeholder="New password"
+        >
 
       </div>
 
@@ -1011,7 +1041,8 @@ body.dark .table-loader{
         <input
           type="password"
           id="confirmPassword"
-          placeholder="Confirm new password">
+          placeholder="Confirm new password"
+        >
 
       </div>
 
@@ -1019,13 +1050,15 @@ body.dark .table-loader{
 
         <button
           class="cancel-btn"
-          onclick="closeModal('passwordModal')">
+          onclick="closeModal('passwordModal')"
+        >
           Cancel
         </button>
 
         <button
           class="save-btn"
-          onclick="changePassword()">
+          onclick="changePassword()"
+        >
           Change Password
         </button>
 
@@ -1041,8 +1074,8 @@ body.dark .table-loader{
 
 <div
   class="toast"
-  id="toast">
-</div>
+  id="toast"
+></div>
 
 <script>
 
@@ -1060,7 +1093,7 @@ const SELL_API_URL =
 "https://script.google.com/macros/s/AKfycbyiKn1MH1ZQvebSIo83bZzbbfJimmfRf9PjlPI4w1q1UliuF27gKViYM24oXakpkHuP/exec";
 
 const ITEM_API_URL =
-"https://script.google.com/macros/s/AKfycb2e7dzGE5vkS0Q-Eyl9MKLAbkkkD8f37eIVj7VuV8bPytWGOH7cwJ3w25efP7MLGshOw/exec";
+"https://script.google.com/macros/s/AKfycby2e7dzGE5vkS0Q-Eyl9MKLAbkkkD8f37eIVj7VuV8bPytWGOH7cwJ3w25efP7MLGshOw/exec";
 
 
 /* ============================================================
@@ -1068,18 +1101,31 @@ GLOBAL
 ============================================================ */
 
 let allData = [];
+
 let filteredData = [];
+
 let currentPage = 1;
+
 const pageSize = 10;
 
 let dataCache = null;
 
 let itemList = [];
+
 let itemCache = null;
+
+
+/* ============================================================
+CURRENT USER
+============================================================ */
 
 let currentUsername =
   localStorage.getItem("username") ||
   localStorage.getItem("loggedUser") ||
+  "";
+
+let currentUserName =
+  localStorage.getItem("name") ||
   "";
 
 
@@ -1093,9 +1139,7 @@ document.addEventListener(
 
     loadTheme();
 
-    if(!checkLogin()){
-      return;
-    }
+    checkLogin();
 
     loadUser();
 
@@ -1116,12 +1160,17 @@ LOGIN CHECK
 function checkLogin(){
 
   const auth =
-    localStorage.getItem("dashboardAuth") === "true" ||
-    sessionStorage.getItem("dashboardAuth") === "true";
+    localStorage.getItem(
+      "dashboardAuth"
+    ) === "true" ||
+    sessionStorage.getItem(
+      "dashboardAuth"
+    ) === "true";
 
   if(!auth){
 
-    window.location.href = "index.html";
+    window.location.href =
+      "index.html";
 
     return false;
 
@@ -1139,7 +1188,13 @@ LOAD USER
 async function loadUser(){
 
   if(!currentUsername){
+
+    currentUserName =
+      localStorage.getItem("name") ||
+      "";
+
     return;
+
   }
 
   try{
@@ -1148,7 +1203,9 @@ async function loadUser(){
       await fetch(
         USER_API_URL +
         "?action=getUser&username=" +
-        encodeURIComponent(currentUsername)
+        encodeURIComponent(
+          currentUsername
+        )
       );
 
     const result =
@@ -1163,15 +1220,57 @@ async function loadUser(){
       const user =
         result.user;
 
+
+      /*
+      ==========================================
+      USER NAME
+      ==========================================
+      */
+
       const name =
         user.Name ||
         user.name ||
         currentUsername;
 
+
+      /*
+      ==========================================
+      STORE CURRENT USER NAME
+      ==========================================
+      */
+
+      currentUserName =
+        String(name).trim();
+
+
+      localStorage.setItem(
+        "name",
+        currentUserName
+      );
+
+
+      /*
+      ==========================================
+      ROLE
+      ==========================================
+      */
+
       const role =
         user.Role ||
         user.role ||
         "";
+
+      localStorage.setItem(
+        "role",
+        role
+      );
+
+
+      /*
+      ==========================================
+      STATUS
+      ==========================================
+      */
 
       const status =
         user.Status ||
@@ -1179,19 +1278,16 @@ async function loadUser(){
         "";
 
       localStorage.setItem(
-        "name",
-        name
-      );
-
-      localStorage.setItem(
-        "role",
-        role
-      );
-
-      localStorage.setItem(
         "status",
         status
       );
+
+
+      /*
+      ==========================================
+      PROFILE IMAGE
+      ==========================================
+      */
 
       const profileImage =
         document.getElementById(
@@ -1213,13 +1309,22 @@ async function loadUser(){
 
       }
 
+
+      /*
+      ==========================================
+      BLOCKED USER
+      ==========================================
+      */
+
       if(
         String(status)
-        .trim()
-        .toLowerCase() === "blocked" ||
+          .trim()
+          .toLowerCase() ===
+        "blocked" ||
         String(status)
-        .trim()
-        .toLowerCase() === "block"
+          .trim()
+          .toLowerCase() ===
+        "block"
       ){
 
         logout();
@@ -1244,15 +1349,21 @@ async function loadUser(){
 LOAD DATA
 ============================================================ */
 
-async function loadData(force = false){
+async function loadData(
+  force = false
+){
 
   if(!checkLogin()){
     return;
   }
 
-  if(!force && dataCache){
+  if(
+    !force &&
+    dataCache
+  ){
 
-    allData = dataCache;
+    allData =
+      dataCache;
 
     applyFilters();
 
@@ -1260,7 +1371,9 @@ async function loadData(force = false){
 
   }
 
-  showLoader("Loading data...");
+  showLoader(
+    "Loading data..."
+  );
 
   try{
 
@@ -1288,7 +1401,9 @@ async function loadData(force = false){
     }
 
     allData =
-      Array.isArray(result.data)
+      Array.isArray(
+        result.data
+      )
         ? result.data
         : [];
 
@@ -1299,7 +1414,9 @@ async function loadData(force = false){
 
   }catch(error){
 
-    console.error(error);
+    console.error(
+      error
+    );
 
     allData = [];
 
@@ -1324,16 +1441,24 @@ async function loadData(force = false){
 RENDER DATA
 ============================================================ */
 
-function renderData(data){
+function renderData(
+  data
+){
 
   const head =
-    document.getElementById("tableHead");
+    document.getElementById(
+      "tableHead"
+    );
 
   const body =
-    document.getElementById("tableBody");
+    document.getElementById(
+      "tableBody"
+    );
 
   head.innerHTML = "";
+
   body.innerHTML = "";
+
 
   const headers = [
     "Name",
@@ -1344,39 +1469,65 @@ function renderData(data){
     "Action"
   ];
 
+
   const headerRow =
-    document.createElement("tr");
+    document.createElement(
+      "tr"
+    );
+
 
   headers.forEach(
     header => {
 
       const th =
-        document.createElement("th");
+        document.createElement(
+          "th"
+        );
 
       th.textContent =
         header;
 
-      headerRow.appendChild(th);
+      headerRow.appendChild(
+        th
+      );
 
     }
   );
 
-  head.appendChild(headerRow);
+
+  head.appendChild(
+    headerRow
+  );
+
 
   const totalPages =
     Math.max(
       1,
       Math.ceil(
-        data.length / pageSize
+        data.length /
+        pageSize
       )
     );
 
-  if(currentPage > totalPages){
-    currentPage = totalPages;
+
+  if(
+    currentPage >
+    totalPages
+  ){
+
+    currentPage =
+      totalPages;
+
   }
 
+
   const start =
-    (currentPage - 1) * pageSize;
+    (
+      currentPage -
+      1
+    ) *
+    pageSize;
+
 
   const pageData =
     data.slice(
@@ -1384,13 +1535,20 @@ function renderData(data){
       start + pageSize
     );
 
-  if(pageData.length === 0){
+
+  if(
+    pageData.length === 0
+  ){
 
     const row =
-      document.createElement("tr");
+      document.createElement(
+        "tr"
+      );
 
     const cell =
-      document.createElement("td");
+      document.createElement(
+        "td"
+      );
 
     cell.colSpan =
       headers.length;
@@ -1401,27 +1559,41 @@ function renderData(data){
     cell.textContent =
       "No data found";
 
-    row.appendChild(cell);
+    row.appendChild(
+      cell
+    );
 
-    body.appendChild(row);
+    body.appendChild(
+      row
+    );
 
-    renderPagination(data.length);
+    renderPagination(
+      data.length
+    );
 
     return;
 
   }
 
+
   pageData.forEach(
-    (row,index) => {
+    (
+      row,
+      index
+    ) => {
 
       const tr =
-        document.createElement("tr");
+        document.createElement(
+          "tr"
+        );
+
 
       const name =
         row.Name ??
         row.name ??
         row[0] ??
         "";
+
 
       const ip =
         row.Ip ??
@@ -1430,11 +1602,13 @@ function renderData(data){
         row[1] ??
         "";
 
+
       const work =
         row.Work ??
         row.work ??
         row[2] ??
         "";
+
 
       const date =
         row.Date ??
@@ -1442,32 +1616,61 @@ function renderData(data){
         row[3] ??
         "";
 
+
       const item =
         row.Item ??
         row.item ??
         row[4] ??
         "";
 
-      addCell(tr,name);
-      addCell(tr,ip);
-      addCell(tr,work);
-      addCell(tr,formatDate(date));
-      addCell(tr,item);
+
+      addCell(
+        tr,
+        name
+      );
+
+      addCell(
+        tr,
+        ip
+      );
+
+      addCell(
+        tr,
+        work
+      );
+
+      addCell(
+        tr,
+        formatDate(date)
+      );
+
+      addCell(
+        tr,
+        item
+      );
+
 
       const actionTd =
-        document.createElement("td");
+        document.createElement(
+          "td"
+        );
+
 
       const actionWrap =
-        document.createElement("div");
+        document.createElement(
+          "div"
+        );
 
       actionWrap.className =
         "action-wrap";
+
 
       const sellButton =
         createActionButton(
           "Sell",
           "action-sell"
         );
+
 
       sellButton.onclick =
         function(){
@@ -1478,24 +1681,33 @@ function renderData(data){
 
         };
 
+
       actionWrap.appendChild(
         sellButton
       );
+
 
       actionTd.appendChild(
         actionWrap
       );
 
+
       tr.appendChild(
         actionTd
       );
 
-      body.appendChild(tr);
+
+      body.appendChild(
+        tr
+      );
 
     }
   );
 
-  renderPagination(data.length);
+
+  renderPagination(
+    data.length
+  );
 
 }
 
@@ -1504,17 +1716,24 @@ function renderData(data){
 ADD CELL
 ============================================================ */
 
-function addCell(row,value){
+function addCell(
+  row,
+  value
+){
 
   const cell =
-    document.createElement("td");
+    document.createElement(
+      "td"
+    );
 
   cell.textContent =
     value == null
       ? ""
       : String(value);
 
-  row.appendChild(cell);
+  row.appendChild(
+    cell
+  );
 
 }
 
@@ -1523,10 +1742,15 @@ function addCell(row,value){
 CREATE ACTION BUTTON
 ============================================================ */
 
-function createActionButton(text,className){
+function createActionButton(
+  text,
+  className
+){
 
   const button =
-    document.createElement("button");
+    document.createElement(
+      "button"
+    );
 
   button.className =
     "action-btn " +
@@ -1544,24 +1768,38 @@ function createActionButton(text,className){
 PAGINATION
 ============================================================ */
 
-function renderPagination(total){
+function renderPagination(
+  total
+){
 
   const container =
-    document.getElementById("pagination");
+    document.getElementById(
+      "pagination"
+    );
 
   container.innerHTML = "";
 
+
   const totalPages =
     Math.ceil(
-      total / pageSize
+      total /
+      pageSize
     );
 
-  if(totalPages <= 1){
+
+  if(
+    totalPages <= 1
+  ){
+
     return;
+
   }
 
+
   const previous =
-    document.createElement("button");
+    document.createElement(
+      "button"
+    );
 
   previous.className =
     "page-btn";
@@ -1581,7 +1819,11 @@ function renderPagination(total){
 
     };
 
-  container.appendChild(previous);
+
+  container.appendChild(
+    previous
+  );
+
 
   for(
     let i = 1;
@@ -1590,7 +1832,9 @@ function renderPagination(total){
   ){
 
     const button =
-      document.createElement("button");
+      document.createElement(
+        "button"
+      );
 
     button.className =
       "page-btn" +
@@ -1610,12 +1854,18 @@ function renderPagination(total){
 
       };
 
-    container.appendChild(button);
+
+    container.appendChild(
+      button
+    );
 
   }
 
+
   const next =
-    document.createElement("button");
+    document.createElement(
+      "button"
+    );
 
   next.className =
     "page-btn";
@@ -1635,7 +1885,10 @@ function renderPagination(total){
 
     };
 
-  container.appendChild(next);
+
+  container.appendChild(
+    next
+  );
 
 }
 
@@ -1644,7 +1897,9 @@ function renderPagination(total){
 GO TO PAGE
 ============================================================ */
 
-function goToPage(page){
+function goToPage(
+  page
+){
 
   const totalPages =
     Math.max(
@@ -1655,15 +1910,20 @@ function goToPage(page){
       )
     );
 
+
   if(
     page < 1 ||
     page > totalPages
   ){
+
     return;
+
   }
+
 
   currentPage =
     page;
+
 
   renderData(
     filteredData
@@ -1680,20 +1940,29 @@ function applyFilters(){
 
   const search =
     document
-      .getElementById("searchInput")
+      .getElementById(
+        "searchInput"
+      )
       .value
       .trim()
       .toLowerCase();
 
+
   const fromDate =
     document
-      .getElementById("fromDate")
+      .getElementById(
+        "fromDate"
+      )
       .value;
+
 
   const toDate =
     document
-      .getElementById("toDate")
+      .getElementById(
+        "toDate"
+      )
       .value;
+
 
   filteredData =
     allData.filter(
@@ -1704,12 +1973,18 @@ function applyFilters(){
             row
           ).toLowerCase();
 
+
         if(
           search &&
-          !text.includes(search)
+          !text.includes(
+            search
+          )
         ){
+
           return false;
+
         }
+
 
         const rowDate =
           normalizeDate(
@@ -1719,28 +1994,37 @@ function applyFilters(){
             ""
           );
 
+
         if(
           fromDate &&
           rowDate &&
           rowDate < fromDate
         ){
+
           return false;
+
         }
+
 
         if(
           toDate &&
           rowDate &&
           rowDate > toDate
         ){
+
           return false;
+
         }
+
 
         return true;
 
       }
     );
 
+
   currentPage = 1;
+
 
   renderData(
     filteredData
@@ -1767,6 +2051,7 @@ function clearFilters(){
     "toDate"
   ).value = "";
 
+
   applyFilters();
 
 }
@@ -1778,48 +2063,110 @@ NEW ENTRY
 
 function openEntryModal(){
 
-  const name =
-    localStorage.getItem("name") ||
-    currentUsername;
+  /*
+  ============================================
+  GET LOGGED-IN USER NAME
+  ============================================
+  */
 
-  document.getElementById(
-    "entryName"
-  ).value =
+  const name =
+    String(
+      currentUserName ||
+      localStorage.getItem("name") ||
+      currentUsername ||
+      ""
+    ).trim();
+
+
+  /*
+  ============================================
+  GET TODAY
+  ============================================
+  */
+
+  const today =
+    getToday();
+
+
+  /*
+  ============================================
+  NAME
+  AUTOMATIC + READ ONLY
+  ============================================
+  */
+
+  const nameInput =
+    document.getElementById(
+      "entryName"
+    );
+
+  nameInput.value =
     name;
+
+  nameInput.readOnly =
+    true;
+
+
+  /*
+  ============================================
+  IP
+  ============================================
+  */
 
   document.getElementById(
     "entryIP"
   ).value = "";
 
+
+  /*
+  ============================================
+  WORK
+  ============================================
+  */
+
   document.getElementById(
     "entryWork"
   ).value = "";
 
-  document.getElementById(
-    "entryDate"
-  ).value =
-    getToday();
+
+  /*
+  ============================================
+  DATE
+  AUTOMATIC + READ ONLY
+  ============================================
+  */
+
+  const dateInput =
+    document.getElementById(
+      "entryDate"
+    );
+
+  dateInput.value =
+    today;
+
+  dateInput.readOnly =
+    true;
+
+
+  /*
+  ============================================
+  ITEM
+  ============================================
+  */
 
   populateItemSelect();
+
 
   document.getElementById(
     "entryItem"
   ).value = "";
 
-  const saveButton =
-    document.getElementById(
-      "saveEntryBtn"
-    );
 
-  if(saveButton){
-
-    saveButton.disabled =
-      false;
-
-    saveButton.textContent =
-      "Save Entry";
-
-  }
+  /*
+  ============================================
+  OPEN
+  ============================================
+  */
 
   openModal(
     "entryModal"
@@ -1830,47 +2177,95 @@ function openEntryModal(){
 
 /* ============================================================
 SAVE NEW ENTRY
-FIXED:
-SUCCESS MESSAGE + FORM CLOSE
+IMPORTANT:
+NAME + DATE ARE ALWAYS GENERATED BY SYSTEM
 ============================================================ */
 
 async function saveEntry(){
 
+  /*
+  ============================================
+  NAME
+  DO NOT TRUST INPUT FIELD
+  ============================================
+  */
+
   const name =
-    document.getElementById(
-      "entryName"
-    ).value.trim();
+    String(
+      currentUserName ||
+      localStorage.getItem("name") ||
+      currentUsername ||
+      ""
+    ).trim();
+
+
+  /*
+  ============================================
+  IP
+  USER INPUT
+  ============================================
+  */
 
   const ip =
     document.getElementById(
       "entryIP"
     ).value.trim();
 
+
+  /*
+  ============================================
+  WORK
+  USER INPUT
+  ============================================
+  */
+
   const work =
     document.getElementById(
       "entryWork"
     ).value.trim();
 
+
+  /*
+  ============================================
+  DATE
+  ALWAYS TODAY
+  DO NOT TRUST INPUT FIELD
+  ============================================
+  */
+
   const date =
-    document.getElementById(
-      "entryDate"
-    ).value;
+    getToday();
+
+
+  /*
+  ============================================
+  ITEM
+  ============================================
+  */
 
   const item =
     document.getElementById(
       "entryItem"
     ).value.trim();
 
+
+  /*
+  ============================================
+  VALIDATION
+  ============================================
+  */
+
   if(!name){
 
     showToast(
-      "Name is required",
+      "User name could not be loaded",
       "error"
     );
 
     return;
 
   }
+
 
   if(!ip){
 
@@ -1883,6 +2278,7 @@ async function saveEntry(){
 
   }
 
+
   if(!work){
 
     showToast(
@@ -1893,6 +2289,7 @@ async function saveEntry(){
     return;
 
   }
+
 
   if(!date){
 
@@ -1905,6 +2302,7 @@ async function saveEntry(){
 
   }
 
+
   if(!item){
 
     showToast(
@@ -1916,43 +2314,52 @@ async function saveEntry(){
 
   }
 
-  const saveButton =
-    document.getElementById(
-      "saveEntryBtn"
-    );
-
-  if(saveButton){
-
-    saveButton.disabled =
-      true;
-
-    saveButton.textContent =
-      "Saving...";
-
-  }
 
   showLoader(
-    "Saving entry..."
+    "Saving..."
   );
 
+
   try{
+
+    /*
+    ==========================================
+    SEND DATA TO SERVER
+    ==========================================
+    */
 
     const result =
       await postJson(
         DATA_API_URL,
         {
-          action:"addData",
-          name:name,
-          ip:ip,
-          work:work,
-          date:date,
-          item:item
+
+          action:
+            "addData",
+
+          name:
+            name,
+
+          ip:
+            ip,
+
+          work:
+            work,
+
+          date:
+            date,
+
+          item:
+            item
+
         }
       );
 
-    /* ==========================================
-       CHECK SERVER RESPONSE
-       ========================================== */
+
+    /*
+    ==========================================
+    CHECK SERVER RESULT
+    ==========================================
+    */
 
     if(
       !result ||
@@ -1963,76 +2370,70 @@ async function saveEntry(){
         result &&
         result.message
           ? result.message
-          : "Failed to save entry"
+          : "Failed to add entry"
       );
 
     }
 
-    /* ==========================================
-       SAVE SUCCESS
-       ========================================== */
+
+    /*
+    ==========================================
+    CLEAR CACHE
+    ==========================================
+    */
 
     dataCache = null;
 
-    /* CLOSE FORM ONLY AFTER SUCCESS */
+
+    /*
+    ==========================================
+    CLOSE MODAL
+    ==========================================
+    */
 
     closeModal(
       "entryModal"
     );
 
-    /* CLEAR FORM */
 
-    document.getElementById(
-      "entryIP"
-    ).value = "";
-
-    document.getElementById(
-      "entryWork"
-    ).value = "";
-
-    document.getElementById(
-      "entryItem"
-    ).value = "";
-
-    /* SUCCESS MESSAGE */
+    /*
+    ==========================================
+    SUCCESS
+    ==========================================
+    */
 
     showToast(
-      "✓ Entry saved successfully",
+      "Entry added successfully",
       "success"
     );
 
-    /* REFRESH DATA */
 
-    await loadData(true);
+    /*
+    ==========================================
+    RELOAD
+    ==========================================
+    */
+
+    await loadData(
+      true
+    );
 
   }catch(error){
 
     console.error(
-      "Save Entry Error:",
       error
     );
 
-    /* FORM WILL NOT CLOSE */
 
     showToast(
       error.message ||
-      "Failed to save entry",
+      "Save failed",
       "error"
     );
 
   }finally{
 
     hideLoader();
-
-    if(saveButton){
-
-      saveButton.disabled =
-        false;
-
-      saveButton.textContent =
-        "Save Entry";
-
-    }
 
   }
 
@@ -2043,10 +2444,13 @@ async function saveEntry(){
 SELL DATA
 ============================================================ */
 
-async function sellDataEntry(index){
+async function sellDataEntry(
+  index
+){
 
   const row =
     filteredData[index];
+
 
   if(!row){
 
@@ -2059,8 +2463,12 @@ async function sellDataEntry(index){
 
   }
 
+
   const rowNumber =
-    getRealRowNumber(row);
+    getRealRowNumber(
+      row
+    );
+
 
   if(
     !rowNumber ||
@@ -2081,11 +2489,13 @@ async function sellDataEntry(index){
 
   }
 
+
   const name =
     row.Name ??
     row.name ??
     row[0] ??
     "";
+
 
   const ip =
     row.Ip ??
@@ -2094,11 +2504,13 @@ async function sellDataEntry(index){
     row[1] ??
     "";
 
+
   const work =
     row.Work ??
     row.work ??
     row[2] ??
     "";
+
 
   const date =
     row.Date ??
@@ -2106,11 +2518,13 @@ async function sellDataEntry(index){
     row[3] ??
     "";
 
+
   const item =
     row.Item ??
     row.item ??
     row[4] ??
     "";
+
 
   const confirmed =
     confirm(
@@ -2123,13 +2537,18 @@ async function sellDataEntry(index){
       item
     );
 
+
   if(!confirmed){
+
     return;
+
   }
+
 
   showLoader(
     "Selling entry..."
   );
+
 
   try{
 
@@ -2137,20 +2556,46 @@ async function sellDataEntry(index){
       await postJson(
         SELL_API_URL,
         {
-          action:"sellData",
-          row:rowNumber,
-          rowNumber:rowNumber,
-          name:name,
-          ip:ip,
-          work:work,
-          date:date,
-          item:item,
-          username:currentUsername,
-          user:currentUsername,
-          SellUser:currentUsername,
-          sellUser:currentUsername
+
+          action:
+            "sellData",
+
+          row:
+            rowNumber,
+
+          rowNumber:
+            rowNumber,
+
+          name:
+            name,
+
+          ip:
+            ip,
+
+          work:
+            work,
+
+          date:
+            date,
+
+          item:
+            item,
+
+          username:
+            currentUsername,
+
+          user:
+            currentUsername,
+
+          SellUser:
+            currentUsername,
+
+          sellUser:
+            currentUsername
+
         }
       );
+
 
     if(
       !sellResult ||
@@ -2166,15 +2611,24 @@ async function sellDataEntry(index){
 
     }
 
+
     const deleteResult =
       await postJson(
         DATA_API_URL,
         {
-          action:"deleteData",
-          row:rowNumber,
-          rowNumber:rowNumber
+
+          action:
+            "deleteData",
+
+          row:
+            rowNumber,
+
+          rowNumber:
+            rowNumber
+
         }
       );
+
 
     if(
       !deleteResult ||
@@ -2186,27 +2640,38 @@ async function sellDataEntry(index){
         deleteResult
       );
 
+
       dataCache = null;
+
 
       showToast(
         "Sold successfully, but Data row could not be removed.",
         "error"
       );
 
-      await loadData(true);
+
+      await loadData(
+        true
+      );
+
 
       return;
 
     }
 
+
     dataCache = null;
 
+
     showToast(
-      "✓ Sold successfully and removed from Data",
+      "Sold successfully and removed from Data",
       "success"
     );
 
-    await loadData(true);
+
+    await loadData(
+      true
+    );
 
   }catch(error){
 
@@ -2214,6 +2679,7 @@ async function sellDataEntry(index){
       "Sell error:",
       error
     );
+
 
     showToast(
       error.message ||
@@ -2234,27 +2700,39 @@ async function sellDataEntry(index){
 GET REAL ROW NUMBER
 ============================================================ */
 
-function getRealRowNumber(row){
+function getRealRowNumber(
+  row
+){
 
   if(
     row &&
     row.row &&
-    Number(row.row) >= 2
+    Number(
+      row.row
+    ) >= 2
   ){
 
-    return Number(row.row);
+    return Number(
+      row.row
+    );
 
   }
+
 
   if(
     row &&
     row.rowNumber &&
-    Number(row.rowNumber) >= 2
+    Number(
+      row.rowNumber
+    ) >= 2
   ){
 
-    return Number(row.rowNumber);
+    return Number(
+      row.rowNumber
+    );
 
   }
+
 
   return null;
 
@@ -2265,7 +2743,9 @@ function getRealRowNumber(row){
 LOAD ITEMS
 ============================================================ */
 
-async function loadItems(force=false){
+async function loadItems(
+  force = false
+){
 
   if(
     !force &&
@@ -2281,6 +2761,7 @@ async function loadItems(force=false){
 
   }
 
+
   try{
 
     const response =
@@ -2289,8 +2770,10 @@ async function loadItems(force=false){
         "?action=getItems"
       );
 
+
     const result =
       await response.json();
+
 
     if(
       !result ||
@@ -2306,19 +2789,27 @@ async function loadItems(force=false){
 
     }
 
+
     itemList =
-      Array.isArray(result.data)
+      Array.isArray(
+        result.data
+      )
         ? result.data
         : [];
 
+
     itemCache =
       itemList;
+
 
     populateItemSelect();
 
   }catch(error){
 
-    console.error(error);
+    console.error(
+      error
+    );
+
 
     showToast(
       error.message ||
@@ -2342,15 +2833,19 @@ function populateItemSelect(){
       "entryItem"
     );
 
+
   if(!select){
     return;
   }
 
+
   const oldValue =
     select.value;
 
+
   select.innerHTML =
     '<option value="">Select Item</option>';
+
 
   itemList.forEach(
     function(item){
@@ -2367,20 +2862,25 @@ function populateItemSelect(){
             )
           : item;
 
+
       if(!name){
         return;
       }
+
 
       const option =
         document.createElement(
           "option"
         );
 
+
       option.value =
         name;
 
+
       option.textContent =
         name;
+
 
       select.appendChild(
         option
@@ -2389,9 +2889,12 @@ function populateItemSelect(){
     }
   );
 
+
   if(oldValue){
+
     select.value =
       oldValue;
+
   }
 
 }
@@ -2415,6 +2918,7 @@ function openPasswordModal(){
     "confirmPassword"
   ).value = "";
 
+
   openModal(
     "passwordModal"
   );
@@ -2433,15 +2937,18 @@ async function changePassword(){
       "currentPassword"
     ).value;
 
+
   const newPassword =
     document.getElementById(
       "newPassword"
     ).value;
 
+
   const confirmPassword =
     document.getElementById(
       "confirmPassword"
     ).value;
+
 
   if(!currentPassword){
 
@@ -2454,6 +2961,7 @@ async function changePassword(){
 
   }
 
+
   if(!newPassword){
 
     showToast(
@@ -2464,6 +2972,7 @@ async function changePassword(){
     return;
 
   }
+
 
   if(
     newPassword !==
@@ -2479,9 +2988,11 @@ async function changePassword(){
 
   }
 
+
   showLoader(
     "Changing password..."
   );
+
 
   try{
 
@@ -2489,13 +3000,25 @@ async function changePassword(){
       await postJson(
         USER_API_URL,
         {
-          action:"changePassword",
-          requester:currentUsername,
-          username:currentUsername,
-          currentPassword:currentPassword,
-          newPassword:newPassword
+
+          action:
+            "changePassword",
+
+          requester:
+            currentUsername,
+
+          username:
+            currentUsername,
+
+          currentPassword:
+            currentPassword,
+
+          newPassword:
+            newPassword
+
         }
       );
+
 
     if(
       !result ||
@@ -2511,9 +3034,11 @@ async function changePassword(){
 
     }
 
+
     closeModal(
       "passwordModal"
     );
+
 
     showToast(
       "Password changed successfully",
@@ -2541,13 +3066,18 @@ async function changePassword(){
 POST JSON
 ============================================================ */
 
-async function postJson(url,data){
+async function postJson(
+  url,
+  data
+){
 
   const response =
     await fetch(
       url,
       {
-        method:"POST",
+
+        method:
+          "POST",
 
         headers:{
           "Content-Type":
@@ -2555,32 +3085,36 @@ async function postJson(url,data){
         },
 
         body:
-          JSON.stringify(data)
+          JSON.stringify(
+            data
+          )
+
       }
     );
+
 
   const text =
     await response.text();
 
+
   let result;
+
 
   try{
 
     result =
-      JSON.parse(text);
+      JSON.parse(
+        text
+      );
 
   }catch(error){
-
-    console.error(
-      "Server response:",
-      text
-    );
 
     throw new Error(
       "Invalid server response"
     );
 
   }
+
 
   return result;
 
@@ -2591,27 +3125,42 @@ async function postJson(url,data){
 MODAL
 ============================================================ */
 
-function openModal(id){
+function openModal(
+  id
+){
 
   const modal =
-    document.getElementById(id);
+    document.getElementById(
+      id
+    );
+
 
   if(modal){
 
-    modal.classList.add("show");
+    modal.classList.add(
+      "show"
+    );
 
   }
 
 }
 
-function closeModal(id){
+
+function closeModal(
+  id
+){
 
   const modal =
-    document.getElementById(id);
+    document.getElementById(
+      id
+    );
+
 
   if(modal){
 
-    modal.classList.remove("show");
+    modal.classList.remove(
+      "show"
+    );
 
   }
 
@@ -2623,10 +3172,14 @@ document.addEventListener(
   function(event){
 
     if(
-      event.target.classList.contains("modal")
+      event.target.classList.contains(
+        "modal"
+      )
     ){
 
-      event.target.classList.remove("show");
+      event.target.classList.remove(
+        "show"
+      );
 
     }
 
@@ -2638,15 +3191,24 @@ document.addEventListener(
 PROFILE MENU
 ============================================================ */
 
-function toggleProfileMenu(event){
+function toggleProfileMenu(
+  event
+){
 
   if(event){
+
     event.stopPropagation();
+
   }
 
+
   document
-    .getElementById("profileMenu")
-    .classList.toggle("show");
+    .getElementById(
+      "profileMenu"
+    )
+    .classList.toggle(
+      "show"
+    );
 
 }
 
@@ -2660,8 +3222,13 @@ document.addEventListener(
         "profileMenu"
       );
 
+
     if(menu){
-      menu.classList.remove("show");
+
+      menu.classList.remove(
+        "show"
+      );
+
     }
 
   }
@@ -2678,9 +3245,12 @@ function toggleTheme(){
     "dark"
   );
 
+
   localStorage.setItem(
     "dashboardTheme",
-    document.body.classList.contains("dark")
+    document.body.classList.contains(
+      "dark"
+    )
       ? "dark"
       : "light"
   );
@@ -2695,7 +3265,10 @@ function loadTheme(){
       "dashboardTheme"
     );
 
-  if(theme === "dark"){
+
+  if(
+    theme === "dark"
+  ){
 
     document.body.classList.add(
       "dark"
@@ -2710,21 +3283,26 @@ function loadTheme(){
 LOADER
 ============================================================ */
 
-function showLoader(text){
+function showLoader(
+  text
+){
 
   const loader =
     document.getElementById(
       "loader"
     );
 
+
   const loaderText =
     document.getElementById(
       "loaderText"
     );
 
+
   if(!loader){
     return;
   }
+
 
   if(loaderText){
 
@@ -2734,7 +3312,10 @@ function showLoader(text){
 
   }
 
-  loader.classList.add("show");
+
+  loader.classList.add(
+    "show"
+  );
 
 }
 
@@ -2746,9 +3327,12 @@ function hideLoader(){
       "loader"
     );
 
+
   if(loader){
 
-    loader.classList.remove("show");
+    loader.classList.remove(
+      "show"
+    );
 
   }
 
@@ -2761,9 +3345,10 @@ TOAST
 
 let toastTimer = null;
 
+
 function showToast(
   message,
-  type="success"
+  type = "success"
 ){
 
   const toast =
@@ -2771,20 +3356,20 @@ function showToast(
       "toast"
     );
 
-  if(!toast){
-    return;
-  }
 
   toast.textContent =
     message;
+
 
   toast.className =
     "toast show " +
     type;
 
+
   clearTimeout(
     toastTimer
   );
+
 
   toastTimer =
     setTimeout(
@@ -2809,18 +3394,28 @@ function getToday(){
   const date =
     new Date();
 
+
   const year =
     date.getFullYear();
+
 
   const month =
     String(
       date.getMonth() + 1
-    ).padStart(2,"0");
+    ).padStart(
+      2,
+      "0"
+    );
+
 
   const day =
     String(
       date.getDate()
-    ).padStart(2,"0");
+    ).padStart(
+      2,
+      "0"
+    );
+
 
   return (
     year +
@@ -2837,28 +3432,44 @@ function getToday(){
 NORMALIZE DATE
 ============================================================ */
 
-function normalizeDate(value){
+function normalizeDate(
+  value
+){
 
   if(!value){
+
     return "";
+
   }
 
+
   const text =
-    String(value).trim();
+    String(
+      value
+    ).trim();
+
 
   if(
-    /^\d{4}-\d{2}-\d{2}$/.test(text)
+    /^\d{4}-\d{2}-\d{2}$/.test(
+      text
+    )
   ){
 
     return text;
 
   }
 
+
   const date =
-    new Date(text);
+    new Date(
+      text
+    );
+
 
   if(
-    !isNaN(date.getTime())
+    !isNaN(
+      date.getTime()
+    )
   ){
 
     return [
@@ -2867,15 +3478,22 @@ function normalizeDate(value){
 
       String(
         date.getMonth() + 1
-      ).padStart(2,"0"),
+      ).padStart(
+        2,
+        "0"
+      ),
 
       String(
         date.getDate()
-      ).padStart(2,"0")
+      ).padStart(
+        2,
+        "0"
+      )
 
     ].join("-");
 
   }
+
 
   return text;
 
@@ -2886,21 +3504,35 @@ function normalizeDate(value){
 FORMAT DATE
 ============================================================ */
 
-function formatDate(value){
+function formatDate(
+  value
+){
 
   const normalized =
-    normalizeDate(value);
+    normalizeDate(
+      value
+    );
+
 
   if(!normalized){
+
     return "";
+
   }
+
 
   const parts =
     normalized.split("-");
 
-  if(parts.length !== 3){
+
+  if(
+    parts.length !== 3
+  ){
+
     return normalized;
+
   }
+
 
   const months = [
 
@@ -2919,11 +3551,14 @@ function formatDate(value){
 
   ];
 
+
   return (
     parts[2] +
     " " +
     months[
-      Number(parts[1]) - 1
+      Number(
+        parts[1]
+      ) - 1
     ] +
     " " +
     parts[0]
@@ -2953,6 +3588,7 @@ function logout(){
 
   ];
 
+
   keys.forEach(
     function(key){
 
@@ -2963,7 +3599,9 @@ function logout(){
     }
   );
 
+
   sessionStorage.clear();
+
 
   window.location.href =
     "index.html";
@@ -2985,13 +3623,19 @@ function setupBackProtection(){
       location.href
     );
 
+
     window.addEventListener(
       "popstate",
       function(){
 
-        if(!checkLogin()){
+        if(
+          !checkLogin()
+        ){
+
           return;
+
         }
+
 
         history.pushState(
           null,
@@ -3001,6 +3645,7 @@ function setupBackProtection(){
 
       }
     );
+
 
     window.addEventListener(
       "pageshow",
