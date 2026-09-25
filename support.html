@@ -4,10 +4,7 @@
 
 <meta charset="UTF-8">
 
-<meta
-  name="viewport"
-  content="width=device-width, initial-scale=1.0"
->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Support Dashboard</title>
 
@@ -33,7 +30,6 @@
   --primary:#16a36a;
   --primary-dark:#087f4e;
   --danger:#e74c3c;
-  --warning:#f39c12;
   --shadow:0 10px 30px rgba(0,0,0,.08);
 }
 
@@ -52,6 +48,12 @@ body{
   color:var(--text);
   min-height:100vh;
   transition:.25s;
+}
+
+button{
+  border:none;
+  cursor:pointer;
+  font-family:inherit;
 }
 
 
@@ -89,7 +91,6 @@ HEADER
   justify-content:center;
   font-size:22px;
   font-weight:800;
-  box-shadow:0 5px 15px rgba(22,163,106,.25);
 }
 
 .logo-text h1{
@@ -106,12 +107,6 @@ HEADER
   display:flex;
   align-items:center;
   gap:8px;
-}
-
-button{
-  border:none;
-  cursor:pointer;
-  font-family:inherit;
 }
 
 .header-btn{
@@ -153,7 +148,6 @@ button{
   overflow:hidden;
   border:2px solid var(--primary);
   background:var(--bg);
-  cursor:pointer;
 }
 
 .profile-btn img{
@@ -233,7 +227,7 @@ MAIN
 
 
 /* =========================================================
-FILTER BAR
+FILTER
 ========================================================= */
 
 .filter-bar{
@@ -245,7 +239,6 @@ FILTER BAR
   align-items:center;
   gap:10px;
   margin-bottom:16px;
-  box-shadow:0 3px 12px rgba(0,0,0,.03);
 }
 
 .search-box{
@@ -379,10 +372,6 @@ ACTION BUTTONS
 
 .action-sell{
   background:#16a36a;
-}
-
-.action-delete{
-  background:#e74c3c;
 }
 
 .action-paid{
@@ -534,7 +523,7 @@ MODAL
 
 
 /* =========================================================
-TABLE LOADER
+LOADER
 ========================================================= */
 
 .table-loader{
@@ -545,7 +534,6 @@ TABLE LOADER
   align-items:center;
   justify-content:center;
   z-index:50;
-  pointer-events:none;
 }
 
 body.dark .table-loader{
@@ -566,7 +554,6 @@ body.dark .table-loader{
   align-items:center;
   gap:10px;
   font-size:12px;
-  color:var(--text);
 }
 
 .spinner{
@@ -576,7 +563,6 @@ body.dark .table-loader{
   border-top-color:var(--primary);
   border-radius:50%;
   animation:spin .65s linear infinite;
-  flex-shrink:0;
 }
 
 @keyframes spin{
@@ -694,7 +680,7 @@ RESPONSIVE
 <body>
 
 
-<!-- ========================================================
+<!-- =========================================================
 HEADER
 ========================================================= -->
 
@@ -710,9 +696,7 @@ HEADER
 
       <h1>Support Dashboard</h1>
 
-      <p>
-        Admin Management System
-      </p>
+      <p>Admin Management System</p>
 
     </div>
 
@@ -786,7 +770,7 @@ HEADER
 
 
 
-<!-- ========================================================
+<!-- =========================================================
 MAIN
 ========================================================= -->
 
@@ -819,9 +803,9 @@ MAIN
 
 
 
-  <!-- ======================================================
+  <!-- =======================================================
   FILTER
-  ======================================================= -->
+  ======================================================== -->
 
   <div class="filter-bar">
 
@@ -900,9 +884,9 @@ MAIN
 
 
 
-  <!-- ======================================================
+  <!-- =======================================================
   TABLE
-  ======================================================= -->
+  ======================================================== -->
 
   <div class="table-card">
 
@@ -948,8 +932,8 @@ MAIN
 
 
 
-<!-- ========================================================
-ENTRY MODAL
+<!-- =========================================================
+NEW ENTRY MODAL
 ========================================================= -->
 
 <div
@@ -961,7 +945,7 @@ ENTRY MODAL
 
     <div class="modal-header">
 
-      <h3 id="entryModalTitle">
+      <h3>
         New Entry
       </h3>
 
@@ -1071,7 +1055,7 @@ ENTRY MODAL
 
 
 
-<!-- ========================================================
+<!-- =========================================================
 PASSWORD MODAL
 ========================================================= -->
 
@@ -1166,7 +1150,7 @@ PASSWORD MODAL
 
 
 
-<!-- ========================================================
+<!-- =========================================================
 TOAST
 ========================================================= -->
 
@@ -1200,27 +1184,21 @@ const PAID_API_URL =
   "https://script.google.com/macros/s/AKfycby_kDEHln_Dj_0YfB421POWa2XAuN6g2PDypQtyS2arrxgPVtyZZOwAp_TKLrUnRudKng/exec";
 
 
-const DELETE_API_URL =
-  "https://script.google.com/macros/s/AKfycbwDL1JIV7QYcH84VGiWxhUoT-wN9UfuGn0t9boYrs_FaG_ZfcVGjNmaTqSTC6ev0Ig9Kg/exec";
-
-
 const ITEM_API_URL =
   "https://script.google.com/macros/s/AKfycby2e7dzGE5vkS0Q-Eyl9MKLAbkkkD8f37eIVj7VuV8bPytWGOH7cwJ3w25efP7MLGshOw/exec";
 
 
 // ============================================================
-// GLOBAL STATE
+// GLOBAL
 // ============================================================
 
 let allData = [];
 let filteredData = [];
 
-let editingDataRow = null;
-let editingSellRow = null;
-
 let currentDataType = "data";
 
 let currentPage = 1;
+
 const pageSize = 10;
 
 let dataCache = null;
@@ -1250,6 +1228,8 @@ document.addEventListener(
     checkLogin();
 
     loadUser();
+
+    updateDataTitle();
 
     loadData();
 
@@ -1288,15 +1268,13 @@ function checkLogin(){
 
 
 // ============================================================
-// LOAD USER
+// USER
 // ============================================================
 
 async function loadUser(){
 
   if(!currentUsername){
-
     return;
-
   }
 
 
@@ -1362,35 +1340,29 @@ async function loadUser(){
       );
 
 
-      const profileName =
+      if(
+        user.Picture ||
+        user.picture
+      ){
+
         document.getElementById(
           "profileImage"
-        );
-
-
-      if(profileName){
-
-        if(
+        ).src =
           user.Picture ||
-          user.picture
-        ){
-
-          profileName.src =
-            user.Picture ||
-            user.picture;
-
-        }
+          user.picture;
 
       }
 
 
+      const lowerStatus =
+        String(status)
+          .trim()
+          .toLowerCase();
+
+
       if(
-        String(status)
-          .trim()
-          .toLowerCase() === "block" ||
-        String(status)
-          .trim()
-          .toLowerCase() === "blocked"
+        lowerStatus === "block" ||
+        lowerStatus === "blocked"
       ){
 
         logout();
@@ -1413,7 +1385,7 @@ async function loadUser(){
 
 
 // ============================================================
-// CHANGE DATA TYPE
+// DATA TYPE
 // ============================================================
 
 function changeDataType(){
@@ -1426,21 +1398,13 @@ function changeDataType(){
 
   currentPage = 1;
 
-  dataCache = null;
-  sellCache = null;
-  paidCache = null;
-  deleteCache = null;
-
-
   document.getElementById(
     "searchInput"
   ).value = "";
 
-
   document.getElementById(
     "fromDate"
   ).value = "";
-
 
   document.getElementById(
     "toDate"
@@ -1594,8 +1558,11 @@ async function loadData(force=false){
 
   try{
 
-    let api = DATA_API_URL;
-    let action = "getData";
+    let api =
+      DATA_API_URL;
+
+    let action =
+      "getData";
 
 
     if(currentDataType === "sell"){
@@ -1623,7 +1590,7 @@ async function loadData(force=false){
     if(currentDataType === "delete"){
 
       api =
-        DELETE_API_URL;
+        DATA_API_URL;
 
       action =
         "getDeletedData";
@@ -1635,7 +1602,9 @@ async function loadData(force=false){
       await fetch(
         api +
         "?action=" +
-        encodeURIComponent(action)
+        encodeURIComponent(
+          action
+        )
       );
 
 
@@ -1665,28 +1634,16 @@ async function loadData(force=false){
 
 
     if(currentDataType === "data"){
-
-      dataCache =
-        allData;
-
+      dataCache = allData;
     }
     else if(currentDataType === "sell"){
-
-      sellCache =
-        allData;
-
+      sellCache = allData;
     }
     else if(currentDataType === "paid"){
-
-      paidCache =
-        allData;
-
+      paidCache = allData;
     }
     else{
-
-      deleteCache =
-        allData;
-
+      deleteCache = allData;
     }
 
 
@@ -1695,10 +1652,7 @@ async function loadData(force=false){
 
   }catch(error){
 
-    console.error(
-      error
-    );
-
+    console.error(error);
 
     showToast(
       error.message ||
@@ -1802,26 +1756,28 @@ function renderData(data){
   }
 
 
-  const tr =
+  const headerRow =
     document.createElement("tr");
 
 
   headers.forEach(
-    h => {
+    header => {
 
       const th =
         document.createElement("th");
 
       th.textContent =
-        h;
+        header;
 
-      tr.appendChild(th);
+      headerRow.appendChild(th);
 
     }
   );
 
 
-  head.appendChild(tr);
+  head.appendChild(
+    headerRow
+  );
 
 
   const totalPages =
@@ -1834,7 +1790,10 @@ function renderData(data){
     );
 
 
-  if(currentPage > totalPages){
+  if(
+    currentPage >
+    totalPages
+  ){
 
     currentPage =
       totalPages;
@@ -1932,41 +1891,70 @@ function renderData(data){
         "";
 
 
-      addCell(
-        tr,
-        name
-      );
-
-
-      addCell(
-        tr,
-        ip
-      );
-
-
-      addCell(
-        tr,
-        work
-      );
-
-
-      addCell(
-        tr,
-        formatDate(date)
-      );
-
-
-      addCell(
-        tr,
-        item
-      );
+      addCell(tr,name);
+      addCell(tr,ip);
+      addCell(tr,work);
+      addCell(tr,formatDate(date));
+      addCell(tr,item);
 
 
       /* =====================================================
-         SELL
+      DATA
+      ONLY SELL BUTTON
       ====================================================== */
 
       if(
+        currentDataType === "data"
+      ){
+
+        const actionTd =
+          document.createElement("td");
+
+
+        const action =
+          document.createElement("div");
+
+
+        action.className =
+          "action-wrap";
+
+
+        const sellBtn =
+          createActionButton(
+            "Sell",
+            "action-sell"
+          );
+
+
+        sellBtn.onclick =
+          () => sellDataEntry(
+            start + index
+          );
+
+
+        action.appendChild(
+          sellBtn
+        );
+
+
+        actionTd.appendChild(
+          action
+        );
+
+
+        tr.appendChild(
+          actionTd
+        );
+
+      }
+
+
+      /* =====================================================
+      SELL
+      EDIT + PAID
+      ====================================================== */
+
+      else if(
         currentDataType === "sell"
       ){
 
@@ -2004,15 +1992,11 @@ function renderData(data){
 
 
         const actionTd =
-          document.createElement(
-            "td"
-          );
+          document.createElement("td");
 
 
         const action =
-          document.createElement(
-            "div"
-          );
+          document.createElement("div");
 
 
         action.className =
@@ -2068,7 +2052,7 @@ function renderData(data){
 
 
       /* =====================================================
-         PAID
+      PAID
       ====================================================== */
 
       else if(
@@ -2141,12 +2125,10 @@ function renderData(data){
 
 
       /* =====================================================
-         DELETE
+      DELETE
       ====================================================== */
 
-      else if(
-        currentDataType === "delete"
-      ){
+      else{
 
         const deleteTime =
           row.DelletTime ??
@@ -2182,94 +2164,6 @@ function renderData(data){
       }
 
 
-      /* =====================================================
-         DATA
-      ====================================================== */
-
-      else{
-
-        const actionTd =
-          document.createElement(
-            "td"
-          );
-
-
-        const action =
-          document.createElement(
-            "div"
-          );
-
-
-        action.className =
-          "action-wrap";
-
-
-        const editBtn =
-          createActionButton(
-            "Edit",
-            "action-edit"
-          );
-
-
-        editBtn.onclick =
-          () => editDataEntry(
-            start + index
-          );
-
-
-        action.appendChild(
-          editBtn
-        );
-
-
-        const sellBtn =
-          createActionButton(
-            "Sell",
-            "action-sell"
-          );
-
-
-        sellBtn.onclick =
-          () => sellDataEntry(
-            start + index
-          );
-
-
-        action.appendChild(
-          sellBtn
-        );
-
-
-        const deleteBtn =
-          createActionButton(
-            "Delete",
-            "action-delete"
-          );
-
-
-        deleteBtn.onclick =
-          () => deleteDataEntry(
-            start + index
-          );
-
-
-        action.appendChild(
-          deleteBtn
-        );
-
-
-        actionTd.appendChild(
-          action
-        );
-
-
-        tr.appendChild(
-          actionTd
-        );
-
-      }
-
-
       body.appendChild(tr);
 
     }
@@ -2284,7 +2178,7 @@ function renderData(data){
 
 
 // ============================================================
-// ADD CELL
+// CELL
 // ============================================================
 
 function addCell(
@@ -2359,9 +2253,7 @@ function renderPagination(
 
 
   if(totalPages <= 1){
-
     return;
-
   }
 
 
@@ -2398,11 +2290,11 @@ function renderPagination(
     i++
   ){
 
-    const btn =
+    const button =
       document.createElement("button");
 
 
-    btn.className =
+    button.className =
       "page-btn" +
       (
         i === currentPage
@@ -2411,16 +2303,16 @@ function renderPagination(
       );
 
 
-    btn.textContent =
+    button.textContent =
       i;
 
 
-    btn.onclick =
+    button.onclick =
       () => goToPage(i);
 
 
     container.appendChild(
-      btn
+      button
     );
 
   }
@@ -2456,7 +2348,7 @@ function renderPagination(
 
 
 // ============================================================
-// GO TO PAGE
+// PAGE
 // ============================================================
 
 function goToPage(page){
@@ -2475,9 +2367,7 @@ function goToPage(page){
     page < 1 ||
     page > totalPages
   ){
-
     return;
-
   }
 
 
@@ -2509,26 +2399,22 @@ function applyFilters(){
 
 
   const fromDate =
-    document
-      .getElementById(
-        "fromDate"
-      )
-      .value;
+    document.getElementById(
+      "fromDate"
+    ).value;
 
 
   const toDate =
-    document
-      .getElementById(
-        "toDate"
-      )
-      .value;
+    document.getElementById(
+      "toDate"
+    ).value;
 
 
   filteredData =
     allData.filter(
       row => {
 
-        const rowText =
+        const text =
           JSON.stringify(
             row
           ).toLowerCase();
@@ -2536,11 +2422,9 @@ function applyFilters(){
 
         if(
           search &&
-          !rowText.includes(search)
+          !text.includes(search)
         ){
-
           return false;
-
         }
 
 
@@ -2558,9 +2442,7 @@ function applyFilters(){
           rowDate &&
           rowDate < fromDate
         ){
-
           return false;
-
         }
 
 
@@ -2569,9 +2451,7 @@ function applyFilters(){
           rowDate &&
           rowDate > toDate
         ){
-
           return false;
-
         }
 
 
@@ -2618,35 +2498,18 @@ function clearFilters(){
 
 
 // ============================================================
-// OPEN NEW ENTRY
+// NEW ENTRY
 // ============================================================
 
 function openEntryModal(){
 
-  editingDataRow =
-    null;
-
-  editingSellRow =
-    null;
-
-
   document.getElementById(
-    "entryModalTitle"
-  ).textContent =
-    "New Entry";
-
-
-  const name =
+    "entryName"
+  ).value =
     localStorage.getItem(
       "name"
     ) ||
     currentUsername;
-
-
-  document.getElementById(
-    "entryName"
-  ).value =
-    name;
 
 
   document.getElementById(
@@ -2681,232 +2544,7 @@ function openEntryModal(){
 
 
 // ============================================================
-// EDIT DATA ENTRY
-// ============================================================
-
-function editDataEntry(
-  index
-){
-
-  const row =
-    filteredData[index];
-
-
-  if(!row){
-
-    return;
-
-  }
-
-
-  editingDataRow =
-    getRealRowNumber(
-      row
-    );
-
-
-  editingSellRow =
-    null;
-
-
-  document.getElementById(
-    "entryModalTitle"
-  ).textContent =
-    "Edit Entry";
-
-
-  document.getElementById(
-    "entryName"
-  ).value =
-    row.Name ??
-    row.name ??
-    row[0] ??
-    "";
-
-
-  document.getElementById(
-    "entryIP"
-  ).value =
-    row.Ip ??
-    row.IP ??
-    row.ip ??
-    row[1] ??
-    "";
-
-
-  document.getElementById(
-    "entryWork"
-  ).value =
-    row.Work ??
-    row.work ??
-    row[2] ??
-    "";
-
-
-  document.getElementById(
-    "entryDate"
-  ).value =
-    normalizeDate(
-      row.Date ??
-      row.date ??
-      row[3] ??
-      ""
-    );
-
-
-  populateItemSelect();
-
-
-  document.getElementById(
-    "entryItem"
-  ).value =
-    row.Item ??
-    row.item ??
-    row[4] ??
-    "";
-
-
-  openModal(
-    "entryModal"
-  );
-
-}
-
-
-// ============================================================
-// EDIT SELL ENTRY
-// ============================================================
-
-function editSellEntry(
-  index
-){
-
-  const row =
-    filteredData[index];
-
-
-  if(!row){
-
-    return;
-
-  }
-
-
-  editingSellRow =
-    getRealRowNumber(
-      row
-    );
-
-
-  editingDataRow =
-    null;
-
-
-  document.getElementById(
-    "entryModalTitle"
-  ).textContent =
-    "Edit Sell Entry";
-
-
-  document.getElementById(
-    "entryName"
-  ).value =
-    row.Name ??
-    row.name ??
-    row[0] ??
-    "";
-
-
-  document.getElementById(
-    "entryIP"
-  ).value =
-    row.Ip ??
-    row.IP ??
-    row.ip ??
-    row[1] ??
-    "";
-
-
-  document.getElementById(
-    "entryWork"
-  ).value =
-    row.Work ??
-    row.work ??
-    row[2] ??
-    "";
-
-
-  document.getElementById(
-    "entryDate"
-  ).value =
-    normalizeDate(
-      row.Date ??
-      row.date ??
-      row[3] ??
-      ""
-    );
-
-
-  populateItemSelect();
-
-
-  document.getElementById(
-    "entryItem"
-  ).value =
-    row.Item ??
-    row.item ??
-    row[4] ??
-    "";
-
-
-  openModal(
-    "entryModal"
-  );
-
-}
-
-
-// ============================================================
-// GET REAL SHEET ROW
-// ============================================================
-
-function getRealRowNumber(
-  row
-){
-
-  if(
-    row &&
-    row.row &&
-    Number(row.row) >= 2
-  ){
-
-    return Number(
-      row.row
-    );
-
-  }
-
-
-  if(
-    row &&
-    row.rowNumber &&
-    Number(row.rowNumber) >= 2
-  ){
-
-    return Number(
-      row.rowNumber
-    );
-
-  }
-
-
-  return null;
-
-}
-
-
-// ============================================================
-// SAVE ENTRY
+// SAVE NEW ENTRY
 // ============================================================
 
 async function saveEntry(){
@@ -2949,7 +2587,6 @@ async function saveEntry(){
     );
 
     return;
-
   }
 
 
@@ -2961,7 +2598,6 @@ async function saveEntry(){
     );
 
     return;
-
   }
 
 
@@ -2973,7 +2609,6 @@ async function saveEntry(){
     );
 
     return;
-
   }
 
 
@@ -2985,7 +2620,6 @@ async function saveEntry(){
     );
 
     return;
-
   }
 
 
@@ -2997,7 +2631,6 @@ async function saveEntry(){
     );
 
     return;
-
   }
 
 
@@ -3008,151 +2641,7 @@ async function saveEntry(){
 
   try{
 
-    if(editingSellRow){
-
-      const response =
-        await postJson(
-          SELL_API_URL,
-          {
-
-            action:
-              "editSellData",
-
-            row:
-              editingSellRow,
-
-            rowNumber:
-              editingSellRow,
-
-            name:
-              name,
-
-            ip:
-              ip,
-
-            work:
-              work,
-
-            date:
-              date,
-
-            item:
-              item,
-
-            username:
-              currentUsername,
-
-            user:
-              currentUsername
-
-          }
-        );
-
-
-      if(
-        !response.success
-      ){
-
-        throw new Error(
-          response.message ||
-          "Failed to edit sell entry"
-        );
-
-      }
-
-
-      sellCache = null;
-
-
-      closeModal(
-        "entryModal"
-      );
-
-
-      showToast(
-        "Sell entry updated successfully",
-        "success"
-      );
-
-
-      loadData(true);
-
-
-      return;
-
-    }
-
-
-    if(editingDataRow){
-
-      const response =
-        await postJson(
-          DATA_API_URL,
-          {
-
-            action:
-              "editData",
-
-            row:
-              editingDataRow,
-
-            rowNumber:
-              editingDataRow,
-
-            name:
-              name,
-
-            ip:
-              ip,
-
-            work:
-              work,
-
-            date:
-              date,
-
-            item:
-              item
-
-          }
-        );
-
-
-      if(
-        !response.success
-      ){
-
-        throw new Error(
-          response.message ||
-          "Failed to update entry"
-        );
-
-      }
-
-
-      dataCache = null;
-
-
-      closeModal(
-        "entryModal"
-      );
-
-
-      showToast(
-        "Entry updated successfully",
-        "success"
-      );
-
-
-      loadData(true);
-
-
-      return;
-
-    }
-
-
-    const response =
+    const result =
       await postJson(
         DATA_API_URL,
         {
@@ -3180,12 +2669,15 @@ async function saveEntry(){
 
 
     if(
-      !response.success
+      !result ||
+      result.success !== true
     ){
 
       throw new Error(
-        response.message ||
-        "Failed to add entry"
+        result &&
+        result.message
+          ? result.message
+          : "Failed to add entry"
       );
 
     }
@@ -3205,14 +2697,12 @@ async function saveEntry(){
     );
 
 
-    loadData(true);
+    await loadData(true);
 
 
   }catch(error){
 
-    console.error(
-      error
-    );
+    console.error(error);
 
 
     showToast(
@@ -3243,23 +2733,7 @@ async function sellDataEntry(
 
 
   if(!row){
-
-    showToast(
-      "Data not found",
-      "error"
-    );
-
     return;
-
-  }
-
-
-  if(
-    currentDataType !== "data"
-  ){
-
-    return;
-
   }
 
 
@@ -3279,13 +2753,7 @@ async function sellDataEntry(
       "error"
     );
 
-    console.error(
-      "Invalid original row:",
-      row
-    );
-
     return;
-
   }
 
 
@@ -3325,19 +2793,15 @@ async function sellDataEntry(
     "";
 
 
-  const confirmed =
-    confirm(
+  if(
+    !confirm(
       "Sell this entry?\n\n" +
       "Name: " + name +
       "\nIP: " + ip +
       "\nItem: " + item
-    );
-
-
-  if(!confirmed){
-
+    )
+  ){
     return;
-
   }
 
 
@@ -3431,20 +2895,14 @@ async function sellDataEntry(
       deleteResult.success !== true
     ){
 
-      console.error(
-        "Sell succeeded but Data row delete failed:",
-        deleteResult
-      );
-
-
       showToast(
-        "Sold successfully, but original Data row could not be deleted. Please reload and check.",
+        "Sold successfully, but original Data row could not be deleted.",
         "error"
       );
 
 
-      sellCache = null;
       dataCache = null;
+      sellCache = null;
 
 
       await loadData(true);
@@ -3458,55 +2916,10 @@ async function sellDataEntry(
     sellCache = null;
 
 
-    allData =
-      allData.filter(
-        itemRow => {
-
-          const r =
-            getRealRowNumber(
-              itemRow
-            );
-
-          return Number(r) !==
-            Number(rowNumber);
-
-        }
-      );
-
-
-    filteredData =
-      filteredData.filter(
-        itemRow => {
-
-          const r =
-            getRealRowNumber(
-              itemRow
-            );
-
-          return Number(r) !==
-            Number(rowNumber);
-
-        }
-      );
-
-
     showToast(
-      "Sold successfully and removed from Data",
+      "Sold successfully",
       "success"
     );
-
-
-    currentDataType =
-      "data";
-
-
-    document.getElementById(
-      "dataType"
-    ).value =
-      "data";
-
-
-    updateDataTitle();
 
 
     await loadData(true);
@@ -3536,10 +2949,10 @@ async function sellDataEntry(
 
 
 // ============================================================
-// DELETE DATA
+// SELL EDIT
 // ============================================================
 
-async function deleteDataEntry(
+async function editSellEntry(
   index
 ){
 
@@ -3548,9 +2961,7 @@ async function deleteDataEntry(
 
 
   if(!row){
-
     return;
-
   }
 
 
@@ -3566,12 +2977,11 @@ async function deleteDataEntry(
   ){
 
     showToast(
-      "Original row not found",
+      "Sell row not found",
       "error"
     );
 
     return;
-
   }
 
 
@@ -3611,34 +3021,68 @@ async function deleteDataEntry(
     "";
 
 
-  if(
-    !confirm(
-      "Delete this entry?\n\n" +
-      name +
-      " | " +
-      ip
-    )
-  ){
+  const newName =
+    prompt(
+      "Name:",
+      name
+    );
 
+
+  if(newName === null){
     return;
+  }
 
+
+  const newIP =
+    prompt(
+      "IP:",
+      ip
+    );
+
+
+  if(newIP === null){
+    return;
+  }
+
+
+  const newWork =
+    prompt(
+      "Work:",
+      work
+    );
+
+
+  if(newWork === null){
+    return;
+  }
+
+
+  const newItem =
+    prompt(
+      "Item:",
+      item
+    );
+
+
+  if(newItem === null){
+    return;
   }
 
 
   showLoader(
-    "Deleting..."
+    "Updating sell entry..."
   );
 
 
   try{
 
-    const archiveResult =
+    const result =
       await postJson(
-        DELETE_API_URL,
+        SELL_API_URL,
         {
 
           action:
-            "deleteData",
+            "editSellData",
 
           row:
             rowNumber,
@@ -3647,19 +3091,19 @@ async function deleteDataEntry(
             rowNumber,
 
           name:
-            name,
+            newName.trim(),
 
           ip:
-            ip,
+            newIP.trim(),
 
           work:
-            work,
+            newWork.trim(),
 
           date:
             date,
 
           item:
-            item,
+            newItem.trim(),
 
           username:
             currentUsername,
@@ -3672,58 +3116,25 @@ async function deleteDataEntry(
 
 
     if(
-      !archiveResult ||
-      archiveResult.success !== true
+      !result ||
+      result.success !== true
     ){
 
       throw new Error(
-        archiveResult &&
-        archiveResult.message
-          ? archiveResult.message
-          : "Delete archive failed"
+        result &&
+        result.message
+          ? result.message
+          : "Failed to edit sell entry"
       );
 
     }
 
 
-    const deleteResult =
-      await postJson(
-        DATA_API_URL,
-        {
-
-          action:
-            "deleteData",
-
-          row:
-            rowNumber,
-
-          rowNumber:
-            rowNumber
-
-        }
-      );
-
-
-    if(
-      !deleteResult ||
-      deleteResult.success !== true
-    ){
-
-      throw new Error(
-        deleteResult &&
-        deleteResult.message
-          ? deleteResult.message
-          : "Original Data delete failed"
-      );
-
-    }
-
-
-    dataCache = null;
+    sellCache = null;
 
 
     showToast(
-      "Entry deleted successfully",
+      "Sell entry updated successfully",
       "success"
     );
 
@@ -3740,7 +3151,7 @@ async function deleteDataEntry(
 
     showToast(
       error.message ||
-      "Delete failed",
+      "Edit failed",
       "error"
     );
 
@@ -3754,7 +3165,7 @@ async function deleteDataEntry(
 
 
 // ============================================================
-// PAID SELL
+// PAID
 // ============================================================
 
 async function paidSellEntry(
@@ -3766,9 +3177,7 @@ async function paidSellEntry(
 
 
   if(!row){
-
     return;
-
   }
 
 
@@ -3777,9 +3186,7 @@ async function paidSellEntry(
       "Mark this sell entry as Paid?"
     )
   ){
-
     return;
-
   }
 
 
@@ -3889,7 +3296,7 @@ async function paidSellEntry(
 
 
     showToast(
-      "Paid successfully and added to Paid Sheet",
+      "Paid successfully",
       "success"
     );
 
@@ -3913,7 +3320,6 @@ async function paidSellEntry(
   }catch(error){
 
     console.error(
-      "Payment error:",
       error
     );
 
@@ -3934,9 +3340,9 @@ async function paidSellEntry(
 
 
 // ============================================================
-// ITEMS
-// EXISTING ITEMS ONLY
-// No Add/Delete UI
+// ITEM LIST
+// Existing items only
+// NO ADD / DELETE
 // ============================================================
 
 async function loadItems(
@@ -3954,7 +3360,6 @@ async function loadItems(
     populateItemSelect();
 
     return;
-
   }
 
 
@@ -3985,7 +3390,9 @@ async function loadItems(
 
 
     itemList =
-      Array.isArray(result.data)
+      Array.isArray(
+        result.data
+      )
         ? result.data
         : [];
 
@@ -4024,9 +3431,7 @@ function populateItemSelect(){
 
 
   if(!select){
-
     return;
-
   }
 
 
@@ -4055,9 +3460,7 @@ function populateItemSelect(){
 
 
       if(!name){
-
         return;
-
       }
 
 
@@ -4084,10 +3487,8 @@ function populateItemSelect(){
 
 
   if(oldValue){
-
     select.value =
       oldValue;
-
   }
 
 }
@@ -4149,7 +3550,6 @@ async function changePassword(){
     );
 
     return;
-
   }
 
 
@@ -4161,7 +3561,6 @@ async function changePassword(){
     );
 
     return;
-
   }
 
 
@@ -4176,7 +3575,6 @@ async function changePassword(){
     );
 
     return;
-
   }
 
 
@@ -4253,7 +3651,7 @@ async function changePassword(){
 
 
 // ============================================================
-// POST JSON
+// POST
 // ============================================================
 
 async function postJson(
@@ -4311,9 +3709,7 @@ async function postJson(
 // MODAL
 // ============================================================
 
-function openModal(
-  id
-){
+function openModal(id){
 
   const modal =
     document.getElementById(id);
@@ -4330,9 +3726,7 @@ function openModal(
 }
 
 
-function closeModal(
-  id
-){
+function closeModal(id){
 
   const modal =
     document.getElementById(id);
@@ -4351,15 +3745,15 @@ function closeModal(
 
 document.addEventListener(
   "click",
-  function(e){
+  function(event){
 
     if(
-      e.target.classList.contains(
+      event.target.classList.contains(
         "modal"
       )
     ){
 
-      e.target.classList.remove(
+      event.target.classList.remove(
         "show"
       );
 
@@ -4370,7 +3764,7 @@ document.addEventListener(
 
 
 // ============================================================
-// PROFILE MENU
+// PROFILE
 // ============================================================
 
 function toggleProfileMenu(
@@ -4378,9 +3772,7 @@ function toggleProfileMenu(
 ){
 
   if(event){
-
     event.stopPropagation();
-
   }
 
 
@@ -4460,7 +3852,7 @@ function loadTheme(){
 
 
 // ============================================================
-// TABLE LOADER
+// LOADER
 // ============================================================
 
 function showLoader(
@@ -4479,13 +3871,6 @@ function showLoader(
     );
 
 
-  if(!loader){
-
-    return;
-
-  }
-
-
   if(loaderText){
 
     loaderText.textContent =
@@ -4495,9 +3880,13 @@ function showLoader(
   }
 
 
-  loader.classList.add(
-    "show"
-  );
+  if(loader){
+
+    loader.classList.add(
+      "show"
+    );
+
+  }
 
 }
 
@@ -4555,7 +3944,7 @@ function showToast(
 
   toastTimer =
     setTimeout(
-      () => {
+      function(){
 
         toast.className =
           "toast";
@@ -4615,39 +4004,7 @@ function normalizeDate(
 ){
 
   if(!value){
-
     return "";
-
-  }
-
-
-  if(
-    Object.prototype.toString.call(
-      value
-    ) === "[object Date]"
-  ){
-
-    if(
-      isNaN(
-        value.getTime()
-      )
-    ){
-
-      return "";
-
-    }
-
-
-    return [
-      value.getFullYear(),
-      String(
-        value.getMonth() + 1
-      ).padStart(2,"0"),
-      String(
-        value.getDate()
-      ).padStart(2,"0")
-    ].join("-");
-
   }
 
 
@@ -4704,12 +4061,8 @@ function formatDate(
     );
 
 
-  if(
-    !normalized
-  ){
-
+  if(!normalized){
     return "";
-
   }
 
 
@@ -4718,9 +4071,7 @@ function formatDate(
 
 
   if(parts.length !== 3){
-
     return normalized;
-
   }
 
 
@@ -4758,9 +4109,7 @@ function formatDateTime(
 ){
 
   if(!value){
-
     return "";
-
   }
 
 
@@ -4791,63 +4140,40 @@ function formatDateTime(
 
 
 // ============================================================
-// ESCAPE HTML
+// REAL SHEET ROW
 // ============================================================
 
-function escapeHtml(
-  value
+function getRealRowNumber(
+  row
 ){
 
-  return String(
-    value ?? ""
-  )
-    .replace(
-      /&/g,
-      "&amp;"
-    )
-    .replace(
-      /</g,
-      "&lt;"
-    )
-    .replace(
-      />/g,
-      "&gt;"
-    )
-    .replace(
-      /"/g,
-      "&quot;"
-    )
-    .replace(
-      /'/g,
-      "&#039;"
+  if(
+    row &&
+    row.row &&
+    Number(row.row) >= 2
+  ){
+
+    return Number(
+      row.row
     );
 
-}
+  }
 
 
-function escapeJs(
-  value
-){
+  if(
+    row &&
+    row.rowNumber &&
+    Number(row.rowNumber) >= 2
+  ){
 
-  return String(
-    value ?? ""
-  )
-    .replace(
-      /\\/g,
-      "\\\\"
-    )
-    .replace(
-      /'/g,
-      "\\'"
-    )
-    .replace(
-      /\n/g,
-      "\\n"
-    )
-    .replace(
-      /\r/g,
-      "\\r"
+    return Number(
+      row.rowNumber
     );
+
+  }
+
+
+  return null;
 
 }
 
@@ -4890,7 +4216,7 @@ function logout(){
 
 
 // ============================================================
-// BACK BUTTON PROTECTION
+// BACK PROTECTION
 // ============================================================
 
 function setupBackProtection(){
@@ -4911,9 +4237,7 @@ function setupBackProtection(){
         if(
           !checkLogin()
         ){
-
           return;
-
         }
 
 
@@ -4935,6 +4259,7 @@ function setupBackProtection(){
 
       }
     );
+
 
   }catch(error){
 
