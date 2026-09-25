@@ -455,10 +455,6 @@ MODAL
   box-shadow:0 25px 70px rgba(0,0,0,.25);
 }
 
-.modal-box.large{
-  max-width:800px;
-}
-
 .modal-header{
   padding:17px 19px;
   display:flex;
@@ -534,28 +530,6 @@ MODAL
   background:var(--primary);
   color:#fff;
   font-weight:700;
-}
-
-
-/* =========================================================
-ITEM
-========================================================= */
-
-.item-add-area{
-  display:flex;
-  gap:8px;
-  margin-bottom:15px;
-}
-
-.item-add-area input{
-  flex:1;
-  height:40px;
-  padding:0 11px;
-  border:1px solid var(--border);
-  background:var(--bg);
-  color:var(--text);
-  border-radius:8px;
-  outline:none;
 }
 
 
@@ -711,10 +685,6 @@ RESPONSIVE
     padding:9px;
   }
 
-  .item-row{
-    grid-template-columns:1fr 1fr;
-  }
-
 }
 
 </style>
@@ -757,14 +727,6 @@ HEADER
       title="Reload"
     >
       ↻ <span>Reload</span>
-    </button>
-
-
-    <button
-      class="header-btn"
-      onclick="openItemsModal()"
-    >
-      📦 <span>Items</span>
     </button>
 
 
@@ -963,8 +925,6 @@ MAIN
     ></div>
 
 
-    <!-- TABLE ONLY LOADER -->
-
     <div
       class="table-loader"
       id="loader"
@@ -1100,79 +1060,6 @@ ENTRY MODAL
         >
           Save Entry
         </button>
-
-      </div>
-
-    </div>
-
-  </div>
-
-</div>
-
-
-
-<!-- ========================================================
-ITEM MODAL
-========================================================= -->
-
-<div
-  class="modal"
-  id="itemsModal"
->
-
-  <div class="modal-box large">
-
-    <div class="modal-header">
-
-      <h3>
-        Item Management
-      </h3>
-
-      <button
-        class="close-btn"
-        onclick="closeModal('itemsModal')"
-      >
-        ×
-      </button>
-
-    </div>
-
-
-    <div class="modal-body">
-
-
-      <div class="item-add-area">
-
-        <input
-          type="text"
-          id="newItem"
-          placeholder="Enter new item"
-        >
-
-
-        <button
-          class="item-add-btn"
-          onclick="addNewItem()"
-        >
-          + Add
-        </button>
-
-      </div>
-
-
-      <div class="items-list">
-
-        <div class="item-row item-head">
-
-          <div>Item</div>
-          <div>Date</div>
-          <div>User</div>
-          <div>Action</div>
-
-        </div>
-
-
-        <div id="itemsBody"></div>
 
       </div>
 
@@ -4007,15 +3894,6 @@ async function paidSellEntry(
     );
 
 
-    /*
-      Paid API is now separate.
-
-      We do NOT call SELL_API_URL with
-      "paidData" because the current separate
-      Sell Code.gs does not support that action.
-    */
-
-
     currentDataType =
       "paid";
 
@@ -4057,24 +3935,9 @@ async function paidSellEntry(
 
 // ============================================================
 // ITEMS
+// EXISTING ITEMS ONLY
+// No Add/Delete UI
 // ============================================================
-
-function openItemsModal(){
-
-  document.getElementById(
-    "newItem"
-  ).value = "";
-
-
-  openModal(
-    "itemsModal"
-  );
-
-
-  loadItems(true);
-
-}
-
 
 async function loadItems(
   force=false
@@ -4089,8 +3952,6 @@ async function loadItems(
       itemCache;
 
     populateItemSelect();
-
-    renderItems();
 
     return;
 
@@ -4133,8 +3994,6 @@ async function loadItems(
       itemList;
 
 
-    renderItems();
-
     populateItemSelect();
 
 
@@ -4152,112 +4011,6 @@ async function loadItems(
     );
 
   }
-
-}
-
-
-function renderItems(){
-
-  const body =
-    document.getElementById(
-      "itemsBody"
-    );
-
-
-  body.innerHTML = "";
-
-
-  if(
-    !itemList ||
-    itemList.length === 0
-  ){
-
-    body.innerHTML =
-      '<div style="padding:25px;text-align:center;color:var(--muted);font-size:12px;">No items found</div>';
-
-    return;
-
-  }
-
-
-  itemList.forEach(
-    (item,index) => {
-
-      const row =
-        typeof item === "object"
-          ? item
-          : {
-              Item:item
-            };
-
-
-      const name =
-        row.Item ??
-        row.item ??
-        row.Name ??
-        row.name ??
-        row[0] ??
-        "";
-
-
-      const date =
-        row.Date ??
-        row.date ??
-        row[1] ??
-        "";
-
-
-      const user =
-        row.User ??
-        row.user ??
-        row.Username ??
-        row.username ??
-        row[2] ??
-        "";
-
-
-      const div =
-        document.createElement(
-          "div"
-        );
-
-
-      div.className =
-        "item-row";
-
-
-      div.innerHTML = `
-
-        <div class="item-cell">
-          ${escapeHtml(name)}
-        </div>
-
-        <div class="item-cell">
-          ${escapeHtml(formatDateTime(date))}
-        </div>
-
-        <div class="item-cell">
-          ${escapeHtml(user)}
-        </div>
-
-        <div class="item-cell">
-
-          <button
-            class="small-action delete-item-btn"
-            onclick="deleteItem(${index})"
-          >
-            Delete
-          </button>
-
-        </div>
-
-      `;
-
-
-      body.appendChild(div);
-
-    }
-  );
 
 }
 
@@ -4334,239 +4087,6 @@ function populateItemSelect(){
 
     select.value =
       oldValue;
-
-  }
-
-}
-
-
-async function addNewItem(){
-
-  const input =
-    document.getElementById(
-      "newItem"
-    );
-
-
-  const item =
-    input.value.trim();
-
-
-  if(!item){
-
-    showToast(
-      "Enter item name",
-      "error"
-    );
-
-    return;
-
-  }
-
-
-  showLoader(
-    "Adding item..."
-  );
-
-
-  try{
-
-    const result =
-      await postJson(
-        ITEM_API_URL,
-        {
-
-          action:
-            "addItem",
-
-          item:
-            item,
-
-          itemName:
-            item,
-
-          name:
-            item,
-
-          user:
-            currentUsername,
-
-          username:
-            currentUsername
-
-        }
-      );
-
-
-    if(
-      !result ||
-      result.success !== true
-    ){
-
-      throw new Error(
-        result.message ||
-        "Failed to add item"
-      );
-
-    }
-
-
-    input.value = "";
-
-    itemCache = null;
-
-
-    await loadItems(true);
-
-
-    showToast(
-      "Item added successfully",
-      "success"
-    );
-
-
-  }catch(error){
-
-    showToast(
-      error.message ||
-      "Failed to add item",
-      "error"
-    );
-
-  }finally{
-
-    hideLoader();
-
-  }
-
-}
-
-
-async function deleteItem(
-  index
-){
-
-  const item =
-    itemList[index];
-
-
-  if(!item){
-
-    return;
-
-  }
-
-
-  const itemName =
-    typeof item === "object"
-      ? (
-          item.Item ??
-          item.item ??
-          item.Name ??
-          item.name ??
-          item[0] ??
-          ""
-        )
-      : item;
-
-
-  const row =
-    typeof item === "object"
-      ? (
-          item.row ??
-          item.rowNumber ??
-          item[3] ??
-          index + 2
-        )
-      : index + 2;
-
-
-  if(
-    !confirm(
-      "Delete item: " +
-      itemName +
-      "?"
-    )
-  ){
-
-    return;
-
-  }
-
-
-  showLoader(
-    "Deleting item..."
-  );
-
-
-  try{
-
-    const result =
-      await postJson(
-        ITEM_API_URL,
-        {
-
-          action:
-            "deleteItem",
-
-          row:
-            row,
-
-          rowNumber:
-            row,
-
-          item:
-            itemName,
-
-          itemName:
-            itemName,
-
-          user:
-            currentUsername,
-
-          username:
-            currentUsername
-
-        }
-      );
-
-
-    if(
-      !result ||
-      result.success !== true
-    ){
-
-      throw new Error(
-        result.message ||
-        "Failed to delete item"
-      );
-
-    }
-
-
-    itemCache = null;
-
-
-    await loadItems(true);
-
-
-    showToast(
-      "Item deleted successfully",
-      "success"
-    );
-
-
-  }catch(error){
-
-    showToast(
-      error.message ||
-      "Failed to delete item",
-      "error"
-    );
-
-  }finally{
-
-    hideLoader();
 
   }
 
