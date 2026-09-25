@@ -2601,6 +2601,42 @@ function getRealRowNumber(
 
   }
 
+  if(
+    row &&
+    row.sourceRow &&
+    Number(row.sourceRow) >= 2
+  ){
+
+    return Number(
+      row.sourceRow
+    );
+
+  }
+
+  if(
+    row &&
+    row.sellRow &&
+    Number(row.sellRow) >= 2
+  ){
+
+    return Number(
+      row.sellRow
+    );
+
+  }
+
+  if(
+    row &&
+    row.SellRow &&
+    Number(row.SellRow) >= 2
+  ){
+
+    return Number(
+      row.SellRow
+    );
+
+  }
+
   return null;
 
 }
@@ -3188,13 +3224,91 @@ async function paidSellEntry(
 
   if(!row){
 
+    showToast(
+      "Sell data not found",
+      "error"
+    );
+
     return;
 
   }
 
   if(
+    currentDataType !== "sell"
+  ){
+
+    return;
+
+  }
+
+  /* ==========================================================
+     GET ACTUAL SELL SHEET ROW
+  ========================================================== */
+
+  const rowNumber =
+    getRealRowNumber(
+      row
+    );
+
+  if(
+    !rowNumber ||
+    Number(rowNumber) < 2
+  ){
+
+    console.error(
+      "Invalid Sell row:",
+      row
+    );
+
+    showToast(
+      "Original Sell row not found",
+      "error"
+    );
+
+    return;
+
+  }
+
+  const name =
+    row.Name ??
+    row.name ??
+    row[0] ??
+    "";
+
+  const ip =
+    row.Ip ??
+    row.IP ??
+    row.ip ??
+    row[1] ??
+    "";
+
+  const work =
+    row.Work ??
+    row.work ??
+    row[2] ??
+    "";
+
+  const date =
+    row.Date ??
+    row.date ??
+    row[3] ??
+    "";
+
+  const item =
+    row.Item ??
+    row.item ??
+    row[4] ??
+    "";
+
+  if(
     !confirm(
-      "Mark this sell entry as Paid?"
+      "Mark this sell entry as Paid?\n\n" +
+      "Name: " +
+      name +
+      "\nIP: " +
+      ip +
+      "\nItem: " +
+      item
     )
   ){
 
@@ -3225,6 +3339,10 @@ async function paidSellEntry(
       row[6] ??
       "";
 
+    /* ========================================================
+       SEND ACTUAL SELL SHEET ROW NUMBER
+    ======================================================== */
+
     const result =
       await postJson(
         PAID_API_URL,
@@ -3233,36 +3351,40 @@ async function paidSellEntry(
           action:
             "paidData",
 
+          /* IMPORTANT:
+             These identify the actual row
+             in Sell sheet.
+          */
+
+          row:
+            Number(rowNumber),
+
+          rowNumber:
+            Number(rowNumber),
+
+          sourceRow:
+            Number(rowNumber),
+
+          sellRow:
+            Number(rowNumber),
+
+          SellRow:
+            Number(rowNumber),
+
           name:
-            row.Name ??
-            row.name ??
-            row[0] ??
-            "",
+            name,
 
           ip:
-            row.Ip ??
-            row.IP ??
-            row.ip ??
-            row[1] ??
-            "",
+            ip,
 
           work:
-            row.Work ??
-            row.work ??
-            row[2] ??
-            "",
+            work,
 
           date:
-            row.Date ??
-            row.date ??
-            row[3] ??
-            "",
+            date,
 
           item:
-            row.Item ??
-            row.item ??
-            row[4] ??
-            "",
+            item,
 
           sellTime:
             sellTime,
@@ -3285,6 +3407,11 @@ async function paidSellEntry(
         }
       );
 
+    console.log(
+      "Paid response:",
+      result
+    );
+
     if(
       !result ||
       result.success !== true
@@ -3299,10 +3426,53 @@ async function paidSellEntry(
 
     }
 
+    /* ========================================================
+       CLEAR BOTH CACHES
+    ======================================================== */
+
     paidCache = null;
+    sellCache = null;
+
+    /* ========================================================
+       REMOVE FROM CURRENT SELL DATA IMMEDIATELY
+    ======================================================== */
+
+    allData =
+      allData.filter(
+        itemRow => {
+
+          const r =
+            getRealRowNumber(
+              itemRow
+            );
+
+          return Number(r) !==
+            Number(rowNumber);
+
+        }
+      );
+
+    filteredData =
+      filteredData.filter(
+        itemRow => {
+
+          const r =
+            getRealRowNumber(
+              itemRow
+            );
+
+          return Number(r) !==
+            Number(rowNumber);
+
+        }
+      );
+
+    /* ========================================================
+       SUCCESS
+    ======================================================== */
 
     showToast(
-      "Paid successfully and added to Paid Sheet",
+      "Paid successfully. Sell data removed.",
       "success"
     );
 
