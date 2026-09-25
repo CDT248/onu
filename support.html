@@ -876,14 +876,6 @@ MAIN
           Sell
         </option>
 
-        <option value="paid">
-          Paid
-        </option>
-
-        <option value="delete">
-          Delete
-        </option>
-
       </select>
 
     </div>
@@ -1225,8 +1217,6 @@ const pageSize = 10;
 
 let dataCache = null;
 let sellCache = null;
-let paidCache = null;
-let deleteCache = null;
 
 let itemList = [];
 let itemCache = null;
@@ -1428,8 +1418,6 @@ function changeDataType(){
 
   dataCache = null;
   sellCache = null;
-  paidCache = null;
-  deleteCache = null;
 
 
   document.getElementById(
@@ -1490,24 +1478,6 @@ function updateDataTitle(){
       "Manage sold entries";
 
   }
-  else if(currentDataType === "paid"){
-
-    title.textContent =
-      "Paid Data";
-
-    subtitle.textContent =
-      "Paid entry history";
-
-  }
-  else{
-
-    title.textContent =
-      "Delete Data";
-
-    subtitle.textContent =
-      "Deleted entry history";
-
-  }
 
 }
 
@@ -1555,38 +1525,6 @@ async function loadData(force=false){
   }
 
 
-  if(
-    !force &&
-    currentDataType === "paid" &&
-    paidCache
-  ){
-
-    allData =
-      paidCache;
-
-    applyFilters();
-
-    return;
-
-  }
-
-
-  if(
-    !force &&
-    currentDataType === "delete" &&
-    deleteCache
-  ){
-
-    allData =
-      deleteCache;
-
-    applyFilters();
-
-    return;
-
-  }
-
-
   showLoader(
     "Loading data..."
   );
@@ -1605,28 +1543,6 @@ async function loadData(force=false){
 
       action =
         "getSellData";
-
-    }
-
-
-    if(currentDataType === "paid"){
-
-      api =
-        PAID_API_URL;
-
-      action =
-        "getPaidData";
-
-    }
-
-
-    if(currentDataType === "delete"){
-
-      api =
-        DELETE_API_URL;
-
-      action =
-        "getDeletedData";
 
     }
 
@@ -1673,18 +1589,6 @@ async function loadData(force=false){
     else if(currentDataType === "sell"){
 
       sellCache =
-        allData;
-
-    }
-    else if(currentDataType === "paid"){
-
-      paidCache =
-        allData;
-
-    }
-    else{
-
-      deleteCache =
         allData;
 
     }
@@ -1769,34 +1673,6 @@ function renderData(data){
       "Sell Date",
       "User",
       "Action"
-    ];
-
-  }
-  else if(currentDataType === "paid"){
-
-    headers = [
-      "Name",
-      "IP",
-      "Work",
-      "Date",
-      "Item",
-      "Sell Date",
-      "Sell User",
-      "Paid Time",
-      "Paid User"
-    ];
-
-  }
-  else{
-
-    headers = [
-      "Name",
-      "IP",
-      "Work",
-      "Date",
-      "Item",
-      "Delete Time",
-      "User"
     ];
 
   }
@@ -2062,121 +1938,6 @@ function renderData(data){
 
         tr.appendChild(
           actionTd
-        );
-
-      }
-
-
-      /* =====================================================
-         PAID
-      ====================================================== */
-
-      else if(
-        currentDataType === "paid"
-      ){
-
-        const sellDate =
-          row.SellDate ??
-          row.sellDate ??
-          row["Sell Date"] ??
-          row.sellTime ??
-          row["Sell time"] ??
-          row[5] ??
-          "";
-
-
-        const sellUser =
-          row.User ??
-          row.user ??
-          row.SellUser ??
-          row.sellUser ??
-          row[6] ??
-          "";
-
-
-        const paidTime =
-          row.PaidTime ??
-          row.paidTime ??
-          row["Paid Time"] ??
-          row[7] ??
-          "";
-
-
-        const paidUser =
-          row.PaidUser ??
-          row.paidUser ??
-          row["Paid User"] ??
-          row[8] ??
-          "";
-
-
-        addCell(
-          tr,
-          formatDateTime(
-            sellDate
-          )
-        );
-
-
-        addCell(
-          tr,
-          sellUser
-        );
-
-
-        addCell(
-          tr,
-          formatDateTime(
-            paidTime
-          )
-        );
-
-
-        addCell(
-          tr,
-          paidUser
-        );
-
-      }
-
-
-      /* =====================================================
-         DELETE
-      ====================================================== */
-
-      else if(
-        currentDataType === "delete"
-      ){
-
-        const deleteTime =
-          row.DelletTime ??
-          row.DeleteTime ??
-          row.Dellet ??
-          row["Delete Time"] ??
-          row[5] ??
-          "";
-
-
-        const deleteUser =
-          row.User ??
-          row.user ??
-          row.Username ??
-          row.username ??
-          row[6] ??
-          "";
-
-
-        addCell(
-          tr,
-          formatDateTime(
-            deleteTime
-          )
-        );
-
-
-        addCell(
-          tr,
-          deleteUser
         );
 
       }
@@ -3895,13 +3656,13 @@ async function paidSellEntry(
 
 
     currentDataType =
-      "paid";
+      "sell";
 
 
     document.getElementById(
       "dataType"
     ).value =
-      "paid";
+      "sell";
 
 
     updateDataTitle();
