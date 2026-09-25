@@ -1,12 +1,14 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
 
 <meta charset="UTF-8">
 
 <meta
-  name="viewport"
-  content="width=device-width, initial-scale=1.0"
+name="viewport"
+content="width=device-width, initial-scale=1.0"
+
 >
 
 <title>Support Dashboard</title>
@@ -248,10 +250,51 @@ FILTER BAR
   box-shadow:0 3px 12px rgba(0,0,0,.03);
 }
 
+
+/* SEARCH BAR - ONLY CHANGED SIZE */
+
 .search-box{
-  flex:1;
-  min-width:180px;
+  width:300px;
+  flex:0 0 300px;
+  min-width:0;
 }
+
+
+/* =========================================================
+COUNT BOXES - NEW
+========================================================= */
+
+.count-box{
+  display:flex;
+  align-items:center;
+  gap:7px;
+  flex-shrink:0;
+}
+
+.count-item{
+  height:40px;
+  padding:0 11px;
+  border-radius:8px;
+  background:var(--bg);
+  border:1px solid var(--border);
+  display:flex;
+  align-items:center;
+  gap:5px;
+  white-space:nowrap;
+  font-size:12px;
+  font-weight:600;
+  color:var(--muted);
+}
+
+.count-item strong{
+  color:var(--text);
+  font-size:13px;
+}
+
+.count-item.result strong{
+  color:var(--primary);
+}
+
 
 .search-box input,
 .date-box input,
@@ -751,6 +794,23 @@ TOAST
 RESPONSIVE
 ========================================================= */
 
+@media(max-width:1100px){
+
+  .search-box{
+    width:240px;
+    flex:0 0 240px;
+  }
+
+  .count-box{
+    gap:5px;
+  }
+
+  .count-item{
+    padding:0 8px;
+  }
+
+}
+
 @media(max-width:900px){
 
   .header{
@@ -779,6 +839,16 @@ RESPONSIVE
 
   .search-box{
     flex-basis:100%;
+    width:100%;
+  }
+
+  .count-box{
+    flex:1;
+  }
+
+  .count-item{
+    flex:1;
+    justify-content:center;
   }
 
   .date-box{
@@ -810,6 +880,15 @@ RESPONSIVE
     padding:9px;
   }
 
+  .count-box{
+    width:100%;
+    flex-basis:100%;
+  }
+
+  .count-item{
+    width:50%;
+  }
+
   .user-row{
     grid-template-columns:1fr 1fr;
   }
@@ -825,265 +904,292 @@ RESPONSIVE
 }
 
 </style>
+
 </head>
 
-
 <body>
-
 
 <header class="header">
 
   <div class="logo-area">
 
-    <div class="logo">
-      S
-    </div>
+```
+<div class="logo">
+  S
+</div>
 
-    <div class="logo-text">
+<div class="logo-text">
 
-      <h1>Support Dashboard</h1>
+  <h1>Support Dashboard</h1>
 
-      <p>
-        Admin Management System
-      </p>
+  <p>
+    Admin Management System
+  </p>
 
-    </div>
+</div>
+```
 
   </div>
 
-
   <div class="header-actions">
 
-    <button
-      class="header-btn"
-      onclick="loadData(true)"
-      title="Reload"
+```
+<button
+  class="header-btn"
+  onclick="loadData(true)"
+  title="Reload"
+>
+  ↻ <span>Reload</span>
+</button>
+
+
+<button
+  class="header-btn"
+  onclick="openUsersModal()"
+>
+  👥 <span>Users</span>
+</button>
+
+
+<button
+  class="header-btn"
+  onclick="openItemsModal()"
+>
+  📦 <span>Items</span>
+</button>
+
+
+<button
+  class="header-btn primary"
+  onclick="openEntryModal()"
+>
+  + <span>New Entry</span>
+</button>
+
+
+<button
+  class="header-btn"
+  onclick="toggleTheme()"
+  title="Dark Mode"
+>
+  ◐
+</button>
+
+
+<div class="profile-wrap">
+
+  <button
+    class="profile-btn"
+    onclick="toggleProfileMenu(event)"
+  >
+
+    <img
+      id="profileImage"
+      src="https://cdn-icons-png.flaticon.com/128/17163/17163834.png"
+      alt="Profile"
     >
-      ↻ <span>Reload</span>
+
+  </button>
+
+
+  <div
+    class="profile-menu"
+    id="profileMenu"
+  >
+
+    <button onclick="openPasswordModal()">
+      🔑 Change Password
     </button>
 
-
-    <button
-      class="header-btn"
-      onclick="openUsersModal()"
-    >
-      👥 <span>Users</span>
+    <button onclick="logout()">
+      🚪 Logout
     </button>
 
+  </div>
 
-    <button
-      class="header-btn"
-      onclick="openItemsModal()"
-    >
-      📦 <span>Items</span>
-    </button>
-
-
-    <button
-      class="header-btn primary"
-      onclick="openEntryModal()"
-    >
-      + <span>New Entry</span>
-    </button>
-
-
-    <button
-      class="header-btn"
-      onclick="toggleTheme()"
-      title="Dark Mode"
-    >
-      ◐
-    </button>
-
-
-    <div class="profile-wrap">
-
-      <button
-        class="profile-btn"
-        onclick="toggleProfileMenu(event)"
-      >
-
-        <img
-          id="profileImage"
-          src="https://cdn-icons-png.flaticon.com/128/17163/17163834.png"
-          alt="Profile"
-        >
-
-      </button>
-
-
-      <div
-        class="profile-menu"
-        id="profileMenu"
-      >
-
-        <button onclick="openPasswordModal()">
-          🔑 Change Password
-        </button>
-
-        <button onclick="logout()">
-          🚪 Logout
-        </button>
-
-      </div>
-
-    </div>
+</div>
+```
 
   </div>
 
 </header>
 
-
-
 <main class="main">
-
 
   <div class="toolbar">
 
-    <div class="toolbar-title">
+```
+<div class="toolbar-title">
 
-      <h2 id="dataTitle">
-        Data
-      </h2>
+  <h2 id="dataTitle">
+    Data
+  </h2>
 
-      <p id="dataSubtitle">
-        Manage your support entries
-      </p>
+  <p id="dataSubtitle">
+    Manage your support entries
+  </p>
 
-    </div>
+</div>
 
 
-    <button
-      class="refresh-btn"
-      onclick="loadData(true)"
-    >
-      ↻ Refresh Data
-    </button>
+<button
+  class="refresh-btn"
+  onclick="loadData(true)"
+>
+  ↻ Refresh Data
+</button>
+```
 
   </div>
-
-
 
   <div class="filter-bar">
 
-    <div class="search-box">
+```
+<div class="search-box">
 
-      <input
-        type="text"
-        id="searchInput"
-        placeholder="Search Name, IP, Work, Item..."
-        oninput="applyFilters()"
-      >
+  <input
+    type="text"
+    id="searchInput"
+    placeholder="Search Name, IP, Work, Item..."
+    oninput="applyFilters()"
+  >
 
-    </div>
-
-
-    <div class="date-box">
-
-      <input
-        type="date"
-        id="fromDate"
-        onchange="applyFilters()"
-        title="From Date"
-      >
-
-    </div>
+</div>
 
 
-    <div class="date-box">
+<!-- NEW COUNT DISPLAY -->
 
-      <input
-        type="date"
-        id="toDate"
-        onchange="applyFilters()"
-        title="To Date"
-      >
+<div class="count-box">
 
-    </div>
+  <div class="count-item">
 
+    <span>Total:</span>
 
-    <div class="select-box">
-
-      <select
-        id="dataType"
-        onchange="changeDataType()"
-      >
-
-        <option value="data">
-          Data
-        </option>
-
-        <option value="sell">
-          Sell
-        </option>
-
-        <option value="paid">
-          Paid
-        </option>
-
-        <option value="delete">
-          Delete
-        </option>
-
-      </select>
-
-    </div>
-
-
-    <button
-      class="clear-btn"
-      onclick="clearFilters()"
-    >
-      Clear
-    </button>
+    <strong id="totalCount">
+      0
+    </strong>
 
   </div>
 
 
+  <div class="count-item result">
+
+    <span>Result:</span>
+
+    <strong id="resultCount">
+      0
+    </strong>
+
+  </div>
+
+</div>
+
+
+<div class="date-box">
+
+  <input
+    type="date"
+    id="fromDate"
+    onchange="applyFilters()"
+    title="From Date"
+  >
+
+</div>
+
+
+<div class="date-box">
+
+  <input
+    type="date"
+    id="toDate"
+    onchange="applyFilters()"
+    title="To Date"
+  >
+
+</div>
+
+
+<div class="select-box">
+
+  <select
+    id="dataType"
+    onchange="changeDataType()"
+  >
+
+    <option value="data">
+      Data
+    </option>
+
+    <option value="sell">
+      Sell
+    </option>
+
+    <option value="paid">
+      Paid
+    </option>
+
+    <option value="delete">
+      Delete
+    </option>
+
+  </select>
+
+</div>
+
+
+<button
+  class="clear-btn"
+  onclick="clearFilters()"
+>
+  Clear
+</button>
+```
+
+  </div>
 
   <div class="table-card">
 
-    <div class="table-wrap">
+```
+<div class="table-wrap">
 
-      <table>
+  <table>
 
-        <thead id="tableHead"></thead>
+    <thead id="tableHead"></thead>
 
-        <tbody id="tableBody"></tbody>
+    <tbody id="tableBody"></tbody>
 
-      </table>
+  </table>
 
-    </div>
-
-
-    <div
-      class="pagination"
-      id="pagination"
-    ></div>
+</div>
 
 
-    <div
-      class="table-loader"
-      id="loader"
-    >
+<div
+  class="pagination"
+  id="pagination"
+></div>
 
-      <div class="table-loader-box">
 
-        <div class="spinner"></div>
+<div
+  class="table-loader"
+  id="loader"
+>
 
-        <span id="loaderText">
-          Loading...
-        </span>
+  <div class="table-loader-box">
 
-      </div>
+    <div class="spinner"></div>
 
-    </div>
+    <span id="loaderText">
+      Loading...
+    </span>
+
+  </div>
+
+</div>
+```
 
   </div>
 
 </main>
-
-
 
 <div
   class="modal"
@@ -1092,117 +1198,117 @@ RESPONSIVE
 
   <div class="modal-box">
 
-    <div class="modal-header">
+```
+<div class="modal-header">
 
-      <h3 id="entryModalTitle">
-        New Entry
-      </h3>
+  <h3 id="entryModalTitle">
+    New Entry
+  </h3>
 
-      <button
-        class="close-btn"
-        onclick="closeModal('entryModal')"
-      >
-        ×
-      </button>
-
-    </div>
-
-
-    <div class="modal-body">
-
-
-      <div class="form-group">
-
-        <label>Name</label>
-
-        <input
-          type="text"
-          id="entryName"
-          readonly
-        >
-
-      </div>
-
-
-      <div class="form-group">
-
-        <label>IP</label>
-
-        <input
-          type="text"
-          id="entryIP"
-          placeholder="Enter IP"
-        >
-
-      </div>
-
-
-      <div class="form-group">
-
-        <label>Work</label>
-
-        <input
-          type="text"
-          id="entryWork"
-          placeholder="Enter Work"
-        >
-
-      </div>
-
-
-      <div class="form-group">
-
-        <label>Date</label>
-
-        <input
-          type="date"
-          id="entryDate"
-          readonly
-        >
-
-      </div>
-
-
-      <div class="form-group">
-
-        <label>Item</label>
-
-        <select id="entryItem">
-
-          <option value="">
-            Select Item
-          </option>
-
-        </select>
-
-      </div>
-
-
-      <div class="form-actions">
-
-        <button
-          class="cancel-btn"
-          onclick="closeModal('entryModal')"
-        >
-          Cancel
-        </button>
-
-        <button
-          class="save-btn"
-          onclick="saveEntry()"
-        >
-          Save Entry
-        </button>
-
-      </div>
-
-    </div>
-
-  </div>
+  <button
+    class="close-btn"
+    onclick="closeModal('entryModal')"
+  >
+    ×
+  </button>
 
 </div>
 
 
+<div class="modal-body">
+
+
+  <div class="form-group">
+
+    <label>Name</label>
+
+    <input
+      type="text"
+      id="entryName"
+      readonly
+    >
+
+  </div>
+
+
+  <div class="form-group">
+
+    <label>IP</label>
+
+    <input
+      type="text"
+      id="entryIP"
+      placeholder="Enter IP"
+    >
+
+  </div>
+
+
+  <div class="form-group">
+
+    <label>Work</label>
+
+    <input
+      type="text"
+      id="entryWork"
+      placeholder="Enter Work"
+    >
+
+  </div>
+
+
+  <div class="form-group">
+
+    <label>Date</label>
+
+    <input
+      type="date"
+      id="entryDate"
+      readonly
+    >
+
+  </div>
+
+
+  <div class="form-group">
+
+    <label>Item</label>
+
+    <select id="entryItem">
+
+      <option value="">
+        Select Item
+      </option>
+
+    </select>
+
+  </div>
+
+
+  <div class="form-actions">
+
+    <button
+      class="cancel-btn"
+      onclick="closeModal('entryModal')"
+    >
+      Cancel
+    </button>
+
+    <button
+      class="save-btn"
+      onclick="saveEntry()"
+    >
+      Save Entry
+    </button>
+
+  </div>
+
+</div>
+```
+
+  </div>
+
+</div>
 
 <div
   class="modal"
@@ -1211,60 +1317,60 @@ RESPONSIVE
 
   <div class="modal-box large">
 
-    <div class="modal-header">
+```
+<div class="modal-header">
 
-      <h3>
-        User Management
-      </h3>
+  <h3>
+    User Management
+  </h3>
 
-      <button
-        class="close-btn"
-        onclick="closeModal('usersModal')"
-      >
-        ×
-      </button>
-
-    </div>
-
-
-    <div class="modal-body">
-
-      <div class="users-top">
-
-        <button
-          class="user-add-btn"
-          onclick="openAddUserModal()"
-        >
-          + Add User
-        </button>
-
-      </div>
-
-
-      <div class="users-list">
-
-        <div class="user-row user-head">
-
-          <div>Username</div>
-          <div>Name</div>
-          <div>Role</div>
-          <div>Status</div>
-          <div>Action</div>
-
-        </div>
-
-
-        <div id="usersBody"></div>
-
-      </div>
-
-    </div>
-
-  </div>
+  <button
+    class="close-btn"
+    onclick="closeModal('usersModal')"
+  >
+    ×
+  </button>
 
 </div>
 
 
+<div class="modal-body">
+
+  <div class="users-top">
+
+    <button
+      class="user-add-btn"
+      onclick="openAddUserModal()"
+    >
+      + Add User
+    </button>
+
+  </div>
+
+
+  <div class="users-list">
+
+    <div class="user-row user-head">
+
+      <div>Username</div>
+      <div>Name</div>
+      <div>Role</div>
+      <div>Status</div>
+      <div>Action</div>
+
+    </div>
+
+
+    <div id="usersBody"></div>
+
+  </div>
+
+</div>
+```
+
+  </div>
+
+</div>
 
 <div
   class="modal"
@@ -1273,125 +1379,125 @@ RESPONSIVE
 
   <div class="modal-box">
 
-    <div class="modal-header">
+```
+<div class="modal-header">
 
-      <h3 id="userFormTitle">
-        Add User
-      </h3>
+  <h3 id="userFormTitle">
+    Add User
+  </h3>
 
-      <button
-        class="close-btn"
-        onclick="closeModal('userFormModal')"
-      >
-        ×
-      </button>
-
-    </div>
-
-
-    <div class="modal-body">
-
-
-      <div class="form-group">
-
-        <label>Username</label>
-
-        <input
-          type="text"
-          id="userUsername"
-          placeholder="Username"
-        >
-
-      </div>
-
-
-      <div class="form-group">
-
-        <label>Name</label>
-
-        <input
-          type="text"
-          id="userName"
-          placeholder="Name"
-        >
-
-      </div>
-
-
-      <div class="form-group">
-
-        <label>Password</label>
-
-        <input
-          type="password"
-          id="userPassword"
-          placeholder="Password"
-        >
-
-      </div>
-
-
-      <div class="form-group">
-
-        <label>Role</label>
-
-        <select id="userRole">
-
-          <option value="admin">admin</option>
-          <option value="manager">manager</option>
-          <option value="support">support</option>
-          <option value="call">call</option>
-          <option value="guest">guest</option>
-
-        </select>
-
-      </div>
-
-
-      <div class="form-group">
-
-        <label>Status</label>
-
-        <select id="userStatus">
-
-          <option value="Active">
-            Active
-          </option>
-
-          <option value="Block">
-            Block
-          </option>
-
-        </select>
-
-      </div>
-
-
-      <div class="form-actions">
-
-        <button
-          class="cancel-btn"
-          onclick="closeModal('userFormModal')"
-        >
-          Cancel
-        </button>
-
-        <button
-          class="save-btn"
-          onclick="saveUser()"
-        >
-          Save User
-        </button>
-
-      </div>
-
-    </div>
-
-  </div>
+  <button
+    class="close-btn"
+    onclick="closeModal('userFormModal')"
+  >
+    ×
+  </button>
 
 </div>
 
 
+<div class="modal-body">
+
+
+  <div class="form-group">
+
+    <label>Username</label>
+
+    <input
+      type="text"
+      id="userUsername"
+      placeholder="Username"
+    >
+
+  </div>
+
+
+  <div class="form-group">
+
+    <label>Name</label>
+
+    <input
+      type="text"
+      id="userName"
+      placeholder="Name"
+    >
+
+  </div>
+
+
+  <div class="form-group">
+
+    <label>Password</label>
+
+    <input
+      type="password"
+      id="userPassword"
+      placeholder="Password"
+    >
+
+  </div>
+
+
+  <div class="form-group">
+
+    <label>Role</label>
+
+    <select id="userRole">
+
+      <option value="admin">admin</option>
+      <option value="manager">manager</option>
+      <option value="support">support</option>
+      <option value="call">call</option>
+      <option value="guest">guest</option>
+
+    </select>
+
+  </div>
+
+
+  <div class="form-group">
+
+    <label>Status</label>
+
+    <select id="userStatus">
+
+      <option value="Active">
+        Active
+      </option>
+
+      <option value="Block">
+        Block
+      </option>
+
+    </select>
+
+  </div>
+
+
+  <div class="form-actions">
+
+    <button
+      class="cancel-btn"
+      onclick="closeModal('userFormModal')"
+    >
+      Cancel
+    </button>
+
+    <button
+      class="save-btn"
+      onclick="saveUser()"
+    >
+      Save User
+    </button>
+
+  </div>
+
+</div>
+```
+
+  </div>
+
+</div>
 
 <div
   class="modal"
@@ -1400,67 +1506,67 @@ RESPONSIVE
 
   <div class="modal-box large">
 
-    <div class="modal-header">
+```
+<div class="modal-header">
 
-      <h3>
-        Item Management
-      </h3>
+  <h3>
+    Item Management
+  </h3>
 
-      <button
-        class="close-btn"
-        onclick="closeModal('itemsModal')"
-      >
-        ×
-      </button>
-
-    </div>
-
-
-    <div class="modal-body">
-
-
-      <div class="item-add-area">
-
-        <input
-          type="text"
-          id="newItem"
-          placeholder="Enter new item"
-        >
-
-
-        <button
-          class="item-add-btn"
-          onclick="addNewItem()"
-        >
-          + Add
-        </button>
-
-      </div>
-
-
-      <div class="items-list">
-
-        <div class="item-row item-head">
-
-          <div>Item</div>
-          <div>Date</div>
-          <div>User</div>
-          <div>Action</div>
-
-        </div>
-
-
-        <div id="itemsBody"></div>
-
-      </div>
-
-    </div>
-
-  </div>
+  <button
+    class="close-btn"
+    onclick="closeModal('itemsModal')"
+  >
+    ×
+  </button>
 
 </div>
 
 
+<div class="modal-body">
+
+
+  <div class="item-add-area">
+
+    <input
+      type="text"
+      id="newItem"
+      placeholder="Enter new item"
+    >
+
+
+    <button
+      class="item-add-btn"
+      onclick="addNewItem()"
+    >
+      + Add
+    </button>
+
+  </div>
+
+
+  <div class="items-list">
+
+    <div class="item-row item-head">
+
+      <div>Item</div>
+      <div>Date</div>
+      <div>User</div>
+      <div>Action</div>
+
+    </div>
+
+
+    <div id="itemsBody"></div>
+
+  </div>
+
+</div>
+```
+
+  </div>
+
+</div>
 
 <div
   class="modal"
@@ -1469,96 +1575,94 @@ RESPONSIVE
 
   <div class="modal-box">
 
-    <div class="modal-header">
+```
+<div class="modal-header">
 
-      <h3>
-        Change Password
-      </h3>
+  <h3>
+    Change Password
+  </h3>
 
-      <button
-        class="close-btn"
-        onclick="closeModal('passwordModal')"
-      >
-        ×
-      </button>
+  <button
+    class="close-btn"
+    onclick="closeModal('passwordModal')"
+  >
+    ×
+  </button>
 
-    </div>
-
-
-    <div class="modal-body">
+</div>
 
 
-      <div class="form-group">
-
-        <label>Current Password</label>
-
-        <input
-          type="password"
-          id="currentPassword"
-          placeholder="Current password"
-        >
-
-      </div>
+<div class="modal-body">
 
 
-      <div class="form-group">
+  <div class="form-group">
 
-        <label>New Password</label>
+    <label>Current Password</label>
 
-        <input
-          type="password"
-          id="newPassword"
-          placeholder="New password"
-        >
+    <input
+      type="password"
+      id="currentPassword"
+      placeholder="Current password"
+    >
 
-      </div>
-
-
-      <div class="form-group">
-
-        <label>Confirm New Password</label>
-
-        <input
-          type="password"
-          id="confirmPassword"
-          placeholder="Confirm new password"
-        >
-
-      </div>
+  </div>
 
 
-      <div class="form-actions">
+  <div class="form-group">
 
-        <button
-          class="cancel-btn"
-          onclick="closeModal('passwordModal')"
-        >
-          Cancel
-        </button>
+    <label>New Password</label>
 
-        <button
-          class="save-btn"
-          onclick="changePassword()"
-        >
-          Change Password
-        </button>
+    <input
+      type="password"
+      id="newPassword"
+      placeholder="New password"
+    >
 
-      </div>
+  </div>
 
-    </div>
+
+  <div class="form-group">
+
+    <label>Confirm New Password</label>
+
+    <input
+      type="password"
+      id="confirmPassword"
+      placeholder="Confirm new password"
+    >
+
+  </div>
+
+
+  <div class="form-actions">
+
+    <button
+      class="cancel-btn"
+      onclick="closeModal('passwordModal')"
+    >
+      Cancel
+    </button>
+
+    <button
+      class="save-btn"
+      onclick="changePassword()"
+    >
+      Change Password
+    </button>
+
+  </div>
+
+</div>
+```
 
   </div>
 
 </div>
 
-
-
 <div
   class="toast"
   id="toast"
 ></div>
-
-
 
 <script>
 
@@ -1916,14 +2020,6 @@ function attachSheetRowNumbers(
   return data.map(
     (row,index) => {
 
-      /*
-        Google Sheet data starts from row 2
-        because row 1 is the header.
-
-        Only add fallback when API did not
-        already provide a row number.
-      */
-
       const existing =
         getRealRowNumber(
           row
@@ -2122,16 +2218,6 @@ async function loadData(force=false){
 
     }
 
-
-    /*
-      IMPORTANT FIX
-
-      Attach original Google Sheet row
-      BEFORE filtering/pagination.
-
-      This prevents Paid/Edit from using
-      the filtered array index as the Sheet row.
-    */
 
     allData =
       attachSheetRowNumbers(
@@ -2439,10 +2525,6 @@ function renderData(data){
       );
 
 
-      /* =====================================================
-         SELL
-      ====================================================== */
-
       if(
         currentDataType === "sell"
       ){
@@ -2544,10 +2626,6 @@ function renderData(data){
       }
 
 
-      /* =====================================================
-         PAID
-      ====================================================== */
-
       else if(
         currentDataType === "paid"
       ){
@@ -2617,10 +2695,6 @@ function renderData(data){
       }
 
 
-      /* =====================================================
-         DELETE
-      ====================================================== */
-
       else if(
         currentDataType === "delete"
       ){
@@ -2658,10 +2732,6 @@ function renderData(data){
 
       }
 
-
-      /* =====================================================
-         DATA
-      ====================================================== */
 
       else{
 
@@ -3061,6 +3131,37 @@ function applyFilters(){
   currentPage = 1;
 
 
+  /* =========================================================
+     NEW: UPDATE TOTAL + SEARCH RESULT COUNT
+  ========================================================= */
+
+  const totalCount =
+    document.getElementById(
+      "totalCount"
+    );
+
+  const resultCount =
+    document.getElementById(
+      "resultCount"
+    );
+
+
+  if(totalCount){
+
+    totalCount.textContent =
+      allData.length;
+
+  }
+
+
+  if(resultCount){
+
+    resultCount.textContent =
+      filteredData.length;
+
+  }
+
+
   renderData(
     filteredData
   );
@@ -3454,11 +3555,6 @@ function getRealRowNumber(
 
   }
 
-
-  /*
-    If API returns an array and the row number
-    is included as an extra field, check it.
-  */
 
   if(
     Array.isArray(row)
@@ -4373,13 +4469,6 @@ async function paidSellEntry(
   }
 
 
-  /*
-    IMPORTANT FIX:
-
-    Get the ORIGINAL SELL SHEET ROW.
-    Do NOT use filtered index as Sheet row.
-  */
-
   const sellRowNumber =
     getRealRowNumber(
       row
@@ -4489,17 +4578,6 @@ async function paidSellEntry(
     );
 
 
-    /*
-      Send the Sell Sheet row number using
-      several common parameter names.
-
-      This fixes APIs that validate:
-      row
-      rowNumber
-      sellRow
-      SellRow
-    */
-
     const result =
       await postJson(
         PAID_API_URL,
@@ -4577,7 +4655,6 @@ async function paidSellEntry(
 
     paidCache = null;
 
-
     sellCache = null;
 
 
@@ -4585,13 +4662,6 @@ async function paidSellEntry(
       "Paid successfully and added to Paid Sheet",
       "success"
     );
-
-
-    /*
-      Paid API is separate.
-      We do not call SELL_API_URL
-      with paidData.
-    */
 
 
     currentDataType =
