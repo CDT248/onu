@@ -499,11 +499,6 @@ tbody tr:last-child td{
   font-weight:700;
 }
 
-.save-btn:disabled{
-  opacity:.7;
-  cursor:not-allowed;
-}
-
 /* ================= LOADER ================= */
 
 .table-loader{
@@ -875,6 +870,8 @@ body.dark .table-loader{
 
     <div class="modal-body">
 
+      <!-- AUTO NAME -->
+
       <div class="form-group">
 
         <label>
@@ -890,6 +887,8 @@ body.dark .table-loader{
 
       </div>
 
+      <!-- USER INPUT IP -->
+
       <div class="form-group">
 
         <label>
@@ -903,6 +902,8 @@ body.dark .table-loader{
         >
 
       </div>
+
+      <!-- USER INPUT WORK -->
 
       <div class="form-group">
 
@@ -918,6 +919,8 @@ body.dark .table-loader{
 
       </div>
 
+      <!-- AUTO DATE -->
+
       <div class="form-group">
 
         <label>
@@ -932,6 +935,8 @@ body.dark .table-loader{
         >
 
       </div>
+
+      <!-- ITEM -->
 
       <div class="form-group">
 
@@ -1088,7 +1093,7 @@ const SELL_API_URL =
 "https://script.google.com/macros/s/AKfycbyiKn1MH1ZQvebSIo83bZzbbfJimmfRf9PjlPI4w1q1UliuF27gKViYM24oXakpkHuP/exec";
 
 const ITEM_API_URL =
-"https://script.google.com/macros/s/AKfycb2e7dzGE5vkS0Q-Eyl9MKLAbkkkD8f37eIVj7VuV8bPytWGOH7cwJ3w25efP7MLGshOw/exec";
+"https://script.google.com/macros/s/AKfycby2e7dzGE5vkS0Q-Eyl9MKLAbkkkD8f37eIVj7VuV8bPytWGOH7cwJ3w25efP7MLGshOw/exec";
 
 
 /* ============================================================
@@ -1108,8 +1113,6 @@ let dataCache = null;
 let itemList = [];
 
 let itemCache = null;
-
-let savingEntry = false;
 
 
 /* ============================================================
@@ -1217,18 +1220,40 @@ async function loadUser(){
       const user =
         result.user;
 
+
+      /*
+      ==========================================
+      USER NAME
+      ==========================================
+      */
+
       const name =
         user.Name ||
         user.name ||
         currentUsername;
 
+
+      /*
+      ==========================================
+      STORE CURRENT USER NAME
+      ==========================================
+      */
+
       currentUserName =
         String(name).trim();
+
 
       localStorage.setItem(
         "name",
         currentUserName
       );
+
+
+      /*
+      ==========================================
+      ROLE
+      ==========================================
+      */
 
       const role =
         user.Role ||
@@ -1240,6 +1265,13 @@ async function loadUser(){
         role
       );
 
+
+      /*
+      ==========================================
+      STATUS
+      ==========================================
+      */
+
       const status =
         user.Status ||
         user.status ||
@@ -1249,6 +1281,13 @@ async function loadUser(){
         "status",
         status
       );
+
+
+      /*
+      ==========================================
+      PROFILE IMAGE
+      ==========================================
+      */
 
       const profileImage =
         document.getElementById(
@@ -1269,6 +1308,13 @@ async function loadUser(){
         }
 
       }
+
+
+      /*
+      ==========================================
+      BLOCKED USER
+      ==========================================
+      */
 
       if(
         String(status)
@@ -1413,6 +1459,7 @@ function renderData(
 
   body.innerHTML = "";
 
+
   const headers = [
     "Name",
     "IP",
@@ -1422,10 +1469,12 @@ function renderData(
     "Action"
   ];
 
+
   const headerRow =
     document.createElement(
       "tr"
     );
+
 
   headers.forEach(
     header => {
@@ -1445,9 +1494,11 @@ function renderData(
     }
   );
 
+
   head.appendChild(
     headerRow
   );
+
 
   const totalPages =
     Math.max(
@@ -1457,6 +1508,7 @@ function renderData(
         pageSize
       )
     );
+
 
   if(
     currentPage >
@@ -1468,6 +1520,7 @@ function renderData(
 
   }
 
+
   const start =
     (
       currentPage -
@@ -1475,11 +1528,13 @@ function renderData(
     ) *
     pageSize;
 
+
   const pageData =
     data.slice(
       start,
       start + pageSize
     );
+
 
   if(
     pageData.length === 0
@@ -1520,6 +1575,7 @@ function renderData(
 
   }
 
+
   pageData.forEach(
     (
       row,
@@ -1531,11 +1587,13 @@ function renderData(
           "tr"
         );
 
+
       const name =
         row.Name ??
         row.name ??
         row[0] ??
         "";
+
 
       const ip =
         row.Ip ??
@@ -1544,11 +1602,13 @@ function renderData(
         row[1] ??
         "";
 
+
       const work =
         row.Work ??
         row.work ??
         row[2] ??
         "";
+
 
       const date =
         row.Date ??
@@ -1556,11 +1616,13 @@ function renderData(
         row[3] ??
         "";
 
+
       const item =
         row.Item ??
         row.item ??
         row[4] ??
         "";
+
 
       addCell(
         tr,
@@ -1587,10 +1649,12 @@ function renderData(
         item
       );
 
+
       const actionTd =
         document.createElement(
           "td"
         );
+
 
       const actionWrap =
         document.createElement(
@@ -1600,11 +1664,13 @@ function renderData(
       actionWrap.className =
         "action-wrap";
 
+
       const sellButton =
         createActionButton(
           "Sell",
           "action-sell"
         );
+
 
       sellButton.onclick =
         function(){
@@ -1615,17 +1681,21 @@ function renderData(
 
         };
 
+
       actionWrap.appendChild(
         sellButton
       );
+
 
       actionTd.appendChild(
         actionWrap
       );
 
+
       tr.appendChild(
         actionTd
       );
+
 
       body.appendChild(
         tr
@@ -1633,6 +1703,7 @@ function renderData(
 
     }
   );
+
 
   renderPagination(
     data.length
@@ -1708,11 +1779,13 @@ function renderPagination(
 
   container.innerHTML = "";
 
+
   const totalPages =
     Math.ceil(
       total /
       pageSize
     );
+
 
   if(
     totalPages <= 1
@@ -1721,6 +1794,7 @@ function renderPagination(
     return;
 
   }
+
 
   const previous =
     document.createElement(
@@ -1745,9 +1819,11 @@ function renderPagination(
 
     };
 
+
   container.appendChild(
     previous
   );
+
 
   for(
     let i = 1;
@@ -1778,11 +1854,13 @@ function renderPagination(
 
       };
 
+
     container.appendChild(
       button
     );
 
   }
+
 
   const next =
     document.createElement(
@@ -1806,6 +1884,7 @@ function renderPagination(
       );
 
     };
+
 
   container.appendChild(
     next
@@ -1831,6 +1910,7 @@ function goToPage(
       )
     );
 
+
   if(
     page < 1 ||
     page > totalPages
@@ -1840,8 +1920,10 @@ function goToPage(
 
   }
 
+
   currentPage =
     page;
+
 
   renderData(
     filteredData
@@ -1865,6 +1947,7 @@ function applyFilters(){
       .trim()
       .toLowerCase();
 
+
   const fromDate =
     document
       .getElementById(
@@ -1872,12 +1955,14 @@ function applyFilters(){
       )
       .value;
 
+
   const toDate =
     document
       .getElementById(
         "toDate"
       )
       .value;
+
 
   filteredData =
     allData.filter(
@@ -1887,6 +1972,7 @@ function applyFilters(){
           JSON.stringify(
             row
           ).toLowerCase();
+
 
         if(
           search &&
@@ -1899,6 +1985,7 @@ function applyFilters(){
 
         }
 
+
         const rowDate =
           normalizeDate(
             row.Date ??
@@ -1906,6 +1993,7 @@ function applyFilters(){
             row[3] ??
             ""
           );
+
 
         if(
           fromDate &&
@@ -1917,6 +2005,7 @@ function applyFilters(){
 
         }
 
+
         if(
           toDate &&
           rowDate &&
@@ -1927,12 +2016,15 @@ function applyFilters(){
 
         }
 
+
         return true;
 
       }
     );
 
+
   currentPage = 1;
+
 
   renderData(
     filteredData
@@ -1959,6 +2051,7 @@ function clearFilters(){
     "toDate"
   ).value = "";
 
+
   applyFilters();
 
 }
@@ -1970,6 +2063,12 @@ NEW ENTRY
 
 function openEntryModal(){
 
+  /*
+  ============================================
+  GET LOGGED-IN USER NAME
+  ============================================
+  */
+
   const name =
     String(
       currentUserName ||
@@ -1978,8 +2077,23 @@ function openEntryModal(){
       ""
     ).trim();
 
+
+  /*
+  ============================================
+  GET TODAY
+  ============================================
+  */
+
   const today =
     getToday();
+
+
+  /*
+  ============================================
+  NAME
+  AUTOMATIC + READ ONLY
+  ============================================
+  */
 
   const nameInput =
     document.getElementById(
@@ -1992,13 +2106,35 @@ function openEntryModal(){
   nameInput.readOnly =
     true;
 
+
+  /*
+  ============================================
+  IP
+  ============================================
+  */
+
   document.getElementById(
     "entryIP"
   ).value = "";
 
+
+  /*
+  ============================================
+  WORK
+  ============================================
+  */
+
   document.getElementById(
     "entryWork"
   ).value = "";
+
+
+  /*
+  ============================================
+  DATE
+  AUTOMATIC + READ ONLY
+  ============================================
+  */
 
   const dateInput =
     document.getElementById(
@@ -2011,34 +2147,26 @@ function openEntryModal(){
   dateInput.readOnly =
     true;
 
+
+  /*
+  ============================================
+  ITEM
+  ============================================
+  */
+
   populateItemSelect();
+
 
   document.getElementById(
     "entryItem"
   ).value = "";
 
-  const saveButton =
-    document.querySelector(
-      "#entryModal .save-btn"
-    );
 
-  if(saveButton){
-
-    saveButton.disabled =
-      false;
-
-    saveButton.textContent =
-      "Save Entry";
-
-    saveButton.style.opacity =
-      "";
-
-    saveButton.style.cursor =
-      "";
-
-  }
-
-  savingEntry = false;
+  /*
+  ============================================
+  OPEN
+  ============================================
+  */
 
   openModal(
     "entryModal"
@@ -2049,21 +2177,18 @@ function openEntryModal(){
 
 /* ============================================================
 SAVE NEW ENTRY
-FAST SAVE VERSION
+IMPORTANT:
+NAME + DATE ARE ALWAYS GENERATED BY SYSTEM
 ============================================================ */
 
 async function saveEntry(){
 
   /*
-  Prevent double click
+  ============================================
+  NAME
+  DO NOT TRUST INPUT FIELD
+  ============================================
   */
-
-  if(savingEntry){
-
-    return;
-
-  }
-
 
   const name =
     String(
@@ -2074,11 +2199,25 @@ async function saveEntry(){
     ).trim();
 
 
+  /*
+  ============================================
+  IP
+  USER INPUT
+  ============================================
+  */
+
   const ip =
     document.getElementById(
       "entryIP"
     ).value.trim();
 
+
+  /*
+  ============================================
+  WORK
+  USER INPUT
+  ============================================
+  */
 
   const work =
     document.getElementById(
@@ -2086,9 +2225,23 @@ async function saveEntry(){
     ).value.trim();
 
 
+  /*
+  ============================================
+  DATE
+  ALWAYS TODAY
+  DO NOT TRUST INPUT FIELD
+  ============================================
+  */
+
   const date =
     getToday();
 
+
+  /*
+  ============================================
+  ITEM
+  ============================================
+  */
 
   const item =
     document.getElementById(
@@ -2096,7 +2249,11 @@ async function saveEntry(){
     ).value.trim();
 
 
-  /* ================= VALIDATION ================= */
+  /*
+  ============================================
+  VALIDATION
+  ============================================
+  */
 
   if(!name){
 
@@ -2158,42 +2315,18 @@ async function saveEntry(){
   }
 
 
-  /* ================= LOCK SAVE ================= */
-
-  savingEntry = true;
-
-
-  const saveButton =
-    document.querySelector(
-      "#entryModal .save-btn"
-    );
-
-
-  if(saveButton){
-
-    saveButton.disabled =
-      true;
-
-    saveButton.textContent =
-      "Saving...";
-
-    saveButton.style.opacity =
-      "0.7";
-
-    saveButton.style.cursor =
-      "not-allowed";
-
-  }
-
-
   showLoader(
-    "Saving data..."
+    "Saving..."
   );
 
 
   try{
 
-    /* ================= SEND TO SERVER ================= */
+    /*
+    ==========================================
+    SEND DATA TO SERVER
+    ==========================================
+    */
 
     const result =
       await postJson(
@@ -2222,7 +2355,11 @@ async function saveEntry(){
       );
 
 
-    /* ================= CHECK SERVER RESULT ================= */
+    /*
+    ==========================================
+    CHECK SERVER RESULT
+    ==========================================
+    */
 
     if(
       !result ||
@@ -2233,24 +2370,25 @@ async function saveEntry(){
         result &&
         result.message
           ? result.message
-          : "Data save failed"
+          : "Failed to add entry"
       );
 
     }
 
 
     /*
-    ============================================
-    SERVER CONFIRMED SAVE
-    ============================================
+    ==========================================
+    CLEAR CACHE
+    ==========================================
     */
 
-    dataCache =
-      null;
+    dataCache = null;
 
 
     /*
-    CLOSE FORM IMMEDIATELY
+    ==========================================
+    CLOSE MODAL
+    ==========================================
     */
 
     closeModal(
@@ -2259,113 +2397,43 @@ async function saveEntry(){
 
 
     /*
-    REMOVE SAVING LOADER
-    */
-
-    hideLoader();
-
-
-    /*
-    RESTORE BUTTON
-    */
-
-    savingEntry =
-      false;
-
-
-    if(saveButton){
-
-      saveButton.disabled =
-        false;
-
-      saveButton.textContent =
-        "Save Entry";
-
-      saveButton.style.opacity =
-        "";
-
-      saveButton.style.cursor =
-        "";
-
-    }
-
-
-    /*
-    SUCCESS MESSAGE
+    ==========================================
+    SUCCESS
+    ==========================================
     */
 
     showToast(
-      "✓ Data saved successfully",
+      "Entry added successfully",
       "success"
     );
 
 
     /*
-    ============================================
-    BACKGROUND REFRESH
-
-    IMPORTANT:
-    We DO NOT await this.
-
-    So confirmation does not wait for
-    table reload.
-    ============================================
+    ==========================================
+    RELOAD
+    ==========================================
     */
 
-    loadData(true).catch(
-      function(error){
-
-        console.error(
-          "Background reload error:",
-          error
-        );
-
-      }
+    await loadData(
+      true
     );
-
 
   }catch(error){
 
     console.error(
-      "Save entry error:",
       error
     );
 
 
-    hideLoader();
-
-
-    savingEntry =
-      false;
-
-
-    if(saveButton){
-
-      saveButton.disabled =
-        false;
-
-      saveButton.textContent =
-        "Save Entry";
-
-      saveButton.style.opacity =
-        "";
-
-      saveButton.style.cursor =
-        "";
-
-    }
-
-
-    /*
-    IMPORTANT:
-    If save failed, modal stays open.
-    */
-
     showToast(
       error.message ||
-      "Data save failed",
+      "Save failed",
       "error"
     );
+
+  }finally{
+
+    hideLoader();
 
   }
 
@@ -2572,16 +2640,20 @@ async function sellDataEntry(
         deleteResult
       );
 
+
       dataCache = null;
+
 
       showToast(
         "Sold successfully, but Data row could not be removed.",
         "error"
       );
 
+
       await loadData(
         true
       );
+
 
       return;
 
