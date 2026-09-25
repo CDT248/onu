@@ -18,155 +18,205 @@
 
 <style>
 
+/* ============================================================
+   ROOT
+============================================================ */
+
+:root{
+  --bg:#f4f7f6;
+  --card:#ffffff;
+  --text:#17221e;
+  --muted:#718079;
+  --border:#dfe7e3;
+  --green:#16a34a;
+  --green-dark:#15803d;
+  --green-light:#dcfce7;
+  --danger:#dc2626;
+  --warning:#d97706;
+  --shadow:0 10px 30px rgba(0,0,0,.07);
+}
+
 *{
   box-sizing:border-box;
   margin:0;
   padding:0;
 }
 
-:root{
-  --bg:#f4f7f6;
-  --card:#ffffff;
-  --text:#17211b;
-  --muted:#6b756f;
-  --border:#e1e7e3;
-  --primary:#16a36a;
-  --primary-dark:#087f4e;
-  --danger:#e74c3c;
-  --warning:#f39c12;
-  --shadow:0 10px 30px rgba(0,0,0,.08);
-}
-
-body.dark{
-  --bg:#111715;
-  --card:#19211e;
-  --text:#eef5f1;
-  --muted:#9ba9a2;
-  --border:#2b3832;
-  --shadow:0 10px 30px rgba(0,0,0,.30);
+html,
+body{
+  width:100%;
+  min-height:100%;
 }
 
 body{
-  font-family:Arial,Helvetica,sans-serif;
+  font-family:
+    Inter,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
   background:var(--bg);
   color:var(--text);
-  min-height:100vh;
   transition:.25s;
 }
 
-button{
-  border:none;
-  cursor:pointer;
-  font-family:inherit;
+body.dark{
+  --bg:#0d1411;
+  --card:#151e1a;
+  --text:#edf7f1;
+  --muted:#93a59c;
+  --border:#27352e;
+  --green:#22c55e;
+  --green-dark:#16a34a;
+  --green-light:#173a25;
+  --shadow:0 10px 30px rgba(0,0,0,.25);
 }
 
+button,
 input,
 select{
-  font-family:inherit;
+  font:inherit;
 }
 
-/* =========================================================
-HEADER
-========================================================= */
+button{
+  cursor:pointer;
+}
+
+button:disabled{
+  opacity:.55;
+  cursor:not-allowed;
+}
+
+/* ============================================================
+   HEADER
+============================================================ */
 
 .header{
-  height:70px;
-  background:var(--card);
-  border-bottom:1px solid var(--border);
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  padding:0 22px;
   position:sticky;
   top:0;
   z-index:100;
+  background:var(--card);
+  border-bottom:1px solid var(--border);
+  box-shadow:0 2px 12px rgba(0,0,0,.04);
+}
+
+.header-inner{
+  width:100%;
+  max-width:1600px;
+  margin:auto;
+  padding:14px 22px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:16px;
 }
 
 .logo-area{
   display:flex;
   align-items:center;
-  gap:12px;
+  gap:11px;
+  min-width:210px;
 }
 
-.logo{
-  width:43px;
-  height:43px;
+.logo-icon{
+  width:42px;
+  height:42px;
   border-radius:12px;
-  background:linear-gradient(
-    135deg,
-    #19b875,
-    #087f4e
-  );
-  color:#fff;
   display:flex;
   align-items:center;
   justify-content:center;
-  font-size:22px;
+  background:var(--green);
+  color:#fff;
+  font-size:21px;
   font-weight:800;
-  box-shadow:
-    0 5px 15px rgba(22,163,106,.25);
 }
 
-.logo-text h1{
+.logo-text{
   font-size:18px;
-  margin-bottom:3px;
+  font-weight:800;
 }
 
-.logo-text p{
+.logo-sub{
   font-size:11px;
   color:var(--muted);
+  margin-top:2px;
 }
 
 .header-actions{
   display:flex;
   align-items:center;
+  justify-content:flex-end;
   gap:8px;
+  flex-wrap:wrap;
 }
 
-.header-btn{
-  height:38px;
-  padding:0 13px;
-  border-radius:9px;
-  background:var(--bg);
-  color:var(--text);
+.btn{
   border:1px solid var(--border);
-  font-size:13px;
-  font-weight:600;
+  background:var(--card);
+  color:var(--text);
+  border-radius:9px;
+  padding:9px 13px;
+  font-weight:650;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:7px;
   transition:.2s;
+  white-space:nowrap;
 }
 
-.header-btn:hover{
-  border-color:var(--primary);
-  color:var(--primary);
+.btn:hover{
+  transform:translateY(-1px);
+  border-color:var(--green);
 }
 
-.header-btn.primary{
-  background:var(--primary);
-  border-color:var(--primary);
+.btn-green{
   color:#fff;
+  background:var(--green);
+  border-color:var(--green);
 }
 
-.header-btn.primary:hover{
-  background:var(--primary-dark);
+.btn-green:hover{
+  background:var(--green-dark);
+  border-color:var(--green-dark);
+}
+
+.btn-danger{
+  color:#fff;
+  background:var(--danger);
+  border-color:var(--danger);
+}
+
+.btn-warning{
+  color:#fff;
+  background:var(--warning);
+  border-color:var(--warning);
+}
+
+.btn-small{
+  padding:6px 9px;
+  font-size:12px;
+  border-radius:7px;
 }
 
 .profile-wrap{
   position:relative;
-  margin-left:5px;
 }
 
 .profile-btn{
-  width:39px;
-  height:39px;
+  border:1px solid var(--border);
+  background:var(--card);
+  padding:3px;
   border-radius:50%;
-  overflow:hidden;
-  border:2px solid var(--primary);
-  background:var(--bg);
+  width:40px;
+  height:40px;
 }
 
 .profile-btn img{
   width:100%;
   height:100%;
+  border-radius:50%;
   object-fit:cover;
 }
 
@@ -181,7 +231,6 @@ HEADER
   box-shadow:var(--shadow);
   padding:7px;
   display:none;
-  z-index:500;
 }
 
 .profile-menu.show{
@@ -190,337 +239,330 @@ HEADER
 
 .profile-menu button{
   width:100%;
-  text-align:left;
-  padding:11px 12px;
-  background:none;
+  border:0;
+  background:transparent;
   color:var(--text);
+  text-align:left;
+  padding:10px;
   border-radius:8px;
-  font-size:13px;
 }
 
 .profile-menu button:hover{
-  background:var(--bg);
+  background:var(--green-light);
 }
 
-/* =========================================================
-MAIN
-========================================================= */
+/* ============================================================
+   MAIN
+============================================================ */
 
-.main{
-  padding:22px;
+.container{
+  width:100%;
   max-width:1600px;
   margin:auto;
+  padding:22px;
 }
 
-.toolbar{
+.page-top{
   display:flex;
   align-items:center;
   justify-content:space-between;
   gap:15px;
-  margin-bottom:16px;
+  margin-bottom:17px;
 }
 
-.toolbar-title h2{
-  font-size:21px;
+.page-title{
+  font-size:25px;
+  font-weight:850;
 }
 
-.toolbar-title p{
+.page-subtitle{
   color:var(--muted);
-  font-size:12px;
-  margin-top:4px;
+  font-size:13px;
+  margin-top:3px;
 }
 
-.refresh-btn{
-  padding:10px 16px;
-  border-radius:9px;
-  background:var(--primary);
-  color:#fff;
-  font-weight:600;
+.toolbar-actions{
+  display:flex;
+  gap:8px;
 }
 
-/* =========================================================
-FILTER
-========================================================= */
+/* ============================================================
+   FILTER
+============================================================ */
 
-.filter-bar{
+.filter-card{
   background:var(--card);
   border:1px solid var(--border);
-  border-radius:13px;
+  border-radius:14px;
   padding:13px;
+  box-shadow:var(--shadow);
+  margin-bottom:16px;
+}
+
+.filter-grid{
+  display:grid;
+  grid-template-columns:
+    minmax(200px,1.8fr)
+    minmax(120px,.7fr)
+    minmax(120px,.7fr)
+    minmax(120px,.7fr)
+    minmax(120px,.7fr)
+    auto;
+  gap:9px;
+  align-items:center;
+}
+
+.input,
+.select{
+  width:100%;
+  min-height:40px;
+  border:1px solid var(--border);
+  background:var(--card);
+  color:var(--text);
+  border-radius:9px;
+  outline:none;
+  padding:9px 11px;
+}
+
+.input:focus,
+.select:focus{
+  border-color:var(--green);
+  box-shadow:0 0 0 3px rgba(34,197,94,.1);
+}
+
+.filter-counts{
   display:flex;
   align-items:center;
-  gap:10px;
-  margin-bottom:16px;
-  box-shadow:0 3px 12px rgba(0,0,0,.03);
-}
-
-.search-box{
-  width:300px;
-  flex:0 0 300px;
-  min-width:0;
-}
-
-.search-box input,
-.date-box input,
-.select-box select{
-  width:100%;
-  height:40px;
-  padding:0 12px;
-  border-radius:8px;
-  border:1px solid var(--border);
-  background:var(--bg);
-  color:var(--text);
-  outline:none;
-}
-
-.search-box input:focus,
-.date-box input:focus,
-.select-box select:focus{
-  border-color:var(--primary);
+  gap:8px;
+  flex-wrap:wrap;
 }
 
 .count-box{
-  display:flex;
-  align-items:center;
-  gap:7px;
-  flex-shrink:0;
-}
-
-.count-item{
-  height:40px;
-  padding:0 11px;
+  padding:8px 11px;
   border-radius:8px;
-  background:var(--bg);
-  border:1px solid var(--border);
-  display:flex;
-  align-items:center;
-  gap:5px;
-  white-space:nowrap;
+  background:var(--green-light);
+  color:var(--green-dark);
   font-size:12px;
-  font-weight:600;
-  color:var(--muted);
+  font-weight:750;
 }
 
-.count-item strong{
-  color:var(--text);
-  font-size:13px;
-}
-
-.count-item.result strong{
-  color:var(--primary);
-}
-
-.date-box{
-  width:155px;
-}
-
-.select-box{
-  width:125px;
-}
-
-.clear-btn{
-  height:40px;
-  padding:0 14px;
-  border-radius:8px;
-  background:var(--bg);
-  border:1px solid var(--border);
-  color:var(--text);
-  font-weight:600;
-}
-
-.clear-btn:hover{
-  color:var(--danger);
-  border-color:var(--danger);
-}
-
-/* =========================================================
-TABLE
-========================================================= */
+/* ============================================================
+   TABLE
+============================================================ */
 
 .table-card{
   background:var(--card);
   border:1px solid var(--border);
-  border-radius:13px;
-  overflow:hidden;
+  border-radius:14px;
   box-shadow:var(--shadow);
-  position:relative;
+  overflow:hidden;
 }
 
 .table-wrap{
   width:100%;
-  overflow-x:auto;
+  overflow:auto;
 }
 
 table{
   width:100%;
-  border-collapse:collapse;
   min-width:850px;
+  border-collapse:collapse;
 }
 
 thead{
-  background:var(--bg);
+  background:var(--green-light);
 }
 
 th{
-  padding:13px 12px;
   text-align:left;
+  padding:12px 13px;
   font-size:12px;
-  color:var(--muted);
+  font-weight:800;
+  color:var(--green-dark);
   border-bottom:1px solid var(--border);
   white-space:nowrap;
 }
 
 td{
-  padding:12px;
+  padding:11px 13px;
   border-bottom:1px solid var(--border);
   font-size:13px;
   vertical-align:middle;
 }
 
 tbody tr:hover{
-  background:rgba(22,163,106,.035);
+  background:rgba(34,197,94,.035);
 }
 
 tbody tr:last-child td{
-  border-bottom:none;
+  border-bottom:0;
 }
 
-.empty-row{
-  text-align:center;
-  color:var(--muted);
-  padding:40px !important;
+.action-cell{
+  white-space:nowrap;
 }
 
-/* =========================================================
-ACTION BUTTONS
-========================================================= */
-
-.action-wrap{
+.action-group{
   display:flex;
   gap:5px;
   flex-wrap:wrap;
 }
 
-.action-btn{
-  padding:7px 10px;
-  border-radius:7px;
+.badge{
+  display:inline-flex;
+  align-items:center;
+  padding:4px 8px;
+  border-radius:20px;
   font-size:11px;
-  font-weight:700;
-  color:#fff;
+  font-weight:750;
+  background:var(--green-light);
+  color:var(--green-dark);
 }
 
-.action-edit{
-  background:#3498db;
+.badge-danger{
+  background:#fee2e2;
+  color:#b91c1c;
 }
 
-.action-sell{
-  background:#16a36a;
+.badge-warning{
+  background:#fef3c7;
+  color:#92400e;
 }
 
-.action-delete{
-  background:#e74c3c;
+body.dark .badge-danger{
+  background:#431b1b;
+  color:#fca5a5;
 }
 
-.action-paid{
-  background:#16a36a;
+body.dark .badge-warning{
+  background:#423313;
+  color:#fcd34d;
 }
 
-/* =========================================================
-PAGINATION
-========================================================= */
+.empty{
+  padding:50px 20px;
+  text-align:center;
+  color:var(--muted);
+}
+
+.empty-icon{
+  font-size:35px;
+  margin-bottom:8px;
+}
+
+/* ============================================================
+   PAGINATION
+============================================================ */
 
 .pagination{
   display:flex;
-  justify-content:center;
   align-items:center;
-  gap:5px;
-  padding:14px;
+  justify-content:space-between;
+  gap:10px;
+  padding:12px 14px;
   border-top:1px solid var(--border);
-  flex-wrap:wrap;
+}
+
+.page-info{
+  font-size:12px;
+  color:var(--muted);
+}
+
+.page-buttons{
+  display:flex;
+  gap:5px;
 }
 
 .page-btn{
   min-width:34px;
   height:34px;
-  padding:0 8px;
-  border-radius:7px;
-  background:var(--bg);
-  color:var(--text);
   border:1px solid var(--border);
+  background:var(--card);
+  color:var(--text);
+  border-radius:7px;
 }
 
 .page-btn.active{
-  background:var(--primary);
+  background:var(--green);
   color:#fff;
-  border-color:var(--primary);
+  border-color:var(--green);
 }
 
-.page-btn:disabled{
-  opacity:.45;
-  cursor:not-allowed;
-}
+/* ============================================================
+   MODAL
+============================================================ */
 
-/* =========================================================
-MODAL
-========================================================= */
-
-.modal{
+.modal-overlay{
   position:fixed;
   inset:0;
-  background:rgba(0,0,0,.52);
+  z-index:1000;
+  background:rgba(0,0,0,.55);
   display:none;
   align-items:center;
   justify-content:center;
   padding:18px;
-  z-index:1000;
 }
 
-.modal.show{
+.modal-overlay.show{
   display:flex;
 }
 
-.modal-box{
+.modal{
   width:100%;
-  max-width:500px;
-  max-height:90vh;
-  overflow-y:auto;
+  max-width:600px;
+  max-height:92vh;
+  overflow:auto;
   background:var(--card);
   border:1px solid var(--border);
-  border-radius:15px;
+  border-radius:16px;
   box-shadow:0 25px 70px rgba(0,0,0,.25);
 }
 
-.modal-box.large{
+.modal-lg{
   max-width:900px;
 }
 
 .modal-header{
-  padding:17px 19px;
+  position:sticky;
+  top:0;
+  z-index:2;
+  background:var(--card);
+  border-bottom:1px solid var(--border);
+  padding:15px 17px;
   display:flex;
   align-items:center;
   justify-content:space-between;
-  border-bottom:1px solid var(--border);
-  position:sticky;
-  top:0;
-  background:var(--card);
-  z-index:2;
+  gap:10px;
 }
 
-.modal-header h3{
+.modal-title{
   font-size:17px;
+  font-weight:800;
 }
 
 .close-btn{
-  width:32px;
-  height:32px;
+  width:34px;
+  height:34px;
+  border:1px solid var(--border);
   border-radius:8px;
-  background:var(--bg);
+  background:var(--card);
   color:var(--text);
-  font-size:18px;
+  font-size:19px;
 }
 
 .modal-body{
-  padding:18px;
+  padding:17px;
+}
+
+.modal-footer{
+  position:sticky;
+  bottom:0;
+  background:var(--card);
+  border-top:1px solid var(--border);
+  padding:12px 17px;
+  display:flex;
+  justify-content:flex-end;
+  gap:8px;
 }
 
 .form-grid{
@@ -530,250 +572,101 @@ MODAL
 }
 
 .form-group{
-  margin-bottom:13px;
+  display:flex;
+  flex-direction:column;
+  gap:6px;
 }
 
 .form-group.full{
   grid-column:1/-1;
 }
 
-.form-group label{
-  display:block;
+.form-label{
   font-size:12px;
+  font-weight:750;
   color:var(--muted);
-  margin-bottom:6px;
-  font-weight:600;
 }
 
-.form-group input,
-.form-group select{
-  width:100%;
-  height:42px;
-  border-radius:8px;
-  border:1px solid var(--border);
-  background:var(--bg);
-  color:var(--text);
-  padding:0 12px;
-  outline:none;
+.password-wrap{
+  position:relative;
 }
 
-.form-group input:focus,
-.form-group select:focus{
-  border-color:var(--primary);
+.password-wrap .input{
+  padding-right:42px;
 }
 
-.form-actions{
-  display:flex;
-  justify-content:flex-end;
-  gap:8px;
-  margin-top:18px;
+.password-toggle{
+  position:absolute;
+  right:8px;
+  top:50%;
+  transform:translateY(-50%);
+  border:0;
+  background:transparent;
+  color:var(--muted);
 }
 
-.cancel-btn{
-  padding:10px 16px;
-  border-radius:8px;
-  background:var(--bg);
-  color:var(--text);
-  border:1px solid var(--border);
-}
+/* ============================================================
+   MODAL TABLE
+============================================================ */
 
-.save-btn{
-  padding:10px 17px;
-  border-radius:8px;
-  background:var(--primary);
-  color:#fff;
-  font-weight:700;
-}
-
-/* =========================================================
-USERS
-========================================================= */
-
-.users-top{
-  display:flex;
-  justify-content:flex-end;
-  margin-bottom:12px;
-}
-
-.user-add-btn,
-.item-add-btn{
-  padding:9px 14px;
-  background:var(--primary);
-  color:#fff;
-  border-radius:8px;
-  font-weight:700;
-}
-
-.users-list,
-.items-list{
+.modal-table-wrap{
+  overflow:auto;
   border:1px solid var(--border);
   border-radius:10px;
-  overflow:auto;
 }
 
-.user-row{
-  display:grid;
-  grid-template-columns:
-    minmax(100px,1fr)
-    minmax(100px,1fr)
-    100px
-    100px
-    180px;
-  gap:8px;
-  padding:11px;
-  border-bottom:1px solid var(--border);
-  align-items:center;
-  min-width:650px;
+.modal-table{
+  min-width:700px;
 }
 
-.item-row{
-  display:grid;
-  grid-template-columns:
-    minmax(150px,1.2fr)
-    minmax(120px,1fr)
-    minmax(120px,1fr)
-    90px;
-  gap:8px;
-  padding:11px;
-  border-bottom:1px solid var(--border);
-  align-items:center;
-  min-width:600px;
+.modal-table th,
+.modal-table td{
+  padding:9px 10px;
 }
 
-.user-row:last-child,
-.item-row:last-child{
-  border-bottom:none;
-}
-
-.user-head,
-.item-head{
-  background:var(--bg);
-  font-size:11px;
-  color:var(--muted);
-  font-weight:700;
-}
-
-.user-cell,
-.item-cell{
-  font-size:12px;
-  overflow:hidden;
-  text-overflow:ellipsis;
-  white-space:nowrap;
-}
-
-.status-active{
-  color:#16a36a;
-  font-weight:700;
-}
-
-.status-block{
-  color:#e74c3c;
-  font-weight:700;
-}
-
-.status-inactive{
-  color:#f39c12;
-  font-weight:700;
-}
-
-.small-action{
-  padding:6px 8px;
-  border-radius:6px;
-  font-size:10px;
-  font-weight:700;
-  margin-right:3px;
-  margin-bottom:2px;
-}
-
-.edit-user-btn{
-  background:#3498db;
-  color:#fff;
-}
-
-.block-user-btn{
-  background:#e74c3c;
-  color:#fff;
-}
-
-.unblock-user-btn{
-  background:#16a36a;
-  color:#fff;
-}
-
-.delete-item-btn{
-  background:#e74c3c;
-  color:#fff;
-}
-
-/* =========================================================
-ITEM
-========================================================= */
-
-.item-add-area{
+.user-actions{
   display:flex;
-  gap:8px;
-  margin-bottom:15px;
+  gap:5px;
+  flex-wrap:wrap;
 }
 
-.item-add-area input{
-  flex:1;
-  height:40px;
-  padding:0 11px;
-  border:1px solid var(--border);
-  background:var(--bg);
-  color:var(--text);
-  border-radius:8px;
-  outline:none;
-}
+/* ============================================================
+   LOADER
+============================================================ */
 
-.item-add-area input:focus{
-  border-color:var(--primary);
-}
-
-/* =========================================================
-LOADER
-========================================================= */
-
-.table-loader{
-  position:absolute;
+.loader-overlay{
+  position:fixed;
   inset:0;
-  background:rgba(255,255,255,.72);
+  z-index:3000;
+  background:rgba(0,0,0,.35);
   display:none;
   align-items:center;
   justify-content:center;
-  z-index:50;
-  pointer-events:none;
 }
 
-body.dark .table-loader{
-  background:rgba(17,23,21,.72);
-}
-
-.table-loader.show{
+.loader-overlay.show{
   display:flex;
 }
 
-.table-loader-box{
+.loader-box{
   background:var(--card);
-  padding:13px 18px;
-  border-radius:10px;
-  box-shadow:0 8px 25px rgba(0,0,0,.12);
+  color:var(--text);
   border:1px solid var(--border);
+  border-radius:13px;
+  padding:20px 25px;
   display:flex;
   align-items:center;
-  gap:10px;
-  font-size:12px;
-  color:var(--text);
+  gap:12px;
+  box-shadow:var(--shadow);
 }
 
 .spinner{
-  width:21px;
-  height:21px;
+  width:25px;
+  height:25px;
   border:3px solid var(--border);
-  border-top-color:var(--primary);
+  border-top-color:var(--green);
   border-radius:50%;
-  animation:spin .65s linear infinite;
-  flex-shrink:0;
+  animation:spin .7s linear infinite;
 }
 
 @keyframes spin{
@@ -782,108 +675,104 @@ body.dark .table-loader{
   }
 }
 
-/* =========================================================
-TOAST
-========================================================= */
+/* ============================================================
+   TOAST
+============================================================ */
+
+.toast-container{
+  position:fixed;
+  right:18px;
+  bottom:18px;
+  z-index:5000;
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+}
 
 .toast{
-  position:fixed;
-  right:20px;
-  bottom:20px;
-  background:#17211b;
-  color:#fff;
-  padding:12px 17px;
-  border-radius:9px;
-  font-size:12px;
+  min-width:240px;
+  max-width:360px;
+  background:var(--card);
+  color:var(--text);
+  border:1px solid var(--border);
+  border-left:4px solid var(--green);
+  border-radius:10px;
+  padding:12px 14px;
   box-shadow:var(--shadow);
-  transform:translateY(80px);
-  opacity:0;
-  pointer-events:none;
-  transition:.3s;
-  z-index:3000;
-  max-width:350px;
-}
-
-.toast.show{
-  transform:translateY(0);
-  opacity:1;
-}
-
-.toast.success{
-  border-left:4px solid #16a36a;
+  animation:toastIn .2s ease;
+  font-size:13px;
 }
 
 .toast.error{
-  border-left:4px solid #e74c3c;
+  border-left-color:var(--danger);
 }
 
-/* =========================================================
-RESPONSIVE
-========================================================= */
+.toast.warning{
+  border-left-color:var(--warning);
+}
 
-@media(max-width:1100px){
+@keyframes toastIn{
+  from{
+    opacity:0;
+    transform:translateY(8px);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
 
-  .search-box{
-    width:240px;
-    flex:0 0 240px;
+/* ============================================================
+   MOBILE
+============================================================ */
+
+@media(max-width:1000px){
+
+  .filter-grid{
+    grid-template-columns:1fr 1fr;
   }
 
-  .count-box{
+}
+
+@media(max-width:700px){
+
+  .header-inner{
+    padding:11px 13px;
+    align-items:flex-start;
+  }
+
+  .logo-area{
+    min-width:auto;
+  }
+
+  .logo-text{
+    font-size:15px;
+  }
+
+  .logo-sub{
+    display:none;
+  }
+
+  .header-actions{
     gap:5px;
   }
 
-  .count-item{
-    padding:0 8px;
+  .header-actions .btn{
+    padding:8px 9px;
+    font-size:12px;
   }
 
-}
-
-@media(max-width:900px){
-
-  .header{
-    padding:0 12px;
+  .container{
+    padding:13px;
   }
 
-  .logo-text p{
-    display:none;
+  .page-top{
+    align-items:flex-start;
+    flex-direction:column;
   }
 
-  .header-btn{
-    padding:0 9px;
-  }
-
-  .header-btn span{
-    display:none;
-  }
-
-  .main{
-    padding:12px;
-  }
-
-  .filter-bar{
-    flex-wrap:wrap;
-  }
-
-  .search-box{
-    flex-basis:100%;
-    width:100%;
-  }
-
-  .count-box{
-    flex:1;
-  }
-
-  .count-item{
-    flex:1;
-    justify-content:center;
-  }
-
-  .date-box{
-    flex:1;
-  }
-
-  .select-box{
-    flex:1;
+  .filter-grid{
+    grid-template-columns:1fr;
   }
 
   .form-grid{
@@ -894,43 +783,19 @@ RESPONSIVE
     grid-column:auto;
   }
 
+  .pagination{
+    align-items:flex-start;
+    flex-direction:column;
+  }
+
 }
 
-@media(max-width:600px){
+/* ============================================================
+   HIDDEN
+============================================================ */
 
-  .logo-text h1{
-    font-size:15px;
-  }
-
-  .header-actions{
-    gap:4px;
-  }
-
-  .header-btn{
-    width:38px;
-    padding:0;
-  }
-
-  .filter-bar{
-    padding:9px;
-  }
-
-  .count-box{
-    width:100%;
-    flex-basis:100%;
-  }
-
-  .count-item{
-    width:50%;
-  }
-
-  .toast{
-    left:12px;
-    right:12px;
-    bottom:12px;
-    max-width:none;
-  }
-
+.hidden{
+  display:none !important;
 }
 
 </style>
@@ -938,102 +803,103 @@ RESPONSIVE
 
 <body>
 
-<!-- =========================================================
-HEADER
-========================================================= -->
+<!-- ============================================================
+     HEADER
+============================================================ -->
 
 <header class="header">
 
-  <div class="logo-area">
+  <div class="header-inner">
 
-    <div class="logo">
-      S
+    <div class="logo-area">
+
+      <div class="logo-icon">
+        S
+      </div>
+
+      <div>
+        <div class="logo-text">
+          Support Dashboard
+        </div>
+
+        <div class="logo-sub">
+          Data management system
+        </div>
+      </div>
+
     </div>
 
-    <div class="logo-text">
 
-      <h1>
-        Support Dashboard
-      </h1>
-
-      <p>
-        Admin Management System
-      </p>
-
-    </div>
-
-  </div>
-
-  <div class="header-actions">
-
-    <button
-      class="header-btn"
-      onclick="loadData(true)"
-      title="Reload"
-    >
-      ↻ <span>Reload</span>
-    </button>
-
-    <button
-      class="header-btn"
-      onclick="openUsersModal()"
-    >
-      👥 <span>Users</span>
-    </button>
-
-    <button
-      class="header-btn"
-      onclick="openItemsModal()"
-    >
-      📦 <span>Items</span>
-    </button>
-
-    <button
-      class="header-btn primary"
-      onclick="openEntryModal()"
-    >
-      + <span>New Entry</span>
-    </button>
-
-    <button
-      class="header-btn"
-      onclick="toggleTheme()"
-      title="Dark Mode"
-    >
-      ◐
-    </button>
-
-    <div class="profile-wrap">
+    <div class="header-actions">
 
       <button
-        class="profile-btn"
-        onclick="toggleProfileMenu(event)"
+        class="btn"
+        onclick="loadData(true)"
       >
-
-        <img
-          id="profileImage"
-          src="https://cdn-icons-png.flaticon.com/128/17163/17163834.png"
-          alt="Profile"
-        >
-
+        ↻ Reload
       </button>
 
-      <div
-        class="profile-menu"
-        id="profileMenu"
+
+      <button
+        class="btn"
+        onclick="openUsersModal()"
       >
+        👥 Users
+      </button>
+
+
+      <button
+        class="btn"
+        onclick="openItemsModal()"
+      >
+        📦 Items
+      </button>
+
+
+      <button
+        class="btn btn-green"
+        onclick="openEntryModal()"
+      >
+        ＋ New Entry
+      </button>
+
+
+      <button
+        class="btn"
+        onclick="toggleTheme()"
+      >
+        🌙 Dark Mode
+      </button>
+
+
+      <div class="profile-wrap">
 
         <button
-          onclick="openPasswordModal()"
+          class="profile-btn"
+          onclick="toggleProfileMenu(event)"
         >
-          🔑 Change Password
+          <img
+            id="profileImage"
+            src="https://cdn-icons-png.flaticon.com/128/149/149071.png"
+            alt="Profile"
+          >
         </button>
 
-        <button
-          onclick="logout()"
+
+        <div
+          class="profile-menu"
+          id="profileMenu"
         >
-          🚪 Logout
-        </button>
+
+          <button onclick="openPasswordModal()">
+            🔑 Change Password
+          </button>
+
+          <button onclick="logout()">
+            🚪 Logout
+          </button>
+
+        </div>
 
       </div>
 
@@ -1043,102 +909,86 @@ HEADER
 
 </header>
 
-<!-- =========================================================
-MAIN
-========================================================= -->
 
-<main class="main">
+<!-- ============================================================
+     MAIN
+============================================================ -->
 
-  <div class="toolbar">
+<main class="container">
 
-    <div class="toolbar-title">
+  <div class="page-top">
 
-      <h2 id="dataTitle">
+    <div>
+
+      <div
+        class="page-title"
+        id="dataTitle"
+      >
         Data
-      </h2>
+      </div>
 
-      <p id="dataSubtitle">
-        Manage your support entries
-      </p>
+      <div
+        class="page-subtitle"
+        id="dataSubtitle"
+      >
+        Manage support entries
+      </div>
 
     </div>
 
-    <button
-      class="refresh-btn"
-      onclick="loadData(true)"
-    >
-      ↻ Refresh Data
-    </button>
+
+    <div class="toolbar-actions">
+
+      <button
+        class="btn"
+        onclick="loadData(true)"
+      >
+        ↻ Refresh Data
+      </button>
+
+    </div>
 
   </div>
 
-  <!-- =======================================================
-  FILTER
-  ======================================================= -->
 
-  <div class="filter-bar">
+  <!-- ==========================================================
+       FILTER
+  =========================================================== -->
 
-    <div class="search-box">
+  <div class="filter-card">
+
+    <div class="filter-grid">
 
       <input
         type="text"
         id="searchInput"
-        placeholder="Search Name, IP, Work, Item..."
+        class="input"
+        placeholder="🔎 Search Name, IP, Work, Item..."
         oninput="applyFilters()"
       >
 
-    </div>
-
-    <div class="count-box">
-
-      <div class="count-item">
-
-        <span>Total:</span>
-
-        <strong id="totalCount">
-          0
-        </strong>
-
-      </div>
-
-      <div class="count-item result">
-
-        <span>Result:</span>
-
-        <strong id="resultCount">
-          0
-        </strong>
-
-      </div>
-
-    </div>
-
-    <div class="date-box">
 
       <input
         type="date"
         id="fromDate"
+        class="input"
         onchange="applyFilters()"
         title="From Date"
       >
 
-    </div>
-
-    <div class="date-box">
 
       <input
         type="date"
         id="toDate"
+        class="input"
         onchange="applyFilters()"
         title="To Date"
       >
 
-    </div>
-
-    <div class="select-box">
 
       <select
         id="dataType"
+        class="select"
         onchange="changeDataType()"
       >
 
@@ -1160,20 +1010,37 @@ MAIN
 
       </select>
 
-    </div>
 
-    <button
-      class="clear-btn"
-      onclick="clearFilters()"
-    >
-      Clear
-    </button>
+      <div class="filter-counts">
+
+        <div class="count-box">
+          Total:
+          <span id="totalCount">0</span>
+        </div>
+
+        <div class="count-box">
+          Result:
+          <span id="resultCount">0</span>
+        </div>
+
+      </div>
+
+
+      <button
+        class="btn"
+        onclick="clearFilters()"
+      >
+        Clear
+      </button>
+
+    </div>
 
   </div>
 
-  <!-- =======================================================
-  TABLE
-  ======================================================= -->
+
+  <!-- ==========================================================
+       TABLE
+  =========================================================== -->
 
   <div class="table-card">
 
@@ -1187,51 +1054,54 @@ MAIN
 
       </table>
 
+      <div
+        id="emptyState"
+        class="empty hidden"
+      >
+
+        <div class="empty-icon">
+          📭
+        </div>
+
+        <div>
+          No data found
+        </div>
+
+      </div>
+
     </div>
+
 
     <div
       class="pagination"
       id="pagination"
     ></div>
 
-    <div
-      class="table-loader"
-      id="loader"
-    >
-
-      <div class="table-loader-box">
-
-        <div class="spinner"></div>
-
-        <span id="loaderText">
-          Loading...
-        </span>
-
-      </div>
-
-    </div>
-
   </div>
 
 </main>
 
-<!-- =========================================================
-ENTRY MODAL
-ALL FIELDS EDITABLE
-========================================================= -->
+
+<!-- ============================================================
+     ENTRY MODAL
+============================================================ -->
 
 <div
-  class="modal"
+  class="modal-overlay"
   id="entryModal"
+  onclick="overlayClose(event,'entryModal')"
 >
 
-  <div class="modal-box">
+  <div class="modal">
 
     <div class="modal-header">
 
-      <h3 id="entryModalTitle">
+      <div
+        class="modal-title"
+        id="entryModalTitle"
+      >
         New Entry
-      </h3>
+      </div>
 
       <button
         class="close-btn"
@@ -1242,72 +1112,84 @@ ALL FIELDS EDITABLE
 
     </div>
 
+
     <div class="modal-body">
 
       <div class="form-grid">
 
         <div class="form-group">
 
-          <label>
+          <label class="form-label">
             Name
           </label>
 
           <input
             type="text"
             id="entryName"
-            placeholder="Enter Name"
+            class="input"
+            placeholder="Name"
           >
 
         </div>
 
+
         <div class="form-group">
 
-          <label>
+          <label class="form-label">
             IP
           </label>
 
           <input
             type="text"
-            id="entryIP"
-            placeholder="Enter IP"
+            id="entryIp"
+            class="input"
+            placeholder="IP address"
           >
 
         </div>
 
+
         <div class="form-group">
 
-          <label>
+          <label class="form-label">
             Work
           </label>
 
           <input
             type="text"
             id="entryWork"
-            placeholder="Enter Work"
+            class="input"
+            placeholder="Work"
           >
 
         </div>
 
+
         <div class="form-group">
 
-          <label>
+          <label class="form-label">
             Date
           </label>
 
           <input
             type="date"
             id="entryDate"
+            class="input"
           >
 
         </div>
 
+
         <div class="form-group full">
 
-          <label>
+          <label class="form-label">
             Item
           </label>
 
-          <select id="entryItem">
+          <select
+            id="entryItem"
+            class="select"
+          >
 
             <option value="">
               Select Item
@@ -1319,23 +1201,24 @@ ALL FIELDS EDITABLE
 
       </div>
 
-      <div class="form-actions">
+    </div>
 
-        <button
-          class="cancel-btn"
-          onclick="closeModal('entryModal')"
-        >
-          Cancel
-        </button>
 
-        <button
-          class="save-btn"
-          onclick="saveEntry()"
-        >
-          Save Entry
-        </button>
+    <div class="modal-footer">
 
-      </div>
+      <button
+        class="btn"
+        onclick="closeModal('entryModal')"
+      >
+        Cancel
+      </button>
+
+      <button
+        class="btn btn-green"
+        onclick="saveEntry()"
+      >
+        Save
+      </button>
 
     </div>
 
@@ -1343,22 +1226,24 @@ ALL FIELDS EDITABLE
 
 </div>
 
-<!-- =========================================================
-USERS MODAL
-========================================================= -->
+
+<!-- ============================================================
+     USERS MODAL
+============================================================ -->
 
 <div
-  class="modal"
+  class="modal-overlay"
   id="usersModal"
+  onclick="overlayClose(event,'usersModal')"
 >
 
-  <div class="modal-box large">
+  <div class="modal modal-lg">
 
     <div class="modal-header">
 
-      <h3>
+      <div class="modal-title">
         User Management
-      </h3>
+      </div>
 
       <button
         class="close-btn"
@@ -1369,46 +1254,62 @@ USERS MODAL
 
     </div>
 
+
     <div class="modal-body">
 
-      <div class="users-top">
+      <div
+        style="
+          display:flex;
+          justify-content:flex-end;
+          margin-bottom:12px;
+        "
+      >
 
         <button
-          class="user-add-btn"
+          class="btn btn-green"
           onclick="openAddUserModal()"
         >
-          + Add User
+          ＋ Add User
         </button>
 
       </div>
 
-      <div class="users-list">
 
-        <div class="user-row user-head">
+      <div class="modal-table-wrap">
 
-          <div>
-            Username
-          </div>
+        <table class="modal-table">
 
-          <div>
-            Name
-          </div>
+          <thead>
 
-          <div>
-            Role
-          </div>
+            <tr>
 
-          <div>
-            Status
-          </div>
+              <th>
+                Username
+              </th>
 
-          <div>
-            Action
-          </div>
+              <th>
+                Name
+              </th>
 
-        </div>
+              <th>
+                Role
+              </th>
 
-        <div id="usersBody"></div>
+              <th>
+                Status
+              </th>
+
+              <th>
+                Action
+              </th>
+
+            </tr>
+
+          </thead>
+
+          <tbody id="usersBody"></tbody>
+
+        </table>
 
       </div>
 
@@ -1418,23 +1319,27 @@ USERS MODAL
 
 </div>
 
-<!-- =========================================================
-USER FORM
-ALL USER FIELDS EDITABLE
-========================================================= -->
+
+<!-- ============================================================
+     ADD / EDIT USER MODAL
+============================================================ -->
 
 <div
-  class="modal"
+  class="modal-overlay"
   id="userFormModal"
+  onclick="overlayClose(event,'userFormModal')"
 >
 
-  <div class="modal-box">
+  <div class="modal">
 
     <div class="modal-header">
 
-      <h3 id="userFormTitle">
+      <div
+        class="modal-title"
+        id="userFormTitle"
+      >
         Add User
-      </h3>
+      </div>
 
       <button
         class="close-btn"
@@ -1445,123 +1350,146 @@ ALL USER FIELDS EDITABLE
 
     </div>
 
+
     <div class="modal-body">
 
-      <div class="form-group">
+      <div class="form-grid">
 
-        <label>
-          Username
-        </label>
+        <div class="form-group">
 
-        <input
-          type="text"
-          id="userUsername"
-          placeholder="Username"
-        >
+          <label class="form-label">
+            Username
+          </label>
+
+          <input
+            type="text"
+            id="userUsername"
+            class="input"
+            placeholder="Username"
+          >
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label class="form-label">
+            Password
+          </label>
+
+          <div class="password-wrap">
+
+            <input
+              type="text"
+              id="userPassword"
+              class="input"
+              placeholder="Password"
+            >
+
+          </div>
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label class="form-label">
+            Name
+          </label>
+
+          <input
+            type="text"
+            id="userName"
+            class="input"
+            placeholder="Name"
+          >
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label class="form-label">
+            Role
+          </label>
+
+          <select
+            id="userRole"
+            class="select"
+          >
+
+            <option value="admin">
+              admin
+            </option>
+
+            <option value="manager">
+              manager
+            </option>
+
+            <option value="support">
+              support
+            </option>
+
+            <option value="call">
+              call
+            </option>
+
+            <option value="guest">
+              guest
+            </option>
+
+          </select>
+
+        </div>
+
+
+        <div class="form-group full">
+
+          <label class="form-label">
+            Status
+          </label>
+
+          <select
+            id="userStatus"
+            class="select"
+          >
+
+            <option value="Active">
+              Active
+            </option>
+
+            <option value="Blocked">
+              Blocked
+            </option>
+
+            <option value="Inactive">
+              Inactive
+            </option>
+
+          </select>
+
+        </div>
 
       </div>
 
-      <div class="form-group">
+    </div>
 
-        <label>
-          Name
-        </label>
 
-        <input
-          type="text"
-          id="userName"
-          placeholder="Name"
-        >
+    <div class="modal-footer">
 
-      </div>
+      <button
+        class="btn"
+        onclick="closeModal('userFormModal')"
+      >
+        Cancel
+      </button>
 
-      <div class="form-group">
-
-        <label>
-          Password
-        </label>
-
-        <input
-          type="text"
-          id="userPassword"
-          placeholder="Password"
-        >
-
-      </div>
-
-      <div class="form-group">
-
-        <label>
-          Role
-        </label>
-
-        <select id="userRole">
-
-          <option value="admin">
-            admin
-          </option>
-
-          <option value="manager">
-            manager
-          </option>
-
-          <option value="support">
-            support
-          </option>
-
-          <option value="call">
-            call
-          </option>
-
-          <option value="guest">
-            guest
-          </option>
-
-        </select>
-
-      </div>
-
-      <div class="form-group">
-
-        <label>
-          Status
-        </label>
-
-        <select id="userStatus">
-
-          <option value="Active">
-            Active
-          </option>
-
-          <option value="Blocked">
-            Blocked
-          </option>
-
-          <option value="Inactive">
-            Inactive
-          </option>
-
-        </select>
-
-      </div>
-
-      <div class="form-actions">
-
-        <button
-          class="cancel-btn"
-          onclick="closeModal('userFormModal')"
-        >
-          Cancel
-        </button>
-
-        <button
-          class="save-btn"
-          onclick="saveUser()"
-        >
-          Save User
-        </button>
-
-      </div>
+      <button
+        class="btn btn-green"
+        onclick="saveUser()"
+      >
+        Save User
+      </button>
 
     </div>
 
@@ -1569,22 +1497,24 @@ ALL USER FIELDS EDITABLE
 
 </div>
 
-<!-- =========================================================
-ITEM MODAL
-========================================================= -->
+
+<!-- ============================================================
+     ITEMS MODAL
+============================================================ -->
 
 <div
-  class="modal"
+  class="modal-overlay"
   id="itemsModal"
+  onclick="overlayClose(event,'itemsModal')"
 >
 
-  <div class="modal-box large">
+  <div class="modal">
 
     <div class="modal-header">
 
-      <h3>
+      <div class="modal-title">
         Item Management
-      </h3>
+      </div>
 
       <button
         class="close-btn"
@@ -1595,48 +1525,65 @@ ITEM MODAL
 
     </div>
 
+
     <div class="modal-body">
 
-      <div class="item-add-area">
+      <div
+        style="
+          display:flex;
+          gap:8px;
+          margin-bottom:14px;
+        "
+      >
 
         <input
           type="text"
-          id="newItem"
-          placeholder="Enter new item"
+          id="newItemName"
+          class="input"
+          placeholder="New item name"
         >
 
         <button
-          class="item-add-btn"
+          class="btn btn-green"
           onclick="addNewItem()"
         >
-          + Add
+          Add
         </button>
 
       </div>
 
-      <div class="items-list">
 
-        <div class="item-row item-head">
+      <div class="modal-table-wrap">
 
-          <div>
-            Item
-          </div>
+        <table class="modal-table">
 
-          <div>
-            Date
-          </div>
+          <thead>
 
-          <div>
-            User
-          </div>
+            <tr>
 
-          <div>
-            Action
-          </div>
+              <th>
+                Item
+              </th>
 
-        </div>
+              <th>
+                Date
+              </th>
 
-        <div id="itemsBody"></div>
+              <th>
+                User
+              </th>
+
+              <th>
+                Action
+              </th>
+
+            </tr>
+
+          </thead>
+
+          <tbody id="itemsBody"></tbody>
+
+        </table>
 
       </div>
 
@@ -1646,22 +1593,24 @@ ITEM MODAL
 
 </div>
 
-<!-- =========================================================
-PASSWORD
-========================================================= -->
+
+<!-- ============================================================
+     PASSWORD MODAL
+============================================================ -->
 
 <div
-  class="modal"
+  class="modal-overlay"
   id="passwordModal"
+  onclick="overlayClose(event,'passwordModal')"
 >
 
-  <div class="modal-box">
+  <div class="modal">
 
     <div class="modal-header">
 
-      <h3>
+      <div class="modal-title">
         Change Password
-      </h3>
+      </div>
 
       <button
         class="close-btn"
@@ -1672,67 +1621,78 @@ PASSWORD
 
     </div>
 
+
     <div class="modal-body">
 
-      <div class="form-group">
+      <div class="form-grid">
 
-        <label>
-          Current Password
-        </label>
+        <div class="form-group full">
 
-        <input
-          type="password"
-          id="currentPassword"
-          placeholder="Current password"
-        >
+          <label class="form-label">
+            Current Password
+          </label>
 
-      </div>
+          <input
+            type="password"
+            id="currentPassword"
+            class="input"
+            placeholder="Current password"
+          >
 
-      <div class="form-group">
+        </div>
 
-        <label>
-          New Password
-        </label>
 
-        <input
-          type="password"
-          id="newPassword"
-          placeholder="New password"
-        >
+        <div class="form-group full">
 
-      </div>
+          <label class="form-label">
+            New Password
+          </label>
 
-      <div class="form-group">
+          <input
+            type="password"
+            id="newPassword"
+            class="input"
+            placeholder="New password"
+          >
 
-        <label>
-          Confirm New Password
-        </label>
+        </div>
 
-        <input
-          type="password"
-          id="confirmPassword"
-          placeholder="Confirm new password"
-        >
 
-      </div>
+        <div class="form-group full">
 
-      <div class="form-actions">
+          <label class="form-label">
+            Confirm New Password
+          </label>
 
-        <button
-          class="cancel-btn"
-          onclick="closeModal('passwordModal')"
-        >
-          Cancel
-        </button>
+          <input
+            type="password"
+            id="confirmPassword"
+            class="input"
+            placeholder="Confirm new password"
+          >
 
-        <button
-          class="save-btn"
-          onclick="changePassword()"
-        >
-          Change Password
-        </button>
+        </div>
 
       </div>
+
+    </div>
+
+
+    <div class="modal-footer">
+
+      <button
+        class="btn"
+        onclick="closeModal('passwordModal')"
+      >
+        Cancel
+      </button>
+
+      <button
+        class="btn btn-green"
+        onclick="changePassword()"
+      >
+        Update Password
+      </button>
 
     </div>
 
@@ -1740,15 +1700,43 @@ PASSWORD
 
 </div>
 
+
+<!-- ============================================================
+     LOADER
+============================================================ -->
+
 <div
-  class="toast"
-  id="toast"
+  class="loader-overlay"
+  id="loader"
+>
+
+  <div class="loader-box">
+
+    <div class="spinner"></div>
+
+    <div>
+      Loading...
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- ============================================================
+     TOAST
+============================================================ -->
+
+<div
+  class="toast-container"
+  id="toastContainer"
 ></div>
+
 
 <script>
 
 /* ============================================================
-API URLS
+   API URLS
 ============================================================ */
 
 const USER_API_URL =
@@ -1769,8 +1757,9 @@ const DELETE_API_URL =
 const ITEM_API_URL =
   "https://script.google.com/macros/s/AKfycby2e7dzGE5vkS0Q-Eyl9MKLAbkkkD8f37eIVj7VuV8bPytWGOH7cwJ3w25efP7MLGshOw/exec";
 
+
 /* ============================================================
-GLOBAL
+   GLOBAL STATE
 ============================================================ */
 
 let allData = [];
@@ -1801,8 +1790,9 @@ let currentUsername =
     ""
   ).trim();
 
+
 /* ============================================================
-DOM READY
+   START
 ============================================================ */
 
 document.addEventListener(
@@ -1828,30 +1818,22 @@ document.addEventListener(
   }
 );
 
+
 /* ============================================================
-LOGIN CHECK
+   LOGIN CHECK
 ============================================================ */
 
 function checkLogin(){
 
   const localAuth =
-    localStorage.getItem(
-      "dashboardAuth"
-    ) === "true";
+    localStorage.getItem("dashboardAuth") === "true";
 
   const sessionAuth =
-    sessionStorage.getItem(
-      "dashboardAuth"
-    ) === "true";
+    sessionStorage.getItem("dashboardAuth") === "true";
 
-  if(
-    !localAuth &&
-    !sessionAuth
-  ){
+  if(!localAuth && !sessionAuth){
 
-    window.location.replace(
-      "index.html"
-    );
+    window.location.replace("index.html");
 
     return false;
   }
@@ -1859,8 +1841,9 @@ function checkLogin(){
   return true;
 }
 
+
 /* ============================================================
-LOAD USER
+   LOAD USER
 ============================================================ */
 
 async function loadUser(){
@@ -1875,22 +1858,14 @@ async function loadUser(){
       await fetch(
         USER_API_URL +
         "?action=getUser&username=" +
-        encodeURIComponent(
-          currentUsername
-        ) +
+        encodeURIComponent(currentUsername) +
         "&_=" +
         Date.now(),
         {
+          method:"GET",
           cache:"no-store"
         }
       );
-
-    if(!response.ok){
-      throw new Error(
-        "User server error: " +
-        response.status
-      );
-    }
 
     const result =
       await response.json();
@@ -1905,79 +1880,85 @@ async function loadUser(){
         result.user;
 
       const name =
-        user.Name ||
-        user.name ||
-        currentUsername;
+        String(
+          user.Name ||
+          user.name ||
+          ""
+        ).trim();
 
       const role =
-        user.Role ||
-        user.role ||
-        "";
+        String(
+          user.Role ||
+          user.role ||
+          ""
+        ).trim();
 
       const status =
-        user.Status ||
-        user.status ||
-        "";
+        String(
+          user.Status ||
+          user.status ||
+          ""
+        ).trim();
 
-      localStorage.setItem(
-        "name",
-        name
-      );
+      if(name){
+        localStorage.setItem(
+          "name",
+          name
+        );
+      }
 
-      localStorage.setItem(
-        "role",
-        role
-      );
+      if(role){
+        localStorage.setItem(
+          "role",
+          role
+        );
+      }
 
-      localStorage.setItem(
-        "status",
-        status
-      );
+      if(status){
+        localStorage.setItem(
+          "status",
+          status
+        );
+      }
 
-      const picture =
-        user.Picture ||
-        user.picture;
+      if(user.Picture){
 
-      if(picture){
+        document.getElementById(
+          "profileImage"
+        ).src =
+          user.Picture;
 
-        const profileImage =
-          document.getElementById(
-            "profileImage"
-          );
-
-        if(profileImage){
-          profileImage.src =
-            picture;
-        }
       }
 
       const statusLower =
-        String(status)
-          .trim()
-          .toLowerCase();
+        status.toLowerCase();
 
       if(
-        statusLower === "blocked" ||
         statusLower === "block" ||
-        statusLower === "inactive"
+        statusLower === "blocked"
       ){
 
         logout();
+
+        return;
       }
+
     }
 
   }catch(error){
 
     console.error(
-      "User loading error:",
+      "loadUser error:",
       error
     );
 
   }
+
 }
 
+
 /* ============================================================
-CHANGE DATA TYPE
+   DATA TYPE
 ============================================================ */
 
 function changeDataType(){
@@ -1989,25 +1970,17 @@ function changeDataType(){
 
   currentPage = 1;
 
-  document.getElementById(
-    "searchInput"
-  ).value = "";
-
-  document.getElementById(
-    "fromDate"
-  ).value = "";
-
-  document.getElementById(
-    "toDate"
-  ).value = "";
+  clearFilterInputs();
 
   updateDataTitle();
 
   loadData();
+
 }
 
+
 /* ============================================================
-TITLE
+   UPDATE TITLE
 ============================================================ */
 
 function updateDataTitle(){
@@ -2022,18 +1995,7 @@ function updateDataTitle(){
       "dataSubtitle"
     );
 
-  if(currentDataType === "data"){
-
-    title.textContent =
-      "Data";
-
-    subtitle.textContent =
-      "Manage your support entries";
-
-  }
-  else if(
-    currentDataType === "sell"
-  ){
+  if(currentDataType === "sell"){
 
     title.textContent =
       "Sell Data";
@@ -2042,209 +2004,123 @@ function updateDataTitle(){
       "Manage sold entries";
 
   }
-  else if(
-    currentDataType === "paid"
-  ){
+  else if(currentDataType === "paid"){
 
     title.textContent =
       "Paid Data";
 
     subtitle.textContent =
-      "Paid entry history";
+      "Manage paid entries";
+
+  }
+  else if(currentDataType === "delete"){
+
+    title.textContent =
+      "Deleted Data";
+
+    subtitle.textContent =
+      "Manage deleted entries";
 
   }
   else{
 
     title.textContent =
-      "Delete Data";
+      "Data";
 
     subtitle.textContent =
-      "Deleted entry history";
+      "Manage support entries";
+
   }
+
 }
 
+
 /* ============================================================
-ROW NUMBER
+   CLEAR FILTER INPUTS
 ============================================================ */
 
-function getRealRowNumber(row){
+function clearFilterInputs(){
 
-  if(!row){
-    return null;
+  const search =
+    document.getElementById(
+      "searchInput"
+    );
+
+  const from =
+    document.getElementById(
+      "fromDate"
+    );
+
+  const to =
+    document.getElementById(
+      "toDate"
+    );
+
+  if(search){
+    search.value = "";
   }
 
-  const keys = [
-
-    "_sheetRow",
-    "sheetRow",
-    "SheetRow",
-
-    "row",
-    "rowNumber",
-
-    "sourceRow",
-
-    "originalRow",
-    "originalRowNumber",
-
-    "sellRow",
-    "SellRow"
-
-  ];
-
-  if(
-    typeof row === "object"
-  ){
-
-    for(
-      const key of keys
-    ){
-
-      const value =
-        Number(
-          row[key]
-        );
-
-      if(
-        Number.isFinite(value) &&
-        value >= 2
-      ){
-
-        return value;
-      }
-    }
+  if(from){
+    from.value = "";
   }
 
-  if(
-    Array.isArray(row)
-  ){
-
-    for(
-      let i = row.length - 1;
-      i >= 9;
-      i--
-    ){
-
-      const value =
-        Number(
-          row[i]
-        );
-
-      if(
-        Number.isFinite(value) &&
-        value >= 2
-      ){
-
-        return value;
-      }
-    }
+  if(to){
+    to.value = "";
   }
 
-  return null;
 }
 
-/* ============================================================
-ATTACH ROW NUMBERS
-============================================================ */
-
-function attachSheetRowNumbers(
-  data
-){
-
-  if(!Array.isArray(data)){
-    return [];
-  }
-
-  return data.map(
-    (row,index) => {
-
-      const existing =
-        getRealRowNumber(
-          row
-        );
-
-      if(
-        existing &&
-        existing >= 2
-      ){
-
-        return row;
-      }
-
-      if(
-        row &&
-        typeof row === "object"
-      ){
-
-        row._sheetRow =
-          index + 2;
-      }
-
-      return row;
-    }
-  );
-}
 
 /* ============================================================
-LOAD DATA
+   LOAD DATA
 ============================================================ */
 
 async function loadData(
-  force=false
+  force = false
 ){
 
-  if(!checkLogin()){
-    return;
-  }
-
-  let cache = null;
+  let cached = null;
 
   if(
     currentDataType === "data"
   ){
-
-    cache =
-      dataCache;
-
+    cached = dataCache;
   }
   else if(
     currentDataType === "sell"
   ){
-
-    cache =
-      sellCache;
-
+    cached = sellCache;
   }
   else if(
     currentDataType === "paid"
   ){
-
-    cache =
-      paidCache;
-
+    cached = paidCache;
   }
-  else{
-
-    cache =
-      deleteCache;
+  else if(
+    currentDataType === "delete"
+  ){
+    cached = deleteCache;
   }
+
 
   if(
-    !force &&
-    cache
+    cached &&
+    !force
   ){
 
     allData =
-      cache;
+      attachSheetRowNumbers(
+        cached
+      );
 
     applyFilters();
 
     return;
   }
 
-  showLoader(
-    "Loading data..."
-  );
+
+  showLoader();
+
 
   try{
 
@@ -2254,9 +2130,8 @@ async function loadData(
     let action =
       "getData";
 
-    if(
-      currentDataType === "sell"
-    ){
+
+    if(currentDataType === "sell"){
 
       api =
         SELL_API_URL;
@@ -2285,21 +2160,22 @@ async function loadData(
 
       action =
         "getDeletedData";
+
     }
+
 
     const separator =
       api.includes("?")
         ? "&"
         : "?";
 
+
     const response =
       await fetch(
         api +
         separator +
         "action=" +
-        encodeURIComponent(
-          action
-        ) +
+        encodeURIComponent(action) +
         "&_=" +
         Date.now(),
         {
@@ -2308,16 +2184,10 @@ async function loadData(
         }
       );
 
-    if(!response.ok){
-
-      throw new Error(
-        "Server error: " +
-        response.status
-      );
-    }
 
     const result =
       await response.json();
+
 
     if(
       !result ||
@@ -2325,79 +2195,207 @@ async function loadData(
     ){
 
       throw new Error(
-        result &&
-        result.message
-          ? result.message
-          : "Failed to load data"
+        result?.message ||
+        "Failed to load data"
       );
+
     }
+
 
     allData =
       attachSheetRowNumbers(
-        Array.isArray(
-          result.data
-        )
+        Array.isArray(result.data)
           ? result.data
           : []
       );
 
-    if(
-      currentDataType === "data"
-    ){
 
-      dataCache =
-        allData;
-
+    if(currentDataType === "data"){
+      dataCache = allData;
     }
-    else if(
-      currentDataType === "sell"
-    ){
-
-      sellCache =
-        allData;
-
+    else if(currentDataType === "sell"){
+      sellCache = allData;
     }
-    else if(
-      currentDataType === "paid"
-    ){
-
-      paidCache =
-        allData;
-
+    else if(currentDataType === "paid"){
+      paidCache = allData;
     }
-    else{
-
-      deleteCache =
-        allData;
+    else if(currentDataType === "delete"){
+      deleteCache = allData;
     }
+
 
     applyFilters();
+
 
   }catch(error){
 
     console.error(
-      "Load data error:",
+      "loadData error:",
       error
-    );
-
-    showToast(
-      error.message ||
-      "Failed to load data",
-      "error"
     );
 
     allData = [];
 
     applyFilters();
 
-  }finally{
+    showToast(
+      error.message ||
+      "Unable to load data",
+      "error"
+    );
+
+  }
+  finally{
 
     hideLoader();
+
   }
+
 }
 
+
 /* ============================================================
-RENDER DATA
+   ATTACH SHEET ROW NUMBERS
+============================================================ */
+
+function attachSheetRowNumbers(
+  data
+){
+
+  return data.map(
+    (
+      row,
+      index
+    ) => {
+
+      if(!row){
+        return row;
+      }
+
+      const existing =
+        getRealRowNumber(row);
+
+      if(
+        existing &&
+        existing >= 2
+      ){
+
+        return row;
+
+      }
+
+
+      if(
+        typeof row === "object" &&
+        !Array.isArray(row)
+      ){
+
+        return {
+          ...row,
+          _sheetRow:
+            index + 2
+        };
+
+      }
+
+
+      return row;
+
+    }
+  );
+
+}
+
+
+/* ============================================================
+   GET REAL ROW NUMBER
+============================================================ */
+
+function getRealRowNumber(
+  row
+){
+
+  if(!row){
+    return null;
+  }
+
+
+  const keys = [
+    "_sheetRow",
+    "sheetRow",
+    "SheetRow",
+    "row",
+    "rowNumber",
+    "sourceRow",
+    "originalRow",
+    "originalRowNumber",
+    "sellRow",
+    "SellRow"
+  ];
+
+
+  if(
+    typeof row === "object"
+  ){
+
+    for(
+      const key of keys
+    ){
+
+      const value =
+        Number(
+          row[key]
+        );
+
+      if(
+        Number.isFinite(value) &&
+        value >= 2
+      ){
+
+        return value;
+
+      }
+
+    }
+
+  }
+
+
+  if(Array.isArray(row)){
+
+    for(
+      let i =
+        row.length - 1;
+      i >= 9;
+      i--
+    ){
+
+      const value =
+        Number(
+          row[i]
+        );
+
+      if(
+        Number.isFinite(value) &&
+        value >= 2
+      ){
+
+        return value;
+
+      }
+
+    }
+
+  }
+
+
+  return null;
+
+}
+
+
+/* ============================================================
+   RENDER DATA
 ============================================================ */
 
 function renderData(
@@ -2414,105 +2412,564 @@ function renderData(
       "tableBody"
     );
 
-  head.innerHTML = "";
-  body.innerHTML = "";
+  const empty =
+    document.getElementById(
+      "emptyState"
+    );
 
-  let headers = [];
 
-  if(
-    currentDataType === "data"
-  ){
+  if(currentDataType === "data"){
 
-    headers = [
-      "Name",
-      "IP",
-      "Work",
-      "Date",
-      "Item",
-      "Action"
-    ];
+    head.innerHTML = `
+      <tr>
+        <th>Name</th>
+        <th>IP</th>
+        <th>Work</th>
+        <th>Date</th>
+        <th>Item</th>
+        <th>Action</th>
+      </tr>
+    `;
 
   }
   else if(
     currentDataType === "sell"
   ){
 
-    headers = [
-      "Name",
-      "IP",
-      "Work",
-      "Date",
-      "Item",
-      "Sell Date",
-      "User",
-      "Action"
-    ];
+    head.innerHTML = `
+      <tr>
+        <th>Name</th>
+        <th>IP</th>
+        <th>Work</th>
+        <th>Date</th>
+        <th>Item</th>
+        <th>Sell Date</th>
+        <th>User</th>
+        <th>Action</th>
+      </tr>
+    `;
 
   }
   else if(
     currentDataType === "paid"
   ){
 
-    headers = [
-      "Name",
-      "IP",
-      "Work",
-      "Date",
-      "Item",
-      "Sell Date",
-      "Sell User",
-      "Paid Time",
-      "Paid User"
-    ];
+    head.innerHTML = `
+      <tr>
+        <th>Name</th>
+        <th>IP</th>
+        <th>Work</th>
+        <th>Date</th>
+        <th>Item</th>
+        <th>Sell Date</th>
+        <th>Sell User</th>
+        <th>Paid Time</th>
+        <th>Paid User</th>
+      </tr>
+    `;
 
   }
   else{
 
-    headers = [
-      "Name",
-      "IP",
-      "Work",
-      "Date",
-      "Item",
-      "Delete Time",
-      "User"
-    ];
+    head.innerHTML = `
+      <tr>
+        <th>Name</th>
+        <th>IP</th>
+        <th>Work</th>
+        <th>Date</th>
+        <th>Item</th>
+        <th>Delete Time</th>
+        <th>User</th>
+      </tr>
+    `;
+
   }
 
-  const headerRow =
-    document.createElement(
-      "tr"
+
+  body.innerHTML = "";
+
+
+  if(
+    !data ||
+    data.length === 0
+  ){
+
+    empty.classList.remove(
+      "hidden"
     );
 
-  headers.forEach(
-    header => {
+    renderPagination(0);
 
-      const th =
-        document.createElement(
-          "th"
+    return;
+
+  }
+
+
+  empty.classList.add(
+    "hidden"
+  );
+
+
+  const start =
+    (currentPage - 1) *
+    pageSize;
+
+  const pageRows =
+    data.slice(
+      start,
+      start + pageSize
+    );
+
+
+  pageRows.forEach(
+    (
+      row,
+      index
+    ) => {
+
+      const realIndex =
+        start + index;
+
+      const name =
+        getField(
+          row,
+          [
+            "Name",
+            "name",
+            0
+          ]
         );
 
-      th.textContent =
-        header;
+      const ip =
+        getField(
+          row,
+          [
+            "IP",
+            "Ip",
+            "ip",
+            1
+          ]
+        );
 
-      headerRow.appendChild(
-        th
+      const work =
+        getField(
+          row,
+          [
+            "Work",
+            "work",
+            2
+          ]
+        );
+
+      const date =
+        getField(
+          row,
+          [
+            "Date",
+            "date",
+            3
+          ]
+        );
+
+      const item =
+        getField(
+          row,
+          [
+            "Item",
+            "item",
+            4
+          ]
+        );
+
+
+      let html = "";
+
+
+      if(
+        currentDataType === "data"
+      ){
+
+        html = `
+          <tr>
+
+            <td>${escapeHtml(name)}</td>
+
+            <td>${escapeHtml(ip)}</td>
+
+            <td>${escapeHtml(work)}</td>
+
+            <td>${escapeHtml(formatDateTime(date))}</td>
+
+            <td>${escapeHtml(item)}</td>
+
+            <td class="action-cell">
+
+              <div class="action-group">
+
+                ${createActionButton(
+                  "Edit",
+                  "editDataEntry",
+                  realIndex,
+                  "btn"
+                )}
+
+                ${createActionButton(
+                  "Sell",
+                  "sellDataEntry",
+                  realIndex,
+                  "btn btn-warning"
+                )}
+
+                ${createActionButton(
+                  "Delete",
+                  "deleteDataEntry",
+                  realIndex,
+                  "btn btn-danger"
+                )}
+
+              </div>
+
+            </td>
+
+          </tr>
+        `;
+
+      }
+      else if(
+        currentDataType === "sell"
+      ){
+
+        const sellTime =
+          getField(
+            row,
+            [
+              "Sell time",
+              "Sell Time",
+              "sellTime",
+              "sell_time",
+              5
+            ]
+          );
+
+        const user =
+          getField(
+            row,
+            [
+              "User",
+              "user",
+              "Username",
+              "username",
+              6
+            ]
+          );
+
+
+        html = `
+          <tr>
+
+            <td>${escapeHtml(name)}</td>
+
+            <td>${escapeHtml(ip)}</td>
+
+            <td>${escapeHtml(work)}</td>
+
+            <td>${escapeHtml(formatDateTime(date))}</td>
+
+            <td>${escapeHtml(item)}</td>
+
+            <td>${escapeHtml(formatDateTime(sellTime))}</td>
+
+            <td>${escapeHtml(user)}</td>
+
+            <td class="action-cell">
+
+              <div class="action-group">
+
+                ${createActionButton(
+                  "Edit",
+                  "editSellEntry",
+                  realIndex,
+                  "btn"
+                )}
+
+                ${createActionButton(
+                  "Paid",
+                  "paidSellEntry",
+                  realIndex,
+                  "btn btn-green"
+                )}
+
+              </div>
+
+            </td>
+
+          </tr>
+        `;
+
+      }
+      else if(
+        currentDataType === "paid"
+      ){
+
+        const sellTime =
+          getField(
+            row,
+            [
+              "Sell time",
+              "Sell Time",
+              "sellTime",
+              5
+            ]
+          );
+
+        const sellUser =
+          getField(
+            row,
+            [
+              "User",
+              "user",
+              "Sell User",
+              "sellUser",
+              6
+            ]
+          );
+
+        const paidTime =
+          getField(
+            row,
+            [
+              "Paid time",
+              "Paid Time",
+              "paidTime",
+              "paid_time",
+              7
+            ]
+          );
+
+        const paidUser =
+          getField(
+            row,
+            [
+              "Paid User",
+              "paidUser",
+              "PaidUser",
+              8
+            ]
+          );
+
+
+        html = `
+          <tr>
+
+            <td>${escapeHtml(name)}</td>
+
+            <td>${escapeHtml(ip)}</td>
+
+            <td>${escapeHtml(work)}</td>
+
+            <td>${escapeHtml(formatDateTime(date))}</td>
+
+            <td>${escapeHtml(item)}</td>
+
+            <td>${escapeHtml(formatDateTime(sellTime))}</td>
+
+            <td>${escapeHtml(sellUser)}</td>
+
+            <td>${escapeHtml(formatDateTime(paidTime))}</td>
+
+            <td>${escapeHtml(paidUser)}</td>
+
+          </tr>
+        `;
+
+      }
+      else{
+
+        const deleteTime =
+          getField(
+            row,
+            [
+              "Delete time",
+              "Delete Time",
+              "deleteTime",
+              "delete_time",
+              5
+            ]
+          );
+
+        const user =
+          getField(
+            row,
+            [
+              "User",
+              "user",
+              "Username",
+              "username",
+              6
+            ]
+          );
+
+
+        html = `
+          <tr>
+
+            <td>${escapeHtml(name)}</td>
+
+            <td>${escapeHtml(ip)}</td>
+
+            <td>${escapeHtml(work)}</td>
+
+            <td>${escapeHtml(formatDateTime(date))}</td>
+
+            <td>${escapeHtml(item)}</td>
+
+            <td>${escapeHtml(formatDateTime(deleteTime))}</td>
+
+            <td>${escapeHtml(user)}</td>
+
+          </tr>
+        `;
+
+      }
+
+
+      body.insertAdjacentHTML(
+        "beforeend",
+        html
       );
+
     }
   );
 
-  head.appendChild(
-    headerRow
+
+  renderPagination(
+    data.length
   );
+
+}
+
+
+/* ============================================================
+   APPLY FILTERS
+============================================================ */
+
+function applyFilters(){
+
+  const search =
+    String(
+      document.getElementById(
+        "searchInput"
+      ).value ||
+      ""
+    )
+    .trim()
+    .toLowerCase();
+
+
+  const fromDate =
+    document.getElementById(
+      "fromDate"
+    ).value;
+
+
+  const toDate =
+    document.getElementById(
+      "toDate"
+    ).value;
+
+
+  filteredData =
+    allData.filter(
+      row => {
+
+        if(search){
+
+          const searchable =
+            JSON.stringify(
+              row
+            ).toLowerCase();
+
+          if(
+            !searchable.includes(
+              search
+            )
+          ){
+
+            return false;
+
+          }
+
+        }
+
+
+        const rowDate =
+          normalizeDate(
+            getField(
+              row,
+              [
+                "Date",
+                "date",
+                3
+              ]
+            )
+          );
+
+
+        if(fromDate){
+
+          if(
+            rowDate &&
+            rowDate < fromDate
+          ){
+
+            return false;
+
+          }
+
+        }
+
+
+        if(toDate){
+
+          if(
+            rowDate &&
+            rowDate > toDate
+          ){
+
+            return false;
+
+          }
+
+        }
+
+
+        return true;
+
+      }
+    );
+
+
+  document.getElementById(
+    "totalCount"
+  ).textContent =
+    allData.length;
+
+
+  document.getElementById(
+    "resultCount"
+  ).textContent =
+    filteredData.length;
+
 
   const totalPages =
     Math.max(
       1,
       Math.ceil(
-        data.length /
+        filteredData.length /
         pageSize
       )
     );
+
 
   if(
     currentPage >
@@ -2521,447 +2978,34 @@ function renderData(
 
     currentPage =
       totalPages;
+
   }
 
-  const start =
-    (currentPage - 1) *
-    pageSize;
 
-  const pageData =
-    data.slice(
-      start,
-      start + pageSize
-    );
-
-  if(
-    pageData.length === 0
-  ){
-
-    const tr =
-      document.createElement(
-        "tr"
-      );
-
-    const td =
-      document.createElement(
-        "td"
-      );
-
-    td.colSpan =
-      headers.length;
-
-    td.className =
-      "empty-row";
-
-    td.textContent =
-      "No data found";
-
-    tr.appendChild(
-      td
-    );
-
-    body.appendChild(
-      tr
-    );
-
-    renderPagination(
-      data.length
-    );
-
-    return;
-  }
-
-  pageData.forEach(
-    (row,index) => {
-
-      const tr =
-        document.createElement(
-          "tr"
-        );
-
-      const name =
-        row.Name ??
-        row.name ??
-        row[0] ??
-        "";
-
-      const ip =
-        row.Ip ??
-        row.IP ??
-        row.ip ??
-        row[1] ??
-        "";
-
-      const work =
-        row.Work ??
-        row.work ??
-        row[2] ??
-        "";
-
-      const date =
-        row.Date ??
-        row.date ??
-        row[3] ??
-        "";
-
-      const item =
-        row.Item ??
-        row.item ??
-        row[4] ??
-        "";
-
-      addCell(
-        tr,
-        name
-      );
-
-      addCell(
-        tr,
-        ip
-      );
-
-      addCell(
-        tr,
-        work
-      );
-
-      addCell(
-        tr,
-        formatDate(date)
-      );
-
-      addCell(
-        tr,
-        item
-      );
-
-      /* ====================================================
-      SELL
-      ==================================================== */
-
-      if(
-        currentDataType === "sell"
-      ){
-
-        const sellDate =
-          row.SellDate ??
-          row.sellDate ??
-          row["Sell Date"] ??
-          row.sellTime ??
-          row["Sell time"] ??
-          row[5] ??
-          "";
-
-        const sellUser =
-          row.User ??
-          row.user ??
-          row.Username ??
-          row.username ??
-          row.SellUser ??
-          row.sellUser ??
-          row[6] ??
-          "";
-
-        addCell(
-          tr,
-          formatDateTime(
-            sellDate
-          )
-        );
-
-        addCell(
-          tr,
-          sellUser
-        );
-
-        const actionTd =
-          document.createElement(
-            "td"
-          );
-
-        const action =
-          document.createElement(
-            "div"
-          );
-
-        action.className =
-          "action-wrap";
-
-        const editBtn =
-          createActionButton(
-            "Edit",
-            "action-edit"
-          );
-
-        editBtn.onclick =
-          () => editSellEntry(
-            start + index
-          );
-
-        action.appendChild(
-          editBtn
-        );
-
-        const paidBtn =
-          createActionButton(
-            "Paid",
-            "action-paid"
-          );
-
-        paidBtn.onclick =
-          () => paidSellEntry(
-            start + index
-          );
-
-        action.appendChild(
-          paidBtn
-        );
-
-        actionTd.appendChild(
-          action
-        );
-
-        tr.appendChild(
-          actionTd
-        );
-      }
-
-      /* ====================================================
-      PAID
-      ==================================================== */
-
-      else if(
-        currentDataType === "paid"
-      ){
-
-        const sellDate =
-          row.SellDate ??
-          row.sellDate ??
-          row["Sell Date"] ??
-          row.sellTime ??
-          row["Sell time"] ??
-          row[5] ??
-          "";
-
-        const sellUser =
-          row.User ??
-          row.user ??
-          row.SellUser ??
-          row.sellUser ??
-          row[6] ??
-          "";
-
-        const paidTime =
-          row.PaidTime ??
-          row.paidTime ??
-          row["Paid Time"] ??
-          row[7] ??
-          "";
-
-        const paidUser =
-          row.PaidUser ??
-          row.paidUser ??
-          row["Paid User"] ??
-          row[8] ??
-          "";
-
-        addCell(
-          tr,
-          formatDateTime(
-            sellDate
-          )
-        );
-
-        addCell(
-          tr,
-          sellUser
-        );
-
-        addCell(
-          tr,
-          formatDateTime(
-            paidTime
-          )
-        );
-
-        addCell(
-          tr,
-          paidUser
-        );
-      }
-
-      /* ====================================================
-      DELETE
-      ==================================================== */
-
-      else if(
-        currentDataType === "delete"
-      ){
-
-        const deleteTime =
-          row.DelletTime ??
-          row.DeleteTime ??
-          row.Dellet ??
-          row["Delete Time"] ??
-          row[5] ??
-          "";
-
-        const deleteUser =
-          row.User ??
-          row.user ??
-          row.Username ??
-          row.username ??
-          row[6] ??
-          "";
-
-        addCell(
-          tr,
-          formatDateTime(
-            deleteTime
-          )
-        );
-
-        addCell(
-          tr,
-          deleteUser
-        );
-      }
-
-      /* ====================================================
-      NORMAL DATA
-      ==================================================== */
-
-      else{
-
-        const actionTd =
-          document.createElement(
-            "td"
-          );
-
-        const action =
-          document.createElement(
-            "div"
-          );
-
-        action.className =
-          "action-wrap";
-
-        const editBtn =
-          createActionButton(
-            "Edit",
-            "action-edit"
-          );
-
-        editBtn.onclick =
-          () => editDataEntry(
-            start + index
-          );
-
-        action.appendChild(
-          editBtn
-        );
-
-        const sellBtn =
-          createActionButton(
-            "Sell",
-            "action-sell"
-          );
-
-        sellBtn.onclick =
-          () => sellDataEntry(
-            start + index
-          );
-
-        action.appendChild(
-          sellBtn
-        );
-
-        const deleteBtn =
-          createActionButton(
-            "Delete",
-            "action-delete"
-          );
-
-        deleteBtn.onclick =
-          () => deleteDataEntry(
-            start + index
-          );
-
-        action.appendChild(
-          deleteBtn
-        );
-
-        actionTd.appendChild(
-          action
-        );
-
-        tr.appendChild(
-          actionTd
-        );
-      }
-
-      body.appendChild(
-        tr
-      );
-
-    }
+  renderData(
+    filteredData
   );
 
-  renderPagination(
-    data.length
-  );
 }
 
+
 /* ============================================================
-CELL
+   CLEAR FILTERS
 ============================================================ */
 
-function addCell(
-  tr,
-  value
-){
+function clearFilters(){
 
-  const td =
-    document.createElement(
-      "td"
-    );
+  clearFilterInputs();
 
-  td.textContent =
-    value == null
-      ? ""
-      : String(value);
+  currentPage = 1;
 
-  tr.appendChild(
-    td
-  );
+  applyFilters();
+
 }
 
-/* ============================================================
-ACTION BUTTON
-============================================================ */
-
-function createActionButton(
-  text,
-  className
-){
-
-  const button =
-    document.createElement(
-      "button"
-    );
-
-  button.className =
-    "action-btn " +
-    className;
-
-  button.textContent =
-    text;
-
-  return button;
-}
 
 /* ============================================================
-PAGINATION
+   PAGINATION
 ============================================================ */
 
 function renderPagination(
@@ -2973,20 +3017,63 @@ function renderPagination(
       "pagination"
     );
 
+
   container.innerHTML = "";
 
-  const totalPages =
+
+  if(total <= pageSize){
+
+    if(total > 0){
+
+      container.innerHTML = `
+        <div class="page-info">
+          Showing ${total} result(s)
+        </div>
+      `;
+
+    }
+
+    return;
+
+  }
+
+
+  const pages =
     Math.ceil(
       total /
       pageSize
     );
 
-  if(
-    totalPages <= 1
-  ){
 
-    return;
-  }
+  const info =
+    document.createElement(
+      "div"
+    );
+
+  info.className =
+    "page-info";
+
+  const start =
+    ((currentPage - 1) * pageSize) + 1;
+
+  const end =
+    Math.min(
+      currentPage * pageSize,
+      total
+    );
+
+  info.textContent =
+    `Showing ${start}-${end} of ${total}`;
+
+
+  const buttons =
+    document.createElement(
+      "div"
+    );
+
+  buttons.className =
+    "page-buttons";
+
 
   const previous =
     document.createElement(
@@ -3000,51 +3087,82 @@ function renderPagination(
     "‹";
 
   previous.disabled =
-    currentPage <= 1;
+    currentPage === 1;
 
   previous.onclick =
-    () => goToPage(
-      currentPage - 1
-    );
+    () => {
 
-  container.appendChild(
+      if(
+        currentPage > 1
+      ){
+
+        currentPage--;
+
+        renderData(
+          filteredData
+        );
+
+      }
+
+    };
+
+
+  buttons.appendChild(
     previous
   );
 
-  const maxButtons = 7;
-
-  let startPage =
-    Math.max(
-      1,
-      currentPage - 3
-    );
-
-  let endPage =
-    Math.min(
-      totalPages,
-      startPage +
-      maxButtons - 1
-    );
-
-  if(
-    endPage - startPage <
-    maxButtons - 1
-  ){
-
-    startPage =
-      Math.max(
-        1,
-        endPage -
-        maxButtons +
-        1
-      );
-  }
 
   for(
-    let i = startPage;
-    i <= endPage;
+    let i = 1;
+    i <= pages;
     i++
   ){
+
+    if(
+      pages > 7 &&
+      i > 2 &&
+      i < pages - 1 &&
+      Math.abs(
+        i - currentPage
+      ) > 1
+    ){
+
+      if(
+        !buttons.querySelector(
+          ".dots"
+        )
+      ){
+
+        const dots =
+          document.createElement(
+            "span"
+          );
+
+        dots.className =
+          "page-btn dots";
+
+        dots.textContent =
+          "...";
+
+        dots.style.display =
+          "inline-flex";
+
+        dots.style.alignItems =
+          "center";
+
+        dots.style.justifyContent =
+          "center";
+
+        buttons.appendChild(
+          dots
+        );
+
+      }
+
+      continue;
+
+    }
+
 
     const btn =
       document.createElement(
@@ -3063,12 +3181,23 @@ function renderPagination(
       i;
 
     btn.onclick =
-      () => goToPage(i);
+      () => {
 
-    container.appendChild(
+        currentPage = i;
+
+        renderData(
+          filteredData
+        );
+
+      };
+
+
+    buttons.appendChild(
       btn
     );
+
   }
+
 
   const next =
     document.createElement(
@@ -3082,179 +3211,44 @@ function renderPagination(
     "›";
 
   next.disabled =
-    currentPage >= totalPages;
+    currentPage === pages;
 
   next.onclick =
-    () => goToPage(
-      currentPage + 1
-    );
+    () => {
 
-  container.appendChild(
+      if(
+        currentPage < pages
+      ){
+
+        currentPage++;
+
+        renderData(
+          filteredData
+        );
+
+      }
+
+    };
+
+
+  buttons.appendChild(
     next
   );
-}
 
-/* ============================================================
-GO PAGE
-============================================================ */
 
-function goToPage(
-  page
-){
-
-  const totalPages =
-    Math.max(
-      1,
-      Math.ceil(
-        filteredData.length /
-        pageSize
-      )
-    );
-
-  if(
-    page < 1 ||
-    page > totalPages
-  ){
-
-    return;
-  }
-
-  currentPage =
-    page;
-
-  renderData(
-    filteredData
+  container.appendChild(
+    info
   );
-}
 
-/* ============================================================
-FILTER
-============================================================ */
-
-function applyFilters(){
-
-  const search =
-    document
-      .getElementById(
-        "searchInput"
-      )
-      .value
-      .trim()
-      .toLowerCase();
-
-  const fromDate =
-    document.getElementById(
-      "fromDate"
-    ).value;
-
-  const toDate =
-    document.getElementById(
-      "toDate"
-    ).value;
-
-  filteredData =
-    allData.filter(
-      row => {
-
-        if(search){
-
-          const rowText =
-            JSON.stringify(
-              row
-            ).toLowerCase();
-
-          if(
-            !rowText.includes(
-              search
-            )
-          ){
-
-            return false;
-          }
-        }
-
-        const rowDate =
-          normalizeDate(
-            row.Date ??
-            row.date ??
-            row[3] ??
-            ""
-          );
-
-        if(
-          fromDate &&
-          rowDate &&
-          rowDate < fromDate
-        ){
-
-          return false;
-        }
-
-        if(
-          toDate &&
-          rowDate &&
-          rowDate > toDate
-        ){
-
-          return false;
-        }
-
-        return true;
-      }
-    );
-
-  currentPage = 1;
-
-  const totalCount =
-    document.getElementById(
-      "totalCount"
-    );
-
-  const resultCount =
-    document.getElementById(
-      "resultCount"
-    );
-
-  if(totalCount){
-
-    totalCount.textContent =
-      allData.length;
-  }
-
-  if(resultCount){
-
-    resultCount.textContent =
-      filteredData.length;
-  }
-
-  renderData(
-    filteredData
+  container.appendChild(
+    buttons
   );
+
 }
 
-/* ============================================================
-CLEAR FILTERS
-============================================================ */
-
-function clearFilters(){
-
-  document.getElementById(
-    "searchInput"
-  ).value = "";
-
-  document.getElementById(
-    "fromDate"
-  ).value = "";
-
-  document.getElementById(
-    "toDate"
-  ).value = "";
-
-  applyFilters();
-}
 
 /* ============================================================
-NEW ENTRY
+   OPEN ENTRY MODAL
 ============================================================ */
 
 function openEntryModal(){
@@ -3262,46 +3256,57 @@ function openEntryModal(){
   editingDataRow = null;
   editingSellRow = null;
 
+
   document.getElementById(
     "entryModalTitle"
   ).textContent =
     "New Entry";
 
+
   document.getElementById(
     "entryName"
   ).value =
-    localStorage.getItem(
-      "name"
-    ) ||
-    currentUsername;
+    localStorage.getItem("name") ||
+    currentUsername ||
+    "";
+
 
   document.getElementById(
-    "entryIP"
-  ).value = "";
+    "entryIp"
+  ).value =
+    "";
+
 
   document.getElementById(
     "entryWork"
-  ).value = "";
+  ).value =
+    "";
+
 
   document.getElementById(
     "entryDate"
   ).value =
-    getToday();
+    getTodayInputValue();
 
-  populateItemSelect();
 
   document.getElementById(
     "entryItem"
-  ).value = "";
+  ).value =
+    "";
+
+
+  populateItemSelect();
+
 
   openModal(
     "entryModal"
   );
+
 }
 
+
 /* ============================================================
-EDIT DATA
-ALL FIELDS CAN BE CHANGED
+   EDIT DATA ENTRY
 ============================================================ */
 
 function editDataEntry(
@@ -3311,9 +3316,11 @@ function editDataEntry(
   const row =
     filteredData[index];
 
+
   if(!row){
     return;
   }
+
 
   editingDataRow =
     getRealRowNumber(
@@ -3322,76 +3329,93 @@ function editDataEntry(
 
   editingSellRow = null;
 
-  if(
-    !editingDataRow
-  ){
-
-    showToast(
-      "Original Data row not found",
-      "error"
-    );
-
-    return;
-  }
 
   document.getElementById(
     "entryModalTitle"
   ).textContent =
-    "Edit Entry";
+    "Edit Data Entry";
+
 
   document.getElementById(
     "entryName"
   ).value =
-    row.Name ??
-    row.name ??
-    row[0] ??
-    "";
+    getField(
+      row,
+      [
+        "Name",
+        "name",
+        0
+      ]
+    );
+
 
   document.getElementById(
-    "entryIP"
+    "entryIp"
   ).value =
-    row.Ip ??
-    row.IP ??
-    row.ip ??
-    row[1] ??
-    "";
+    getField(
+      row,
+      [
+        "IP",
+        "Ip",
+        "ip",
+        1
+      ]
+    );
+
 
   document.getElementById(
     "entryWork"
   ).value =
-    row.Work ??
-    row.work ??
-    row[2] ??
-    "";
+    getField(
+      row,
+      [
+        "Work",
+        "work",
+        2
+      ]
+    );
+
 
   document.getElementById(
     "entryDate"
   ).value =
     normalizeDate(
-      row.Date ??
-      row.date ??
-      row[3] ??
-      ""
+      getField(
+        row,
+        [
+          "Date",
+          "date",
+          3
+        ]
+      )
     );
 
+
   populateItemSelect();
+
 
   document.getElementById(
     "entryItem"
   ).value =
-    row.Item ??
-    row.item ??
-    row[4] ??
-    "";
+    getField(
+      row,
+      [
+        "Item",
+        "item",
+        4
+      ]
+    );
+
 
   openModal(
     "entryModal"
   );
+
 }
 
+
 /* ============================================================
-EDIT SELL
-ALL FIELDS CAN BE CHANGED
+   EDIT SELL ENTRY
 ============================================================ */
 
 function editSellEntry(
@@ -3401,9 +3425,11 @@ function editSellEntry(
   const row =
     filteredData[index];
 
+
   if(!row){
     return;
   }
+
 
   editingSellRow =
     getRealRowNumber(
@@ -3412,75 +3438,93 @@ function editSellEntry(
 
   editingDataRow = null;
 
-  if(
-    !editingSellRow
-  ){
-
-    showToast(
-      "Sell row number not found",
-      "error"
-    );
-
-    return;
-  }
 
   document.getElementById(
     "entryModalTitle"
   ).textContent =
     "Edit Sell Entry";
 
+
   document.getElementById(
     "entryName"
   ).value =
-    row.Name ??
-    row.name ??
-    row[0] ??
-    "";
+    getField(
+      row,
+      [
+        "Name",
+        "name",
+        0
+      ]
+    );
+
 
   document.getElementById(
-    "entryIP"
+    "entryIp"
   ).value =
-    row.Ip ??
-    row.IP ??
-    row.ip ??
-    row[1] ??
-    "";
+    getField(
+      row,
+      [
+        "IP",
+        "Ip",
+        "ip",
+        1
+      ]
+    );
+
 
   document.getElementById(
     "entryWork"
   ).value =
-    row.Work ??
-    row.work ??
-    row[2] ??
-    "";
+    getField(
+      row,
+      [
+        "Work",
+        "work",
+        2
+      ]
+    );
+
 
   document.getElementById(
     "entryDate"
   ).value =
     normalizeDate(
-      row.Date ??
-      row.date ??
-      row[3] ??
-      ""
+      getField(
+        row,
+        [
+          "Date",
+          "date",
+          3
+        ]
+      )
     );
 
+
   populateItemSelect();
+
 
   document.getElementById(
     "entryItem"
   ).value =
-    row.Item ??
-    row.item ??
-    row[4] ??
-    "";
+    getField(
+      row,
+      [
+        "Item",
+        "item",
+        4
+      ]
+    );
+
 
   openModal(
     "entryModal"
   );
+
 }
 
+
 /* ============================================================
-SAVE ENTRY
+   SAVE ENTRY
 ============================================================ */
 
 async function saveEntry(){
@@ -3490,25 +3534,30 @@ async function saveEntry(){
       "entryName"
     ).value.trim();
 
+
   const ip =
     document.getElementById(
-      "entryIP"
+      "entryIp"
     ).value.trim();
+
 
   const work =
     document.getElementById(
       "entryWork"
     ).value.trim();
 
+
   const date =
     document.getElementById(
       "entryDate"
     ).value;
 
+
   const item =
     document.getElementById(
       "entryItem"
     ).value.trim();
+
 
   if(!name){
 
@@ -3518,7 +3567,9 @@ async function saveEntry(){
     );
 
     return;
+
   }
+
 
   if(!ip){
 
@@ -3528,7 +3579,9 @@ async function saveEntry(){
     );
 
     return;
+
   }
+
 
   if(!work){
 
@@ -3538,7 +3591,9 @@ async function saveEntry(){
     );
 
     return;
+
   }
+
 
   if(!date){
 
@@ -3548,7 +3603,9 @@ async function saveEntry(){
     );
 
     return;
+
   }
+
 
   if(!item){
 
@@ -3558,27 +3615,25 @@ async function saveEntry(){
     );
 
     return;
+
   }
 
-  showLoader(
-    "Saving..."
-  );
+
+  showLoader();
+
 
   try{
 
-    /* ======================================================
-    EDIT SELL
-    ====================================================== */
+    let result;
+
 
     if(editingSellRow){
 
-      const response =
+      result =
         await postJson(
           SELL_API_URL,
           {
-
-            action:
-              "editSellData",
+            action:"editSellData",
 
             row:
               editingSellRow,
@@ -3592,74 +3647,28 @@ async function saveEntry(){
             SellRow:
               editingSellRow,
 
-            name:
-              name,
-
-            ip:
-              ip,
-
-            work:
-              work,
-
-            date:
-              date,
-
-            item:
-              item,
+            name,
+            ip,
+            work,
+            date,
+            item,
 
             username:
               currentUsername,
 
             user:
               currentUsername
-
           }
         );
 
-      if(
-        !response ||
-        response.success !== true
-      ){
-
-        throw new Error(
-          response &&
-          response.message
-            ? response.message
-            : "Failed to edit sell entry"
-        );
-      }
-
-      sellCache = null;
-
-      closeModal(
-        "entryModal"
-      );
-
-      showToast(
-        "Sell entry updated successfully",
-        "success"
-      );
-
-      await loadData(
-        true
-      );
-
-      return;
     }
+    else if(editingDataRow){
 
-    /* ======================================================
-    EDIT NORMAL DATA
-    ====================================================== */
-
-    if(editingDataRow){
-
-      const response =
+      result =
         await postJson(
           DATA_API_URL,
           {
-
-            action:
-              "editData",
+            action:"editData",
 
             row:
               editingDataRow,
@@ -3667,134 +3676,105 @@ async function saveEntry(){
             rowNumber:
               editingDataRow,
 
-            name:
-              name,
-
-            ip:
-              ip,
-
-            work:
-              work,
-
-            date:
-              date,
-
-            item:
-              item
-
+            name,
+            ip,
+            work,
+            date,
+            item
           }
         );
 
-      if(
-        !response ||
-        response.success !== true
-      ){
+    }
+    else{
 
-        throw new Error(
-          response &&
-          response.message
-            ? response.message
-            : "Failed to update entry"
+      result =
+        await postJson(
+          DATA_API_URL,
+          {
+            action:"addData",
+
+            name,
+            ip,
+            work,
+            date,
+            item
+          }
         );
-      }
 
-      dataCache = null;
-
-      closeModal(
-        "entryModal"
-      );
-
-      showToast(
-        "Entry updated successfully",
-        "success"
-      );
-
-      await loadData(
-        true
-      );
-
-      return;
     }
 
-    /* ======================================================
-    ADD NEW DATA
-    ====================================================== */
-
-    const response =
-      await postJson(
-        DATA_API_URL,
-        {
-
-          action:
-            "addData",
-
-          name:
-            name,
-
-          ip:
-            ip,
-
-          work:
-            work,
-
-          date:
-            date,
-
-          item:
-            item
-
-        }
-      );
 
     if(
-      !response ||
-      response.success !== true
+      !result ||
+      result.success !== true
     ){
 
       throw new Error(
-        response &&
-        response.message
-          ? response.message
-          : "Failed to add entry"
+        result?.message ||
+        "Save failed"
       );
+
     }
 
-    dataCache = null;
 
     closeModal(
       "entryModal"
     );
 
+
+    dataCache = null;
+    sellCache = null;
+
+
+    currentDataType =
+      editingSellRow
+        ? "sell"
+        : "data";
+
+
+    document.getElementById(
+      "dataType"
+    ).value =
+      currentDataType;
+
+
+    updateDataTitle();
+
+
     showToast(
-      "Entry added successfully",
+      "Saved successfully",
       "success"
     );
 
-    await loadData(
-      true
-    );
+
+    await loadData(true);
+
 
   }catch(error){
 
     console.error(
-      "Save entry error:",
+      "saveEntry error:",
       error
     );
 
     showToast(
       error.message ||
-      "Save failed",
+      "Unable to save",
       "error"
     );
 
-  }finally{
+  }
+  finally{
 
     hideLoader();
+
   }
+
 }
 
+
 /* ============================================================
-SELL
+   SELL DATA ENTRY
 ============================================================ */
 
 async function sellDataEntry(
@@ -3804,240 +3784,17 @@ async function sellDataEntry(
   const row =
     filteredData[index];
 
+
   if(!row){
-
-    showToast(
-      "Data not found",
-      "error"
-    );
-
     return;
   }
+
 
   const rowNumber =
     getRealRowNumber(
       row
     );
 
-  if(
-    !rowNumber ||
-    rowNumber < 2
-  ){
-
-    showToast(
-      "Original Data row not found",
-      "error"
-    );
-
-    return;
-  }
-
-  const name =
-    row.Name ??
-    row.name ??
-    row[0] ??
-    "";
-
-  const ip =
-    row.Ip ??
-    row.IP ??
-    row.ip ??
-    row[1] ??
-    "";
-
-  const work =
-    row.Work ??
-    row.work ??
-    row[2] ??
-    "";
-
-  const date =
-    row.Date ??
-    row.date ??
-    row[3] ??
-    "";
-
-  const item =
-    row.Item ??
-    row.item ??
-    row[4] ??
-    "";
-
-  if(
-    !confirm(
-      "Sell this entry?\n\n" +
-      "Name: " +
-      name +
-      "\nIP: " +
-      ip +
-      "\nItem: " +
-      item
-    )
-  ){
-
-    return;
-  }
-
-  showLoader(
-    "Selling entry..."
-  );
-
-  try{
-
-    const sellResult =
-      await postJson(
-        SELL_API_URL,
-        {
-
-          action:
-            "sellData",
-
-          row:
-            rowNumber,
-
-          rowNumber:
-            rowNumber,
-
-          name:
-            name,
-
-          ip:
-            ip,
-
-          work:
-            work,
-
-          date:
-            date,
-
-          item:
-            item,
-
-          username:
-            currentUsername,
-
-          user:
-            currentUsername,
-
-          SellUser:
-            currentUsername,
-
-          sellUser:
-            currentUsername
-
-        }
-      );
-
-    if(
-      !sellResult ||
-      sellResult.success !== true
-    ){
-
-      throw new Error(
-        sellResult &&
-        sellResult.message
-          ? sellResult.message
-          : "Sell operation failed"
-      );
-    }
-
-    const deleteResult =
-      await postJson(
-        DATA_API_URL,
-        {
-
-          action:
-            "deleteData",
-
-          row:
-            rowNumber,
-
-          rowNumber:
-            rowNumber
-
-        }
-      );
-
-    if(
-      !deleteResult ||
-      deleteResult.success !== true
-    ){
-
-      dataCache = null;
-      sellCache = null;
-
-      showToast(
-        "Sold successfully, but original Data row could not be deleted.",
-        "error"
-      );
-
-      await loadData(
-        true
-      );
-
-      return;
-    }
-
-    dataCache = null;
-    sellCache = null;
-
-    currentDataType =
-      "data";
-
-    document.getElementById(
-      "dataType"
-    ).value =
-      "data";
-
-    updateDataTitle();
-
-    showToast(
-      "Sold successfully and removed from Data",
-      "success"
-    );
-
-    await loadData(
-      true
-    );
-
-  }catch(error){
-
-    console.error(
-      "Sell error:",
-      error
-    );
-
-    showToast(
-      error.message ||
-      "Sell failed",
-      "error"
-    );
-
-  }finally{
-
-    hideLoader();
-  }
-}
-
-/* ============================================================
-DELETE
-============================================================ */
-
-async function deleteDataEntry(
-  index
-){
-
-  const row =
-    filteredData[index];
-
-  if(!row){
-    return;
-  }
-
-  const rowNumber =
-    getRealRowNumber(
-      row
-    );
 
   if(
     !rowNumber ||
@@ -4050,64 +3807,83 @@ async function deleteDataEntry(
     );
 
     return;
+
   }
 
-  const name =
-    row.Name ??
-    row.name ??
-    row[0] ??
-    "";
-
-  const ip =
-    row.Ip ??
-    row.IP ??
-    row.ip ??
-    row[1] ??
-    "";
-
-  const work =
-    row.Work ??
-    row.work ??
-    row[2] ??
-    "";
-
-  const date =
-    row.Date ??
-    row.date ??
-    row[3] ??
-    "";
-
-  const item =
-    row.Item ??
-    row.item ??
-    row[4] ??
-    "";
 
   if(
     !confirm(
-      "Delete this entry?\n\n" +
-      name +
-      " | " +
-      ip
+      "Are you sure you want to sell this entry?"
     )
   ){
 
     return;
+
   }
 
-  showLoader(
-    "Deleting..."
-  );
+
+  const name =
+    getField(
+      row,
+      [
+        "Name",
+        "name",
+        0
+      ]
+    );
+
+  const ip =
+    getField(
+      row,
+      [
+        "IP",
+        "Ip",
+        "ip",
+        1
+      ]
+    );
+
+  const work =
+    getField(
+      row,
+      [
+        "Work",
+        "work",
+        2
+      ]
+    );
+
+  const date =
+    getField(
+      row,
+      [
+        "Date",
+        "date",
+        3
+      ]
+    );
+
+  const item =
+    getField(
+      row,
+      [
+        "Item",
+        "item",
+        4
+      ]
+    );
+
+
+  showLoader();
+
 
   try{
 
-    const archiveResult =
+    const sellResult =
       await postJson(
-        DELETE_API_URL,
+        SELL_API_URL,
         {
-
-          action:
-            "deleteData",
+          action:"sellData",
 
           row:
             rowNumber,
@@ -4115,59 +3891,235 @@ async function deleteDataEntry(
           rowNumber:
             rowNumber,
 
-          name:
-            name,
+          sellRow:
+            rowNumber,
 
-          ip:
-            ip,
+          SellRow:
+            rowNumber,
 
-          work:
-            work,
-
-          date:
-            date,
-
-          item:
-            item,
+          name,
+          ip,
+          work,
+          date,
+          item,
 
           username:
             currentUsername,
 
           user:
             currentUsername
-
         }
       );
 
+
     if(
-      !archiveResult ||
-      archiveResult.success !== true
+      !sellResult ||
+      sellResult.success !== true
     ){
 
       throw new Error(
-        archiveResult &&
-        archiveResult.message
-          ? archiveResult.message
-          : "Delete archive failed"
+        sellResult?.message ||
+        "Sell operation failed"
       );
+
     }
+
+
+    await postJson(
+      DATA_API_URL,
+      {
+        action:"deleteData",
+
+        row:
+          rowNumber,
+
+        rowNumber:
+          rowNumber
+      }
+    );
+
+
+    dataCache = null;
+    sellCache = null;
+
+
+    currentDataType =
+      "data";
+
+
+    document.getElementById(
+      "dataType"
+    ).value =
+      "data";
+
+
+    updateDataTitle();
+
+
+    showToast(
+      "Entry sold successfully",
+      "success"
+    );
+
+
+    await loadData(true);
+
+
+  }catch(error){
+
+    console.error(
+      "sellDataEntry error:",
+      error
+    );
+
+    showToast(
+      error.message ||
+      "Sell failed",
+      "error"
+    );
+
+  }
+  finally{
+
+    hideLoader();
+
+  }
+
+}
+
+
+/* ============================================================
+   DELETE DATA ENTRY
+============================================================ */
+
+async function deleteDataEntry(
+  index
+){
+
+  const row =
+    filteredData[index];
+
+
+  if(!row){
+    return;
+  }
+
+
+  const rowNumber =
+    getRealRowNumber(
+      row
+    );
+
+
+  if(
+    !rowNumber ||
+    rowNumber < 2
+  ){
+
+    showToast(
+      "Original row not found",
+      "error"
+    );
+
+    return;
+
+  }
+
+
+  if(
+    !confirm(
+      "Are you sure you want to delete this entry?"
+    )
+  ){
+
+    return;
+
+  }
+
+
+  const name =
+    getField(
+      row,
+      [
+        "Name",
+        "name",
+        0
+      ]
+    );
+
+  const ip =
+    getField(
+      row,
+      [
+        "IP",
+        "Ip",
+        "ip",
+        1
+      ]
+    );
+
+  const work =
+    getField(
+      row,
+      [
+        "Work",
+        "work",
+        2
+      ]
+    );
+
+  const date =
+    getField(
+      row,
+      [
+        "Date",
+        "date",
+        3
+      ]
+    );
+
+  const item =
+    getField(
+      row,
+      [
+        "Item",
+        "item",
+        4
+      ]
+    );
+
+
+  showLoader();
+
+
+  try{
 
     const deleteResult =
       await postJson(
-        DATA_API_URL,
+        DELETE_API_URL,
         {
-
-          action:
-            "deleteData",
+          action:"deleteData",
 
           row:
             rowNumber,
 
           rowNumber:
-            rowNumber
+            rowNumber,
 
+          name,
+          ip,
+          work,
+          date,
+          item,
+
+          username:
+            currentUsername,
+
+          user:
+            currentUsername
         }
       );
+
 
     if(
       !deleteResult ||
@@ -4175,28 +4127,44 @@ async function deleteDataEntry(
     ){
 
       throw new Error(
-        deleteResult &&
-        deleteResult.message
-          ? deleteResult.message
-          : "Original Data delete failed"
+        deleteResult?.message ||
+        "Delete archive failed"
       );
+
     }
 
+
+    await postJson(
+      DATA_API_URL,
+      {
+        action:"deleteData",
+
+        row:
+          rowNumber,
+
+        rowNumber:
+          rowNumber
+      }
+    );
+
+
     dataCache = null;
+    deleteCache = null;
+
 
     showToast(
-      "Entry deleted successfully",
+      "Deleted successfully",
       "success"
     );
 
-    await loadData(
-      true
-    );
+
+    await loadData(true);
+
 
   }catch(error){
 
     console.error(
-      "Delete error:",
+      "deleteDataEntry error:",
       error
     );
 
@@ -4206,14 +4174,18 @@ async function deleteDataEntry(
       "error"
     );
 
-  }finally{
+  }
+  finally{
 
     hideLoader();
+
   }
+
 }
 
+
 /* ============================================================
-PAID
+   PAID SELL ENTRY
 ============================================================ */
 
 async function paidSellEntry(
@@ -4223,33 +4195,32 @@ async function paidSellEntry(
   const row =
     filteredData[index];
 
+
   if(!row){
-
-    showToast(
-      "Sell entry not found",
-      "error"
-    );
-
     return;
   }
 
-  const sellRowNumber =
+
+  const rowNumber =
     getRealRowNumber(
       row
     );
 
+
   if(
-    !sellRowNumber ||
-    sellRowNumber < 2
+    !rowNumber ||
+    rowNumber < 2
   ){
 
     showToast(
-      "Invalid Sell row number",
+      "Original row not found",
       "error"
     );
 
     return;
+
   }
+
 
   if(
     !confirm(
@@ -4258,107 +4229,118 @@ async function paidSellEntry(
   ){
 
     return;
+
   }
 
-  showLoader(
-    "Processing payment..."
-  );
+
+  const name =
+    getField(
+      row,
+      [
+        "Name",
+        "name",
+        0
+      ]
+    );
+
+  const ip =
+    getField(
+      row,
+      [
+        "IP",
+        "Ip",
+        "ip",
+        1
+      ]
+    );
+
+  const work =
+    getField(
+      row,
+      [
+        "Work",
+        "work",
+        2
+      ]
+    );
+
+  const date =
+    getField(
+      row,
+      [
+        "Date",
+        "date",
+        3
+      ]
+    );
+
+  const item =
+    getField(
+      row,
+      [
+        "Item",
+        "item",
+        4
+      ]
+    );
+
+
+  const sellTime =
+    getField(
+      row,
+      [
+        "Sell time",
+        "Sell Time",
+        "sellTime",
+        5
+      ]
+    );
+
+
+  const sellUser =
+    getField(
+      row,
+      [
+        "User",
+        "user",
+        "Username",
+        "username",
+        6
+      ]
+    );
+
+
+  showLoader();
+
 
   try{
-
-    const sellTime =
-      row.SellDate ??
-      row.sellDate ??
-      row["Sell Date"] ??
-      row.sellTime ??
-      row["Sell time"] ??
-      row[5] ??
-      "";
-
-    const sellUser =
-      row.User ??
-      row.user ??
-      row.Username ??
-      row.username ??
-      row.SellUser ??
-      row.sellUser ??
-      row[6] ??
-      "";
-
-    const name =
-      row.Name ??
-      row.name ??
-      row[0] ??
-      "";
-
-    const ip =
-      row.Ip ??
-      row.IP ??
-      row.ip ??
-      row[1] ??
-      "";
-
-    const work =
-      row.Work ??
-      row.work ??
-      row[2] ??
-      "";
-
-    const date =
-      row.Date ??
-      row.date ??
-      row[3] ??
-      "";
-
-    const item =
-      row.Item ??
-      row.item ??
-      row[4] ??
-      "";
 
     const result =
       await postJson(
         PAID_API_URL,
         {
-
-          action:
-            "paidData",
+          action:"paidData",
 
           row:
-            sellRowNumber,
+            rowNumber,
 
           rowNumber:
-            sellRowNumber,
+            rowNumber,
 
           sellRow:
-            sellRowNumber,
+            rowNumber,
 
           SellRow:
-            sellRowNumber,
+            rowNumber,
 
-          sellRowNumber:
-            sellRowNumber,
+          name,
+          ip,
+          work,
+          date,
+          item,
 
-          name:
-            name,
-
-          ip:
-            ip,
-
-          work:
-            work,
-
-          date:
-            date,
-
-          item:
-            item,
-
-          sellTime:
-            sellTime,
-
-          sellUser:
-            sellUser,
+          sellTime,
+          sellUser,
 
           user:
             currentUsername,
@@ -4371,9 +4353,9 @@ async function paidSellEntry(
 
           PaidUser:
             currentUsername
-
         }
       );
+
 
     if(
       !result ||
@@ -4381,615 +4363,97 @@ async function paidSellEntry(
     ){
 
       throw new Error(
-        result &&
-        result.message
-          ? result.message
-          : "Payment failed"
+        result?.message ||
+        "Paid operation failed"
       );
+
     }
 
-    paidCache = null;
+
     sellCache = null;
+    paidCache = null;
+
 
     currentDataType =
       "paid";
+
 
     document.getElementById(
       "dataType"
     ).value =
       "paid";
 
+
     updateDataTitle();
 
+
     showToast(
-      "Paid successfully and added to Paid Sheet",
+      "Marked as paid successfully",
       "success"
     );
 
-    await loadData(
-      true
-    );
+
+    await loadData(true);
+
 
   }catch(error){
 
     console.error(
-      "Payment error:",
+      "paidSellEntry error:",
       error
     );
 
     showToast(
       error.message ||
-      "Payment failed",
+      "Paid failed",
       "error"
     );
 
-  }finally{
+  }
+  finally{
 
     hideLoader();
+
   }
+
 }
+
 
 /* ============================================================
-ITEMS
+   USERS
 ============================================================ */
 
-function openItemsModal(){
-
-  document.getElementById(
-    "newItem"
-  ).value = "";
-
-  openModal(
-    "itemsModal"
-  );
-
-  loadItems(
-    true
-  );
-}
-
-async function loadItems(
-  force=false
-){
-
-  if(
-    !force &&
-    itemCache
-  ){
-
-    itemList =
-      itemCache;
-
-    populateItemSelect();
-
-    renderItems();
-
-    return;
-  }
-
-  try{
-
-    const response =
-      await fetch(
-        ITEM_API_URL +
-        "?action=getItems&_=" +
-        Date.now(),
-        {
-          cache:"no-store"
-        }
-      );
-
-    if(!response.ok){
-
-      throw new Error(
-        "Item server error: " +
-        response.status
-      );
-    }
-
-    const result =
-      await response.json();
-
-    if(
-      !result ||
-      result.success !== true
-    ){
-
-      throw new Error(
-        result.message ||
-        "Failed to load items"
-      );
-    }
-
-    itemList =
-      Array.isArray(
-        result.data
-      )
-        ? result.data
-        : [];
-
-    itemCache =
-      itemList;
-
-    renderItems();
-
-    populateItemSelect();
-
-  }catch(error){
-
-    console.error(
-      "Items error:",
-      error
-    );
-
-    showToast(
-      error.message ||
-      "Failed to load items",
-      "error"
-    );
-  }
-}
-
-/* ============================================================
-RENDER ITEMS
-============================================================ */
-
-function renderItems(){
-
-  const body =
-    document.getElementById(
-      "itemsBody"
-    );
-
-  body.innerHTML = "";
-
-  if(
-    !itemList ||
-    itemList.length === 0
-  ){
-
-    body.innerHTML =
-      '<div style="padding:25px;text-align:center;color:var(--muted);font-size:12px;">No items found</div>';
-
-    return;
-  }
-
-  itemList.forEach(
-    (item,index) => {
-
-      const row =
-        typeof item === "object"
-          ? item
-          : {
-              Item:item
-            };
-
-      const name =
-        row.Item ??
-        row.item ??
-        row.Name ??
-        row.name ??
-        row[0] ??
-        "";
-
-      const date =
-        row.Date ??
-        row.date ??
-        row[1] ??
-        "";
-
-      const user =
-        row.User ??
-        row.user ??
-        row.Username ??
-        row.username ??
-        row[2] ??
-        "";
-
-      const div =
-        document.createElement(
-          "div"
-        );
-
-      div.className =
-        "item-row";
-
-      const itemCell =
-        document.createElement(
-          "div"
-        );
-
-      itemCell.className =
-        "item-cell";
-
-      itemCell.textContent =
-        name;
-
-      const dateCell =
-        document.createElement(
-          "div"
-        );
-
-      dateCell.className =
-        "item-cell";
-
-      dateCell.textContent =
-        formatDateTime(
-          date
-        );
-
-      const userCell =
-        document.createElement(
-          "div"
-        );
-
-      userCell.className =
-        "item-cell";
-
-      userCell.textContent =
-        user;
-
-      const actionCell =
-        document.createElement(
-          "div"
-        );
-
-      actionCell.className =
-        "item-cell";
-
-      const deleteBtn =
-        document.createElement(
-          "button"
-        );
-
-      deleteBtn.className =
-        "small-action delete-item-btn";
-
-      deleteBtn.textContent =
-        "Delete";
-
-      deleteBtn.onclick =
-        () => deleteItem(
-          index
-        );
-
-      actionCell.appendChild(
-        deleteBtn
-      );
-
-      div.appendChild(
-        itemCell
-      );
-
-      div.appendChild(
-        dateCell
-      );
-
-      div.appendChild(
-        userCell
-      );
-
-      div.appendChild(
-        actionCell
-      );
-
-      body.appendChild(
-        div
-      );
-    }
-  );
-}
-
-/* ============================================================
-ITEM SELECT
-============================================================ */
-
-function populateItemSelect(){
-
-  const select =
-    document.getElementById(
-      "entryItem"
-    );
-
-  if(!select){
-    return;
-  }
-
-  const oldValue =
-    select.value;
-
-  select.innerHTML =
-    '<option value="">Select Item</option>';
-
-  itemList.forEach(
-    item => {
-
-      const name =
-        typeof item === "object"
-          ? (
-              item.Item ??
-              item.item ??
-              item.Name ??
-              item.name ??
-              item[0] ??
-              ""
-            )
-          : item;
-
-      if(!name){
-        return;
-      }
-
-      const option =
-        document.createElement(
-          "option"
-        );
-
-      option.value =
-        name;
-
-      option.textContent =
-        name;
-
-      select.appendChild(
-        option
-      );
-    }
-  );
-
-  if(oldValue){
-
-    select.value =
-      oldValue;
-  }
-}
-
-/* ============================================================
-ADD ITEM
-============================================================ */
-
-async function addNewItem(){
-
-  const input =
-    document.getElementById(
-      "newItem"
-    );
-
-  const item =
-    input.value.trim();
-
-  if(!item){
-
-    showToast(
-      "Enter item name",
-      "error"
-    );
-
-    return;
-  }
-
-  showLoader(
-    "Adding item..."
-  );
-
-  try{
-
-    const result =
-      await postJson(
-        ITEM_API_URL,
-        {
-
-          action:
-            "addItem",
-
-          item:
-            item,
-
-          itemName:
-            item,
-
-          name:
-            item,
-
-          user:
-            currentUsername,
-
-          username:
-            currentUsername
-
-        }
-      );
-
-    if(
-      !result ||
-      result.success !== true
-    ){
-
-      throw new Error(
-        result.message ||
-        "Failed to add item"
-      );
-    }
-
-    input.value = "";
-
-    itemCache = null;
-
-    await loadItems(
-      true
-    );
-
-    showToast(
-      "Item added successfully",
-      "success"
-    );
-
-  }catch(error){
-
-    console.error(
-      "Add item error:",
-      error
-    );
-
-    showToast(
-      error.message ||
-      "Failed to add item",
-      "error"
-    );
-
-  }finally{
-
-    hideLoader();
-  }
-}
-
-/* ============================================================
-DELETE ITEM
-============================================================ */
-
-async function deleteItem(
-  index
-){
-
-  const item =
-    itemList[index];
-
-  if(!item){
-    return;
-  }
-
-  const itemName =
-    typeof item === "object"
-      ? (
-          item.Item ??
-          item.item ??
-          item.Name ??
-          item.name ??
-          item[0] ??
-          ""
-        )
-      : item;
-
-  const row =
-    typeof item === "object"
-      ? (
-          item.row ??
-          item.rowNumber ??
-          item.Row ??
-          item[3] ??
-          index + 2
-        )
-      : index + 2;
-
-  if(
-    !confirm(
-      "Delete item: " +
-      itemName +
-      "?"
-    )
-  ){
-
-    return;
-  }
-
-  showLoader(
-    "Deleting item..."
-  );
-
-  try{
-
-    const result =
-      await postJson(
-        ITEM_API_URL,
-        {
-
-          action:
-            "deleteItem",
-
-          row:
-            row,
-
-          rowNumber:
-            row,
-
-          item:
-            itemName,
-
-          itemName:
-            itemName,
-
-          user:
-            currentUsername,
-
-          username:
-            currentUsername
-
-        }
-      );
-
-    if(
-      !result ||
-      result.success !== true
-    ){
-
-      throw new Error(
-        result.message ||
-        "Failed to delete item"
-      );
-    }
-
-    itemCache = null;
-
-    await loadItems(
-      true
-    );
-
-    showToast(
-      "Item deleted successfully",
-      "success"
-    );
-
-  }catch(error){
-
-    console.error(
-      "Delete item error:",
-      error
-    );
-
-    showToast(
-      error.message ||
-      "Failed to delete item",
-      "error"
-    );
-
-  }finally{
-
-    hideLoader();
-  }
-}
-
-/* ============================================================
-USERS
-============================================================ */
-
-function openUsersModal(){
+async function openUsersModal(){
 
   openModal(
     "usersModal"
   );
 
-  loadUsers();
+  await loadUsers();
+
 }
 
+
 /* ============================================================
-LOAD USERS
+   LOAD USERS
 ============================================================ */
 
 async function loadUsers(){
 
-  showLoader(
-    "Loading users..."
-  );
+  const body =
+    document.getElementById(
+      "usersBody"
+    );
+
+
+  body.innerHTML = `
+    <tr>
+      <td colspan="5" style="text-align:center;padding:25px">
+        Loading users...
+      </td>
+    </tr>
+  `;
+
 
   try{
 
@@ -5003,20 +4467,15 @@ async function loadUsers(){
         "&_=" +
         Date.now(),
         {
+          method:"GET",
           cache:"no-store"
         }
       );
 
-    if(!response.ok){
-
-      throw new Error(
-        "User server error: " +
-        response.status
-      );
-    }
 
     const result =
       await response.json();
+
 
     if(
       !result ||
@@ -5024,49 +4483,58 @@ async function loadUsers(){
     ){
 
       throw new Error(
-        result.message ||
-        "Failed to load users"
+        result?.message ||
+        "Unable to load users"
       );
+
     }
 
+
     const users =
-      Array.isArray(
-        result.users
-      )
+      Array.isArray(result.users)
         ? result.users
-        : (
-            Array.isArray(
-              result.data
-            )
-              ? result.data
-              : []
-          );
+        : Array.isArray(result.data)
+          ? result.data
+          : [];
+
 
     renderUsers(
       users
     );
 
+
   }catch(error){
 
     console.error(
-      "Load users error:",
+      "loadUsers error:",
       error
     );
 
-    showToast(
-      error.message ||
-      "Failed to load users",
-      "error"
-    );
+    body.innerHTML = `
+      <tr>
+        <td
+          colspan="5"
+          style="
+            text-align:center;
+            padding:25px;
+            color:var(--danger);
+          "
+        >
+          ${escapeHtml(
+            error.message ||
+            "Unable to load users"
+          )}
+        </td>
+      </tr>
+    `;
 
-  }finally{
-
-    hideLoader();
   }
+
 }
 
+
 /* ============================================================
-RENDER USERS
+   RENDER USERS
 ============================================================ */
 
 function renderUsers(
@@ -5078,257 +4546,231 @@ function renderUsers(
       "usersBody"
     );
 
+
   body.innerHTML = "";
+
 
   if(
     !users ||
     users.length === 0
   ){
 
-    body.innerHTML =
-      '<div style="padding:25px;text-align:center;color:var(--muted);font-size:12px;">No users found</div>';
+    body.innerHTML = `
+      <tr>
+        <td
+          colspan="5"
+          style="
+            text-align:center;
+            padding:25px;
+            color:var(--muted);
+          "
+        >
+          No users found
+        </td>
+      </tr>
+    `;
 
     return;
+
   }
 
+
   users.forEach(
-    user => {
+    (
+      user,
+      index
+    ) => {
 
       const username =
-        user.Username ??
-        user.username ??
-        user[0] ??
-        "";
+        String(
+          user.Username ||
+          user.username ||
+          ""
+        );
 
       const name =
-        user.Name ??
-        user.name ??
-        user[2] ??
-        "";
+        String(
+          user.Name ||
+          user.name ||
+          ""
+        );
 
       const role =
-        user.Role ??
-        user.role ??
-        user[3] ??
-        "";
+        String(
+          user.Role ||
+          user.role ||
+          ""
+        );
 
       const status =
-        user.Status ??
-        user.status ??
-        user[4] ??
-        "";
+        String(
+          user.Status ||
+          user.status ||
+          ""
+        );
+
 
       const statusLower =
-        String(status)
-          .trim()
-          .toLowerCase();
+        status.toLowerCase();
 
-      const row =
-        document.createElement(
-          "div"
-        );
 
-      row.className =
-        "user-row";
+      const statusClass =
+        statusLower === "active"
+          ? "badge"
+          : statusLower === "blocked" ||
+            statusLower === "block"
+            ? "badge badge-danger"
+            : "badge badge-warning";
 
-      const usernameCell =
-        document.createElement(
-          "div"
-        );
 
-      usernameCell.className =
-        "user-cell";
+      const blockText =
+        statusLower === "blocked" ||
+        statusLower === "block"
+          ? "Unblock"
+          : "Block";
 
-      usernameCell.textContent =
-        username;
 
-      const nameCell =
-        document.createElement(
-          "div"
-        );
+      body.insertAdjacentHTML(
+        "beforeend",
+        `
+        <tr>
 
-      nameCell.className =
-        "user-cell";
+          <td>
+            ${escapeHtml(username)}
+          </td>
 
-      nameCell.textContent =
-        name;
+          <td>
+            ${escapeHtml(name)}
+          </td>
 
-      const roleCell =
-        document.createElement(
-          "div"
-        );
+          <td>
+            ${escapeHtml(role)}
+          </td>
 
-      roleCell.className =
-        "user-cell";
+          <td>
+            <span class="${statusClass}">
+              ${escapeHtml(status)}
+            </span>
+          </td>
 
-      roleCell.textContent =
-        role;
+          <td>
 
-      const statusCell =
-        document.createElement(
-          "div"
-        );
+            <div class="user-actions">
 
-      statusCell.className =
-        "user-cell " +
-        (
-          statusLower === "active"
-            ? "status-active"
-            : (
-                statusLower === "inactive"
-                  ? "status-inactive"
-                  : "status-block"
-              )
-        );
+              <button
+                class="btn btn-small"
+                onclick="editUserByIndex(${index})"
+              >
+                Edit
+              </button>
 
-      statusCell.textContent =
-        status;
+              <button
+                class="btn btn-small ${
+                  blockText === "Block"
+                    ? "btn-danger"
+                    : "btn-green"
+                }"
+                onclick="changeUserStatusByIndex(${index}, '${escapeJs(username)}', '${escapeJs(status)}')"
+              >
+                ${blockText}
+              </button>
 
-      const actionCell =
-        document.createElement(
-          "div"
-        );
+            </div>
 
-      actionCell.className =
-        "user-cell";
+          </td>
 
-      const editBtn =
-        document.createElement(
-          "button"
-        );
-
-      editBtn.className =
-        "small-action edit-user-btn";
-
-      editBtn.textContent =
-        "Edit";
-
-      editBtn.onclick =
-        () => editUser(
-          user
-        );
-
-      actionCell.appendChild(
-        editBtn
+        </tr>
+        `
       );
 
-      if(
-        String(username).trim() !==
-        String(currentUsername).trim()
-      ){
-
-        const statusBtn =
-          document.createElement(
-            "button"
-          );
-
-        if(
-          statusLower === "blocked" ||
-          statusLower === "block"
-        ){
-
-          statusBtn.className =
-            "small-action unblock-user-btn";
-
-          statusBtn.textContent =
-            "Unblock";
-
-          statusBtn.onclick =
-            () => changeUserStatus(
-              username,
-              "Active"
-            );
-
-        }
-        else{
-
-          statusBtn.className =
-            "small-action block-user-btn";
-
-          statusBtn.textContent =
-            "Block";
-
-          statusBtn.onclick =
-            () => changeUserStatus(
-              username,
-              "Blocked"
-            );
-        }
-
-        actionCell.appendChild(
-          statusBtn
-        );
-      }
-
-      row.appendChild(
-        usernameCell
-      );
-
-      row.appendChild(
-        nameCell
-      );
-
-      row.appendChild(
-        roleCell
-      );
-
-      row.appendChild(
-        statusCell
-      );
-
-      row.appendChild(
-        actionCell
-      );
-
-      body.appendChild(
-        row
-      );
     }
   );
+
+
+  window.loadedUsers =
+    users;
+
 }
 
+
 /* ============================================================
-ADD USER
+   OPEN ADD USER
 ============================================================ */
 
 function openAddUserModal(){
 
   editingUser = null;
 
+
   document.getElementById(
     "userFormTitle"
   ).textContent =
     "Add User";
 
-  document.getElementById(
-    "userUsername"
-  ).value = "";
 
   document.getElementById(
-    "userName"
-  ).value = "";
+    "userUsername"
+  ).value =
+    "";
+
 
   document.getElementById(
     "userPassword"
-  ).value = "";
+  ).value =
+    "";
+
+
+  document.getElementById(
+    "userName"
+  ).value =
+    "";
+
 
   document.getElementById(
     "userRole"
   ).value =
     "support";
 
+
   document.getElementById(
     "userStatus"
   ).value =
     "Active";
 
+
   openModal(
     "userFormModal"
   );
+
 }
 
+
 /* ============================================================
-EDIT USER
+   EDIT USER BY INDEX
+============================================================ */
+
+function editUserByIndex(
+  index
+){
+
+  const user =
+    window.loadedUsers?.[index];
+
+
+  if(!user){
+    return;
+  }
+
+
+  editUser(
+    user
+  );
+
+}
+
+
+/* ============================================================
+   EDIT USER
 ============================================================ */
 
 function editUser(
@@ -5338,67 +4780,78 @@ function editUser(
   editingUser =
     user;
 
+
+  const username =
+    user.Username ||
+    user.username ||
+    "";
+
+  const password =
+    user.Password ||
+    user.password ||
+    "";
+
+  const name =
+    user.Name ||
+    user.name ||
+    "";
+
+  const role =
+    user.Role ||
+    user.role ||
+    "support";
+
+  const status =
+    user.Status ||
+    user.status ||
+    "Active";
+
+
   document.getElementById(
     "userFormTitle"
   ).textContent =
     "Edit User";
 
+
   document.getElementById(
     "userUsername"
   ).value =
-    user.Username ??
-    user.username ??
-    user[0] ??
-    "";
+    username;
 
-  document.getElementById(
-    "userName"
-  ).value =
-    user.Name ??
-    user.name ??
-    user[2] ??
-    "";
 
   document.getElementById(
     "userPassword"
   ).value =
-    user.Password ??
-    user.password ??
-    user[1] ??
-    "";
+    password;
+
+
+  document.getElementById(
+    "userName"
+  ).value =
+    name;
+
 
   document.getElementById(
     "userRole"
   ).value =
-    user.Role ??
-    user.role ??
-    user[3] ??
-    "support";
+    role;
 
-  const status =
-    user.Status ??
-    user.status ??
-    user[4] ??
-    "Active";
 
   document.getElementById(
     "userStatus"
   ).value =
-    (
-      String(status)
-        .toLowerCase()
-        .trim() === "block"
-    )
-      ? "Blocked"
-      : status;
+    status;
+
 
   openModal(
     "userFormModal"
   );
+
 }
 
+
 /* ============================================================
-SAVE USER
+   SAVE USER
 ============================================================ */
 
 async function saveUser(){
@@ -5408,25 +4861,30 @@ async function saveUser(){
       "userUsername"
     ).value.trim();
 
-  const name =
-    document.getElementById(
-      "userName"
-    ).value.trim();
 
   const password =
     document.getElementById(
       "userPassword"
     ).value;
 
+
+  const name =
+    document.getElementById(
+      "userName"
+    ).value.trim();
+
+
   const role =
     document.getElementById(
       "userRole"
     ).value;
 
+
   const status =
     document.getElementById(
       "userStatus"
     ).value;
+
 
   if(!username){
 
@@ -5436,17 +4894,9 @@ async function saveUser(){
     );
 
     return;
+
   }
 
-  if(!name){
-
-    showToast(
-      "Name is required",
-      "error"
-    );
-
-    return;
-  }
 
   if(!password){
 
@@ -5456,86 +4906,80 @@ async function saveUser(){
     );
 
     return;
+
   }
 
-  showLoader(
-    "Saving user..."
-  );
+
+  if(!name){
+
+    showToast(
+      "Name is required",
+      "error"
+    );
+
+    return;
+
+  }
+
+
+  showLoader();
+
 
   try{
 
-    let payload;
+    let result;
+
 
     if(editingUser){
 
       const originalUsername =
-        editingUser.Username ??
-        editingUser.username ??
-        editingUser[0] ??
+        editingUser.Username ||
+        editingUser.username ||
         "";
 
-      payload = {
 
-        action:
-          "editUser",
+      result =
+        await postJson(
+          USER_API_URL,
+          {
+            action:"editUser",
 
-        requester:
-          currentUsername,
+            requester:
+              currentUsername,
 
-        originalUsername:
-          originalUsername,
+            originalUsername:
+              originalUsername,
 
-        username:
-          username,
-
-        password:
-          password,
-
-        name:
-          name,
-
-        role:
-          role,
-
-        status:
-          status
-
-      };
+            username,
+            password,
+            name,
+            role,
+            status
+          }
+        );
 
     }
     else{
 
-      payload = {
+      result =
+        await postJson(
+          USER_API_URL,
+          {
+            action:"addUser",
 
-        action:
-          "addUser",
+            requester:
+              currentUsername,
 
-        requester:
-          currentUsername,
+            username,
+            password,
+            name,
+            role,
+            status
+          }
+        );
 
-        username:
-          username,
-
-        password:
-          password,
-
-        name:
-          name,
-
-        role:
-          role,
-
-        status:
-          status
-
-      };
     }
 
-    const result =
-      await postJson(
-        USER_API_URL,
-        payload
-      );
 
     if(
       !result ||
@@ -5543,88 +4987,114 @@ async function saveUser(){
     ){
 
       throw new Error(
-        result.message ||
-        "Failed to save user"
+        result?.message ||
+        "User save failed"
       );
+
     }
 
-    const wasEditing =
-      !!editingUser;
-
-    editingUser = null;
 
     closeModal(
       "userFormModal"
     );
 
-    await loadUsers();
 
     showToast(
-      wasEditing
+      editingUser
         ? "User updated successfully"
         : "User added successfully",
       "success"
     );
 
+
+    await loadUsers();
+
+
   }catch(error){
 
     console.error(
-      "Save user error:",
+      "saveUser error:",
       error
     );
 
     showToast(
       error.message ||
-      "Failed to save user",
+      "Unable to save user",
       "error"
     );
 
-  }finally{
+  }
+  finally{
 
     hideLoader();
+
   }
+
 }
 
+
 /* ============================================================
-USER STATUS
+   CHANGE USER STATUS
+============================================================ */
+
+function changeUserStatusByIndex(
+  index,
+  username,
+  currentStatus
+){
+
+  changeUserStatus(
+    username,
+    currentStatus
+  );
+
+}
+
+
+/* ============================================================
+   CHANGE USER STATUS
 ============================================================ */
 
 async function changeUserStatus(
   username,
-  status
+  currentStatus
 ){
 
-  if(
-    String(username).trim() ===
-    String(currentUsername).trim()
-  ){
+  const lower =
+    String(
+      currentStatus ||
+      ""
+    ).toLowerCase();
 
-    showToast(
-      "You cannot change your own status",
-      "error"
-    );
 
-    return;
-  }
+  const newStatus =
+    (
+      lower === "blocked" ||
+      lower === "block"
+    )
+      ? "Active"
+      : "Blocked";
 
-  const isUnblock =
-    String(status).toLowerCase() ===
-    "active";
+
+  const actionText =
+    newStatus === "Blocked"
+      ? "block"
+      : "unblock";
+
 
   if(
     !confirm(
-      isUnblock
-        ? "Unblock " + username + "?"
-        : "Block " + username + "?"
+      `Are you sure you want to ${actionText} ${username}?`
     )
   ){
 
     return;
+
   }
 
-  showLoader(
-    "Updating user status..."
-  );
+
+  showLoader();
+
 
   try{
 
@@ -5632,21 +5102,37 @@ async function changeUserStatus(
       await postJson(
         USER_API_URL,
         {
-
-          action:
-            "toggleUserStatus",
+          action:"editUser",
 
           requester:
             currentUsername,
 
+          originalUsername:
+            username,
+
           username:
             username,
 
-          status:
-            status
+          password:
+            findUserPassword(
+              username
+            ),
 
+          name:
+            findUserName(
+              username
+            ),
+
+          role:
+            findUserRole(
+              username
+            ),
+
+          status:
+            newStatus
         }
       );
+
 
     if(
       !result ||
@@ -5654,56 +5140,665 @@ async function changeUserStatus(
     ){
 
       throw new Error(
-        result.message ||
-        "Failed to update status"
+        result?.message ||
+        "Status update failed"
       );
+
     }
+
+
+    showToast(
+      `User ${newStatus.toLowerCase()} successfully`,
+      "success"
+    );
+
 
     await loadUsers();
 
-    showToast(
-      isUnblock
-        ? "User unblocked"
-        : "User blocked",
-      "success"
-    );
 
   }catch(error){
 
     console.error(
-      "Status error:",
+      "changeUserStatus error:",
       error
     );
 
     showToast(
       error.message ||
-      "Status update failed",
+      "Unable to change status",
       "error"
     );
 
-  }finally{
+  }
+  finally{
 
     hideLoader();
+
   }
+
 }
 
+
 /* ============================================================
-PASSWORD
+   USER HELPERS
+============================================================ */
+
+function findUser(
+  username
+){
+
+  return (
+    window.loadedUsers || []
+  ).find(
+    user =>
+      String(
+        user.Username ||
+        user.username ||
+        ""
+      ).toLowerCase() ===
+      String(username).toLowerCase()
+  );
+
+}
+
+
+function findUserPassword(
+  username
+){
+
+  const user =
+    findUser(username);
+
+  return (
+    user?.Password ||
+    user?.password ||
+    ""
+  );
+
+}
+
+
+function findUserName(
+  username
+){
+
+  const user =
+    findUser(username);
+
+  return (
+    user?.Name ||
+    user?.name ||
+    ""
+  );
+
+}
+
+
+function findUserRole(
+  username
+){
+
+  const user =
+    findUser(username);
+
+  return (
+    user?.Role ||
+    user?.role ||
+    "support"
+  );
+
+}
+
+
+/* ============================================================
+   ITEMS
+============================================================ */
+
+function openItemsModal(){
+
+  openModal(
+    "itemsModal"
+  );
+
+  document.getElementById(
+    "newItemName"
+  ).value =
+    "";
+
+  loadItems(true);
+
+}
+
+
+/* ============================================================
+   LOAD ITEMS
+============================================================ */
+
+async function loadItems(
+  force = false
+){
+
+  if(
+    itemCache &&
+    !force
+  ){
+
+    itemList =
+      itemCache;
+
+    populateItemSelect();
+
+    renderItems();
+
+    return;
+
+  }
+
+
+  try{
+
+    const response =
+      await fetch(
+        ITEM_API_URL +
+        "?action=getItems&_=" +
+        Date.now(),
+        {
+          method:"GET",
+          cache:"no-store"
+        }
+      );
+
+
+    const result =
+      await response.json();
+
+
+    if(
+      !result ||
+      result.success !== true
+    ){
+
+      throw new Error(
+        result?.message ||
+        "Unable to load items"
+      );
+
+    }
+
+
+    itemList =
+      Array.isArray(result.items)
+        ? result.items
+        : Array.isArray(result.data)
+          ? result.data
+          : [];
+
+
+    itemCache =
+      itemList;
+
+
+    populateItemSelect();
+
+    renderItems();
+
+
+  }catch(error){
+
+    console.error(
+      "loadItems error:",
+      error
+    );
+
+    itemList = [];
+
+    populateItemSelect();
+
+    renderItems();
+
+  }
+
+}
+
+
+/* ============================================================
+   RENDER ITEMS
+============================================================ */
+
+function renderItems(){
+
+  const body =
+    document.getElementById(
+      "itemsBody"
+    );
+
+
+  if(!body){
+    return;
+  }
+
+
+  body.innerHTML = "";
+
+
+  if(
+    !itemList ||
+    itemList.length === 0
+  ){
+
+    body.innerHTML = `
+      <tr>
+        <td
+          colspan="4"
+          style="
+            text-align:center;
+            padding:25px;
+            color:var(--muted);
+          "
+        >
+          No items found
+        </td>
+      </tr>
+    `;
+
+    return;
+
+  }
+
+
+  itemList.forEach(
+    (
+      item,
+      index
+    ) => {
+
+      const itemName =
+        getField(
+          item,
+          [
+            "Item",
+            "item",
+            "Name",
+            "name",
+            0
+          ]
+        );
+
+      const date =
+        getField(
+          item,
+          [
+            "Date",
+            "date",
+            1
+          ]
+        );
+
+      const user =
+        getField(
+          item,
+          [
+            "User",
+            "user",
+            "Username",
+            "username",
+            2
+          ]
+        );
+
+
+      body.insertAdjacentHTML(
+        "beforeend",
+        `
+        <tr>
+
+          <td>
+            ${escapeHtml(itemName)}
+          </td>
+
+          <td>
+            ${escapeHtml(formatDateTime(date))}
+          </td>
+
+          <td>
+            ${escapeHtml(user)}
+          </td>
+
+          <td>
+
+            <button
+              class="btn btn-small btn-danger"
+              onclick="deleteItem(${index})"
+            >
+              Delete
+            </button>
+
+          </td>
+
+        </tr>
+        `
+      );
+
+    }
+  );
+
+}
+
+
+/* ============================================================
+   POPULATE ITEM SELECT
+============================================================ */
+
+function populateItemSelect(){
+
+  const select =
+    document.getElementById(
+      "entryItem"
+    );
+
+
+  if(!select){
+    return;
+  }
+
+
+  const current =
+    select.value;
+
+
+  select.innerHTML = `
+    <option value="">
+      Select Item
+    </option>
+  `;
+
+
+  (
+    itemList || []
+  ).forEach(
+    item => {
+
+      const value =
+        getField(
+          item,
+          [
+            "Item",
+            "item",
+            "Name",
+            "name",
+            0
+          ]
+        );
+
+
+      if(!value){
+        return;
+      }
+
+
+      const option =
+        document.createElement(
+          "option"
+        );
+
+      option.value =
+        value;
+
+      option.textContent =
+        value;
+
+
+      select.appendChild(
+        option
+      );
+
+    }
+  );
+
+
+  if(current){
+
+    select.value =
+      current;
+
+  }
+
+}
+
+
+/* ============================================================
+   ADD ITEM
+============================================================ */
+
+async function addNewItem(){
+
+  const input =
+    document.getElementById(
+      "newItemName"
+    );
+
+
+  const item =
+    input.value.trim();
+
+
+  if(!item){
+
+    showToast(
+      "Enter item name",
+      "error"
+    );
+
+    return;
+
+  }
+
+
+  showLoader();
+
+
+  try{
+
+    const result =
+      await postJson(
+        ITEM_API_URL,
+        {
+          action:"addItem",
+
+          item,
+
+          name:
+            item,
+
+          user:
+            currentUsername,
+
+          username:
+            currentUsername
+        }
+      );
+
+
+    if(
+      !result ||
+      result.success !== true
+    ){
+
+      throw new Error(
+        result?.message ||
+        "Unable to add item"
+      );
+
+    }
+
+
+    input.value = "";
+
+    itemCache = null;
+
+    await loadItems(true);
+
+
+    showToast(
+      "Item added successfully",
+      "success"
+    );
+
+
+  }catch(error){
+
+    console.error(
+      "addNewItem error:",
+      error
+    );
+
+    showToast(
+      error.message ||
+      "Unable to add item",
+      "error"
+    );
+
+  }
+  finally{
+
+    hideLoader();
+
+  }
+
+}
+
+
+/* ============================================================
+   DELETE ITEM
+============================================================ */
+
+async function deleteItem(
+  index
+){
+
+  const item =
+    itemList[index];
+
+
+  if(!item){
+    return;
+  }
+
+
+  const itemName =
+    getField(
+      item,
+      [
+        "Item",
+        "item",
+        "Name",
+        "name",
+        0
+      ]
+    );
+
+
+  if(
+    !confirm(
+      `Delete item "${itemName}"?`
+    )
+  ){
+
+    return;
+
+  }
+
+
+  showLoader();
+
+
+  try{
+
+    const itemRow =
+      getRealRowNumber(
+        item
+      );
+
+
+    const result =
+      await postJson(
+        ITEM_API_URL,
+        {
+          action:"deleteItem",
+
+          row:
+            itemRow,
+
+          rowNumber:
+            itemRow,
+
+          item:
+            itemName,
+
+          name:
+            itemName,
+
+          username:
+            currentUsername,
+
+          user:
+            currentUsername
+        }
+      );
+
+
+    if(
+      !result ||
+      result.success !== true
+    ){
+
+      throw new Error(
+        result?.message ||
+        "Unable to delete item"
+      );
+
+    }
+
+
+    itemCache = null;
+
+    await loadItems(true);
+
+
+    showToast(
+      "Item deleted successfully",
+      "success"
+    );
+
+
+  }catch(error){
+
+    console.error(
+      "deleteItem error:",
+      error
+    );
+
+    showToast(
+      error.message ||
+      "Unable to delete item",
+      "error"
+    );
+
+  }
+  finally{
+
+    hideLoader();
+
+  }
+
+}
+
+
+/* ============================================================
+   CHANGE PASSWORD MODAL
 ============================================================ */
 
 function openPasswordModal(){
-
-  const menu =
-    document.getElementById(
-      "profileMenu"
-    );
-
-  if(menu){
-
-    menu.classList.remove(
-      "show"
-    );
-  }
 
   document.getElementById(
     "currentPassword"
@@ -5717,13 +5812,18 @@ function openPasswordModal(){
     "confirmPassword"
   ).value = "";
 
+
+  closeProfileMenu();
+
   openModal(
     "passwordModal"
   );
+
 }
 
+
 /* ============================================================
-CHANGE PASSWORD
+   CHANGE PASSWORD
 ============================================================ */
 
 async function changePassword(){
@@ -5733,15 +5833,18 @@ async function changePassword(){
       "currentPassword"
     ).value;
 
+
   const newPassword =
     document.getElementById(
       "newPassword"
     ).value;
 
+
   const confirmPassword =
     document.getElementById(
       "confirmPassword"
     ).value;
+
 
   if(!currentPassword){
 
@@ -5751,7 +5854,9 @@ async function changePassword(){
     );
 
     return;
+
   }
+
 
   if(!newPassword){
 
@@ -5761,7 +5866,9 @@ async function changePassword(){
     );
 
     return;
+
   }
+
 
   if(
     newPassword !==
@@ -5774,11 +5881,12 @@ async function changePassword(){
     );
 
     return;
+
   }
 
-  showLoader(
-    "Changing password..."
-  );
+
+  showLoader();
+
 
   try{
 
@@ -5786,24 +5894,20 @@ async function changePassword(){
       await postJson(
         USER_API_URL,
         {
-
-          action:
-            "changePassword",
-
-          requester:
-            currentUsername,
+          action:"changePassword",
 
           username:
             currentUsername,
 
-          currentPassword:
-            currentPassword,
+          requester:
+            currentUsername,
 
-          newPassword:
-            newPassword
+          currentPassword,
 
+          newPassword
         }
       );
+
 
     if(
       !result ||
@@ -5811,41 +5915,49 @@ async function changePassword(){
     ){
 
       throw new Error(
-        result.message ||
+        result?.message ||
         "Password change failed"
       );
+
     }
+
 
     closeModal(
       "passwordModal"
     );
+
 
     showToast(
       "Password changed successfully",
       "success"
     );
 
+
   }catch(error){
 
     console.error(
-      "Password error:",
+      "changePassword error:",
       error
     );
 
     showToast(
       error.message ||
-      "Password change failed",
+      "Unable to change password",
       "error"
     );
 
-  }finally{
+  }
+  finally{
 
     hideLoader();
+
   }
+
 }
 
+
 /* ============================================================
-POST JSON
+   POST JSON
 ============================================================ */
 
 async function postJson(
@@ -5857,9 +5969,7 @@ async function postJson(
     await fetch(
       url,
       {
-
-        method:
-          "POST",
+        method:"POST",
 
         headers:{
           "Content-Type":
@@ -5867,15 +5977,14 @@ async function postJson(
         },
 
         body:
-          JSON.stringify(
-            data
-          )
-
+          JSON.stringify(data)
       }
     );
 
+
   const text =
     await response.text();
+
 
   if(!response.ok){
 
@@ -5883,7 +5992,9 @@ async function postJson(
       "Server error: " +
       response.status
     );
+
   }
+
 
   try{
 
@@ -5901,11 +6012,332 @@ async function postJson(
     throw new Error(
       "Invalid server response"
     );
+
   }
+
 }
 
+
 /* ============================================================
-MODAL
+   FIELD HELPER
+============================================================ */
+
+function getField(
+  row,
+  keys
+){
+
+  if(row == null){
+    return "";
+  }
+
+
+  for(
+    const key of keys
+  ){
+
+    if(
+      typeof key === "number"
+    ){
+
+      if(
+        Array.isArray(row) &&
+        row[key] !== undefined &&
+        row[key] !== null
+      ){
+
+        return String(
+          row[key]
+        );
+
+      }
+
+    }
+    else{
+
+      if(
+        typeof row === "object" &&
+        row[key] !== undefined &&
+        row[key] !== null
+      ){
+
+        return String(
+          row[key]
+        );
+
+      }
+
+    }
+
+  }
+
+
+  return "";
+
+}
+
+
+/* ============================================================
+   NORMALIZE DATE
+============================================================ */
+
+function normalizeDate(
+  value
+){
+
+  if(!value){
+    return "";
+  }
+
+
+  const text =
+    String(value)
+      .trim();
+
+
+  if(
+    /^\d{4}-\d{2}-\d{2}$/.test(
+      text
+    )
+  ){
+
+    return text;
+
+  }
+
+
+  const date =
+    new Date(text);
+
+
+  if(
+    Number.isNaN(
+      date.getTime()
+    )
+  ){
+
+    return "";
+
+  }
+
+
+  const year =
+    date.getFullYear();
+
+
+  const month =
+    String(
+      date.getMonth() + 1
+    ).padStart(
+      2,
+      "0"
+    );
+
+
+  const day =
+    String(
+      date.getDate()
+    ).padStart(
+      2,
+      "0"
+    );
+
+
+  return `${year}-${month}-${day}`;
+
+}
+
+
+/* ============================================================
+   TODAY INPUT VALUE
+============================================================ */
+
+function getTodayInputValue(){
+
+  const now =
+    new Date();
+
+
+  const year =
+    now.getFullYear();
+
+
+  const month =
+    String(
+      now.getMonth() + 1
+    ).padStart(
+      2,
+      "0"
+    );
+
+
+  const day =
+    String(
+      now.getDate()
+    ).padStart(
+      2,
+      "0"
+    );
+
+
+  return `${year}-${month}-${day}`;
+
+}
+
+
+/* ============================================================
+   FORMAT DATE TIME
+============================================================ */
+
+function formatDateTime(
+  value
+){
+
+  if(!value){
+    return "";
+  }
+
+
+  const text =
+    String(value)
+      .trim();
+
+
+  if(
+    /^\d{4}-\d{2}-\d{2}$/.test(
+      text
+    )
+  ){
+
+    return text;
+
+  }
+
+
+  const date =
+    new Date(text);
+
+
+  if(
+    Number.isNaN(
+      date.getTime()
+    )
+  ){
+
+    return text;
+
+  }
+
+
+  return date.toLocaleString(
+    undefined,
+    {
+      year:"numeric",
+      month:"2-digit",
+      day:"2-digit",
+      hour:"2-digit",
+      minute:"2-digit"
+    }
+  );
+
+}
+
+
+/* ============================================================
+   ESCAPE HTML
+============================================================ */
+
+function escapeHtml(
+  value
+){
+
+  return String(
+    value ?? ""
+  )
+  .replace(
+    /&/g,
+    "&amp;"
+  )
+  .replace(
+    /</g,
+    "&lt;"
+  )
+  .replace(
+    />/g,
+    "&gt;"
+  )
+  .replace(
+    /"/g,
+    "&quot;"
+  )
+  .replace(
+    /'/g,
+    "&#039;"
+  );
+
+}
+
+
+/* ============================================================
+   ESCAPE JS
+============================================================ */
+
+function escapeJs(
+  value
+){
+
+  return String(
+    value ?? ""
+  )
+  .replace(
+    /\\/g,
+    "\\\\"
+  )
+  .replace(
+    /'/g,
+    "\\'"
+  )
+  .replace(
+    /"/g,
+    '\\"'
+  )
+  .replace(
+    /\n/g,
+    "\\n"
+  )
+  .replace(
+    /\r/g,
+    "\\r"
+  );
+
+}
+
+
+/* ============================================================
+   ACTION BUTTON
+============================================================ */
+
+function createActionButton(
+  text,
+  fn,
+  index,
+  className
+){
+
+  return `
+    <button
+      class="${className} btn-small"
+      onclick="${fn}(${index})"
+    >
+      ${text}
+    </button>
+  `;
+
+}
+
+
+/* ============================================================
+   MODAL HELPERS
 ============================================================ */
 
 function openModal(
@@ -5922,8 +6354,11 @@ function openModal(
     modal.classList.add(
       "show"
     );
+
   }
+
 }
+
 
 function closeModal(
   id
@@ -5939,29 +6374,31 @@ function closeModal(
     modal.classList.remove(
       "show"
     );
+
   }
+
 }
 
-document.addEventListener(
-  "click",
-  event => {
 
-    if(
-      event.target.classList.contains(
-        "modal"
-      )
-    ){
+function overlayClose(
+  event,
+  id
+){
 
-      event.target.classList.remove(
-        "show"
-      );
-    }
+  if(
+    event.target ===
+    event.currentTarget
+  ){
+
+    closeModal(id);
 
   }
-);
+
+}
+
 
 /* ============================================================
-PROFILE
+   PROFILE MENU
 ============================================================ */
 
 function toggleProfileMenu(
@@ -5972,47 +6409,91 @@ function toggleProfileMenu(
     event.stopPropagation();
   }
 
-  const menu =
-    document.getElementById(
+
+  document
+    .getElementById(
       "profileMenu"
-    );
-
-  if(menu){
-
-    menu.classList.toggle(
+    )
+    .classList.toggle(
       "show"
     );
-  }
+
 }
+
+
+function closeProfileMenu(){
+
+  document
+    .getElementById(
+      "profileMenu"
+    )
+    .classList.remove(
+      "show"
+    );
+
+}
+
 
 document.addEventListener(
   "click",
-  () => {
+  event => {
 
     const menu =
       document.getElementById(
         "profileMenu"
       );
 
-    if(menu){
+    const profile =
+      document.querySelector(
+        ".profile-wrap"
+      );
+
+
+    if(
+      menu &&
+      profile &&
+      !profile.contains(event.target)
+    ){
 
       menu.classList.remove(
         "show"
       );
+
     }
 
   }
 );
 
+
 /* ============================================================
-THEME
+   THEME
 ============================================================ */
+
+function loadTheme(){
+
+  const theme =
+    localStorage.getItem(
+      "dashboardTheme"
+    );
+
+
+  if(theme === "dark"){
+
+    document.body.classList.add(
+      "dark"
+    );
+
+  }
+
+}
+
 
 function toggleTheme(){
 
   document.body.classList.toggle(
     "dark"
   );
+
 
   localStorage.setItem(
     "dashboardTheme",
@@ -6022,441 +6503,154 @@ function toggleTheme(){
       ? "dark"
       : "light"
   );
+
 }
 
-function loadTheme(){
-
-  const theme =
-    localStorage.getItem(
-      "dashboardTheme"
-    );
-
-  if(
-    theme === "dark"
-  ){
-
-    document.body.classList.add(
-      "dark"
-    );
-  }
-}
 
 /* ============================================================
-LOADER
+   LOADER
 ============================================================ */
 
-function showLoader(
-  text
-){
+function showLoader(){
 
-  const loader =
-    document.getElementById(
+  document
+    .getElementById(
       "loader"
+    )
+    .classList.add(
+      "show"
     );
 
-  const loaderText =
-    document.getElementById(
-      "loaderText"
-    );
-
-  if(!loader){
-    return;
-  }
-
-  if(loaderText){
-
-    loaderText.textContent =
-      text ||
-      "Loading...";
-  }
-
-  loader.classList.add(
-    "show"
-  );
 }
+
 
 function hideLoader(){
 
-  const loader =
-    document.getElementById(
+  document
+    .getElementById(
       "loader"
-    );
-
-  if(loader){
-
-    loader.classList.remove(
+    )
+    .classList.remove(
       "show"
     );
-  }
+
 }
 
-/* ============================================================
-TOAST
-============================================================ */
 
-let toastTimer =
-  null;
+/* ============================================================
+   TOAST
+============================================================ */
 
 function showToast(
   message,
-  type="success"
+  type = "success"
 ){
 
-  const toast =
+  const container =
     document.getElementById(
-      "toast"
+      "toastContainer"
     );
 
-  if(!toast){
-    return;
-  }
+
+  const toast =
+    document.createElement(
+      "div"
+    );
+
+
+  toast.className =
+    "toast " +
+    (
+      type === "error"
+        ? "error"
+        : type === "warning"
+          ? "warning"
+          : ""
+    );
+
 
   toast.textContent =
     message;
 
-  toast.className =
-    "toast show " +
-    type;
 
-  clearTimeout(
-    toastTimer
+  container.appendChild(
+    toast
   );
 
-  toastTimer =
-    setTimeout(
-      () => {
 
-        toast.className =
-          "toast";
+  setTimeout(
+    () => {
 
-      },
-      3500
-    );
+      toast.remove();
+
+    },
+    3500
+  );
+
 }
+
 
 /* ============================================================
-DATE
-============================================================ */
-
-function getToday(){
-
-  const d =
-    new Date();
-
-  const year =
-    d.getFullYear();
-
-  const month =
-    String(
-      d.getMonth() + 1
-    ).padStart(
-      2,
-      "0"
-    );
-
-  const day =
-    String(
-      d.getDate()
-    ).padStart(
-      2,
-      "0"
-    );
-
-  return (
-    year +
-    "-" +
-    month +
-    "-" +
-    day
-  );
-}
-
-function normalizeDate(
-  value
-){
-
-  if(!value){
-    return "";
-  }
-
-  if(
-    Object.prototype.toString.call(
-      value
-    ) ===
-    "[object Date]"
-  ){
-
-    if(
-      isNaN(
-        value.getTime()
-      )
-    ){
-
-      return "";
-    }
-
-    return [
-
-      value.getFullYear(),
-
-      String(
-        value.getMonth() + 1
-      ).padStart(
-        2,
-        "0"
-      ),
-
-      String(
-        value.getDate()
-      ).padStart(
-        2,
-        "0"
-      )
-
-    ].join("-");
-  }
-
-  const text =
-    String(
-      value
-    ).trim();
-
-  if(
-    /^\d{4}-\d{2}-\d{2}$/.test(
-      text
-    )
-  ){
-
-    return text;
-  }
-
-  const d =
-    new Date(
-      text
-    );
-
-  if(
-    !isNaN(
-      d.getTime()
-    )
-  ){
-
-    return [
-
-      d.getFullYear(),
-
-      String(
-        d.getMonth() + 1
-      ).padStart(
-        2,
-        "0"
-      ),
-
-      String(
-        d.getDate()
-      ).padStart(
-        2,
-        "0"
-      )
-
-    ].join("-");
-  }
-
-  return text;
-}
-
-function formatDate(
-  value
-){
-
-  const normalized =
-    normalizeDate(
-      value
-    );
-
-  if(!normalized){
-    return "";
-  }
-
-  const parts =
-    normalized.split("-");
-
-  if(
-    parts.length !== 3
-  ){
-
-    return normalized;
-  }
-
-  const months = [
-
-    "Jan",
-    "Feb",
-    "Mar",
-    "Apr",
-    "May",
-    "Jun",
-    "Jul",
-    "Aug",
-    "Sep",
-    "Oct",
-    "Nov",
-    "Dec"
-
-  ];
-
-  const monthIndex =
-    Number(
-      parts[1]
-    ) - 1;
-
-  return (
-
-    parts[2] +
-    " " +
-    (
-      months[monthIndex] ||
-      parts[1]
-    ) +
-    " " +
-    parts[0]
-
-  );
-}
-
-function formatDateTime(
-  value
-){
-
-  if(!value){
-    return "";
-  }
-
-  const d =
-    new Date(
-      value
-    );
-
-  if(
-    !isNaN(
-      d.getTime()
-    )
-  ){
-
-    return d.toLocaleString(
-      "en-GB",
-      {
-        dateStyle:
-          "medium",
-
-        timeStyle:
-          "short"
-      }
-    );
-  }
-
-  return String(
-    value
-  );
-}
-
-/* ============================================================
-ESCAPE
-============================================================ */
-
-function escapeHtml(
-  value
-){
-
-  return String(
-    value ?? ""
-  )
-    .replace(
-      /&/g,
-      "&amp;"
-    )
-    .replace(
-      /</g,
-      "&lt;"
-    )
-    .replace(
-      />/g,
-      "&gt;"
-    )
-    .replace(
-      /"/g,
-      "&quot;"
-    )
-    .replace(
-      /'/g,
-      "&#039;"
-    );
-}
-
-function escapeJs(
-  value
-){
-
-  return String(
-    value ?? ""
-  )
-    .replace(
-      /\\/g,
-      "\\\\"
-    )
-    .replace(
-      /'/g,
-      "\\'"
-    )
-    .replace(
-      /\n/g,
-      "\\n"
-    )
-    .replace(
-      /\r/g,
-      "\\r"
-    );
-}
-
-/* ============================================================
-LOGOUT
+   LOGOUT
 ============================================================ */
 
 function logout(){
 
-  const keys = [
-
-    "dashboardAuth",
-    "username",
-    "userData",
-    "loginData",
-    "loggedUser",
-    "currentUser",
-    "userInfo",
-    "name",
-    "role",
-    "status"
-
-  ];
-
-  keys.forEach(
-    key => {
-
-      localStorage.removeItem(
-        key
-      );
-    }
+  localStorage.removeItem(
+    "dashboardAuth"
   );
 
-  sessionStorage.clear();
+  localStorage.removeItem(
+    "username"
+  );
+
+  localStorage.removeItem(
+    "loggedUser"
+  );
+
+  localStorage.removeItem(
+    "currentUser"
+  );
+
+  localStorage.removeItem(
+    "userData"
+  );
+
+  localStorage.removeItem(
+    "loginData"
+  );
+
+  localStorage.removeItem(
+    "userInfo"
+  );
+
+  localStorage.removeItem(
+    "name"
+  );
+
+  localStorage.removeItem(
+    "role"
+  );
+
+  localStorage.removeItem(
+    "status"
+  );
+
+
+  sessionStorage.removeItem(
+    "dashboardAuth"
+  );
+
 
   window.location.replace(
     "index.html"
   );
+
 }
 
+
 /* ============================================================
-BACK PROTECTION
+   BACK PROTECTION
 ============================================================ */
 
 function setupBackProtection(){
@@ -6469,28 +6663,38 @@ function setupBackProtection(){
       location.href
     );
 
+
     window.addEventListener(
       "popstate",
       () => {
 
-        if(!checkLogin()){
-          return;
-        }
+        if(
+          checkLogin()
+        ){
 
-        history.pushState(
-          null,
-          "",
-          location.href
-        );
+          history.pushState(
+            null,
+            "",
+            location.href
+          );
+
+        }
 
       }
     );
+
 
     window.addEventListener(
       "pageshow",
       () => {
 
-        checkLogin();
+        if(
+          !checkLogin()
+        ){
+
+          return;
+
+        }
 
       }
     );
@@ -6498,11 +6702,80 @@ function setupBackProtection(){
   }catch(error){
 
     console.error(
-      "Back protection error:",
+      "Back protection:",
       error
     );
+
   }
+
 }
+
+
+/* ============================================================
+   ESCAPE KEY MODAL CLOSE
+============================================================ */
+
+document.addEventListener(
+  "keydown",
+  event => {
+
+    if(
+      event.key === "Escape"
+    ){
+
+      document
+        .querySelectorAll(
+          ".modal-overlay.show"
+        )
+        .forEach(
+          modal => {
+
+            modal.classList.remove(
+              "show"
+            );
+
+          }
+        );
+
+    }
+
+  }
+);
+
+
+/* ============================================================
+   AUTO REFRESH VISIBILITY
+============================================================ */
+
+document.addEventListener(
+  "visibilitychange",
+  () => {
+
+    if(
+      document.visibilityState ===
+      "visible"
+    ){
+
+      if(
+        localStorage.getItem(
+          "dashboardAuth"
+        ) === "true"
+      ){
+
+        currentUsername =
+          String(
+            localStorage.getItem("username") ||
+            localStorage.getItem("loggedUser") ||
+            localStorage.getItem("currentUser") ||
+            ""
+          ).trim();
+
+      }
+
+    }
+
+  }
+);
 
 </script>
 
