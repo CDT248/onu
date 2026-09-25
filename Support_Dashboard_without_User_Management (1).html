@@ -1,0 +1,6121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0"
+>
+
+<title>Support Dashboard</title>
+
+<link
+  rel="icon"
+  href="https://cdn-icons-png.flaticon.com/128/17163/17163834.png"
+>
+
+<style>
+
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+:root{
+  --bg:#f4f7f6;
+  --card:#ffffff;
+  --text:#17211b;
+  --muted:#6b756f;
+  --border:#e1e7e3;
+  --primary:#16a36a;
+  --primary-dark:#087f4e;
+  --danger:#e74c3c;
+  --warning:#f39c12;
+  --shadow:0 10px 30px rgba(0,0,0,.08);
+}
+
+body.dark{
+  --bg:#111715;
+  --card:#19211e;
+  --text:#eef5f1;
+  --muted:#9ba9a2;
+  --border:#2b3832;
+  --shadow:0 10px 30px rgba(0,0,0,.30);
+}
+
+body{
+  font-family:Arial,Helvetica,sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  min-height:100vh;
+  transition:.25s;
+}
+
+
+/* =========================================================
+HEADER
+========================================================= */
+
+.header{
+  height:70px;
+  background:var(--card);
+  border-bottom:1px solid var(--border);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 22px;
+  position:sticky;
+  top:0;
+  z-index:100;
+}
+
+.logo-area{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+
+.logo{
+  width:43px;
+  height:43px;
+  border-radius:12px;
+  background:linear-gradient(135deg,#19b875,#087f4e);
+  color:#fff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:22px;
+  font-weight:800;
+  box-shadow:0 5px 15px rgba(22,163,106,.25);
+}
+
+.logo-text h1{
+  font-size:18px;
+  margin-bottom:3px;
+}
+
+.logo-text p{
+  font-size:11px;
+  color:var(--muted);
+}
+
+.header-actions{
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+
+button{
+  border:none;
+  cursor:pointer;
+  font-family:inherit;
+}
+
+.header-btn{
+  height:38px;
+  padding:0 13px;
+  border-radius:9px;
+  background:var(--bg);
+  color:var(--text);
+  border:1px solid var(--border);
+  font-size:13px;
+  font-weight:600;
+  transition:.2s;
+}
+
+.header-btn:hover{
+  border-color:var(--primary);
+  color:var(--primary);
+}
+
+.header-btn.primary{
+  background:var(--primary);
+  border-color:var(--primary);
+  color:#fff;
+}
+
+.header-btn.primary:hover{
+  background:var(--primary-dark);
+}
+
+.profile-wrap{
+  position:relative;
+  margin-left:5px;
+}
+
+.profile-btn{
+  width:39px;
+  height:39px;
+  border-radius:50%;
+  overflow:hidden;
+  border:2px solid var(--primary);
+  background:var(--bg);
+  cursor:pointer;
+}
+
+.profile-btn img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+.profile-menu{
+  position:absolute;
+  right:0;
+  top:48px;
+  width:190px;
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:12px;
+  box-shadow:var(--shadow);
+  padding:7px;
+  display:none;
+  z-index:500;
+}
+
+.profile-menu.show{
+  display:block;
+}
+
+.profile-menu button{
+  width:100%;
+  text-align:left;
+  padding:11px 12px;
+  background:none;
+  color:var(--text);
+  border-radius:8px;
+  font-size:13px;
+}
+
+.profile-menu button:hover{
+  background:var(--bg);
+}
+
+
+/* =========================================================
+MAIN
+========================================================= */
+
+.main{
+  padding:22px;
+  max-width:1600px;
+  margin:auto;
+}
+
+.toolbar{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:15px;
+  margin-bottom:16px;
+}
+
+.toolbar-title h2{
+  font-size:21px;
+}
+
+.toolbar-title p{
+  color:var(--muted);
+  font-size:12px;
+  margin-top:4px;
+}
+
+.refresh-btn{
+  padding:10px 16px;
+  border-radius:9px;
+  background:var(--primary);
+  color:white;
+  font-weight:600;
+}
+
+
+/* =========================================================
+FILTER BAR
+========================================================= */
+
+.filter-bar{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:13px;
+  padding:13px;
+  display:flex;
+  align-items:center;
+  gap:10px;
+  margin-bottom:16px;
+  box-shadow:0 3px 12px rgba(0,0,0,.03);
+}
+
+.search-box{
+  flex:1;
+  min-width:180px;
+}
+
+.search-box input,
+.date-box input,
+.select-box select{
+  width:100%;
+  height:40px;
+  padding:0 12px;
+  border-radius:8px;
+  border:1px solid var(--border);
+  background:var(--bg);
+  color:var(--text);
+  outline:none;
+}
+
+.search-box input:focus,
+.date-box input:focus,
+.select-box select:focus{
+  border-color:var(--primary);
+}
+
+.date-box{
+  width:155px;
+}
+
+.select-box{
+  width:125px;
+}
+
+.clear-btn{
+  height:40px;
+  padding:0 14px;
+  border-radius:8px;
+  background:var(--bg);
+  border:1px solid var(--border);
+  color:var(--text);
+  font-weight:600;
+}
+
+.clear-btn:hover{
+  color:var(--danger);
+  border-color:var(--danger);
+}
+
+
+/* =========================================================
+TABLE
+========================================================= */
+
+.table-card{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:13px;
+  overflow:hidden;
+  box-shadow:var(--shadow);
+  position:relative;
+}
+
+.table-wrap{
+  width:100%;
+  overflow-x:auto;
+}
+
+table{
+  width:100%;
+  border-collapse:collapse;
+  min-width:850px;
+}
+
+thead{
+  background:var(--bg);
+}
+
+th{
+  padding:13px 12px;
+  text-align:left;
+  font-size:12px;
+  color:var(--muted);
+  border-bottom:1px solid var(--border);
+  white-space:nowrap;
+}
+
+td{
+  padding:12px;
+  border-bottom:1px solid var(--border);
+  font-size:13px;
+  vertical-align:middle;
+}
+
+tbody tr:hover{
+  background:rgba(22,163,106,.035);
+}
+
+tbody tr:last-child td{
+  border-bottom:none;
+}
+
+.empty-row{
+  text-align:center;
+  color:var(--muted);
+  padding:40px !important;
+}
+
+
+/* =========================================================
+ACTION BUTTONS
+========================================================= */
+
+.action-wrap{
+  display:flex;
+  gap:5px;
+  flex-wrap:wrap;
+}
+
+.action-btn{
+  padding:7px 10px;
+  border-radius:7px;
+  font-size:11px;
+  font-weight:700;
+  color:#fff;
+}
+
+.action-edit{
+  background:#3498db;
+}
+
+.action-sell{
+  background:#16a36a;
+}
+
+.action-delete{
+  background:#e74c3c;
+}
+
+.action-paid{
+  background:#16a36a;
+}
+
+
+/* =========================================================
+PAGINATION
+========================================================= */
+
+.pagination{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:5px;
+  padding:14px;
+  border-top:1px solid var(--border);
+}
+
+.page-btn{
+  min-width:34px;
+  height:34px;
+  padding:0 8px;
+  border-radius:7px;
+  background:var(--bg);
+  color:var(--text);
+  border:1px solid var(--border);
+}
+
+.page-btn.active{
+  background:var(--primary);
+  color:white;
+  border-color:var(--primary);
+}
+
+.page-btn:disabled{
+  opacity:.45;
+  cursor:not-allowed;
+}
+
+
+/* =========================================================
+MODAL
+========================================================= */
+
+.modal{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.52);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:18px;
+  z-index:1000;
+}
+
+.modal.show{
+  display:flex;
+}
+
+.modal-box{
+  width:100%;
+  max-width:500px;
+  max-height:90vh;
+  overflow-y:auto;
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:15px;
+  box-shadow:0 25px 70px rgba(0,0,0,.25);
+}
+
+.modal-box.large{
+  max-width:800px;
+}
+
+.modal-header{
+  padding:17px 19px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  border-bottom:1px solid var(--border);
+}
+
+.modal-header h3{
+  font-size:17px;
+}
+
+.close-btn{
+  width:32px;
+  height:32px;
+  border-radius:8px;
+  background:var(--bg);
+  color:var(--text);
+  font-size:18px;
+}
+
+.modal-body{
+  padding:18px;
+}
+
+.form-group{
+  margin-bottom:13px;
+}
+
+.form-group label{
+  display:block;
+  font-size:12px;
+  color:var(--muted);
+  margin-bottom:6px;
+  font-weight:600;
+}
+
+.form-group input,
+.form-group select{
+  width:100%;
+  height:42px;
+  border-radius:8px;
+  border:1px solid var(--border);
+  background:var(--bg);
+  color:var(--text);
+  padding:0 12px;
+  outline:none;
+}
+
+.form-group input:focus,
+.form-group select:focus{
+  border-color:var(--primary);
+}
+
+.form-actions{
+  display:flex;
+  justify-content:flex-end;
+  gap:8px;
+  margin-top:18px;
+}
+
+.cancel-btn{
+  padding:10px 16px;
+  border-radius:8px;
+  background:var(--bg);
+  color:var(--text);
+  border:1px solid var(--border);
+}
+
+.save-btn{
+  padding:10px 17px;
+  border-radius:8px;
+  background:var(--primary);
+  color:#fff;
+  font-weight:700;
+}
+
+
+/* =========================================================
+USERS
+========================================================= */
+
+.item-add-btn{padding:9px 14px;background:var(--primary);color:#fff;border-radius:8px;font-weight:700;}
+
+.items-list{border:1px solid var(--border);border-radius:10px;overflow:hidden;}
+
+.item-row{display:grid;grid-template-columns:1.2fr 1fr 1fr 80px;gap:8px;padding:11px;border-bottom:1px solid var(--border);align-items:center;}
+
+.item-row{
+  grid-template-columns:1.2fr 1fr 1fr 80px;
+}
+
+.item-row:last-child{border-bottom:none;}
+
+.item-head{background:var(--bg);font-size:11px;color:var(--muted);font-weight:700;}
+
+.item-cell{font-size:12px;overflow:hidden;text-overflow:ellipsis;}
+
+
+/* =========================================================
+ITEM
+========================================================= */
+
+.item-add-area{
+  display:flex;
+  gap:8px;
+  margin-bottom:15px;
+}
+
+.item-add-area input{
+  flex:1;
+  height:40px;
+  padding:0 11px;
+  border:1px solid var(--border);
+  background:var(--bg);
+  color:var(--text);
+  border-radius:8px;
+  outline:none;
+}
+
+
+/* =========================================================
+TABLE LOADER
+========================================================= */
+
+.table-loader{
+  position:absolute;
+  inset:0;
+  background:rgba(255,255,255,.72);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  z-index:50;
+  pointer-events:none;
+}
+
+body.dark .table-loader{
+  background:rgba(17,23,21,.72);
+}
+
+.table-loader.show{
+  display:flex;
+}
+
+.table-loader-box{
+  background:var(--card);
+  padding:13px 18px;
+  border-radius:10px;
+  box-shadow:0 8px 25px rgba(0,0,0,.12);
+  border:1px solid var(--border);
+  display:flex;
+  align-items:center;
+  gap:10px;
+  font-size:12px;
+  color:var(--text);
+}
+
+.spinner{
+  width:21px;
+  height:21px;
+  border:3px solid var(--border);
+  border-top-color:var(--primary);
+  border-radius:50%;
+  animation:spin .65s linear infinite;
+  flex-shrink:0;
+}
+
+@keyframes spin{
+  to{
+    transform:rotate(360deg);
+  }
+}
+
+
+/* =========================================================
+TOAST
+========================================================= */
+
+.toast{
+  position:fixed;
+  right:20px;
+  bottom:20px;
+  background:#17211b;
+  color:#fff;
+  padding:12px 17px;
+  border-radius:9px;
+  font-size:12px;
+  box-shadow:var(--shadow);
+  transform:translateY(80px);
+  opacity:0;
+  pointer-events:none;
+  transition:.3s;
+  z-index:3000;
+  max-width:350px;
+}
+
+.toast.show{
+  transform:translateY(0);
+  opacity:1;
+}
+
+.toast.success{
+  border-left:4px solid #16a36a;
+}
+
+.toast.error{
+  border-left:4px solid #e74c3c;
+}
+
+
+/* =========================================================
+RESPONSIVE
+========================================================= */
+
+@media(max-width:900px){
+
+  .header{
+    padding:0 12px;
+  }
+
+  .logo-text p{
+    display:none;
+  }
+
+  .header-btn{
+    padding:0 9px;
+  }
+
+  .header-btn span{
+    display:none;
+  }
+
+  .main{
+    padding:12px;
+  }
+
+  .filter-bar{
+    flex-wrap:wrap;
+  }
+
+  .search-box{
+    flex-basis:100%;
+  }
+
+  .date-box{
+    flex:1;
+  }
+
+  .select-box{
+    flex:1;
+  }
+
+}
+
+@media(max-width:600px){
+
+  .logo-text h1{
+    font-size:15px;
+  }
+
+  .header-actions{
+    gap:4px;
+  }
+
+  .header-btn{
+    width:38px;
+    padding:0;
+  }
+
+  .filter-bar{
+    padding:9px;
+  }
+
+  .item-row{
+    grid-template-columns:1fr 1fr;
+  }
+
+}
+
+</style>
+</head>
+
+
+<body>
+
+
+<!-- ========================================================
+HEADER
+========================================================= -->
+
+<header class="header">
+
+  <div class="logo-area">
+
+    <div class="logo">
+      S
+    </div>
+
+    <div class="logo-text">
+
+      <h1>Support Dashboard</h1>
+
+      <p>
+        Admin Management System
+      </p>
+
+    </div>
+
+  </div>
+
+
+  <div class="header-actions">
+
+    <button
+      class="header-btn"
+      onclick="loadData(true)"
+      title="Reload"
+    >
+      ↻ <span>Reload</span>
+    </button>
+<button
+      class="header-btn"
+      onclick="openItemsModal()"
+    >
+      📦 <span>Items</span>
+    </button>
+
+
+    <button
+      class="header-btn primary"
+      onclick="openEntryModal()"
+    >
+      + <span>New Entry</span>
+    </button>
+
+
+    <button
+      class="header-btn"
+      onclick="toggleTheme()"
+      title="Dark Mode"
+    >
+      ◐
+    </button>
+
+
+    <div class="profile-wrap">
+
+      <button
+        class="profile-btn"
+        onclick="toggleProfileMenu(event)"
+      >
+
+        <img
+          id="profileImage"
+          src="https://cdn-icons-png.flaticon.com/128/17163/17163834.png"
+          alt="Profile"
+        >
+
+      </button>
+
+
+      <div
+        class="profile-menu"
+        id="profileMenu"
+      >
+
+        <button onclick="openPasswordModal()">
+          🔑 Change Password
+        </button>
+
+        <button onclick="logout()">
+          🚪 Logout
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</header>
+
+
+
+<!-- ========================================================
+MAIN
+========================================================= -->
+
+<main class="main">
+
+
+  <div class="toolbar">
+
+    <div class="toolbar-title">
+
+      <h2 id="dataTitle">
+        Data
+      </h2>
+
+      <p id="dataSubtitle">
+        Manage your support entries
+      </p>
+
+    </div>
+
+
+    <button
+      class="refresh-btn"
+      onclick="loadData(true)"
+    >
+      ↻ Refresh Data
+    </button>
+
+  </div>
+
+
+
+  <!-- ======================================================
+  FILTER
+  ======================================================= -->
+
+  <div class="filter-bar">
+
+    <div class="search-box">
+
+      <input
+        type="text"
+        id="searchInput"
+        placeholder="Search Name, IP, Work, Item..."
+        oninput="applyFilters()"
+      >
+
+    </div>
+
+
+    <div class="date-box">
+
+      <input
+        type="date"
+        id="fromDate"
+        onchange="applyFilters()"
+        title="From Date"
+      >
+
+    </div>
+
+
+    <div class="date-box">
+
+      <input
+        type="date"
+        id="toDate"
+        onchange="applyFilters()"
+        title="To Date"
+      >
+
+    </div>
+
+
+    <div class="select-box">
+
+      <select
+        id="dataType"
+        onchange="changeDataType()"
+      >
+
+        <option value="data">
+          Data
+        </option>
+
+        <option value="sell">
+          Sell
+        </option>
+
+        <option value="paid">
+          Paid
+        </option>
+
+        <option value="delete">
+          Delete
+        </option>
+
+      </select>
+
+    </div>
+
+
+    <button
+      class="clear-btn"
+      onclick="clearFilters()"
+    >
+      Clear
+    </button>
+
+  </div>
+
+
+
+  <!-- ======================================================
+  TABLE
+  ======================================================= -->
+
+  <div class="table-card">
+
+    <div class="table-wrap">
+
+      <table>
+
+        <thead id="tableHead"></thead>
+
+        <tbody id="tableBody"></tbody>
+
+      </table>
+
+    </div>
+
+
+    <div
+      class="pagination"
+      id="pagination"
+    ></div>
+
+
+    <!-- TABLE ONLY LOADER -->
+
+    <div
+      class="table-loader"
+      id="loader"
+    >
+
+      <div class="table-loader-box">
+
+        <div class="spinner"></div>
+
+        <span id="loaderText">
+          Loading...
+        </span>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</main>
+
+
+
+<!-- ========================================================
+ENTRY MODAL
+========================================================= -->
+
+<div
+  class="modal"
+  id="entryModal"
+>
+
+  <div class="modal-box">
+
+    <div class="modal-header">
+
+      <h3 id="entryModalTitle">
+        New Entry
+      </h3>
+
+      <button
+        class="close-btn"
+        onclick="closeModal('entryModal')"
+      >
+        ×
+      </button>
+
+    </div>
+
+
+    <div class="modal-body">
+
+
+      <div class="form-group">
+
+        <label>Name</label>
+
+        <input
+          type="text"
+          id="entryName"
+          readonly
+        >
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label>IP</label>
+
+        <input
+          type="text"
+          id="entryIP"
+          placeholder="Enter IP"
+        >
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label>Work</label>
+
+        <input
+          type="text"
+          id="entryWork"
+          placeholder="Enter Work"
+        >
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label>Date</label>
+
+        <input
+          type="date"
+          id="entryDate"
+          readonly
+        >
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label>Item</label>
+
+        <select id="entryItem">
+
+          <option value="">
+            Select Item
+          </option>
+
+        </select>
+
+      </div>
+
+
+      <div class="form-actions">
+
+        <button
+          class="cancel-btn"
+          onclick="closeModal('entryModal')"
+        >
+          Cancel
+        </button>
+
+        <button
+          class="save-btn"
+          onclick="saveEntry()"
+        >
+          Save Entry
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+
+<!-- ========================================================
+ITEM MODAL
+========================================================= -->
+
+<div
+  class="modal"
+  id="itemsModal"
+>
+
+  <div class="modal-box large">
+
+    <div class="modal-header">
+
+      <h3>
+        Item Management
+      </h3>
+
+      <button
+        class="close-btn"
+        onclick="closeModal('itemsModal')"
+      >
+        ×
+      </button>
+
+    </div>
+
+
+    <div class="modal-body">
+
+
+      <div class="item-add-area">
+
+        <input
+          type="text"
+          id="newItem"
+          placeholder="Enter new item"
+        >
+
+
+        <button
+          class="item-add-btn"
+          onclick="addNewItem()"
+        >
+          + Add
+        </button>
+
+      </div>
+
+
+      <div class="items-list">
+
+        <div class="item-row item-head">
+
+          <div>Item</div>
+          <div>Date</div>
+          <div>User</div>
+          <div>Action</div>
+
+        </div>
+
+
+        <div id="itemsBody"></div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+
+<!-- ========================================================
+PASSWORD MODAL
+========================================================= -->
+
+<div
+  class="modal"
+  id="passwordModal"
+>
+
+  <div class="modal-box">
+
+    <div class="modal-header">
+
+      <h3>
+        Change Password
+      </h3>
+
+      <button
+        class="close-btn"
+        onclick="closeModal('passwordModal')"
+      >
+        ×
+      </button>
+
+    </div>
+
+
+    <div class="modal-body">
+
+
+      <div class="form-group">
+
+        <label>Current Password</label>
+
+        <input
+          type="password"
+          id="currentPassword"
+          placeholder="Current password"
+        >
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label>New Password</label>
+
+        <input
+          type="password"
+          id="newPassword"
+          placeholder="New password"
+        >
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label>Confirm New Password</label>
+
+        <input
+          type="password"
+          id="confirmPassword"
+          placeholder="Confirm new password"
+        >
+
+      </div>
+
+
+      <div class="form-actions">
+
+        <button
+          class="cancel-btn"
+          onclick="closeModal('passwordModal')"
+        >
+          Cancel
+        </button>
+
+        <button
+          class="save-btn"
+          onclick="changePassword()"
+        >
+          Change Password
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+
+<!-- ========================================================
+TOAST
+========================================================= -->
+
+<div
+  class="toast"
+  id="toast"
+></div>
+
+
+
+<script>
+
+
+// ============================================================
+// API URLS
+// ============================================================
+
+const USER_API_URL =
+  "https://script.google.com/macros/s/AKfycbw00GHHheuvtdQtgPURjs4PtsM48-4yaFx-_ms0ZBV5FHhnmcdbJ5DHr3Aix8JPF0kQzA/exec";
+
+
+const DATA_API_URL =
+  "https://script.google.com/macros/s/AKfycbz59T-4CKQDbHJB_ql6OYZf18eN7XUmttp0d2FaOM5pm27yCBOWrEilqA_zMOnFq_rz/exec";
+
+
+const SELL_API_URL =
+  "https://script.google.com/macros/s/AKfycbyiKn1MH1ZQvebSIo83bZzbbfJimmfRf9PjlPI4w1q1UliuF27gKViYM24oXakpkHuP/exec";
+
+
+const PAID_API_URL =
+  "https://script.google.com/macros/s/AKfycby_kDEHln_Dj_0YfB421POWa2XAuN6g2PDypQtyS2arrxgPVtyZZOwAp_TKLrUnRudKng/exec";
+
+
+const DELETE_API_URL =
+  "https://script.google.com/macros/s/AKfycbwDL1JIV7QYcH84VGiWxhUoT-wN9UfuGn0t9boYrs_FaG_ZfcVGjNmaTqSTC6ev0Ig9Kg/exec";
+
+
+const ITEM_API_URL =
+  "https://script.google.com/macros/s/AKfycby2e7dzGE5vkS0Q-Eyl9MKLAbkkkD8f37eIVj7VuV8bPytWGOH7cwJ3w25efP7MLGshOw/exec";
+
+
+// ============================================================
+// GLOBAL STATE
+// ============================================================
+
+let allData = [];
+let filteredData = [];
+
+let editingDataRow = null;
+let editingSellRow = null;
+
+let currentDataType = "data";
+
+let currentPage = 1;
+const pageSize = 10;
+
+let dataCache = null;
+let sellCache = null;
+let paidCache = null;
+let deleteCache = null;
+
+let itemList = [];
+let itemCache = null;
+
+let currentUsername =
+  localStorage.username ||
+  localStorage.loggedUser ||
+  "";
+
+
+// ============================================================
+// DOM READY
+// ============================================================
+
+document.addEventListener(
+  "DOMContentLoaded",
+  function(){
+
+    loadTheme();
+
+    checkLogin();
+
+    loadUser();
+
+    loadData();
+
+    loadItems();
+
+    setupBackProtection();
+
+  }
+);
+
+
+// ============================================================
+// LOGIN CHECK
+// ============================================================
+
+function checkLogin(){
+
+  const auth =
+    localStorage.getItem("dashboardAuth") === "true" ||
+    sessionStorage.getItem("dashboardAuth") === "true";
+
+
+  if(!auth){
+
+    window.location.href =
+      "index.html";
+
+    return false;
+
+  }
+
+
+  return true;
+
+}
+
+
+// ============================================================
+// LOAD USER
+// ============================================================
+
+async function loadUser(){
+
+  if(!currentUsername){
+
+    return;
+
+  }
+
+
+  try{
+
+    const response =
+      await fetch(
+        USER_API_URL +
+        "?action=getUser&username=" +
+        encodeURIComponent(
+          currentUsername
+        )
+      );
+
+
+    const result =
+      await response.json();
+
+
+    if(
+      result &&
+      result.success &&
+      result.user
+    ){
+
+      const user =
+        result.user;
+
+
+      const name =
+        user.Name ||
+        user.name ||
+        currentUsername;
+
+
+      const role =
+        user.Role ||
+        user.role ||
+        "";
+
+
+      const status =
+        user.Status ||
+        user.status ||
+        "";
+
+
+      localStorage.setItem(
+        "name",
+        name
+      );
+
+
+      localStorage.setItem(
+        "role",
+        role
+      );
+
+
+      localStorage.setItem(
+        "status",
+        status
+      );
+
+
+      const profileName =
+        document.getElementById(
+          "profileImage"
+        );
+
+
+      if(profileName){
+
+        if(
+          user.Picture ||
+          user.picture
+        ){
+
+          profileName.src =
+            user.Picture ||
+            user.picture;
+
+        }
+
+      }
+
+
+      if(
+        String(status)
+          .trim()
+          .toLowerCase() === "block" ||
+        String(status)
+          .trim()
+          .toLowerCase() === "blocked"
+      ){
+
+        logout();
+
+      }
+
+    }
+
+
+  }catch(error){
+
+    console.error(
+      "User loading error:",
+      error
+    );
+
+  }
+
+}
+
+
+// ============================================================
+// CHANGE DATA TYPE
+// ============================================================
+
+function changeDataType(){
+
+  currentDataType =
+    document.getElementById(
+      "dataType"
+    ).value;
+
+
+  currentPage = 1;
+
+  dataCache = null;
+  sellCache = null;
+  paidCache = null;
+  deleteCache = null;
+
+
+  document.getElementById(
+    "searchInput"
+  ).value = "";
+
+
+  document.getElementById(
+    "fromDate"
+  ).value = "";
+
+
+  document.getElementById(
+    "toDate"
+  ).value = "";
+
+
+  updateDataTitle();
+
+  loadData();
+
+}
+
+
+// ============================================================
+// TITLE
+// ============================================================
+
+function updateDataTitle(){
+
+  const title =
+    document.getElementById(
+      "dataTitle"
+    );
+
+
+  const subtitle =
+    document.getElementById(
+      "dataSubtitle"
+    );
+
+
+  if(currentDataType === "data"){
+
+    title.textContent =
+      "Data";
+
+    subtitle.textContent =
+      "Manage your support entries";
+
+  }
+  else if(currentDataType === "sell"){
+
+    title.textContent =
+      "Sell Data";
+
+    subtitle.textContent =
+      "Manage sold entries";
+
+  }
+  else if(currentDataType === "paid"){
+
+    title.textContent =
+      "Paid Data";
+
+    subtitle.textContent =
+      "Paid entry history";
+
+  }
+  else{
+
+    title.textContent =
+      "Delete Data";
+
+    subtitle.textContent =
+      "Deleted entry history";
+
+  }
+
+}
+
+
+// ============================================================
+// LOAD DATA
+// ============================================================
+
+async function loadData(force=false){
+
+  if(!checkLogin()){
+    return;
+  }
+
+
+  if(
+    !force &&
+    currentDataType === "data" &&
+    dataCache
+  ){
+
+    allData =
+      dataCache;
+
+    applyFilters();
+
+    return;
+
+  }
+
+
+  if(
+    !force &&
+    currentDataType === "sell" &&
+    sellCache
+  ){
+
+    allData =
+      sellCache;
+
+    applyFilters();
+
+    return;
+
+  }
+
+
+  if(
+    !force &&
+    currentDataType === "paid" &&
+    paidCache
+  ){
+
+    allData =
+      paidCache;
+
+    applyFilters();
+
+    return;
+
+  }
+
+
+  if(
+    !force &&
+    currentDataType === "delete" &&
+    deleteCache
+  ){
+
+    allData =
+      deleteCache;
+
+    applyFilters();
+
+    return;
+
+  }
+
+
+  showLoader(
+    "Loading data..."
+  );
+
+
+  try{
+
+    let api = DATA_API_URL;
+    let action = "getData";
+
+
+    if(currentDataType === "sell"){
+
+      api =
+        SELL_API_URL;
+
+      action =
+        "getSellData";
+
+    }
+
+
+    if(currentDataType === "paid"){
+
+      api =
+        PAID_API_URL;
+
+      action =
+        "getPaidData";
+
+    }
+
+
+    if(currentDataType === "delete"){
+
+      api =
+        DELETE_API_URL;
+
+      action =
+        "getDeletedData";
+
+    }
+
+
+    const response =
+      await fetch(
+        api +
+        "?action=" +
+        encodeURIComponent(action)
+      );
+
+
+    const result =
+      await response.json();
+
+
+    if(
+      !result ||
+      result.success !== true
+    ){
+
+      throw new Error(
+        result &&
+        result.message
+          ? result.message
+          : "Failed to load data"
+      );
+
+    }
+
+
+    allData =
+      Array.isArray(result.data)
+        ? result.data
+        : [];
+
+
+    if(currentDataType === "data"){
+
+      dataCache =
+        allData;
+
+    }
+    else if(currentDataType === "sell"){
+
+      sellCache =
+        allData;
+
+    }
+    else if(currentDataType === "paid"){
+
+      paidCache =
+        allData;
+
+    }
+    else{
+
+      deleteCache =
+        allData;
+
+    }
+
+
+    applyFilters();
+
+
+  }catch(error){
+
+    console.error(
+      error
+    );
+
+
+    showToast(
+      error.message ||
+      "Failed to load data",
+      "error"
+    );
+
+
+    allData = [];
+
+    applyFilters();
+
+
+  }finally{
+
+    hideLoader();
+
+  }
+
+}
+
+
+// ============================================================
+// RENDER DATA
+// ============================================================
+
+function renderData(data){
+
+  const head =
+    document.getElementById(
+      "tableHead"
+    );
+
+
+  const body =
+    document.getElementById(
+      "tableBody"
+    );
+
+
+  head.innerHTML = "";
+  body.innerHTML = "";
+
+
+  let headers = [];
+
+
+  if(currentDataType === "data"){
+
+    headers = [
+      "Name",
+      "IP",
+      "Work",
+      "Date",
+      "Item",
+      "Action"
+    ];
+
+  }
+  else if(currentDataType === "sell"){
+
+    headers = [
+      "Name",
+      "IP",
+      "Work",
+      "Date",
+      "Item",
+      "Sell Date",
+      "User",
+      "Action"
+    ];
+
+  }
+  else if(currentDataType === "paid"){
+
+    headers = [
+      "Name",
+      "IP",
+      "Work",
+      "Date",
+      "Item",
+      "Sell Date",
+      "Sell User",
+      "Paid Time",
+      "Paid User"
+    ];
+
+  }
+  else{
+
+    headers = [
+      "Name",
+      "IP",
+      "Work",
+      "Date",
+      "Item",
+      "Delete Time",
+      "User"
+    ];
+
+  }
+
+
+  const tr =
+    document.createElement("tr");
+
+
+  headers.forEach(
+    h => {
+
+      const th =
+        document.createElement("th");
+
+      th.textContent =
+        h;
+
+      tr.appendChild(th);
+
+    }
+  );
+
+
+  head.appendChild(tr);
+
+
+  const totalPages =
+    Math.max(
+      1,
+      Math.ceil(
+        data.length /
+        pageSize
+      )
+    );
+
+
+  if(currentPage > totalPages){
+
+    currentPage =
+      totalPages;
+
+  }
+
+
+  const start =
+    (currentPage - 1) *
+    pageSize;
+
+
+  const pageData =
+    data.slice(
+      start,
+      start + pageSize
+    );
+
+
+  if(pageData.length === 0){
+
+    const tr =
+      document.createElement("tr");
+
+
+    const td =
+      document.createElement("td");
+
+
+    td.colSpan =
+      headers.length;
+
+
+    td.className =
+      "empty-row";
+
+
+    td.textContent =
+      "No data found";
+
+
+    tr.appendChild(td);
+
+    body.appendChild(tr);
+
+    renderPagination(
+      data.length
+    );
+
+    return;
+
+  }
+
+
+  pageData.forEach(
+    (row,index) => {
+
+      const tr =
+        document.createElement("tr");
+
+
+      const name =
+        row.Name ??
+        row.name ??
+        row[0] ??
+        "";
+
+
+      const ip =
+        row.Ip ??
+        row.IP ??
+        row.ip ??
+        row[1] ??
+        "";
+
+
+      const work =
+        row.Work ??
+        row.work ??
+        row[2] ??
+        "";
+
+
+      const date =
+        row.Date ??
+        row.date ??
+        row[3] ??
+        "";
+
+
+      const item =
+        row.Item ??
+        row.item ??
+        row[4] ??
+        "";
+
+
+      addCell(
+        tr,
+        name
+      );
+
+
+      addCell(
+        tr,
+        ip
+      );
+
+
+      addCell(
+        tr,
+        work
+      );
+
+
+      addCell(
+        tr,
+        formatDate(date)
+      );
+
+
+      addCell(
+        tr,
+        item
+      );
+
+
+      /* =====================================================
+         SELL
+      ====================================================== */
+
+      if(
+        currentDataType === "sell"
+      ){
+
+        const sellDate =
+          row.SellDate ??
+          row.sellDate ??
+          row["Sell Date"] ??
+          row.sellTime ??
+          row["Sell time"] ??
+          row[5] ??
+          "";
+
+
+        const sellUser =
+          row.User ??
+          row.user ??
+          row.Username ??
+          row.username ??
+          row[6] ??
+          "";
+
+
+        addCell(
+          tr,
+          formatDateTime(
+            sellDate
+          )
+        );
+
+
+        addCell(
+          tr,
+          sellUser
+        );
+
+
+        const actionTd =
+          document.createElement(
+            "td"
+          );
+
+
+        const action =
+          document.createElement(
+            "div"
+          );
+
+
+        action.className =
+          "action-wrap";
+
+
+        const editBtn =
+          createActionButton(
+            "Edit",
+            "action-edit"
+          );
+
+
+        editBtn.onclick =
+          () => editSellEntry(
+            start + index
+          );
+
+
+        action.appendChild(
+          editBtn
+        );
+
+
+        const paidBtn =
+          createActionButton(
+            "Paid",
+            "action-paid"
+          );
+
+
+        paidBtn.onclick =
+          () => paidSellEntry(
+            start + index
+          );
+
+
+        action.appendChild(
+          paidBtn
+        );
+
+
+        actionTd.appendChild(
+          action
+        );
+
+
+        tr.appendChild(
+          actionTd
+        );
+
+      }
+
+
+      /* =====================================================
+         PAID
+      ====================================================== */
+
+      else if(
+        currentDataType === "paid"
+      ){
+
+        const sellDate =
+          row.SellDate ??
+          row.sellDate ??
+          row["Sell Date"] ??
+          row.sellTime ??
+          row["Sell time"] ??
+          row[5] ??
+          "";
+
+
+        const sellUser =
+          row.User ??
+          row.user ??
+          row.SellUser ??
+          row.sellUser ??
+          row[6] ??
+          "";
+
+
+        const paidTime =
+          row.PaidTime ??
+          row.paidTime ??
+          row["Paid Time"] ??
+          row[7] ??
+          "";
+
+
+        const paidUser =
+          row.PaidUser ??
+          row.paidUser ??
+          row["Paid User"] ??
+          row[8] ??
+          "";
+
+
+        addCell(
+          tr,
+          formatDateTime(
+            sellDate
+          )
+        );
+
+
+        addCell(
+          tr,
+          sellUser
+        );
+
+
+        addCell(
+          tr,
+          formatDateTime(
+            paidTime
+          )
+        );
+
+
+        addCell(
+          tr,
+          paidUser
+        );
+
+      }
+
+
+      /* =====================================================
+         DELETE
+      ====================================================== */
+
+      else if(
+        currentDataType === "delete"
+      ){
+
+        const deleteTime =
+          row.DelletTime ??
+          row.DeleteTime ??
+          row.Dellet ??
+          row["Delete Time"] ??
+          row[5] ??
+          "";
+
+
+        const deleteUser =
+          row.User ??
+          row.user ??
+          row.Username ??
+          row.username ??
+          row[6] ??
+          "";
+
+
+        addCell(
+          tr,
+          formatDateTime(
+            deleteTime
+          )
+        );
+
+
+        addCell(
+          tr,
+          deleteUser
+        );
+
+      }
+
+
+      /* =====================================================
+         DATA
+      ====================================================== */
+
+      else{
+
+        const actionTd =
+          document.createElement(
+            "td"
+          );
+
+
+        const action =
+          document.createElement(
+            "div"
+          );
+
+
+        action.className =
+          "action-wrap";
+
+
+        const editBtn =
+          createActionButton(
+            "Edit",
+            "action-edit"
+          );
+
+
+        editBtn.onclick =
+          () => editDataEntry(
+            start + index
+          );
+
+
+        action.appendChild(
+          editBtn
+        );
+
+
+        const sellBtn =
+          createActionButton(
+            "Sell",
+            "action-sell"
+          );
+
+
+        sellBtn.onclick =
+          () => sellDataEntry(
+            start + index
+          );
+
+
+        action.appendChild(
+          sellBtn
+        );
+
+
+        const deleteBtn =
+          createActionButton(
+            "Delete",
+            "action-delete"
+          );
+
+
+        deleteBtn.onclick =
+          () => deleteDataEntry(
+            start + index
+          );
+
+
+        action.appendChild(
+          deleteBtn
+        );
+
+
+        actionTd.appendChild(
+          action
+        );
+
+
+        tr.appendChild(
+          actionTd
+        );
+
+      }
+
+
+      body.appendChild(tr);
+
+    }
+  );
+
+
+  renderPagination(
+    data.length
+  );
+
+}
+
+
+// ============================================================
+// ADD CELL
+// ============================================================
+
+function addCell(
+  tr,
+  value
+){
+
+  const td =
+    document.createElement("td");
+
+
+  td.textContent =
+    value == null
+      ? ""
+      : String(value);
+
+
+  tr.appendChild(td);
+
+}
+
+
+// ============================================================
+// ACTION BUTTON
+// ============================================================
+
+function createActionButton(
+  text,
+  className
+){
+
+  const button =
+    document.createElement("button");
+
+
+  button.className =
+    "action-btn " +
+    className;
+
+
+  button.textContent =
+    text;
+
+
+  return button;
+
+}
+
+
+// ============================================================
+// PAGINATION
+// ============================================================
+
+function renderPagination(
+  total
+){
+
+  const container =
+    document.getElementById(
+      "pagination"
+    );
+
+
+  container.innerHTML = "";
+
+
+  const totalPages =
+    Math.ceil(
+      total /
+      pageSize
+    );
+
+
+  if(totalPages <= 1){
+
+    return;
+
+  }
+
+
+  const previous =
+    document.createElement("button");
+
+
+  previous.className =
+    "page-btn";
+
+
+  previous.textContent =
+    "‹";
+
+
+  previous.disabled =
+    currentPage <= 1;
+
+
+  previous.onclick =
+    () => goToPage(
+      currentPage - 1
+    );
+
+
+  container.appendChild(
+    previous
+  );
+
+
+  for(
+    let i = 1;
+    i <= totalPages;
+    i++
+  ){
+
+    const btn =
+      document.createElement("button");
+
+
+    btn.className =
+      "page-btn" +
+      (
+        i === currentPage
+          ? " active"
+          : ""
+      );
+
+
+    btn.textContent =
+      i;
+
+
+    btn.onclick =
+      () => goToPage(i);
+
+
+    container.appendChild(
+      btn
+    );
+
+  }
+
+
+  const next =
+    document.createElement("button");
+
+
+  next.className =
+    "page-btn";
+
+
+  next.textContent =
+    "›";
+
+
+  next.disabled =
+    currentPage >= totalPages;
+
+
+  next.onclick =
+    () => goToPage(
+      currentPage + 1
+    );
+
+
+  container.appendChild(
+    next
+  );
+
+}
+
+
+// ============================================================
+// GO TO PAGE
+// ============================================================
+
+function goToPage(page){
+
+  const totalPages =
+    Math.max(
+      1,
+      Math.ceil(
+        filteredData.length /
+        pageSize
+      )
+    );
+
+
+  if(
+    page < 1 ||
+    page > totalPages
+  ){
+
+    return;
+
+  }
+
+
+  currentPage =
+    page;
+
+
+  renderData(
+    filteredData
+  );
+
+}
+
+
+// ============================================================
+// FILTER
+// ============================================================
+
+function applyFilters(){
+
+  const search =
+    document
+      .getElementById(
+        "searchInput"
+      )
+      .value
+      .trim()
+      .toLowerCase();
+
+
+  const fromDate =
+    document
+      .getElementById(
+        "fromDate"
+      )
+      .value;
+
+
+  const toDate =
+    document
+      .getElementById(
+        "toDate"
+      )
+      .value;
+
+
+  filteredData =
+    allData.filter(
+      row => {
+
+        const rowText =
+          JSON.stringify(
+            row
+          ).toLowerCase();
+
+
+        if(
+          search &&
+          !rowText.includes(search)
+        ){
+
+          return false;
+
+        }
+
+
+        const rowDate =
+          normalizeDate(
+            row.Date ??
+            row.date ??
+            row[3] ??
+            ""
+          );
+
+
+        if(
+          fromDate &&
+          rowDate &&
+          rowDate < fromDate
+        ){
+
+          return false;
+
+        }
+
+
+        if(
+          toDate &&
+          rowDate &&
+          rowDate > toDate
+        ){
+
+          return false;
+
+        }
+
+
+        return true;
+
+      }
+    );
+
+
+  currentPage = 1;
+
+
+  renderData(
+    filteredData
+  );
+
+}
+
+
+// ============================================================
+// CLEAR FILTER
+// ============================================================
+
+function clearFilters(){
+
+  document.getElementById(
+    "searchInput"
+  ).value = "";
+
+
+  document.getElementById(
+    "fromDate"
+  ).value = "";
+
+
+  document.getElementById(
+    "toDate"
+  ).value = "";
+
+
+  applyFilters();
+
+}
+
+
+// ============================================================
+// OPEN NEW ENTRY
+// ============================================================
+
+function openEntryModal(){
+
+  editingDataRow =
+    null;
+
+  editingSellRow =
+    null;
+
+
+  document.getElementById(
+    "entryModalTitle"
+  ).textContent =
+    "New Entry";
+
+
+  const name =
+    localStorage.getItem(
+      "name"
+    ) ||
+    currentUsername;
+
+
+  document.getElementById(
+    "entryName"
+  ).value =
+    name;
+
+
+  document.getElementById(
+    "entryIP"
+  ).value = "";
+
+
+  document.getElementById(
+    "entryWork"
+  ).value = "";
+
+
+  document.getElementById(
+    "entryDate"
+  ).value =
+    getToday();
+
+
+  populateItemSelect();
+
+
+  document.getElementById(
+    "entryItem"
+  ).value = "";
+
+
+  openModal(
+    "entryModal"
+  );
+
+}
+
+
+// ============================================================
+// EDIT DATA ENTRY
+// ============================================================
+
+function editDataEntry(
+  index
+){
+
+  const row =
+    filteredData[index];
+
+
+  if(!row){
+
+    return;
+
+  }
+
+
+  editingDataRow =
+    getRealRowNumber(
+      row
+    );
+
+
+  editingSellRow =
+    null;
+
+
+  document.getElementById(
+    "entryModalTitle"
+  ).textContent =
+    "Edit Entry";
+
+
+  document.getElementById(
+    "entryName"
+  ).value =
+    row.Name ??
+    row.name ??
+    row[0] ??
+    "";
+
+
+  document.getElementById(
+    "entryIP"
+  ).value =
+    row.Ip ??
+    row.IP ??
+    row.ip ??
+    row[1] ??
+    "";
+
+
+  document.getElementById(
+    "entryWork"
+  ).value =
+    row.Work ??
+    row.work ??
+    row[2] ??
+    "";
+
+
+  document.getElementById(
+    "entryDate"
+  ).value =
+    normalizeDate(
+      row.Date ??
+      row.date ??
+      row[3] ??
+      ""
+    );
+
+
+  populateItemSelect();
+
+
+  document.getElementById(
+    "entryItem"
+  ).value =
+    row.Item ??
+    row.item ??
+    row[4] ??
+    "";
+
+
+  openModal(
+    "entryModal"
+  );
+
+}
+
+
+// ============================================================
+// EDIT SELL ENTRY
+// ============================================================
+
+function editSellEntry(
+  index
+){
+
+  const row =
+    filteredData[index];
+
+
+  if(!row){
+
+    return;
+
+  }
+
+
+  editingSellRow =
+    getRealRowNumber(
+      row
+    );
+
+
+  editingDataRow =
+    null;
+
+
+  document.getElementById(
+    "entryModalTitle"
+  ).textContent =
+    "Edit Sell Entry";
+
+
+  document.getElementById(
+    "entryName"
+  ).value =
+    row.Name ??
+    row.name ??
+    row[0] ??
+    "";
+
+
+  document.getElementById(
+    "entryIP"
+  ).value =
+    row.Ip ??
+    row.IP ??
+    row.ip ??
+    row[1] ??
+    "";
+
+
+  document.getElementById(
+    "entryWork"
+  ).value =
+    row.Work ??
+    row.work ??
+    row[2] ??
+    "";
+
+
+  document.getElementById(
+    "entryDate"
+  ).value =
+    normalizeDate(
+      row.Date ??
+      row.date ??
+      row[3] ??
+      ""
+    );
+
+
+  populateItemSelect();
+
+
+  document.getElementById(
+    "entryItem"
+  ).value =
+    row.Item ??
+    row.item ??
+    row[4] ??
+    "";
+
+
+  openModal(
+    "entryModal"
+  );
+
+}
+
+
+// ============================================================
+// GET REAL SHEET ROW
+// ============================================================
+
+function getRealRowNumber(
+  row
+){
+
+  if(
+    row &&
+    row.row &&
+    Number(row.row) >= 2
+  ){
+
+    return Number(
+      row.row
+    );
+
+  }
+
+
+  if(
+    row &&
+    row.rowNumber &&
+    Number(row.rowNumber) >= 2
+  ){
+
+    return Number(
+      row.rowNumber
+    );
+
+  }
+
+
+  return null;
+
+}
+
+
+// ============================================================
+// SAVE ENTRY
+// ============================================================
+
+async function saveEntry(){
+
+  const name =
+    document.getElementById(
+      "entryName"
+    ).value.trim();
+
+
+  const ip =
+    document.getElementById(
+      "entryIP"
+    ).value.trim();
+
+
+  const work =
+    document.getElementById(
+      "entryWork"
+    ).value.trim();
+
+
+  const date =
+    document.getElementById(
+      "entryDate"
+    ).value;
+
+
+  const item =
+    document.getElementById(
+      "entryItem"
+    ).value.trim();
+
+
+  if(!name){
+
+    showToast(
+      "Name is required",
+      "error"
+    );
+
+    return;
+
+  }
+
+
+  if(!ip){
+
+    showToast(
+      "IP is required",
+      "error"
+    );
+
+    return;
+
+  }
+
+
+  if(!work){
+
+    showToast(
+      "Work is required",
+      "error"
+    );
+
+    return;
+
+  }
+
+
+  if(!date){
+
+    showToast(
+      "Date is required",
+      "error"
+    );
+
+    return;
+
+  }
+
+
+  if(!item){
+
+    showToast(
+      "Item is required",
+      "error"
+    );
+
+    return;
+
+  }
+
+
+  showLoader(
+    "Saving..."
+  );
+
+
+  try{
+
+    if(editingSellRow){
+
+      const response =
+        await postJson(
+          SELL_API_URL,
+          {
+
+            action:
+              "editSellData",
+
+            row:
+              editingSellRow,
+
+            rowNumber:
+              editingSellRow,
+
+            name:
+              name,
+
+            ip:
+              ip,
+
+            work:
+              work,
+
+            date:
+              date,
+
+            item:
+              item,
+
+            username:
+              currentUsername,
+
+            user:
+              currentUsername
+
+          }
+        );
+
+
+      if(
+        !response.success
+      ){
+
+        throw new Error(
+          response.message ||
+          "Failed to edit sell entry"
+        );
+
+      }
+
+
+      sellCache = null;
+
+
+      closeModal(
+        "entryModal"
+      );
+
+
+      showToast(
+        "Sell entry updated successfully",
+        "success"
+      );
+
+
+      loadData(true);
+
+
+      return;
+
+    }
+
+
+    if(editingDataRow){
+
+      const response =
+        await postJson(
+          DATA_API_URL,
+          {
+
+            action:
+              "editData",
+
+            row:
+              editingDataRow,
+
+            rowNumber:
+              editingDataRow,
+
+            name:
+              name,
+
+            ip:
+              ip,
+
+            work:
+              work,
+
+            date:
+              date,
+
+            item:
+              item
+
+          }
+        );
+
+
+      if(
+        !response.success
+      ){
+
+        throw new Error(
+          response.message ||
+          "Failed to update entry"
+        );
+
+      }
+
+
+      dataCache = null;
+
+
+      closeModal(
+        "entryModal"
+      );
+
+
+      showToast(
+        "Entry updated successfully",
+        "success"
+      );
+
+
+      loadData(true);
+
+
+      return;
+
+    }
+
+
+    const response =
+      await postJson(
+        DATA_API_URL,
+        {
+
+          action:
+            "addData",
+
+          name:
+            name,
+
+          ip:
+            ip,
+
+          work:
+            work,
+
+          date:
+            date,
+
+          item:
+            item
+
+        }
+      );
+
+
+    if(
+      !response.success
+    ){
+
+      throw new Error(
+        response.message ||
+        "Failed to add entry"
+      );
+
+    }
+
+
+    dataCache = null;
+
+
+    closeModal(
+      "entryModal"
+    );
+
+
+    showToast(
+      "Entry added successfully",
+      "success"
+    );
+
+
+    loadData(true);
+
+
+  }catch(error){
+
+    console.error(
+      error
+    );
+
+
+    showToast(
+      error.message ||
+      "Save failed",
+      "error"
+    );
+
+  }finally{
+
+    hideLoader();
+
+  }
+
+}
+
+
+// ============================================================
+// SELL DATA
+// ============================================================
+
+async function sellDataEntry(
+  index
+){
+
+  const row =
+    filteredData[index];
+
+
+  if(!row){
+
+    showToast(
+      "Data not found",
+      "error"
+    );
+
+    return;
+
+  }
+
+
+  if(
+    currentDataType !== "data"
+  ){
+
+    return;
+
+  }
+
+
+  const rowNumber =
+    getRealRowNumber(
+      row
+    );
+
+
+  if(
+    !rowNumber ||
+    rowNumber < 2
+  ){
+
+    showToast(
+      "Original Data row not found",
+      "error"
+    );
+
+    console.error(
+      "Invalid original row:",
+      row
+    );
+
+    return;
+
+  }
+
+
+  const name =
+    row.Name ??
+    row.name ??
+    row[0] ??
+    "";
+
+
+  const ip =
+    row.Ip ??
+    row.IP ??
+    row.ip ??
+    row[1] ??
+    "";
+
+
+  const work =
+    row.Work ??
+    row.work ??
+    row[2] ??
+    "";
+
+
+  const date =
+    row.Date ??
+    row.date ??
+    row[3] ??
+    "";
+
+
+  const item =
+    row.Item ??
+    row.item ??
+    row[4] ??
+    "";
+
+
+  const confirmed =
+    confirm(
+      "Sell this entry?\n\n" +
+      "Name: " + name +
+      "\nIP: " + ip +
+      "\nItem: " + item
+    );
+
+
+  if(!confirmed){
+
+    return;
+
+  }
+
+
+  showLoader(
+    "Selling entry..."
+  );
+
+
+  try{
+
+    const sellResult =
+      await postJson(
+        SELL_API_URL,
+        {
+
+          action:
+            "sellData",
+
+          row:
+            rowNumber,
+
+          rowNumber:
+            rowNumber,
+
+          name:
+            name,
+
+          ip:
+            ip,
+
+          work:
+            work,
+
+          date:
+            date,
+
+          item:
+            item,
+
+          username:
+            currentUsername,
+
+          user:
+            currentUsername,
+
+          SellUser:
+            currentUsername,
+
+          sellUser:
+            currentUsername
+
+        }
+      );
+
+
+    if(
+      !sellResult ||
+      sellResult.success !== true
+    ){
+
+      throw new Error(
+        sellResult &&
+        sellResult.message
+          ? sellResult.message
+          : "Sell operation failed"
+      );
+
+    }
+
+
+    const deleteResult =
+      await postJson(
+        DATA_API_URL,
+        {
+
+          action:
+            "deleteData",
+
+          row:
+            rowNumber,
+
+          rowNumber:
+            rowNumber
+
+        }
+      );
+
+
+    if(
+      !deleteResult ||
+      deleteResult.success !== true
+    ){
+
+      console.error(
+        "Sell succeeded but Data row delete failed:",
+        deleteResult
+      );
+
+
+      showToast(
+        "Sold successfully, but original Data row could not be deleted. Please reload and check.",
+        "error"
+      );
+
+
+      sellCache = null;
+      dataCache = null;
+
+
+      await loadData(true);
+
+      return;
+
+    }
+
+
+    dataCache = null;
+    sellCache = null;
+
+
+    allData =
+      allData.filter(
+        itemRow => {
+
+          const r =
+            getRealRowNumber(
+              itemRow
+            );
+
+          return Number(r) !==
+            Number(rowNumber);
+
+        }
+      );
+
+
+    filteredData =
+      filteredData.filter(
+        itemRow => {
+
+          const r =
+            getRealRowNumber(
+              itemRow
+            );
+
+          return Number(r) !==
+            Number(rowNumber);
+
+        }
+      );
+
+
+    showToast(
+      "Sold successfully and removed from Data",
+      "success"
+    );
+
+
+    currentDataType =
+      "data";
+
+
+    document.getElementById(
+      "dataType"
+    ).value =
+      "data";
+
+
+    updateDataTitle();
+
+
+    await loadData(true);
+
+
+  }catch(error){
+
+    console.error(
+      "Sell error:",
+      error
+    );
+
+
+    showToast(
+      error.message ||
+      "Sell failed",
+      "error"
+    );
+
+  }finally{
+
+    hideLoader();
+
+  }
+
+}
+
+
+// ============================================================
+// DELETE DATA
+// ============================================================
+
+async function deleteDataEntry(
+  index
+){
+
+  const row =
+    filteredData[index];
+
+
+  if(!row){
+
+    return;
+
+  }
+
+
+  const rowNumber =
+    getRealRowNumber(
+      row
+    );
+
+
+  if(
+    !rowNumber ||
+    rowNumber < 2
+  ){
+
+    showToast(
+      "Original row not found",
+      "error"
+    );
+
+    return;
+
+  }
+
+
+  const name =
+    row.Name ??
+    row.name ??
+    row[0] ??
+    "";
+
+
+  const ip =
+    row.Ip ??
+    row.IP ??
+    row.ip ??
+    row[1] ??
+    "";
+
+
+  const work =
+    row.Work ??
+    row.work ??
+    row[2] ??
+    "";
+
+
+  const date =
+    row.Date ??
+    row.date ??
+    row[3] ??
+    "";
+
+
+  const item =
+    row.Item ??
+    row.item ??
+    row[4] ??
+    "";
+
+
+  if(
+    !confirm(
+      "Delete this entry?\n\n" +
+      name +
+      " | " +
+      ip
+    )
+  ){
+
+    return;
+
+  }
+
+
+  showLoader(
+    "Deleting..."
+  );
+
+
+  try{
+
+    const archiveResult =
+      await postJson(
+        DELETE_API_URL,
+        {
+
+          action:
+            "deleteData",
+
+          row:
+            rowNumber,
+
+          rowNumber:
+            rowNumber,
+
+          name:
+            name,
+
+          ip:
+            ip,
+
+          work:
+            work,
+
+          date:
+            date,
+
+          item:
+            item,
+
+          username:
+            currentUsername,
+
+          user:
+            currentUsername
+
+        }
+      );
+
+
+    if(
+      !archiveResult ||
+      archiveResult.success !== true
+    ){
+
+      throw new Error(
+        archiveResult &&
+        archiveResult.message
+          ? archiveResult.message
+          : "Delete archive failed"
+      );
+
+    }
+
+
+    const deleteResult =
+      await postJson(
+        DATA_API_URL,
+        {
+
+          action:
+            "deleteData",
+
+          row:
+            rowNumber,
+
+          rowNumber:
+            rowNumber
+
+        }
+      );
+
+
+    if(
+      !deleteResult ||
+      deleteResult.success !== true
+    ){
+
+      throw new Error(
+        deleteResult &&
+        deleteResult.message
+          ? deleteResult.message
+          : "Original Data delete failed"
+      );
+
+    }
+
+
+    dataCache = null;
+
+
+    showToast(
+      "Entry deleted successfully",
+      "success"
+    );
+
+
+    await loadData(true);
+
+
+  }catch(error){
+
+    console.error(
+      error
+    );
+
+
+    showToast(
+      error.message ||
+      "Delete failed",
+      "error"
+    );
+
+  }finally{
+
+    hideLoader();
+
+  }
+
+}
+
+
+// ============================================================
+// PAID SELL
+// ============================================================
+
+async function paidSellEntry(
+  index
+){
+
+  const row =
+    filteredData[index];
+
+
+  if(!row){
+
+    return;
+
+  }
+
+
+  if(
+    !confirm(
+      "Mark this sell entry as Paid?"
+    )
+  ){
+
+    return;
+
+  }
+
+
+  showLoader(
+    "Processing payment..."
+  );
+
+
+  try{
+
+    const sellTime =
+      row.SellDate ??
+      row.sellDate ??
+      row["Sell Date"] ??
+      row.sellTime ??
+      row["Sell time"] ??
+      row[5] ??
+      "";
+
+
+    const sellUser =
+      row.User ??
+      row.user ??
+      row.Username ??
+      row.username ??
+      row[6] ??
+      "";
+
+
+    const result =
+      await postJson(
+        PAID_API_URL,
+        {
+
+          action:
+            "paidData",
+
+          name:
+            row.Name ??
+            row.name ??
+            row[0] ??
+            "",
+
+          ip:
+            row.Ip ??
+            row.IP ??
+            row.ip ??
+            row[1] ??
+            "",
+
+          work:
+            row.Work ??
+            row.work ??
+            row[2] ??
+            "",
+
+          date:
+            row.Date ??
+            row.date ??
+            row[3] ??
+            "",
+
+          item:
+            row.Item ??
+            row.item ??
+            row[4] ??
+            "",
+
+          sellTime:
+            sellTime,
+
+          sellUser:
+            sellUser,
+
+          user:
+            currentUsername,
+
+          username:
+            currentUsername,
+
+          paidUser:
+            currentUsername,
+
+          PaidUser:
+            currentUsername
+
+        }
+      );
+
+
+    if(
+      !result ||
+      result.success !== true
+    ){
+
+      throw new Error(
+        result &&
+        result.message
+          ? result.message
+          : "Payment failed"
+      );
+
+    }
+
+
+    paidCache = null;
+
+
+    showToast(
+      "Paid successfully and added to Paid Sheet",
+      "success"
+    );
+
+
+    /*
+      Paid API is now separate.
+
+      We do NOT call SELL_API_URL with
+      "paidData" because the current separate
+      Sell Code.gs does not support that action.
+    */
+
+
+    currentDataType =
+      "paid";
+
+
+    document.getElementById(
+      "dataType"
+    ).value =
+      "paid";
+
+
+    updateDataTitle();
+
+
+    await loadData(true);
+
+
+  }catch(error){
+
+    console.error(
+      "Payment error:",
+      error
+    );
+
+
+    showToast(
+      error.message ||
+      "Payment failed",
+      "error"
+    );
+
+  }finally{
+
+    hideLoader();
+
+  }
+
+}
+
+
+// ============================================================
+// ITEMS
+// ============================================================
+
+function openItemsModal(){
+
+  document.getElementById(
+    "newItem"
+  ).value = "";
+
+
+  openModal(
+    "itemsModal"
+  );
+
+
+  loadItems(true);
+
+}
+
+
+async function loadItems(
+  force=false
+){
+
+  if(
+    !force &&
+    itemCache
+  ){
+
+    itemList =
+      itemCache;
+
+    populateItemSelect();
+
+    renderItems();
+
+    return;
+
+  }
+
+
+  try{
+
+    const response =
+      await fetch(
+        ITEM_API_URL +
+        "?action=getItems"
+      );
+
+
+    const result =
+      await response.json();
+
+
+    if(
+      !result ||
+      result.success !== true
+    ){
+
+      throw new Error(
+        result.message ||
+        "Failed to load items"
+      );
+
+    }
+
+
+    itemList =
+      Array.isArray(result.data)
+        ? result.data
+        : [];
+
+
+    itemCache =
+      itemList;
+
+
+    renderItems();
+
+    populateItemSelect();
+
+
+  }catch(error){
+
+    console.error(
+      error
+    );
+
+
+    showToast(
+      error.message ||
+      "Failed to load items",
+      "error"
+    );
+
+  }
+
+}
+
+
+function renderItems(){
+
+  const body =
+    document.getElementById(
+      "itemsBody"
+    );
+
+
+  body.innerHTML = "";
+
+
+  if(
+    !itemList ||
+    itemList.length === 0
+  ){
+
+    body.innerHTML =
+      '<div style="padding:25px;text-align:center;color:var(--muted);font-size:12px;">No items found</div>';
+
+    return;
+
+  }
+
+
+  itemList.forEach(
+    (item,index) => {
+
+      const row =
+        typeof item === "object"
+          ? item
+          : {
+              Item:item
+            };
+
+
+      const name =
+        row.Item ??
+        row.item ??
+        row.Name ??
+        row.name ??
+        row[0] ??
+        "";
+
+
+      const date =
+        row.Date ??
+        row.date ??
+        row[1] ??
+        "";
+
+
+      const user =
+        row.User ??
+        row.user ??
+        row.Username ??
+        row.username ??
+        row[2] ??
+        "";
+
+
+      const div =
+        document.createElement(
+          "div"
+        );
+
+
+      div.className =
+        "item-row";
+
+
+      div.innerHTML = `
+
+        <div class="item-cell">
+          ${escapeHtml(name)}
+        </div>
+
+        <div class="item-cell">
+          ${escapeHtml(formatDateTime(date))}
+        </div>
+
+        <div class="item-cell">
+          ${escapeHtml(user)}
+        </div>
+
+        <div class="item-cell">
+
+          <button
+            class="small-action delete-item-btn"
+            onclick="deleteItem(${index})"
+          >
+            Delete
+          </button>
+
+        </div>
+
+      `;
+
+
+      body.appendChild(div);
+
+    }
+  );
+
+}
+
+
+function populateItemSelect(){
+
+  const select =
+    document.getElementById(
+      "entryItem"
+    );
+
+
+  if(!select){
+
+    return;
+
+  }
+
+
+  const oldValue =
+    select.value;
+
+
+  select.innerHTML =
+    '<option value="">Select Item</option>';
+
+
+  itemList.forEach(
+    item => {
+
+      const name =
+        typeof item === "object"
+          ? (
+              item.Item ??
+              item.item ??
+              item.Name ??
+              item.name ??
+              item[0] ??
+              ""
+            )
+          : item;
+
+
+      if(!name){
+
+        return;
+
+      }
+
+
+      const option =
+        document.createElement(
+          "option"
+        );
+
+
+      option.value =
+        name;
+
+
+      option.textContent =
+        name;
+
+
+      select.appendChild(
+        option
+      );
+
+    }
+  );
+
+
+  if(oldValue){
+
+    select.value =
+      oldValue;
+
+  }
+
+}
+
+
+async function addNewItem(){
+
+  const input =
+    document.getElementById(
+      "newItem"
+    );
+
+
+  const item =
+    input.value.trim();
+
+
+  if(!item){
+
+    showToast(
+      "Enter item name",
+      "error"
+    );
+
+    return;
+
+  }
+
+
+  showLoader(
+    "Adding item..."
+  );
+
+
+  try{
+
+    const result =
+      await postJson(
+        ITEM_API_URL,
+        {
+
+          action:
+            "addItem",
+
+          item:
+            item,
+
+          itemName:
+            item,
+
+          name:
+            item,
+
+          user:
+            currentUsername,
+
+          username:
+            currentUsername
+
+        }
+      );
+
+
+    if(
+      !result ||
+      result.success !== true
+    ){
+
+      throw new Error(
+        result.message ||
+        "Failed to add item"
+      );
+
+    }
+
+
+    input.value = "";
+
+    itemCache = null;
+
+
+    await loadItems(true);
+
+
+    showToast(
+      "Item added successfully",
+      "success"
+    );
+
+
+  }catch(error){
+
+    showToast(
+      error.message ||
+      "Failed to add item",
+      "error"
+    );
+
+  }finally{
+
+    hideLoader();
+
+  }
+
+}
+
+
+async function deleteItem(
+  index
+){
+
+  const item =
+    itemList[index];
+
+
+  if(!item){
+
+    return;
+
+  }
+
+
+  const itemName =
+    typeof item === "object"
+      ? (
+          item.Item ??
+          item.item ??
+          item.Name ??
+          item.name ??
+          item[0] ??
+          ""
+        )
+      : item;
+
+
+  const row =
+    typeof item === "object"
+      ? (
+          item.row ??
+          item.rowNumber ??
+          item[3] ??
+          index + 2
+        )
+      : index + 2;
+
+
+  if(
+    !confirm(
+      "Delete item: " +
+      itemName +
+      "?"
+    )
+  ){
+
+    return;
+
+  }
+
+
+  showLoader(
+    "Deleting item..."
+  );
+
+
+  try{
+
+    const result =
+      await postJson(
+        ITEM_API_URL,
+        {
+
+          action:
+            "deleteItem",
+
+          row:
+            row,
+
+          rowNumber:
+            row,
+
+          item:
+            itemName,
+
+          itemName:
+            itemName,
+
+          user:
+            currentUsername,
+
+          username:
+            currentUsername
+
+        }
+      );
+
+
+    if(
+      !result ||
+      result.success !== true
+    ){
+
+      throw new Error(
+        result.message ||
+        "Failed to delete item"
+      );
+
+    }
+
+
+    itemCache = null;
+
+
+    await loadItems(true);
+
+
+    showToast(
+      "Item deleted successfully",
+      "success"
+    );
+
+
+  }catch(error){
+
+    showToast(
+      error.message ||
+      "Failed to delete item",
+      "error"
+    );
+
+  }finally{
+
+    hideLoader();
+
+  }
+
+}
+
+
+// ============================================================
+// USERS
+// ============================================================
+
+function openUsersModal(){
+
+  openModal(
+    "usersModal"
+  );
+
+
+  loadUsers();
+
+}
+
+
+async function loadUsers(){
+
+  showLoader(
+    "Loading users..."
+  );
+
+
+  try{
+
+    const response =
+      await fetch(
+        USER_API_URL +
+        "?action=getUsers&requester=" +
+        encodeURIComponent(
+          currentUsername
+        )
+      );
+
+
+    const result =
+      await response.json();
+
+
+    if(
+      !result ||
+      result.success !== true
+    ){
+
+      throw new Error(
+        result.message ||
+        "Failed to load users"
+      );
+
+    }
+
+
+    const users =
+      Array.isArray(result.users)
+        ? result.users
+        : (
+            Array.isArray(result.data)
+              ? result.data
+              : []
+          );
+
+
+    renderUsers(
+      users
+    );
+
+
+  }catch(error){
+
+    showToast(
+      error.message ||
+      "Failed to load users",
+      "error"
+    );
+
+  }finally{
+
+    hideLoader();
+
+  }
+
+}
+
+
+function renderUsers(
+  users
+){
+
+  const body =
+    document.getElementById(
+      "usersBody"
+    );
+
+
+  body.innerHTML = "";
+
+
+  if(
+    !users ||
+    users.length === 0
+  ){
+
+    body.innerHTML =
+      '<div style="padding:25px;text-align:center;color:var(--muted);font-size:12px;">No users found</div>';
+
+    return;
+
+  }
+
+
+  users.forEach(
+    user => {
+
+      const username =
+        user.Username ??
+        user.username ??
+        user[0] ??
+        "";
+
+
+      const name =
+        user.Name ??
+        user.name ??
+        user[2] ??
+        "";
+
+
+      const role =
+        user.Role ??
+        user.role ??
+        user[3] ??
+        "";
+
+
+      const status =
+        user.Status ??
+        user.status ??
+        user[4] ??
+        "";
+
+
+      const div =
+        document.createElement(
+          "div"
+        );
+
+
+      div.className =
+        "user-row";
+
+
+      const statusLower =
+        String(status)
+          .toLowerCase();
+
+
+      let actionHtml = "";
+
+
+      actionHtml += `
+        <button
+          class="small-action edit-user-btn"
+          onclick='editUser(${JSON.stringify(user).replace(/'/g,"&#39;")})'
+        >
+          Edit
+        </button>
+      `;
+
+
+      if(
+        username !== currentUsername
+      ){
+
+        if(
+          statusLower === "block" ||
+          statusLower === "blocked"
+        ){
+
+          actionHtml += `
+            <button
+              class="small-action unblock-user-btn"
+              onclick="changeUserStatus('${escapeJs(username)}','Active')"
+            >
+              Unblock
+            </button>
+          `;
+
+        }
+        else{
+
+          actionHtml += `
+            <button
+              class="small-action block-user-btn"
+              onclick="changeUserStatus('${escapeJs(username)}','Block')"
+            >
+              Block
+            </button>
+          `;
+
+        }
+
+      }
+
+
+      div.innerHTML = `
+
+        <div class="user-cell">
+          ${escapeHtml(username)}
+        </div>
+
+        <div class="user-cell">
+          ${escapeHtml(name)}
+        </div>
+
+        <div class="user-cell">
+          ${escapeHtml(role)}
+        </div>
+
+        <div class="user-cell ${
+          statusLower === "active"
+            ? "status-active"
+            : "status-block"
+        }">
+          ${escapeHtml(status)}
+        </div>
+
+        <div class="user-cell">
+          ${actionHtml}
+        </div>
+
+      `;
+
+
+      body.appendChild(
+        div
+      );
+
+    }
+  );
+
+}
+
+
+// ============================================================
+// ADD USER
+// ============================================================
+
+function openAddUserModal(){
+
+  editingUser = null;
+
+
+  document.getElementById(
+    "userFormTitle"
+  ).textContent =
+    "Add User";
+
+
+  document.getElementById(
+    "userUsername"
+  ).value = "";
+
+
+  document.getElementById(
+    "userName"
+  ).value = "";
+
+
+  document.getElementById(
+    "userPassword"
+  ).value = "";
+
+
+  document.getElementById(
+    "userRole"
+  ).value =
+    "support";
+
+
+  document.getElementById(
+    "userStatus"
+  ).value =
+    "Active";
+
+
+  openModal(
+    "userFormModal"
+  );
+
+}
+
+
+// ============================================================
+// EDIT USER
+// ============================================================
+
+function editUser(
+  user
+){
+
+  editingUser =
+    user;
+
+
+  document.getElementById(
+    "userFormTitle"
+  ).textContent =
+    "Edit User";
+
+
+  document.getElementById(
+    "userUsername"
+  ).value =
+    user.Username ??
+    user.username ??
+    user[0] ??
+    "";
+
+
+  document.getElementById(
+    "userName"
+  ).value =
+    user.Name ??
+    user.name ??
+    user[2] ??
+    "";
+
+
+  document.getElementById(
+    "userPassword"
+  ).value =
+    user.Password ??
+    user.password ??
+    user[1] ??
+    "";
+
+
+  document.getElementById(
+    "userRole"
+  ).value =
+    user.Role ??
+    user.role ??
+    user[3] ??
+    "support";
+
+
+  document.getElementById(
+    "userStatus"
+  ).value =
+    user.Status ??
+    user.status ??
+    user[4] ??
+    "Active";
+
+
+  openModal(
+    "userFormModal"
+  );
+
+}
+
+
+// ============================================================
+// SAVE USER
+// ============================================================
+
+async function saveUser(){
+
+  const username =
+    document.getElementById(
+      "userUsername"
+    ).value.trim();
+
+
+  const name =
+    document.getElementById(
+      "userName"
+    ).value.trim();
+
+
+  const password =
+    document.getElementById(
+      "userPassword"
+    ).value;
+
+
+  const role =
+    document.getElementById(
+      "userRole"
+    ).value;
+
+
+  const status =
+    document.getElementById(
+      "userStatus"
+    ).value;
+
+
+  if(!username){
+
+    showToast(
+      "Username is required",
+      "error"
+    );
+
+    return;
+
+  }
+
+
+  if(!name){
+
+    showToast(
+      "Name is required",
+      "error"
+    );
+
+    return;
+
+  }
+
+
+  if(!password){
+
+    showToast(
+      "Password is required",
+      "error"
+    );
+
+    return;
+
+  }
+
+
+  showLoader(
+    "Saving user..."
+  );
+
+
+  try{
+
+    let payload;
+
+
+    if(editingUser){
+
+      const originalUsername =
+        editingUser.Username ??
+        editingUser.username ??
+        editingUser[0] ??
+        "";
+
+
+      payload = {
+
+        action:
+          "editUser",
+
+        requester:
+          currentUsername,
+
+        originalUsername:
+          originalUsername,
+
+        username:
+          username,
+
+        password:
+          password,
+
+        name:
+          name,
+
+        role:
+          role,
+
+        status:
+          status
+
+      };
+
+    }
+    else{
+
+      payload = {
+
+        action:
+          "addUser",
+
+        requester:
+          currentUsername,
+
+        username:
+          username,
+
+        password:
+          password,
+
+        name:
+          name,
+
+        role:
+          role,
+
+        status:
+          status
+
+      };
+
+    }
+
+
+    const result =
+      await postJson(
+        USER_API_URL,
+        payload
+      );
+
+
+    if(
+      !result ||
+      result.success !== true
+    ){
+
+      throw new Error(
+        result.message ||
+        "Failed to save user"
+      );
+
+    }
+
+
+    closeModal(
+      "userFormModal"
+    );
+
+
+    await loadUsers();
+
+
+    showToast(
+      editingUser
+        ? "User updated successfully"
+        : "User added successfully",
+      "success"
+    );
+
+
+  }catch(error){
+
+    showToast(
+      error.message ||
+      "Failed to save user",
+      "error"
+    );
+
+  }finally{
+
+    hideLoader();
+
+  }
+
+}
+
+
+// ============================================================
+// CHANGE USER STATUS
+// ============================================================
+
+async function changeUserStatus(
+  username,
+  status
+){
+
+  if(
+    username === currentUsername
+  ){
+
+    showToast(
+      "You cannot change your own status",
+      "error"
+    );
+
+    return;
+
+  }
+
+
+  if(
+    !confirm(
+      status === "Active"
+        ? "Unblock " + username + "?"
+        : "Block " + username + "?"
+    )
+  ){
+
+    return;
+
+  }
+
+
+  showLoader(
+    "Updating user status..."
+  );
+
+
+  try{
+
+    const result =
+      await postJson(
+        USER_API_URL,
+        {
+
+          action:
+            "toggleUserStatus",
+
+          requester:
+            currentUsername,
+
+          username:
+            username,
+
+          status:
+            status
+
+        }
+      );
+
+
+    if(
+      !result ||
+      result.success !== true
+    ){
+
+      throw new Error(
+        result.message ||
+        "Failed to update status"
+      );
+
+    }
+
+
+    await loadUsers();
+
+
+    showToast(
+      status === "Active"
+        ? "User unblocked"
+        : "User blocked",
+      "success"
+    );
+
+
+  }catch(error){
+
+    showToast(
+      error.message ||
+      "Status update failed",
+      "error"
+    );
+
+  }finally{
+
+    hideLoader();
+
+  }
+
+}
+
+
+// ============================================================
+// PASSWORD
+// ============================================================
+
+function openPasswordModal(){
+
+  document.getElementById(
+    "currentPassword"
+  ).value = "";
+
+
+  document.getElementById(
+    "newPassword"
+  ).value = "";
+
+
+  document.getElementById(
+    "confirmPassword"
+  ).value = "";
+
+
+  openModal(
+    "passwordModal"
+  );
+
+}
+
+
+async function changePassword(){
+
+  const currentPassword =
+    document.getElementById(
+      "currentPassword"
+    ).value;
+
+
+  const newPassword =
+    document.getElementById(
+      "newPassword"
+    ).value;
+
+
+  const confirmPassword =
+    document.getElementById(
+      "confirmPassword"
+    ).value;
+
+
+  if(!currentPassword){
+
+    showToast(
+      "Current password is required",
+      "error"
+    );
+
+    return;
+
+  }
+
+
+  if(!newPassword){
+
+    showToast(
+      "New password is required",
+      "error"
+    );
+
+    return;
+
+  }
+
+
+  if(
+    newPassword !==
+    confirmPassword
+  ){
+
+    showToast(
+      "Passwords do not match",
+      "error"
+    );
+
+    return;
+
+  }
+
+
+  showLoader(
+    "Changing password..."
+  );
+
+
+  try{
+
+    const result =
+      await postJson(
+        USER_API_URL,
+        {
+
+          action:
+            "changePassword",
+
+          requester:
+            currentUsername,
+
+          username:
+            currentUsername,
+
+          currentPassword:
+            currentPassword,
+
+          newPassword:
+            newPassword
+
+        }
+      );
+
+
+    if(
+      !result ||
+      result.success !== true
+    ){
+
+      throw new Error(
+        result.message ||
+        "Password change failed"
+      );
+
+    }
+
+
+    closeModal(
+      "passwordModal"
+    );
+
+
+    showToast(
+      "Password changed successfully",
+      "success"
+    );
+
+
+  }catch(error){
+
+    showToast(
+      error.message ||
+      "Password change failed",
+      "error"
+    );
+
+  }finally{
+
+    hideLoader();
+
+  }
+
+}
+
+
+// ============================================================
+// POST JSON
+// ============================================================
+
+async function postJson(
+  url,
+  data
+){
+
+  const response =
+    await fetch(
+      url,
+      {
+
+        method:
+          "POST",
+
+        headers:{
+          "Content-Type":
+            "text/plain;charset=utf-8"
+        },
+
+        body:
+          JSON.stringify(data)
+
+      }
+    );
+
+
+  const text =
+    await response.text();
+
+
+  let result;
+
+
+  try{
+
+    result =
+      JSON.parse(text);
+
+  }catch(error){
+
+    throw new Error(
+      "Invalid server response"
+    );
+
+  }
+
+
+  return result;
+
+}
+
+
+// ============================================================
+// MODAL
+// ============================================================
+
+function openModal(
+  id
+){
+
+  const modal =
+    document.getElementById(id);
+
+
+  if(modal){
+
+    modal.classList.add(
+      "show"
+    );
+
+  }
+
+}
+
+
+function closeModal(
+  id
+){
+
+  const modal =
+    document.getElementById(id);
+
+
+  if(modal){
+
+    modal.classList.remove(
+      "show"
+    );
+
+  }
+
+}
+
+
+document.addEventListener(
+  "click",
+  function(e){
+
+    if(
+      e.target.classList.contains(
+        "modal"
+      )
+    ){
+
+      e.target.classList.remove(
+        "show"
+      );
+
+    }
+
+  }
+);
+
+
+// ============================================================
+// PROFILE MENU
+// ============================================================
+
+function toggleProfileMenu(
+  event
+){
+
+  if(event){
+
+    event.stopPropagation();
+
+  }
+
+
+  document
+    .getElementById(
+      "profileMenu"
+    )
+    .classList.toggle(
+      "show"
+    );
+
+}
+
+
+document.addEventListener(
+  "click",
+  function(){
+
+    const menu =
+      document.getElementById(
+        "profileMenu"
+      );
+
+
+    if(menu){
+
+      menu.classList.remove(
+        "show"
+      );
+
+    }
+
+  }
+);
+
+
+// ============================================================
+// THEME
+// ============================================================
+
+function toggleTheme(){
+
+  document.body.classList.toggle(
+    "dark"
+  );
+
+
+  localStorage.setItem(
+    "dashboardTheme",
+    document.body.classList.contains(
+      "dark"
+    )
+      ? "dark"
+      : "light"
+  );
+
+}
+
+
+function loadTheme(){
+
+  const theme =
+    localStorage.getItem(
+      "dashboardTheme"
+    );
+
+
+  if(theme === "dark"){
+
+    document.body.classList.add(
+      "dark"
+    );
+
+  }
+
+}
+
+
+// ============================================================
+// TABLE LOADER
+// ============================================================
+
+function showLoader(
+  text
+){
+
+  const loader =
+    document.getElementById(
+      "loader"
+    );
+
+
+  const loaderText =
+    document.getElementById(
+      "loaderText"
+    );
+
+
+  if(!loader){
+
+    return;
+
+  }
+
+
+  if(loaderText){
+
+    loaderText.textContent =
+      text ||
+      "Loading...";
+
+  }
+
+
+  loader.classList.add(
+    "show"
+  );
+
+}
+
+
+function hideLoader(){
+
+  const loader =
+    document.getElementById(
+      "loader"
+    );
+
+
+  if(loader){
+
+    loader.classList.remove(
+      "show"
+    );
+
+  }
+
+}
+
+
+// ============================================================
+// TOAST
+// ============================================================
+
+let toastTimer = null;
+
+
+function showToast(
+  message,
+  type="success"
+){
+
+  const toast =
+    document.getElementById(
+      "toast"
+    );
+
+
+  toast.textContent =
+    message;
+
+
+  toast.className =
+    "toast show " +
+    type;
+
+
+  clearTimeout(
+    toastTimer
+  );
+
+
+  toastTimer =
+    setTimeout(
+      () => {
+
+        toast.className =
+          "toast";
+
+      },
+      3500
+    );
+
+}
+
+
+// ============================================================
+// DATE
+// ============================================================
+
+function getToday(){
+
+  const d =
+    new Date();
+
+
+  const year =
+    d.getFullYear();
+
+
+  const month =
+    String(
+      d.getMonth() + 1
+    ).padStart(
+      2,
+      "0"
+    );
+
+
+  const day =
+    String(
+      d.getDate()
+    ).padStart(
+      2,
+      "0"
+    );
+
+
+  return (
+    year +
+    "-" +
+    month +
+    "-" +
+    day
+  );
+
+}
+
+
+function normalizeDate(
+  value
+){
+
+  if(!value){
+
+    return "";
+
+  }
+
+
+  if(
+    Object.prototype.toString.call(
+      value
+    ) === "[object Date]"
+  ){
+
+    if(
+      isNaN(
+        value.getTime()
+      )
+    ){
+
+      return "";
+
+    }
+
+
+    return [
+      value.getFullYear(),
+      String(
+        value.getMonth() + 1
+      ).padStart(2,"0"),
+      String(
+        value.getDate()
+      ).padStart(2,"0")
+    ].join("-");
+
+  }
+
+
+  const text =
+    String(value).trim();
+
+
+  if(
+    /^\d{4}-\d{2}-\d{2}$/.test(
+      text
+    )
+  ){
+
+    return text;
+
+  }
+
+
+  const d =
+    new Date(text);
+
+
+  if(
+    !isNaN(
+      d.getTime()
+    )
+  ){
+
+    return [
+      d.getFullYear(),
+      String(
+        d.getMonth() + 1
+      ).padStart(2,"0"),
+      String(
+        d.getDate()
+      ).padStart(2,"0")
+    ].join("-");
+
+  }
+
+
+  return text;
+
+}
+
+
+function formatDate(
+  value
+){
+
+  const normalized =
+    normalizeDate(
+      value
+    );
+
+
+  if(
+    !normalized
+  ){
+
+    return "";
+
+  }
+
+
+  const parts =
+    normalized.split("-");
+
+
+  if(parts.length !== 3){
+
+    return normalized;
+
+  }
+
+
+  const months = [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec"
+  ];
+
+
+  return (
+    parts[2] +
+    " " +
+    months[
+      Number(parts[1]) - 1
+    ] +
+    " " +
+    parts[0]
+  );
+
+}
+
+
+function formatDateTime(
+  value
+){
+
+  if(!value){
+
+    return "";
+
+  }
+
+
+  const d =
+    new Date(value);
+
+
+  if(
+    !isNaN(
+      d.getTime()
+    )
+  ){
+
+    return d.toLocaleString(
+      "en-GB",
+      {
+        dateStyle:"medium",
+        timeStyle:"short"
+      }
+    );
+
+  }
+
+
+  return String(value);
+
+}
+
+
+// ============================================================
+// ESCAPE HTML
+// ============================================================
+
+function escapeHtml(
+  value
+){
+
+  return String(
+    value ?? ""
+  )
+    .replace(
+      /&/g,
+      "&amp;"
+    )
+    .replace(
+      /</g,
+      "&lt;"
+    )
+    .replace(
+      />/g,
+      "&gt;"
+    )
+    .replace(
+      /"/g,
+      "&quot;"
+    )
+    .replace(
+      /'/g,
+      "&#039;"
+    );
+
+}
+
+
+function escapeJs(
+  value
+){
+
+  return String(
+    value ?? ""
+  )
+    .replace(
+      /\\/g,
+      "\\\\"
+    )
+    .replace(
+      /'/g,
+      "\\'"
+    )
+    .replace(
+      /\n/g,
+      "\\n"
+    )
+    .replace(
+      /\r/g,
+      "\\r"
+    );
+
+}
+
+
+// ============================================================
+// LOGOUT
+// ============================================================
+
+function logout(){
+
+  const keys = [
+    "dashboardAuth",
+    "username",
+    "userData",
+    "loginData",
+    "loggedUser",
+    "currentUser",
+    "userInfo",
+    "name",
+    "role",
+    "status"
+  ];
+
+
+  keys.forEach(
+    key =>
+      localStorage.removeItem(
+        key
+      )
+  );
+
+
+  sessionStorage.clear();
+
+
+  window.location.href =
+    "index.html";
+
+}
+
+
+// ============================================================
+// BACK BUTTON PROTECTION
+// ============================================================
+
+function setupBackProtection(){
+
+  try{
+
+    history.pushState(
+      null,
+      "",
+      location.href
+    );
+
+
+    window.addEventListener(
+      "popstate",
+      function(){
+
+        if(
+          !checkLogin()
+        ){
+
+          return;
+
+        }
+
+
+        history.pushState(
+          null,
+          "",
+          location.href
+        );
+
+      }
+    );
+
+
+    window.addEventListener(
+      "pageshow",
+      function(){
+
+        checkLogin();
+
+      }
+    );
+
+  }catch(error){
+
+    console.error(
+      error
+    );
+
+  }
+
+}
+
+</script>
+
+</body>
+</html>
