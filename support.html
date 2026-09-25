@@ -1,12 +1,14 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
 
 <meta charset="UTF-8">
 
 <meta
-  name="viewport"
-  content="width=device-width, initial-scale=1.0"
+name="viewport"
+content="width=device-width, initial-scale=1.0"
+
 >
 
 <title>Support Dashboard</title>
@@ -317,7 +319,7 @@ TABLE
 table{
   width:100%;
   border-collapse:collapse;
-  min-width:850px;
+  min-width:750px;
 }
 
 thead{
@@ -455,10 +457,6 @@ MODAL
   box-shadow:0 25px 70px rgba(0,0,0,.25);
 }
 
-.modal-box.large{
-  max-width:800px;
-}
-
 .modal-header{
   padding:17px 19px;
   display:flex;
@@ -534,28 +532,6 @@ MODAL
   background:var(--primary);
   color:#fff;
   font-weight:700;
-}
-
-
-/* =========================================================
-ITEM
-========================================================= */
-
-.item-add-area{
-  display:flex;
-  gap:8px;
-  margin-bottom:15px;
-}
-
-.item-add-area input{
-  flex:1;
-  height:40px;
-  padding:0 11px;
-  border:1px solid var(--border);
-  background:var(--bg);
-  color:var(--text);
-  border-radius:8px;
-  outline:none;
 }
 
 
@@ -711,18 +687,13 @@ RESPONSIVE
     padding:9px;
   }
 
-  .item-row{
-    grid-template-columns:1fr 1fr;
-  }
-
 }
 
 </style>
+
 </head>
 
-
 <body>
-
 
 <!-- ========================================================
 HEADER
@@ -732,97 +703,90 @@ HEADER
 
   <div class="logo-area">
 
-    <div class="logo">
-      S
-    </div>
+```
+<div class="logo">
+  S
+</div>
 
-    <div class="logo-text">
+<div class="logo-text">
 
-      <h1>Support Dashboard</h1>
+  <h1>Support Dashboard</h1>
 
-      <p>
-        Admin Management System
-      </p>
+  <p>
+    Admin Management System
+  </p>
 
-    </div>
+</div>
+```
 
   </div>
 
-
   <div class="header-actions">
 
-    <button
-      class="header-btn"
-      onclick="loadData(true)"
-      title="Reload"
+```
+<button
+  class="header-btn"
+  onclick="loadData(true)"
+  title="Reload"
+>
+  ↻ <span>Reload</span>
+</button>
+
+
+<button
+  class="header-btn primary"
+  onclick="openEntryModal()"
+>
+  + <span>New Entry</span>
+</button>
+
+
+<button
+  class="header-btn"
+  onclick="toggleTheme()"
+  title="Dark Mode"
+>
+  ◐
+</button>
+
+
+<div class="profile-wrap">
+
+  <button
+    class="profile-btn"
+    onclick="toggleProfileMenu(event)"
+  >
+
+    <img
+      id="profileImage"
+      src="https://cdn-icons-png.flaticon.com/128/17163/17163834.png"
+      alt="Profile"
     >
-      ↻ <span>Reload</span>
+
+  </button>
+
+
+  <div
+    class="profile-menu"
+    id="profileMenu"
+  >
+
+    <button onclick="openPasswordModal()">
+      🔑 Change Password
     </button>
 
-
-    <button
-      class="header-btn"
-      onclick="openItemsModal()"
-    >
-      📦 <span>Items</span>
+    <button onclick="logout()">
+      🚪 Logout
     </button>
 
+  </div>
 
-    <button
-      class="header-btn primary"
-      onclick="openEntryModal()"
-    >
-      + <span>New Entry</span>
-    </button>
-
-
-    <button
-      class="header-btn"
-      onclick="toggleTheme()"
-      title="Dark Mode"
-    >
-      ◐
-    </button>
-
-
-    <div class="profile-wrap">
-
-      <button
-        class="profile-btn"
-        onclick="toggleProfileMenu(event)"
-      >
-
-        <img
-          id="profileImage"
-          src="https://cdn-icons-png.flaticon.com/128/17163/17163834.png"
-          alt="Profile"
-        >
-
-      </button>
-
-
-      <div
-        class="profile-menu"
-        id="profileMenu"
-      >
-
-        <button onclick="openPasswordModal()">
-          🔑 Change Password
-        </button>
-
-        <button onclick="logout()">
-          🚪 Logout
-        </button>
-
-      </div>
-
-    </div>
+</div>
+```
 
   </div>
 
 </header>
-
-
 
 <!-- ========================================================
 MAIN
@@ -830,32 +794,31 @@ MAIN
 
 <main class="main">
 
-
   <div class="toolbar">
 
-    <div class="toolbar-title">
+```
+<div class="toolbar-title">
 
-      <h2 id="dataTitle">
-        Data
-      </h2>
+  <h2 id="dataTitle">
+    Data
+  </h2>
 
-      <p id="dataSubtitle">
-        Manage your support entries
-      </p>
+  <p id="dataSubtitle">
+    Manage your support entries
+  </p>
 
-    </div>
+</div>
 
 
-    <button
-      class="refresh-btn"
-      onclick="loadData(true)"
-    >
-      ↻ Refresh Data
-    </button>
+<button
+  class="refresh-btn"
+  onclick="loadData(true)"
+>
+  ↻ Refresh Data
+</button>
+```
 
   </div>
-
-
 
   <!-- ======================================================
   FILTER
@@ -863,80 +826,80 @@ MAIN
 
   <div class="filter-bar">
 
-    <div class="search-box">
+```
+<div class="search-box">
 
-      <input
-        type="text"
-        id="searchInput"
-        placeholder="Search Name, IP, Work, Item..."
-        oninput="applyFilters()"
-      >
+  <input
+    type="text"
+    id="searchInput"
+    placeholder="Search Name, IP, Work..."
+    oninput="applyFilters()"
+  >
 
-    </div>
-
-
-    <div class="date-box">
-
-      <input
-        type="date"
-        id="fromDate"
-        onchange="applyFilters()"
-        title="From Date"
-      >
-
-    </div>
+</div>
 
 
-    <div class="date-box">
+<div class="date-box">
 
-      <input
-        type="date"
-        id="toDate"
-        onchange="applyFilters()"
-        title="To Date"
-      >
+  <input
+    type="date"
+    id="fromDate"
+    onchange="applyFilters()"
+    title="From Date"
+  >
 
-    </div>
-
-
-    <div class="select-box">
-
-      <select
-        id="dataType"
-        onchange="changeDataType()"
-      >
-
-        <option value="data">
-          Data
-        </option>
-
-        <option value="sell">
-          Sell
-        </option>
-
-        <option value="paid">
-          Paid
-        </option>
-
-        <option value="delete">
-          Delete
-        </option>
-
-      </select>
-
-    </div>
+</div>
 
 
-    <button
-      class="clear-btn"
-      onclick="clearFilters()"
-    >
-      Clear
-    </button>
+<div class="date-box">
+
+  <input
+    type="date"
+    id="toDate"
+    onchange="applyFilters()"
+    title="To Date"
+  >
+
+</div>
+
+
+<div class="select-box">
+
+  <select
+    id="dataType"
+    onchange="changeDataType()"
+  >
+
+    <option value="data">
+      Data
+    </option>
+
+    <option value="sell">
+      Sell
+    </option>
+
+    <option value="paid">
+      Paid
+    </option>
+
+    <option value="delete">
+      Delete
+    </option>
+
+  </select>
+
+</div>
+
+
+<button
+  class="clear-btn"
+  onclick="clearFilters()"
+>
+  Clear
+</button>
+```
 
   </div>
-
-
 
   <!-- ======================================================
   TABLE
@@ -944,49 +907,47 @@ MAIN
 
   <div class="table-card">
 
-    <div class="table-wrap">
+```
+<div class="table-wrap">
 
-      <table>
+  <table>
 
-        <thead id="tableHead"></thead>
+    <thead id="tableHead"></thead>
 
-        <tbody id="tableBody"></tbody>
+    <tbody id="tableBody"></tbody>
 
-      </table>
+  </table>
 
-    </div>
-
-
-    <div
-      class="pagination"
-      id="pagination"
-    ></div>
+</div>
 
 
-    <!-- TABLE ONLY LOADER -->
+<div
+  class="pagination"
+  id="pagination"
+></div>
 
-    <div
-      class="table-loader"
-      id="loader"
-    >
 
-      <div class="table-loader-box">
+<div
+  class="table-loader"
+  id="loader"
+>
 
-        <div class="spinner"></div>
+  <div class="table-loader-box">
 
-        <span id="loaderText">
-          Loading...
-        </span>
+    <div class="spinner"></div>
 
-      </div>
+    <span id="loaderText">
+      Loading...
+    </span>
 
-    </div>
+  </div>
+
+</div>
+```
 
   </div>
 
 </main>
-
-
 
 <!-- ========================================================
 ENTRY MODAL
@@ -999,190 +960,102 @@ ENTRY MODAL
 
   <div class="modal-box">
 
-    <div class="modal-header">
+```
+<div class="modal-header">
 
-      <h3 id="entryModalTitle">
-        New Entry
-      </h3>
+  <h3 id="entryModalTitle">
+    New Entry
+  </h3>
 
-      <button
-        class="close-btn"
-        onclick="closeModal('entryModal')"
-      >
-        ×
-      </button>
-
-    </div>
-
-
-    <div class="modal-body">
-
-
-      <div class="form-group">
-
-        <label>Name</label>
-
-        <input
-          type="text"
-          id="entryName"
-          readonly
-        >
-
-      </div>
-
-
-      <div class="form-group">
-
-        <label>IP</label>
-
-        <input
-          type="text"
-          id="entryIP"
-          placeholder="Enter IP"
-        >
-
-      </div>
-
-
-      <div class="form-group">
-
-        <label>Work</label>
-
-        <input
-          type="text"
-          id="entryWork"
-          placeholder="Enter Work"
-        >
-
-      </div>
-
-
-      <div class="form-group">
-
-        <label>Date</label>
-
-        <input
-          type="date"
-          id="entryDate"
-          readonly
-        >
-
-      </div>
-
-
-      <div class="form-group">
-
-        <label>Item</label>
-
-        <select id="entryItem">
-
-          <option value="">
-            Select Item
-          </option>
-
-        </select>
-
-      </div>
-
-
-      <div class="form-actions">
-
-        <button
-          class="cancel-btn"
-          onclick="closeModal('entryModal')"
-        >
-          Cancel
-        </button>
-
-        <button
-          class="save-btn"
-          onclick="saveEntry()"
-        >
-          Save Entry
-        </button>
-
-      </div>
-
-    </div>
-
-  </div>
+  <button
+    class="close-btn"
+    onclick="closeModal('entryModal')"
+  >
+    ×
+  </button>
 
 </div>
 
 
-
-<!-- ========================================================
-ITEM MODAL
-========================================================= -->
-
-<div
-  class="modal"
-  id="itemsModal"
->
-
-  <div class="modal-box large">
-
-    <div class="modal-header">
-
-      <h3>
-        Item Management
-      </h3>
-
-      <button
-        class="close-btn"
-        onclick="closeModal('itemsModal')"
-      >
-        ×
-      </button>
-
-    </div>
+<div class="modal-body">
 
 
-    <div class="modal-body">
+  <div class="form-group">
+
+    <label>Name</label>
+
+    <input
+      type="text"
+      id="entryName"
+      readonly
+    >
+
+  </div>
 
 
-      <div class="item-add-area">
+  <div class="form-group">
 
-        <input
-          type="text"
-          id="newItem"
-          placeholder="Enter new item"
-        >
+    <label>IP</label>
 
+    <input
+      type="text"
+      id="entryIP"
+      placeholder="Enter IP"
+    >
 
-        <button
-          class="item-add-btn"
-          onclick="addNewItem()"
-        >
-          + Add
-        </button>
-
-      </div>
+  </div>
 
 
-      <div class="items-list">
+  <div class="form-group">
 
-        <div class="item-row item-head">
+    <label>Work</label>
 
-          <div>Item</div>
-          <div>Date</div>
-          <div>User</div>
-          <div>Action</div>
+    <input
+      type="text"
+      id="entryWork"
+      placeholder="Enter Work"
+    >
 
-        </div>
+  </div>
 
 
-        <div id="itemsBody"></div>
+  <div class="form-group">
 
-      </div>
+    <label>Date</label>
 
-    </div>
+    <input
+      type="date"
+      id="entryDate"
+      readonly
+    >
+
+  </div>
+
+
+  <div class="form-actions">
+
+    <button
+      class="cancel-btn"
+      onclick="closeModal('entryModal')"
+    >
+      Cancel
+    </button>
+
+    <button
+      class="save-btn"
+      onclick="saveEntry()"
+    >
+      Save Entry
+    </button>
 
   </div>
 
 </div>
+```
 
+  </div>
 
+</div>
 
 <!-- ========================================================
 PASSWORD MODAL
@@ -1195,89 +1068,89 @@ PASSWORD MODAL
 
   <div class="modal-box">
 
-    <div class="modal-header">
+```
+<div class="modal-header">
 
-      <h3>
-        Change Password
-      </h3>
+  <h3>
+    Change Password
+  </h3>
 
-      <button
-        class="close-btn"
-        onclick="closeModal('passwordModal')"
-      >
-        ×
-      </button>
-
-    </div>
-
-
-    <div class="modal-body">
-
-
-      <div class="form-group">
-
-        <label>Current Password</label>
-
-        <input
-          type="password"
-          id="currentPassword"
-          placeholder="Current password"
-        >
-
-      </div>
-
-
-      <div class="form-group">
-
-        <label>New Password</label>
-
-        <input
-          type="password"
-          id="newPassword"
-          placeholder="New password"
-        >
-
-      </div>
-
-
-      <div class="form-group">
-
-        <label>Confirm New Password</label>
-
-        <input
-          type="password"
-          id="confirmPassword"
-          placeholder="Confirm new password"
-        >
-
-      </div>
-
-
-      <div class="form-actions">
-
-        <button
-          class="cancel-btn"
-          onclick="closeModal('passwordModal')"
-        >
-          Cancel
-        </button>
-
-        <button
-          class="save-btn"
-          onclick="changePassword()"
-        >
-          Change Password
-        </button>
-
-      </div>
-
-    </div>
-
-  </div>
+  <button
+    class="close-btn"
+    onclick="closeModal('passwordModal')"
+  >
+    ×
+  </button>
 
 </div>
 
 
+<div class="modal-body">
+
+
+  <div class="form-group">
+
+    <label>Current Password</label>
+
+    <input
+      type="password"
+      id="currentPassword"
+      placeholder="Current password"
+    >
+
+  </div>
+
+
+  <div class="form-group">
+
+    <label>New Password</label>
+
+    <input
+      type="password"
+      id="newPassword"
+      placeholder="New password"
+    >
+
+  </div>
+
+
+  <div class="form-group">
+
+    <label>Confirm New Password</label>
+
+    <input
+      type="password"
+      id="confirmPassword"
+      placeholder="Confirm new password"
+    >
+
+  </div>
+
+
+  <div class="form-actions">
+
+    <button
+      class="cancel-btn"
+      onclick="closeModal('passwordModal')"
+    >
+      Cancel
+    </button>
+
+    <button
+      class="save-btn"
+      onclick="changePassword()"
+    >
+      Change Password
+    </button>
+
+  </div>
+
+</div>
+```
+
+  </div>
+
+</div>
 
 <!-- ========================================================
 TOAST
@@ -1287,8 +1160,6 @@ TOAST
   class="toast"
   id="toast"
 ></div>
-
-
 
 <script>
 
@@ -1317,10 +1188,6 @@ const DELETE_API_URL =
   "https://script.google.com/macros/s/AKfycbwDL1JIV7QYcH84VGiWxhUoT-wN9UfuGn0t9boYrs_FaG_ZfcVGjNmaTqSTC6ev0Ig9Kg/exec";
 
 
-const ITEM_API_URL =
-  "https://script.google.com/macros/s/AKfycby2e7dzGE5vkS0Q-Eyl9MKLAbkkkD8f37eIVj7VuV8bPytWGOH7cwJ3w25efP7MLGshOw/exec";
-
-
 // ============================================================
 // GLOBAL STATE
 // ============================================================
@@ -1340,9 +1207,6 @@ let dataCache = null;
 let sellCache = null;
 let paidCache = null;
 let deleteCache = null;
-
-let itemList = [];
-let itemCache = null;
 
 let currentUsername =
   localStorage.username ||
@@ -1365,8 +1229,6 @@ document.addEventListener(
     loadUser();
 
     loadData();
-
-    loadItems();
 
     setupBackProtection();
 
@@ -1866,7 +1728,6 @@ function renderData(data){
       "IP",
       "Work",
       "Date",
-      "Item",
       "Action"
     ];
 
@@ -1878,7 +1739,6 @@ function renderData(data){
       "IP",
       "Work",
       "Date",
-      "Item",
       "Sell Date",
       "User",
       "Action"
@@ -1892,7 +1752,6 @@ function renderData(data){
       "IP",
       "Work",
       "Date",
-      "Item",
       "Sell Date",
       "Sell User",
       "Paid Time",
@@ -1907,7 +1766,6 @@ function renderData(data){
       "IP",
       "Work",
       "Date",
-      "Item",
       "Delete Time",
       "User"
     ];
@@ -2038,13 +1896,6 @@ function renderData(data){
         "";
 
 
-      const item =
-        row.Item ??
-        row.item ??
-        row[4] ??
-        "";
-
-
       addCell(
         tr,
         name
@@ -2069,12 +1920,6 @@ function renderData(data){
       );
 
 
-      addCell(
-        tr,
-        item
-      );
-
-
       /* =====================================================
          SELL
       ====================================================== */
@@ -2089,7 +1934,7 @@ function renderData(data){
           row["Sell Date"] ??
           row.sellTime ??
           row["Sell time"] ??
-          row[5] ??
+          row[4] ??
           "";
 
 
@@ -2098,7 +1943,7 @@ function renderData(data){
           row.user ??
           row.Username ??
           row.username ??
-          row[6] ??
+          row[5] ??
           "";
 
 
@@ -2194,7 +2039,7 @@ function renderData(data){
           row["Sell Date"] ??
           row.sellTime ??
           row["Sell time"] ??
-          row[5] ??
+          row[4] ??
           "";
 
 
@@ -2203,7 +2048,7 @@ function renderData(data){
           row.user ??
           row.SellUser ??
           row.sellUser ??
-          row[6] ??
+          row[5] ??
           "";
 
 
@@ -2211,7 +2056,7 @@ function renderData(data){
           row.PaidTime ??
           row.paidTime ??
           row["Paid Time"] ??
-          row[7] ??
+          row[6] ??
           "";
 
 
@@ -2219,7 +2064,7 @@ function renderData(data){
           row.PaidUser ??
           row.paidUser ??
           row["Paid User"] ??
-          row[8] ??
+          row[7] ??
           "";
 
 
@@ -2266,7 +2111,7 @@ function renderData(data){
           row.DeleteTime ??
           row.Dellet ??
           row["Delete Time"] ??
-          row[5] ??
+          row[4] ??
           "";
 
 
@@ -2275,7 +2120,7 @@ function renderData(data){
           row.user ??
           row.Username ??
           row.username ??
-          row[6] ??
+          row[5] ??
           "";
 
 
@@ -2778,14 +2623,6 @@ function openEntryModal(){
     getToday();
 
 
-  populateItemSelect();
-
-
-  document.getElementById(
-    "entryItem"
-  ).value = "";
-
-
   openModal(
     "entryModal"
   );
@@ -2865,18 +2702,6 @@ function editDataEntry(
       row[3] ??
       ""
     );
-
-
-  populateItemSelect();
-
-
-  document.getElementById(
-    "entryItem"
-  ).value =
-    row.Item ??
-    row.item ??
-    row[4] ??
-    "";
 
 
   openModal(
@@ -2960,18 +2785,6 @@ function editSellEntry(
     );
 
 
-  populateItemSelect();
-
-
-  document.getElementById(
-    "entryItem"
-  ).value =
-    row.Item ??
-    row.item ??
-    row[4] ??
-    "";
-
-
   openModal(
     "entryModal"
   );
@@ -3048,12 +2861,6 @@ async function saveEntry(){
     ).value;
 
 
-  const item =
-    document.getElementById(
-      "entryItem"
-    ).value.trim();
-
-
   if(!name){
 
     showToast(
@@ -3102,18 +2909,6 @@ async function saveEntry(){
   }
 
 
-  if(!item){
-
-    showToast(
-      "Item is required",
-      "error"
-    );
-
-    return;
-
-  }
-
-
   showLoader(
     "Saving..."
   );
@@ -3148,9 +2943,6 @@ async function saveEntry(){
 
             date:
               date,
-
-            item:
-              item,
 
             username:
               currentUsername,
@@ -3222,10 +3014,7 @@ async function saveEntry(){
               work,
 
             date:
-              date,
-
-            item:
-              item
+              date
 
           }
         );
@@ -3283,10 +3072,7 @@ async function saveEntry(){
             work,
 
           date:
-            date,
-
-          item:
-            item
+            date
 
         }
       );
@@ -3431,19 +3217,11 @@ async function sellDataEntry(
     "";
 
 
-  const item =
-    row.Item ??
-    row.item ??
-    row[4] ??
-    "";
-
-
   const confirmed =
     confirm(
       "Sell this entry?\n\n" +
       "Name: " + name +
-      "\nIP: " + ip +
-      "\nItem: " + item
+      "\nIP: " + ip
     );
 
 
@@ -3486,9 +3264,6 @@ async function sellDataEntry(
 
           date:
             date,
-
-          item:
-            item,
 
           username:
             currentUsername,
@@ -3717,13 +3492,6 @@ async function deleteDataEntry(
     "";
 
 
-  const item =
-    row.Item ??
-    row.item ??
-    row[4] ??
-    "";
-
-
   if(
     !confirm(
       "Delete this entry?\n\n" +
@@ -3770,9 +3538,6 @@ async function deleteDataEntry(
 
           date:
             date,
-
-          item:
-            item,
 
           username:
             currentUsername,
@@ -3909,7 +3674,7 @@ async function paidSellEntry(
       row["Sell Date"] ??
       row.sellTime ??
       row["Sell time"] ??
-      row[5] ??
+      row[4] ??
       "";
 
 
@@ -3918,7 +3683,7 @@ async function paidSellEntry(
       row.user ??
       row.Username ??
       row.username ??
-      row[6] ??
+      row[5] ??
       "";
 
 
@@ -3953,12 +3718,6 @@ async function paidSellEntry(
             row.Date ??
             row.date ??
             row[3] ??
-            "",
-
-          item:
-            row.Item ??
-            row.item ??
-            row[4] ??
             "",
 
           sellTime:
@@ -4007,15 +3766,6 @@ async function paidSellEntry(
     );
 
 
-    /*
-      Paid API is now separate.
-
-      We do NOT call SELL_API_URL with
-      "paidData" because the current separate
-      Sell Code.gs does not support that action.
-    */
-
-
     currentDataType =
       "paid";
 
@@ -4043,524 +3793,6 @@ async function paidSellEntry(
     showToast(
       error.message ||
       "Payment failed",
-      "error"
-    );
-
-  }finally{
-
-    hideLoader();
-
-  }
-
-}
-
-
-// ============================================================
-// ITEMS
-// ============================================================
-
-function openItemsModal(){
-
-  document.getElementById(
-    "newItem"
-  ).value = "";
-
-
-  openModal(
-    "itemsModal"
-  );
-
-
-  loadItems(true);
-
-}
-
-
-async function loadItems(
-  force=false
-){
-
-  if(
-    !force &&
-    itemCache
-  ){
-
-    itemList =
-      itemCache;
-
-    populateItemSelect();
-
-    renderItems();
-
-    return;
-
-  }
-
-
-  try{
-
-    const response =
-      await fetch(
-        ITEM_API_URL +
-        "?action=getItems"
-      );
-
-
-    const result =
-      await response.json();
-
-
-    if(
-      !result ||
-      result.success !== true
-    ){
-
-      throw new Error(
-        result.message ||
-        "Failed to load items"
-      );
-
-    }
-
-
-    itemList =
-      Array.isArray(result.data)
-        ? result.data
-        : [];
-
-
-    itemCache =
-      itemList;
-
-
-    renderItems();
-
-    populateItemSelect();
-
-
-  }catch(error){
-
-    console.error(
-      error
-    );
-
-
-    showToast(
-      error.message ||
-      "Failed to load items",
-      "error"
-    );
-
-  }
-
-}
-
-
-function renderItems(){
-
-  const body =
-    document.getElementById(
-      "itemsBody"
-    );
-
-
-  body.innerHTML = "";
-
-
-  if(
-    !itemList ||
-    itemList.length === 0
-  ){
-
-    body.innerHTML =
-      '<div style="padding:25px;text-align:center;color:var(--muted);font-size:12px;">No items found</div>';
-
-    return;
-
-  }
-
-
-  itemList.forEach(
-    (item,index) => {
-
-      const row =
-        typeof item === "object"
-          ? item
-          : {
-              Item:item
-            };
-
-
-      const name =
-        row.Item ??
-        row.item ??
-        row.Name ??
-        row.name ??
-        row[0] ??
-        "";
-
-
-      const date =
-        row.Date ??
-        row.date ??
-        row[1] ??
-        "";
-
-
-      const user =
-        row.User ??
-        row.user ??
-        row.Username ??
-        row.username ??
-        row[2] ??
-        "";
-
-
-      const div =
-        document.createElement(
-          "div"
-        );
-
-
-      div.className =
-        "item-row";
-
-
-      div.innerHTML = `
-
-        <div class="item-cell">
-          ${escapeHtml(name)}
-        </div>
-
-        <div class="item-cell">
-          ${escapeHtml(formatDateTime(date))}
-        </div>
-
-        <div class="item-cell">
-          ${escapeHtml(user)}
-        </div>
-
-        <div class="item-cell">
-
-          <button
-            class="small-action delete-item-btn"
-            onclick="deleteItem(${index})"
-          >
-            Delete
-          </button>
-
-        </div>
-
-      `;
-
-
-      body.appendChild(div);
-
-    }
-  );
-
-}
-
-
-function populateItemSelect(){
-
-  const select =
-    document.getElementById(
-      "entryItem"
-    );
-
-
-  if(!select){
-
-    return;
-
-  }
-
-
-  const oldValue =
-    select.value;
-
-
-  select.innerHTML =
-    '<option value="">Select Item</option>';
-
-
-  itemList.forEach(
-    item => {
-
-      const name =
-        typeof item === "object"
-          ? (
-              item.Item ??
-              item.item ??
-              item.Name ??
-              item.name ??
-              item[0] ??
-              ""
-            )
-          : item;
-
-
-      if(!name){
-
-        return;
-
-      }
-
-
-      const option =
-        document.createElement(
-          "option"
-        );
-
-
-      option.value =
-        name;
-
-
-      option.textContent =
-        name;
-
-
-      select.appendChild(
-        option
-      );
-
-    }
-  );
-
-
-  if(oldValue){
-
-    select.value =
-      oldValue;
-
-  }
-
-}
-
-
-async function addNewItem(){
-
-  const input =
-    document.getElementById(
-      "newItem"
-    );
-
-
-  const item =
-    input.value.trim();
-
-
-  if(!item){
-
-    showToast(
-      "Enter item name",
-      "error"
-    );
-
-    return;
-
-  }
-
-
-  showLoader(
-    "Adding item..."
-  );
-
-
-  try{
-
-    const result =
-      await postJson(
-        ITEM_API_URL,
-        {
-
-          action:
-            "addItem",
-
-          item:
-            item,
-
-          itemName:
-            item,
-
-          name:
-            item,
-
-          user:
-            currentUsername,
-
-          username:
-            currentUsername
-
-        }
-      );
-
-
-    if(
-      !result ||
-      result.success !== true
-    ){
-
-      throw new Error(
-        result.message ||
-        "Failed to add item"
-      );
-
-    }
-
-
-    input.value = "";
-
-    itemCache = null;
-
-
-    await loadItems(true);
-
-
-    showToast(
-      "Item added successfully",
-      "success"
-    );
-
-
-  }catch(error){
-
-    showToast(
-      error.message ||
-      "Failed to add item",
-      "error"
-    );
-
-  }finally{
-
-    hideLoader();
-
-  }
-
-}
-
-
-async function deleteItem(
-  index
-){
-
-  const item =
-    itemList[index];
-
-
-  if(!item){
-
-    return;
-
-  }
-
-
-  const itemName =
-    typeof item === "object"
-      ? (
-          item.Item ??
-          item.item ??
-          item.Name ??
-          item.name ??
-          item[0] ??
-          ""
-        )
-      : item;
-
-
-  const row =
-    typeof item === "object"
-      ? (
-          item.row ??
-          item.rowNumber ??
-          item[3] ??
-          index + 2
-        )
-      : index + 2;
-
-
-  if(
-    !confirm(
-      "Delete item: " +
-      itemName +
-      "?"
-    )
-  ){
-
-    return;
-
-  }
-
-
-  showLoader(
-    "Deleting item..."
-  );
-
-
-  try{
-
-    const result =
-      await postJson(
-        ITEM_API_URL,
-        {
-
-          action:
-            "deleteItem",
-
-          row:
-            row,
-
-          rowNumber:
-            row,
-
-          item:
-            itemName,
-
-          itemName:
-            itemName,
-
-          user:
-            currentUsername,
-
-          username:
-            currentUsername
-
-        }
-      );
-
-
-    if(
-      !result ||
-      result.success !== true
-    ){
-
-      throw new Error(
-        result.message ||
-        "Failed to delete item"
-      );
-
-    }
-
-
-    itemCache = null;
-
-
-    await loadItems(true);
-
-
-    showToast(
-      "Item deleted successfully",
-      "success"
-    );
-
-
-  }catch(error){
-
-    showToast(
-      error.message ||
-      "Failed to delete item",
       "error"
     );
 
@@ -5266,68 +4498,6 @@ function formatDateTime(
 
 
   return String(value);
-
-}
-
-
-// ============================================================
-// ESCAPE HTML
-// ============================================================
-
-function escapeHtml(
-  value
-){
-
-  return String(
-    value ?? ""
-  )
-    .replace(
-      /&/g,
-      "&amp;"
-    )
-    .replace(
-      /</g,
-      "&lt;"
-    )
-    .replace(
-      />/g,
-      "&gt;"
-    )
-    .replace(
-      /"/g,
-      "&quot;"
-    )
-    .replace(
-      /'/g,
-      "&#039;"
-    );
-
-}
-
-
-function escapeJs(
-  value
-){
-
-  return String(
-    value ?? ""
-  )
-    .replace(
-      /\\/g,
-      "\\\\"
-    )
-    .replace(
-      /'/g,
-      "\\'"
-    )
-    .replace(
-      /\n/g,
-      "\\n"
-    )
-    .replace(
-      /\r/g,
-      "\\r"
-    );
 
 }
 
