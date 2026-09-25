@@ -290,9 +290,6 @@ margin-right:4px;margin-bottom:3px
 <button class="clear-btn" onclick="clearFilters()">Clear</button>
 </div>
 
-<!-- =====================================================
-     BULK SELL PAID BAR
-====================================================== -->
 <div class="bulk-bar" id="bulkBar">
 
 <div class="bulk-left">
@@ -330,8 +327,6 @@ margin-right:4px;margin-bottom:3px
 
 </main>
 
-
-<!-- ENTRY MODAL -->
 <div class="modal" id="entryModal">
 <div class="modal-box">
 <div class="modal-header">
@@ -373,8 +368,6 @@ margin-right:4px;margin-bottom:3px
 </div>
 </div>
 
-
-<!-- ITEM MODAL -->
 <div class="modal" id="itemsModal">
 <div class="modal-box large">
 <div class="modal-header">
@@ -396,8 +389,6 @@ margin-right:4px;margin-bottom:3px
 </div>
 </div>
 
-
-<!-- USERS MODAL -->
 <div class="modal" id="usersModal">
 <div class="modal-box large">
 <div class="modal-header">
@@ -418,8 +409,6 @@ margin-right:4px;margin-bottom:3px
 </div>
 </div>
 
-
-<!-- USER FORM MODAL -->
 <div class="modal" id="userFormModal">
 <div class="modal-box">
 <div class="modal-header">
@@ -473,7 +462,6 @@ margin-right:4px;margin-bottom:3px
 </div>
 
 
-<!-- PASSWORD MODAL -->
 <div class="modal" id="passwordModal">
 <div class="modal-box">
 <div class="modal-header">
@@ -511,9 +499,6 @@ margin-right:4px;margin-bottom:3px
 
 <script>
 
-/* ============================================================
-API URLS
-============================================================ */
 
 const USER_API_URL="https://script.google.com/macros/s/AKfycbw00GHHheuvtdQtgPURjs4PtsM48-4yaFx-_ms0ZBV5FHhnmcdbJ5DHr3Aix8JPF0kQzA/exec";
 
@@ -525,10 +510,6 @@ const PAID_API_URL="https://script.google.com/macros/s/AKfycby_kDEHln_Dj_0YfB421
 
 const ITEM_API_URL="https://script.google.com/macros/s/AKfycby2e7dzGE5vkS0Q-Eyl9MKLAbkkkD8f37eIVj7VuV8bPytWGOH7cwJ3w25efP7MLGshOw/exec";
 
-
-/* ============================================================
-GLOBAL
-============================================================ */
 
 let allData=[];
 let filteredData=[];
@@ -553,10 +534,6 @@ localStorage.loggedUser||
 "";
 
 
-/* ============================================================
-READY
-============================================================ */
-
 document.addEventListener("DOMContentLoaded",()=>{
 loadTheme();
 checkLogin();
@@ -566,10 +543,6 @@ loadItems();
 setupBackProtection();
 });
 
-
-/* ============================================================
-LOGIN
-============================================================ */
 
 function checkLogin(){
 const auth=
@@ -582,11 +555,6 @@ return false;
 }
 return true;
 }
-
-
-/* ============================================================
-USER
-============================================================ */
 
 async function loadUser(){
 if(!currentUsername)return;
@@ -621,10 +589,6 @@ console.error("User loading error:",e);
 }
 }
 
-
-/* ============================================================
-DATA TYPE
-============================================================ */
 
 function changeDataType(){
 currentDataType=document.getElementById("dataType").value;
@@ -661,10 +625,6 @@ updateBulkBar();
 }
 
 
-/* ============================================================
-NAME FILTER
-============================================================ */
-
 function updateNameFilter(){
 const select=document.getElementById("nameFilter");
 if(!select)return;
@@ -692,11 +652,6 @@ select.appendChild(option);
 if(old&&names.some(n=>n.toLowerCase()===old.toLowerCase()))
 select.value=old;
 }
-
-
-/* ============================================================
-LOAD DATA
-============================================================ */
 
 async function loadData(force=false){
 
@@ -759,10 +714,6 @@ hideLoader();
 }
 }
 
-
-/* ============================================================
-RENDER
-============================================================ */
 
 function renderData(data){
 
@@ -916,9 +867,6 @@ updateBulkBar();
 }
 
 
-/* ============================================================
-CELL
-============================================================ */
 
 function addCell(tr,value){
 const td=document.createElement("td");
@@ -934,9 +882,6 @@ return button;
 }
 
 
-/* ============================================================
-PAGINATION
-============================================================ */
 
 function renderPagination(total){
 
@@ -977,10 +922,6 @@ renderData(filteredData);
 }
 
 
-/* ============================================================
-FILTER
-============================================================ */
-
 function applyFilters(){
 
 const nameFilter=document.getElementById("nameFilter").value.trim().toLowerCase();
@@ -1012,10 +953,6 @@ document.getElementById("toDate").value="";
 applyFilters();
 }
 
-
-/* ============================================================
-BULK SELECT
-============================================================ */
 
 function clearSelectedSellRows(){
 
@@ -1089,10 +1026,6 @@ renderData(filteredData);
 }
 
 
-/* ============================================================
-BULK PAID
-============================================================ */
-
 async function bulkPaidSell(){
 
 if(currentDataType!=="sell")return;
@@ -1119,14 +1052,6 @@ let failedCount=0;
 let failedMessages=[];
 
 try{
-
-/*
- IMPORTANT:
- We process rows from bottom to top.
- If the Paid API removes the Sell row after payment,
- deleting lower rows first prevents the upper row numbers
- from shifting before they are processed.
-*/
 
 const rowsToProcess=[...rowNumbers].sort((a,b)=>b-a);
 
@@ -1234,10 +1159,6 @@ hideLoader();
 }
 
 
-/* ============================================================
-ENTRY MODAL
-============================================================ */
-
 function openEntryModal(){
 
 editingDataRow=null;
@@ -1259,10 +1180,6 @@ openModal("entryModal");
 }
 
 
-/* ============================================================
-EDIT DATA
-============================================================ */
-
 function editDataEntry(index){
 
 const row=filteredData[index];
@@ -1282,11 +1199,6 @@ document.getElementById("entryItem").value=row.Item??row.item??row[4]??"";
 
 openModal("entryModal");
 }
-
-
-/* ============================================================
-EDIT SELL
-============================================================ */
 
 function editSellEntry(index){
 
@@ -1309,10 +1221,6 @@ openModal("entryModal");
 }
 
 
-/* ============================================================
-REAL ROW
-============================================================ */
-
 function getRealRowNumber(row){
 
 if(row&&row.row&&Number(row.row)>=2)return Number(row.row);
@@ -1324,10 +1232,6 @@ if(row&&row.SellRow&&Number(row.SellRow)>=2)return Number(row.SellRow);
 return null;
 }
 
-
-/* ============================================================
-SAVE ENTRY
-============================================================ */
 
 async function saveEntry(){
 
@@ -1408,11 +1312,6 @@ showToast(error.message||"Save failed","error");
 hideLoader();
 }
 }
-
-
-/* ============================================================
-SELL
-============================================================ */
 
 async function sellDataEntry(index){
 
@@ -1504,11 +1403,6 @@ hideLoader();
 }
 }
 
-
-/* ============================================================
-SINGLE PAID
-============================================================ */
-
 async function paidSellEntry(index){
 
 const row=filteredData[index];
@@ -1591,10 +1485,6 @@ hideLoader();
 }
 }
 
-
-/* ============================================================
-ITEMS
-============================================================ */
 
 function openItemsModal(){
 document.getElementById("newItem").value="";
@@ -1774,10 +1664,6 @@ hideLoader();
 }
 
 
-/* ============================================================
-USERS
-============================================================ */
-
 function openUsersModal(){
 openModal("usersModal");
 loadUsers();
@@ -1871,11 +1757,6 @@ body.appendChild(div);
 });
 }
 
-
-/* ============================================================
-ADD USER
-============================================================ */
-
 function openAddUserModal(){
 
 editingUser=null;
@@ -1889,11 +1770,6 @@ document.getElementById("userStatus").value="Active";
 
 openModal("userFormModal");
 }
-
-
-/* ============================================================
-EDIT USER
-============================================================ */
 
 function editUser(user){
 
@@ -1919,10 +1795,6 @@ user.Status??user.status??user[4]??"Active";
 openModal("userFormModal");
 }
 
-
-/* ============================================================
-SAVE USER
-============================================================ */
 
 async function saveUser(){
 
@@ -1987,10 +1859,6 @@ hideLoader();
 }
 
 
-/* ============================================================
-USER STATUS
-============================================================ */
-
 async function changeUserStatus(username,status){
 
 if(username===currentUsername){
@@ -2034,10 +1902,6 @@ hideLoader();
 }
 }
 
-
-/* ============================================================
-PASSWORD
-============================================================ */
 
 function openPasswordModal(){
 
@@ -2090,10 +1954,6 @@ hideLoader();
 }
 
 
-/* ============================================================
-POST JSON
-============================================================ */
-
 async function postJson(url,data){
 
 const response=await fetch(url,{
@@ -2112,10 +1972,6 @@ throw new Error("Invalid server response");
 }
 
 
-/* ============================================================
-MODAL
-============================================================ */
-
 function openModal(id){
 const modal=document.getElementById(id);
 if(modal)modal.classList.add("show");
@@ -2132,10 +1988,6 @@ e.target.classList.remove("show");
 });
 
 
-/* ============================================================
-PROFILE
-============================================================ */
-
 function toggleProfileMenu(event){
 
 if(event)event.stopPropagation();
@@ -2148,10 +2000,6 @@ const menu=document.getElementById("profileMenu");
 if(menu)menu.classList.remove("show");
 });
 
-
-/* ============================================================
-THEME
-============================================================ */
 
 function toggleTheme(){
 
@@ -2170,10 +2018,6 @@ document.body.classList.add("dark");
 }
 
 
-/* ============================================================
-LOADER
-============================================================ */
-
 function showLoader(text){
 
 const loader=document.getElementById("loader");
@@ -2189,10 +2033,6 @@ const loader=document.getElementById("loader");
 if(loader)loader.classList.remove("show");
 }
 
-
-/* ============================================================
-TOAST
-============================================================ */
 
 let toastTimer=null;
 
@@ -2210,10 +2050,6 @@ toast.className="toast";
 },3500);
 }
 
-
-/* ============================================================
-DATE
-============================================================ */
 
 function getToday(){
 
@@ -2291,11 +2127,6 @@ timeStyle:"short"
 return String(value);
 }
 
-
-/* ============================================================
-ESCAPE
-============================================================ */
-
 function escapeHtml(value){
 
 return String(value??"")
@@ -2316,10 +2147,6 @@ return String(value??"")
 }
 
 
-/* ============================================================
-LOGOUT
-============================================================ */
-
 function logout(){
 
 const keys=[
@@ -2334,10 +2161,6 @@ sessionStorage.clear();
 window.location.href="index.html";
 }
 
-
-/* ============================================================
-BACK PROTECTION
-============================================================ */
 
 function setupBackProtection(){
 
