@@ -779,7 +779,8 @@ HEADER
     >
       ↻ <span>Reload</span>
     </button>
-<button
+
+    <button
       class="header-btn"
       onclick="openItemsModal()"
     >
@@ -1885,8 +1886,7 @@ function renderData(data){
       "IP",
       "Work",
       "Date",
-      "Item",
-      "Action"
+      "Item"
     ];
 
   }
@@ -2151,24 +2151,6 @@ function renderData(data){
           "action-wrap";
 
 
-        const editBtn =
-          createActionButton(
-            "Edit",
-            "action-edit"
-          );
-
-
-        editBtn.onclick =
-          () => editSellEntry(
-            start + index
-          );
-
-
-        action.appendChild(
-          editBtn
-        );
-
-
         const paidBtn =
           createActionButton(
             "Paid",
@@ -2316,90 +2298,10 @@ function renderData(data){
 
       /* =====================================================
          DATA
+
+         Edit / Sell / Delete buttons removed.
+         Action column removed.
       ====================================================== */
-
-      else{
-
-        const actionTd =
-          document.createElement(
-            "td"
-          );
-
-
-        const action =
-          document.createElement(
-            "div"
-          );
-
-
-        action.className =
-          "action-wrap";
-
-
-        const editBtn =
-          createActionButton(
-            "Edit",
-            "action-edit"
-          );
-
-
-        editBtn.onclick =
-          () => editDataEntry(
-            start + index
-          );
-
-
-        action.appendChild(
-          editBtn
-        );
-
-
-        const sellBtn =
-          createActionButton(
-            "Sell",
-            "action-sell"
-          );
-
-
-        sellBtn.onclick =
-          () => sellDataEntry(
-            start + index
-          );
-
-
-        action.appendChild(
-          sellBtn
-        );
-
-
-        const deleteBtn =
-          createActionButton(
-            "Delete",
-            "action-delete"
-          );
-
-
-        deleteBtn.onclick =
-          () => deleteDataEntry(
-            start + index
-          );
-
-
-        action.appendChild(
-          deleteBtn
-        );
-
-
-        actionTd.appendChild(
-          action
-        );
-
-
-        tr.appendChild(
-          actionTd
-        );
-
-      }
 
 
       body.appendChild(tr);
@@ -4026,15 +3928,6 @@ async function paidSellEntry(
     );
 
 
-    /*
-      Paid API is now separate.
-
-      We do NOT call SELL_API_URL with
-      "paidData" because the current separate
-      Sell Code.gs does not support that action.
-    */
-
-
     currentDataType =
       "paid";
 
@@ -5146,6 +5039,7 @@ async function saveUser(){
       error.message ||
       "Failed to save user",
       "error"
+
     );
 
   }finally{
