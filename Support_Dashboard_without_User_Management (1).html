@@ -541,21 +541,45 @@ MODAL
 USERS
 ========================================================= */
 
-.item-add-btn{padding:9px 14px;background:var(--primary);color:#fff;border-radius:8px;font-weight:700;}
-
-.items-list{border:1px solid var(--border);border-radius:10px;overflow:hidden;}
-
-.item-row{display:grid;grid-template-columns:1.2fr 1fr 1fr 80px;gap:8px;padding:11px;border-bottom:1px solid var(--border);align-items:center;}
-
-.item-row{
-  grid-template-columns:1.2fr 1fr 1fr 80px;
+.item-add-btn{
+  padding:9px 14px;
+  background:var(--primary);
+  color:#fff;
+  border-radius:8px;
+  font-weight:700;
 }
 
-.item-row:last-child{border-bottom:none;}
+.items-list{
+  border:1px solid var(--border);
+  border-radius:10px;
+  overflow:hidden;
+}
 
-.item-head{background:var(--bg);font-size:11px;color:var(--muted);font-weight:700;}
+.item-row{
+  display:grid;
+  grid-template-columns:1.2fr 1fr 1fr 80px;
+  gap:8px;
+  padding:11px;
+  border-bottom:1px solid var(--border);
+  align-items:center;
+}
 
-.item-cell{font-size:12px;overflow:hidden;text-overflow:ellipsis;}
+.item-row:last-child{
+  border-bottom:none;
+}
+
+.item-head{
+  background:var(--bg);
+  font-size:11px;
+  color:var(--muted);
+  font-weight:700;
+}
+
+.item-cell{
+  font-size:12px;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
 
 
 /* =========================================================
@@ -741,34 +765,23 @@ RESPONSIVE
 </style>
 </head>
 
-
 <body>
-
-
-<!-- ========================================================
-HEADER
-========================================================= -->
 
 <header class="header">
 
   <div class="logo-area">
 
-    <div class="logo">
-      S
-    </div>
+    <div class="logo">S</div>
 
     <div class="logo-text">
 
       <h1>Support Dashboard</h1>
 
-      <p>
-        Admin Management System
-      </p>
+      <p>Admin Management System</p>
 
     </div>
 
   </div>
-
 
   <div class="header-actions">
 
@@ -787,14 +800,12 @@ HEADER
       📦 <span>Items</span>
     </button>
 
-
     <button
       class="header-btn primary"
       onclick="openEntryModal()"
     >
       + <span>New Entry</span>
     </button>
-
 
     <button
       class="header-btn"
@@ -803,7 +814,6 @@ HEADER
     >
       ◐
     </button>
-
 
     <div class="profile-wrap">
 
@@ -819,7 +829,6 @@ HEADER
         >
 
       </button>
-
 
       <div
         class="profile-menu"
@@ -843,28 +852,19 @@ HEADER
 </header>
 
 
-
-<!-- ========================================================
-MAIN
-========================================================= -->
-
 <main class="main">
-
 
   <div class="toolbar">
 
     <div class="toolbar-title">
 
-      <h2 id="dataTitle">
-        Data
-      </h2>
+      <h2 id="dataTitle">Data</h2>
 
       <p id="dataSubtitle">
         Manage your support entries
       </p>
 
     </div>
-
 
     <button
       class="refresh-btn"
@@ -875,11 +875,6 @@ MAIN
 
   </div>
 
-
-
-  <!-- ======================================================
-  FILTER
-  ======================================================= -->
 
   <div class="filter-bar">
 
@@ -894,7 +889,6 @@ MAIN
 
     </div>
 
-
     <div class="date-box">
 
       <input
@@ -906,7 +900,6 @@ MAIN
 
     </div>
 
-
     <div class="date-box">
 
       <input
@@ -917,7 +910,6 @@ MAIN
       >
 
     </div>
-
 
     <div class="select-box">
 
@@ -938,14 +930,9 @@ MAIN
           Paid
         </option>
 
-        <option value="delete">
-          Delete
-        </option>
-
       </select>
 
     </div>
-
 
     <button
       class="clear-btn"
@@ -956,11 +943,6 @@ MAIN
 
   </div>
 
-
-
-  <!-- ======================================================
-  TABLE
-  ======================================================= -->
 
   <div class="table-card">
 
@@ -976,14 +958,10 @@ MAIN
 
     </div>
 
-
     <div
       class="pagination"
       id="pagination"
     ></div>
-
-
-    <!-- TABLE ONLY LOADER -->
 
     <div
       class="table-loader"
@@ -1007,10 +985,7 @@ MAIN
 </main>
 
 
-
-<!-- ========================================================
-ENTRY MODAL
-========================================================= -->
+<!-- ENTRY MODAL -->
 
 <div
   class="modal"
@@ -1034,9 +1009,7 @@ ENTRY MODAL
 
     </div>
 
-
     <div class="modal-body">
-
 
       <div class="form-group">
 
@@ -1050,7 +1023,6 @@ ENTRY MODAL
 
       </div>
 
-
       <div class="form-group">
 
         <label>IP</label>
@@ -1062,7 +1034,6 @@ ENTRY MODAL
         >
 
       </div>
-
 
       <div class="form-group">
 
@@ -1076,7 +1047,6 @@ ENTRY MODAL
 
       </div>
 
-
       <div class="form-group">
 
         <label>Date</label>
@@ -1088,7 +1058,6 @@ ENTRY MODAL
         >
 
       </div>
-
 
       <div class="form-group">
 
@@ -1103,7 +1072,6 @@ ENTRY MODAL
         </select>
 
       </div>
-
 
       <div class="form-actions">
 
@@ -1130,10 +1098,7 @@ ENTRY MODAL
 </div>
 
 
-
-<!-- ========================================================
-ITEM MODAL
-========================================================= -->
+<!-- ITEM MODAL -->
 
 <div
   class="modal"
@@ -1144,9 +1109,7 @@ ITEM MODAL
 
     <div class="modal-header">
 
-      <h3>
-        Item Management
-      </h3>
+      <h3>Item Management</h3>
 
       <button
         class="close-btn"
@@ -1157,9 +1120,7 @@ ITEM MODAL
 
     </div>
 
-
     <div class="modal-body">
-
 
       <div class="item-add-area">
 
@@ -1169,7 +1130,6 @@ ITEM MODAL
           placeholder="Enter new item"
         >
 
-
         <button
           class="item-add-btn"
           onclick="addNewItem()"
@@ -1178,7 +1138,6 @@ ITEM MODAL
         </button>
 
       </div>
-
 
       <div class="items-list">
 
@@ -1191,7 +1150,6 @@ ITEM MODAL
 
         </div>
 
-
         <div id="itemsBody"></div>
 
       </div>
@@ -1203,10 +1161,7 @@ ITEM MODAL
 </div>
 
 
-
-<!-- ========================================================
-PASSWORD MODAL
-========================================================= -->
+<!-- PASSWORD MODAL -->
 
 <div
   class="modal"
@@ -1217,9 +1172,7 @@ PASSWORD MODAL
 
     <div class="modal-header">
 
-      <h3>
-        Change Password
-      </h3>
+      <h3>Change Password</h3>
 
       <button
         class="close-btn"
@@ -1230,9 +1183,7 @@ PASSWORD MODAL
 
     </div>
 
-
     <div class="modal-body">
-
 
       <div class="form-group">
 
@@ -1246,7 +1197,6 @@ PASSWORD MODAL
 
       </div>
 
-
       <div class="form-group">
 
         <label>New Password</label>
@@ -1259,7 +1209,6 @@ PASSWORD MODAL
 
       </div>
 
-
       <div class="form-group">
 
         <label>Confirm New Password</label>
@@ -1271,7 +1220,6 @@ PASSWORD MODAL
         >
 
       </div>
-
 
       <div class="form-actions">
 
@@ -1298,58 +1246,45 @@ PASSWORD MODAL
 </div>
 
 
-
-<!-- ========================================================
-TOAST
-========================================================= -->
-
 <div
   class="toast"
   id="toast"
 ></div>
 
 
-
 <script>
 
-
-// ============================================================
-// API URLS
-// ============================================================
+/* ============================================================
+API URLS
+============================================================ */
 
 const USER_API_URL =
   "https://script.google.com/macros/s/AKfycbw00GHHheuvtdQtgPURjs4PtsM48-4yaFx-_ms0ZBV5FHhnmcdbJ5DHr3Aix8JPF0kQzA/exec";
 
-
 const DATA_API_URL =
   "https://script.google.com/macros/s/AKfycbz59T-4CKQDbHJB_ql6OYZf18eN7XUmttp0d2FaOM5pm27yCBOWrEilqA_zMOnFq_rz/exec";
-
 
 const SELL_API_URL =
   "https://script.google.com/macros/s/AKfycbyiKn1MH1ZQvebSIo83bZzbbfJimmfRf9PjlPI4w1q1UliuF27gKViYM24oXakpkHuP/exec";
 
-
 const PAID_API_URL =
   "https://script.google.com/macros/s/AKfycby_kDEHln_Dj_0YfB421POWa2XAuN6g2PDypQtyS2arrxgPVtyZZOwAp_TKLrUnRudKng/exec";
-
-
-const DELETE_API_URL =
-  "https://script.google.com/macros/s/AKfycbwDL1JIV7QYcH84VGiWxhUoT-wN9UfuGn0t9boYrs_FaG_ZfcVGjNmaTqSTC6ev0Ig9Kg/exec";
-
 
 const ITEM_API_URL =
   "https://script.google.com/macros/s/AKfycby2e7dzGE5vkS0Q-Eyl9MKLAbkkkD8f37eIVj7VuV8bPytWGOH7cwJ3w25efP7MLGshOw/exec";
 
 
-// ============================================================
-// GLOBAL STATE
-// ============================================================
+/* ============================================================
+GLOBAL STATE
+============================================================ */
 
 let allData = [];
 let filteredData = [];
 
 let editingDataRow = null;
 let editingSellRow = null;
+
+let editingUser = null;
 
 let currentDataType = "data";
 
@@ -1359,7 +1294,6 @@ const pageSize = 10;
 let dataCache = null;
 let sellCache = null;
 let paidCache = null;
-let deleteCache = null;
 
 let itemList = [];
 let itemCache = null;
@@ -1370,9 +1304,9 @@ let currentUsername =
   "";
 
 
-// ============================================================
-// DOM READY
-// ============================================================
+/* ============================================================
+DOM READY
+============================================================ */
 
 document.addEventListener(
   "DOMContentLoaded",
@@ -1394,16 +1328,15 @@ document.addEventListener(
 );
 
 
-// ============================================================
-// LOGIN CHECK
-// ============================================================
+/* ============================================================
+LOGIN CHECK
+============================================================ */
 
 function checkLogin(){
 
   const auth =
     localStorage.getItem("dashboardAuth") === "true" ||
     sessionStorage.getItem("dashboardAuth") === "true";
-
 
   if(!auth){
 
@@ -1414,15 +1347,14 @@ function checkLogin(){
 
   }
 
-
   return true;
 
 }
 
 
-// ============================================================
-// LOAD USER
-// ============================================================
+/* ============================================================
+LOAD USER
+============================================================ */
 
 async function loadUser(){
 
@@ -1431,7 +1363,6 @@ async function loadUser(){
     return;
 
   }
-
 
   try{
 
@@ -1444,10 +1375,8 @@ async function loadUser(){
         )
       );
 
-
     const result =
       await response.json();
-
 
     if(
       result &&
@@ -1458,48 +1387,40 @@ async function loadUser(){
       const user =
         result.user;
 
-
       const name =
         user.Name ||
         user.name ||
         currentUsername;
-
 
       const role =
         user.Role ||
         user.role ||
         "";
 
-
       const status =
         user.Status ||
         user.status ||
         "";
-
 
       localStorage.setItem(
         "name",
         name
       );
 
-
       localStorage.setItem(
         "role",
         role
       );
-
 
       localStorage.setItem(
         "status",
         status
       );
 
-
       const profileName =
         document.getElementById(
           "profileImage"
         );
-
 
       if(profileName){
 
@@ -1516,7 +1437,6 @@ async function loadUser(){
 
       }
 
-
       if(
         String(status)
           .trim()
@@ -1532,7 +1452,6 @@ async function loadUser(){
 
     }
 
-
   }catch(error){
 
     console.error(
@@ -1545,9 +1464,9 @@ async function loadUser(){
 }
 
 
-// ============================================================
-// CHANGE DATA TYPE
-// ============================================================
+/* ============================================================
+CHANGE DATA TYPE
+============================================================ */
 
 function changeDataType(){
 
@@ -1556,29 +1475,23 @@ function changeDataType(){
       "dataType"
     ).value;
 
-
   currentPage = 1;
 
   dataCache = null;
   sellCache = null;
   paidCache = null;
-  deleteCache = null;
-
 
   document.getElementById(
     "searchInput"
   ).value = "";
 
-
   document.getElementById(
     "fromDate"
   ).value = "";
 
-
   document.getElementById(
     "toDate"
   ).value = "";
-
 
   updateDataTitle();
 
@@ -1587,9 +1500,9 @@ function changeDataType(){
 }
 
 
-// ============================================================
-// TITLE
-// ============================================================
+/* ============================================================
+TITLE
+============================================================ */
 
 function updateDataTitle(){
 
@@ -1598,12 +1511,10 @@ function updateDataTitle(){
       "dataTitle"
     );
 
-
   const subtitle =
     document.getElementById(
       "dataSubtitle"
     );
-
 
   if(currentDataType === "data"){
 
@@ -1623,7 +1534,7 @@ function updateDataTitle(){
       "Manage sold entries";
 
   }
-  else if(currentDataType === "paid"){
+  else{
 
     title.textContent =
       "Paid Data";
@@ -1632,29 +1543,19 @@ function updateDataTitle(){
       "Paid entry history";
 
   }
-  else{
-
-    title.textContent =
-      "Delete Data";
-
-    subtitle.textContent =
-      "Deleted entry history";
-
-  }
 
 }
 
 
-// ============================================================
-// LOAD DATA
-// ============================================================
+/* ============================================================
+LOAD DATA
+============================================================ */
 
 async function loadData(force=false){
 
   if(!checkLogin()){
     return;
   }
-
 
   if(
     !force &&
@@ -1671,7 +1572,6 @@ async function loadData(force=false){
 
   }
 
-
   if(
     !force &&
     currentDataType === "sell" &&
@@ -1686,7 +1586,6 @@ async function loadData(force=false){
     return;
 
   }
-
 
   if(
     !force &&
@@ -1703,33 +1602,14 @@ async function loadData(force=false){
 
   }
 
-
-  if(
-    !force &&
-    currentDataType === "delete" &&
-    deleteCache
-  ){
-
-    allData =
-      deleteCache;
-
-    applyFilters();
-
-    return;
-
-  }
-
-
   showLoader(
     "Loading data..."
   );
-
 
   try{
 
     let api = DATA_API_URL;
     let action = "getData";
-
 
     if(currentDataType === "sell"){
 
@@ -1741,7 +1621,6 @@ async function loadData(force=false){
 
     }
 
-
     if(currentDataType === "paid"){
 
       api =
@@ -1752,18 +1631,6 @@ async function loadData(force=false){
 
     }
 
-
-    if(currentDataType === "delete"){
-
-      api =
-        DELETE_API_URL;
-
-      action =
-        "getDeletedData";
-
-    }
-
-
     const response =
       await fetch(
         api +
@@ -1771,10 +1638,8 @@ async function loadData(force=false){
         encodeURIComponent(action)
       );
 
-
     const result =
       await response.json();
-
 
     if(
       !result ||
@@ -1790,12 +1655,10 @@ async function loadData(force=false){
 
     }
 
-
     allData =
       Array.isArray(result.data)
         ? result.data
         : [];
-
 
     if(currentDataType === "data"){
 
@@ -1809,22 +1672,14 @@ async function loadData(force=false){
         allData;
 
     }
-    else if(currentDataType === "paid"){
+    else{
 
       paidCache =
         allData;
 
     }
-    else{
-
-      deleteCache =
-        allData;
-
-    }
-
 
     applyFilters();
-
 
   }catch(error){
 
@@ -1832,18 +1687,15 @@ async function loadData(force=false){
       error
     );
 
-
     showToast(
       error.message ||
       "Failed to load data",
       "error"
     );
 
-
     allData = [];
 
     applyFilters();
-
 
   }finally{
 
@@ -1854,9 +1706,9 @@ async function loadData(force=false){
 }
 
 
-// ============================================================
-// RENDER DATA
-// ============================================================
+/* ============================================================
+RENDER DATA
+============================================================ */
 
 function renderData(data){
 
@@ -1865,19 +1717,15 @@ function renderData(data){
       "tableHead"
     );
 
-
   const body =
     document.getElementById(
       "tableBody"
     );
 
-
   head.innerHTML = "";
   body.innerHTML = "";
 
-
   let headers = [];
-
 
   if(currentDataType === "data"){
 
@@ -1904,7 +1752,7 @@ function renderData(data){
     ];
 
   }
-  else if(currentDataType === "paid"){
+  else{
 
     headers = [
       "Name",
@@ -1919,24 +1767,9 @@ function renderData(data){
     ];
 
   }
-  else{
-
-    headers = [
-      "Name",
-      "IP",
-      "Work",
-      "Date",
-      "Item",
-      "Delete Time",
-      "User"
-    ];
-
-  }
-
 
   const tr =
     document.createElement("tr");
-
 
   headers.forEach(
     h => {
@@ -1952,9 +1785,7 @@ function renderData(data){
     }
   );
 
-
   head.appendChild(tr);
-
 
   const totalPages =
     Math.max(
@@ -1965,7 +1796,6 @@ function renderData(data){
       )
     );
 
-
   if(currentPage > totalPages){
 
     currentPage =
@@ -1973,11 +1803,9 @@ function renderData(data){
 
   }
 
-
   const start =
     (currentPage - 1) *
     pageSize;
-
 
   const pageData =
     data.slice(
@@ -1985,28 +1813,22 @@ function renderData(data){
       start + pageSize
     );
 
-
   if(pageData.length === 0){
 
     const tr =
       document.createElement("tr");
 
-
     const td =
       document.createElement("td");
-
 
     td.colSpan =
       headers.length;
 
-
     td.className =
       "empty-row";
 
-
     td.textContent =
       "No data found";
-
 
     tr.appendChild(td);
 
@@ -2020,20 +1842,17 @@ function renderData(data){
 
   }
 
-
   pageData.forEach(
     (row,index) => {
 
       const tr =
         document.createElement("tr");
 
-
       const name =
         row.Name ??
         row.name ??
         row[0] ??
         "";
-
 
       const ip =
         row.Ip ??
@@ -2042,13 +1861,11 @@ function renderData(data){
         row[1] ??
         "";
 
-
       const work =
         row.Work ??
         row.work ??
         row[2] ??
         "";
-
 
       const date =
         row.Date ??
@@ -2056,37 +1873,31 @@ function renderData(data){
         row[3] ??
         "";
 
-
       const item =
         row.Item ??
         row.item ??
         row[4] ??
         "";
 
-
       addCell(
         tr,
         name
       );
-
 
       addCell(
         tr,
         ip
       );
 
-
       addCell(
         tr,
         work
       );
 
-
       addCell(
         tr,
         formatDate(date)
       );
-
 
       addCell(
         tr,
@@ -2111,7 +1922,6 @@ function renderData(data){
           row[5] ??
           "";
 
-
         const sellUser =
           row.User ??
           row.user ??
@@ -2120,7 +1930,6 @@ function renderData(data){
           row[6] ??
           "";
 
-
         addCell(
           tr,
           formatDateTime(
@@ -2128,28 +1937,23 @@ function renderData(data){
           )
         );
 
-
         addCell(
           tr,
           sellUser
         );
-
 
         const actionTd =
           document.createElement(
             "td"
           );
 
-
         const action =
           document.createElement(
             "div"
           );
 
-
         action.className =
           "action-wrap";
-
 
         const paidBtn =
           createActionButton(
@@ -2157,22 +1961,18 @@ function renderData(data){
             "action-paid"
           );
 
-
         paidBtn.onclick =
           () => paidSellEntry(
             start + index
           );
 
-
         action.appendChild(
           paidBtn
         );
 
-
         actionTd.appendChild(
           action
         );
-
 
         tr.appendChild(
           actionTd
@@ -2198,7 +1998,6 @@ function renderData(data){
           row[5] ??
           "";
 
-
         const sellUser =
           row.User ??
           row.user ??
@@ -2207,14 +2006,12 @@ function renderData(data){
           row[6] ??
           "";
 
-
         const paidTime =
           row.PaidTime ??
           row.paidTime ??
           row["Paid Time"] ??
           row[7] ??
           "";
-
 
         const paidUser =
           row.PaidUser ??
@@ -2223,7 +2020,6 @@ function renderData(data){
           row[8] ??
           "";
 
-
         addCell(
           tr,
           formatDateTime(
@@ -2231,12 +2027,10 @@ function renderData(data){
           )
         );
 
-
         addCell(
           tr,
           sellUser
         );
-
 
         addCell(
           tr,
@@ -2245,7 +2039,6 @@ function renderData(data){
           )
         );
 
-
         addCell(
           tr,
           paidUser
@@ -2253,62 +2046,10 @@ function renderData(data){
 
       }
 
-
-      /* =====================================================
-         DELETE
-      ====================================================== */
-
-      else if(
-        currentDataType === "delete"
-      ){
-
-        const deleteTime =
-          row.DelletTime ??
-          row.DeleteTime ??
-          row.Dellet ??
-          row["Delete Time"] ??
-          row[5] ??
-          "";
-
-
-        const deleteUser =
-          row.User ??
-          row.user ??
-          row.Username ??
-          row.username ??
-          row[6] ??
-          "";
-
-
-        addCell(
-          tr,
-          formatDateTime(
-            deleteTime
-          )
-        );
-
-
-        addCell(
-          tr,
-          deleteUser
-        );
-
-      }
-
-
-      /* =====================================================
-         DATA
-
-         Edit / Sell / Delete buttons removed.
-         Action column removed.
-      ====================================================== */
-
-
       body.appendChild(tr);
 
     }
   );
-
 
   renderPagination(
     data.length
@@ -2317,9 +2058,9 @@ function renderData(data){
 }
 
 
-// ============================================================
-// ADD CELL
-// ============================================================
+/* ============================================================
+ADD CELL
+============================================================ */
 
 function addCell(
   tr,
@@ -2329,21 +2070,19 @@ function addCell(
   const td =
     document.createElement("td");
 
-
   td.textContent =
     value == null
       ? ""
       : String(value);
-
 
   tr.appendChild(td);
 
 }
 
 
-// ============================================================
-// ACTION BUTTON
-// ============================================================
+/* ============================================================
+ACTION BUTTON
+============================================================ */
 
 function createActionButton(
   text,
@@ -2353,24 +2092,21 @@ function createActionButton(
   const button =
     document.createElement("button");
 
-
   button.className =
     "action-btn " +
     className;
 
-
   button.textContent =
     text;
-
 
   return button;
 
 }
 
 
-// ============================================================
-// PAGINATION
-// ============================================================
+/* ============================================================
+PAGINATION
+============================================================ */
 
 function renderPagination(
   total
@@ -2381,9 +2117,7 @@ function renderPagination(
       "pagination"
     );
 
-
   container.innerHTML = "";
-
 
   const totalPages =
     Math.ceil(
@@ -2391,40 +2125,32 @@ function renderPagination(
       pageSize
     );
 
-
   if(totalPages <= 1){
 
     return;
 
   }
 
-
   const previous =
     document.createElement("button");
-
 
   previous.className =
     "page-btn";
 
-
   previous.textContent =
     "‹";
 
-
   previous.disabled =
     currentPage <= 1;
-
 
   previous.onclick =
     () => goToPage(
       currentPage - 1
     );
 
-
   container.appendChild(
     previous
   );
-
 
   for(
     let i = 1;
@@ -2435,7 +2161,6 @@ function renderPagination(
     const btn =
       document.createElement("button");
 
-
     btn.className =
       "page-btn" +
       (
@@ -2444,14 +2169,11 @@ function renderPagination(
           : ""
       );
 
-
     btn.textContent =
       i;
 
-
     btn.onclick =
       () => goToPage(i);
-
 
     container.appendChild(
       btn
@@ -2459,28 +2181,22 @@ function renderPagination(
 
   }
 
-
   const next =
     document.createElement("button");
-
 
   next.className =
     "page-btn";
 
-
   next.textContent =
     "›";
 
-
   next.disabled =
     currentPage >= totalPages;
-
 
   next.onclick =
     () => goToPage(
       currentPage + 1
     );
-
 
   container.appendChild(
     next
@@ -2489,9 +2205,9 @@ function renderPagination(
 }
 
 
-// ============================================================
-// GO TO PAGE
-// ============================================================
+/* ============================================================
+GO TO PAGE
+============================================================ */
 
 function goToPage(page){
 
@@ -2504,7 +2220,6 @@ function goToPage(page){
       )
     );
 
-
   if(
     page < 1 ||
     page > totalPages
@@ -2514,10 +2229,8 @@ function goToPage(page){
 
   }
 
-
   currentPage =
     page;
-
 
   renderData(
     filteredData
@@ -2526,9 +2239,9 @@ function goToPage(page){
 }
 
 
-// ============================================================
-// FILTER
-// ============================================================
+/* ============================================================
+FILTER
+============================================================ */
 
 function applyFilters(){
 
@@ -2541,7 +2254,6 @@ function applyFilters(){
       .trim()
       .toLowerCase();
 
-
   const fromDate =
     document
       .getElementById(
@@ -2549,14 +2261,12 @@ function applyFilters(){
       )
       .value;
 
-
   const toDate =
     document
       .getElementById(
         "toDate"
       )
       .value;
-
 
   filteredData =
     allData.filter(
@@ -2567,7 +2277,6 @@ function applyFilters(){
             row
           ).toLowerCase();
 
-
         if(
           search &&
           !rowText.includes(search)
@@ -2577,7 +2286,6 @@ function applyFilters(){
 
         }
 
-
         const rowDate =
           normalizeDate(
             row.Date ??
@@ -2585,7 +2293,6 @@ function applyFilters(){
             row[3] ??
             ""
           );
-
 
         if(
           fromDate &&
@@ -2597,7 +2304,6 @@ function applyFilters(){
 
         }
 
-
         if(
           toDate &&
           rowDate &&
@@ -2608,15 +2314,12 @@ function applyFilters(){
 
         }
 
-
         return true;
 
       }
     );
 
-
   currentPage = 1;
-
 
   renderData(
     filteredData
@@ -2625,9 +2328,9 @@ function applyFilters(){
 }
 
 
-// ============================================================
-// CLEAR FILTER
-// ============================================================
+/* ============================================================
+CLEAR FILTER
+============================================================ */
 
 function clearFilters(){
 
@@ -2635,25 +2338,22 @@ function clearFilters(){
     "searchInput"
   ).value = "";
 
-
   document.getElementById(
     "fromDate"
   ).value = "";
 
-
   document.getElementById(
     "toDate"
   ).value = "";
-
 
   applyFilters();
 
 }
 
 
-// ============================================================
-// OPEN NEW ENTRY
-// ============================================================
+/* ============================================================
+OPEN NEW ENTRY
+============================================================ */
 
 function openEntryModal(){
 
@@ -2663,12 +2363,10 @@ function openEntryModal(){
   editingSellRow =
     null;
 
-
   document.getElementById(
     "entryModalTitle"
   ).textContent =
     "New Entry";
-
 
   const name =
     localStorage.getItem(
@@ -2676,36 +2374,29 @@ function openEntryModal(){
     ) ||
     currentUsername;
 
-
   document.getElementById(
     "entryName"
   ).value =
     name;
 
-
   document.getElementById(
     "entryIP"
   ).value = "";
 
-
   document.getElementById(
     "entryWork"
   ).value = "";
-
 
   document.getElementById(
     "entryDate"
   ).value =
     getToday();
 
-
   populateItemSelect();
-
 
   document.getElementById(
     "entryItem"
   ).value = "";
-
 
   openModal(
     "entryModal"
@@ -2714,9 +2405,9 @@ function openEntryModal(){
 }
 
 
-// ============================================================
-// EDIT DATA ENTRY
-// ============================================================
+/* ============================================================
+EDIT DATA ENTRY
+============================================================ */
 
 function editDataEntry(
   index
@@ -2725,29 +2416,24 @@ function editDataEntry(
   const row =
     filteredData[index];
 
-
   if(!row){
 
     return;
 
   }
 
-
   editingDataRow =
     getRealRowNumber(
       row
     );
 
-
   editingSellRow =
     null;
-
 
   document.getElementById(
     "entryModalTitle"
   ).textContent =
     "Edit Entry";
-
 
   document.getElementById(
     "entryName"
@@ -2756,7 +2442,6 @@ function editDataEntry(
     row.name ??
     row[0] ??
     "";
-
 
   document.getElementById(
     "entryIP"
@@ -2767,7 +2452,6 @@ function editDataEntry(
     row[1] ??
     "";
 
-
   document.getElementById(
     "entryWork"
   ).value =
@@ -2775,7 +2459,6 @@ function editDataEntry(
     row.work ??
     row[2] ??
     "";
-
 
   document.getElementById(
     "entryDate"
@@ -2787,9 +2470,7 @@ function editDataEntry(
       ""
     );
 
-
   populateItemSelect();
-
 
   document.getElementById(
     "entryItem"
@@ -2799,7 +2480,6 @@ function editDataEntry(
     row[4] ??
     "";
 
-
   openModal(
     "entryModal"
   );
@@ -2807,9 +2487,9 @@ function editDataEntry(
 }
 
 
-// ============================================================
-// EDIT SELL ENTRY
-// ============================================================
+/* ============================================================
+EDIT SELL ENTRY
+============================================================ */
 
 function editSellEntry(
   index
@@ -2818,29 +2498,24 @@ function editSellEntry(
   const row =
     filteredData[index];
 
-
   if(!row){
 
     return;
 
   }
 
-
   editingSellRow =
     getRealRowNumber(
       row
     );
 
-
   editingDataRow =
     null;
-
 
   document.getElementById(
     "entryModalTitle"
   ).textContent =
     "Edit Sell Entry";
-
 
   document.getElementById(
     "entryName"
@@ -2849,7 +2524,6 @@ function editSellEntry(
     row.name ??
     row[0] ??
     "";
-
 
   document.getElementById(
     "entryIP"
@@ -2860,7 +2534,6 @@ function editSellEntry(
     row[1] ??
     "";
 
-
   document.getElementById(
     "entryWork"
   ).value =
@@ -2868,7 +2541,6 @@ function editSellEntry(
     row.work ??
     row[2] ??
     "";
-
 
   document.getElementById(
     "entryDate"
@@ -2880,9 +2552,7 @@ function editSellEntry(
       ""
     );
 
-
   populateItemSelect();
-
 
   document.getElementById(
     "entryItem"
@@ -2892,7 +2562,6 @@ function editSellEntry(
     row[4] ??
     "";
 
-
   openModal(
     "entryModal"
   );
@@ -2900,9 +2569,9 @@ function editSellEntry(
 }
 
 
-// ============================================================
-// GET REAL SHEET ROW
-// ============================================================
+/* ============================================================
+GET REAL SHEET ROW
+============================================================ */
 
 function getRealRowNumber(
   row
@@ -2920,7 +2589,6 @@ function getRealRowNumber(
 
   }
 
-
   if(
     row &&
     row.rowNumber &&
@@ -2933,15 +2601,14 @@ function getRealRowNumber(
 
   }
 
-
   return null;
 
 }
 
 
-// ============================================================
-// SAVE ENTRY
-// ============================================================
+/* ============================================================
+SAVE ENTRY
+============================================================ */
 
 async function saveEntry(){
 
@@ -2950,30 +2617,25 @@ async function saveEntry(){
       "entryName"
     ).value.trim();
 
-
   const ip =
     document.getElementById(
       "entryIP"
     ).value.trim();
-
 
   const work =
     document.getElementById(
       "entryWork"
     ).value.trim();
 
-
   const date =
     document.getElementById(
       "entryDate"
     ).value;
 
-
   const item =
     document.getElementById(
       "entryItem"
     ).value.trim();
-
 
   if(!name){
 
@@ -2986,7 +2648,6 @@ async function saveEntry(){
 
   }
 
-
   if(!ip){
 
     showToast(
@@ -2997,7 +2658,6 @@ async function saveEntry(){
     return;
 
   }
-
 
   if(!work){
 
@@ -3010,7 +2670,6 @@ async function saveEntry(){
 
   }
 
-
   if(!date){
 
     showToast(
@@ -3021,7 +2680,6 @@ async function saveEntry(){
     return;
 
   }
-
 
   if(!item){
 
@@ -3034,11 +2692,9 @@ async function saveEntry(){
 
   }
 
-
   showLoader(
     "Saving..."
   );
-
 
   try{
 
@@ -3082,7 +2738,6 @@ async function saveEntry(){
           }
         );
 
-
       if(
         !response.success
       ){
@@ -3094,28 +2749,22 @@ async function saveEntry(){
 
       }
 
-
       sellCache = null;
-
 
       closeModal(
         "entryModal"
       );
-
 
       showToast(
         "Sell entry updated successfully",
         "success"
       );
 
-
       loadData(true);
-
 
       return;
 
     }
-
 
     if(editingDataRow){
 
@@ -3151,7 +2800,6 @@ async function saveEntry(){
           }
         );
 
-
       if(
         !response.success
       ){
@@ -3163,28 +2811,22 @@ async function saveEntry(){
 
       }
 
-
       dataCache = null;
-
 
       closeModal(
         "entryModal"
       );
-
 
       showToast(
         "Entry updated successfully",
         "success"
       );
 
-
       loadData(true);
-
 
       return;
 
     }
-
 
     const response =
       await postJson(
@@ -3212,7 +2854,6 @@ async function saveEntry(){
         }
       );
 
-
     if(
       !response.success
     ){
@@ -3224,30 +2865,24 @@ async function saveEntry(){
 
     }
 
-
     dataCache = null;
-
 
     closeModal(
       "entryModal"
     );
-
 
     showToast(
       "Entry added successfully",
       "success"
     );
 
-
     loadData(true);
-
 
   }catch(error){
 
     console.error(
       error
     );
-
 
     showToast(
       error.message ||
@@ -3264,9 +2899,9 @@ async function saveEntry(){
 }
 
 
-// ============================================================
-// SELL DATA
-// ============================================================
+/* ============================================================
+SELL DATA
+============================================================ */
 
 async function sellDataEntry(
   index
@@ -3274,7 +2909,6 @@ async function sellDataEntry(
 
   const row =
     filteredData[index];
-
 
   if(!row){
 
@@ -3287,7 +2921,6 @@ async function sellDataEntry(
 
   }
 
-
   if(
     currentDataType !== "data"
   ){
@@ -3296,12 +2929,10 @@ async function sellDataEntry(
 
   }
 
-
   const rowNumber =
     getRealRowNumber(
       row
     );
-
 
   if(
     !rowNumber ||
@@ -3322,13 +2953,11 @@ async function sellDataEntry(
 
   }
 
-
   const name =
     row.Name ??
     row.name ??
     row[0] ??
     "";
-
 
   const ip =
     row.Ip ??
@@ -3337,13 +2966,11 @@ async function sellDataEntry(
     row[1] ??
     "";
 
-
   const work =
     row.Work ??
     row.work ??
     row[2] ??
     "";
-
 
   const date =
     row.Date ??
@@ -3351,13 +2978,11 @@ async function sellDataEntry(
     row[3] ??
     "";
 
-
   const item =
     row.Item ??
     row.item ??
     row[4] ??
     "";
-
 
   const confirmed =
     confirm(
@@ -3367,18 +2992,15 @@ async function sellDataEntry(
       "\nItem: " + item
     );
 
-
   if(!confirmed){
 
     return;
 
   }
 
-
   showLoader(
     "Selling entry..."
   );
-
 
   try{
 
@@ -3426,7 +3048,6 @@ async function sellDataEntry(
         }
       );
 
-
     if(
       !sellResult ||
       sellResult.success !== true
@@ -3440,7 +3061,6 @@ async function sellDataEntry(
       );
 
     }
-
 
     const deleteResult =
       await postJson(
@@ -3459,7 +3079,6 @@ async function sellDataEntry(
         }
       );
 
-
     if(
       !deleteResult ||
       deleteResult.success !== true
@@ -3470,16 +3089,13 @@ async function sellDataEntry(
         deleteResult
       );
 
-
       showToast(
         "Sold successfully, but original Data row could not be deleted. Please reload and check.",
         "error"
       );
 
-
       sellCache = null;
       dataCache = null;
-
 
       await loadData(true);
 
@@ -3487,10 +3103,8 @@ async function sellDataEntry(
 
     }
 
-
     dataCache = null;
     sellCache = null;
-
 
     allData =
       allData.filter(
@@ -3507,7 +3121,6 @@ async function sellDataEntry(
         }
       );
 
-
     filteredData =
       filteredData.filter(
         itemRow => {
@@ -3523,28 +3136,22 @@ async function sellDataEntry(
         }
       );
 
-
     showToast(
       "Sold successfully and removed from Data",
       "success"
     );
 
-
     currentDataType =
       "data";
-
 
     document.getElementById(
       "dataType"
     ).value =
       "data";
 
-
     updateDataTitle();
 
-
     await loadData(true);
-
 
   }catch(error){
 
@@ -3552,7 +3159,6 @@ async function sellDataEntry(
       "Sell error:",
       error
     );
-
 
     showToast(
       error.message ||
@@ -3569,227 +3175,9 @@ async function sellDataEntry(
 }
 
 
-// ============================================================
-// DELETE DATA
-// ============================================================
-
-async function deleteDataEntry(
-  index
-){
-
-  const row =
-    filteredData[index];
-
-
-  if(!row){
-
-    return;
-
-  }
-
-
-  const rowNumber =
-    getRealRowNumber(
-      row
-    );
-
-
-  if(
-    !rowNumber ||
-    rowNumber < 2
-  ){
-
-    showToast(
-      "Original row not found",
-      "error"
-    );
-
-    return;
-
-  }
-
-
-  const name =
-    row.Name ??
-    row.name ??
-    row[0] ??
-    "";
-
-
-  const ip =
-    row.Ip ??
-    row.IP ??
-    row.ip ??
-    row[1] ??
-    "";
-
-
-  const work =
-    row.Work ??
-    row.work ??
-    row[2] ??
-    "";
-
-
-  const date =
-    row.Date ??
-    row.date ??
-    row[3] ??
-    "";
-
-
-  const item =
-    row.Item ??
-    row.item ??
-    row[4] ??
-    "";
-
-
-  if(
-    !confirm(
-      "Delete this entry?\n\n" +
-      name +
-      " | " +
-      ip
-    )
-  ){
-
-    return;
-
-  }
-
-
-  showLoader(
-    "Deleting..."
-  );
-
-
-  try{
-
-    const archiveResult =
-      await postJson(
-        DELETE_API_URL,
-        {
-
-          action:
-            "deleteData",
-
-          row:
-            rowNumber,
-
-          rowNumber:
-            rowNumber,
-
-          name:
-            name,
-
-          ip:
-            ip,
-
-          work:
-            work,
-
-          date:
-            date,
-
-          item:
-            item,
-
-          username:
-            currentUsername,
-
-          user:
-            currentUsername
-
-        }
-      );
-
-
-    if(
-      !archiveResult ||
-      archiveResult.success !== true
-    ){
-
-      throw new Error(
-        archiveResult &&
-        archiveResult.message
-          ? archiveResult.message
-          : "Delete archive failed"
-      );
-
-    }
-
-
-    const deleteResult =
-      await postJson(
-        DATA_API_URL,
-        {
-
-          action:
-            "deleteData",
-
-          row:
-            rowNumber,
-
-          rowNumber:
-            rowNumber
-
-        }
-      );
-
-
-    if(
-      !deleteResult ||
-      deleteResult.success !== true
-    ){
-
-      throw new Error(
-        deleteResult &&
-        deleteResult.message
-          ? deleteResult.message
-          : "Original Data delete failed"
-      );
-
-    }
-
-
-    dataCache = null;
-
-
-    showToast(
-      "Entry deleted successfully",
-      "success"
-    );
-
-
-    await loadData(true);
-
-
-  }catch(error){
-
-    console.error(
-      error
-    );
-
-
-    showToast(
-      error.message ||
-      "Delete failed",
-      "error"
-    );
-
-  }finally{
-
-    hideLoader();
-
-  }
-
-}
-
-
-// ============================================================
-// PAID SELL
-// ============================================================
+/* ============================================================
+PAID SELL
+============================================================ */
 
 async function paidSellEntry(
   index
@@ -3798,13 +3186,11 @@ async function paidSellEntry(
   const row =
     filteredData[index];
 
-
   if(!row){
 
     return;
 
   }
-
 
   if(
     !confirm(
@@ -3816,11 +3202,9 @@ async function paidSellEntry(
 
   }
 
-
   showLoader(
     "Processing payment..."
   );
-
 
   try{
 
@@ -3833,7 +3217,6 @@ async function paidSellEntry(
       row[5] ??
       "";
 
-
     const sellUser =
       row.User ??
       row.user ??
@@ -3841,7 +3224,6 @@ async function paidSellEntry(
       row.username ??
       row[6] ??
       "";
-
 
     const result =
       await postJson(
@@ -3903,7 +3285,6 @@ async function paidSellEntry(
         }
       );
 
-
     if(
       !result ||
       result.success !== true
@@ -3918,31 +3299,24 @@ async function paidSellEntry(
 
     }
 
-
     paidCache = null;
-
 
     showToast(
       "Paid successfully and added to Paid Sheet",
       "success"
     );
 
-
     currentDataType =
       "paid";
-
 
     document.getElementById(
       "dataType"
     ).value =
       "paid";
 
-
     updateDataTitle();
 
-
     await loadData(true);
-
 
   }catch(error){
 
@@ -3950,7 +3324,6 @@ async function paidSellEntry(
       "Payment error:",
       error
     );
-
 
     showToast(
       error.message ||
@@ -3967,9 +3340,9 @@ async function paidSellEntry(
 }
 
 
-// ============================================================
-// ITEMS
-// ============================================================
+/* ============================================================
+ITEMS
+============================================================ */
 
 function openItemsModal(){
 
@@ -3977,11 +3350,9 @@ function openItemsModal(){
     "newItem"
   ).value = "";
 
-
   openModal(
     "itemsModal"
   );
-
 
   loadItems(true);
 
@@ -4008,7 +3379,6 @@ async function loadItems(
 
   }
 
-
   try{
 
     const response =
@@ -4017,10 +3387,8 @@ async function loadItems(
         "?action=getItems"
       );
 
-
     const result =
       await response.json();
-
 
     if(
       !result ||
@@ -4034,28 +3402,23 @@ async function loadItems(
 
     }
 
-
     itemList =
       Array.isArray(result.data)
         ? result.data
         : [];
 
-
     itemCache =
       itemList;
-
 
     renderItems();
 
     populateItemSelect();
-
 
   }catch(error){
 
     console.error(
       error
     );
-
 
     showToast(
       error.message ||
@@ -4075,9 +3438,7 @@ function renderItems(){
       "itemsBody"
     );
 
-
   body.innerHTML = "";
-
 
   if(
     !itemList ||
@@ -4091,7 +3452,6 @@ function renderItems(){
 
   }
 
-
   itemList.forEach(
     (item,index) => {
 
@@ -4102,7 +3462,6 @@ function renderItems(){
               Item:item
             };
 
-
       const name =
         row.Item ??
         row.item ??
@@ -4111,13 +3470,11 @@ function renderItems(){
         row[0] ??
         "";
 
-
       const date =
         row.Date ??
         row.date ??
         row[1] ??
         "";
-
 
       const user =
         row.User ??
@@ -4127,16 +3484,13 @@ function renderItems(){
         row[2] ??
         "";
 
-
       const div =
         document.createElement(
           "div"
         );
 
-
       div.className =
         "item-row";
-
 
       div.innerHTML = `
 
@@ -4165,7 +3519,6 @@ function renderItems(){
 
       `;
 
-
       body.appendChild(div);
 
     }
@@ -4181,21 +3534,17 @@ function populateItemSelect(){
       "entryItem"
     );
 
-
   if(!select){
 
     return;
 
   }
 
-
   const oldValue =
     select.value;
 
-
   select.innerHTML =
     '<option value="">Select Item</option>';
-
 
   itemList.forEach(
     item => {
@@ -4212,27 +3561,22 @@ function populateItemSelect(){
             )
           : item;
 
-
       if(!name){
 
         return;
 
       }
 
-
       const option =
         document.createElement(
           "option"
         );
 
-
       option.value =
         name;
 
-
       option.textContent =
         name;
-
 
       select.appendChild(
         option
@@ -4240,7 +3584,6 @@ function populateItemSelect(){
 
     }
   );
-
 
   if(oldValue){
 
@@ -4259,10 +3602,8 @@ async function addNewItem(){
       "newItem"
     );
 
-
   const item =
     input.value.trim();
-
 
   if(!item){
 
@@ -4275,11 +3616,9 @@ async function addNewItem(){
 
   }
 
-
   showLoader(
     "Adding item..."
   );
-
 
   try{
 
@@ -4309,7 +3648,6 @@ async function addNewItem(){
         }
       );
 
-
     if(
       !result ||
       result.success !== true
@@ -4322,20 +3660,16 @@ async function addNewItem(){
 
     }
 
-
     input.value = "";
 
     itemCache = null;
 
-
     await loadItems(true);
-
 
     showToast(
       "Item added successfully",
       "success"
     );
-
 
   }catch(error){
 
@@ -4361,13 +3695,11 @@ async function deleteItem(
   const item =
     itemList[index];
 
-
   if(!item){
 
     return;
 
   }
-
 
   const itemName =
     typeof item === "object"
@@ -4381,7 +3713,6 @@ async function deleteItem(
         )
       : item;
 
-
   const row =
     typeof item === "object"
       ? (
@@ -4391,7 +3722,6 @@ async function deleteItem(
           index + 2
         )
       : index + 2;
-
 
   if(
     !confirm(
@@ -4405,11 +3735,9 @@ async function deleteItem(
 
   }
 
-
   showLoader(
     "Deleting item..."
   );
-
 
   try{
 
@@ -4442,7 +3770,6 @@ async function deleteItem(
         }
       );
 
-
     if(
       !result ||
       result.success !== true
@@ -4455,18 +3782,14 @@ async function deleteItem(
 
     }
 
-
     itemCache = null;
 
-
     await loadItems(true);
-
 
     showToast(
       "Item deleted successfully",
       "success"
     );
-
 
   }catch(error){
 
@@ -4485,16 +3808,15 @@ async function deleteItem(
 }
 
 
-// ============================================================
-// USERS
-// ============================================================
+/* ============================================================
+USERS
+============================================================ */
 
 function openUsersModal(){
 
   openModal(
     "usersModal"
   );
-
 
   loadUsers();
 
@@ -4507,7 +3829,6 @@ async function loadUsers(){
     "Loading users..."
   );
 
-
   try{
 
     const response =
@@ -4519,10 +3840,8 @@ async function loadUsers(){
         )
       );
 
-
     const result =
       await response.json();
-
 
     if(
       !result ||
@@ -4536,7 +3855,6 @@ async function loadUsers(){
 
     }
 
-
     const users =
       Array.isArray(result.users)
         ? result.users
@@ -4546,11 +3864,9 @@ async function loadUsers(){
               : []
           );
 
-
     renderUsers(
       users
     );
-
 
   }catch(error){
 
@@ -4578,9 +3894,11 @@ function renderUsers(
       "usersBody"
     );
 
+  if(!body){
+    return;
+  }
 
   body.innerHTML = "";
-
 
   if(
     !users ||
@@ -4594,7 +3912,6 @@ function renderUsers(
 
   }
 
-
   users.forEach(
     user => {
 
@@ -4604,13 +3921,11 @@ function renderUsers(
         user[0] ??
         "";
 
-
       const name =
         user.Name ??
         user.name ??
         user[2] ??
         "";
-
 
       const role =
         user.Role ??
@@ -4618,31 +3933,25 @@ function renderUsers(
         user[3] ??
         "";
 
-
       const status =
         user.Status ??
         user.status ??
         user[4] ??
         "";
 
-
       const div =
         document.createElement(
           "div"
         );
 
-
       div.className =
         "user-row";
-
 
       const statusLower =
         String(status)
           .toLowerCase();
 
-
       let actionHtml = "";
-
 
       actionHtml += `
         <button
@@ -4652,7 +3961,6 @@ function renderUsers(
           Edit
         </button>
       `;
-
 
       if(
         username !== currentUsername
@@ -4688,7 +3996,6 @@ function renderUsers(
 
       }
 
-
       div.innerHTML = `
 
         <div class="user-cell">
@@ -4717,7 +4024,6 @@ function renderUsers(
 
       `;
 
-
       body.appendChild(
         div
       );
@@ -4728,47 +4034,40 @@ function renderUsers(
 }
 
 
-// ============================================================
-// ADD USER
-// ============================================================
+/* ============================================================
+ADD USER
+============================================================ */
 
 function openAddUserModal(){
 
   editingUser = null;
-
 
   document.getElementById(
     "userFormTitle"
   ).textContent =
     "Add User";
 
-
   document.getElementById(
     "userUsername"
   ).value = "";
-
 
   document.getElementById(
     "userName"
   ).value = "";
 
-
   document.getElementById(
     "userPassword"
   ).value = "";
-
 
   document.getElementById(
     "userRole"
   ).value =
     "support";
 
-
   document.getElementById(
     "userStatus"
   ).value =
     "Active";
-
 
   openModal(
     "userFormModal"
@@ -4777,9 +4076,9 @@ function openAddUserModal(){
 }
 
 
-// ============================================================
-// EDIT USER
-// ============================================================
+/* ============================================================
+EDIT USER
+============================================================ */
 
 function editUser(
   user
@@ -4788,12 +4087,10 @@ function editUser(
   editingUser =
     user;
 
-
   document.getElementById(
     "userFormTitle"
   ).textContent =
     "Edit User";
-
 
   document.getElementById(
     "userUsername"
@@ -4803,7 +4100,6 @@ function editUser(
     user[0] ??
     "";
 
-
   document.getElementById(
     "userName"
   ).value =
@@ -4811,7 +4107,6 @@ function editUser(
     user.name ??
     user[2] ??
     "";
-
 
   document.getElementById(
     "userPassword"
@@ -4821,7 +4116,6 @@ function editUser(
     user[1] ??
     "";
 
-
   document.getElementById(
     "userRole"
   ).value =
@@ -4829,7 +4123,6 @@ function editUser(
     user.role ??
     user[3] ??
     "support";
-
 
   document.getElementById(
     "userStatus"
@@ -4839,7 +4132,6 @@ function editUser(
     user[4] ??
     "Active";
 
-
   openModal(
     "userFormModal"
   );
@@ -4847,9 +4139,9 @@ function editUser(
 }
 
 
-// ============================================================
-// SAVE USER
-// ============================================================
+/* ============================================================
+SAVE USER
+============================================================ */
 
 async function saveUser(){
 
@@ -4858,30 +4150,25 @@ async function saveUser(){
       "userUsername"
     ).value.trim();
 
-
   const name =
     document.getElementById(
       "userName"
     ).value.trim();
-
 
   const password =
     document.getElementById(
       "userPassword"
     ).value;
 
-
   const role =
     document.getElementById(
       "userRole"
     ).value;
 
-
   const status =
     document.getElementById(
       "userStatus"
     ).value;
-
 
   if(!username){
 
@@ -4894,7 +4181,6 @@ async function saveUser(){
 
   }
 
-
   if(!name){
 
     showToast(
@@ -4905,7 +4191,6 @@ async function saveUser(){
     return;
 
   }
-
 
   if(!password){
 
@@ -4918,16 +4203,13 @@ async function saveUser(){
 
   }
 
-
   showLoader(
     "Saving user..."
   );
 
-
   try{
 
     let payload;
-
 
     if(editingUser){
 
@@ -4936,7 +4218,6 @@ async function saveUser(){
         editingUser.username ??
         editingUser[0] ??
         "";
-
 
       payload = {
 
@@ -4996,13 +4277,11 @@ async function saveUser(){
 
     }
 
-
     const result =
       await postJson(
         USER_API_URL,
         payload
       );
-
 
     if(
       !result ||
@@ -5016,14 +4295,11 @@ async function saveUser(){
 
     }
 
-
     closeModal(
       "userFormModal"
     );
 
-
     await loadUsers();
-
 
     showToast(
       editingUser
@@ -5032,14 +4308,12 @@ async function saveUser(){
       "success"
     );
 
-
   }catch(error){
 
     showToast(
       error.message ||
       "Failed to save user",
       "error"
-
     );
 
   }finally{
@@ -5051,9 +4325,9 @@ async function saveUser(){
 }
 
 
-// ============================================================
-// CHANGE USER STATUS
-// ============================================================
+/* ============================================================
+CHANGE USER STATUS
+============================================================ */
 
 async function changeUserStatus(
   username,
@@ -5073,7 +4347,6 @@ async function changeUserStatus(
 
   }
 
-
   if(
     !confirm(
       status === "Active"
@@ -5086,11 +4359,9 @@ async function changeUserStatus(
 
   }
 
-
   showLoader(
     "Updating user status..."
   );
-
 
   try{
 
@@ -5114,7 +4385,6 @@ async function changeUserStatus(
         }
       );
 
-
     if(
       !result ||
       result.success !== true
@@ -5127,9 +4397,7 @@ async function changeUserStatus(
 
     }
 
-
     await loadUsers();
-
 
     showToast(
       status === "Active"
@@ -5137,7 +4405,6 @@ async function changeUserStatus(
         : "User blocked",
       "success"
     );
-
 
   }catch(error){
 
@@ -5156,9 +4423,9 @@ async function changeUserStatus(
 }
 
 
-// ============================================================
-// PASSWORD
-// ============================================================
+/* ============================================================
+PASSWORD
+============================================================ */
 
 function openPasswordModal(){
 
@@ -5166,16 +4433,13 @@ function openPasswordModal(){
     "currentPassword"
   ).value = "";
 
-
   document.getElementById(
     "newPassword"
   ).value = "";
 
-
   document.getElementById(
     "confirmPassword"
   ).value = "";
-
 
   openModal(
     "passwordModal"
@@ -5191,18 +4455,15 @@ async function changePassword(){
       "currentPassword"
     ).value;
 
-
   const newPassword =
     document.getElementById(
       "newPassword"
     ).value;
 
-
   const confirmPassword =
     document.getElementById(
       "confirmPassword"
     ).value;
-
 
   if(!currentPassword){
 
@@ -5215,7 +4476,6 @@ async function changePassword(){
 
   }
 
-
   if(!newPassword){
 
     showToast(
@@ -5226,7 +4486,6 @@ async function changePassword(){
     return;
 
   }
-
 
   if(
     newPassword !==
@@ -5242,11 +4501,9 @@ async function changePassword(){
 
   }
 
-
   showLoader(
     "Changing password..."
   );
-
 
   try{
 
@@ -5273,7 +4530,6 @@ async function changePassword(){
         }
       );
 
-
     if(
       !result ||
       result.success !== true
@@ -5286,17 +4542,14 @@ async function changePassword(){
 
     }
 
-
     closeModal(
       "passwordModal"
     );
-
 
     showToast(
       "Password changed successfully",
       "success"
     );
-
 
   }catch(error){
 
@@ -5315,9 +4568,9 @@ async function changePassword(){
 }
 
 
-// ============================================================
-// POST JSON
-// ============================================================
+/* ============================================================
+POST JSON
+============================================================ */
 
 async function postJson(
   url,
@@ -5343,13 +4596,10 @@ async function postJson(
       }
     );
 
-
   const text =
     await response.text();
 
-
   let result;
-
 
   try{
 
@@ -5364,15 +4614,14 @@ async function postJson(
 
   }
 
-
   return result;
 
 }
 
 
-// ============================================================
-// MODAL
-// ============================================================
+/* ============================================================
+MODAL
+============================================================ */
 
 function openModal(
   id
@@ -5380,7 +4629,6 @@ function openModal(
 
   const modal =
     document.getElementById(id);
-
 
   if(modal){
 
@@ -5399,7 +4647,6 @@ function closeModal(
 
   const modal =
     document.getElementById(id);
-
 
   if(modal){
 
@@ -5432,9 +4679,9 @@ document.addEventListener(
 );
 
 
-// ============================================================
-// PROFILE MENU
-// ============================================================
+/* ============================================================
+PROFILE MENU
+============================================================ */
 
 function toggleProfileMenu(
   event
@@ -5445,7 +4692,6 @@ function toggleProfileMenu(
     event.stopPropagation();
 
   }
-
 
   document
     .getElementById(
@@ -5467,7 +4713,6 @@ document.addEventListener(
         "profileMenu"
       );
 
-
     if(menu){
 
       menu.classList.remove(
@@ -5480,16 +4725,15 @@ document.addEventListener(
 );
 
 
-// ============================================================
-// THEME
-// ============================================================
+/* ============================================================
+THEME
+============================================================ */
 
 function toggleTheme(){
 
   document.body.classList.toggle(
     "dark"
   );
-
 
   localStorage.setItem(
     "dashboardTheme",
@@ -5510,7 +4754,6 @@ function loadTheme(){
       "dashboardTheme"
     );
 
-
   if(theme === "dark"){
 
     document.body.classList.add(
@@ -5522,9 +4765,9 @@ function loadTheme(){
 }
 
 
-// ============================================================
-// TABLE LOADER
-// ============================================================
+/* ============================================================
+TABLE LOADER
+============================================================ */
 
 function showLoader(
   text
@@ -5535,19 +4778,16 @@ function showLoader(
       "loader"
     );
 
-
   const loaderText =
     document.getElementById(
       "loaderText"
     );
-
 
   if(!loader){
 
     return;
 
   }
-
 
   if(loaderText){
 
@@ -5556,7 +4796,6 @@ function showLoader(
       "Loading...";
 
   }
-
 
   loader.classList.add(
     "show"
@@ -5572,7 +4811,6 @@ function hideLoader(){
       "loader"
     );
 
-
   if(loader){
 
     loader.classList.remove(
@@ -5584,9 +4822,9 @@ function hideLoader(){
 }
 
 
-// ============================================================
-// TOAST
-// ============================================================
+/* ============================================================
+TOAST
+============================================================ */
 
 let toastTimer = null;
 
@@ -5601,20 +4839,16 @@ function showToast(
       "toast"
     );
 
-
   toast.textContent =
     message;
-
 
   toast.className =
     "toast show " +
     type;
 
-
   clearTimeout(
     toastTimer
   );
-
 
   toastTimer =
     setTimeout(
@@ -5630,19 +4864,17 @@ function showToast(
 }
 
 
-// ============================================================
-// DATE
-// ============================================================
+/* ============================================================
+DATE
+============================================================ */
 
 function getToday(){
 
   const d =
     new Date();
 
-
   const year =
     d.getFullYear();
-
 
   const month =
     String(
@@ -5652,7 +4884,6 @@ function getToday(){
       "0"
     );
 
-
   const day =
     String(
       d.getDate()
@@ -5660,7 +4891,6 @@ function getToday(){
       2,
       "0"
     );
-
 
   return (
     year +
@@ -5683,7 +4913,6 @@ function normalizeDate(
 
   }
 
-
   if(
     Object.prototype.toString.call(
       value
@@ -5700,7 +4929,6 @@ function normalizeDate(
 
     }
 
-
     return [
       value.getFullYear(),
       String(
@@ -5713,10 +4941,8 @@ function normalizeDate(
 
   }
 
-
   const text =
     String(value).trim();
-
 
   if(
     /^\d{4}-\d{2}-\d{2}$/.test(
@@ -5728,10 +4954,8 @@ function normalizeDate(
 
   }
 
-
   const d =
     new Date(text);
-
 
   if(
     !isNaN(
@@ -5751,7 +4975,6 @@ function normalizeDate(
 
   }
 
-
   return text;
 
 }
@@ -5766,7 +4989,6 @@ function formatDate(
       value
     );
 
-
   if(
     !normalized
   ){
@@ -5775,17 +4997,14 @@ function formatDate(
 
   }
 
-
   const parts =
     normalized.split("-");
-
 
   if(parts.length !== 3){
 
     return normalized;
 
   }
-
 
   const months = [
     "Jan",
@@ -5801,7 +5020,6 @@ function formatDate(
     "Nov",
     "Dec"
   ];
-
 
   return (
     parts[2] +
@@ -5826,10 +5044,8 @@ function formatDateTime(
 
   }
 
-
   const d =
     new Date(value);
-
 
   if(
     !isNaN(
@@ -5847,15 +5063,14 @@ function formatDateTime(
 
   }
 
-
   return String(value);
 
 }
 
 
-// ============================================================
-// ESCAPE HTML
-// ============================================================
+/* ============================================================
+ESCAPE HTML
+============================================================ */
 
 function escapeHtml(
   value
@@ -5915,9 +5130,9 @@ function escapeJs(
 }
 
 
-// ============================================================
-// LOGOUT
-// ============================================================
+/* ============================================================
+LOGOUT
+============================================================ */
 
 function logout(){
 
@@ -5934,7 +5149,6 @@ function logout(){
     "status"
   ];
 
-
   keys.forEach(
     key =>
       localStorage.removeItem(
@@ -5942,9 +5156,7 @@ function logout(){
       )
   );
 
-
   sessionStorage.clear();
-
 
   window.location.href =
     "index.html";
@@ -5952,9 +5164,9 @@ function logout(){
 }
 
 
-// ============================================================
-// BACK BUTTON PROTECTION
-// ============================================================
+/* ============================================================
+BACK BUTTON PROTECTION
+============================================================ */
 
 function setupBackProtection(){
 
@@ -5965,7 +5177,6 @@ function setupBackProtection(){
       "",
       location.href
     );
-
 
     window.addEventListener(
       "popstate",
@@ -5979,7 +5190,6 @@ function setupBackProtection(){
 
         }
 
-
         history.pushState(
           null,
           "",
@@ -5988,7 +5198,6 @@ function setupBackProtection(){
 
       }
     );
-
 
     window.addEventListener(
       "pageshow",
