@@ -646,23 +646,17 @@ body.dark .table-loader{
 
 <body>
 
-<!-- ================= HEADER ================= -->
-
 <header class="header">
 
   <div class="logo-area">
 
-    <div class="logo">
-      S
-    </div>
+    <div class="logo">S</div>
 
     <div class="logo-text">
 
       <h1>Support Dashboard</h1>
 
-      <p>
-        Admin Management System
-      </p>
+      <p>Admin Management System</p>
 
     </div>
 
@@ -729,21 +723,15 @@ body.dark .table-loader{
 
 </header>
 
-<!-- ================= MAIN ================= -->
-
 <main class="main">
 
   <div class="toolbar">
 
     <div class="toolbar-title">
 
-      <h2>
-        Data
-      </h2>
+      <h2>Data</h2>
 
-      <p>
-        Manage your support entries
-      </p>
+      <p>Manage your support entries</p>
 
     </div>
 
@@ -755,8 +743,6 @@ body.dark .table-loader{
     </button>
 
   </div>
-
-  <!-- ================= FILTER ================= -->
 
   <div class="filter-bar">
 
@@ -802,8 +788,6 @@ body.dark .table-loader{
 
   </div>
 
-  <!-- ================= TABLE ================= -->
-
   <div class="table-card">
 
     <div class="table-wrap">
@@ -844,7 +828,7 @@ body.dark .table-loader{
 
 </main>
 
-<!-- ================= ENTRY MODAL ================= -->
+<!-- ENTRY MODAL -->
 
 <div
   class="modal"
@@ -855,9 +839,7 @@ body.dark .table-loader{
 
     <div class="modal-header">
 
-      <h3>
-        New Entry
-      </h3>
+      <h3>New Entry</h3>
 
       <button
         class="close-btn"
@@ -870,13 +852,9 @@ body.dark .table-loader{
 
     <div class="modal-body">
 
-      <!-- AUTO NAME -->
-
       <div class="form-group">
 
-        <label>
-          Name
-        </label>
+        <label>Name</label>
 
         <input
           type="text"
@@ -887,13 +865,9 @@ body.dark .table-loader{
 
       </div>
 
-      <!-- USER INPUT IP -->
-
       <div class="form-group">
 
-        <label>
-          IP
-        </label>
+        <label>IP</label>
 
         <input
           type="text"
@@ -903,13 +877,9 @@ body.dark .table-loader{
 
       </div>
 
-      <!-- USER INPUT WORK -->
-
       <div class="form-group">
 
-        <label>
-          Work
-        </label>
+        <label>Work</label>
 
         <input
           type="text"
@@ -919,13 +889,9 @@ body.dark .table-loader{
 
       </div>
 
-      <!-- AUTO DATE -->
-
       <div class="form-group">
 
-        <label>
-          Date
-        </label>
+        <label>Date</label>
 
         <input
           type="date"
@@ -936,13 +902,9 @@ body.dark .table-loader{
 
       </div>
 
-      <!-- ITEM -->
-
       <div class="form-group">
 
-        <label>
-          Item
-        </label>
+        <label>Item</label>
 
         <select id="entryItem">
 
@@ -978,7 +940,7 @@ body.dark .table-loader{
 
 </div>
 
-<!-- ================= PASSWORD MODAL ================= -->
+<!-- PASSWORD MODAL -->
 
 <div
   class="modal"
@@ -989,9 +951,7 @@ body.dark .table-loader{
 
     <div class="modal-header">
 
-      <h3>
-        Change Password
-      </h3>
+      <h3>Change Password</h3>
 
       <button
         class="close-btn"
@@ -1006,9 +966,7 @@ body.dark .table-loader{
 
       <div class="form-group">
 
-        <label>
-          Current Password
-        </label>
+        <label>Current Password</label>
 
         <input
           type="password"
@@ -1020,9 +978,7 @@ body.dark .table-loader{
 
       <div class="form-group">
 
-        <label>
-          New Password
-        </label>
+        <label>New Password</label>
 
         <input
           type="password"
@@ -1034,9 +990,7 @@ body.dark .table-loader{
 
       <div class="form-group">
 
-        <label>
-          Confirm New Password
-        </label>
+        <label>Confirm New Password</label>
 
         <input
           type="password"
@@ -1070,8 +1024,6 @@ body.dark .table-loader{
 
 </div>
 
-<!-- ================= TOAST ================= -->
-
 <div
   class="toast"
   id="toast"
@@ -1093,7 +1045,7 @@ const SELL_API_URL =
 "https://script.google.com/macros/s/AKfycbyiKn1MH1ZQvebSIo83bZzbbfJimmfRf9PjlPI4w1q1UliuF27gKViYM24oXakpkHuP/exec";
 
 const ITEM_API_URL =
-"https://script.google.com/macros/s/AKfycby2e7dzGE5vkS0Q-Eyl9MKLAbkkkD8f37eIVj7VuV8bPytWGOH7cwJ3w25efP7MLGshOw/exec";
+"https://script.google.com/macros/s/AKfycb2e7dzGE5vkS0Q-Eyl9MKLAbkkkD8f37eIVj7VuV8bPytWGOH7cwJ3w25efP7MLGshOw/exec";
 
 
 /* ============================================================
@@ -1130,18 +1082,41 @@ let currentUserName =
 
 
 /* ============================================================
+SECURITY
+============================================================ */
+
+const AUTO_LOGOUT_TIME =
+  5 * 60 * 1000;
+
+let inactivityTimer = null;
+
+let activityThrottle = null;
+
+let securityCheckRunning = false;
+
+let securityValidated = false;
+
+
+/* ============================================================
 DOM READY
 ============================================================ */
 
 document.addEventListener(
   "DOMContentLoaded",
-  function(){
+  async function(){
 
     loadTheme();
 
-    checkLogin();
+    const valid =
+      await checkLogin();
 
-    loadUser();
+    if(!valid){
+      return;
+    }
+
+    setupAutoLogout();
+
+    await loadUser();
 
     loadData();
 
@@ -1154,10 +1129,10 @@ document.addEventListener(
 
 
 /* ============================================================
-LOGIN CHECK
+LOGIN + SERVER SECURITY CHECK
 ============================================================ */
 
-function checkLogin(){
+async function checkLogin(){
 
   const auth =
     localStorage.getItem(
@@ -1169,14 +1144,335 @@ function checkLogin(){
 
   if(!auth){
 
-    window.location.href =
-      "index.html";
+    securityValidated = false;
+
+    window.location.replace(
+      "index.html"
+    );
 
     return false;
 
   }
 
-  return true;
+
+  if(!currentUsername){
+
+    securityValidated = false;
+
+    logout();
+
+    return false;
+
+  }
+
+
+  if(securityCheckRunning){
+
+    return securityValidated;
+
+  }
+
+
+  securityCheckRunning = true;
+
+
+  try{
+
+    const response =
+      await fetch(
+        USER_API_URL +
+        "?action=getUser&username=" +
+        encodeURIComponent(
+          currentUsername
+        ) +
+        "&_=" +
+        Date.now(),
+        {
+          method:"GET",
+          cache:"no-store"
+        }
+      );
+
+
+    if(!response.ok){
+
+      throw new Error(
+        "Authentication server unavailable"
+      );
+
+    }
+
+
+    const result =
+      await response.json();
+
+
+    if(
+      !result ||
+      result.success !== true ||
+      !result.user
+    ){
+
+      throw new Error(
+        "User authentication failed"
+      );
+
+    }
+
+
+    const user =
+      result.user;
+
+
+    const serverUsername =
+      String(
+        user.Username ||
+        user.username ||
+        currentUsername
+      )
+      .trim()
+      .toLowerCase();
+
+
+    const localUsername =
+      String(
+        currentUsername
+      )
+      .trim()
+      .toLowerCase();
+
+
+    if(
+      serverUsername !==
+      localUsername
+    ){
+
+      throw new Error(
+        "Invalid user session"
+      );
+
+    }
+
+
+    const status =
+      String(
+        user.Status ||
+        user.status ||
+        ""
+      )
+      .trim()
+      .toLowerCase();
+
+
+    if(
+      status !== "active"
+    ){
+
+      throw new Error(
+        "Your account is not active"
+      );
+
+    }
+
+
+    const verifiedName =
+      String(
+        user.Name ||
+        user.name ||
+        currentUsername
+      ).trim();
+
+
+    const verifiedRole =
+      String(
+        user.Role ||
+        user.role ||
+        ""
+      ).trim();
+
+
+    localStorage.setItem(
+      "name",
+      verifiedName
+    );
+
+
+    localStorage.setItem(
+      "role",
+      verifiedRole
+    );
+
+
+    localStorage.setItem(
+      "status",
+      "Active"
+    );
+
+
+    currentUserName =
+      verifiedName;
+
+
+    securityValidated = true;
+
+
+    return true;
+
+
+  }catch(error){
+
+    console.error(
+      "Security validation failed:",
+      error
+    );
+
+
+    securityValidated = false;
+
+
+    logout();
+
+
+    return false;
+
+
+  }finally{
+
+    securityCheckRunning = false;
+
+  }
+
+}
+
+
+/* ============================================================
+5 MINUTE AUTO LOGOUT
+============================================================ */
+
+function startAutoLogout(){
+
+  clearTimeout(
+    inactivityTimer
+  );
+
+
+  inactivityTimer =
+    setTimeout(
+      function(){
+
+        console.log(
+          "5 minute inactivity timeout"
+        );
+
+
+        logout();
+
+      },
+      AUTO_LOGOUT_TIME
+    );
+
+}
+
+
+/* ============================================================
+RESET AUTO LOGOUT
+============================================================ */
+
+function resetAutoLogout(){
+
+  const auth =
+    localStorage.getItem(
+      "dashboardAuth"
+    ) === "true" ||
+    sessionStorage.getItem(
+      "dashboardAuth"
+    ) === "true";
+
+
+  if(!auth){
+
+    return;
+
+  }
+
+
+  if(activityThrottle){
+
+    return;
+
+  }
+
+
+  activityThrottle =
+    setTimeout(
+      function(){
+
+        activityThrottle = null;
+
+        startAutoLogout();
+
+      },
+      500
+    );
+
+}
+
+
+/* ============================================================
+SETUP AUTO LOGOUT
+============================================================ */
+
+function setupAutoLogout(){
+
+  const events = [
+
+    "mousemove",
+    "mousedown",
+    "keydown",
+    "scroll",
+    "touchstart",
+    "click"
+
+  ];
+
+
+  events.forEach(
+    function(eventName){
+
+      document.addEventListener(
+        eventName,
+        resetAutoLogout,
+        {
+          passive:true
+        }
+      );
+
+    }
+  );
+
+
+  startAutoLogout();
+
+}
+
+
+/* ============================================================
+STOP AUTO LOGOUT
+============================================================ */
+
+function stopAutoLogout(){
+
+  clearTimeout(
+    inactivityTimer
+  );
+
+  clearTimeout(
+    activityThrottle
+  );
+
+  inactivityTimer = null;
+
+  activityThrottle = null;
 
 }
 
@@ -1197,6 +1493,7 @@ async function loadUser(){
 
   }
 
+
   try{
 
     const response =
@@ -1205,11 +1502,19 @@ async function loadUser(){
         "?action=getUser&username=" +
         encodeURIComponent(
           currentUsername
-        )
+        ) +
+        "&_=" +
+        Date.now(),
+        {
+          method:"GET",
+          cache:"no-store"
+        }
       );
+
 
     const result =
       await response.json();
+
 
     if(
       result &&
@@ -1221,23 +1526,11 @@ async function loadUser(){
         result.user;
 
 
-      /*
-      ==========================================
-      USER NAME
-      ==========================================
-      */
-
       const name =
         user.Name ||
         user.name ||
         currentUsername;
 
-
-      /*
-      ==========================================
-      STORE CURRENT USER NAME
-      ==========================================
-      */
 
       currentUserName =
         String(name).trim();
@@ -1249,16 +1542,11 @@ async function loadUser(){
       );
 
 
-      /*
-      ==========================================
-      ROLE
-      ==========================================
-      */
-
       const role =
         user.Role ||
         user.role ||
         "";
+
 
       localStorage.setItem(
         "role",
@@ -1266,16 +1554,11 @@ async function loadUser(){
       );
 
 
-      /*
-      ==========================================
-      STATUS
-      ==========================================
-      */
-
       const status =
         user.Status ||
         user.status ||
         "";
+
 
       localStorage.setItem(
         "status",
@@ -1283,16 +1566,11 @@ async function loadUser(){
       );
 
 
-      /*
-      ==========================================
-      PROFILE IMAGE
-      ==========================================
-      */
-
       const profileImage =
         document.getElementById(
           "profileImage"
         );
+
 
       if(profileImage){
 
@@ -1310,24 +1588,16 @@ async function loadUser(){
       }
 
 
-      /*
-      ==========================================
-      BLOCKED USER
-      ==========================================
-      */
-
       if(
         String(status)
           .trim()
-          .toLowerCase() ===
-        "blocked" ||
-        String(status)
-          .trim()
-          .toLowerCase() ===
-        "block"
+          .toLowerCase() !==
+        "active"
       ){
 
         logout();
+
+        return;
 
       }
 
@@ -1353,9 +1623,19 @@ async function loadData(
   force = false
 ){
 
-  if(!checkLogin()){
-    return;
+  if(!securityValidated){
+
+    const valid =
+      await checkLogin();
+
+    if(!valid){
+
+      return;
+
+    }
+
   }
+
 
   if(
     !force &&
@@ -1371,20 +1651,28 @@ async function loadData(
 
   }
 
+
   showLoader(
     "Loading data..."
   );
+
 
   try{
 
     const response =
       await fetch(
         DATA_API_URL +
-        "?action=getData"
+        "?action=getData&_=" +
+        Date.now(),
+        {
+          cache:"no-store"
+        }
       );
+
 
     const result =
       await response.json();
+
 
     if(
       !result ||
@@ -1400,6 +1688,7 @@ async function loadData(
 
     }
 
+
     allData =
       Array.isArray(
         result.data
@@ -1407,10 +1696,13 @@ async function loadData(
         ? result.data
         : [];
 
+
     dataCache =
       allData;
 
+
     applyFilters();
+
 
   }catch(error){
 
@@ -1418,15 +1710,18 @@ async function loadData(
       error
     );
 
+
     allData = [];
 
     applyFilters();
+
 
     showToast(
       error.message ||
       "Failed to load data",
       "error"
     );
+
 
   }finally{
 
@@ -1455,18 +1750,21 @@ function renderData(
       "tableBody"
     );
 
+
   head.innerHTML = "";
 
   body.innerHTML = "";
 
 
   const headers = [
+
     "Name",
     "IP",
     "Work",
     "Date",
     "Item",
     "Action"
+
   ];
 
 
@@ -1484,8 +1782,10 @@ function renderData(
           "th"
         );
 
+
       th.textContent =
         header;
+
 
       headerRow.appendChild(
         th
@@ -1545,31 +1845,39 @@ function renderData(
         "tr"
       );
 
+
     const cell =
       document.createElement(
         "td"
       );
 
+
     cell.colSpan =
       headers.length;
+
 
     cell.className =
       "empty-row";
 
+
     cell.textContent =
       "No data found";
+
 
     row.appendChild(
       cell
     );
 
+
     body.appendChild(
       row
     );
 
+
     renderPagination(
       data.length
     );
+
 
     return;
 
@@ -1629,20 +1937,24 @@ function renderData(
         name
       );
 
+
       addCell(
         tr,
         ip
       );
+
 
       addCell(
         tr,
         work
       );
 
+
       addCell(
         tr,
         formatDate(date)
       );
+
 
       addCell(
         tr,
@@ -1660,6 +1972,7 @@ function renderData(
         document.createElement(
           "div"
         );
+
 
       actionWrap.className =
         "action-wrap";
@@ -1726,10 +2039,12 @@ function addCell(
       "td"
     );
 
+
   cell.textContent =
     value == null
       ? ""
       : String(value);
+
 
   row.appendChild(
     cell
@@ -1752,12 +2067,15 @@ function createActionButton(
       "button"
     );
 
+
   button.className =
     "action-btn " +
     className;
 
+
   button.textContent =
     text;
+
 
   return button;
 
@@ -1776,6 +2094,7 @@ function renderPagination(
     document.getElementById(
       "pagination"
     );
+
 
   container.innerHTML = "";
 
@@ -1801,14 +2120,18 @@ function renderPagination(
       "button"
     );
 
+
   previous.className =
     "page-btn";
+
 
   previous.textContent =
     "‹";
 
+
   previous.disabled =
     currentPage <= 1;
+
 
   previous.onclick =
     function(){
@@ -1836,6 +2159,7 @@ function renderPagination(
         "button"
       );
 
+
     button.className =
       "page-btn" +
       (
@@ -1844,8 +2168,10 @@ function renderPagination(
           : ""
       );
 
+
     button.textContent =
       i;
+
 
     button.onclick =
       function(){
@@ -1867,14 +2193,18 @@ function renderPagination(
       "button"
     );
 
+
   next.className =
     "page-btn";
+
 
   next.textContent =
     "›";
 
+
   next.disabled =
     currentPage >= totalPages;
+
 
   next.onclick =
     function(){
@@ -2043,9 +2373,11 @@ function clearFilters(){
     "searchInput"
   ).value = "";
 
+
   document.getElementById(
     "fromDate"
   ).value = "";
+
 
   document.getElementById(
     "toDate"
@@ -2063,12 +2395,6 @@ NEW ENTRY
 
 function openEntryModal(){
 
-  /*
-  ============================================
-  GET LOGGED-IN USER NAME
-  ============================================
-  */
-
   const name =
     String(
       currentUserName ||
@@ -2078,81 +2404,47 @@ function openEntryModal(){
     ).trim();
 
 
-  /*
-  ============================================
-  GET TODAY
-  ============================================
-  */
-
   const today =
     getToday();
 
-
-  /*
-  ============================================
-  NAME
-  AUTOMATIC + READ ONLY
-  ============================================
-  */
 
   const nameInput =
     document.getElementById(
       "entryName"
     );
 
+
   nameInput.value =
     name;
+
 
   nameInput.readOnly =
     true;
 
-
-  /*
-  ============================================
-  IP
-  ============================================
-  */
 
   document.getElementById(
     "entryIP"
   ).value = "";
 
 
-  /*
-  ============================================
-  WORK
-  ============================================
-  */
-
   document.getElementById(
     "entryWork"
   ).value = "";
 
-
-  /*
-  ============================================
-  DATE
-  AUTOMATIC + READ ONLY
-  ============================================
-  */
 
   const dateInput =
     document.getElementById(
       "entryDate"
     );
 
+
   dateInput.value =
     today;
+
 
   dateInput.readOnly =
     true;
 
-
-  /*
-  ============================================
-  ITEM
-  ============================================
-  */
 
   populateItemSelect();
 
@@ -2161,12 +2453,6 @@ function openEntryModal(){
     "entryItem"
   ).value = "";
 
-
-  /*
-  ============================================
-  OPEN
-  ============================================
-  */
 
   openModal(
     "entryModal"
@@ -2177,18 +2463,9 @@ function openEntryModal(){
 
 /* ============================================================
 SAVE NEW ENTRY
-IMPORTANT:
-NAME + DATE ARE ALWAYS GENERATED BY SYSTEM
 ============================================================ */
 
 async function saveEntry(){
-
-  /*
-  ============================================
-  NAME
-  DO NOT TRUST INPUT FIELD
-  ============================================
-  */
 
   const name =
     String(
@@ -2199,25 +2476,11 @@ async function saveEntry(){
     ).trim();
 
 
-  /*
-  ============================================
-  IP
-  USER INPUT
-  ============================================
-  */
-
   const ip =
     document.getElementById(
       "entryIP"
     ).value.trim();
 
-
-  /*
-  ============================================
-  WORK
-  USER INPUT
-  ============================================
-  */
 
   const work =
     document.getElementById(
@@ -2225,35 +2488,15 @@ async function saveEntry(){
     ).value.trim();
 
 
-  /*
-  ============================================
-  DATE
-  ALWAYS TODAY
-  DO NOT TRUST INPUT FIELD
-  ============================================
-  */
-
   const date =
     getToday();
 
-
-  /*
-  ============================================
-  ITEM
-  ============================================
-  */
 
   const item =
     document.getElementById(
       "entryItem"
     ).value.trim();
 
-
-  /*
-  ============================================
-  VALIDATION
-  ============================================
-  */
 
   if(!name){
 
@@ -2322,12 +2565,6 @@ async function saveEntry(){
 
   try{
 
-    /*
-    ==========================================
-    SEND DATA TO SERVER
-    ==========================================
-    */
-
     const result =
       await postJson(
         DATA_API_URL,
@@ -2355,12 +2592,6 @@ async function saveEntry(){
       );
 
 
-    /*
-    ==========================================
-    CHECK SERVER RESULT
-    ==========================================
-    */
-
     if(
       !result ||
       result.success !== true
@@ -2376,31 +2607,13 @@ async function saveEntry(){
     }
 
 
-    /*
-    ==========================================
-    CLEAR CACHE
-    ==========================================
-    */
-
     dataCache = null;
 
-
-    /*
-    ==========================================
-    CLOSE MODAL
-    ==========================================
-    */
 
     closeModal(
       "entryModal"
     );
 
-
-    /*
-    ==========================================
-    SUCCESS
-    ==========================================
-    */
 
     showToast(
       "Entry added successfully",
@@ -2408,15 +2621,10 @@ async function saveEntry(){
     );
 
 
-    /*
-    ==========================================
-    RELOAD
-    ==========================================
-    */
-
     await loadData(
       true
     );
+
 
   }catch(error){
 
@@ -2430,6 +2638,7 @@ async function saveEntry(){
       "Save failed",
       "error"
     );
+
 
   }finally{
 
@@ -2673,6 +2882,7 @@ async function sellDataEntry(
       true
     );
 
+
   }catch(error){
 
     console.error(
@@ -2686,6 +2896,7 @@ async function sellDataEntry(
       "Sell failed",
       "error"
     );
+
 
   }finally{
 
@@ -2755,7 +2966,9 @@ async function loadItems(
     itemList =
       itemCache;
 
+
     populateItemSelect();
+
 
     return;
 
@@ -2767,7 +2980,11 @@ async function loadItems(
     const response =
       await fetch(
         ITEM_API_URL +
-        "?action=getItems"
+        "?action=getItems&_=" +
+        Date.now(),
+        {
+          cache:"no-store"
+        }
       );
 
 
@@ -2804,6 +3021,7 @@ async function loadItems(
 
     populateItemSelect();
 
+
   }catch(error){
 
     console.error(
@@ -2835,7 +3053,9 @@ function populateItemSelect(){
 
 
   if(!select){
+
     return;
+
   }
 
 
@@ -2864,7 +3084,9 @@ function populateItemSelect(){
 
 
       if(!name){
+
         return;
+
       }
 
 
@@ -2910,9 +3132,11 @@ function openPasswordModal(){
     "currentPassword"
   ).value = "";
 
+
   document.getElementById(
     "newPassword"
   ).value = "";
+
 
   document.getElementById(
     "confirmPassword"
@@ -3045,6 +3269,7 @@ async function changePassword(){
       "success"
     );
 
+
   }catch(error){
 
     showToast(
@@ -3052,6 +3277,7 @@ async function changePassword(){
       "Password change failed",
       "error"
     );
+
 
   }finally{
 
@@ -3300,7 +3526,9 @@ function showLoader(
 
 
   if(!loader){
+
     return;
+
   }
 
 
@@ -3568,10 +3796,16 @@ function formatDate(
 
 
 /* ============================================================
-LOGOUT
+SECURE LOGOUT
 ============================================================ */
 
 function logout(){
+
+  stopAutoLogout();
+
+
+  securityValidated = false;
+
 
   const keys = [
 
@@ -3603,8 +3837,9 @@ function logout(){
   sessionStorage.clear();
 
 
-  window.location.href =
-    "index.html";
+  window.location.replace(
+    "index.html"
+  );
 
 }
 
@@ -3626,11 +3861,13 @@ function setupBackProtection(){
 
     window.addEventListener(
       "popstate",
-      function(){
+      async function(){
 
-        if(
-          !checkLogin()
-        ){
+        const valid =
+          await checkLogin();
+
+
+        if(!valid){
 
           return;
 
@@ -3649,16 +3886,63 @@ function setupBackProtection(){
 
     window.addEventListener(
       "pageshow",
-      function(){
+      async function(){
 
-        checkLogin();
+        const valid =
+          await checkLogin();
+
+
+        if(!valid){
+
+          return;
+
+        }
+
+
+        startAutoLogout();
 
       }
     );
 
+
+    /*
+    ==========================================
+    STORAGE SECURITY
+    ==========================================
+    */
+
+    window.addEventListener(
+      "storage",
+      function(event){
+
+        if(
+          event.key ===
+          "dashboardAuth" &&
+          event.newValue !== "true"
+        ){
+
+          logout();
+
+        }
+
+        if(
+          event.key ===
+          "username" &&
+          !event.newValue
+        ){
+
+          logout();
+
+        }
+
+      }
+    );
+
+
   }catch(error){
 
     console.error(
+      "Back protection error:",
       error
     );
 
