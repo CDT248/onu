@@ -979,7 +979,6 @@ ENTRY MODAL
 
 <div class="modal-body">
 
-
   <div class="form-group">
 
     <label>Name</label>
@@ -1086,7 +1085,6 @@ PASSWORD MODAL
 
 
 <div class="modal-body">
-
 
   <div class="form-group">
 
@@ -1195,7 +1193,6 @@ const DELETE_API_URL =
 let allData = [];
 let filteredData = [];
 
-let editingDataRow = null;
 let editingSellRow = null;
 
 let currentDataType = "data";
@@ -2142,6 +2139,9 @@ function renderData(data){
 
       /* =====================================================
          DATA
+         
+         এখানে Edit এবং Delete সরানো হয়েছে।
+         শুধু Sell থাকবে।
       ====================================================== */
 
       else{
@@ -2162,24 +2162,6 @@ function renderData(data){
           "action-wrap";
 
 
-        const editBtn =
-          createActionButton(
-            "Edit",
-            "action-edit"
-          );
-
-
-        editBtn.onclick =
-          () => editDataEntry(
-            start + index
-          );
-
-
-        action.appendChild(
-          editBtn
-        );
-
-
         const sellBtn =
           createActionButton(
             "Sell",
@@ -2195,24 +2177,6 @@ function renderData(data){
 
         action.appendChild(
           sellBtn
-        );
-
-
-        const deleteBtn =
-          createActionButton(
-            "Delete",
-            "action-delete"
-          );
-
-
-        deleteBtn.onclick =
-          () => deleteDataEntry(
-            start + index
-          );
-
-
-        action.appendChild(
-          deleteBtn
         );
 
 
@@ -2581,9 +2545,6 @@ function clearFilters(){
 
 function openEntryModal(){
 
-  editingDataRow =
-    null;
-
   editingSellRow =
     null;
 
@@ -2631,87 +2592,6 @@ function openEntryModal(){
 
 
 // ============================================================
-// EDIT DATA ENTRY
-// ============================================================
-
-function editDataEntry(
-  index
-){
-
-  const row =
-    filteredData[index];
-
-
-  if(!row){
-
-    return;
-
-  }
-
-
-  editingDataRow =
-    getRealRowNumber(
-      row
-    );
-
-
-  editingSellRow =
-    null;
-
-
-  document.getElementById(
-    "entryModalTitle"
-  ).textContent =
-    "Edit Entry";
-
-
-  document.getElementById(
-    "entryName"
-  ).value =
-    row.Name ??
-    row.name ??
-    row[0] ??
-    "";
-
-
-  document.getElementById(
-    "entryIP"
-  ).value =
-    row.Ip ??
-    row.IP ??
-    row.ip ??
-    row[1] ??
-    "";
-
-
-  document.getElementById(
-    "entryWork"
-  ).value =
-    row.Work ??
-    row.work ??
-    row[2] ??
-    "";
-
-
-  document.getElementById(
-    "entryDate"
-  ).value =
-    normalizeDate(
-      row.Date ??
-      row.date ??
-      row[3] ??
-      ""
-    );
-
-
-  openModal(
-    "entryModal"
-  );
-
-}
-
-
-// ============================================================
 // EDIT SELL ENTRY
 // ============================================================
 
@@ -2736,8 +2616,16 @@ function editSellEntry(
     );
 
 
-  editingDataRow =
-    null;
+  if(!editingSellRow){
+
+    showToast(
+      "Sell row not found",
+      "error"
+    );
+
+    return;
+
+  }
 
 
   document.getElementById(
@@ -2916,6 +2804,10 @@ async function saveEntry(){
 
   try{
 
+    /* ======================================================
+       EDIT SELL ENTRY
+    ====================================================== */
+
     if(editingSellRow){
 
       const response =
@@ -2988,71 +2880,9 @@ async function saveEntry(){
     }
 
 
-    if(editingDataRow){
-
-      const response =
-        await postJson(
-          DATA_API_URL,
-          {
-
-            action:
-              "editData",
-
-            row:
-              editingDataRow,
-
-            rowNumber:
-              editingDataRow,
-
-            name:
-              name,
-
-            ip:
-              ip,
-
-            work:
-              work,
-
-            date:
-              date
-
-          }
-        );
-
-
-      if(
-        !response.success
-      ){
-
-        throw new Error(
-          response.message ||
-          "Failed to update entry"
-        );
-
-      }
-
-
-      dataCache = null;
-
-
-      closeModal(
-        "entryModal"
-      );
-
-
-      showToast(
-        "Entry updated successfully",
-        "success"
-      );
-
-
-      loadData(true);
-
-
-      return;
-
-    }
-
+    /* ======================================================
+       NEW DATA ENTRY
+    ====================================================== */
 
     const response =
       await postJson(
@@ -3411,214 +3241,6 @@ async function sellDataEntry(
     showToast(
       error.message ||
       "Sell failed",
-      "error"
-    );
-
-  }finally{
-
-    hideLoader();
-
-  }
-
-}
-
-
-// ============================================================
-// DELETE DATA
-// ============================================================
-
-async function deleteDataEntry(
-  index
-){
-
-  const row =
-    filteredData[index];
-
-
-  if(!row){
-
-    return;
-
-  }
-
-
-  const rowNumber =
-    getRealRowNumber(
-      row
-    );
-
-
-  if(
-    !rowNumber ||
-    rowNumber < 2
-  ){
-
-    showToast(
-      "Original row not found",
-      "error"
-    );
-
-    return;
-
-  }
-
-
-  const name =
-    row.Name ??
-    row.name ??
-    row[0] ??
-    "";
-
-
-  const ip =
-    row.Ip ??
-    row.IP ??
-    row.ip ??
-    row[1] ??
-    "";
-
-
-  const work =
-    row.Work ??
-    row.work ??
-    row[2] ??
-    "";
-
-
-  const date =
-    row.Date ??
-    row.date ??
-    row[3] ??
-    "";
-
-
-  if(
-    !confirm(
-      "Delete this entry?\n\n" +
-      name +
-      " | " +
-      ip
-    )
-  ){
-
-    return;
-
-  }
-
-
-  showLoader(
-    "Deleting..."
-  );
-
-
-  try{
-
-    const archiveResult =
-      await postJson(
-        DELETE_API_URL,
-        {
-
-          action:
-            "deleteData",
-
-          row:
-            rowNumber,
-
-          rowNumber:
-            rowNumber,
-
-          name:
-            name,
-
-          ip:
-            ip,
-
-          work:
-            work,
-
-          date:
-            date,
-
-          username:
-            currentUsername,
-
-          user:
-            currentUsername
-
-        }
-      );
-
-
-    if(
-      !archiveResult ||
-      archiveResult.success !== true
-    ){
-
-      throw new Error(
-        archiveResult &&
-        archiveResult.message
-          ? archiveResult.message
-          : "Delete archive failed"
-      );
-
-    }
-
-
-    const deleteResult =
-      await postJson(
-        DATA_API_URL,
-        {
-
-          action:
-            "deleteData",
-
-          row:
-            rowNumber,
-
-          rowNumber:
-            rowNumber
-
-        }
-      );
-
-
-    if(
-      !deleteResult ||
-      deleteResult.success !== true
-    ){
-
-      throw new Error(
-        deleteResult &&
-        deleteResult.message
-          ? deleteResult.message
-          : "Original Data delete failed"
-      );
-
-    }
-
-
-    dataCache = null;
-
-
-    showToast(
-      "Entry deleted successfully",
-      "success"
-    );
-
-
-    await loadData(true);
-
-
-  }catch(error){
-
-    console.error(
-      error
-    );
-
-
-    showToast(
-      error.message ||
-      "Delete failed",
       "error"
     );
 
