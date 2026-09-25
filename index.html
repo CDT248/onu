@@ -406,31 +406,59 @@ async function login(){
         .toLowerCase();
 
 
-      let page = "2S.html";
+      let page = "";
 
 
-      if(role === "admin"){
-        page = "admin.html";
-      }
+      /*
+        ROLE ROUTING
 
-      else if(role === "manager"){
-        page = "ad.html";
-      }
+        support     -> 25489.html
+        call        -> 25489.html
+        admin       -> 264864.html
+        accounting  -> 26874.html
+      */
 
-      else if(role === "support"){
-        page = "support.html";
+      if(role === "support"){
+        page = "25489.html";
       }
 
       else if(role === "call"){
-        page = "call.html";
+        page = "25489.html";
       }
 
-      else if(role === "guest"){
-        page = "2S.html";
+      else if(role === "admin"){
+        page = "264864.html";
       }
 
       else if(role === "accounting"){
-        page = "agm.html";
+        page = "26874.html";
+      }
+
+      else{
+
+        /*
+          Unknown role:
+          remove login session and stop access
+        */
+
+        localStorage.removeItem("dashboardAuth");
+        localStorage.removeItem("username");
+        localStorage.removeItem("userData");
+        localStorage.removeItem("loginData");
+        localStorage.removeItem("loggedUser");
+        localStorage.removeItem("currentUser");
+        localStorage.removeItem("userInfo");
+
+        sessionStorage.clear();
+
+        alert(
+          "Your account role is not configured for dashboard access."
+        );
+
+        button.disabled = false;
+        button.innerText = "Login to Dashboard";
+
+        return;
       }
 
 
