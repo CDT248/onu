@@ -18,213 +18,188 @@
 
 <style>
 
-/* ============================================================
-   ROOT
-============================================================ */
-
-:root{
-  --bg:#f4f7f6;
-  --card:#ffffff;
-  --text:#17221e;
-  --muted:#718079;
-  --border:#dfe7e3;
-  --green:#16a34a;
-  --green-dark:#15803d;
-  --green-light:#dcfce7;
-  --danger:#dc2626;
-  --warning:#d97706;
-  --shadow:0 10px 30px rgba(0,0,0,.07);
-}
-
 *{
   box-sizing:border-box;
   margin:0;
   padding:0;
 }
 
-html,
-body{
-  width:100%;
-  min-height:100%;
+:root{
+  --bg:#f3f7f5;
+  --card:#ffffff;
+  --text:#17231d;
+  --muted:#718078;
+  --border:#dce7e1;
+  --green:#16a36b;
+  --green-dark:#0b8052;
+  --green-light:#e8f8f0;
+  --danger:#dc3545;
+  --warning:#f59e0b;
+  --blue:#2563eb;
+  --shadow:0 8px 28px rgba(24,55,42,.08);
+}
+
+body.dark{
+  --bg:#0d1511;
+  --card:#142019;
+  --text:#ecf7f0;
+  --muted:#9aaca1;
+  --border:#293a31;
+  --green-light:#163528;
+  --shadow:0 8px 28px rgba(0,0,0,.28);
 }
 
 body{
   font-family:
     Inter,
-    system-ui,
-    -apple-system,
-    BlinkMacSystemFont,
-    "Segoe UI",
+    Arial,
+    Helvetica,
     sans-serif;
   background:var(--bg);
   color:var(--text);
-  transition:.25s;
+  min-height:100vh;
+  transition:.2s;
 }
 
-body.dark{
-  --bg:#0d1411;
-  --card:#151e1a;
-  --text:#edf7f1;
-  --muted:#93a59c;
-  --border:#27352e;
-  --green:#22c55e;
-  --green-dark:#16a34a;
-  --green-light:#173a25;
-  --shadow:0 10px 30px rgba(0,0,0,.25);
-}
-
-button,
-input,
-select{
-  font:inherit;
-}
-
-button{
-  cursor:pointer;
-}
-
-button:disabled{
-  opacity:.55;
-  cursor:not-allowed;
-}
-
-/* ============================================================
-   HEADER
-============================================================ */
+/* =========================================================
+HEADER
+========================================================= */
 
 .header{
   position:sticky;
   top:0;
   z-index:100;
+  height:72px;
   background:var(--card);
   border-bottom:1px solid var(--border);
-  box-shadow:0 2px 12px rgba(0,0,0,.04);
-}
-
-.header-inner{
-  width:100%;
-  max-width:1600px;
-  margin:auto;
-  padding:14px 22px;
   display:flex;
   align-items:center;
   justify-content:space-between;
-  gap:16px;
+  padding:0 24px;
+  box-shadow:0 3px 15px rgba(0,0,0,.04);
 }
 
-.logo-area{
+.logoArea{
   display:flex;
   align-items:center;
-  gap:11px;
-  min-width:210px;
+  gap:12px;
 }
 
-.logo-icon{
+.logo{
   width:42px;
   height:42px;
   border-radius:12px;
+  background:var(--green);
   display:flex;
   align-items:center;
   justify-content:center;
-  background:var(--green);
-  color:#fff;
-  font-size:21px;
+  color:white;
+  font-size:20px;
   font-weight:800;
 }
 
-.logo-text{
+.logoText h2{
   font-size:18px;
   font-weight:800;
 }
 
-.logo-sub{
-  font-size:11px;
+.logoText span{
   color:var(--muted);
-  margin-top:2px;
+  font-size:11px;
 }
 
-.header-actions{
+.headerActions{
   display:flex;
   align-items:center;
-  justify-content:flex-end;
   gap:8px;
-  flex-wrap:wrap;
 }
 
 .btn{
-  border:1px solid var(--border);
-  background:var(--card);
-  color:var(--text);
-  border-radius:9px;
-  padding:9px 13px;
-  font-weight:650;
+  border:0;
+  border-radius:10px;
+  padding:10px 14px;
+  cursor:pointer;
+  font-size:13px;
+  font-weight:700;
+  transition:.18s;
   display:inline-flex;
   align-items:center;
   justify-content:center;
   gap:7px;
-  transition:.2s;
-  white-space:nowrap;
 }
 
 .btn:hover{
   transform:translateY(-1px);
-  border-color:var(--green);
 }
 
-.btn-green{
-  color:#fff;
+.btnGreen{
   background:var(--green);
-  border-color:var(--green);
+  color:white;
 }
 
-.btn-green:hover{
+.btnGreen:hover{
   background:var(--green-dark);
-  border-color:var(--green-dark);
 }
 
-.btn-danger{
-  color:#fff;
-  background:var(--danger);
-  border-color:var(--danger);
+.btnLight{
+  background:var(--green-light);
+  color:var(--green-dark);
 }
 
-.btn-warning{
-  color:#fff;
-  background:var(--warning);
-  border-color:var(--warning);
+body.dark .btnLight{
+  color:#7ce1b2;
 }
 
-.btn-small{
-  padding:6px 9px;
-  font-size:12px;
-  border-radius:7px;
+.btnDanger{
+  background:#ffe8eb;
+  color:var(--danger);
 }
 
-.profile-wrap{
+body.dark .btnDanger{
+  background:#3a1d22;
+}
+
+.btnBlue{
+  background:#e8efff;
+  color:var(--blue);
+}
+
+body.dark .btnBlue{
+  background:#1d2d4b;
+}
+
+.btnGray{
+  background:var(--border);
+  color:var(--text);
+}
+
+.profileWrap{
   position:relative;
+  margin-left:4px;
 }
 
-.profile-btn{
-  border:1px solid var(--border);
-  background:var(--card);
-  padding:3px;
+.profileBtn{
+  border:2px solid var(--green);
+  background:none;
+  padding:0;
   border-radius:50%;
-  width:40px;
-  height:40px;
+  width:42px;
+  height:42px;
+  overflow:hidden;
+  cursor:pointer;
 }
 
-.profile-btn img{
+.profileBtn img{
   width:100%;
   height:100%;
-  border-radius:50%;
   object-fit:cover;
 }
 
-.profile-menu{
+.profileMenu{
   position:absolute;
   right:0;
-  top:48px;
-  width:190px;
+  top:50px;
+  width:180px;
   background:var(--card);
   border:1px solid var(--border);
   border-radius:12px;
@@ -233,81 +208,73 @@ button:disabled{
   display:none;
 }
 
-.profile-menu.show{
+.profileMenu.show{
   display:block;
 }
 
-.profile-menu button{
+.profileMenu button{
   width:100%;
   border:0;
-  background:transparent;
+  background:none;
   color:var(--text);
   text-align:left;
-  padding:10px;
+  padding:11px;
   border-radius:8px;
+  cursor:pointer;
+  font-size:13px;
 }
 
-.profile-menu button:hover{
+.profileMenu button:hover{
   background:var(--green-light);
 }
 
-/* ============================================================
-   MAIN
-============================================================ */
+/* =========================================================
+MAIN
+========================================================= */
 
 .container{
-  width:100%;
-  max-width:1600px;
-  margin:auto;
-  padding:22px;
+  width:min(1500px,96%);
+  margin:22px auto;
 }
 
-.page-top{
+.topTitle{
   display:flex;
   align-items:center;
   justify-content:space-between;
   gap:15px;
-  margin-bottom:17px;
+  margin-bottom:18px;
 }
 
-.page-title{
-  font-size:25px;
-  font-weight:850;
+.topTitle h1{
+  font-size:24px;
+  font-weight:800;
 }
 
-.page-subtitle{
+.topTitle p{
   color:var(--muted);
   font-size:13px;
-  margin-top:3px;
+  margin-top:4px;
 }
 
-.toolbar-actions{
-  display:flex;
-  gap:8px;
-}
-
-/* ============================================================
-   FILTER
-============================================================ */
-
-.filter-card{
+.filterCard{
   background:var(--card);
   border:1px solid var(--border);
-  border-radius:14px;
-  padding:13px;
+  border-radius:15px;
+  padding:14px;
   box-shadow:var(--shadow);
   margin-bottom:16px;
 }
 
-.filter-grid{
+.filterRow{
   display:grid;
   grid-template-columns:
-    minmax(200px,1.8fr)
-    minmax(120px,.7fr)
-    minmax(120px,.7fr)
-    minmax(120px,.7fr)
-    minmax(120px,.7fr)
-    auto;
+    minmax(220px,1.6fr)
+    110px
+    110px
+    145px
+    145px
+    130px
+    90px;
   gap:9px;
   align-items:center;
 }
@@ -315,58 +282,60 @@ button:disabled{
 .input,
 .select{
   width:100%;
-  min-height:40px;
+  height:40px;
   border:1px solid var(--border);
+  border-radius:9px;
   background:var(--card);
   color:var(--text);
-  border-radius:9px;
+  padding:0 11px;
   outline:none;
-  padding:9px 11px;
+  font-size:13px;
 }
 
 .input:focus,
 .select:focus{
   border-color:var(--green);
-  box-shadow:0 0 0 3px rgba(34,197,94,.1);
+  box-shadow:0 0 0 3px rgba(22,163,107,.10);
 }
 
-.filter-counts{
+.counter{
+  height:40px;
+  border:1px solid var(--border);
+  border-radius:9px;
   display:flex;
   align-items:center;
-  gap:8px;
-  flex-wrap:wrap;
-}
-
-.count-box{
-  padding:8px 11px;
-  border-radius:8px;
+  justify-content:center;
+  font-size:12px;
+  font-weight:700;
   background:var(--green-light);
   color:var(--green-dark);
-  font-size:12px;
-  font-weight:750;
 }
 
-/* ============================================================
-   TABLE
-============================================================ */
+body.dark .counter{
+  color:#8be8bc;
+}
 
-.table-card{
+/* =========================================================
+TABLE
+========================================================= */
+
+.tableCard{
   background:var(--card);
   border:1px solid var(--border);
-  border-radius:14px;
+  border-radius:15px;
   box-shadow:var(--shadow);
   overflow:hidden;
 }
 
-.table-wrap{
+.tableWrap{
   width:100%;
-  overflow:auto;
+  overflow-x:auto;
 }
 
 table{
   width:100%;
-  min-width:850px;
   border-collapse:collapse;
+  min-width:850px;
 }
 
 thead{
@@ -374,69 +343,62 @@ thead{
 }
 
 th{
-  text-align:left;
-  padding:12px 13px;
-  font-size:12px;
-  font-weight:800;
   color:var(--green-dark);
-  border-bottom:1px solid var(--border);
+  font-size:12px;
+  text-transform:uppercase;
+  letter-spacing:.3px;
+  padding:13px 12px;
+  text-align:left;
   white-space:nowrap;
 }
 
+body.dark th{
+  color:#8be8bc;
+}
+
 td{
-  padding:11px 13px;
-  border-bottom:1px solid var(--border);
+  padding:12px;
+  border-top:1px solid var(--border);
   font-size:13px;
   vertical-align:middle;
 }
 
 tbody tr:hover{
-  background:rgba(34,197,94,.035);
+  background:rgba(22,163,107,.035);
 }
 
-tbody tr:last-child td{
-  border-bottom:0;
-}
-
-.action-cell{
+.actionCell{
   white-space:nowrap;
 }
 
-.action-group{
-  display:flex;
-  gap:5px;
-  flex-wrap:wrap;
-}
-
-.badge{
-  display:inline-flex;
-  align-items:center;
-  padding:4px 8px;
-  border-radius:20px;
+.smallBtn{
+  border:0;
+  border-radius:7px;
+  padding:7px 9px;
+  margin:2px;
+  cursor:pointer;
   font-size:11px;
-  font-weight:750;
-  background:var(--green-light);
-  color:var(--green-dark);
+  font-weight:700;
 }
 
-.badge-danger{
-  background:#fee2e2;
-  color:#b91c1c;
+.editBtn{
+  background:#e8efff;
+  color:#2563eb;
 }
 
-.badge-warning{
-  background:#fef3c7;
-  color:#92400e;
+.sellBtn{
+  background:#e7f8ef;
+  color:#0b8052;
 }
 
-body.dark .badge-danger{
-  background:#431b1b;
-  color:#fca5a5;
+.deleteBtn{
+  background:#ffe8eb;
+  color:#dc3545;
 }
 
-body.dark .badge-warning{
-  background:#423313;
-  color:#fcd34d;
+.paidBtn{
+  background:#fff4dc;
+  color:#b66b00;
 }
 
 .empty{
@@ -445,228 +407,68 @@ body.dark .badge-warning{
   color:var(--muted);
 }
 
-.empty-icon{
-  font-size:35px;
-  margin-bottom:8px;
-}
-
-/* ============================================================
-   PAGINATION
-============================================================ */
-
 .pagination{
   display:flex;
   align-items:center;
-  justify-content:space-between;
-  gap:10px;
-  padding:12px 14px;
+  justify-content:center;
+  gap:5px;
+  padding:14px;
   border-top:1px solid var(--border);
 }
 
-.page-info{
-  font-size:12px;
-  color:var(--muted);
-}
-
-.page-buttons{
-  display:flex;
-  gap:5px;
-}
-
-.page-btn{
+.pageBtn{
   min-width:34px;
   height:34px;
   border:1px solid var(--border);
   background:var(--card);
   color:var(--text);
-  border-radius:7px;
+  border-radius:8px;
+  cursor:pointer;
+  font-size:12px;
+  font-weight:700;
 }
 
-.page-btn.active{
+.pageBtn.active{
   background:var(--green);
-  color:#fff;
+  color:white;
   border-color:var(--green);
 }
 
-/* ============================================================
-   MODAL
-============================================================ */
+/* =========================================================
+LOADER
+========================================================= */
 
-.modal-overlay{
+.loaderOverlay{
   position:fixed;
   inset:0;
-  z-index:1000;
-  background:rgba(0,0,0,.55);
-  display:none;
-  align-items:center;
-  justify-content:center;
-  padding:18px;
-}
-
-.modal-overlay.show{
-  display:flex;
-}
-
-.modal{
-  width:100%;
-  max-width:600px;
-  max-height:92vh;
-  overflow:auto;
-  background:var(--card);
-  border:1px solid var(--border);
-  border-radius:16px;
-  box-shadow:0 25px 70px rgba(0,0,0,.25);
-}
-
-.modal-lg{
-  max-width:900px;
-}
-
-.modal-header{
-  position:sticky;
-  top:0;
-  z-index:2;
-  background:var(--card);
-  border-bottom:1px solid var(--border);
-  padding:15px 17px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:10px;
-}
-
-.modal-title{
-  font-size:17px;
-  font-weight:800;
-}
-
-.close-btn{
-  width:34px;
-  height:34px;
-  border:1px solid var(--border);
-  border-radius:8px;
-  background:var(--card);
-  color:var(--text);
-  font-size:19px;
-}
-
-.modal-body{
-  padding:17px;
-}
-
-.modal-footer{
-  position:sticky;
-  bottom:0;
-  background:var(--card);
-  border-top:1px solid var(--border);
-  padding:12px 17px;
-  display:flex;
-  justify-content:flex-end;
-  gap:8px;
-}
-
-.form-grid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:13px;
-}
-
-.form-group{
-  display:flex;
-  flex-direction:column;
-  gap:6px;
-}
-
-.form-group.full{
-  grid-column:1/-1;
-}
-
-.form-label{
-  font-size:12px;
-  font-weight:750;
-  color:var(--muted);
-}
-
-.password-wrap{
-  position:relative;
-}
-
-.password-wrap .input{
-  padding-right:42px;
-}
-
-.password-toggle{
-  position:absolute;
-  right:8px;
-  top:50%;
-  transform:translateY(-50%);
-  border:0;
-  background:transparent;
-  color:var(--muted);
-}
-
-/* ============================================================
-   MODAL TABLE
-============================================================ */
-
-.modal-table-wrap{
-  overflow:auto;
-  border:1px solid var(--border);
-  border-radius:10px;
-}
-
-.modal-table{
-  min-width:700px;
-}
-
-.modal-table th,
-.modal-table td{
-  padding:9px 10px;
-}
-
-.user-actions{
-  display:flex;
-  gap:5px;
-  flex-wrap:wrap;
-}
-
-/* ============================================================
-   LOADER
-============================================================ */
-
-.loader-overlay{
-  position:fixed;
-  inset:0;
-  z-index:3000;
-  background:rgba(0,0,0,.35);
+  z-index:9999;
+  background:rgba(0,0,0,.28);
+  backdrop-filter:blur(3px);
   display:none;
   align-items:center;
   justify-content:center;
 }
 
-.loader-overlay.show{
+.loaderOverlay.show{
   display:flex;
 }
 
-.loader-box{
+.loaderBox{
   background:var(--card);
-  color:var(--text);
-  border:1px solid var(--border);
-  border-radius:13px;
-  padding:20px 25px;
-  display:flex;
-  align-items:center;
-  gap:12px;
+  border-radius:15px;
+  padding:25px 30px;
   box-shadow:var(--shadow);
+  text-align:center;
 }
 
 .spinner{
-  width:25px;
-  height:25px;
-  border:3px solid var(--border);
+  width:38px;
+  height:38px;
+  border:4px solid var(--border);
   border-top-color:var(--green);
   border-radius:50%;
-  animation:spin .7s linear infinite;
+  animation:spin .8s linear infinite;
+  margin:0 auto 12px;
 }
 
 @keyframes spin{
@@ -675,32 +477,184 @@ body.dark .badge-warning{
   }
 }
 
-/* ============================================================
-   TOAST
-============================================================ */
+.loaderBox span{
+  font-size:13px;
+  color:var(--muted);
+}
 
-.toast-container{
+/* =========================================================
+MODAL
+========================================================= */
+
+.modalOverlay{
   position:fixed;
-  right:18px;
-  bottom:18px;
+  inset:0;
   z-index:5000;
+  background:rgba(0,0,0,.45);
+  backdrop-filter:blur(4px);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:15px;
+}
+
+.modalOverlay.show{
+  display:flex;
+}
+
+.modal{
+  width:min(600px,100%);
+  max-height:92vh;
+  overflow:auto;
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:17px;
+  box-shadow:0 20px 70px rgba(0,0,0,.22);
+}
+
+.modal.large{
+  width:min(950px,100%);
+}
+
+.modalHeader{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:17px 20px;
+  border-bottom:1px solid var(--border);
+}
+
+.modalHeader h3{
+  font-size:17px;
+}
+
+.closeBtn{
+  width:32px;
+  height:32px;
+  border:0;
+  border-radius:8px;
+  background:var(--border);
+  color:var(--text);
+  cursor:pointer;
+  font-size:18px;
+}
+
+.modalBody{
+  padding:20px;
+}
+
+.modalFooter{
+  padding:14px 20px;
+  border-top:1px solid var(--border);
+  display:flex;
+  justify-content:flex-end;
+  gap:8px;
+}
+
+.formGrid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:13px;
+}
+
+.formGroup{
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+}
+
+.formGroup.full{
+  grid-column:1/-1;
+}
+
+.formGroup label{
+  font-size:12px;
+  font-weight:700;
+  color:var(--muted);
+}
+
+.textarea{
+  min-height:90px;
+  resize:vertical;
+  padding:10px;
+}
+
+/* =========================================================
+USERS
+========================================================= */
+
+.userToolbar,
+.itemToolbar{
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+  margin-bottom:13px;
+}
+
+.statusBadge{
+  display:inline-flex;
+  padding:5px 8px;
+  border-radius:20px;
+  font-size:10px;
+  font-weight:800;
+}
+
+.statusActive{
+  background:#e5f8ee;
+  color:#08794d;
+}
+
+.statusBlocked{
+  background:#ffe7ea;
+  color:#c52d3d;
+}
+
+.statusInactive{
+  background:#fff1d6;
+  color:#a86600;
+}
+
+body.dark .statusActive{
+  background:#163b2b;
+  color:#75dfad;
+}
+
+body.dark .statusBlocked{
+  background:#401d24;
+  color:#ff9ba6;
+}
+
+body.dark .statusInactive{
+  background:#42321b;
+  color:#f7c66b;
+}
+
+/* =========================================================
+TOAST
+========================================================= */
+
+.toastContainer{
+  position:fixed;
+  right:20px;
+  bottom:20px;
+  z-index:10000;
   display:flex;
   flex-direction:column;
   gap:8px;
 }
 
 .toast{
-  min-width:240px;
-  max-width:360px;
+  min-width:250px;
+  max-width:380px;
   background:var(--card);
   color:var(--text);
   border:1px solid var(--border);
   border-left:4px solid var(--green);
-  border-radius:10px;
   padding:12px 14px;
+  border-radius:10px;
   box-shadow:var(--shadow);
-  animation:toastIn .2s ease;
   font-size:13px;
+  animation:toastIn .2s ease;
 }
 
 .toast.error{
@@ -714,192 +668,195 @@ body.dark .badge-warning{
 @keyframes toastIn{
   from{
     opacity:0;
-    transform:translateY(8px);
+    transform:translateY(10px);
   }
   to{
     opacity:1;
-    transform:translateY(0);
+    transform:none;
   }
 }
 
-/* ============================================================
-   MOBILE
-============================================================ */
+/* =========================================================
+RESPONSIVE
+========================================================= */
 
-@media(max-width:1000px){
+@media(max-width:1100px){
 
-  .filter-grid{
-    grid-template-columns:1fr 1fr;
+  .filterRow{
+    grid-template-columns:
+      1fr 1fr 1fr;
   }
 
 }
 
 @media(max-width:700px){
 
-  .header-inner{
-    padding:11px 13px;
-    align-items:flex-start;
+  .header{
+    height:auto;
+    min-height:68px;
+    padding:10px 12px;
+    gap:8px;
   }
 
-  .logo-area{
-    min-width:auto;
-  }
-
-  .logo-text{
-    font-size:15px;
-  }
-
-  .logo-sub{
+  .logoText{
     display:none;
   }
 
-  .header-actions{
-    gap:5px;
+  .headerActions{
+    flex-wrap:wrap;
+    justify-content:flex-end;
   }
 
-  .header-actions .btn{
+  .headerActions .btn{
     padding:8px 9px;
-    font-size:12px;
+    font-size:11px;
   }
 
   .container{
-    padding:13px;
+    width:96%;
+    margin:14px auto;
   }
 
-  .page-top{
+  .topTitle{
     align-items:flex-start;
     flex-direction:column;
   }
 
-  .filter-grid{
+  .topTitle h1{
+    font-size:20px;
+  }
+
+  .filterRow{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .filterRow > :first-child{
+    grid-column:1/-1;
+  }
+
+  .formGrid{
     grid-template-columns:1fr;
   }
 
-  .form-grid{
-    grid-template-columns:1fr;
-  }
-
-  .form-group.full{
+  .formGroup.full{
     grid-column:auto;
-  }
-
-  .pagination{
-    align-items:flex-start;
-    flex-direction:column;
   }
 
 }
 
-/* ============================================================
-   HIDDEN
-============================================================ */
+@media(max-width:450px){
+
+  .filterRow{
+    grid-template-columns:1fr;
+  }
+
+  .filterRow > :first-child{
+    grid-column:auto;
+  }
+
+  .profileBtn{
+    width:36px;
+    height:36px;
+  }
+
+}
+
+/* =========================================================
+HIDDEN
+========================================================= */
 
 .hidden{
   display:none !important;
 }
 
 </style>
+
 </head>
 
 <body>
 
-<!-- ============================================================
-     HEADER
-============================================================ -->
+<!-- ========================================================
+HEADER
+========================================================= -->
 
 <header class="header">
 
-  <div class="header-inner">
+  <div class="logoArea">
 
-    <div class="logo-area">
-
-      <div class="logo-icon">
-        S
-      </div>
-
-      <div>
-        <div class="logo-text">
-          Support Dashboard
-        </div>
-
-        <div class="logo-sub">
-          Data management system
-        </div>
-      </div>
-
+    <div class="logo">
+      S
     </div>
 
+    <div class="logoText">
+      <h2>Support Dashboard</h2>
+      <span id="headerUser">Loading...</span>
+    </div>
 
-    <div class="header-actions">
+  </div>
+
+  <div class="headerActions">
+
+    <button
+      class="btn btnLight"
+      onclick="loadData(true)"
+    >
+      ↻ Reload
+    </button>
+
+    <button
+      class="btn btnLight"
+      onclick="openUsersModal()"
+    >
+      👥 Users
+    </button>
+
+    <button
+      class="btn btnLight"
+      onclick="openItemsModal()"
+    >
+      📦 Items
+    </button>
+
+    <button
+      class="btn btnGreen"
+      onclick="openEntryModal()"
+    >
+      ＋ New Entry
+    </button>
+
+    <button
+      class="btn btnLight"
+      onclick="toggleTheme()"
+      id="themeBtn"
+    >
+      🌙 Dark
+    </button>
+
+    <div class="profileWrap">
 
       <button
-        class="btn"
-        onclick="loadData(true)"
+        class="profileBtn"
+        onclick="toggleProfileMenu()"
       >
-        ↻ Reload
-      </button>
-
-
-      <button
-        class="btn"
-        onclick="openUsersModal()"
-      >
-        👥 Users
-      </button>
-
-
-      <button
-        class="btn"
-        onclick="openItemsModal()"
-      >
-        📦 Items
-      </button>
-
-
-      <button
-        class="btn btn-green"
-        onclick="openEntryModal()"
-      >
-        ＋ New Entry
-      </button>
-
-
-      <button
-        class="btn"
-        onclick="toggleTheme()"
-      >
-        🌙 Dark Mode
-      </button>
-
-
-      <div class="profile-wrap">
-
-        <button
-          class="profile-btn"
-          onclick="toggleProfileMenu(event)"
+        <img
+          id="profileImage"
+          src="https://cdn-icons-png.flaticon.com/512/149/149071.png"
+          alt="Profile"
         >
-          <img
-            id="profileImage"
-            src="https://cdn-icons-png.flaticon.com/128/149/149071.png"
-            alt="Profile"
-          >
+      </button>
+
+      <div
+        class="profileMenu"
+        id="profileMenu"
+      >
+
+        <button onclick="openPasswordModal()">
+          🔑 Change Password
         </button>
 
-
-        <div
-          class="profile-menu"
-          id="profileMenu"
-        >
-
-          <button onclick="openPasswordModal()">
-            🔑 Change Password
-          </button>
-
-          <button onclick="logout()">
-            🚪 Logout
-          </button>
-
-        </div>
+        <button onclick="logout()">
+          🚪 Logout
+        </button>
 
       </div>
 
@@ -910,124 +867,88 @@ body.dark .badge-warning{
 </header>
 
 
-<!-- ============================================================
-     MAIN
-============================================================ -->
+<!-- ========================================================
+MAIN
+========================================================= -->
 
 <main class="container">
 
-  <div class="page-top">
+  <div class="topTitle">
 
     <div>
-
-      <div
-        class="page-title"
-        id="dataTitle"
-      >
-        Data
-      </div>
-
-      <div
-        class="page-subtitle"
-        id="dataSubtitle"
-      >
-        Manage support entries
-      </div>
-
+      <h1 id="dataTitle">Data</h1>
+      <p id="dataSubtitle">
+        Manage and monitor your support entries.
+      </p>
     </div>
 
-
-    <div class="toolbar-actions">
-
-      <button
-        class="btn"
-        onclick="loadData(true)"
-      >
-        ↻ Refresh Data
-      </button>
-
-    </div>
+    <button
+      class="btn btnLight"
+      onclick="loadData(true)"
+    >
+      ↻ Refresh Data
+    </button>
 
   </div>
 
 
-  <!-- ==========================================================
-       FILTER
-  =========================================================== -->
+  <!-- FILTER -->
 
-  <div class="filter-card">
+  <section class="filterCard">
 
-    <div class="filter-grid">
+    <div class="filterRow">
 
       <input
-        type="text"
-        id="searchInput"
         class="input"
-        placeholder="🔎 Search Name, IP, Work, Item..."
+        id="searchInput"
+        type="search"
+        placeholder="Search Name, IP, Work, Item..."
         oninput="applyFilters()"
       >
 
+      <div
+        class="counter"
+        id="totalCount"
+      >
+        Total: 0
+      </div>
+
+      <div
+        class="counter"
+        id="resultCount"
+      >
+        Result: 0
+      </div>
 
       <input
-        type="date"
+        class="input"
         id="fromDate"
-        class="input"
+        type="date"
         onchange="applyFilters()"
-        title="From Date"
       >
-
 
       <input
-        type="date"
-        id="toDate"
         class="input"
+        id="toDate"
+        type="date"
         onchange="applyFilters()"
-        title="To Date"
       >
-
 
       <select
-        id="dataType"
         class="select"
+        id="dataType"
         onchange="changeDataType()"
       >
 
-        <option value="data">
-          Data
-        </option>
-
-        <option value="sell">
-          Sell
-        </option>
-
-        <option value="paid">
-          Paid
-        </option>
-
-        <option value="delete">
-          Delete
-        </option>
+        <option value="data">Data</option>
+        <option value="sell">Sell</option>
+        <option value="paid">Paid</option>
+        <option value="delete">Delete</option>
 
       </select>
 
-
-      <div class="filter-counts">
-
-        <div class="count-box">
-          Total:
-          <span id="totalCount">0</span>
-        </div>
-
-        <div class="count-box">
-          Result:
-          <span id="resultCount">0</span>
-        </div>
-
-      </div>
-
-
       <button
-        class="btn"
+        class="btn btnGray"
         onclick="clearFilters()"
       >
         Clear
@@ -1035,16 +956,14 @@ body.dark .badge-warning{
 
     </div>
 
-  </div>
+  </section>
 
 
-  <!-- ==========================================================
-       TABLE
-  =========================================================== -->
+  <!-- TABLE -->
 
-  <div class="table-card">
+  <section class="tableCard">
 
-    <div class="table-wrap">
+    <div class="tableWrap">
 
       <table>
 
@@ -1054,57 +973,59 @@ body.dark .badge-warning{
 
       </table>
 
-      <div
-        id="emptyState"
-        class="empty hidden"
-      >
-
-        <div class="empty-icon">
-          📭
-        </div>
-
-        <div>
-          No data found
-        </div>
-
-      </div>
-
     </div>
-
 
     <div
       class="pagination"
       id="pagination"
     ></div>
 
-  </div>
+  </section>
 
 </main>
 
 
-<!-- ============================================================
-     ENTRY MODAL
-============================================================ -->
+<!-- ========================================================
+LOADER
+========================================================= -->
 
 <div
-  class="modal-overlay"
+  class="loaderOverlay"
+  id="loader"
+>
+
+  <div class="loaderBox">
+
+    <div class="spinner"></div>
+
+    <span id="loaderText">
+      Loading...
+    </span>
+
+  </div>
+
+</div>
+
+
+<!-- ========================================================
+ENTRY MODAL
+========================================================= -->
+
+<div
+  class="modalOverlay"
   id="entryModal"
-  onclick="overlayClose(event,'entryModal')"
 >
 
   <div class="modal">
 
-    <div class="modal-header">
+    <div class="modalHeader">
 
-      <div
-        class="modal-title"
-        id="entryModalTitle"
-      >
+      <h3 id="entryModalTitle">
         New Entry
-      </div>
+      </h3>
 
       <button
-        class="close-btn"
+        class="closeBtn"
         onclick="closeModal('entryModal')"
       >
         ×
@@ -1113,82 +1034,72 @@ body.dark .badge-warning{
     </div>
 
 
-    <div class="modal-body">
+    <div class="modalBody">
 
-      <div class="form-grid">
+      <div class="formGrid">
 
-        <div class="form-group">
+        <div class="formGroup">
 
-          <label class="form-label">
-            Name
-          </label>
+          <label>Name</label>
 
           <input
-            type="text"
-            id="entryName"
             class="input"
+            id="entryName"
+            type="text"
             placeholder="Name"
           >
 
         </div>
 
 
-        <div class="form-group">
+        <div class="formGroup">
 
-          <label class="form-label">
-            IP
-          </label>
+          <label>IP</label>
 
           <input
-            type="text"
-            id="entryIp"
             class="input"
-            placeholder="IP address"
+            id="entryIP"
+            type="text"
+            placeholder="IP Address"
           >
 
         </div>
 
 
-        <div class="form-group">
+        <div class="formGroup">
 
-          <label class="form-label">
-            Work
-          </label>
+          <label>Work</label>
 
           <input
-            type="text"
-            id="entryWork"
             class="input"
+            id="entryWork"
+            type="text"
             placeholder="Work"
           >
 
         </div>
 
 
-        <div class="form-group">
+        <div class="formGroup">
 
-          <label class="form-label">
-            Date
-          </label>
+          <label>Date</label>
 
           <input
-            type="date"
-            id="entryDate"
             class="input"
+            id="entryDate"
+            type="date"
           >
 
         </div>
 
 
-        <div class="form-group full">
+        <div class="formGroup full">
 
-          <label class="form-label">
-            Item
-          </label>
+          <label>Item</label>
 
           <select
-            id="entryItem"
             class="select"
+            id="entryItem"
           >
 
             <option value="">
@@ -1204,18 +1115,19 @@ body.dark .badge-warning{
     </div>
 
 
-    <div class="modal-footer">
+    <div class="modalFooter">
 
       <button
-        class="btn"
+        class="btn btnGray"
         onclick="closeModal('entryModal')"
       >
         Cancel
       </button>
 
       <button
-        class="btn btn-green"
+        class="btn btnGreen"
         onclick="saveEntry()"
+        id="saveEntryBtn"
       >
         Save
       </button>
@@ -1227,26 +1139,23 @@ body.dark .badge-warning{
 </div>
 
 
-<!-- ============================================================
-     USERS MODAL
-============================================================ -->
+<!-- ========================================================
+USERS MODAL
+========================================================= -->
 
 <div
-  class="modal-overlay"
+  class="modalOverlay"
   id="usersModal"
-  onclick="overlayClose(event,'usersModal')"
 >
 
-  <div class="modal modal-lg">
+  <div class="modal large">
 
-    <div class="modal-header">
+    <div class="modalHeader">
 
-      <div class="modal-title">
-        User Management
-      </div>
+      <h3>User Management</h3>
 
       <button
-        class="close-btn"
+        class="closeBtn"
         onclick="closeModal('usersModal')"
       >
         ×
@@ -1255,18 +1164,19 @@ body.dark .badge-warning{
     </div>
 
 
-    <div class="modal-body">
+    <div class="modalBody">
 
-      <div
-        style="
-          display:flex;
-          justify-content:flex-end;
-          margin-bottom:12px;
-        "
-      >
+      <div class="userToolbar">
+
+        <input
+          class="input"
+          id="userSearch"
+          placeholder="Search users..."
+          oninput="filterUsersView()"
+        >
 
         <button
-          class="btn btn-green"
+          class="btn btnGreen"
           onclick="openAddUserModal()"
         >
           ＋ Add User
@@ -1275,34 +1185,18 @@ body.dark .badge-warning{
       </div>
 
 
-      <div class="modal-table-wrap">
+      <div class="tableWrap">
 
-        <table class="modal-table">
+        <table>
 
           <thead>
 
             <tr>
-
-              <th>
-                Username
-              </th>
-
-              <th>
-                Name
-              </th>
-
-              <th>
-                Role
-              </th>
-
-              <th>
-                Status
-              </th>
-
-              <th>
-                Action
-              </th>
-
+              <th>Username</th>
+              <th>Name</th>
+              <th>Role</th>
+              <th>Status</th>
+              <th>Action</th>
             </tr>
 
           </thead>
@@ -1320,30 +1214,26 @@ body.dark .badge-warning{
 </div>
 
 
-<!-- ============================================================
-     ADD / EDIT USER MODAL
-============================================================ -->
+<!-- ========================================================
+ADD / EDIT USER MODAL
+========================================================= -->
 
 <div
-  class="modal-overlay"
-  id="userFormModal"
-  onclick="overlayClose(event,'userFormModal')"
+  class="modalOverlay"
+  id="userEditModal"
 >
 
   <div class="modal">
 
-    <div class="modal-header">
+    <div class="modalHeader">
 
-      <div
-        class="modal-title"
-        id="userFormTitle"
-      >
+      <h3 id="userModalTitle">
         Add User
-      </div>
+      </h3>
 
       <button
-        class="close-btn"
-        onclick="closeModal('userFormModal')"
+        class="closeBtn"
+        onclick="closeModal('userEditModal')"
       >
         ×
       </button>
@@ -1351,107 +1241,76 @@ body.dark .badge-warning{
     </div>
 
 
-    <div class="modal-body">
+    <div class="modalBody">
 
-      <div class="form-grid">
+      <div class="formGrid">
 
-        <div class="form-group">
+        <div class="formGroup">
 
-          <label class="form-label">
-            Username
-          </label>
+          <label>Username</label>
 
           <input
-            type="text"
+            class="input"
             id="userUsername"
-            class="input"
-            placeholder="Username"
+            type="text"
           >
 
         </div>
 
 
-        <div class="form-group">
+        <div class="formGroup">
 
-          <label class="form-label">
-            Password
-          </label>
-
-          <div class="password-wrap">
-
-            <input
-              type="text"
-              id="userPassword"
-              class="input"
-              placeholder="Password"
-            >
-
-          </div>
-
-        </div>
-
-
-        <div class="form-group">
-
-          <label class="form-label">
-            Name
-          </label>
+          <label>Password</label>
 
           <input
-            type="text"
-            id="userName"
             class="input"
-            placeholder="Name"
+            id="userPassword"
+            type="text"
           >
 
         </div>
 
 
-        <div class="form-group">
+        <div class="formGroup">
 
-          <label class="form-label">
-            Role
-          </label>
+          <label>Name</label>
+
+          <input
+            class="input"
+            id="userName"
+            type="text"
+          >
+
+        </div>
+
+
+        <div class="formGroup">
+
+          <label>Role</label>
 
           <select
-            id="userRole"
             class="select"
+            id="userRole"
           >
 
-            <option value="admin">
-              admin
-            </option>
-
-            <option value="manager">
-              manager
-            </option>
-
-            <option value="support">
-              support
-            </option>
-
-            <option value="call">
-              call
-            </option>
-
-            <option value="guest">
-              guest
-            </option>
+            <option value="admin">admin</option>
+            <option value="manager">manager</option>
+            <option value="support">support</option>
+            <option value="call">call</option>
+            <option value="guest">guest</option>
 
           </select>
 
         </div>
 
 
-        <div class="form-group full">
+        <div class="formGroup full">
 
-          <label class="form-label">
-            Status
-          </label>
+          <label>Status</label>
 
           <select
-            id="userStatus"
             class="select"
+            id="userStatus"
           >
 
             <option value="Active">
@@ -1475,17 +1334,17 @@ body.dark .badge-warning{
     </div>
 
 
-    <div class="modal-footer">
+    <div class="modalFooter">
 
       <button
-        class="btn"
-        onclick="closeModal('userFormModal')"
+        class="btn btnGray"
+        onclick="closeModal('userEditModal')"
       >
         Cancel
       </button>
 
       <button
-        class="btn btn-green"
+        class="btn btnGreen"
         onclick="saveUser()"
       >
         Save User
@@ -1498,26 +1357,23 @@ body.dark .badge-warning{
 </div>
 
 
-<!-- ============================================================
-     ITEMS MODAL
-============================================================ -->
+<!-- ========================================================
+ITEM MODAL
+========================================================= -->
 
 <div
-  class="modal-overlay"
+  class="modalOverlay"
   id="itemsModal"
-  onclick="overlayClose(event,'itemsModal')"
 >
 
-  <div class="modal">
+  <div class="modal large">
 
-    <div class="modal-header">
+    <div class="modalHeader">
 
-      <div class="modal-title">
-        Item Management
-      </div>
+      <h3>Item Management</h3>
 
       <button
-        class="close-btn"
+        class="closeBtn"
         onclick="closeModal('itemsModal')"
       >
         ×
@@ -1526,57 +1382,37 @@ body.dark .badge-warning{
     </div>
 
 
-    <div class="modal-body">
+    <div class="modalBody">
 
-      <div
-        style="
-          display:flex;
-          gap:8px;
-          margin-bottom:14px;
-        "
-      >
+      <div class="itemToolbar">
 
         <input
-          type="text"
-          id="newItemName"
           class="input"
-          placeholder="New item name"
+          id="newItemName"
+          placeholder="Enter new item"
         >
 
         <button
-          class="btn btn-green"
+          class="btn btnGreen"
           onclick="addNewItem()"
         >
-          Add
+          ＋ Add Item
         </button>
 
       </div>
 
 
-      <div class="modal-table-wrap">
+      <div class="tableWrap">
 
-        <table class="modal-table">
+        <table>
 
           <thead>
 
             <tr>
-
-              <th>
-                Item
-              </th>
-
-              <th>
-                Date
-              </th>
-
-              <th>
-                User
-              </th>
-
-              <th>
-                Action
-              </th>
-
+              <th>Item</th>
+              <th>Date</th>
+              <th>User</th>
+              <th>Action</th>
             </tr>
 
           </thead>
@@ -1594,26 +1430,23 @@ body.dark .badge-warning{
 </div>
 
 
-<!-- ============================================================
-     PASSWORD MODAL
-============================================================ -->
+<!-- ========================================================
+PASSWORD MODAL
+========================================================= -->
 
 <div
-  class="modal-overlay"
+  class="modalOverlay"
   id="passwordModal"
-  onclick="overlayClose(event,'passwordModal')"
 >
 
   <div class="modal">
 
-    <div class="modal-header">
+    <div class="modalHeader">
 
-      <div class="modal-title">
-        Change Password
-      </div>
+      <h3>Change Password</h3>
 
       <button
-        class="close-btn"
+        class="closeBtn"
         onclick="closeModal('passwordModal')"
       >
         ×
@@ -1622,53 +1455,44 @@ body.dark .badge-warning{
     </div>
 
 
-    <div class="modal-body">
+    <div class="modalBody">
 
-      <div class="form-grid">
+      <div class="formGrid">
 
-        <div class="form-group full">
+        <div class="formGroup full">
 
-          <label class="form-label">
-            Current Password
-          </label>
+          <label>Current Password</label>
 
           <input
-            type="password"
+            class="input"
             id="currentPassword"
-            class="input"
-            placeholder="Current password"
+            type="password"
           >
 
         </div>
 
 
-        <div class="form-group full">
+        <div class="formGroup full">
 
-          <label class="form-label">
-            New Password
-          </label>
+          <label>New Password</label>
 
           <input
-            type="password"
+            class="input"
             id="newPassword"
-            class="input"
-            placeholder="New password"
+            type="password"
           >
 
         </div>
 
 
-        <div class="form-group full">
+        <div class="formGroup full">
 
-          <label class="form-label">
-            Confirm New Password
-          </label>
+          <label>Confirm New Password</label>
 
           <input
-            type="password"
-            id="confirmPassword"
             class="input"
-            placeholder="Confirm new password"
+            id="confirmPassword"
+            type="password"
           >
 
         </div>
@@ -1678,20 +1502,20 @@ body.dark .badge-warning{
     </div>
 
 
-    <div class="modal-footer">
+    <div class="modalFooter">
 
       <button
-        class="btn"
+        class="btn btnGray"
         onclick="closeModal('passwordModal')"
       >
         Cancel
       </button>
 
       <button
-        class="btn btn-green"
+        class="btn btnGreen"
         onclick="changePassword()"
       >
-        Update Password
+        Change Password
       </button>
 
     </div>
@@ -1701,34 +1525,12 @@ body.dark .badge-warning{
 </div>
 
 
-<!-- ============================================================
-     LOADER
-============================================================ -->
+<!-- ========================================================
+TOAST
+========================================================= -->
 
 <div
-  class="loader-overlay"
-  id="loader"
->
-
-  <div class="loader-box">
-
-    <div class="spinner"></div>
-
-    <div>
-      Loading...
-    </div>
-
-  </div>
-
-</div>
-
-
-<!-- ============================================================
-     TOAST
-============================================================ -->
-
-<div
-  class="toast-container"
+  class="toastContainer"
   id="toastContainer"
 ></div>
 
@@ -1736,7 +1538,7 @@ body.dark .badge-warning{
 <script>
 
 /* ============================================================
-   API URLS
+API URLS
 ============================================================ */
 
 const USER_API_URL =
@@ -1759,7 +1561,7 @@ const ITEM_API_URL =
 
 
 /* ============================================================
-   GLOBAL STATE
+GLOBAL STATE
 ============================================================ */
 
 let allData = [];
@@ -1772,6 +1574,7 @@ let editingSellRow = null;
 let currentDataType = "data";
 
 let currentPage = 1;
+
 const pageSize = 10;
 
 let dataCache = null;
@@ -1781,6 +1584,8 @@ let deleteCache = null;
 
 let itemList = [];
 let itemCache = null;
+
+let allUsers = [];
 
 let currentUsername =
   String(
@@ -1792,7 +1597,7 @@ let currentUsername =
 
 
 /* ============================================================
-   START
+DOM READY
 ============================================================ */
 
 document.addEventListener(
@@ -1801,7 +1606,7 @@ document.addEventListener(
 
     loadTheme();
 
-    if(!checkLogin()){
+    if (!checkLogin()) {
       return;
     }
 
@@ -1820,7 +1625,7 @@ document.addEventListener(
 
 
 /* ============================================================
-   LOGIN CHECK
+LOGIN CHECK
 ============================================================ */
 
 function checkLogin(){
@@ -1843,7 +1648,7 @@ function checkLogin(){
 
 
 /* ============================================================
-   LOAD USER
+LOAD USER
 ============================================================ */
 
 async function loadUser(){
@@ -1862,7 +1667,6 @@ async function loadUser(){
         "&_=" +
         Date.now(),
         {
-          method:"GET",
           cache:"no-store"
         }
       );
@@ -1879,47 +1683,55 @@ async function loadUser(){
       const user =
         result.user;
 
+      const username =
+        user.Username ||
+        user.username ||
+        currentUsername;
+
       const name =
-        String(
-          user.Name ||
-          user.name ||
-          ""
-        ).trim();
+        user.Name ||
+        user.name ||
+        "";
 
       const role =
-        String(
-          user.Role ||
-          user.role ||
-          ""
-        ).trim();
+        user.Role ||
+        user.role ||
+        "";
 
       const status =
-        String(
-          user.Status ||
-          user.status ||
-          ""
-        ).trim();
+        user.Status ||
+        user.status ||
+        "";
 
-      if(name){
-        localStorage.setItem(
-          "name",
-          name
-        );
-      }
+      currentUsername =
+        String(username).trim();
 
-      if(role){
-        localStorage.setItem(
-          "role",
-          role
-        );
-      }
+      localStorage.setItem(
+        "username",
+        currentUsername
+      );
 
-      if(status){
-        localStorage.setItem(
-          "status",
-          status
-        );
-      }
+      localStorage.setItem(
+        "name",
+        name
+      );
+
+      localStorage.setItem(
+        "role",
+        role
+      );
+
+      localStorage.setItem(
+        "status",
+        status
+      );
+
+      document.getElementById(
+        "headerUser"
+      ).textContent =
+        name
+          ? name + " • " + role
+          : currentUsername;
 
       if(user.Picture){
 
@@ -1930,17 +1742,26 @@ async function loadUser(){
 
       }
 
-      const statusLower =
-        status.toLowerCase();
+      const normalizedStatus =
+        String(status)
+          .trim()
+          .toLowerCase();
 
       if(
-        statusLower === "block" ||
-        statusLower === "blocked"
+        normalizedStatus === "blocked" ||
+        normalizedStatus === "block"
       ){
 
-        logout();
+        showToast(
+          "Your account is blocked.",
+          "error"
+        );
 
-        return;
+        setTimeout(
+          logout,
+          1000
+        );
+
       }
 
     }
@@ -1958,7 +1779,7 @@ async function loadUser(){
 
 
 /* ============================================================
-   DATA TYPE
+DATA TYPE
 ============================================================ */
 
 function changeDataType(){
@@ -1979,138 +1800,112 @@ function changeDataType(){
 }
 
 
-/* ============================================================
-   UPDATE TITLE
-============================================================ */
-
 function updateDataTitle(){
 
-  const title =
-    document.getElementById(
-      "dataTitle"
-    );
+  const titles = {
 
-  const subtitle =
-    document.getElementById(
-      "dataSubtitle"
-    );
+    data:"Data",
 
-  if(currentDataType === "sell"){
+    sell:"Sell Data",
 
-    title.textContent =
-      "Sell Data";
+    paid:"Paid Data",
 
-    subtitle.textContent =
-      "Manage sold entries";
+    delete:"Deleted Data"
 
-  }
-  else if(currentDataType === "paid"){
+  };
 
-    title.textContent =
-      "Paid Data";
+  const subtitles = {
 
-    subtitle.textContent =
-      "Manage paid entries";
+    data:"Manage and monitor your support entries.",
 
-  }
-  else if(currentDataType === "delete"){
+    sell:"Entries that have been sold.",
 
-    title.textContent =
-      "Deleted Data";
+    paid:"Paid entries and payment records.",
 
-    subtitle.textContent =
-      "Manage deleted entries";
+    delete:"Deleted entries."
 
-  }
-  else{
+  };
 
-    title.textContent =
-      "Data";
+  document.getElementById(
+    "dataTitle"
+  ).textContent =
+    titles[currentDataType] ||
+    "Data";
 
-    subtitle.textContent =
-      "Manage support entries";
-
-  }
+  document.getElementById(
+    "dataSubtitle"
+  ).textContent =
+    subtitles[currentDataType] ||
+    "";
 
 }
 
 
 /* ============================================================
-   CLEAR FILTER INPUTS
+CLEAR FILTER INPUTS
 ============================================================ */
 
 function clearFilterInputs(){
 
-  const search =
-    document.getElementById(
-      "searchInput"
-    );
+  document.getElementById(
+    "searchInput"
+  ).value = "";
 
-  const from =
-    document.getElementById(
-      "fromDate"
-    );
+  document.getElementById(
+    "fromDate"
+  ).value = "";
 
-  const to =
-    document.getElementById(
-      "toDate"
-    );
+  document.getElementById(
+    "toDate"
+  ).value = "";
 
-  if(search){
-    search.value = "";
-  }
+}
 
-  if(from){
-    from.value = "";
-  }
 
-  if(to){
-    to.value = "";
-  }
+function clearFilters(){
+
+  clearFilterInputs();
+
+  currentPage = 1;
+
+  applyFilters();
 
 }
 
 
 /* ============================================================
-   LOAD DATA
+LOAD DATA
 ============================================================ */
 
-async function loadData(
-  force = false
-){
+async function loadData(force=false){
 
-  let cached = null;
+  let cachedData = null;
 
-  if(
-    currentDataType === "data"
-  ){
-    cached = dataCache;
+  if(currentDataType === "data"){
+    cachedData = dataCache;
   }
-  else if(
-    currentDataType === "sell"
-  ){
-    cached = sellCache;
+
+  if(currentDataType === "sell"){
+    cachedData = sellCache;
   }
-  else if(
-    currentDataType === "paid"
-  ){
-    cached = paidCache;
+
+  if(currentDataType === "paid"){
+    cachedData = paidCache;
   }
-  else if(
-    currentDataType === "delete"
-  ){
-    cached = deleteCache;
+
+  if(currentDataType === "delete"){
+    cachedData = deleteCache;
   }
 
 
   if(
-    cached &&
-    !force
+    !force &&
+    Array.isArray(cachedData)
   ){
 
     allData =
       attachSheetRowNumbers(
-        cached
+        cachedData
       );
 
     applyFilters();
@@ -2119,50 +1914,54 @@ async function loadData(
   }
 
 
-  showLoader();
+  showLoader(
+    "Loading " +
+    currentDataType +
+    "..."
+  );
+
+
+  let api =
+    DATA_API_URL;
+
+  let action =
+    "getData";
+
+
+  if(currentDataType === "sell"){
+
+    api =
+      SELL_API_URL;
+
+    action =
+      "getSellData";
+
+  }
+
+
+  if(currentDataType === "paid"){
+
+    api =
+      PAID_API_URL;
+
+    action =
+      "getPaidData";
+
+  }
+
+
+  if(currentDataType === "delete"){
+
+    api =
+      DELETE_API_URL;
+
+    action =
+      "getDeletedData";
+
+  }
 
 
   try{
-
-    let api =
-      DATA_API_URL;
-
-    let action =
-      "getData";
-
-
-    if(currentDataType === "sell"){
-
-      api =
-        SELL_API_URL;
-
-      action =
-        "getSellData";
-
-    }
-    else if(
-      currentDataType === "paid"
-    ){
-
-      api =
-        PAID_API_URL;
-
-      action =
-        "getPaidData";
-
-    }
-    else if(
-      currentDataType === "delete"
-    ){
-
-      api =
-        DELETE_API_URL;
-
-      action =
-        "getDeletedData";
-
-    }
-
 
     const separator =
       api.includes("?")
@@ -2213,19 +2012,21 @@ async function loadData(
     if(currentDataType === "data"){
       dataCache = allData;
     }
-    else if(currentDataType === "sell"){
+
+    if(currentDataType === "sell"){
       sellCache = allData;
     }
-    else if(currentDataType === "paid"){
+
+    if(currentDataType === "paid"){
       paidCache = allData;
     }
-    else if(currentDataType === "delete"){
+
+    if(currentDataType === "delete"){
       deleteCache = allData;
     }
 
 
     applyFilters();
-
 
   }catch(error){
 
@@ -2240,12 +2041,11 @@ async function loadData(
 
     showToast(
       error.message ||
-      "Unable to load data",
+      "Failed to load data.",
       "error"
     );
 
-  }
-  finally{
+  }finally{
 
     hideLoader();
 
@@ -2255,49 +2055,37 @@ async function loadData(
 
 
 /* ============================================================
-   ATTACH SHEET ROW NUMBERS
+ROW NUMBER
 ============================================================ */
 
-function attachSheetRowNumbers(
-  data
-){
+function attachSheetRowNumbers(data){
 
   return data.map(
-    (
-      row,
-      index
-    ) => {
+    (row,index) => {
 
-      if(!row){
-        return row;
-      }
-
-      const existing =
+      const realRow =
         getRealRowNumber(row);
 
       if(
-        existing &&
-        existing >= 2
+        Number.isFinite(realRow) &&
+        realRow >= 2
       ){
 
         return row;
 
       }
 
-
       if(
-        typeof row === "object" &&
-        !Array.isArray(row)
+        row &&
+        typeof row === "object"
       ){
 
         return {
           ...row,
-          _sheetRow:
-            index + 2
+          _sheetRow:index + 2
         };
 
       }
-
 
       return row;
 
@@ -2307,13 +2095,7 @@ function attachSheetRowNumbers(
 }
 
 
-/* ============================================================
-   GET REAL ROW NUMBER
-============================================================ */
-
-function getRealRowNumber(
-  row
-){
+function getRealRowNumber(row){
 
   if(!row){
     return null;
@@ -2321,16 +2103,27 @@ function getRealRowNumber(
 
 
   const keys = [
+
     "_sheetRow",
+
     "sheetRow",
+
     "SheetRow",
+
     "row",
+
     "rowNumber",
+
     "sourceRow",
+
     "originalRow",
+
     "originalRowNumber",
+
     "sellRow",
+
     "SellRow"
+
   ];
 
 
@@ -2343,9 +2136,7 @@ function getRealRowNumber(
     ){
 
       const value =
-        Number(
-          row[key]
-        );
+        Number(row[key]);
 
       if(
         Number.isFinite(value) &&
@@ -2371,9 +2162,7 @@ function getRealRowNumber(
     ){
 
       const value =
-        Number(
-          row[i]
-        );
+        Number(row[i]);
 
       if(
         Number.isFinite(value) &&
@@ -2395,12 +2184,59 @@ function getRealRowNumber(
 
 
 /* ============================================================
-   RENDER DATA
+GET FIELD
 ============================================================ */
 
-function renderData(
-  data
+function getField(
+  row,
+  keys,
+  index = null
 ){
+
+  if(
+    row &&
+    typeof row === "object" &&
+    !Array.isArray(row)
+  ){
+
+    for(
+      const key of keys
+    ){
+
+      if(
+        row[key] !== undefined &&
+        row[key] !== null
+      ){
+
+        return row[key];
+
+      }
+
+    }
+
+  }
+
+
+  if(
+    Array.isArray(row) &&
+    index !== null
+  ){
+
+    return row[index] ?? "";
+
+  }
+
+
+  return "";
+
+}
+
+
+/* ============================================================
+RENDER DATA
+============================================================ */
+
+function renderData(data){
 
   const head =
     document.getElementById(
@@ -2412,467 +2248,519 @@ function renderData(
       "tableBody"
     );
 
-  const empty =
-    document.getElementById(
-      "emptyState"
-    );
+
+  let headers = [];
 
 
   if(currentDataType === "data"){
 
-    head.innerHTML = `
-      <tr>
-        <th>Name</th>
-        <th>IP</th>
-        <th>Work</th>
-        <th>Date</th>
-        <th>Item</th>
-        <th>Action</th>
-      </tr>
-    `;
-
-  }
-  else if(
-    currentDataType === "sell"
-  ){
-
-    head.innerHTML = `
-      <tr>
-        <th>Name</th>
-        <th>IP</th>
-        <th>Work</th>
-        <th>Date</th>
-        <th>Item</th>
-        <th>Sell Date</th>
-        <th>User</th>
-        <th>Action</th>
-      </tr>
-    `;
-
-  }
-  else if(
-    currentDataType === "paid"
-  ){
-
-    head.innerHTML = `
-      <tr>
-        <th>Name</th>
-        <th>IP</th>
-        <th>Work</th>
-        <th>Date</th>
-        <th>Item</th>
-        <th>Sell Date</th>
-        <th>Sell User</th>
-        <th>Paid Time</th>
-        <th>Paid User</th>
-      </tr>
-    `;
-
-  }
-  else{
-
-    head.innerHTML = `
-      <tr>
-        <th>Name</th>
-        <th>IP</th>
-        <th>Work</th>
-        <th>Date</th>
-        <th>Item</th>
-        <th>Delete Time</th>
-        <th>User</th>
-      </tr>
-    `;
+    headers = [
+      "Name",
+      "IP",
+      "Work",
+      "Date",
+      "Item",
+      "Action"
+    ];
 
   }
 
 
-  body.innerHTML = "";
+  if(currentDataType === "sell"){
+
+    headers = [
+      "Name",
+      "IP",
+      "Work",
+      "Date",
+      "Item",
+      "Sell Date",
+      "User",
+      "Action"
+    ];
+
+  }
 
 
-  if(
-    !data ||
-    data.length === 0
-  ){
+  if(currentDataType === "paid"){
 
-    empty.classList.remove(
-      "hidden"
-    );
+    headers = [
+      "Name",
+      "IP",
+      "Work",
+      "Date",
+      "Item",
+      "Sell Date",
+      "Sell User",
+      "Paid Time",
+      "Paid User"
+    ];
 
-    renderPagination(0);
+  }
+
+
+  if(currentDataType === "delete"){
+
+    headers = [
+      "Name",
+      "IP",
+      "Work",
+      "Date",
+      "Item",
+      "Delete Time",
+      "User"
+    ];
+
+  }
+
+
+  head.innerHTML =
+    "<tr>" +
+    headers
+      .map(
+        h => "<th>" +
+          escapeHtml(h) +
+          "</th>"
+      )
+      .join("") +
+    "</tr>";
+
+
+  if(!data.length){
+
+    body.innerHTML =
+      `<tr>
+        <td colspan="${headers.length}">
+          <div class="empty">
+            No data found.
+          </div>
+        </td>
+      </tr>`;
+
+    renderPagination();
 
     return;
 
   }
 
 
-  empty.classList.add(
-    "hidden"
-  );
-
-
   const start =
     (currentPage - 1) *
     pageSize;
 
-  const pageRows =
+  const pageData =
     data.slice(
       start,
       start + pageSize
     );
 
 
-  pageRows.forEach(
-    (
-      row,
-      index
-    ) => {
-
-      const realIndex =
-        start + index;
-
-      const name =
-        getField(
-          row,
-          [
-            "Name",
-            "name",
-            0
-          ]
-        );
-
-      const ip =
-        getField(
-          row,
-          [
-            "IP",
-            "Ip",
-            "ip",
-            1
-          ]
-        );
-
-      const work =
-        getField(
-          row,
-          [
-            "Work",
-            "work",
-            2
-          ]
-        );
-
-      const date =
-        getField(
-          row,
-          [
-            "Date",
-            "date",
-            3
-          ]
-        );
-
-      const item =
-        getField(
-          row,
-          [
-            "Item",
-            "item",
-            4
-          ]
-        );
-
-
-      let html = "";
-
-
-      if(
-        currentDataType === "data"
-      ){
-
-        html = `
-          <tr>
-
-            <td>${escapeHtml(name)}</td>
-
-            <td>${escapeHtml(ip)}</td>
-
-            <td>${escapeHtml(work)}</td>
-
-            <td>${escapeHtml(formatDateTime(date))}</td>
-
-            <td>${escapeHtml(item)}</td>
-
-            <td class="action-cell">
-
-              <div class="action-group">
-
-                ${createActionButton(
-                  "Edit",
-                  "editDataEntry",
-                  realIndex,
-                  "btn"
-                )}
-
-                ${createActionButton(
-                  "Sell",
-                  "sellDataEntry",
-                  realIndex,
-                  "btn btn-warning"
-                )}
-
-                ${createActionButton(
-                  "Delete",
-                  "deleteDataEntry",
-                  realIndex,
-                  "btn btn-danger"
-                )}
-
-              </div>
-
-            </td>
-
-          </tr>
-        `;
-
-      }
-      else if(
-        currentDataType === "sell"
-      ){
-
-        const sellTime =
-          getField(
-            row,
-            [
-              "Sell time",
-              "Sell Time",
-              "sellTime",
-              "sell_time",
-              5
-            ]
-          );
-
-        const user =
-          getField(
-            row,
-            [
-              "User",
-              "user",
-              "Username",
-              "username",
-              6
-            ]
-          );
-
-
-        html = `
-          <tr>
-
-            <td>${escapeHtml(name)}</td>
-
-            <td>${escapeHtml(ip)}</td>
-
-            <td>${escapeHtml(work)}</td>
-
-            <td>${escapeHtml(formatDateTime(date))}</td>
-
-            <td>${escapeHtml(item)}</td>
-
-            <td>${escapeHtml(formatDateTime(sellTime))}</td>
-
-            <td>${escapeHtml(user)}</td>
-
-            <td class="action-cell">
-
-              <div class="action-group">
-
-                ${createActionButton(
-                  "Edit",
-                  "editSellEntry",
-                  realIndex,
-                  "btn"
-                )}
-
-                ${createActionButton(
-                  "Paid",
-                  "paidSellEntry",
-                  realIndex,
-                  "btn btn-green"
-                )}
-
-              </div>
-
-            </td>
-
-          </tr>
-        `;
-
-      }
-      else if(
-        currentDataType === "paid"
-      ){
-
-        const sellTime =
-          getField(
-            row,
-            [
-              "Sell time",
-              "Sell Time",
-              "sellTime",
-              5
-            ]
-          );
-
-        const sellUser =
-          getField(
-            row,
-            [
-              "User",
-              "user",
-              "Sell User",
-              "sellUser",
-              6
-            ]
-          );
-
-        const paidTime =
-          getField(
-            row,
-            [
-              "Paid time",
-              "Paid Time",
-              "paidTime",
-              "paid_time",
-              7
-            ]
-          );
-
-        const paidUser =
-          getField(
-            row,
-            [
-              "Paid User",
-              "paidUser",
-              "PaidUser",
-              8
-            ]
-          );
-
-
-        html = `
-          <tr>
-
-            <td>${escapeHtml(name)}</td>
-
-            <td>${escapeHtml(ip)}</td>
-
-            <td>${escapeHtml(work)}</td>
-
-            <td>${escapeHtml(formatDateTime(date))}</td>
-
-            <td>${escapeHtml(item)}</td>
-
-            <td>${escapeHtml(formatDateTime(sellTime))}</td>
-
-            <td>${escapeHtml(sellUser)}</td>
-
-            <td>${escapeHtml(formatDateTime(paidTime))}</td>
-
-            <td>${escapeHtml(paidUser)}</td>
-
-          </tr>
-        `;
-
-      }
-      else{
-
-        const deleteTime =
-          getField(
-            row,
-            [
-              "Delete time",
-              "Delete Time",
-              "deleteTime",
-              "delete_time",
-              5
-            ]
-          );
-
-        const user =
-          getField(
-            row,
-            [
-              "User",
-              "user",
-              "Username",
-              "username",
-              6
-            ]
-          );
-
-
-        html = `
-          <tr>
-
-            <td>${escapeHtml(name)}</td>
-
-            <td>${escapeHtml(ip)}</td>
-
-            <td>${escapeHtml(work)}</td>
-
-            <td>${escapeHtml(formatDateTime(date))}</td>
-
-            <td>${escapeHtml(item)}</td>
-
-            <td>${escapeHtml(formatDateTime(deleteTime))}</td>
-
-            <td>${escapeHtml(user)}</td>
-
-          </tr>
-        `;
-
-      }
-
-
-      body.insertAdjacentHTML(
-        "beforeend",
-        html
-      );
-
-    }
-  );
-
-
-  renderPagination(
-    data.length
-  );
+  body.innerHTML =
+    pageData
+      .map(
+        (row,index) => {
+
+          const name =
+            getField(
+              row,
+              ["Name","name"],
+              0
+            );
+
+          const ip =
+            getField(
+              row,
+              ["IP","Ip","ip"],
+              1
+            );
+
+          const work =
+            getField(
+              row,
+              ["Work","work"],
+              2
+            );
+
+          const date =
+            getField(
+              row,
+              ["Date","date"],
+              3
+            );
+
+          const item =
+            getField(
+              row,
+              ["Item","item"],
+              4
+            );
+
+
+          let html = "";
+
+
+          if(
+            currentDataType ===
+            "data"
+          ){
+
+            html =
+              "<tr>" +
+
+              "<td>" +
+              escapeHtml(name) +
+              "</td>" +
+
+              "<td>" +
+              escapeHtml(ip) +
+              "</td>" +
+
+              "<td>" +
+              escapeHtml(work) +
+              "</td>" +
+
+              "<td>" +
+              escapeHtml(
+                formatDateTime(date)
+              ) +
+              "</td>" +
+
+              "<td>" +
+              escapeHtml(item) +
+              "</td>" +
+
+              "<td class='actionCell'>" +
+
+              createActionButton(
+                "Edit",
+                "editDataEntry",
+                start + index,
+                "editBtn"
+              ) +
+
+              createActionButton(
+                "Sell",
+                "sellDataEntry",
+                start + index,
+                "sellBtn"
+              ) +
+
+              createActionButton(
+                "Delete",
+                "deleteDataEntry",
+                start + index,
+                "deleteBtn"
+              ) +
+
+              "</td>" +
+
+              "</tr>";
+
+          }
+
+
+          if(
+            currentDataType ===
+            "sell"
+          ){
+
+            const sellTime =
+              getField(
+                row,
+                [
+                  "Sell time",
+                  "Sell Time",
+                  "sellTime",
+                  "sell_time"
+                ],
+                5
+              );
+
+            const user =
+              getField(
+                row,
+                [
+                  "User",
+                  "user",
+                  "Username",
+                  "username"
+                ],
+                6
+              );
+
+
+            html =
+              "<tr>" +
+
+              "<td>" +
+              escapeHtml(name) +
+              "</td>" +
+
+              "<td>" +
+              escapeHtml(ip) +
+              "</td>" +
+
+              "<td>" +
+              escapeHtml(work) +
+              "</td>" +
+
+              "<td>" +
+              escapeHtml(
+                formatDateTime(date)
+              ) +
+              "</td>" +
+
+              "<td>" +
+              escapeHtml(item) +
+              "</td>" +
+
+              "<td>" +
+              escapeHtml(
+                formatDateTime(
+                  sellTime
+                )
+              ) +
+              "</td>" +
+
+              "<td>" +
+              escapeHtml(user) +
+              "</td>" +
+
+              "<td class='actionCell'>" +
+
+              createActionButton(
+                "Edit",
+                "editSellEntry",
+                start + index,
+                "editBtn"
+              ) +
+
+              createActionButton(
+                "Paid",
+                "paidSellEntry",
+                start + index,
+                "paidBtn"
+              ) +
+
+              "</td>" +
+
+              "</tr>";
+
+          }
+
+
+          if(
+            currentDataType ===
+            "paid"
+          ){
+
+            const sellTime =
+              getField(
+                row,
+                [
+                  "Sell time",
+                  "Sell Time",
+                  "sellTime",
+                  "sell_time"
+                ],
+                5
+              );
+
+            const sellUser =
+              getField(
+                row,
+                [
+                  "Sell User",
+                  "SellUser",
+                  "sellUser",
+                  "User"
+                ],
+                6
+              );
+
+            const paidTime =
+              getField(
+                row,
+                [
+                  "Paid Time",
+                  "Paid time",
+                  "paidTime",
+                  "paid_time"
+                ],
+                7
+              );
+
+            const paidUser =
+              getField(
+                row,
+                [
+                  "Paid User",
+                  "PaidUser",
+                  "paidUser"
+                ],
+                8
+              );
+
+
+            html =
+              "<tr>" +
+
+              "<td>" +
+              escapeHtml(name) +
+              "</td>" +
+
+              "<td>" +
+              escapeHtml(ip) +
+              "</td>" +
+
+              "<td>" +
+              escapeHtml(work) +
+              "</td>" +
+
+              "<td>" +
+              escapeHtml(
+                formatDateTime(date)
+              ) +
+              "</td>" +
+
+              "<td>" +
+              escapeHtml(item) +
+              "</td>" +
+
+              "<td>" +
+              escapeHtml(
+                formatDateTime(
+                  sellTime
+                )
+              ) +
+              "</td>" +
+
+              "<td>" +
+              escapeHtml(sellUser) +
+              "</td>" +
+
+              "<td>" +
+              escapeHtml(
+                formatDateTime(
+                  paidTime
+                )
+              ) +
+              "</td>" +
+
+              "<td>" +
+              escapeHtml(paidUser) +
+              "</td>" +
+
+              "</tr>";
+
+          }
+
+
+          if(
+            currentDataType ===
+            "delete"
+          ){
+
+            const deleteTime =
+              getField(
+                row,
+                [
+                  "Delete Time",
+                  "Delete time",
+                  "deleteTime",
+                  "delete_time"
+                ],
+                5
+              );
+
+            const user =
+              getField(
+                row,
+                [
+                  "User",
+                  "user",
+                  "Username",
+                  "username"
+                ],
+                6
+              );
+
+
+            html =
+              "<tr>" +
+
+              "<td>" +
+              escapeHtml(name) +
+              "</td>" +
+
+              "<td>" +
+              escapeHtml(ip) +
+              "</td>" +
+
+              "<td>" +
+              escapeHtml(work) +
+              "</td>" +
+
+              "<td>" +
+              escapeHtml(
+                formatDateTime(date)
+              ) +
+              "</td>" +
+
+              "<td>" +
+              escapeHtml(item) +
+              "</td>" +
+
+              "<td>" +
+              escapeHtml(
+                formatDateTime(
+                  deleteTime
+                )
+              ) +
+              "</td>" +
+
+              "<td>" +
+              escapeHtml(user) +
+              "</td>" +
+
+              "</tr>";
+
+          }
+
+
+          return html;
+
+        }
+      )
+      .join("");
+
+
+  renderPagination();
 
 }
 
 
 /* ============================================================
-   APPLY FILTERS
+FILTER
 ============================================================ */
 
 function applyFilters(){
 
   const search =
-    String(
-      document.getElementById(
-        "searchInput"
-      ).value ||
-      ""
-    )
-    .trim()
-    .toLowerCase();
+    document.getElementById(
+      "searchInput"
+    ).value
+      .trim()
+      .toLowerCase();
 
 
-  const fromDate =
+  const from =
     document.getElementById(
       "fromDate"
     ).value;
 
 
-  const toDate =
+  const to =
     document.getElementById(
       "toDate"
     ).value;
@@ -2882,63 +2770,54 @@ function applyFilters(){
     allData.filter(
       row => {
 
-        if(search){
+        const searchable =
+          JSON.stringify(
+            row
+          ).toLowerCase();
 
-          const searchable =
-            JSON.stringify(
-              row
-            ).toLowerCase();
 
-          if(
-            !searchable.includes(
-              search
-            )
-          ){
+        if(
+          search &&
+          !searchable.includes(search)
+        ){
 
-            return false;
-
-          }
+          return false;
 
         }
+
+
+        const rawDate =
+          getField(
+            row,
+            ["Date","date"],
+            3
+          );
 
 
         const rowDate =
           normalizeDate(
-            getField(
-              row,
-              [
-                "Date",
-                "date",
-                3
-              ]
-            )
+            rawDate
           );
 
 
-        if(fromDate){
+        if(
+          from &&
+          rowDate &&
+          rowDate < from
+        ){
 
-          if(
-            rowDate &&
-            rowDate < fromDate
-          ){
-
-            return false;
-
-          }
+          return false;
 
         }
 
 
-        if(toDate){
+        if(
+          to &&
+          rowDate &&
+          rowDate > to
+        ){
 
-          if(
-            rowDate &&
-            rowDate > toDate
-          ){
-
-            return false;
-
-          }
+          return false;
 
         }
 
@@ -2949,37 +2828,30 @@ function applyFilters(){
     );
 
 
-  document.getElementById(
-    "totalCount"
-  ).textContent =
-    allData.length;
-
-
-  document.getElementById(
-    "resultCount"
-  ).textContent =
-    filteredData.length;
-
-
-  const totalPages =
+  currentPage = Math.min(
+    currentPage,
     Math.max(
       1,
       Math.ceil(
         filteredData.length /
         pageSize
       )
-    );
+    )
+  );
 
 
-  if(
-    currentPage >
-    totalPages
-  ){
+  document.getElementById(
+    "totalCount"
+  ).textContent =
+    "Total: " +
+    allData.length;
 
-    currentPage =
-      totalPages;
 
-  }
+  document.getElementById(
+    "resultCount"
+  ).textContent =
+    "Result: " +
+    filteredData.length;
 
 
   renderData(
@@ -2990,272 +2862,115 @@ function applyFilters(){
 
 
 /* ============================================================
-   CLEAR FILTERS
+PAGINATION
 ============================================================ */
 
-function clearFilters(){
+function renderPagination(){
 
-  clearFilterInputs();
-
-  currentPage = 1;
-
-  applyFilters();
-
-}
-
-
-/* ============================================================
-   PAGINATION
-============================================================ */
-
-function renderPagination(
-  total
-){
-
-  const container =
+  const pagination =
     document.getElementById(
       "pagination"
     );
 
 
-  container.innerHTML = "";
+  const totalPages =
+    Math.ceil(
+      filteredData.length /
+      pageSize
+    );
 
 
-  if(total <= pageSize){
+  if(totalPages <= 1){
 
-    if(total > 0){
-
-      container.innerHTML = `
-        <div class="page-info">
-          Showing ${total} result(s)
-        </div>
-      `;
-
-    }
+    pagination.innerHTML = "";
 
     return;
 
   }
 
 
-  const pages =
-    Math.ceil(
-      total /
-      pageSize
-    );
+  let html = "";
 
 
-  const info =
-    document.createElement(
-      "div"
-    );
+  if(currentPage > 1){
 
-  info.className =
-    "page-info";
-
-  const start =
-    ((currentPage - 1) * pageSize) + 1;
-
-  const end =
-    Math.min(
-      currentPage * pageSize,
-      total
-    );
-
-  info.textContent =
-    `Showing ${start}-${end} of ${total}`;
-
-
-  const buttons =
-    document.createElement(
-      "div"
-    );
-
-  buttons.className =
-    "page-buttons";
-
-
-  const previous =
-    document.createElement(
-      "button"
-    );
-
-  previous.className =
-    "page-btn";
-
-  previous.textContent =
-    "‹";
-
-  previous.disabled =
-    currentPage === 1;
-
-  previous.onclick =
-    () => {
-
-      if(
-        currentPage > 1
-      ){
-
-        currentPage--;
-
-        renderData(
-          filteredData
-        );
-
-      }
-
-    };
-
-
-  buttons.appendChild(
-    previous
-  );
-
-
-  for(
-    let i = 1;
-    i <= pages;
-    i++
-  ){
-
-    if(
-      pages > 7 &&
-      i > 2 &&
-      i < pages - 1 &&
-      Math.abs(
-        i - currentPage
-      ) > 1
-    ){
-
-      if(
-        !buttons.querySelector(
-          ".dots"
-        )
-      ){
-
-        const dots =
-          document.createElement(
-            "span"
-          );
-
-        dots.className =
-          "page-btn dots";
-
-        dots.textContent =
-          "...";
-
-        dots.style.display =
-          "inline-flex";
-
-        dots.style.alignItems =
-          "center";
-
-        dots.style.justifyContent =
-          "center";
-
-        buttons.appendChild(
-          dots
-        );
-
-      }
-
-      continue;
-
-    }
-
-
-    const btn =
-      document.createElement(
-        "button"
-      );
-
-    btn.className =
-      "page-btn" +
-      (
-        i === currentPage
-          ? " active"
-          : ""
-      );
-
-    btn.textContent =
-      i;
-
-    btn.onclick =
-      () => {
-
-        currentPage = i;
-
-        renderData(
-          filteredData
-        );
-
-      };
-
-
-    buttons.appendChild(
-      btn
-    );
+    html +=
+      `<button
+        class="pageBtn"
+        onclick="goToPage(${currentPage - 1})"
+      >‹</button>`;
 
   }
 
 
-  const next =
-    document.createElement(
-      "button"
-    );
+  for(
+    let i=1;
+    i<=totalPages;
+    i++
+  ){
 
-  next.className =
-    "page-btn";
+    if(
+      i === 1 ||
+      i === totalPages ||
+      Math.abs(i-currentPage) <= 2
+    ){
 
-  next.textContent =
-    "›";
+      html +=
+        `<button
+          class="pageBtn ${
+            i === currentPage
+              ? "active"
+              : ""
+          }"
+          onclick="goToPage(${i})"
+        >${i}</button>`;
 
-  next.disabled =
-    currentPage === pages;
+    }
 
-  next.onclick =
-    () => {
-
-      if(
-        currentPage < pages
-      ){
-
-        currentPage++;
-
-        renderData(
-          filteredData
-        );
-
-      }
-
-    };
+  }
 
 
-  buttons.appendChild(
-    next
+  if(currentPage < totalPages){
+
+    html +=
+      `<button
+        class="pageBtn"
+        onclick="goToPage(${currentPage + 1})"
+      >›</button>`;
+
+  }
+
+
+  pagination.innerHTML =
+    html;
+
+}
+
+
+function goToPage(page){
+
+  currentPage = page;
+
+  renderData(
+    filteredData
   );
 
-
-  container.appendChild(
-    info
-  );
-
-  container.appendChild(
-    buttons
-  );
+  window.scrollTo({
+    top:0,
+    behavior:"smooth"
+  });
 
 }
 
 
 /* ============================================================
-   OPEN ENTRY MODAL
+ENTRY MODAL
 ============================================================ */
 
 function openEntryModal(){
 
   editingDataRow = null;
   editingSellRow = null;
-
 
   document.getElementById(
     "entryModalTitle"
@@ -3272,15 +2987,13 @@ function openEntryModal(){
 
 
   document.getElementById(
-    "entryIp"
-  ).value =
-    "";
+    "entryIP"
+  ).value = "";
 
 
   document.getElementById(
     "entryWork"
-  ).value =
-    "";
+  ).value = "";
 
 
   document.getElementById(
@@ -3291,8 +3004,7 @@ function openEntryModal(){
 
   document.getElementById(
     "entryItem"
-  ).value =
-    "";
+  ).value = "";
 
 
   populateItemSelect();
@@ -3306,16 +3018,13 @@ function openEntryModal(){
 
 
 /* ============================================================
-   EDIT DATA ENTRY
+EDIT DATA ENTRY
 ============================================================ */
 
-function editDataEntry(
-  index
-){
+function editDataEntry(index){
 
   const row =
     filteredData[index];
-
 
   if(!row){
     return;
@@ -3323,11 +3032,24 @@ function editDataEntry(
 
 
   editingDataRow =
-    getRealRowNumber(
-      row
-    );
+    getRealRowNumber(row);
 
   editingSellRow = null;
+
+
+  if(
+    !editingDataRow ||
+    editingDataRow < 2
+  ){
+
+    showToast(
+      "Original row not found.",
+      "error"
+    );
+
+    return;
+
+  }
 
 
   document.getElementById(
@@ -3341,25 +3063,18 @@ function editDataEntry(
   ).value =
     getField(
       row,
-      [
-        "Name",
-        "name",
-        0
-      ]
+      ["Name","name"],
+      0
     );
 
 
   document.getElementById(
-    "entryIp"
+    "entryIP"
   ).value =
     getField(
       row,
-      [
-        "IP",
-        "Ip",
-        "ip",
-        1
-      ]
+      ["IP","Ip","ip"],
+      1
     );
 
 
@@ -3368,11 +3083,8 @@ function editDataEntry(
   ).value =
     getField(
       row,
-      [
-        "Work",
-        "work",
-        2
-      ]
+      ["Work","work"],
+      2
     );
 
 
@@ -3382,11 +3094,8 @@ function editDataEntry(
     normalizeDate(
       getField(
         row,
-        [
-          "Date",
-          "date",
-          3
-        ]
+        ["Date","date"],
+        3
       )
     );
 
@@ -3399,11 +3108,8 @@ function editDataEntry(
   ).value =
     getField(
       row,
-      [
-        "Item",
-        "item",
-        4
-      ]
+      ["Item","item"],
+      4
     );
 
 
@@ -3415,16 +3121,13 @@ function editDataEntry(
 
 
 /* ============================================================
-   EDIT SELL ENTRY
+EDIT SELL ENTRY
 ============================================================ */
 
-function editSellEntry(
-  index
-){
+function editSellEntry(index){
 
   const row =
     filteredData[index];
-
 
   if(!row){
     return;
@@ -3432,11 +3135,24 @@ function editSellEntry(
 
 
   editingSellRow =
-    getRealRowNumber(
-      row
-    );
+    getRealRowNumber(row);
 
   editingDataRow = null;
+
+
+  if(
+    !editingSellRow ||
+    editingSellRow < 2
+  ){
+
+    showToast(
+      "Original sell row not found.",
+      "error"
+    );
+
+    return;
+
+  }
 
 
   document.getElementById(
@@ -3450,25 +3166,18 @@ function editSellEntry(
   ).value =
     getField(
       row,
-      [
-        "Name",
-        "name",
-        0
-      ]
+      ["Name","name"],
+      0
     );
 
 
   document.getElementById(
-    "entryIp"
+    "entryIP"
   ).value =
     getField(
       row,
-      [
-        "IP",
-        "Ip",
-        "ip",
-        1
-      ]
+      ["IP","Ip","ip"],
+      1
     );
 
 
@@ -3477,11 +3186,8 @@ function editSellEntry(
   ).value =
     getField(
       row,
-      [
-        "Work",
-        "work",
-        2
-      ]
+      ["Work","work"],
+      2
     );
 
 
@@ -3491,11 +3197,8 @@ function editSellEntry(
     normalizeDate(
       getField(
         row,
-        [
-          "Date",
-          "date",
-          3
-        ]
+        ["Date","date"],
+        3
       )
     );
 
@@ -3508,11 +3211,8 @@ function editSellEntry(
   ).value =
     getField(
       row,
-      [
-        "Item",
-        "item",
-        4
-      ]
+      ["Item","item"],
+      4
     );
 
 
@@ -3524,7 +3224,7 @@ function editSellEntry(
 
 
 /* ============================================================
-   SAVE ENTRY
+SAVE ENTRY
 ============================================================ */
 
 async function saveEntry(){
@@ -3537,7 +3237,7 @@ async function saveEntry(){
 
   const ip =
     document.getElementById(
-      "entryIp"
+      "entryIP"
     ).value.trim();
 
 
@@ -3562,32 +3262,8 @@ async function saveEntry(){
   if(!name){
 
     showToast(
-      "Name is required",
-      "error"
-    );
-
-    return;
-
-  }
-
-
-  if(!ip){
-
-    showToast(
-      "IP is required",
-      "error"
-    );
-
-    return;
-
-  }
-
-
-  if(!work){
-
-    showToast(
-      "Work is required",
-      "error"
+      "Name is required.",
+      "warning"
     );
 
     return;
@@ -3598,8 +3274,8 @@ async function saveEntry(){
   if(!date){
 
     showToast(
-      "Date is required",
-      "error"
+      "Date is required.",
+      "warning"
     );
 
     return;
@@ -3607,19 +3283,17 @@ async function saveEntry(){
   }
 
 
-  if(!item){
-
-    showToast(
-      "Item is required",
-      "error"
+  const button =
+    document.getElementById(
+      "saveEntryBtn"
     );
 
-    return;
 
-  }
+  button.disabled = true;
 
-
-  showLoader();
+  showLoader(
+    "Saving entry..."
+  );
 
 
   try{
@@ -3635,33 +3309,32 @@ async function saveEntry(){
           {
             action:"editSellData",
 
-            row:
-              editingSellRow,
+            row:editingSellRow,
 
-            rowNumber:
-              editingSellRow,
+            rowNumber:editingSellRow,
 
-            sellRow:
-              editingSellRow,
+            sellRow:editingSellRow,
 
-            SellRow:
-              editingSellRow,
+            SellRow:editingSellRow,
 
-            name,
-            ip,
-            work,
-            date,
-            item,
+            name:name,
 
-            username:
-              currentUsername,
+            ip:ip,
 
-            user:
-              currentUsername
+            work:work,
+
+            date:date,
+
+            item:item,
+
+            username:currentUsername,
+
+            user:currentUsername
           }
         );
 
     }
+
     else if(editingDataRow){
 
       result =
@@ -3670,21 +3343,24 @@ async function saveEntry(){
           {
             action:"editData",
 
-            row:
-              editingDataRow,
+            row:editingDataRow,
 
-            rowNumber:
-              editingDataRow,
+            rowNumber:editingDataRow,
 
-            name,
-            ip,
-            work,
-            date,
-            item
+            name:name,
+
+            ip:ip,
+
+            work:work,
+
+            date:date,
+
+            item:item
           }
         );
 
     }
+
     else{
 
       result =
@@ -3693,11 +3369,15 @@ async function saveEntry(){
           {
             action:"addData",
 
-            name,
-            ip,
-            work,
-            date,
-            item
+            name:name,
+
+            ip:ip,
+
+            work:work,
+
+            date:date,
+
+            item:item
           }
         );
 
@@ -3711,7 +3391,7 @@ async function saveEntry(){
 
       throw new Error(
         result?.message ||
-        "Save failed"
+        "Save failed."
       );
 
     }
@@ -3725,46 +3405,37 @@ async function saveEntry(){
     dataCache = null;
     sellCache = null;
 
-
-    currentDataType =
-      editingSellRow
-        ? "sell"
-        : "data";
-
-
-    document.getElementById(
-      "dataType"
-    ).value =
-      currentDataType;
-
-
-    updateDataTitle();
+    await loadData(true);
 
 
     showToast(
-      "Saved successfully",
-      "success"
+      editingSellRow ||
+      editingDataRow
+        ? "Entry updated successfully."
+        : "Entry added successfully."
     );
 
 
-    await loadData(true);
+    editingDataRow = null;
+    editingSellRow = null;
 
 
   }catch(error){
 
     console.error(
-      "saveEntry error:",
+      "saveEntry:",
       error
     );
 
     showToast(
       error.message ||
-      "Unable to save",
+      "Failed to save entry.",
       "error"
     );
 
-  }
-  finally{
+  }finally{
+
+    button.disabled = false;
 
     hideLoader();
 
@@ -3774,16 +3445,23 @@ async function saveEntry(){
 
 
 /* ============================================================
-   SELL DATA ENTRY
+SELL DATA
 ============================================================ */
 
-async function sellDataEntry(
-  index
-){
+async function sellDataEntry(index){
+
+  if(
+    currentDataType !==
+    "data"
+  ){
+
+    return;
+
+  }
+
 
   const row =
     filteredData[index];
-
 
   if(!row){
     return;
@@ -3791,9 +3469,7 @@ async function sellDataEntry(
 
 
   const rowNumber =
-    getRealRowNumber(
-      row
-    );
+    getRealRowNumber(row);
 
 
   if(
@@ -3802,7 +3478,7 @@ async function sellDataEntry(
   ){
 
     showToast(
-      "Original row not found",
+      "Original row not found.",
       "error"
     );
 
@@ -3822,62 +3498,48 @@ async function sellDataEntry(
   }
 
 
-  const name =
-    getField(
-      row,
-      [
-        "Name",
-        "name",
-        0
-      ]
-    );
-
-  const ip =
-    getField(
-      row,
-      [
-        "IP",
-        "Ip",
-        "ip",
-        1
-      ]
-    );
-
-  const work =
-    getField(
-      row,
-      [
-        "Work",
-        "work",
-        2
-      ]
-    );
-
-  const date =
-    getField(
-      row,
-      [
-        "Date",
-        "date",
-        3
-      ]
-    );
-
-  const item =
-    getField(
-      row,
-      [
-        "Item",
-        "item",
-        4
-      ]
-    );
-
-
-  showLoader();
+  showLoader(
+    "Selling entry..."
+  );
 
 
   try{
+
+    const name =
+      getField(
+        row,
+        ["Name","name"],
+        0
+      );
+
+    const ip =
+      getField(
+        row,
+        ["IP","Ip","ip"],
+        1
+      );
+
+    const work =
+      getField(
+        row,
+        ["Work","work"],
+        2
+      );
+
+    const date =
+      getField(
+        row,
+        ["Date","date"],
+        3
+      );
+
+    const item =
+      getField(
+        row,
+        ["Item","item"],
+        4
+      );
+
 
     const sellResult =
       await postJson(
@@ -3885,29 +3547,27 @@ async function sellDataEntry(
         {
           action:"sellData",
 
-          row:
-            rowNumber,
+          row:rowNumber,
 
-          rowNumber:
-            rowNumber,
+          rowNumber:rowNumber,
 
-          sellRow:
-            rowNumber,
+          sellRow:rowNumber,
 
-          SellRow:
-            rowNumber,
+          SellRow:rowNumber,
 
-          name,
-          ip,
-          work,
-          date,
-          item,
+          name:name,
 
-          username:
-            currentUsername,
+          ip:ip,
 
-          user:
-            currentUsername
+          work:work,
+
+          date:date,
+
+          item:item,
+
+          username:currentUsername,
+
+          user:currentUsername
         }
       );
 
@@ -3919,7 +3579,7 @@ async function sellDataEntry(
 
       throw new Error(
         sellResult?.message ||
-        "Sell operation failed"
+        "Sell operation failed."
       );
 
     }
@@ -3930,11 +3590,9 @@ async function sellDataEntry(
       {
         action:"deleteData",
 
-        row:
-          rowNumber,
+        row:rowNumber,
 
-        rowNumber:
-          rowNumber
+        rowNumber:rowNumber
       }
     );
 
@@ -3943,43 +3601,28 @@ async function sellDataEntry(
     sellCache = null;
 
 
-    currentDataType =
-      "data";
-
-
-    document.getElementById(
-      "dataType"
-    ).value =
-      "data";
-
-
-    updateDataTitle();
+    await loadData(true);
 
 
     showToast(
-      "Entry sold successfully",
-      "success"
+      "Entry sold successfully."
     );
-
-
-    await loadData(true);
 
 
   }catch(error){
 
     console.error(
-      "sellDataEntry error:",
+      "sellDataEntry:",
       error
     );
 
     showToast(
       error.message ||
-      "Sell failed",
+      "Sell failed.",
       "error"
     );
 
-  }
-  finally{
+  }finally{
 
     hideLoader();
 
@@ -3989,16 +3632,13 @@ async function sellDataEntry(
 
 
 /* ============================================================
-   DELETE DATA ENTRY
+DELETE DATA
 ============================================================ */
 
-async function deleteDataEntry(
-  index
-){
+async function deleteDataEntry(index){
 
   const row =
     filteredData[index];
-
 
   if(!row){
     return;
@@ -4006,9 +3646,7 @@ async function deleteDataEntry(
 
 
   const rowNumber =
-    getRealRowNumber(
-      row
-    );
+    getRealRowNumber(row);
 
 
   if(
@@ -4017,7 +3655,7 @@ async function deleteDataEntry(
   ){
 
     showToast(
-      "Original row not found",
+      "Original row not found.",
       "error"
     );
 
@@ -4037,62 +3675,48 @@ async function deleteDataEntry(
   }
 
 
-  const name =
-    getField(
-      row,
-      [
-        "Name",
-        "name",
-        0
-      ]
-    );
-
-  const ip =
-    getField(
-      row,
-      [
-        "IP",
-        "Ip",
-        "ip",
-        1
-      ]
-    );
-
-  const work =
-    getField(
-      row,
-      [
-        "Work",
-        "work",
-        2
-      ]
-    );
-
-  const date =
-    getField(
-      row,
-      [
-        "Date",
-        "date",
-        3
-      ]
-    );
-
-  const item =
-    getField(
-      row,
-      [
-        "Item",
-        "item",
-        4
-      ]
-    );
-
-
-  showLoader();
+  showLoader(
+    "Deleting entry..."
+  );
 
 
   try{
+
+    const name =
+      getField(
+        row,
+        ["Name","name"],
+        0
+      );
+
+    const ip =
+      getField(
+        row,
+        ["IP","Ip","ip"],
+        1
+      );
+
+    const work =
+      getField(
+        row,
+        ["Work","work"],
+        2
+      );
+
+    const date =
+      getField(
+        row,
+        ["Date","date"],
+        3
+      );
+
+    const item =
+      getField(
+        row,
+        ["Item","item"],
+        4
+      );
+
 
     const deleteResult =
       await postJson(
@@ -4100,23 +3724,23 @@ async function deleteDataEntry(
         {
           action:"deleteData",
 
-          row:
-            rowNumber,
+          row:rowNumber,
 
-          rowNumber:
-            rowNumber,
+          rowNumber:rowNumber,
 
-          name,
-          ip,
-          work,
-          date,
-          item,
+          name:name,
 
-          username:
-            currentUsername,
+          ip:ip,
 
-          user:
-            currentUsername
+          work:work,
+
+          date:date,
+
+          item:item,
+
+          username:currentUsername,
+
+          user:currentUsername
         }
       );
 
@@ -4128,7 +3752,7 @@ async function deleteDataEntry(
 
       throw new Error(
         deleteResult?.message ||
-        "Delete archive failed"
+        "Delete archive failed."
       );
 
     }
@@ -4139,11 +3763,9 @@ async function deleteDataEntry(
       {
         action:"deleteData",
 
-        row:
-          rowNumber,
+        row:rowNumber,
 
-        rowNumber:
-          rowNumber
+        rowNumber:rowNumber
       }
     );
 
@@ -4152,30 +3774,28 @@ async function deleteDataEntry(
     deleteCache = null;
 
 
-    showToast(
-      "Deleted successfully",
-      "success"
-    );
-
-
     await loadData(true);
+
+
+    showToast(
+      "Entry deleted successfully."
+    );
 
 
   }catch(error){
 
     console.error(
-      "deleteDataEntry error:",
+      "deleteDataEntry:",
       error
     );
 
     showToast(
       error.message ||
-      "Delete failed",
+      "Delete failed.",
       "error"
     );
 
-  }
-  finally{
+  }finally{
 
     hideLoader();
 
@@ -4185,16 +3805,13 @@ async function deleteDataEntry(
 
 
 /* ============================================================
-   PAID SELL ENTRY
+PAID SELL
 ============================================================ */
 
-async function paidSellEntry(
-  index
-){
+async function paidSellEntry(index){
 
   const row =
     filteredData[index];
-
 
   if(!row){
     return;
@@ -4202,9 +3819,7 @@ async function paidSellEntry(
 
 
   const rowNumber =
-    getRealRowNumber(
-      row
-    );
+    getRealRowNumber(row);
 
 
   if(
@@ -4213,7 +3828,7 @@ async function paidSellEntry(
   ){
 
     showToast(
-      "Original row not found",
+      "Original sell row not found.",
       "error"
     );
 
@@ -4233,87 +3848,72 @@ async function paidSellEntry(
   }
 
 
-  const name =
-    getField(
-      row,
-      [
-        "Name",
-        "name",
-        0
-      ]
-    );
-
-  const ip =
-    getField(
-      row,
-      [
-        "IP",
-        "Ip",
-        "ip",
-        1
-      ]
-    );
-
-  const work =
-    getField(
-      row,
-      [
-        "Work",
-        "work",
-        2
-      ]
-    );
-
-  const date =
-    getField(
-      row,
-      [
-        "Date",
-        "date",
-        3
-      ]
-    );
-
-  const item =
-    getField(
-      row,
-      [
-        "Item",
-        "item",
-        4
-      ]
-    );
-
-
-  const sellTime =
-    getField(
-      row,
-      [
-        "Sell time",
-        "Sell Time",
-        "sellTime",
-        5
-      ]
-    );
-
-
-  const sellUser =
-    getField(
-      row,
-      [
-        "User",
-        "user",
-        "Username",
-        "username",
-        6
-      ]
-    );
-
-
-  showLoader();
+  showLoader(
+    "Processing payment..."
+  );
 
 
   try{
+
+    const name =
+      getField(
+        row,
+        ["Name","name"],
+        0
+      );
+
+    const ip =
+      getField(
+        row,
+        ["IP","Ip","ip"],
+        1
+      );
+
+    const work =
+      getField(
+        row,
+        ["Work","work"],
+        2
+      );
+
+    const date =
+      getField(
+        row,
+        ["Date","date"],
+        3
+      );
+
+    const item =
+      getField(
+        row,
+        ["Item","item"],
+        4
+      );
+
+    const sellTime =
+      getField(
+        row,
+        [
+          "Sell time",
+          "Sell Time",
+          "sellTime",
+          "sell_time"
+        ],
+        5
+      );
+
+    const sellUser =
+      getField(
+        row,
+        [
+          "User",
+          "user",
+          "Username",
+          "username"
+        ],
+        6
+      );
+
 
     const result =
       await postJson(
@@ -4321,38 +3921,35 @@ async function paidSellEntry(
         {
           action:"paidData",
 
-          row:
-            rowNumber,
+          row:rowNumber,
 
-          rowNumber:
-            rowNumber,
+          rowNumber:rowNumber,
 
-          sellRow:
-            rowNumber,
+          sellRow:rowNumber,
 
-          SellRow:
-            rowNumber,
+          SellRow:rowNumber,
 
-          name,
-          ip,
-          work,
-          date,
-          item,
+          name:name,
 
-          sellTime,
-          sellUser,
+          ip:ip,
 
-          user:
-            currentUsername,
+          work:work,
 
-          username:
-            currentUsername,
+          date:date,
 
-          paidUser:
-            currentUsername,
+          item:item,
 
-          PaidUser:
-            currentUsername
+          sellTime:sellTime,
+
+          sellUser:sellUser,
+
+          user:currentUsername,
+
+          username:currentUsername,
+
+          paidUser:currentUsername,
+
+          PaidUser:currentUsername
         }
       );
 
@@ -4364,19 +3961,18 @@ async function paidSellEntry(
 
       throw new Error(
         result?.message ||
-        "Paid operation failed"
+        "Payment operation failed."
       );
 
     }
 
 
-    sellCache = null;
     paidCache = null;
+    sellCache = null;
 
 
     currentDataType =
       "paid";
-
 
     document.getElementById(
       "dataType"
@@ -4386,31 +3982,28 @@ async function paidSellEntry(
 
     updateDataTitle();
 
+    await loadData(true);
+
 
     showToast(
-      "Marked as paid successfully",
-      "success"
+      "Marked as paid successfully."
     );
-
-
-    await loadData(true);
 
 
   }catch(error){
 
     console.error(
-      "paidSellEntry error:",
+      "paidSellEntry:",
       error
     );
 
     showToast(
       error.message ||
-      "Paid failed",
+      "Payment failed.",
       "error"
     );
 
-  }
-  finally{
+  }finally{
 
     hideLoader();
 
@@ -4420,54 +4013,51 @@ async function paidSellEntry(
 
 
 /* ============================================================
-   USERS
+ITEMS
 ============================================================ */
 
-async function openUsersModal(){
+function openItemsModal(){
+
+  document.getElementById(
+    "newItemName"
+  ).value = "";
 
   openModal(
-    "usersModal"
+    "itemsModal"
   );
 
-  await loadUsers();
+  loadItems(true);
 
 }
 
 
-/* ============================================================
-   LOAD USERS
-============================================================ */
+async function loadItems(force=false){
 
-async function loadUsers(){
+  if(
+    !force &&
+    Array.isArray(itemCache)
+  ){
 
-  const body =
-    document.getElementById(
-      "usersBody"
-    );
+    itemList =
+      itemCache;
 
+    renderItems();
 
-  body.innerHTML = `
-    <tr>
-      <td colspan="5" style="text-align:center;padding:25px">
-        Loading users...
-      </td>
-    </tr>
-  `;
+    populateItemSelect();
+
+    return;
+
+  }
 
 
   try{
 
     const response =
       await fetch(
-        USER_API_URL +
-        "?action=getUsers&requester=" +
-        encodeURIComponent(
-          currentUsername
-        ) +
-        "&_=" +
+        ITEM_API_URL +
+        "?action=getItems&_=" +
         Date.now(),
         {
-          method:"GET",
           cache:"no-store"
         }
       );
@@ -4484,13 +4074,496 @@ async function loadUsers(){
 
       throw new Error(
         result?.message ||
-        "Unable to load users"
+        "Failed to load items."
       );
 
     }
 
 
-    const users =
+    itemList =
+      Array.isArray(result.data)
+        ? result.data
+        : [];
+
+
+    itemCache =
+      itemList;
+
+
+    renderItems();
+
+    populateItemSelect();
+
+
+  }catch(error){
+
+    console.error(
+      "loadItems:",
+      error
+    );
+
+    showToast(
+      error.message ||
+      "Failed to load items.",
+      "error"
+    );
+
+  }
+
+}
+
+
+function renderItems(){
+
+  const body =
+    document.getElementById(
+      "itemsBody"
+    );
+
+
+  if(!itemList.length){
+
+    body.innerHTML =
+      `<tr>
+        <td colspan="4">
+          <div class="empty">
+            No items found.
+          </div>
+        </td>
+      </tr>`;
+
+    return;
+
+  }
+
+
+  body.innerHTML =
+    itemList
+      .map(
+        (item,index) => {
+
+          const itemName =
+            getField(
+              item,
+              [
+                "Item",
+                "item",
+                "Name",
+                "name"
+              ],
+              0
+            );
+
+          const date =
+            getField(
+              item,
+              [
+                "Date",
+                "date",
+                "Created",
+                "created"
+              ],
+              1
+            );
+
+          const user =
+            getField(
+              item,
+              [
+                "User",
+                "user",
+                "Username",
+                "username"
+              ],
+              2
+            );
+
+
+          return `
+            <tr>
+
+              <td>
+                ${escapeHtml(itemName)}
+              </td>
+
+              <td>
+                ${escapeHtml(
+                  formatDateTime(date)
+                )}
+              </td>
+
+              <td>
+                ${escapeHtml(user)}
+              </td>
+
+              <td>
+
+                <button
+                  class="smallBtn deleteBtn"
+                  onclick="deleteItem(${index})"
+                >
+                  Delete
+                </button>
+
+              </td>
+
+            </tr>
+          `;
+
+        }
+      )
+      .join("");
+
+}
+
+
+function populateItemSelect(){
+
+  const select =
+    document.getElementById(
+      "entryItem"
+    );
+
+
+  const currentValue =
+    select.value;
+
+
+  select.innerHTML =
+    `<option value="">
+      Select Item
+    </option>`;
+
+
+  itemList.forEach(
+    item => {
+
+      const itemName =
+        getField(
+          item,
+          [
+            "Item",
+            "item",
+            "Name",
+            "name"
+          ],
+          0
+        );
+
+
+      if(!itemName){
+        return;
+      }
+
+
+      const option =
+        document.createElement(
+          "option"
+        );
+
+
+      option.value =
+        itemName;
+
+      option.textContent =
+        itemName;
+
+
+      select.appendChild(
+        option
+      );
+
+    }
+  );
+
+
+  if(currentValue){
+
+    select.value =
+      currentValue;
+
+  }
+
+}
+
+
+async function addNewItem(){
+
+  const item =
+    document.getElementById(
+      "newItemName"
+    ).value.trim();
+
+
+  if(!item){
+
+    showToast(
+      "Enter item name.",
+      "warning"
+    );
+
+    return;
+
+  }
+
+
+  try{
+
+    showLoader(
+      "Adding item..."
+    );
+
+
+    const result =
+      await postJson(
+        ITEM_API_URL,
+        {
+          action:"addItem",
+
+          item:item,
+
+          name:item,
+
+          username:currentUsername,
+
+          user:currentUsername
+        }
+      );
+
+
+    if(
+      !result ||
+      result.success !== true
+    ){
+
+      throw new Error(
+        result?.message ||
+        "Failed to add item."
+      );
+
+    }
+
+
+    itemCache = null;
+
+
+    document.getElementById(
+      "newItemName"
+    ).value = "";
+
+
+    await loadItems(true);
+
+
+    showToast(
+      "Item added successfully."
+    );
+
+
+  }catch(error){
+
+    console.error(
+      "addNewItem:",
+      error
+    );
+
+    showToast(
+      error.message ||
+      "Failed to add item.",
+      "error"
+    );
+
+  }finally{
+
+    hideLoader();
+
+  }
+
+}
+
+
+async function deleteItem(index){
+
+  const item =
+    itemList[index];
+
+  if(!item){
+    return;
+  }
+
+
+  const itemName =
+    getField(
+      item,
+      [
+        "Item",
+        "item",
+        "Name",
+        "name"
+      ],
+      0
+    );
+
+
+  if(
+    !confirm(
+      "Delete item: " +
+      itemName +
+      "?"
+    )
+  ){
+
+    return;
+
+  }
+
+
+  const rowNumber =
+    getRealRowNumber(item);
+
+
+  try{
+
+    showLoader(
+      "Deleting item..."
+    );
+
+
+    const result =
+      await postJson(
+        ITEM_API_URL,
+        {
+          action:"deleteItem",
+
+          row:rowNumber,
+
+          rowNumber:rowNumber,
+
+          item:itemName,
+
+          name:itemName,
+
+          username:currentUsername,
+
+          user:currentUsername
+        }
+      );
+
+
+    if(
+      !result ||
+      result.success !== true
+    ){
+
+      throw new Error(
+        result?.message ||
+        "Failed to delete item."
+      );
+
+    }
+
+
+    itemCache = null;
+
+
+    await loadItems(true);
+
+
+    showToast(
+      "Item deleted successfully."
+    );
+
+
+  }catch(error){
+
+    console.error(
+      "deleteItem:",
+      error
+    );
+
+    showToast(
+      error.message ||
+      "Failed to delete item.",
+      "error"
+    );
+
+  }finally{
+
+    hideLoader();
+
+  }
+
+}
+
+
+/* ============================================================
+USERS
+============================================================ */
+
+async function openUsersModal(){
+
+  openModal(
+    "usersModal"
+  );
+
+  await loadUsers();
+
+}
+
+
+async function loadUsers(){
+
+  const body =
+    document.getElementById(
+      "usersBody"
+    );
+
+
+  body.innerHTML =
+    `<tr>
+      <td colspan="5">
+        <div class="empty">
+          Loading users...
+        </div>
+      </td>
+    </tr>`;
+
+
+  try{
+
+    const response =
+      await fetch(
+        USER_API_URL +
+        "?action=getUsers&requester=" +
+        encodeURIComponent(
+          currentUsername
+        ) +
+        "&_=" +
+        Date.now(),
+        {
+          cache:"no-store"
+        }
+      );
+
+
+    const result =
+      await response.json();
+
+
+    if(
+      !result ||
+      result.success !== true
+    ){
+
+      throw new Error(
+        result?.message ||
+        "Failed to load users."
+      );
+
+    }
+
+
+    allUsers =
       Array.isArray(result.users)
         ? result.users
         : Array.isArray(result.data)
@@ -4499,47 +4572,43 @@ async function loadUsers(){
 
 
     renderUsers(
-      users
+      allUsers
     );
 
 
   }catch(error){
 
     console.error(
-      "loadUsers error:",
+      "loadUsers:",
       error
     );
 
-    body.innerHTML = `
-      <tr>
-        <td
-          colspan="5"
-          style="
-            text-align:center;
-            padding:25px;
-            color:var(--danger);
-          "
-        >
-          ${escapeHtml(
-            error.message ||
-            "Unable to load users"
-          )}
+
+    body.innerHTML =
+      `<tr>
+        <td colspan="5">
+          <div class="empty">
+            ${escapeHtml(
+              error.message ||
+              "Failed to load users."
+            )}
+          </div>
         </td>
-      </tr>
-    `;
+      </tr>`;
+
+
+    showToast(
+      error.message ||
+      "Failed to load users.",
+      "error"
+    );
 
   }
 
 }
 
 
-/* ============================================================
-   RENDER USERS
-============================================================ */
-
-function renderUsers(
-  users
-){
+function renderUsers(users){
 
   const body =
     document.getElementById(
@@ -4547,154 +4616,191 @@ function renderUsers(
     );
 
 
-  body.innerHTML = "";
+  if(!users.length){
 
-
-  if(
-    !users ||
-    users.length === 0
-  ){
-
-    body.innerHTML = `
-      <tr>
-        <td
-          colspan="5"
-          style="
-            text-align:center;
-            padding:25px;
-            color:var(--muted);
-          "
-        >
-          No users found
+    body.innerHTML =
+      `<tr>
+        <td colspan="5">
+          <div class="empty">
+            No users found.
+          </div>
         </td>
-      </tr>
-    `;
+      </tr>`;
 
     return;
 
   }
 
 
-  users.forEach(
-    (
-      user,
-      index
-    ) => {
+  body.innerHTML =
+    users
+      .map(
+        (user,index) => {
 
-      const username =
-        String(
-          user.Username ||
-          user.username ||
-          ""
-        );
+          const username =
+            user.Username ||
+            user.username ||
+            "";
 
-      const name =
-        String(
-          user.Name ||
-          user.name ||
-          ""
-        );
+          const name =
+            user.Name ||
+            user.name ||
+            "";
 
-      const role =
-        String(
-          user.Role ||
-          user.role ||
-          ""
-        );
+          const role =
+            user.Role ||
+            user.role ||
+            "";
 
-      const status =
-        String(
-          user.Status ||
-          user.status ||
-          ""
-        );
+          const status =
+            user.Status ||
+            user.status ||
+            "";
 
 
-      const statusLower =
-        status.toLowerCase();
+          const normalized =
+            String(status)
+              .trim()
+              .toLowerCase();
 
 
-      const statusClass =
-        statusLower === "active"
-          ? "badge"
-          : statusLower === "blocked" ||
-            statusLower === "block"
-            ? "badge badge-danger"
-            : "badge badge-warning";
+          let badgeClass =
+            "statusActive";
 
 
-      const blockText =
-        statusLower === "blocked" ||
-        statusLower === "block"
-          ? "Unblock"
-          : "Block";
+          if(
+            normalized ===
+            "blocked" ||
+            normalized ===
+            "block"
+          ){
+
+            badgeClass =
+              "statusBlocked";
+
+          }
+          else if(
+            normalized ===
+            "inactive"
+          ){
+
+            badgeClass =
+              "statusInactive";
+
+          }
 
 
-      body.insertAdjacentHTML(
-        "beforeend",
-        `
-        <tr>
+          const nextStatus =
+            (
+              normalized ===
+              "blocked" ||
+              normalized ===
+              "block"
+            )
+              ? "Active"
+              : "Blocked";
 
-          <td>
-            ${escapeHtml(username)}
-          </td>
 
-          <td>
-            ${escapeHtml(name)}
-          </td>
+          return `
+            <tr>
 
-          <td>
-            ${escapeHtml(role)}
-          </td>
+              <td>
+                ${escapeHtml(username)}
+              </td>
 
-          <td>
-            <span class="${statusClass}">
-              ${escapeHtml(status)}
-            </span>
-          </td>
+              <td>
+                ${escapeHtml(name)}
+              </td>
 
-          <td>
+              <td>
+                ${escapeHtml(role)}
+              </td>
 
-            <div class="user-actions">
+              <td>
+                <span
+                  class="statusBadge ${badgeClass}"
+                >
+                  ${escapeHtml(status)}
+                </span>
+              </td>
 
-              <button
-                class="btn btn-small"
-                onclick="editUserByIndex(${index})"
-              >
-                Edit
-              </button>
+              <td>
 
-              <button
-                class="btn btn-small ${
-                  blockText === "Block"
-                    ? "btn-danger"
-                    : "btn-green"
-                }"
-                onclick="changeUserStatusByIndex(${index}, '${escapeJs(username)}', '${escapeJs(status)}')"
-              >
-                ${blockText}
-              </button>
+                <button
+                  class="smallBtn editBtn"
+                  onclick="editUser(${index})"
+                >
+                  Edit
+                </button>
 
-            </div>
+                <button
+                  class="smallBtn ${
+                    nextStatus === "Blocked"
+                      ? "deleteBtn"
+                      : "sellBtn"
+                  }"
+                  onclick="changeUserStatus(${index}, '${nextStatus}')"
+                >
+                  ${
+                    nextStatus === "Blocked"
+                      ? "Block"
+                      : "Unblock"
+                  }
+                </button>
 
-          </td>
+              </td>
 
-        </tr>
-        `
-      );
+            </tr>
+          `;
 
-    }
+        }
+      )
+      .join("");
+
+}
+
+
+function filterUsersView(){
+
+  const search =
+    document.getElementById(
+      "userSearch"
+    ).value
+      .trim()
+      .toLowerCase();
+
+
+  if(!search){
+
+    renderUsers(
+      allUsers
+    );
+
+    return;
+
+  }
+
+
+  const filtered =
+    allUsers.filter(
+      user =>
+        JSON.stringify(
+          user
+        )
+          .toLowerCase()
+          .includes(search)
+    );
+
+
+  renderUsers(
+    filtered
   );
-
-
-  window.loadedUsers =
-    users;
 
 }
 
 
 /* ============================================================
-   OPEN ADD USER
+ADD USER
 ============================================================ */
 
 function openAddUserModal(){
@@ -4703,27 +4809,24 @@ function openAddUserModal(){
 
 
   document.getElementById(
-    "userFormTitle"
+    "userModalTitle"
   ).textContent =
     "Add User";
 
 
   document.getElementById(
     "userUsername"
-  ).value =
-    "";
+  ).value = "";
 
 
   document.getElementById(
     "userPassword"
-  ).value =
-    "";
+  ).value = "";
 
 
   document.getElementById(
     "userName"
-  ).value =
-    "";
+  ).value = "";
 
 
   document.getElementById(
@@ -4739,76 +4842,32 @@ function openAddUserModal(){
 
 
   openModal(
-    "userFormModal"
+    "userEditModal"
   );
 
 }
 
 
 /* ============================================================
-   EDIT USER BY INDEX
+EDIT USER
 ============================================================ */
 
-function editUserByIndex(
-  index
-){
+function editUser(index){
 
   const user =
-    window.loadedUsers?.[index];
-
+    allUsers[index];
 
   if(!user){
     return;
   }
 
 
-  editUser(
-    user
-  );
-
-}
-
-
-/* ============================================================
-   EDIT USER
-============================================================ */
-
-function editUser(
-  user
-){
-
   editingUser =
     user;
 
 
-  const username =
-    user.Username ||
-    user.username ||
-    "";
-
-  const password =
-    user.Password ||
-    user.password ||
-    "";
-
-  const name =
-    user.Name ||
-    user.name ||
-    "";
-
-  const role =
-    user.Role ||
-    user.role ||
-    "support";
-
-  const status =
-    user.Status ||
-    user.status ||
-    "Active";
-
-
   document.getElementById(
-    "userFormTitle"
+    "userModalTitle"
   ).textContent =
     "Edit User";
 
@@ -4816,42 +4875,52 @@ function editUser(
   document.getElementById(
     "userUsername"
   ).value =
-    username;
+    user.Username ||
+    user.username ||
+    "";
 
 
   document.getElementById(
     "userPassword"
   ).value =
-    password;
+    user.Password ||
+    user.password ||
+    "";
 
 
   document.getElementById(
     "userName"
   ).value =
-    name;
+    user.Name ||
+    user.name ||
+    "";
 
 
   document.getElementById(
     "userRole"
   ).value =
-    role;
+    user.Role ||
+    user.role ||
+    "support";
 
 
   document.getElementById(
     "userStatus"
   ).value =
-    status;
+    user.Status ||
+    user.status ||
+    "Active";
 
 
   openModal(
-    "userFormModal"
+    "userEditModal"
   );
 
 }
 
 
 /* ============================================================
-   SAVE USER
+SAVE USER
 ============================================================ */
 
 async function saveUser(){
@@ -4889,8 +4958,8 @@ async function saveUser(){
   if(!username){
 
     showToast(
-      "Username is required",
-      "error"
+      "Username is required.",
+      "warning"
     );
 
     return;
@@ -4901,8 +4970,8 @@ async function saveUser(){
   if(!password){
 
     showToast(
-      "Password is required",
-      "error"
+      "Password is required.",
+      "warning"
     );
 
     return;
@@ -4913,8 +4982,8 @@ async function saveUser(){
   if(!name){
 
     showToast(
-      "Name is required",
-      "error"
+      "Name is required.",
+      "warning"
     );
 
     return;
@@ -4922,7 +4991,11 @@ async function saveUser(){
   }
 
 
-  showLoader();
+  showLoader(
+    editingUser
+      ? "Updating user..."
+      : "Adding user..."
+  );
 
 
   try{
@@ -4944,17 +5017,20 @@ async function saveUser(){
           {
             action:"editUser",
 
-            requester:
-              currentUsername,
+            requester:currentUsername,
 
             originalUsername:
               originalUsername,
 
-            username,
-            password,
-            name,
-            role,
-            status
+            username:username,
+
+            password:password,
+
+            name:name,
+
+            role:role,
+
+            status:status
           }
         );
 
@@ -4967,14 +5043,17 @@ async function saveUser(){
           {
             action:"addUser",
 
-            requester:
-              currentUsername,
+            requester:currentUsername,
 
-            username,
-            password,
-            name,
-            role,
-            status
+            username:username,
+
+            password:password,
+
+            name:name,
+
+            role:role,
+
+            status:status
           }
         );
 
@@ -4988,43 +5067,44 @@ async function saveUser(){
 
       throw new Error(
         result?.message ||
-        "User save failed"
+        "User save failed."
       );
 
     }
 
 
     closeModal(
-      "userFormModal"
-    );
-
-
-    showToast(
-      editingUser
-        ? "User updated successfully"
-        : "User added successfully",
-      "success"
+      "userEditModal"
     );
 
 
     await loadUsers();
 
 
+    showToast(
+      editingUser
+        ? "User updated successfully."
+        : "User added successfully."
+    );
+
+
+    editingUser = null;
+
+
   }catch(error){
 
     console.error(
-      "saveUser error:",
+      "saveUser:",
       error
     );
 
     showToast(
       error.message ||
-      "Unable to save user",
+      "Failed to save user.",
       "error"
     );
 
-  }
-  finally{
+  }finally{
 
     hideLoader();
 
@@ -5034,57 +5114,35 @@ async function saveUser(){
 
 
 /* ============================================================
-   CHANGE USER STATUS
-============================================================ */
-
-function changeUserStatusByIndex(
-  index,
-  username,
-  currentStatus
-){
-
-  changeUserStatus(
-    username,
-    currentStatus
-  );
-
-}
-
-
-/* ============================================================
-   CHANGE USER STATUS
+CHANGE USER STATUS
 ============================================================ */
 
 async function changeUserStatus(
-  username,
-  currentStatus
+  index,
+  newStatus
 ){
 
-  const lower =
-    String(
-      currentStatus ||
-      ""
-    ).toLowerCase();
+  const user =
+    allUsers[index];
+
+  if(!user){
+    return;
+  }
 
 
-  const newStatus =
-    (
-      lower === "blocked" ||
-      lower === "block"
-    )
-      ? "Active"
-      : "Blocked";
-
-
-  const actionText =
-    newStatus === "Blocked"
-      ? "block"
-      : "unblock";
+  const username =
+    user.Username ||
+    user.username ||
+    "";
 
 
   if(
     !confirm(
-      `Are you sure you want to ${actionText} ${username}?`
+      "Change status of " +
+      username +
+      " to " +
+      newStatus +
+      "?"
     )
   ){
 
@@ -5093,7 +5151,9 @@ async function changeUserStatus(
   }
 
 
-  showLoader();
+  showLoader(
+    "Updating status..."
+  );
 
 
   try{
@@ -5104,32 +5164,29 @@ async function changeUserStatus(
         {
           action:"editUser",
 
-          requester:
-            currentUsername,
+          requester:currentUsername,
 
           originalUsername:
             username,
 
-          username:
-            username,
+          username:username,
 
           password:
-            findUserPassword(
-              username
-            ),
+            user.Password ||
+            user.password ||
+            "",
 
           name:
-            findUserName(
-              username
-            ),
+            user.Name ||
+            user.name ||
+            "",
 
           role:
-            findUserRole(
-              username
-            ),
+            user.Role ||
+            user.role ||
+            "support",
 
-          status:
-            newStatus
+          status:newStatus
         }
       );
 
@@ -5141,36 +5198,34 @@ async function changeUserStatus(
 
       throw new Error(
         result?.message ||
-        "Status update failed"
+        "Status update failed."
       );
 
     }
-
-
-    showToast(
-      `User ${newStatus.toLowerCase()} successfully`,
-      "success"
-    );
 
 
     await loadUsers();
 
 
+    showToast(
+      "User status updated."
+    );
+
+
   }catch(error){
 
     console.error(
-      "changeUserStatus error:",
+      "changeUserStatus:",
       error
     );
 
     showToast(
       error.message ||
-      "Unable to change status",
+      "Failed to update status.",
       "error"
     );
 
-  }
-  finally{
+  }finally{
 
     hideLoader();
 
@@ -5180,622 +5235,7 @@ async function changeUserStatus(
 
 
 /* ============================================================
-   USER HELPERS
-============================================================ */
-
-function findUser(
-  username
-){
-
-  return (
-    window.loadedUsers || []
-  ).find(
-    user =>
-      String(
-        user.Username ||
-        user.username ||
-        ""
-      ).toLowerCase() ===
-      String(username).toLowerCase()
-  );
-
-}
-
-
-function findUserPassword(
-  username
-){
-
-  const user =
-    findUser(username);
-
-  return (
-    user?.Password ||
-    user?.password ||
-    ""
-  );
-
-}
-
-
-function findUserName(
-  username
-){
-
-  const user =
-    findUser(username);
-
-  return (
-    user?.Name ||
-    user?.name ||
-    ""
-  );
-
-}
-
-
-function findUserRole(
-  username
-){
-
-  const user =
-    findUser(username);
-
-  return (
-    user?.Role ||
-    user?.role ||
-    "support"
-  );
-
-}
-
-
-/* ============================================================
-   ITEMS
-============================================================ */
-
-function openItemsModal(){
-
-  openModal(
-    "itemsModal"
-  );
-
-  document.getElementById(
-    "newItemName"
-  ).value =
-    "";
-
-  loadItems(true);
-
-}
-
-
-/* ============================================================
-   LOAD ITEMS
-============================================================ */
-
-async function loadItems(
-  force = false
-){
-
-  if(
-    itemCache &&
-    !force
-  ){
-
-    itemList =
-      itemCache;
-
-    populateItemSelect();
-
-    renderItems();
-
-    return;
-
-  }
-
-
-  try{
-
-    const response =
-      await fetch(
-        ITEM_API_URL +
-        "?action=getItems&_=" +
-        Date.now(),
-        {
-          method:"GET",
-          cache:"no-store"
-        }
-      );
-
-
-    const result =
-      await response.json();
-
-
-    if(
-      !result ||
-      result.success !== true
-    ){
-
-      throw new Error(
-        result?.message ||
-        "Unable to load items"
-      );
-
-    }
-
-
-    itemList =
-      Array.isArray(result.items)
-        ? result.items
-        : Array.isArray(result.data)
-          ? result.data
-          : [];
-
-
-    itemCache =
-      itemList;
-
-
-    populateItemSelect();
-
-    renderItems();
-
-
-  }catch(error){
-
-    console.error(
-      "loadItems error:",
-      error
-    );
-
-    itemList = [];
-
-    populateItemSelect();
-
-    renderItems();
-
-  }
-
-}
-
-
-/* ============================================================
-   RENDER ITEMS
-============================================================ */
-
-function renderItems(){
-
-  const body =
-    document.getElementById(
-      "itemsBody"
-    );
-
-
-  if(!body){
-    return;
-  }
-
-
-  body.innerHTML = "";
-
-
-  if(
-    !itemList ||
-    itemList.length === 0
-  ){
-
-    body.innerHTML = `
-      <tr>
-        <td
-          colspan="4"
-          style="
-            text-align:center;
-            padding:25px;
-            color:var(--muted);
-          "
-        >
-          No items found
-        </td>
-      </tr>
-    `;
-
-    return;
-
-  }
-
-
-  itemList.forEach(
-    (
-      item,
-      index
-    ) => {
-
-      const itemName =
-        getField(
-          item,
-          [
-            "Item",
-            "item",
-            "Name",
-            "name",
-            0
-          ]
-        );
-
-      const date =
-        getField(
-          item,
-          [
-            "Date",
-            "date",
-            1
-          ]
-        );
-
-      const user =
-        getField(
-          item,
-          [
-            "User",
-            "user",
-            "Username",
-            "username",
-            2
-          ]
-        );
-
-
-      body.insertAdjacentHTML(
-        "beforeend",
-        `
-        <tr>
-
-          <td>
-            ${escapeHtml(itemName)}
-          </td>
-
-          <td>
-            ${escapeHtml(formatDateTime(date))}
-          </td>
-
-          <td>
-            ${escapeHtml(user)}
-          </td>
-
-          <td>
-
-            <button
-              class="btn btn-small btn-danger"
-              onclick="deleteItem(${index})"
-            >
-              Delete
-            </button>
-
-          </td>
-
-        </tr>
-        `
-      );
-
-    }
-  );
-
-}
-
-
-/* ============================================================
-   POPULATE ITEM SELECT
-============================================================ */
-
-function populateItemSelect(){
-
-  const select =
-    document.getElementById(
-      "entryItem"
-    );
-
-
-  if(!select){
-    return;
-  }
-
-
-  const current =
-    select.value;
-
-
-  select.innerHTML = `
-    <option value="">
-      Select Item
-    </option>
-  `;
-
-
-  (
-    itemList || []
-  ).forEach(
-    item => {
-
-      const value =
-        getField(
-          item,
-          [
-            "Item",
-            "item",
-            "Name",
-            "name",
-            0
-          ]
-        );
-
-
-      if(!value){
-        return;
-      }
-
-
-      const option =
-        document.createElement(
-          "option"
-        );
-
-      option.value =
-        value;
-
-      option.textContent =
-        value;
-
-
-      select.appendChild(
-        option
-      );
-
-    }
-  );
-
-
-  if(current){
-
-    select.value =
-      current;
-
-  }
-
-}
-
-
-/* ============================================================
-   ADD ITEM
-============================================================ */
-
-async function addNewItem(){
-
-  const input =
-    document.getElementById(
-      "newItemName"
-    );
-
-
-  const item =
-    input.value.trim();
-
-
-  if(!item){
-
-    showToast(
-      "Enter item name",
-      "error"
-    );
-
-    return;
-
-  }
-
-
-  showLoader();
-
-
-  try{
-
-    const result =
-      await postJson(
-        ITEM_API_URL,
-        {
-          action:"addItem",
-
-          item,
-
-          name:
-            item,
-
-          user:
-            currentUsername,
-
-          username:
-            currentUsername
-        }
-      );
-
-
-    if(
-      !result ||
-      result.success !== true
-    ){
-
-      throw new Error(
-        result?.message ||
-        "Unable to add item"
-      );
-
-    }
-
-
-    input.value = "";
-
-    itemCache = null;
-
-    await loadItems(true);
-
-
-    showToast(
-      "Item added successfully",
-      "success"
-    );
-
-
-  }catch(error){
-
-    console.error(
-      "addNewItem error:",
-      error
-    );
-
-    showToast(
-      error.message ||
-      "Unable to add item",
-      "error"
-    );
-
-  }
-  finally{
-
-    hideLoader();
-
-  }
-
-}
-
-
-/* ============================================================
-   DELETE ITEM
-============================================================ */
-
-async function deleteItem(
-  index
-){
-
-  const item =
-    itemList[index];
-
-
-  if(!item){
-    return;
-  }
-
-
-  const itemName =
-    getField(
-      item,
-      [
-        "Item",
-        "item",
-        "Name",
-        "name",
-        0
-      ]
-    );
-
-
-  if(
-    !confirm(
-      `Delete item "${itemName}"?`
-    )
-  ){
-
-    return;
-
-  }
-
-
-  showLoader();
-
-
-  try{
-
-    const itemRow =
-      getRealRowNumber(
-        item
-      );
-
-
-    const result =
-      await postJson(
-        ITEM_API_URL,
-        {
-          action:"deleteItem",
-
-          row:
-            itemRow,
-
-          rowNumber:
-            itemRow,
-
-          item:
-            itemName,
-
-          name:
-            itemName,
-
-          username:
-            currentUsername,
-
-          user:
-            currentUsername
-        }
-      );
-
-
-    if(
-      !result ||
-      result.success !== true
-    ){
-
-      throw new Error(
-        result?.message ||
-        "Unable to delete item"
-      );
-
-    }
-
-
-    itemCache = null;
-
-    await loadItems(true);
-
-
-    showToast(
-      "Item deleted successfully",
-      "success"
-    );
-
-
-  }catch(error){
-
-    console.error(
-      "deleteItem error:",
-      error
-    );
-
-    showToast(
-      error.message ||
-      "Unable to delete item",
-      "error"
-    );
-
-  }
-  finally{
-
-    hideLoader();
-
-  }
-
-}
-
-
-/* ============================================================
-   CHANGE PASSWORD MODAL
+CHANGE PASSWORD
 ============================================================ */
 
 function openPasswordModal(){
@@ -5813,18 +5253,12 @@ function openPasswordModal(){
   ).value = "";
 
 
-  closeProfileMenu();
-
   openModal(
     "passwordModal"
   );
 
 }
 
-
-/* ============================================================
-   CHANGE PASSWORD
-============================================================ */
 
 async function changePassword(){
 
@@ -5846,23 +5280,15 @@ async function changePassword(){
     ).value;
 
 
-  if(!currentPassword){
+  if(
+    !currentPassword ||
+    !newPassword ||
+    !confirmPassword
+  ){
 
     showToast(
-      "Current password is required",
-      "error"
-    );
-
-    return;
-
-  }
-
-
-  if(!newPassword){
-
-    showToast(
-      "New password is required",
-      "error"
+      "Fill all password fields.",
+      "warning"
     );
 
     return;
@@ -5876,8 +5302,8 @@ async function changePassword(){
   ){
 
     showToast(
-      "Passwords do not match",
-      "error"
+      "New passwords do not match.",
+      "warning"
     );
 
     return;
@@ -5885,7 +5311,9 @@ async function changePassword(){
   }
 
 
-  showLoader();
+  showLoader(
+    "Changing password..."
+  );
 
 
   try{
@@ -5896,15 +5324,15 @@ async function changePassword(){
         {
           action:"changePassword",
 
-          username:
-            currentUsername,
+          requester:currentUsername,
 
-          requester:
-            currentUsername,
+          username:currentUsername,
 
-          currentPassword,
+          currentPassword:
+            currentPassword,
 
-          newPassword
+          newPassword:
+            newPassword
         }
       );
 
@@ -5916,7 +5344,7 @@ async function changePassword(){
 
       throw new Error(
         result?.message ||
-        "Password change failed"
+        "Password change failed."
       );
 
     }
@@ -5928,26 +5356,24 @@ async function changePassword(){
 
 
     showToast(
-      "Password changed successfully",
-      "success"
+      "Password changed successfully."
     );
 
 
   }catch(error){
 
     console.error(
-      "changePassword error:",
+      "changePassword:",
       error
     );
 
     showToast(
       error.message ||
-      "Unable to change password",
+      "Failed to change password.",
       "error"
     );
 
-  }
-  finally{
+  }finally{
 
     hideLoader();
 
@@ -5957,7 +5383,7 @@ async function changePassword(){
 
 
 /* ============================================================
-   POST JSON
+POST JSON
 ============================================================ */
 
 async function postJson(
@@ -6019,335 +5445,13 @@ async function postJson(
 
 
 /* ============================================================
-   FIELD HELPER
+MODAL HELPERS
 ============================================================ */
 
-function getField(
-  row,
-  keys
-){
-
-  if(row == null){
-    return "";
-  }
-
-
-  for(
-    const key of keys
-  ){
-
-    if(
-      typeof key === "number"
-    ){
-
-      if(
-        Array.isArray(row) &&
-        row[key] !== undefined &&
-        row[key] !== null
-      ){
-
-        return String(
-          row[key]
-        );
-
-      }
-
-    }
-    else{
-
-      if(
-        typeof row === "object" &&
-        row[key] !== undefined &&
-        row[key] !== null
-      ){
-
-        return String(
-          row[key]
-        );
-
-      }
-
-    }
-
-  }
-
-
-  return "";
-
-}
-
-
-/* ============================================================
-   NORMALIZE DATE
-============================================================ */
-
-function normalizeDate(
-  value
-){
-
-  if(!value){
-    return "";
-  }
-
-
-  const text =
-    String(value)
-      .trim();
-
-
-  if(
-    /^\d{4}-\d{2}-\d{2}$/.test(
-      text
-    )
-  ){
-
-    return text;
-
-  }
-
-
-  const date =
-    new Date(text);
-
-
-  if(
-    Number.isNaN(
-      date.getTime()
-    )
-  ){
-
-    return "";
-
-  }
-
-
-  const year =
-    date.getFullYear();
-
-
-  const month =
-    String(
-      date.getMonth() + 1
-    ).padStart(
-      2,
-      "0"
-    );
-
-
-  const day =
-    String(
-      date.getDate()
-    ).padStart(
-      2,
-      "0"
-    );
-
-
-  return `${year}-${month}-${day}`;
-
-}
-
-
-/* ============================================================
-   TODAY INPUT VALUE
-============================================================ */
-
-function getTodayInputValue(){
-
-  const now =
-    new Date();
-
-
-  const year =
-    now.getFullYear();
-
-
-  const month =
-    String(
-      now.getMonth() + 1
-    ).padStart(
-      2,
-      "0"
-    );
-
-
-  const day =
-    String(
-      now.getDate()
-    ).padStart(
-      2,
-      "0"
-    );
-
-
-  return `${year}-${month}-${day}`;
-
-}
-
-
-/* ============================================================
-   FORMAT DATE TIME
-============================================================ */
-
-function formatDateTime(
-  value
-){
-
-  if(!value){
-    return "";
-  }
-
-
-  const text =
-    String(value)
-      .trim();
-
-
-  if(
-    /^\d{4}-\d{2}-\d{2}$/.test(
-      text
-    )
-  ){
-
-    return text;
-
-  }
-
-
-  const date =
-    new Date(text);
-
-
-  if(
-    Number.isNaN(
-      date.getTime()
-    )
-  ){
-
-    return text;
-
-  }
-
-
-  return date.toLocaleString(
-    undefined,
-    {
-      year:"numeric",
-      month:"2-digit",
-      day:"2-digit",
-      hour:"2-digit",
-      minute:"2-digit"
-    }
-  );
-
-}
-
-
-/* ============================================================
-   ESCAPE HTML
-============================================================ */
-
-function escapeHtml(
-  value
-){
-
-  return String(
-    value ?? ""
-  )
-  .replace(
-    /&/g,
-    "&amp;"
-  )
-  .replace(
-    /</g,
-    "&lt;"
-  )
-  .replace(
-    />/g,
-    "&gt;"
-  )
-  .replace(
-    /"/g,
-    "&quot;"
-  )
-  .replace(
-    /'/g,
-    "&#039;"
-  );
-
-}
-
-
-/* ============================================================
-   ESCAPE JS
-============================================================ */
-
-function escapeJs(
-  value
-){
-
-  return String(
-    value ?? ""
-  )
-  .replace(
-    /\\/g,
-    "\\\\"
-  )
-  .replace(
-    /'/g,
-    "\\'"
-  )
-  .replace(
-    /"/g,
-    '\\"'
-  )
-  .replace(
-    /\n/g,
-    "\\n"
-  )
-  .replace(
-    /\r/g,
-    "\\r"
-  );
-
-}
-
-
-/* ============================================================
-   ACTION BUTTON
-============================================================ */
-
-function createActionButton(
-  text,
-  fn,
-  index,
-  className
-){
-
-  return `
-    <button
-      class="${className} btn-small"
-      onclick="${fn}(${index})"
-    >
-      ${text}
-    </button>
-  `;
-
-}
-
-
-/* ============================================================
-   MODAL HELPERS
-============================================================ */
-
-function openModal(
-  id
-){
+function openModal(id){
 
   const modal =
-    document.getElementById(
-      id
-    );
+    document.getElementById(id);
 
   if(modal){
 
@@ -6360,14 +5464,10 @@ function openModal(
 }
 
 
-function closeModal(
-  id
-){
+function closeModal(id){
 
   const modal =
-    document.getElementById(
-      id
-    );
+    document.getElementById(id);
 
   if(modal){
 
@@ -6380,35 +5480,31 @@ function closeModal(
 }
 
 
-function overlayClose(
-  event,
-  id
-){
+document.addEventListener(
+  "click",
+  event => {
 
-  if(
-    event.target ===
-    event.currentTarget
-  ){
+    if(
+      event.target.classList.contains(
+        "modalOverlay"
+      )
+    ){
 
-    closeModal(id);
+      event.target.classList.remove(
+        "show"
+      );
+
+    }
 
   }
-
-}
+);
 
 
 /* ============================================================
-   PROFILE MENU
+PROFILE MENU
 ============================================================ */
 
-function toggleProfileMenu(
-  event
-){
-
-  if(event){
-    event.stopPropagation();
-  }
-
+function toggleProfileMenu(){
 
   document
     .getElementById(
@@ -6421,43 +5517,29 @@ function toggleProfileMenu(
 }
 
 
-function closeProfileMenu(){
-
-  document
-    .getElementById(
-      "profileMenu"
-    )
-    .classList.remove(
-      "show"
-    );
-
-}
-
-
 document.addEventListener(
   "click",
   event => {
 
-    const menu =
-      document.getElementById(
-        "profileMenu"
-      );
-
-    const profile =
+    const wrap =
       document.querySelector(
-        ".profile-wrap"
+        ".profileWrap"
       );
-
 
     if(
-      menu &&
-      profile &&
-      !profile.contains(event.target)
+      wrap &&
+      !wrap.contains(
+        event.target
+      )
     ){
 
-      menu.classList.remove(
-        "show"
-      );
+      document
+        .getElementById(
+          "profileMenu"
+        )
+        .classList.remove(
+          "show"
+        );
 
     }
 
@@ -6466,7 +5548,7 @@ document.addEventListener(
 
 
 /* ============================================================
-   THEME
+THEME
 ============================================================ */
 
 function loadTheme(){
@@ -6485,6 +5567,9 @@ function loadTheme(){
 
   }
 
+
+  updateThemeButton();
+
 }
 
 
@@ -6495,55 +5580,94 @@ function toggleTheme(){
   );
 
 
-  localStorage.setItem(
-    "dashboardTheme",
+  const isDark =
     document.body.classList.contains(
       "dark"
-    )
+    );
+
+
+  localStorage.setItem(
+    "dashboardTheme",
+    isDark
       ? "dark"
       : "light"
   );
+
+
+  updateThemeButton();
+
+}
+
+
+function updateThemeButton(){
+
+  const button =
+    document.getElementById(
+      "themeBtn"
+    );
+
+
+  if(
+    document.body.classList.contains(
+      "dark"
+    )
+  ){
+
+    button.textContent =
+      "☀️ Light";
+
+  }
+  else{
+
+    button.textContent =
+      "🌙 Dark";
+
+  }
 
 }
 
 
 /* ============================================================
-   LOADER
+LOADER
 ============================================================ */
 
-function showLoader(){
+function showLoader(
+  message="Loading..."
+){
 
-  document
-    .getElementById(
-      "loader"
-    )
-    .classList.add(
-      "show"
-    );
+  document.getElementById(
+    "loaderText"
+  ).textContent =
+    message;
+
+
+  document.getElementById(
+    "loader"
+  ).classList.add(
+    "show"
+  );
 
 }
 
 
 function hideLoader(){
 
-  document
-    .getElementById(
-      "loader"
-    )
-    .classList.remove(
-      "show"
-    );
+  document.getElementById(
+    "loader"
+  ).classList.remove(
+    "show"
+  );
 
 }
 
 
 /* ============================================================
-   TOAST
+TOAST
 ============================================================ */
 
 function showToast(
   message,
-  type = "success"
+  type="success"
 ){
 
   const container =
@@ -6591,7 +5715,229 @@ function showToast(
 
 
 /* ============================================================
-   LOGOUT
+DATE HELPERS
+============================================================ */
+
+function getTodayInputValue(){
+
+  const now =
+    new Date();
+
+
+  const year =
+    now.getFullYear();
+
+
+  const month =
+    String(
+      now.getMonth()+1
+    ).padStart(
+      2,
+      "0"
+    );
+
+
+  const day =
+    String(
+      now.getDate()
+    ).padStart(
+      2,
+      "0"
+    );
+
+
+  return (
+    year +
+    "-" +
+    month +
+    "-" +
+    day
+  );
+
+}
+
+
+function normalizeDate(value){
+
+  if(!value){
+    return "";
+  }
+
+
+  const stringValue =
+    String(value).trim();
+
+
+  const directMatch =
+    stringValue.match(
+      /^(\d{4})[-\/](\d{1,2})[-\/](\d{1,2})/
+    );
+
+
+  if(directMatch){
+
+    return (
+      directMatch[1] +
+      "-" +
+      String(
+        directMatch[2]
+      ).padStart(2,"0") +
+      "-" +
+      String(
+        directMatch[3]
+      ).padStart(2,"0")
+    );
+
+  }
+
+
+  const date =
+    new Date(
+      stringValue
+    );
+
+
+  if(
+    Number.isNaN(
+      date.getTime()
+    )
+  ){
+
+    return "";
+
+  }
+
+
+  return (
+    date.getFullYear() +
+    "-" +
+    String(
+      date.getMonth()+1
+    ).padStart(2,"0") +
+    "-" +
+    String(
+      date.getDate()
+    ).padStart(2,"0")
+  );
+
+}
+
+
+function formatDateTime(value){
+
+  if(!value){
+    return "";
+  }
+
+
+  const stringValue =
+    String(value).trim();
+
+
+  if(
+    /^\d{4}-\d{2}-\d{2}$/
+      .test(stringValue)
+  ){
+
+    return stringValue;
+
+  }
+
+
+  return stringValue;
+
+}
+
+
+/* ============================================================
+HTML ESCAPE
+============================================================ */
+
+function escapeHtml(value){
+
+  if(
+    value === null ||
+    value === undefined
+  ){
+
+    return "";
+
+  }
+
+
+  return String(value)
+    .replace(
+      /&/g,
+      "&amp;"
+    )
+    .replace(
+      /</g,
+      "&lt;"
+    )
+    .replace(
+      />/g,
+      "&gt;"
+    )
+    .replace(
+      /"/g,
+      "&quot;"
+    )
+    .replace(
+      /'/g,
+      "&#039;"
+    );
+
+}
+
+
+function escapeJs(value){
+
+  return String(value || "")
+    .replace(
+      /\\/g,
+      "\\\\"
+    )
+    .replace(
+      /'/g,
+      "\\'"
+    )
+    .replace(
+      /"/g,
+      '\\"'
+    )
+    .replace(
+      /\n/g,
+      "\\n"
+    )
+    .replace(
+      /\r/g,
+      "\\r"
+    );
+
+}
+
+
+function createActionButton(
+  text,
+  functionName,
+  index,
+  className
+){
+
+  return `
+    <button
+      class="smallBtn ${className}"
+      onclick="${functionName}(${index})"
+    >
+      ${escapeHtml(text)}
+    </button>
+  `;
+
+}
+
+
+/* ============================================================
+LOGOUT
 ============================================================ */
 
 function logout(){
@@ -6621,10 +5967,6 @@ function logout(){
   );
 
   localStorage.removeItem(
-    "userInfo"
-  );
-
-  localStorage.removeItem(
     "name"
   );
 
@@ -6650,7 +5992,7 @@ function logout(){
 
 
 /* ============================================================
-   BACK PROTECTION
+BACK NAVIGATION PROTECTION
 ============================================================ */
 
 function setupBackProtection(){
@@ -6669,13 +6011,25 @@ function setupBackProtection(){
       () => {
 
         if(
-          checkLogin()
+          localStorage.getItem(
+            "dashboardAuth"
+          ) === "true" ||
+          sessionStorage.getItem(
+            "dashboardAuth"
+          ) === "true"
         ){
 
           history.pushState(
             null,
             "",
             location.href
+          );
+
+        }
+        else{
+
+          window.location.replace(
+            "index.html"
           );
 
         }
@@ -6686,13 +6040,16 @@ function setupBackProtection(){
 
     window.addEventListener(
       "pageshow",
-      () => {
+      event => {
 
         if(
+          event.persisted &&
           !checkLogin()
         ){
 
-          return;
+          window.location.replace(
+            "index.html"
+          );
 
         }
 
@@ -6709,73 +6066,6 @@ function setupBackProtection(){
   }
 
 }
-
-
-/* ============================================================
-   ESCAPE KEY MODAL CLOSE
-============================================================ */
-
-document.addEventListener(
-  "keydown",
-  event => {
-
-    if(
-      event.key === "Escape"
-    ){
-
-      document
-        .querySelectorAll(
-          ".modal-overlay.show"
-        )
-        .forEach(
-          modal => {
-
-            modal.classList.remove(
-              "show"
-            );
-
-          }
-        );
-
-    }
-
-  }
-);
-
-
-/* ============================================================
-   AUTO REFRESH VISIBILITY
-============================================================ */
-
-document.addEventListener(
-  "visibilitychange",
-  () => {
-
-    if(
-      document.visibilityState ===
-      "visible"
-    ){
-
-      if(
-        localStorage.getItem(
-          "dashboardAuth"
-        ) === "true"
-      ){
-
-        currentUsername =
-          String(
-            localStorage.getItem("username") ||
-            localStorage.getItem("loggedUser") ||
-            localStorage.getItem("currentUser") ||
-            ""
-          ).trim();
-
-      }
-
-    }
-
-  }
-);
 
 </script>
 
