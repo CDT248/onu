@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,11 +6,13 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 
 <title>Login</title>
+
 <link
   rel="icon"
   type="image/png"
   href="https://cdn-icons-png.flaticon.com/128/16470/16470836.png"
 >
+
 <style>
 *{
   margin:0;
@@ -75,6 +78,7 @@ body{
   color:#286052;
 }
 
+/* Company Logo */
 .illustration{
   width:270px;
   height:270px;
@@ -83,7 +87,15 @@ body{
   display:flex;
   justify-content:center;
   align-items:center;
-  font-size:110px;
+  overflow:hidden;
+}
+
+.illustration img{
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  padding:20px;
+  display:block;
 }
 
 .welcome{
@@ -156,6 +168,12 @@ button:hover{
   transform:translateY(-2px);
 }
 
+button:disabled{
+  opacity:.7;
+  cursor:not-allowed;
+  transform:none;
+}
+
 .register{
   text-align:center;
   margin-top:22px;
@@ -206,7 +224,10 @@ button:hover{
   .illustration{
     width:120px;
     height:120px;
-    font-size:55px;
+  }
+
+  .illustration img{
+    padding:10px;
   }
 
   .welcome{
@@ -242,8 +263,15 @@ button:hover{
 
     <div class="left-content">
 
+      <!-- COMPANY LOGO -->
       <div class="illustration">
-        🎄
+
+        <img
+          id="companyLogo"
+          src="https://your-logo-image-url.png"
+          alt="Company Logo"
+        >
+
       </div>
 
       <div class="welcome">
@@ -254,26 +282,27 @@ button:hover{
 
   </div>
 
-
   <!-- RIGHT SIDE -->
   <div class="right">
 
     <h1>Login</h1>
 
-    <label>Username</label>
+    <label for="username">Username</label>
 
     <input
       type="text"
       id="username"
       placeholder="Enter your username"
+      autocomplete="username"
     >
 
-    <label>Password</label>
+    <label for="password">Password</label>
 
     <input
       type="password"
       id="password"
       placeholder="Enter your password"
+      autocomplete="current-password"
     >
 
     <span class="forgot" onclick="forgotPassword()">
@@ -297,8 +326,19 @@ button:hover{
 
 </div>
 
-
 <script>
+
+/* COMPANY LOGO URL */
+/* এখানে আপনার কোম্পানির Logo URL দিন */
+
+const COMPANY_LOGO_URL =
+"https://your-logo-image-url.png";
+
+/* Set Company Logo */
+
+document.getElementById("companyLogo").src =
+COMPANY_LOGO_URL;
+
 
 /* YOUR APPS SCRIPT URL */
 
@@ -347,7 +387,7 @@ async function login(){
 
 
     const response =
-      await fetch(url, {
+      await fetch(url,{
         method:"GET",
         cache:"no-store"
       });
@@ -359,7 +399,7 @@ async function login(){
 
     if(result.success){
 
-      /* Save login information */
+      /* Save Login Information */
 
       localStorage.setItem(
         "dashboardAuth",
@@ -402,7 +442,7 @@ async function login(){
       );
 
 
-      /* Role based page */
+      /* Role Based Page */
 
       const role =
         String(result.user.role || "")
@@ -440,10 +480,7 @@ async function login(){
 
       else{
 
-        /*
-          Unknown role:
-          remove login session and stop access
-        */
+        /* Unknown Role */
 
         localStorage.removeItem("dashboardAuth");
         localStorage.removeItem("username");
