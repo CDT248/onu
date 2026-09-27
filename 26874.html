@@ -69,36 +69,13 @@ border-radius:8px;font-size:13px
 background:var(--card);border:1px solid var(--border);border-radius:13px;padding:13px;
 display:flex;align-items:center;gap:10px;margin-bottom:16px;box-shadow:0 3px 12px rgba(0,0,0,.03)
 }
-
-/* Name search box - only changed part */
-.name-select-box{
-width:220px;
-min-width:180px;
-}
-
-.name-select-box input{
-width:100%;
-height:40px;
-padding:0 12px;
-border-radius:8px;
-border:1px solid var(--border);
-background:var(--bg);
-color:var(--text);
-outline:none
-}
-
-.name-select-box input:focus{
-border-color:var(--primary)
-}
-
-.date-box input,.select-box select{
+.name-select-box{flex:1;min-width:180px}
+.name-select-box select,.date-box input,.select-box select{
 width:100%;height:40px;padding:0 12px;border-radius:8px;border:1px solid var(--border);
 background:var(--bg);color:var(--text);outline:none
 }
-
-.date-box input:focus,.select-box select:focus{border-color:var(--primary)}
+.name-select-box select:focus,.date-box input:focus,.select-box select:focus{border-color:var(--primary)}
 .date-box{width:155px}.select-box{width:125px}
-
 .clear-btn{
 height:40px;padding:0 14px;border-radius:8px;background:var(--bg);
 border:1px solid var(--border);color:var(--text);font-weight:600
@@ -239,15 +216,11 @@ margin-right:4px;margin-bottom:3px
 .main{padding:12px}.filter-bar{flex-wrap:wrap}.name-select-box{flex-basis:100%}
 .date-box,.select-box{flex:1}
 }
-
 @media(max-width:600px){
 .logo-text h1{font-size:15px}.header-actions{gap:4px}.header-btn{width:38px;padding:0}
 .filter-bar{padding:9px}.item-row{grid-template-columns:1fr 1fr}
 }
-
-@media(max-width:700px){
-.user-row{grid-template-columns:1fr 1fr}.user-head{display:none}
-}
+@media(max-width:700px){.user-row{grid-template-columns:1fr 1fr}.user-head{display:none}}
 </style>
 </head>
 
@@ -272,7 +245,6 @@ margin-right:4px;margin-bottom:3px
 <button class="profile-btn" onclick="toggleProfileMenu(event)">
 <img id="profileImage" src="https://cdn-icons-png.flaticon.com/128/17163/17163834.png" alt="Profile">
 </button>
-
 <div class="profile-menu" id="profileMenu">
 <button onclick="openPasswordModal()">🔑 Change Password</button>
 <button onclick="logout()">🚪 Logout</button>
@@ -292,14 +264,10 @@ margin-right:4px;margin-bottom:3px
 </div>
 
 <div class="filter-bar">
-
 <div class="name-select-box">
-<input
-type="search"
-id="nameFilter"
-placeholder="Search Name..."
-autocomplete="off"
-oninput="applyFilters()">
+<select id="nameFilter" onchange="applyFilters()">
+<option value="">All Names</option>
+</select>
 </div>
 
 <div class="date-box">
@@ -319,7 +287,6 @@ oninput="applyFilters()">
 </div>
 
 <button class="clear-btn" onclick="clearFilters()">Clear</button>
-
 </div>
 
 <div class="bulk-bar" id="bulkBar">
@@ -340,7 +307,6 @@ oninput="applyFilters()">
 </div>
 
 <div class="table-card">
-
 <div class="table-wrap">
 <table>
 <thead id="tableHead"></thead>
@@ -356,21 +322,18 @@ oninput="applyFilters()">
 <span id="loaderText">Loading...</span>
 </div>
 </div>
-
 </div>
 
 </main>
 
 <div class="modal" id="entryModal">
 <div class="modal-box">
-
 <div class="modal-header">
 <h3 id="entryModalTitle">New Entry</h3>
 <button class="close-btn" onclick="closeModal('entryModal')">×</button>
 </div>
 
 <div class="modal-body">
-
 <div class="form-group">
 <label>Name</label>
 <input type="text" id="entryName" placeholder="Enter Name">
@@ -393,46 +356,33 @@ oninput="applyFilters()">
 
 <div class="form-group">
 <label>Item</label>
-<select id="entryItem">
-<option value="">Select Item</option>
-</select>
+<select id="entryItem"><option value="">Select Item</option></select>
 </div>
 
 <div class="form-actions">
 <button class="cancel-btn" onclick="closeModal('entryModal')">Cancel</button>
 <button class="save-btn" onclick="saveEntry()">Save Entry</button>
 </div>
-
 </div>
 </div>
 </div>
 
 <div class="modal" id="itemsModal">
 <div class="modal-box large">
-
 <div class="modal-header">
 <h3>Item Management</h3>
 <button class="close-btn" onclick="closeModal('itemsModal')">×</button>
 </div>
-
 <div class="modal-body">
-
 <div class="item-add-area">
 <input type="text" id="newItem" placeholder="Enter new item">
 <button class="item-add-btn" onclick="addNewItem()">+ Add</button>
 </div>
-
 <div class="items-list">
-
 <div class="item-row item-head">
-<div>Item</div>
-<div>Date</div>
-<div>User</div>
-<div>Action</div>
+<div>Item</div><div>Date</div><div>User</div><div>Action</div>
 </div>
-
 <div id="itemsBody"></div>
-
 </div>
 </div>
 </div>
@@ -440,30 +390,19 @@ oninput="applyFilters()">
 
 <div class="modal" id="usersModal">
 <div class="modal-box large">
-
 <div class="modal-header">
 <h3>User Management</h3>
 <button class="close-btn" onclick="closeModal('usersModal')">×</button>
 </div>
-
 <div class="modal-body">
-
 <div class="users-add-area">
 <button class="item-add-btn" onclick="openAddUserModal()">+ Add User</button>
 </div>
-
 <div class="user-list">
-
 <div class="user-row user-head">
-<div>Username</div>
-<div>Name</div>
-<div>Role</div>
-<div>Status</div>
-<div>Action</div>
+<div>Username</div><div>Name</div><div>Role</div><div>Status</div><div>Action</div>
 </div>
-
 <div id="usersBody"></div>
-
 </div>
 </div>
 </div>
@@ -471,12 +410,10 @@ oninput="applyFilters()">
 
 <div class="modal" id="userFormModal">
 <div class="modal-box">
-
 <div class="modal-header">
 <h3 id="userFormTitle">Add User</h3>
 <button class="close-btn" onclick="closeModal('userFormModal')">×</button>
 </div>
-
 <div class="modal-body">
 
 <div class="form-group">
@@ -523,14 +460,13 @@ oninput="applyFilters()">
 </div>
 </div>
 
+
 <div class="modal" id="passwordModal">
 <div class="modal-box">
-
 <div class="modal-header">
 <h3>Change Password</h3>
 <button class="close-btn" onclick="closeModal('passwordModal')">×</button>
 </div>
-
 <div class="modal-body">
 
 <div class="form-group">
@@ -559,7 +495,9 @@ oninput="applyFilters()">
 
 <div class="toast" id="toast"></div>
 
+
 <script>
+
 
 const USER_API_URL="https://script.google.com/macros/s/AKfycbw00GHHheuvtdQtgPURjs4PtsM48-4yaFx-_ms0ZBV5FHhnmcdbJ5DHr3Aix8JPF0kQzA/exec";
 
@@ -570,6 +508,7 @@ const SELL_API_URL="https://script.google.com/macros/s/AKfycbyiKn1MH1ZQvebSIo83b
 const PAID_API_URL="https://script.google.com/macros/s/AKfycby_kDEHln_Dj_0YfB421POWa2XAuN6g2PDypQtyS2arrxgPVtyZZOwAp_TKLrUnRudKng/exec";
 
 const ITEM_API_URL="https://script.google.com/macros/s/AKfycby2e7dzGE5vkS0Q-Eyl9MKLAbkkkD8f37eIVj7VuV8bPytWGOH7cwJ3w25efP7MLGshOw/exec";
+
 
 let allData=[];
 let filteredData=[];
@@ -593,6 +532,7 @@ localStorage.username||
 localStorage.loggedUser||
 "";
 
+
 document.addEventListener("DOMContentLoaded",()=>{
 loadTheme();
 checkLogin();
@@ -602,8 +542,8 @@ loadItems();
 setupBackProtection();
 });
 
-function checkLogin(){
 
+function checkLogin(){
 const auth=
 localStorage.getItem("dashboardAuth")==="true"||
 sessionStorage.getItem("dashboardAuth")==="true";
@@ -612,26 +552,20 @@ if(!auth){
 window.location.href="index.html";
 return false;
 }
-
 return true;
 }
 
 async function loadUser(){
-
 if(!currentUsername)return;
 
 try{
-
 const response=await fetch(
 USER_API_URL+"?action=getUser&username="+encodeURIComponent(currentUsername)
 );
-
 const result=await response.json();
 
 if(result&&result.success&&result.user){
-
 const user=result.user;
-
 const name=user.Name||user.name||currentUsername;
 const role=user.Role||user.role||"";
 const status=user.Status||user.status||"";
@@ -641,32 +575,23 @@ localStorage.setItem("role",role);
 localStorage.setItem("status",status);
 
 const img=document.getElementById("profileImage");
-
 if(img&&(user.Picture||user.picture)){
 img.src=user.Picture||user.picture;
 }
 
-if(["block","blocked"].includes(
-String(status).trim().toLowerCase()
-)){
+if(["block","blocked"].includes(String(status).trim().toLowerCase())){
 logout();
 }
-
 }
-
 }catch(e){
-
 console.error("User loading error:",e);
-
+}
 }
 
-}
 
 function changeDataType(){
-
 currentDataType=document.getElementById("dataType").value;
 currentPage=1;
-
 dataCache=null;
 sellCache=null;
 paidCache=null;
@@ -678,44 +603,53 @@ document.getElementById("toDate").value="";
 clearSelectedSellRows();
 updateDataTitle();
 loadData();
-
 }
 
 function updateDataTitle(){
-
 const title=document.getElementById("dataTitle");
 const subtitle=document.getElementById("dataSubtitle");
 
 if(currentDataType==="data"){
-
 title.textContent="Data";
 subtitle.textContent="Manage your support entries";
-
 }else if(currentDataType==="sell"){
-
 title.textContent="Sell Data";
 subtitle.textContent="Manage sold entries";
-
 }else{
-
 title.textContent="Paid Data";
 subtitle.textContent="Paid entry history";
-
 }
 
 updateBulkBar();
-
 }
 
-/* Name search input no longer needs dynamic options */
+
 function updateNameFilter(){
+const select=document.getElementById("nameFilter");
+if(!select)return;
 
-const input=document.getElementById("nameFilter");
+const old=select.value;
+const names=[];
 
-if(!input)return;
+allData.forEach(row=>{
+const name=String(row.Name??row.name??row[0]??"").trim();
+if(name&&!names.some(n=>n.toLowerCase()===name.toLowerCase()))
+names.push(name);
+});
 
-input.value=input.value;
+names.sort((a,b)=>a.localeCompare(b,undefined,{sensitivity:"base"}));
 
+select.innerHTML='<option value="">All Names</option>';
+
+names.forEach(name=>{
+const option=document.createElement("option");
+option.value=name;
+option.textContent=name;
+select.appendChild(option);
+});
+
+if(old&&names.some(n=>n.toLowerCase()===old.toLowerCase()))
+select.value=old;
 }
 
 async function loadData(force=false){
@@ -723,34 +657,15 @@ async function loadData(force=false){
 if(!checkLogin())return;
 
 if(!force){
-
 if(currentDataType==="data"&&dataCache){
-
-allData=dataCache;
-updateNameFilter();
-applyFilters();
-return;
-
+allData=dataCache;updateNameFilter();applyFilters();return;
 }
-
 if(currentDataType==="sell"&&sellCache){
-
-allData=sellCache;
-updateNameFilter();
-applyFilters();
-return;
-
+allData=sellCache;updateNameFilter();applyFilters();return;
 }
-
 if(currentDataType==="paid"&&paidCache){
-
-allData=paidCache;
-updateNameFilter();
-applyFilters();
-return;
-
+allData=paidCache;updateNameFilter();applyFilters();return;
 }
-
 }
 
 showLoader("Loading data...");
@@ -761,23 +676,16 @@ let api=DATA_API_URL;
 let action="getData";
 
 if(currentDataType==="sell"){
-
 api=SELL_API_URL;
 action="getSellData";
-
 }
 
 if(currentDataType==="paid"){
-
 api=PAID_API_URL;
 action="getPaidData";
-
 }
 
-const response=await fetch(
-api+"?action="+encodeURIComponent(action)
-);
-
+const response=await fetch(api+"?action="+encodeURIComponent(action));
 const result=await response.json();
 
 if(!result||result.success!==true)
@@ -785,12 +693,9 @@ throw new Error(result?.message||"Failed to load data");
 
 allData=Array.isArray(result.data)?result.data:[];
 
-if(currentDataType==="data")
-dataCache=allData;
-else if(currentDataType==="sell")
-sellCache=allData;
-else
-paidCache=allData;
+if(currentDataType==="data")dataCache=allData;
+else if(currentDataType==="sell")sellCache=allData;
+else paidCache=allData;
 
 updateNameFilter();
 applyFilters();
@@ -798,23 +703,16 @@ applyFilters();
 }catch(error){
 
 console.error(error);
-
-showToast(
-error.message||"Failed to load data",
-"error"
-);
-
+showToast(error.message||"Failed to load data","error");
 allData=[];
 updateNameFilter();
 applyFilters();
 
 }finally{
-
 hideLoader();
-
+}
 }
 
-}
 
 function renderData(data){
 
@@ -827,121 +725,73 @@ body.innerHTML="";
 let headers=[];
 
 if(currentDataType==="data"){
-
-headers=[
-"Name","IP","Work","Date","Item"
-];
-
-}else if(currentDataType==="sell"){
-
-headers=[
-"Select","Name","IP","Work","Date",
-"Item","Sell Date","User","Action"
-];
-
-}else{
-
-headers=[
-"Name","IP","Work","Date","Item",
-"Sell Date","Sell User","Paid Time","Paid User"
-];
-
+headers=["Name","IP","Work","Date","Item"];
+}
+else if(currentDataType==="sell"){
+headers=["Select","Name","IP","Work","Date","Item","Sell Date","User","Action"];
+}
+else{
+headers=["Name","IP","Work","Date","Item","Sell Date","Sell User","Paid Time","Paid User"];
 }
 
 const tr=document.createElement("tr");
 
 headers.forEach((h,i)=>{
-
 const th=document.createElement("th");
-
 th.textContent=h;
-
-if(currentDataType==="sell"&&i===0)
-th.className="select-col";
-
+if(currentDataType==="sell"&&i===0)th.className="select-col";
 tr.appendChild(th);
-
 });
 
 head.appendChild(tr);
 
-const totalPages=Math.max(
-1,
-Math.ceil(data.length/pageSize)
-);
+const totalPages=Math.max(1,Math.ceil(data.length/pageSize));
 
-if(currentPage>totalPages)
-currentPage=totalPages;
+if(currentPage>totalPages)currentPage=totalPages;
 
 const start=(currentPage-1)*pageSize;
-
-const pageData=data.slice(
-start,
-start+pageSize
-);
+const pageData=data.slice(start,start+pageSize);
 
 if(!pageData.length){
 
 const tr=document.createElement("tr");
 const td=document.createElement("td");
-
 td.colSpan=headers.length;
 td.className="empty-row";
 td.textContent="No data found";
-
 tr.appendChild(td);
 body.appendChild(tr);
 
 renderPagination(data.length);
 updateBulkBar();
-
 return;
-
 }
 
 pageData.forEach((row,index)=>{
 
 const tr=document.createElement("tr");
 
-const name=
-row.Name??row.name??row[0]??"";
-
-const ip=
-row.Ip??row.IP??row.ip??row[1]??"";
-
-const work=
-row.Work??row.work??row[2]??"";
-
-const date=
-row.Date??row.date??row[3]??"";
-
-const item=
-row.Item??row.item??row[4]??"";
+const name=row.Name??row.name??row[0]??"";
+const ip=row.Ip??row.IP??row.ip??row[1]??"";
+const work=row.Work??row.work??row[2]??"";
+const date=row.Date??row.date??row[3]??"";
+const item=row.Item??row.item??row[4]??"";
 
 if(currentDataType==="sell"){
 
 const realRow=getRealRowNumber(row);
 
 const td=document.createElement("td");
-
 td.className="select-col";
 
 const checkbox=document.createElement("input");
-
 checkbox.type="checkbox";
 checkbox.className="row-check";
 checkbox.dataset.row=realRow||"";
-checkbox.checked=
-realRow?
-selectedSellRows.has(Number(realRow)):
-false;
-
+checkbox.checked=realRow?selectedSellRows.has(Number(realRow)):false;
 checkbox.disabled=!realRow;
 
-checkbox.addEventListener(
-"change",
-function(){
-
+checkbox.addEventListener("change",function(){
 if(!realRow)return;
 
 if(this.checked)
@@ -950,12 +800,10 @@ else
 selectedSellRows.delete(Number(realRow));
 
 updateBulkBar();
-
 });
 
 td.appendChild(checkbox);
 tr.appendChild(td);
-
 }
 
 addCell(tr,name);
@@ -967,88 +815,46 @@ addCell(tr,item);
 if(currentDataType==="sell"){
 
 const sellDate=
-row.SellDate??
-row.sellDate??
-row["Sell Date"]??
-row.sellTime??
-row["Sell time"]??
-row[5]??"";
+row.SellDate??row.sellDate??row["Sell Date"]??
+row.sellTime??row["Sell time"]??row[5]??"";
 
 const sellUser=
-row.User??
-row.user??
-row.Username??
-row.username??
-row[6]??"";
+row.User??row.user??row.Username??row.username??row[6]??"";
 
-addCell(
-tr,
-formatDateTime(sellDate)
-);
-
+addCell(tr,formatDateTime(sellDate));
 addCell(tr,sellUser);
 
 const actionTd=document.createElement("td");
 const action=document.createElement("div");
-
 action.className="action-wrap";
 
-const paidBtn=
-createActionButton(
-"Paid",
-"action-paid"
-);
-
-paidBtn.onclick=
-()=>paidSellEntry(start+index);
+const paidBtn=createActionButton("Paid","action-paid");
+paidBtn.onclick=()=>paidSellEntry(start+index);
 
 action.appendChild(paidBtn);
 actionTd.appendChild(action);
 tr.appendChild(actionTd);
 
-}else if(currentDataType==="paid"){
+}
+else if(currentDataType==="paid"){
 
 const sellDate=
-row.SellDate??
-row.sellDate??
-row["Sell Date"]??
-row.sellTime??
-row["Sell time"]??
-row[5]??"";
+row.SellDate??row.sellDate??row["Sell Date"]??
+row.sellTime??row["Sell time"]??row[5]??"";
 
 const sellUser=
-row.User??
-row.user??
-row.SellUser??
-row.sellUser??
-row[6]??"";
+row.User??row.user??row.SellUser??row.sellUser??row[6]??"";
 
 const paidTime=
-row.PaidTime??
-row.paidTime??
-row["Paid Time"]??
-row[7]??"";
+row.PaidTime??row.paidTime??row["Paid Time"]??row[7]??"";
 
 const paidUser=
-row.PaidUser??
-row.paidUser??
-row["Paid User"]??
-row[8]??"";
+row.PaidUser??row.paidUser??row["Paid User"]??row[8]??"";
 
-addCell(
-tr,
-formatDateTime(sellDate)
-);
-
+addCell(tr,formatDateTime(sellDate));
 addCell(tr,sellUser);
-
-addCell(
-tr,
-formatDateTime(paidTime)
-);
-
+addCell(tr,formatDateTime(paidTime));
 addCell(tr,paidUser);
-
 }
 
 body.appendChild(tr);
@@ -1057,241 +863,133 @@ body.appendChild(tr);
 
 renderPagination(data.length);
 updateBulkBar();
-
 }
 
+
+
 function addCell(tr,value){
-
 const td=document.createElement("td");
-
-td.textContent=
-value==null?"":String(value);
-
+td.textContent=value==null?"":String(value);
 tr.appendChild(td);
-
 }
 
 function createActionButton(text,className){
-
 const button=document.createElement("button");
-
-button.className=
-"action-btn "+className;
-
+button.className="action-btn "+className;
 button.textContent=text;
-
 return button;
-
 }
+
+
 
 function renderPagination(total){
 
-const container=
-document.getElementById("pagination");
-
+const container=document.getElementById("pagination");
 container.innerHTML="";
 
-const totalPages=
-Math.ceil(total/pageSize);
-
+const totalPages=Math.ceil(total/pageSize);
 if(totalPages<=1)return;
 
-const previous=
-document.createElement("button");
-
+const previous=document.createElement("button");
 previous.className="page-btn";
 previous.textContent="‹";
 previous.disabled=currentPage<=1;
-
-previous.onclick=
-()=>goToPage(currentPage-1);
-
+previous.onclick=()=>goToPage(currentPage-1);
 container.appendChild(previous);
 
 for(let i=1;i<=totalPages;i++){
-
-const btn=
-document.createElement("button");
-
-btn.className=
-"page-btn"+
-(i===currentPage?" active":"");
-
+const btn=document.createElement("button");
+btn.className="page-btn"+(i===currentPage?" active":"");
 btn.textContent=i;
-
-btn.onclick=
-()=>goToPage(i);
-
+btn.onclick=()=>goToPage(i);
 container.appendChild(btn);
-
 }
 
-const next=
-document.createElement("button");
-
+const next=document.createElement("button");
 next.className="page-btn";
 next.textContent="›";
-next.disabled=
-currentPage>=totalPages;
-
-next.onclick=
-()=>goToPage(currentPage+1);
-
+next.disabled=currentPage>=totalPages;
+next.onclick=()=>goToPage(currentPage+1);
 container.appendChild(next);
-
 }
 
 function goToPage(page){
-
-const totalPages=
-Math.max(
-1,
-Math.ceil(filteredData.length/pageSize)
-);
-
+const totalPages=Math.max(1,Math.ceil(filteredData.length/pageSize));
 if(page<1||page>totalPages)return;
-
 currentPage=page;
-
 renderData(filteredData);
-
 }
+
 
 function applyFilters(){
 
-const nameFilter=
-document.getElementById("nameFilter")
-.value
-.trim()
-.toLowerCase();
+const nameFilter=document.getElementById("nameFilter").value.trim().toLowerCase();
+const fromDate=document.getElementById("fromDate").value;
+const toDate=document.getElementById("toDate").value;
 
-const fromDate=
-document.getElementById("fromDate").value;
+filteredData=allData.filter(row=>{
 
-const toDate=
-document.getElementById("toDate").value;
+const rowName=String(row.Name??row.name??row[0]??"").trim().toLowerCase();
 
-filteredData=
-allData.filter(row=>{
+if(nameFilter&&rowName!==nameFilter)return false;
 
-const rowName=
-String(
-row.Name??
-row.name??
-row[0]??""
-)
-.trim()
-.toLowerCase();
+const rowDate=normalizeDate(row.Date??row.date??row[3]??"");
 
-/*
-Search works with partial name.
-Example:
-"rah" will match "Rahim", "Rahman", etc.
-*/
-if(
-nameFilter &&
-!rowName.includes(nameFilter)
-)return false;
-
-const rowDate=
-normalizeDate(
-row.Date??
-row.date??
-row[3]??""
-);
-
-if(
-fromDate&&
-rowDate&&
-rowDate<fromDate
-)return false;
-
-if(
-toDate&&
-rowDate&&
-rowDate>toDate
-)return false;
+if(fromDate&&rowDate&&rowDate<fromDate)return false;
+if(toDate&&rowDate&&rowDate>toDate)return false;
 
 return true;
-
 });
 
 currentPage=1;
-
 renderData(filteredData);
-
 }
 
 function clearFilters(){
-
 document.getElementById("nameFilter").value="";
 document.getElementById("fromDate").value="";
 document.getElementById("toDate").value="";
-
 applyFilters();
-
 }
+
 
 function clearSelectedSellRows(){
 
 selectedSellRows.clear();
 
-const selectAll=
-document.getElementById("selectAllSell");
-
-if(selectAll)
-selectAll.checked=false;
+const selectAll=document.getElementById("selectAllSell");
+if(selectAll)selectAll.checked=false;
 
 updateBulkBar();
-
 }
+
 
 function updateBulkBar(){
 
-const bar=
-document.getElementById("bulkBar");
-
-const count=
-document.getElementById("selectedCount");
-
-const btn=
-document.getElementById("bulkPaidBtn");
-
-const selectAll=
-document.getElementById("selectAllSell");
+const bar=document.getElementById("bulkBar");
+const count=document.getElementById("selectedCount");
+const btn=document.getElementById("bulkPaidBtn");
+const selectAll=document.getElementById("selectAllSell");
 
 if(currentDataType!=="sell"){
-
 bar.classList.remove("show");
 return;
-
 }
 
 bar.classList.add("show");
 
-const countValue=
-selectedSellRows.size;
+const countValue=selectedSellRows.size;
 
-count.textContent=
-countValue+" selected";
+count.textContent=countValue+" selected";
+btn.disabled=countValue===0;
 
-btn.disabled=
-countValue===0;
-
-const visibleRows=
-filteredData
-.slice(
-(currentPage-1)*pageSize,
-(currentPage-1)*pageSize+pageSize
-)
+const visibleRows=filteredData
+.slice((currentPage-1)*pageSize,(currentPage-1)*pageSize+pageSize)
 .map(row=>getRealRowNumber(row))
 .filter(Boolean)
 .map(Number);
 
-const visibleSelected=
-visibleRows.filter(
-r=>selectedSellRows.has(r)
-).length;
+const visibleSelected=visibleRows.filter(r=>selectedSellRows.has(r)).length;
 
 selectAll.checked=
 visibleRows.length>0&&
@@ -1300,28 +998,20 @@ visibleSelected===visibleRows.length;
 selectAll.indeterminate=
 visibleSelected>0&&
 visibleSelected<visibleRows.length;
-
 }
+
 
 function toggleSelectAll(checked){
 
-if(currentDataType!=="sell")
-return;
+if(currentDataType!=="sell")return;
 
-const start=
-(currentPage-1)*pageSize;
+const start=(currentPage-1)*pageSize;
 
-const pageData=
-filteredData.slice(
-start,
-start+pageSize
-);
+const pageData=filteredData.slice(start,start+pageSize);
 
 pageData.forEach(row=>{
 
-const rowNumber=
-getRealRowNumber(row);
-
+const rowNumber=getRealRowNumber(row);
 if(!rowNumber)return;
 
 if(checked)
@@ -1332,43 +1022,29 @@ selectedSellRows.delete(Number(rowNumber));
 });
 
 renderData(filteredData);
-
 }
+
 
 async function bulkPaidSell(){
 
-if(currentDataType!=="sell")
-return;
+if(currentDataType!=="sell")return;
 
-const rowNumbers=
-[...selectedSellRows]
+const rowNumbers=[...selectedSellRows]
 .map(Number)
 .filter(n=>n>=2);
 
 if(!rowNumbers.length){
-
-showToast(
-"Please select at least one sell entry",
-"error"
-);
-
+showToast("Please select at least one sell entry","error");
 return;
-
 }
 
 if(!confirm(
-"Mark "+
-rowNumbers.length+
-" selected sell entr"+
-(rowNumbers.length===1?"y":"ies")+
-" as Paid?"
-))return;
+"Mark "+rowNumbers.length+" selected sell entr"+(rowNumbers.length===1?"y":"ies")+" as Paid?"
+)){
+return;
+}
 
-showLoader(
-"Processing "+
-rowNumbers.length+
-" payments..."
-);
+showLoader("Processing "+rowNumbers.length+" payments...");
 
 let successCount=0;
 let failedCount=0;
@@ -1376,81 +1052,36 @@ let failedMessages=[];
 
 try{
 
-const rowsToProcess=
-[...rowNumbers].sort(
-(a,b)=>b-a
-);
+const rowsToProcess=[...rowNumbers].sort((a,b)=>b-a);
 
-for(
-const rowNumber of rowsToProcess
-){
+for(const rowNumber of rowsToProcess){
 
-const row=
-allData.find(
-r=>
-Number(
-getRealRowNumber(r)
-)===Number(rowNumber)
+const row=allData.find(r=>
+Number(getRealRowNumber(r))===Number(rowNumber)
 );
 
 if(!row){
-
 failedCount++;
-failedMessages.push(
-"Row "+
-rowNumber+
-" not found"
-);
-
+failedMessages.push("Row "+rowNumber+" not found");
 continue;
-
 }
 
-const name=
-row.Name??
-row.name??
-row[0]??"";
-
-const ip=
-row.Ip??
-row.IP??
-row.ip??
-row[1]??"";
-
-const work=
-row.Work??
-row.work??
-row[2]??"";
-
-const date=
-row.Date??
-row.date??
-row[3]??"";
-
-const item=
-row.Item??
-row.item??
-row[4]??"";
+const name=row.Name??row.name??row[0]??"";
+const ip=row.Ip??row.IP??row.ip??row[1]??"";
+const work=row.Work??row.work??row[2]??"";
+const date=row.Date??row.date??row[3]??"";
+const item=row.Item??row.item??row[4]??"";
 
 const sellTime=
-row.SellDate??
-row.sellDate??
-row["Sell Date"]??
-row.sellTime??
-row["Sell time"]??
-row[5]??"";
+row.SellDate??row.sellDate??row["Sell Date"]??
+row.sellTime??row["Sell time"]??row[5]??"";
 
 const sellUser=
-row.User??
-row.user??
-row.Username??
-row.username??
-row[6]??"";
+row.User??row.user??row.Username??row.username??row[6]??"";
 
 try{
 
-const result=
-await postJson(
+const result=await postJson(
 PAID_API_URL,
 {
 action:"paidData",
@@ -1476,16 +1107,8 @@ PaidUser:currentUsername
 }
 );
 
-if(
-!result||
-result.success!==true
-){
-
-throw new Error(
-result?.message||
-"Payment failed"
-);
-
+if(!result||result.success!==true){
+throw new Error(result?.message||"Payment failed");
 }
 
 successCount++;
@@ -1493,20 +1116,13 @@ successCount++;
 }catch(error){
 
 failedCount++;
-
-failedMessages.push(
-name+
-" - "+
-(error.message||
-"Payment failed")
-);
-
+failedMessages.push(name+" - "+(error.message||"Payment failed"));
 }
 
 }
 
+/* Reload from server after all operations */
 selectedSellRows.clear();
-
 sellCache=null;
 paidCache=null;
 
@@ -1515,252 +1131,120 @@ await loadData(true);
 if(failedCount===0){
 
 showToast(
-successCount+
-" sell entr"+
-(successCount===1?"y":"ies")+
-" paid successfully",
+successCount+" sell entr"+(successCount===1?"y":"ies")+" paid successfully",
 "success"
 );
 
 }else{
 
 showToast(
-successCount+
-" paid, "+
-failedCount+
-" failed",
+successCount+" paid, "+failedCount+" failed",
 "error"
 );
 
-console.error(
-"Bulk Paid failures:",
-failedMessages
-);
-
+console.error("Bulk Paid failures:",failedMessages);
 }
 
 }catch(error){
 
-console.error(
-"Bulk Paid error:",
-error
-);
-
-showToast(
-error.message||
-"Bulk payment failed",
-"error"
-);
+console.error("Bulk Paid error:",error);
+showToast(error.message||"Bulk payment failed","error");
 
 }finally{
 
 hideLoader();
 
 }
-
 }
+
 
 function openEntryModal(){
 
 editingDataRow=null;
 editingSellRow=null;
 
-document.getElementById(
-"entryModalTitle"
-).textContent="New Entry";
+document.getElementById("entryModalTitle").textContent="New Entry";
 
-document.getElementById(
-"entryName"
-).value=
-localStorage.getItem("name")||
-currentUsername;
+document.getElementById("entryName").value=
+localStorage.getItem("name")||currentUsername;
 
 document.getElementById("entryIP").value="";
 document.getElementById("entryWork").value="";
-document.getElementById("entryDate").value=
-getToday();
+document.getElementById("entryDate").value=getToday();
 
 populateItemSelect();
-
 document.getElementById("entryItem").value="";
 
 openModal("entryModal");
-
 }
+
 
 function editDataEntry(index){
 
 const row=filteredData[index];
-
 if(!row)return;
 
-editingDataRow=
-getRealRowNumber(row);
-
+editingDataRow=getRealRowNumber(row);
 editingSellRow=null;
 
-document.getElementById(
-"entryModalTitle"
-).textContent="Edit Entry";
-
-document.getElementById("entryName").value=
-row.Name??row.name??row[0]??"";
-
-document.getElementById("entryIP").value=
-row.Ip??row.IP??row.ip??row[1]??"";
-
-document.getElementById("entryWork").value=
-row.Work??row.work??row[2]??"";
-
-document.getElementById("entryDate").value=
-normalizeDate(
-row.Date??row.date??row[3]??""
-);
+document.getElementById("entryModalTitle").textContent="Edit Entry";
+document.getElementById("entryName").value=row.Name??row.name??row[0]??"";
+document.getElementById("entryIP").value=row.Ip??row.IP??row.ip??row[1]??"";
+document.getElementById("entryWork").value=row.Work??row.work??row[2]??"";
+document.getElementById("entryDate").value=normalizeDate(row.Date??row.date??row[3]??"");
 
 populateItemSelect();
-
-document.getElementById("entryItem").value=
-row.Item??row.item??row[4]??"";
+document.getElementById("entryItem").value=row.Item??row.item??row[4]??"";
 
 openModal("entryModal");
-
 }
 
 function editSellEntry(index){
 
 const row=filteredData[index];
-
 if(!row)return;
 
-editingSellRow=
-getRealRowNumber(row);
-
+editingSellRow=getRealRowNumber(row);
 editingDataRow=null;
 
-document.getElementById(
-"entryModalTitle"
-).textContent="Edit Sell Entry";
-
-document.getElementById("entryName").value=
-row.Name??row.name??row[0]??"";
-
-document.getElementById("entryIP").value=
-row.Ip??row.IP??row.ip??row[1]??"";
-
-document.getElementById("entryWork").value=
-row.Work??row.work??row[2]??"";
-
-document.getElementById("entryDate").value=
-normalizeDate(
-row.Date??row.date??row[3]??""
-);
+document.getElementById("entryModalTitle").textContent="Edit Sell Entry";
+document.getElementById("entryName").value=row.Name??row.name??row[0]??"";
+document.getElementById("entryIP").value=row.Ip??row.IP??row.ip??row[1]??"";
+document.getElementById("entryWork").value=row.Work??row.work??row[2]??"";
+document.getElementById("entryDate").value=normalizeDate(row.Date??row.date??row[3]??"");
 
 populateItemSelect();
-
-document.getElementById("entryItem").value=
-row.Item??row.item??row[4]??"";
+document.getElementById("entryItem").value=row.Item??row.item??row[4]??"";
 
 openModal("entryModal");
-
 }
+
 
 function getRealRowNumber(row){
 
-if(
-row&&
-row.row&&
-Number(row.row)>=2
-)
-return Number(row.row);
-
-if(
-row&&
-row.rowNumber&&
-Number(row.rowNumber)>=2
-)
-return Number(row.rowNumber);
-
-if(
-row&&
-row.sourceRow&&
-Number(row.sourceRow)>=2
-)
-return Number(row.sourceRow);
-
-if(
-row&&
-row.sellRow&&
-Number(row.sellRow)>=2
-)
-return Number(row.sellRow);
-
-if(
-row&&
-row.SellRow&&
-Number(row.SellRow)>=2
-)
-return Number(row.SellRow);
+if(row&&row.row&&Number(row.row)>=2)return Number(row.row);
+if(row&&row.rowNumber&&Number(row.rowNumber)>=2)return Number(row.rowNumber);
+if(row&&row.sourceRow&&Number(row.sourceRow)>=2)return Number(row.sourceRow);
+if(row&&row.sellRow&&Number(row.sellRow)>=2)return Number(row.sellRow);
+if(row&&row.SellRow&&Number(row.SellRow)>=2)return Number(row.SellRow);
 
 return null;
-
 }
+
 
 async function saveEntry(){
 
-const name=
-document.getElementById(
-"entryName"
-).value.trim();
+const name=document.getElementById("entryName").value.trim();
+const ip=document.getElementById("entryIP").value.trim();
+const work=document.getElementById("entryWork").value.trim();
+const date=document.getElementById("entryDate").value;
+const item=document.getElementById("entryItem").value.trim();
 
-const ip=
-document.getElementById(
-"entryIP"
-).value.trim();
-
-const work=
-document.getElementById(
-"entryWork"
-).value.trim();
-
-const date=
-document.getElementById(
-"entryDate"
-).value;
-
-const item=
-document.getElementById(
-"entryItem"
-).value.trim();
-
-if(!name)
-return showToast(
-"Name is required",
-"error"
-);
-
-if(!ip)
-return showToast(
-"IP is required",
-"error"
-);
-
-if(!work)
-return showToast(
-"Work is required",
-"error"
-);
-
-if(!date)
-return showToast(
-"Date is required",
-"error"
-);
-
-if(!item)
-return showToast(
-"Item is required",
-"error"
-);
+if(!name)return showToast("Name is required","error");
+if(!ip)return showToast("IP is required","error");
+if(!work)return showToast("Work is required","error");
+if(!date)return showToast("Date is required","error");
+if(!item)return showToast("Item is required","error");
 
 showLoader("Saving...");
 
@@ -1768,128 +1252,64 @@ try{
 
 if(editingSellRow){
 
-const response=
-await postJson(
-SELL_API_URL,
-{
+const response=await postJson(SELL_API_URL,{
 action:"editSellData",
 row:editingSellRow,
 rowNumber:editingSellRow,
-name,
-ip,
-work,
-date,
-item,
+name,ip,work,date,item,
 username:currentUsername,
 user:currentUsername
-}
-);
+});
 
 if(!response.success)
-throw new Error(
-response.message||
-"Failed to edit sell entry"
-);
+throw new Error(response.message||"Failed to edit sell entry");
 
 sellCache=null;
-
 closeModal("entryModal");
-
-showToast(
-"Sell entry updated successfully",
-"success"
-);
-
+showToast("Sell entry updated successfully","success");
 await loadData(true);
-
 return;
-
 }
 
 if(editingDataRow){
 
-const response=
-await postJson(
-DATA_API_URL,
-{
+const response=await postJson(DATA_API_URL,{
 action:"editData",
 row:editingDataRow,
 rowNumber:editingDataRow,
-name,
-ip,
-work,
-date,
-item
-}
-);
+name,ip,work,date,item
+});
 
 if(!response.success)
-throw new Error(
-response.message||
-"Failed to update entry"
-);
+throw new Error(response.message||"Failed to update entry");
 
 dataCache=null;
-
 closeModal("entryModal");
-
-showToast(
-"Entry updated successfully",
-"success"
-);
-
+showToast("Entry updated successfully","success");
 await loadData(true);
-
 return;
-
 }
 
-const response=
-await postJson(
-DATA_API_URL,
-{
-action:"addData",
-name,
-ip,
-work,
-date,
-item
-}
-);
+const response=await postJson(DATA_API_URL,{
+action:"addData",name,ip,work,date,item
+});
 
 if(!response.success)
-throw new Error(
-response.message||
-"Failed to add entry"
-);
+throw new Error(response.message||"Failed to add entry");
 
 dataCache=null;
-
 closeModal("entryModal");
-
-showToast(
-"Entry added successfully",
-"success"
-);
-
+showToast("Entry added successfully","success");
 await loadData(true);
 
 }catch(error){
 
 console.error(error);
-
-showToast(
-error.message||
-"Save failed",
-"error"
-);
+showToast(error.message||"Save failed","error");
 
 }finally{
-
 hideLoader();
-
 }
-
 }
 
 async function sellDataEntry(index){
@@ -1897,109 +1317,58 @@ async function sellDataEntry(index){
 const row=filteredData[index];
 
 if(!row){
-
-showToast(
-"Data not found",
-"error"
-);
-
+showToast("Data not found","error");
 return;
-
 }
 
-if(currentDataType!=="data")
-return;
+if(currentDataType!=="data")return;
 
-const rowNumber=
-getRealRowNumber(row);
+const rowNumber=getRealRowNumber(row);
 
 if(!rowNumber){
-
-showToast(
-"Original Data row not found",
-"error"
-);
-
+showToast("Original Data row not found","error");
 return;
-
 }
 
-const name=
-row.Name??row.name??row[0]??"";
-
-const ip=
-row.Ip??row.IP??row.ip??row[1]??"";
-
-const work=
-row.Work??row.work??row[2]??"";
-
-const date=
-row.Date??row.date??row[3]??"";
-
-const item=
-row.Item??row.item??row[4]??"";
+const name=row.Name??row.name??row[0]??"";
+const ip=row.Ip??row.IP??row.ip??row[1]??"";
+const work=row.Work??row.work??row[2]??"";
+const date=row.Date??row.date??row[3]??"";
+const item=row.Item??row.item??row[4]??"";
 
 if(!confirm(
-"Sell this entry?\n\nName: "+
-name+
-"\nIP: "+
-ip+
-"\nItem: "+
-item
-))
-return;
+"Sell this entry?\n\nName: "+name+
+"\nIP: "+ip+
+"\nItem: "+item
+))return;
 
 showLoader("Selling entry...");
 
 try{
 
-const sellResult=
-await postJson(
-SELL_API_URL,
-{
+const sellResult=await postJson(SELL_API_URL,{
 action:"sellData",
 row:rowNumber,
 rowNumber:rowNumber,
-name,
-ip,
-work,
-date,
-item,
+name,ip,work,date,item,
 username:currentUsername,
 user:currentUsername,
 SellUser:currentUsername,
 sellUser:currentUsername
-}
-);
+});
 
-if(
-!sellResult||
-sellResult.success!==true
-)
-throw new Error(
-sellResult?.message||
-"Sell operation failed"
-);
+if(!sellResult||sellResult.success!==true)
+throw new Error(sellResult?.message||"Sell operation failed");
 
-const deleteResult=
-await postJson(
-DATA_API_URL,
-{
+const deleteResult=await postJson(DATA_API_URL,{
 action:"deleteData",
 row:rowNumber,
 rowNumber:rowNumber
-}
-);
+});
 
-if(
-!deleteResult||
-deleteResult.success!==true
-){
+if(!deleteResult||deleteResult.success!==true){
 
-console.error(
-"Sell succeeded but Data delete failed:",
-deleteResult
-);
+console.error("Sell succeeded but Data delete failed:",deleteResult);
 
 showToast(
 "Sold successfully, but original Data row could not be deleted.",
@@ -2008,50 +1377,29 @@ showToast(
 
 sellCache=null;
 dataCache=null;
-
 await loadData(true);
-
 return;
-
 }
 
 dataCache=null;
 sellCache=null;
 
-showToast(
-"Sold successfully and removed from Data",
-"success"
-);
+showToast("Sold successfully and removed from Data","success");
 
 currentDataType="data";
-
-document.getElementById(
-"dataType"
-).value="data";
-
+document.getElementById("dataType").value="data";
 updateDataTitle();
 
 await loadData(true);
 
 }catch(error){
 
-console.error(
-"Sell error:",
-error
-);
-
-showToast(
-error.message||
-"Sell failed",
-"error"
-);
+console.error("Sell error:",error);
+showToast(error.message||"Sell failed","error");
 
 }finally{
-
 hideLoader();
-
 }
-
 }
 
 async function paidSellEntry(index){
@@ -2059,204 +1407,108 @@ async function paidSellEntry(index){
 const row=filteredData[index];
 
 if(!row){
-
-showToast(
-"Sell data not found",
-"error"
-);
-
+showToast("Sell data not found","error");
 return;
-
 }
 
-if(currentDataType!=="sell")
-return;
+if(currentDataType!=="sell")return;
 
-const rowNumber=
-getRealRowNumber(row);
+const rowNumber=getRealRowNumber(row);
 
 if(!rowNumber){
-
-showToast(
-"Original Sell row not found",
-"error"
-);
-
+showToast("Original Sell row not found","error");
 return;
-
 }
 
-const name=
-row.Name??row.name??row[0]??"";
-
-const ip=
-row.Ip??row.IP??row.ip??row[1]??"";
-
-const work=
-row.Work??row.work??row[2]??"";
-
-const date=
-row.Date??row.date??row[3]??"";
-
-const item=
-row.Item??row.item??row[4]??"";
+const name=row.Name??row.name??row[0]??"";
+const ip=row.Ip??row.IP??row.ip??row[1]??"";
+const work=row.Work??row.work??row[2]??"";
+const date=row.Date??row.date??row[3]??"";
+const item=row.Item??row.item??row[4]??"";
 
 if(!confirm(
 "Mark this sell entry as Paid?\n\n"+
-"Name: "+
-name+
-"\nIP: "+
-ip+
-"\nItem: "+
-item
-))
-return;
+"Name: "+name+
+"\nIP: "+ip+
+"\nItem: "+item
+))return;
 
 showLoader("Processing payment...");
 
 try{
 
 const sellTime=
-row.SellDate??
-row.sellDate??
-row["Sell Date"]??
-row.sellTime??
-row["Sell time"]??
-row[5]??"";
+row.SellDate??row.sellDate??row["Sell Date"]??
+row.sellTime??row["Sell time"]??row[5]??"";
 
 const sellUser=
-row.User??
-row.user??
-row.Username??
-row.username??
-row[6]??"";
+row.User??row.user??row.Username??row.username??row[6]??"";
 
-const result=
-await postJson(
-PAID_API_URL,
-{
+const result=await postJson(PAID_API_URL,{
 action:"paidData",
 row:Number(rowNumber),
 rowNumber:Number(rowNumber),
 sourceRow:Number(rowNumber),
 sellRow:Number(rowNumber),
 SellRow:Number(rowNumber),
-name,
-ip,
-work,
-date,
-item,
-sellTime,
-sellUser,
+name,ip,work,date,item,
+sellTime,sellUser,
 user:currentUsername,
 username:currentUsername,
 paidUser:currentUsername,
 PaidUser:currentUsername
-}
-);
+});
 
-if(
-!result||
-result.success!==true
-)
-throw new Error(
-result?.message||
-"Payment failed"
-);
+if(!result||result.success!==true)
+throw new Error(result?.message||"Payment failed");
 
-selectedSellRows.delete(
-Number(rowNumber)
-);
-
+selectedSellRows.delete(Number(rowNumber));
 paidCache=null;
 sellCache=null;
 
-showToast(
-"Paid successfully. Sell data removed.",
-"success"
-);
+showToast("Paid successfully. Sell data removed.","success");
 
 currentDataType="paid";
-
-document.getElementById(
-"dataType"
-).value="paid";
-
+document.getElementById("dataType").value="paid";
 updateDataTitle();
 
 await loadData(true);
 
 }catch(error){
 
-console.error(
-"Payment error:",
-error
-);
-
-showToast(
-error.message||
-"Payment failed",
-"error"
-);
+console.error("Payment error:",error);
+showToast(error.message||"Payment failed","error");
 
 }finally{
-
 hideLoader();
-
+}
 }
 
-}
 
 function openItemsModal(){
-
-document.getElementById(
-"newItem"
-).value="";
-
+document.getElementById("newItem").value="";
 openModal("itemsModal");
-
 loadItems(true);
-
 }
 
 async function loadItems(force=false){
 
 if(!force&&itemCache){
-
 itemList=itemCache;
-
 populateItemSelect();
 renderItems();
-
 return;
-
 }
 
 try{
 
-const response=
-await fetch(
-ITEM_API_URL+
-"?action=getItems"
-);
+const response=await fetch(ITEM_API_URL+"?action=getItems");
+const result=await response.json();
 
-const result=
-await response.json();
+if(!result||result.success!==true)
+throw new Error(result?.message||"Failed to load items");
 
-if(
-!result||
-result.success!==true
-)
-throw new Error(
-result?.message||
-"Failed to load items"
-);
-
-itemList=
-Array.isArray(result.data)?
-result.data:
-[];
-
+itemList=Array.isArray(result.data)?result.data:[];
 itemCache=itemList;
 
 renderItems();
@@ -2265,304 +1517,155 @@ populateItemSelect();
 }catch(error){
 
 console.error(error);
-
-showToast(
-error.message||
-"Failed to load items",
-"error"
-);
-
+showToast(error.message||"Failed to load items","error");
 }
-
 }
 
 function renderItems(){
 
-const body=
-document.getElementById("itemsBody");
-
+const body=document.getElementById("itemsBody");
 body.innerHTML="";
 
 if(!itemList.length){
-
-body.innerHTML=
-'<div style="padding:25px;text-align:center;color:var(--muted);font-size:12px">No items found</div>';
-
+body.innerHTML='<div style="padding:25px;text-align:center;color:var(--muted);font-size:12px">No items found</div>';
 return;
-
 }
 
-itemList.forEach(
-(item,index)=>{
+itemList.forEach((item,index)=>{
 
-const row=
-typeof item==="object"?
-item:
-{Item:item};
+const row=typeof item==="object"?item:{Item:item};
 
-const name=
-row.Item??
-row.item??
-row.Name??
-row.name??
-row[0]??"";
+const name=row.Item??row.item??row.Name??row.name??row[0]??"";
+const date=row.Date??row.date??row[1]??"";
+const user=row.User??row.user??row.Username??row.username??row[2]??"";
 
-const date=
-row.Date??
-row.date??
-row[1]??"";
-
-const user=
-row.User??
-row.user??
-row.Username??
-row.username??
-row[2]??"";
-
-const div=
-document.createElement("div");
-
+const div=document.createElement("div");
 div.className="item-row";
 
 div.innerHTML=`
+<div class="item-cell">${escapeHtml(name)}</div>
+<div class="item-cell">${escapeHtml(formatDateTime(date))}</div>
+<div class="item-cell">${escapeHtml(user)}</div>
 <div class="item-cell">
-${escapeHtml(name)}
-</div>
-
-<div class="item-cell">
-${escapeHtml(formatDateTime(date))}
-</div>
-
-<div class="item-cell">
-${escapeHtml(user)}
-</div>
-
-<div class="item-cell">
-<button
-class="small-action block-user-btn"
-onclick="deleteItem(${index})">
-Delete
-</button>
-</div>
-`;
+<button class="small-action block-user-btn" onclick="deleteItem(${index})">Delete</button>
+</div>`;
 
 body.appendChild(div);
-
 });
-
 }
 
 function populateItemSelect(){
 
-const select=
-document.getElementById("entryItem");
-
+const select=document.getElementById("entryItem");
 if(!select)return;
 
 const old=select.value;
 
-select.innerHTML=
-'<option value="">Select Item</option>';
+select.innerHTML='<option value="">Select Item</option>';
 
 itemList.forEach(item=>{
 
-const name=
-typeof item==="object"
-?
-(
-item.Item??
-item.item??
-item.Name??
-item.name??
-item[0]??""
-)
-:
-item;
+const name=typeof item==="object"
+?(item.Item??item.item??item.Name??item.name??item[0]??"")
+:item;
 
 if(!name)return;
 
-const option=
-document.createElement("option");
-
+const option=document.createElement("option");
 option.value=name;
 option.textContent=name;
-
 select.appendChild(option);
-
 });
 
-if(old)
-select.value=old;
-
+if(old)select.value=old;
 }
 
 async function addNewItem(){
 
-const input=
-document.getElementById("newItem");
-
-const item=
-input.value.trim();
+const input=document.getElementById("newItem");
+const item=input.value.trim();
 
 if(!item){
-
-showToast(
-"Enter item name",
-"error"
-);
-
+showToast("Enter item name","error");
 return;
-
 }
 
 showLoader("Adding item...");
 
 try{
 
-const result=
-await postJson(
-ITEM_API_URL,
-{
+const result=await postJson(ITEM_API_URL,{
 action:"addItem",
-item,
-itemName:item,
-name:item,
+item,itemName:item,name:item,
 user:currentUsername,
 username:currentUsername
-}
-);
+});
 
-if(
-!result||
-result.success!==true
-)
-throw new Error(
-result?.message||
-"Failed to add item"
-);
+if(!result||result.success!==true)
+throw new Error(result?.message||"Failed to add item");
 
 input.value="";
-
 itemCache=null;
-
 await loadItems(true);
 
-showToast(
-"Item added successfully",
-"success"
-);
+showToast("Item added successfully","success");
 
 }catch(error){
 
-showToast(
-error.message||
-"Failed to add item",
-"error"
-);
+showToast(error.message||"Failed to add item","error");
 
 }finally{
-
 hideLoader();
-
 }
-
 }
 
 async function deleteItem(index){
 
 const item=itemList[index];
-
 if(!item)return;
 
-const itemName=
-typeof item==="object"
-?
-(
-item.Item??
-item.item??
-item.Name??
-item.name??
-item[0]??""
-)
-:
-item;
+const itemName=typeof item==="object"
+?(item.Item??item.item??item.Name??item.name??item[0]??"")
+:item;
 
-const row=
-typeof item==="object"
-?
-(
-item.row??
-item.rowNumber??
-item[3]??
-index+2
-)
-:
-index+2;
+const row=typeof item==="object"
+?(item.row??item.rowNumber??item[3]??index+2)
+:index+2;
 
-if(!confirm(
-"Delete item: "+
-itemName+
-"?"
-))
-return;
+if(!confirm("Delete item: "+itemName+"?"))return;
 
 showLoader("Deleting item...");
 
 try{
 
-const result=
-await postJson(
-ITEM_API_URL,
-{
+const result=await postJson(ITEM_API_URL,{
 action:"deleteItem",
-row,
-rowNumber:row,
-item:itemName,
-itemName:itemName,
+row,rowNumber:row,
+item:itemName,itemName:itemName,
 user:currentUsername,
 username:currentUsername
-}
-);
+});
 
-if(
-!result||
-result.success!==true
-)
-throw new Error(
-result?.message||
-"Failed to delete item"
-);
+if(!result||result.success!==true)
+throw new Error(result?.message||"Failed to delete item");
 
 itemCache=null;
-
 await loadItems(true);
-
-showToast(
-"Item deleted successfully",
-"success"
-);
+showToast("Item deleted successfully","success");
 
 }catch(error){
 
-showToast(
-error.message||
-"Failed to delete item",
-"error"
-);
+showToast(error.message||"Failed to delete item","error");
 
 }finally{
-
 hideLoader();
-
+}
 }
 
-}
 
 function openUsersModal(){
-
 openModal("usersModal");
 loadUsers();
-
 }
 
 async function loadUsers(){
@@ -2571,294 +1674,138 @@ showLoader("Loading users...");
 
 try{
 
-const response=
-await fetch(
-USER_API_URL+
-"?action=getUsers&requester="+
-encodeURIComponent(currentUsername)
+const response=await fetch(
+USER_API_URL+"?action=getUsers&requester="+encodeURIComponent(currentUsername)
 );
 
-const result=
-await response.json();
+const result=await response.json();
 
-if(
-!result||
-result.success!==true
-)
-throw new Error(
-result?.message||
-"Failed to load users"
-);
+if(!result||result.success!==true)
+throw new Error(result?.message||"Failed to load users");
 
-const users=
-Array.isArray(result.users)
-?
-result.users
-:
-Array.isArray(result.data)?
-result.data:
-[];
+const users=Array.isArray(result.users)
+?result.users
+:Array.isArray(result.data)?result.data:[];
 
 renderUsers(users);
 
 }catch(error){
 
-showToast(
-error.message||
-"Failed to load users",
-"error"
-);
+showToast(error.message||"Failed to load users","error");
 
 }finally{
-
 hideLoader();
-
 }
-
 }
 
 function renderUsers(users){
 
-const body=
-document.getElementById("usersBody");
-
+const body=document.getElementById("usersBody");
 if(!body)return;
 
 body.innerHTML="";
 
 if(!users.length){
-
-body.innerHTML=
-'<div style="padding:25px;text-align:center;color:var(--muted);font-size:12px">No users found</div>';
-
+body.innerHTML='<div style="padding:25px;text-align:center;color:var(--muted);font-size:12px">No users found</div>';
 return;
-
 }
 
 users.forEach(user=>{
 
-const username=
-user.Username??
-user.username??
-user[0]??"";
+const username=user.Username??user.username??user[0]??"";
+const name=user.Name??user.name??user[2]??"";
+const role=user.Role??user.role??user[3]??"";
+const status=user.Status??user.status??user[4]??"";
 
-const name=
-user.Name??
-user.name??
-user[2]??"";
-
-const role=
-user.Role??
-user.role??
-user[3]??"";
-
-const status=
-user.Status??
-user.status??
-user[4]??"";
-
-const div=
-document.createElement("div");
-
+const div=document.createElement("div");
 div.className="user-row";
 
-const statusLower=
-String(status).toLowerCase();
+const statusLower=String(status).toLowerCase();
 
 let actionHtml=`
-<button
-class="small-action edit-user-btn"
+<button class="small-action edit-user-btn"
 onclick='editUser(${JSON.stringify(user).replace(/'/g,"&#39;")})'>
 Edit
-</button>
-`;
+</button>`;
 
 if(username!==currentUsername){
 
-if(
-statusLower==="block"||
-statusLower==="blocked"
-){
-
+if(statusLower==="block"||statusLower==="blocked"){
 actionHtml+=`
-<button
-class="small-action unblock-user-btn"
+<button class="small-action unblock-user-btn"
 onclick="changeUserStatus('${escapeJs(username)}','Active')">
 Unblock
-</button>
-`;
-
+</button>`;
 }else{
-
 actionHtml+=`
-<button
-class="small-action block-user-btn"
+<button class="small-action block-user-btn"
 onclick="changeUserStatus('${escapeJs(username)}','Block')">
 Block
-</button>
-`;
-
+</button>`;
 }
-
 }
 
 div.innerHTML=`
-<div class="user-cell">
-${escapeHtml(username)}
-</div>
-
-<div class="user-cell">
-${escapeHtml(name)}
-</div>
-
-<div class="user-cell">
-${escapeHtml(role)}
-</div>
-
-<div class="user-cell ${
-statusLower==="active"?
-"status-active":
-"status-block"
-}">
-${escapeHtml(status)}
-</div>
-
-<div class="user-cell">
-${actionHtml}
-</div>
-`;
+<div class="user-cell">${escapeHtml(username)}</div>
+<div class="user-cell">${escapeHtml(name)}</div>
+<div class="user-cell">${escapeHtml(role)}</div>
+<div class="user-cell ${statusLower==="active"?"status-active":"status-block"}">${escapeHtml(status)}</div>
+<div class="user-cell">${actionHtml}</div>`;
 
 body.appendChild(div);
-
 });
-
 }
 
 function openAddUserModal(){
 
 editingUser=null;
 
-document.getElementById(
-"userFormTitle"
-).textContent="Add User";
-
-document.getElementById(
-"userUsername"
-).value="";
-
-document.getElementById(
-"userName"
-).value="";
-
-document.getElementById(
-"userPassword"
-).value="";
-
-document.getElementById(
-"userRole"
-).value="support";
-
-document.getElementById(
-"userStatus"
-).value="Active";
+document.getElementById("userFormTitle").textContent="Add User";
+document.getElementById("userUsername").value="";
+document.getElementById("userName").value="";
+document.getElementById("userPassword").value="";
+document.getElementById("userRole").value="support";
+document.getElementById("userStatus").value="Active";
 
 openModal("userFormModal");
-
 }
 
 function editUser(user){
 
 editingUser=user;
 
-document.getElementById(
-"userFormTitle"
-).textContent="Edit User";
+document.getElementById("userFormTitle").textContent="Edit User";
 
-document.getElementById(
-"userUsername"
-).value=
-user.Username??
-user.username??
-user[0]??"";
+document.getElementById("userUsername").value=
+user.Username??user.username??user[0]??"";
 
-document.getElementById(
-"userName"
-).value=
-user.Name??
-user.name??
-user[2]??"";
+document.getElementById("userName").value=
+user.Name??user.name??user[2]??"";
 
-document.getElementById(
-"userPassword"
-).value=
-user.Password??
-user.password??
-user[1]??"";
+document.getElementById("userPassword").value=
+user.Password??user.password??user[1]??"";
 
-document.getElementById(
-"userRole"
-).value=
-user.Role??
-user.role??
-user[3]??
-"support";
+document.getElementById("userRole").value=
+user.Role??user.role??user[3]??"support";
 
-document.getElementById(
-"userStatus"
-).value=
-user.Status??
-user.status??
-user[4]??
-"Active";
+document.getElementById("userStatus").value=
+user.Status??user.status??user[4]??"Active";
 
 openModal("userFormModal");
-
 }
+
 
 async function saveUser(){
 
-const username=
-document.getElementById(
-"userUsername"
-).value.trim();
+const username=document.getElementById("userUsername").value.trim();
+const name=document.getElementById("userName").value.trim();
+const password=document.getElementById("userPassword").value;
+const role=document.getElementById("userRole").value;
+const status=document.getElementById("userStatus").value;
 
-const name=
-document.getElementById(
-"userName"
-).value.trim();
-
-const password=
-document.getElementById(
-"userPassword"
-).value;
-
-const role=
-document.getElementById(
-"userRole"
-).value;
-
-const status=
-document.getElementById(
-"userStatus"
-).value;
-
-if(!username)
-return showToast(
-"Username is required",
-"error"
-);
-
-if(!name)
-return showToast(
-"Name is required",
-"error"
-);
-
-if(!password)
-return showToast(
-"Password is required",
-"error"
-);
+if(!username)return showToast("Username is required","error");
+if(!name)return showToast("Name is required","error");
+if(!password)return showToast("Password is required","error");
 
 showLoader("Saving user...");
 
@@ -2869,19 +1816,13 @@ let payload;
 if(editingUser){
 
 const originalUsername=
-editingUser.Username??
-editingUser.username??
-editingUser[0]??"";
+editingUser.Username??editingUser.username??editingUser[0]??"";
 
 payload={
 action:"editUser",
 requester:currentUsername,
 originalUsername,
-username,
-password,
-name,
-role,
-status
+username,password,name,role,status
 };
 
 }else{
@@ -2889,332 +1830,175 @@ status
 payload={
 action:"addUser",
 requester:currentUsername,
-username,
-password,
-name,
-role,
-status
+username,password,name,role,status
 };
 
 }
 
-const result=
-await postJson(
-USER_API_URL,
-payload
-);
+const result=await postJson(USER_API_URL,payload);
 
-if(
-!result||
-result.success!==true
-)
-throw new Error(
-result?.message||
-"Failed to save user"
-);
+if(!result||result.success!==true)
+throw new Error(result?.message||"Failed to save user");
 
 closeModal("userFormModal");
-
 await loadUsers();
 
 showToast(
-editingUser?
-"User updated successfully":
-"User added successfully",
+editingUser?"User updated successfully":"User added successfully",
 "success"
 );
 
 }catch(error){
 
-showToast(
-error.message||
-"Failed to save user",
-"error"
-);
+showToast(error.message||"Failed to save user","error");
 
 }finally{
-
 hideLoader();
-
+}
 }
 
-}
 
-async function changeUserStatus(
-username,
-status
-){
+async function changeUserStatus(username,status){
 
 if(username===currentUsername){
-
-showToast(
-"You cannot change your own status",
-"error"
-);
-
+showToast("You cannot change your own status","error");
 return;
-
 }
 
 if(!confirm(
 status==="Active"
-?
-"Unblock "+
-username+
-"?"
-:
-"Block "+
-username+
-"?"
-))
-return;
+?"Unblock "+username+"?"
+:"Block "+username+"?"
+))return;
 
-showLoader(
-"Updating user status..."
-);
+showLoader("Updating user status...");
 
 try{
 
-const result=
-await postJson(
-USER_API_URL,
-{
+const result=await postJson(USER_API_URL,{
 action:"toggleUserStatus",
 requester:currentUsername,
 username,
 status
-}
-);
+});
 
-if(
-!result||
-result.success!==true
-)
-throw new Error(
-result?.message||
-"Failed to update status"
-);
+if(!result||result.success!==true)
+throw new Error(result?.message||"Failed to update status");
 
 await loadUsers();
 
 showToast(
-status==="Active"?
-"User unblocked":
-"User blocked",
+status==="Active"?"User unblocked":"User blocked",
 "success"
 );
 
 }catch(error){
 
-showToast(
-error.message||
-"Status update failed",
-"error"
-);
+showToast(error.message||"Status update failed","error");
 
 }finally{
-
 hideLoader();
-
+}
 }
 
-}
 
 function openPasswordModal(){
 
-document.getElementById(
-"currentPassword"
-).value="";
-
-document.getElementById(
-"newPassword"
-).value="";
-
-document.getElementById(
-"confirmPassword"
-).value="";
+document.getElementById("currentPassword").value="";
+document.getElementById("newPassword").value="";
+document.getElementById("confirmPassword").value="";
 
 openModal("passwordModal");
-
 }
 
 async function changePassword(){
 
-const currentPassword=
-document.getElementById(
-"currentPassword"
-).value;
+const currentPassword=document.getElementById("currentPassword").value;
+const newPassword=document.getElementById("newPassword").value;
+const confirmPassword=document.getElementById("confirmPassword").value;
 
-const newPassword=
-document.getElementById(
-"newPassword"
-).value;
-
-const confirmPassword=
-document.getElementById(
-"confirmPassword"
-).value;
-
-if(!currentPassword)
-return showToast(
-"Current password is required",
-"error"
-);
-
-if(!newPassword)
-return showToast(
-"New password is required",
-"error"
-);
+if(!currentPassword)return showToast("Current password is required","error");
+if(!newPassword)return showToast("New password is required","error");
 
 if(newPassword!==confirmPassword){
-
-showToast(
-"Passwords do not match",
-"error"
-);
-
+showToast("Passwords do not match","error");
 return;
-
 }
 
-showLoader(
-"Changing password..."
-);
+showLoader("Changing password...");
 
 try{
 
-const result=
-await postJson(
-USER_API_URL,
-{
+const result=await postJson(USER_API_URL,{
 action:"changePassword",
 requester:currentUsername,
 username:currentUsername,
 currentPassword,
 newPassword
-}
-);
+});
 
-if(
-!result||
-result.success!==true
-)
-throw new Error(
-result?.message||
-"Password change failed"
-);
+if(!result||result.success!==true)
+throw new Error(result?.message||"Password change failed");
 
 closeModal("passwordModal");
-
-showToast(
-"Password changed successfully",
-"success"
-);
+showToast("Password changed successfully","success");
 
 }catch(error){
 
-showToast(
-error.message||
-"Password change failed",
-"error"
-);
+showToast(error.message||"Password change failed","error");
 
 }finally{
-
 hideLoader();
-
+}
 }
 
-}
 
 async function postJson(url,data){
 
-const response=
-await fetch(
-url,
-{
+const response=await fetch(url,{
 method:"POST",
-headers:{
-"Content-Type":
-"text/plain;charset=utf-8"
-},
+headers:{"Content-Type":"text/plain;charset=utf-8"},
 body:JSON.stringify(data)
-}
-);
+});
 
-const text=
-await response.text();
+const text=await response.text();
 
 try{
-
 return JSON.parse(text);
-
 }catch(error){
-
-throw new Error(
-"Invalid server response"
-);
-
+throw new Error("Invalid server response");
+}
 }
 
-}
 
 function openModal(id){
-
-const modal=
-document.getElementById(id);
-
-if(modal)
-modal.classList.add("show");
-
+const modal=document.getElementById(id);
+if(modal)modal.classList.add("show");
 }
 
 function closeModal(id){
-
-const modal=
-document.getElementById(id);
-
-if(modal)
-modal.classList.remove("show");
-
+const modal=document.getElementById(id);
+if(modal)modal.classList.remove("show");
 }
 
-document.addEventListener(
-"click",
-e=>{
-
-if(
-e.target.classList.contains("modal")
-)
+document.addEventListener("click",e=>{
+if(e.target.classList.contains("modal"))
 e.target.classList.remove("show");
-
 });
+
 
 function toggleProfileMenu(event){
 
-if(event)
-event.stopPropagation();
+if(event)event.stopPropagation();
 
-document.getElementById(
-"profileMenu"
-).classList.toggle("show");
-
+document.getElementById("profileMenu").classList.toggle("show");
 }
 
-document.addEventListener(
-"click",
-()=>{
-
-const menu=
-document.getElementById(
-"profileMenu"
-);
-
-if(menu)
-menu.classList.remove("show");
-
+document.addEventListener("click",()=>{
+const menu=document.getElementById("profileMenu");
+if(menu)menu.classList.remove("show");
 });
+
 
 function toggleTheme(){
 
@@ -3222,172 +2006,107 @@ document.body.classList.toggle("dark");
 
 localStorage.setItem(
 "dashboardTheme",
-document.body.classList.contains("dark")
-?
-"dark":
-"light"
+document.body.classList.contains("dark")?"dark":"light"
 );
-
 }
 
 function loadTheme(){
 
-if(
-localStorage.getItem(
-"dashboardTheme"
-)==="dark"
-)
+if(localStorage.getItem("dashboardTheme")==="dark")
 document.body.classList.add("dark");
-
 }
+
 
 function showLoader(text){
 
-const loader=
-document.getElementById("loader");
+const loader=document.getElementById("loader");
+const loaderText=document.getElementById("loaderText");
 
-const loaderText=
-document.getElementById("loaderText");
-
-if(loaderText)
-loaderText.textContent=
-text||"Loading...";
-
-if(loader)
-loader.classList.add("show");
-
+if(loaderText)loaderText.textContent=text||"Loading...";
+if(loader)loader.classList.add("show");
 }
 
 function hideLoader(){
 
-const loader=
-document.getElementById("loader");
-
-if(loader)
-loader.classList.remove("show");
-
+const loader=document.getElementById("loader");
+if(loader)loader.classList.remove("show");
 }
+
 
 let toastTimer=null;
 
-function showToast(
-message,
-type="success"
-){
+function showToast(message,type="success"){
 
-const toast=
-document.getElementById("toast");
+const toast=document.getElementById("toast");
 
 toast.textContent=message;
-
-toast.className=
-"toast show "+
-type;
+toast.className="toast show "+type;
 
 clearTimeout(toastTimer);
 
-toastTimer=setTimeout(
-()=>{
+toastTimer=setTimeout(()=>{
 toast.className="toast";
-},
-3500
-);
-
+},3500);
 }
+
 
 function getToday(){
 
 const d=new Date();
 
-return d.getFullYear()+
-"-"+
-String(
-d.getMonth()+1
-).padStart(2,"0")+
-"-"+
-String(
-d.getDate()
-).padStart(2,"0");
-
+return d.getFullYear()+"-"+
+String(d.getMonth()+1).padStart(2,"0")+"-"+
+String(d.getDate()).padStart(2,"0");
 }
 
 function normalizeDate(value){
 
 if(!value)return"";
 
-if(
-Object.prototype.toString.call(value)==="[object Date]"
-){
+if(Object.prototype.toString.call(value)==="[object Date]"){
 
-if(isNaN(value.getTime()))
-return"";
+if(isNaN(value.getTime()))return"";
 
-return value.getFullYear()+
-"-"+
-String(
-value.getMonth()+1
-).padStart(2,"0")+
-"-"+
-String(
-value.getDate()
-).padStart(2,"0");
-
+return value.getFullYear()+"-"+
+String(value.getMonth()+1).padStart(2,"0")+"-"+
+String(value.getDate()).padStart(2,"0");
 }
 
-const text=
-String(value).trim();
+const text=String(value).trim();
 
-if(
-/^\d{4}-\d{2}-\d{2}$/.test(text)
-)
+if(/^\d{4}-\d{2}-\d{2}$/.test(text))
 return text;
 
 const d=new Date(text);
 
 if(!isNaN(d.getTime())){
 
-return d.getFullYear()+
-"-"+
-String(
-d.getMonth()+1
-).padStart(2,"0")+
-"-"+
-String(
-d.getDate()
-).padStart(2,"0");
-
+return d.getFullYear()+"-"+
+String(d.getMonth()+1).padStart(2,"0")+"-"+
+String(d.getDate()).padStart(2,"0");
 }
 
 return text;
-
 }
 
 function formatDate(value){
 
-const normalized=
-normalizeDate(value);
+const normalized=normalizeDate(value);
 
 if(!normalized)return"";
 
-const parts=
-normalized.split("-");
+const parts=normalized.split("-");
 
-if(parts.length!==3)
-return normalized;
+if(parts.length!==3)return normalized;
 
 const months=[
 "Jan","Feb","Mar","Apr","May","Jun",
 "Jul","Aug","Sep","Oct","Nov","Dec"
 ];
 
-return parts[2]+
-" "+
-months[
-Number(parts[1])-1
-]+
-" "+
+return parts[2]+" "+
+months[Number(parts[1])-1]+" "+
 parts[0];
-
 }
 
 function formatDateTime(value){
@@ -3398,18 +2117,13 @@ const d=new Date(value);
 
 if(!isNaN(d.getTime())){
 
-return d.toLocaleString(
-"en-GB",
-{
+return d.toLocaleString("en-GB",{
 dateStyle:"medium",
 timeStyle:"short"
-}
-);
-
+});
 }
 
 return String(value);
-
 }
 
 function escapeHtml(value){
@@ -3420,7 +2134,6 @@ return String(value??"")
 .replace(/>/g,"&gt;")
 .replace(/"/g,"&quot;")
 .replace(/'/g,"&#039;");
-
 }
 
 function escapeJs(value){
@@ -3430,75 +2143,44 @@ return String(value??"")
 .replace(/'/g,"\\'")
 .replace(/\n/g,"\\n")
 .replace(/\r/g,"\\r");
-
 }
+
 
 function logout(){
 
 const keys=[
-"dashboardAuth",
-"username",
-"userData",
-"loginData",
-"loggedUser",
-"currentUser",
-"userInfo",
-"name",
-"role",
-"status"
+"dashboardAuth","username","userData","loginData",
+"loggedUser","currentUser","userInfo","name","role","status"
 ];
 
-keys.forEach(
-key=>
-localStorage.removeItem(key)
-);
+keys.forEach(key=>localStorage.removeItem(key));
 
 sessionStorage.clear();
 
-window.location.href=
-"index.html";
-
+window.location.href="index.html";
 }
+
 
 function setupBackProtection(){
 
 try{
 
-history.pushState(
-null,
-"",
-location.href
-);
+history.pushState(null,"",location.href);
 
-window.addEventListener(
-"popstate",
-()=>{
+window.addEventListener("popstate",()=>{
 
-if(!checkLogin())
-return;
+if(!checkLogin())return;
 
-history.pushState(
-null,
-"",
-location.href
-);
-
+history.pushState(null,"",location.href);
 });
 
-window.addEventListener(
-"pageshow",
-()=>checkLogin()
-);
+window.addEventListener("pageshow",()=>checkLogin());
 
 }catch(error){
-
 console.error(error);
-
 }
-
 }
 
 </script>
-
 </body>
 </html>
